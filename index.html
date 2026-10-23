@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b100f">
+  <meta name="description" content="أطلس تفاعلي لببتيدات العقارب: استكشف التسلسلات والخصائص والأدلة العلمية المنشورة.">
+  <title>ScorpionAI — أطلس الاحتمالات الصغيرة</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
+  <script type="module" src="scene.js"></script><script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#atlas">انتقل إلى البيانات</a>
+<header class="nav">
+ <a class="brand" href="#home" aria-label="ScorpionAI، الرئيسية"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M11 28 6 20l7-9 8 4 5 11-7 7Zm13-1 8-7 2-10-6-6-6 3 1 5 5-2 2 4-3 6M12 19l-7-7M12 23 3 25M18 28l-3 9M23 26l6 9"/></svg><span dir="ltr">SCORPION<span class="brand-accent">AI</span><small>PEPTIDE ATLAS</small></span></a>
+ <nav aria-label="القائمة الرئيسية"><a href="#atlas">الأطلس</a><a href="#approach">المنهجية</a><a href="#evidence">الأدلة</a><a href="#contact">تواصل</a></nav>
+ <a class="nav-download" href="#downloads">البيانات المفتوحة <span aria-hidden="true">↙</span></a>
+</header>
+<main>
+ <section class="hero" id="home" aria-labelledby="hero-title">
+  <div class="hero-orbit" aria-hidden="true"></div>
+  <div class="hero-copy">
+   <p class="eyebrow"><span class="live-dot"></span> حيث يلتقي التنوع الحيوي بالذكاء الحسابي</p>
+   <h1 id="hero-title">من عالَمٍ صغير،<br>إلى <em>احتمالاتٍ كبيرة.</em></h1>
+   <p class="hero-description">اكتشف الجزيئات الكامنة في سموم العقارب.<br>أطلس يجمع التسلسلات والخصائص والأدلة العلمية،<br class="desktop-break"> ليمنح البحث نقطة انطلاق أوضح.</p>
+   <div class="hero-actions"><a class="button primary" href="#atlas">استكشف الأطلس <span aria-hidden="true">↙</span></a><a class="text-link" href="#approach"><span class="play-icon" aria-hidden="true">▶</span> وراء البيانات</a></div>
+   <div class="hero-edition"><span class="edition-line"></span><span dir="ltr">ATLAS / VOL. 01</span><span>نسخة بحثية · v1.5</span></div>
+  </div>
+  <div class="specimen" id="specimen">
+   <div class="specimen-coordinate top-coordinate" dir="ltr"><span id="scene-coordinate">SCORPIONES</span><span>ART STUDY / 001</span></div>
+   <div class="scene-switch" role="group" aria-label="اختيار المجسم"><button id="show-render" aria-pressed="true">رندر فني</button><button id="show-scorpion" aria-pressed="false">مجسّم 3D</button><button id="show-peptide" aria-pressed="false">سلسلة ببتيدية</button></div>
+   <div class="render-art" id="render-art"><div class="render-image-frame"><img id="render-image" src="assets/scorpion-render.png" alt="رندر فني لعقرب داكن بملمس قشري ومخالب وذيل مقوس، بإضاءة برونزية" width="1280" height="1280" fetchpriority="high"></div></div>
+   <canvas hidden id="scorpion" aria-label="مجسم فني ثلاثي الأبعاد لعقرب؛ اسحب بالفأرة أو اللمس لتدويره" tabindex="0" role="img"></canvas>
+   <div class="scene-fallback" id="scene-fallback" hidden><svg viewBox="0 0 360 300" aria-hidden="true"><path d="M165 195 120 170 90 100 48 75 32 112 62 136 93 122M195 195l45-25 30-70 42-25 16 37-30 24-31-14M155 179l-60 26-50 48M161 200l-45 39-20 44M201 179l60 26 50 48M199 200l45 39 20 44M178 194c30-20 100-54 94-112-3-39-72-73-105-38-32 34 2 62 25 37"/><ellipse cx="180" cy="187" rx="28" ry="49"/></svg><p>يمكنك متابعة استكشاف الأطلس على هذا الجهاز.</p></div>
+   <div class="specimen-tag"><span class="tag-rule"></span><div><b id="scene-title">رندر فني مستوحى من العقرب</b><small id="scene-disclaimer">صورة فنية مولّدة · حركة عمق توضيحية</small></div></div>
+   <div class="scene-tools"><span id="scene-hint">حرّك المؤشر لاستكشاف العمق <span aria-hidden="true">↔</span></span><button id="rotate-left" aria-label="تدوير المجسم إلى اليسار">↶</button><button id="motion-toggle" aria-label="إيقاف الحركة" aria-pressed="false">Ⅱ</button><button id="rotate-right" aria-label="تدوير المجسم إلى اليمين">↷</button></div>
+   <div class="creature-actions" id="creature-actions" hidden><button id="sting-action">لدغة ⚡</button><button id="claw-action">الكلّابات ◇</button><button id="follow-action" aria-pressed="true">يتبع المؤشر ◎</button></div><span class="pointer-aura" id="pointer-aura" aria-hidden="true"></span><p class="sr-only" id="action-status" role="status" aria-live="polite"></p><p class="scene-loading" id="scene-loading" role="status">جارٍ إعداد المجسّم…</p>
+  </div>
+  <div class="hero-bottom"><span>صُمّم للفضول. بُني على البيانات.</span><a href="#atlas">انزل للاستكشاف <span aria-hidden="true">↓</span></a><span dir="ltr">OPEN SCIENCE. OPEN POSSIBILITIES.</span></div>
+ </section>
+ <section class="numbers reveal" aria-label="الأطلس بالأرقام"><div><span class="number" dir="ltr">1,232</span><p>تسلسلاً ببتيدياً فريداً</p></div><div><span class="number" dir="ltr">568</span><p>مجموعة تشابه تسلسلي</p></div><div><span class="number" dir="ltr">32</span><p>سجلاً للأدلة التجريبية</p></div><p class="numbers-note">آلاف التفاصيل.<br><span>مساحة واحدة للاستكشاف.</span><small>تضم البيانات عقارب ومشتقات ببتيدية مُهندسة.</small></p></section>
+ <section class="atlas section-space" id="atlas" aria-labelledby="atlas-title">
+  <div class="section-heading reveal"><div><p class="eyebrow"><span class="section-index">01 /</span> مكتبة الجزيئات</p><h2 id="atlas-title">اتبع فضولك.<br><span>اعثر على ببتيدك.</span></h2></div><p>ابدأ باسم ببتيد، أو نوع عقرب، أو تسلسل.<br>كل سجل يقودك إلى خصائصه ودليله الأصلي.</p></div>
+  <div class="catalog-controls"><label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg><input id="search" type="search" placeholder="ابحث عن Stigmurin أو نوع العقرب أو التسلسل…" aria-label="البحث في الأطلس" autocomplete="off"><span class="search-key" aria-hidden="true">/</span></label><label class="select-label"><span class="sr-only">حالة الدليل</span><select id="status-filter"><option value="all">كل حالات الدليل</option value="measured">MIC مقاس</option><option value="annotated">تعليق UniProt</option><option value="background">خلفية غير مختبرة</option><option value="conditional">حالات الغشاء الحيوي</option></select></label><button class="filter-reset" id="reset-filters" aria-label="إعادة ضبط البحث والتصفية">↻</button></div>
+  <div class="catalog-summary"><span id="result-count" role="status" aria-live="polite">جارٍ تحميل البيانات…</span><span class="summary-note"><i></i> المصدر: بيانات الأطلس المدققة v1.5</span></div>
+  <div class="table-scroll"><table><thead><tr><th>الببتيد / المصدر</th><th>الطول</th><th>الشحنة <small>pH 7.4</small></th><th>حالة الدليل</th><th>المجموعة</th><th><span class="sr-only">عرض التفاصيل</span></th></tr></thead><tbody id="peptide-rows"></tbody></table></div>
+  <div id="empty-state" class="empty-state" hidden><span>∅</span><h3>لا توجد نتائج مطابقة</h3><p>جرّب اسماً أقصر أو غيّر حالة الدليل.</p><button class="button secondary" id="empty-reset">عرض جميع الببتيدات</button></div>
+  <div id="data-error" class="empty-state" hidden><h3>تعذّر تحميل البيانات</h3><p>شغّل الموقع من المشغّل المحلي، ثم حاول مجدداً.</p><button class="button secondary" id="retry-data">إعادة المحاولة</button></div>
+  <div class="pagination"><p>الأدلة متفاوتة؛ وجود سجل هنا لا يثبت نشاطه المخبري.</p><div><button id="prev-page" aria-label="الصفحة السابقة">→</button><span id="page-label">—</span><button id="next-page" aria-label="الصفحة التالية">←</button></div></div>
+ </section>
+ <section class="approach section-space" id="approach" aria-labelledby="approach-title">
+  <div class="approach-intro reveal"><p class="eyebrow"><span class="section-index">02 /</span> وراء الأطلس</p><h2 id="approach-title">من التسلسل،<br>إلى <em>رؤية أوضح.</em></h2><p>قيمة الأطلس تبدأ من أثرٍ قابل للتتبّع: من أين جاءت المعلومة، كيف حُسبت، وما الذي يمكن أن تقوله فعلاً.</p><div class="sequence-art" dir="ltr" aria-label="مثال تسلسل Stigmurin">FFSLIPSLV<span>GGLISAFK</span><small>STIGMURIN / 17 AMINO ACIDS</small></div></div>
+  <ol class="method-steps"><li class="reveal"><span>01</span><div><h3>نجمع ونوثّق</h3><p>تسلسلات UniProt وأدلة الأدبيات، مع ربط القياس بالكائن والسلالة والمصدر.</p></div></li><li class="reveal"><span>02</span><div><h3>ننظّم ونحسب</h3><p>تحديد التسلسل الناضج، إزالة التكرار، وحساب الخصائص مع فصل الوحدات المنشورة عن المحوّلة.</p></div></li><li class="reveal"><span>03</span><div><h3>نقارن بمسؤولية</h3><p>تجميع المتشابهات وفصل المجموعات بين التدريب والاختبار، ثم عرض النتائج مع حدود عدم اليقين.</p></div></li></ol>
+ </section>
+ <section class="evidence section-space" id="evidence" aria-labelledby="evidence-title">
+  <div class="section-heading reveal"><div><p class="eyebrow"><span class="section-index">03 /</span> العلم يبدأ بالتمييز</p><h2 id="evidence-title">ليست كل الأدلة<br><span>على الدرجة نفسها.</span></h2></div><p>نحتفظ بما نعرفه، ونوضح ما لم يُختبر.<br>لا يُقدَّم التنبؤ كإثبات تجريبي.</p></div>
+  <div class="evidence-grid"><article class="reveal"><span class="evidence-count">18</span><span class="badge measured">MIC مقاس</span><h3>قياس منشور</h3><p>ببتيدات ذات قياس كمي في جدول الأدلة. النتيجة مرتبطة بظروف التجربة والكائن المستهدف.</p></article><article class="reveal"><span class="evidence-count">165</span><span class="badge annotated">تعليق UniProt</span><h3>معرفة موثّقة</h3><p>سجلات موسومة بالنشاط في UniProt، دون قياس MIC مباشر في جدول الأدلة الحالي.</p></article><article class="reveal"><span class="evidence-count">1,047</span><span class="badge background">خلفية غير مختبرة</span><h3>سؤال مفتوح</h3><p>غياب القياس لا يعني غياب النشاط. هذه الخلفية ليست مجموعة سلبيات مخبرية مؤكدة.</p></article></div>
+  <p class="evidence-footnote">إضافةً إلى حالتين منفصلتين تخصان أدلة الأغشية الحيوية: StigA6 وStigA16.</p>
+  <div class="model-note reveal"><div><p class="eyebrow">قراءة النموذج</p><h3>التنبؤ بداية سؤال،<br>وليس نهايته.</h3></div><div class="model-metric"><b dir="ltr">0.742</b><span>ROC-AUC · الاختبار المحجوز</span><small dir="rtl">فاصل الثقة بالمجموعات: 0.477–0.948</small></div><p>النموذج خط أساس مقابل خلفية غير موسومة. حدود الثقة واسعة، والنتائج لا تعوّض التجارب المخبرية. القاعدة الفيزيائية البسيطة تحقق F1 أعلى عند العتبات الحالية.</p></div>
+ </section>
+ <section class="downloads section-space reveal" id="downloads"><div><p class="eyebrow"><span class="section-index">04 /</span> معرفة قابلة للمشاركة</p><h2>خذ البيانات.<br><em>وابنِ عليها.</em></h2><p>ابدأ بحثك بنسخة واضحة المصدر، واذكر المراجع الأصلية<br>وشروط استخدام البيانات عند إعادة الاستعمال.</p></div><div class="download-list"><a href="downloads/atlas_master.csv" download><span><b>الأطلس الكامل</b><small dir="ltr">CSV · 1,232 records</small></span><span aria-hidden="true">↙</span></a><a href="downloads/antimicrobial_evidence.csv" download><span><b>الأدلة والقياسات</b><small dir="ltr">CSV · 32 evidence rows</small></span><span aria-hidden="true">↙</span></a><a href="downloads/atlas_master.fasta" download><span><b>التسلسلات الببتيدية</b><small dir="ltr">FASTA · mature sequences</small></span><span aria-hidden="true">↙</span></a></div></section>
+<section class="creator section-space" id="contact" aria-labelledby="creator-title">
+ <div class="creator-heading"><p class="eyebrow">خلف هذا الأطلس</p><h2 id="creator-title">فضولٌ يقود البحث.<br><em>وشغفٌ يصنع التفاصيل.</em></h2></div>
+ <div class="creator-card"><span class="creator-monogram" aria-hidden="true">م</span><p class="eyebrow">إعداد وتطوير</p><h3>مصطفى فريد يحيى</h3><div class="supervisor"><span>بإشراف</span><strong>دكتورة تريفة فاروق</strong></div><p class="contact-intro">للتواصل ومتابعة جديد المشروع</p><div class="social-links"><a href="https://www.instagram.com/gtt.j/" target="_blank" rel="noopener noreferrer" aria-label="زيارة حساب مصطفى على إنستغرام gtt.j"><span>Instagram ↗</span><b dir="ltr">@gtt.j</b></a><a href="https://t.me/eq_mc" target="_blank" rel="noopener noreferrer" aria-label="زيارة حساب مصطفى على تليجرام eq_mc"><span>Telegram ↗</span><b dir="ltr">@eq_mc</b></a><a href="tel:07724431510" aria-label="الاتصال بمصطفى على 07724431510"><span>اتصال مباشر ↗</span><b dir="ltr">07724431510</b></a></div></div>
+ </section></main>
+<footer><a class="footer-wordmark" dir="ltr" href="#home">SCORPION<span>AI</span><sup>ATLAS</sup></a><div><p>أطلس بحثي مستقل · البيانات v1.5</p><p>للاستكشاف العلمي. الفعالية والسلامة تتطلبان تحققاً تجريبياً.</p></div><a href="#home">العودة للأعلى ↑</a></footer>
+<dialog id="peptide-dialog" aria-labelledby="detail-title"><div class="dialog-top"><span class="eyebrow">داخل السجل</span><button id="close-dialog" aria-label="إغلاق التفاصيل">×</button></div><div id="detail-content"></div></dialog>
+
+<!-- Gatekeeper Passcode Overlay (Academic Preview) -->
+<div id="gatekeeper-modal" class="gatekeeper-overlay">
+  <div class="gatekeeper-card">
+    <div class="gatekeeper-badge">معاينة أكاديمية مقيدة · SCORPIONAI ATLAS</div>
+    <h2>رمز المرور للمعاينة</h2>
+    <p>هذه النسخة مخصصة للمراجعة والتقييم الأكاديمي بإشراف <strong>دكتورة تريفة فاروق</strong> والباحث <strong>مصطفى فريد يحيى</strong>. يرجى إدخال رمز المرور للمتابعة.</p>
+    <form id="gatekeeper-form" class="gatekeeper-form">
+      <input type="password" id="gatekeeper-input" class="gatekeeper-input" placeholder="رمز المرور للمعاينة..." autocomplete="current-password" required autofocus />
+      <button type="submit" id="gatekeeper-btn" class="gatekeeper-btn">دخول المعاينة ←</button>
+    </form>
+    <p id="gatekeeper-error" class="gatekeeper-error">رمز المرور غير صحيح. يرجى التأكد والمحاولة مجدداً.</p>
+    <div class="gatekeeper-footer">
+      <span>جميع البيانات محمية برمجياً · الاستكشاف الأكاديمي فقط</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const PASSCODE = 'Atlas2026';
+  const overlay = document.getElementById('gatekeeper-modal');
+  const form = document.getElementById('gatekeeper-form');
+  const input = document.getElementById('gatekeeper-input');
+  const err = document.getElementById('gatekeeper-error');
+
+  function unlock() {
+    sessionStorage.setItem('atlas_auth_unlocked', 'true');
+    overlay.classList.add('unlocked');
+    setTimeout(() => { if (overlay) overlay.style.display = 'none'; }, 400);
+  }
+
+  // Check URL key param or hash (#key=Atlas2026 or ?key=Atlas2026)
+  const hashKey = (window.location.hash || '').match(/key=([^&]+)/);
+  const searchKey = new URLSearchParams(window.location.search).get('key');
+  const providedKey = (hashKey ? hashKey[1] : searchKey);
+
+  if (sessionStorage.getItem('atlas_auth_unlocked') === 'true' || providedKey === PASSCODE) {
+    unlock();
+  }
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (input.value.trim() === PASSCODE) {
+        unlock();
+      } else {
+        err.classList.add('show');
+        input.select();
+      }
+    });
+  }
+})();
+</script>
+
+</body></html>

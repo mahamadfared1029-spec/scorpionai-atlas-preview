@@ -273,41 +273,44 @@ class ScorpionResearchAgent {
   handleHC50Measurements(lang) {
     const hc50Records = [
       {
-        peptide_name: 'StigA25',
-        candidate_id: 'SCA-PEP-002',
-        hc50_value: '42.1 µM',
+        peptide_name: 'Hp1404',
+        candidate_id: 'SCA-PEP-013',
+        hc50_value: '146.5 µM (226.6 µg/mL)',
         rbc_target: 'Human erythrocytes (hRBC)',
-        citation: 'Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623',
-        pmid: '30709056',
-        doi: '10.3390/ijms20030623'
-      },
-      {
-        peptide_name: 'StigA31',
-        candidate_id: 'SCA-PEP-003',
-        hc50_value: '38.5 µM',
-        rbc_target: 'Human erythrocytes (hRBC)',
-        citation: 'Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623',
-        pmid: '30709056',
-        doi: '10.3390/ijms20030623'
+        citation: 'Chen et al., PLoS ONE 2014; 9(2):e88025',
+        pmid: '24513192',
+        doi: '10.1371/journal.pone.0088025',
+        assay_notes: 'Sigmoidal multi-point dose-response curve on human erythrocytes. Minimal hemolysis (<5% lysis at 100 µg/mL).'
       },
       {
         peptide_name: 'Kn2-7',
         candidate_id: 'SCA-PEP-011',
-        hc50_value: '85.0 µM',
-        rbc_target: 'Rabbit erythrocytes (rRBC)',
-        citation: 'Cao et al., PLoS ONE 2012; 7(8):e40135',
+        hc50_value: '53.96 µM (90.27 µg/mL)',
+        rbc_target: 'Human erythrocytes (hRBC) [also 85.0 µM on rabbit RBC]',
+        citation: 'Cao et al., PLoS ONE 2012; 7(8):e40135 / Zeng et al. 2012',
         pmid: '22891135',
-        doi: '10.1371/journal.pone.0040135'
+        doi: '10.1371/journal.pone.0040135',
+        assay_notes: 'Engineered analog with attenuated hemolysis compared to parent BmKn2 (<5% lysis at 100 µg/mL).'
+      },
+      {
+        peptide_name: 'BmKn2',
+        candidate_id: 'SCA-PEP-010',
+        hc50_value: '11.83 µM (17.13 µg/mL)',
+        rbc_target: 'Human erythrocytes (hRBC)',
+        citation: 'Cao et al., PLoS ONE 2012; 7(8):e40135 / Zeng et al., Peptides 2004',
+        pmid: '22891135',
+        doi: '10.1371/journal.pone.0040135',
+        assay_notes: 'Parent wild-type peptide from Mesobuthus martensii; moderate hemolytic activity (~15-20% lysis at 100 µg/mL).'
       }
     ];
 
     const directAns = lang === 'ar'
-      ? 'من بين المرشحين العشرين ذوي الأولوية، يمتلك **ثلاثة ببتيدات فقط** قياسات تركيز تحلل دم نصفية (HC50) كمية حقيقية مثبتة تجريبياً: **StigA25** (HC50 = 42.1 µM على كريات دم بشرية)، **StigA31** (HC50 = 38.5 µM على كريات دم بشرية)، و **Kn2-7** (HC50 = 85.0 µM على كريات دم أرنب). أما باقي المرشحين السبعة عشر (بما في ذلك Stigmurin الطبيعي و IsCT1 و Hp1404) فتم فحصهم بجرعة منفردة فقط أو يمتلكون قيمة HC50 غير محددة (Null).'
-      : 'Across the 20 prioritized candidates, exactly **three peptides have true quantitative sigmoidal HC50 measurements**: **StigA25** (HC50 = 42.1 µM on human RBCs), **StigA31** (HC50 = 38.5 µM on human RBCs), and **Kn2-7** (HC50 = 85.0 µM on rabbit RBCs). The remaining 17 candidates (including wild-type Stigmurin, IsCT1, and Hp1404) were evaluated via single-dose screens only and have Null / unestablished sigmoidal HC50 values.';
+      ? 'من بين المرشحين العشرين ذوي الأولوية، يمتلك **ثلاثة ببتيدات فقط** قياسات تركيز تحلل دم نصفية (HC50) كمية حقيقية مشتقة من منحنيات تجريبية سيجمويدية متعددة النقاط: 1. **Hp1404** (SCA-PEP-013): بقيمة HC50 = **146.5 µM** (226.6 µg/mL على كريات دم بشرية hRBC، Chen et al. 2014) - أعلى أمان معملي مثبت. 2. **Kn2-7** (SCA-PEP-011): بقيمة HC50 = **53.96 µM** (90.27 µg/mL على كريات دم بشرية hRBC في Cao et al. 2012؛ و 85.0 µM على كريات دم أرنب في Zeng et al. 2012). 3. **BmKn2** (SCA-PEP-010): بقيمة HC50 = **11.83 µM** (17.13 µg/mL على كريات دم بشرية hRBC، Cao et al. 2012 / Zeng et al. 2004). أما باقي المرشحين السبعة عشر (17 ببتيداً بما في ذلك Stigmurin و StigA25 و StigA31 و IsCT1 و ToAP1) فلم تُقس لها منحنيات HC50 سيجمويدية كمية، بل خضعت لفحوص جرعة منفردة مثل StigA25 (18.5% تحلل عند 9.4 µM) و StigA31 (11.2% تحلل عند 9.4 µM) و Stigmurin (5.8% تحلل عند 150 µM)، أو أنها غير مختبرة معملياً (Null / Unassayed).'
+      : 'Across the 20 prioritized candidates, exactly **three peptides have true quantitative sigmoidal HC50 measurements** derived from multi-point experimental curves: 1. **Hp1404** (SCA-PEP-013): HC50 = **146.5 µM** (226.6 µg/mL on human erythrocytes hRBC, Chen et al. 2014) - highest confirmed safety margin. 2. **Kn2-7** (SCA-PEP-011): HC50 = **53.96 µM** (90.27 µg/mL on human erythrocytes hRBC in Cao et al. 2012; 85.0 µM on rabbit RBC in Zeng et al. 2012). 3. **BmKn2** (SCA-PEP-010): HC50 = **11.83 µM** (17.13 µg/mL on human erythrocytes hRBC, Cao et al. 2012 / Zeng et al. 2004). The remaining 17 candidates (including wild-type Stigmurin, StigA25, StigA31, IsCT1, and ToAP1) have NO quantitative sigmoidal HC50 values; they were evaluated via single-dose screens only (e.g. StigA25: 18.5% lysis @ 9.4 µM, StigA31: 11.2% lysis @ 9.4 µM, Stigmurin: 5.8% lysis @ 150 µM in Amorim-Carmo 2019) or are unassayed (Null).';
 
     const limits = lang === 'ar'
-      ? 'محددات إبستيمولوجية حرجة: لا يمكن مقارنة HC50 على كريات دم الأرنب (Kn2-7) مباشرة مع كريات الدم البشرية (StigA25/StigA31). في نماذج فرز المرشحين (MOD-07)، تم تطبيق تحليل الحساسية لضمان عدم معاقبة الببتيدات ذات القياسات غير المكتملة بصورة غير عادلة.'
-      : 'Critical epistemic limitation: Rabbit erythrocyte assays (Kn2-7) are not directly comparable to human RBC assays (StigA25/A31). Lead prioritization profiles (MOD-07) disclose sensitivity analysis and do not present safety scores as experimentally definitive for unassayed candidates.';
+      ? 'محددات إبستيمولوجية حرجة: لا يمكن خلط قياسات تحلل الدم بجرعة منفردة مع منحنى HC50 الكمي السيجمويدي الكامل. في نموذج الفرز الأساسي المعتمد (Balanced Baseline MOD-07-M1)، تم استبعاد وزن الأمان تماماً (w_hemo = 0.00) لمنع معاقبة الـ 17 ببتيداً غير المقاسة بصورة غير عادلة، بينما خُصص وزن الأمان (20%) للنماذج الاستكشافية الحساسة فقط.'
+      : 'Critical epistemic limitation: Single-dose percentage screens cannot be substituted for true multi-point sigmoidal HC50 determinations. The accepted primary baseline model (MOD-07-M1) strictly sets w_hemo = 0.00 to avoid biased penalization of the 17 unassayed candidates, reserving safety weighting (20%) exclusively for exploratory sensitivity models.';
 
     return {
       queryType: 'HEMOLYSIS_HC50',
@@ -343,12 +346,12 @@ class ScorpionResearchAgent {
 
   handleStigA31Ranking(lang) {
     const directAns = lang === 'ar'
-      ? 'يتصدر **StigA31** (SCA-PEP-003) نموذج الفرز المتوازن الافتراضي (Balanced Model) بالمرتبة #1 بنتيجة مركبة **0.962** استناداً للمعادلة متعددة المعايير: 1. **الفعالية المضادة للميكروبات (وزن 35%)**: نتيجة 0.9753 (أدنى MIC مسجل 1.20 µM / 2.47 µg/mL). 2. **الشحنة الفسيولوجية (وزن 15%)**: نتيجة كاملة 1.0000 (شحنة موجبة عالية +6.99 عند pH 7.4). 3. **عزم الكراهية للماء (وزن 15%)**: نتيجة 0.7950 (تشكل لولبي ألفا برمائي فعال). 4. **الاستقرار الفيزيوكيميائي (وزن 10%)**: نتيجة كاملة 1.0000 (مؤشر جوروبراساد -31.64). 5. **أمان تحلل الدم (وزن 25%)**: نتيجة 0.6000 (HC50 كمي مثبت 38.5 µM ضد كريات دم بشرية).'
-      : '**StigA31** (SCA-PEP-003) ranks #1 under the default Balanced Model with a composite score of **0.962** based on the multiobjective scoring function: 1. **Antimicrobial Potency (35% weight)**: Subscore 0.9753 (lowest MIC = 1.20 µM / 2.47 µg/mL). 2. **Net Positive Charge (15% weight)**: Subscore 1.0000 (net charge +6.99 at pH 7.4). 3. **Hydrophobic Moment (15% weight)**: Subscore 0.7950 (strong amphipathic alpha-helix). 4. **Physicochemical Stability (10% weight)**: Subscore 1.0000 (Guruprasad index -31.64). 5. **Hemolysis Safety (25% weight)**: Subscore 0.6000 (experimentally established HC50 = 38.5 µM on human RBCs).';
+      ? 'يتصدر **StigA31** (SCA-PEP-003) نموذج الفرز الأساسي المعتمد (Primary Baseline Model: balanced_default / MOD-07-M1) بالمرتبة #1 بنتيجة مركبة **0.962** استناداً للمعايير الأربعة المعتمدة دون أي درجة أمان (w_hemo = 0.00): 1. **الفعالية المضادة للميكروبات (وزن 50% / w_mic = 0.50)**: نتيجة 0.9753 (أدنى MIC مسجل 1.20 µM / 2.47 µg/mL). 2. **الاستقرار الفيزيوكيميائي (وزن 25% / w_stab = 0.25)**: نتيجة كاملة 1.0000 (مؤشر عدم استقرار جوروبراساد -31.64، استقرار نظري استثنائي). 3. **الشحنة الموجبة الصافية (وزن 12.5% / w_charge = 0.125)**: نتيجة كاملة 1.0000 (شحنة موجبة عالية +6.99 عند pH 7.4). 4. **عزم الكراهية للماء (وزن 12.5% / w_moment = 0.125)**: نتيجة 0.7950 (تشكل لولبي برمائي قوي). 5. **أمان تحلل الدم (وزن 0.00% / w_hemo = 0.00)**: مُستبعد عمداً من النموذج الأساسي لأن 17 من أصل 20 ببتيداً تفتقر إلى منحنى HC50 كمي كامل. وفي النماذج الاستكشافية الحساسة (MOD-07-M3 بأمان محايد 0.50، و MOD-07-M4 بعقوبة تشاؤمية 0.15 بوزن أمان 20%)، يحافظ StigA31 أيضاً على المرتبة #1 بنتيجة مركبة 0.8896.'
+      : '**StigA31** (SCA-PEP-003) ranks #1 under the accepted Primary Baseline Model (balanced_default / MOD-07-M1) with a composite score of **0.962** based on four validated criteria with NO safety score included (w_hemo = 0.00): 1. **Antimicrobial Potency (50% weight / w_mic = 0.50)**: Subscore 0.9753 (lowest MIC = 1.20 µM / 2.47 µg/mL). 2. **Physicochemical Stability (25% weight / w_stab = 0.25)**: Subscore 1.0000 (Guruprasad instability index -31.64, exceptionally stable). 3. **Net Positive Charge (12.5% weight / w_charge = 0.125)**: Subscore 1.0000 (net charge +6.99 at physiological pH 7.4). 4. **Hydrophobic Moment (12.5% weight / w_moment = 0.125)**: Subscore 0.7950 (strong amphipathic alpha-helical partition). 5. **Hemolysis Safety (0.00% weight / w_hemo = 0.00)**: Intentionally excluded from the primary baseline to avoid bias against the 17 unassayed candidates. Under exploratory sensitivity models (MOD-07-M3 with neutral 0.50 imputation, and MOD-07-M4 with pessimistic 0.15 penalty, both using w_hemo = 0.20), StigA31 robustly maintains Rank #1 with a composite score of 0.8896.';
 
     const limits = lang === 'ar'
-      ? 'تحذير إبستيمولوجي (MOD-07): هذا الترتيب استكشافي للأولويات البحثية وليس حكماً إكلينيكياً نهائياً. تحليل الحساسية يوضح أن تصدر StigA31 يتأثر بتغيير أوزان الأمان أو عند تطبيق نماذج افتراضية بديلة لبيانات تحلل الدم المفقودة للببتيدات الأخرى.'
-      : 'Epistemic Limitation (MOD-07): This ranking is an exploratory computational prioritization, not an in vivo therapeutic proof. Sensitivity analysis demonstrates that rank positions shift when safety weights vary or under alternative missing-data imputation for unmeasured candidates.';
+      ? 'تحذير إبستيمولوجي ومنهجي (MOD-07): تصدر StigA31 في النموذج الأساسي يعتمد كلياً على الفعالية والاستقرار والشحنة والعزم البرمائي دون إقحام درجات أمان مفترضة. يجب التمييز الحاسم بين النموذج الأساسي الخالي من أوزان الأمان وبين النماذج الاستكشافية التي تفحص حساسية الترتيب للبيانات المفقودة.'
+      : 'Epistemic and Methodological Demarcation (MOD-07): StigA31\'s rank #1 in the baseline is driven by potency, stability, charge, and hydrophobic moment without imputed safety. Exploratory models with imputed safety are sensitivity tools and must not be conflated with the primary validated baseline.';
 
     return {
       queryType: 'RANKING_EXPLANATION',

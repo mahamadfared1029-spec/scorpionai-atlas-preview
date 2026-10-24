@@ -460,7 +460,8 @@ class VenomLabManager {
     setText('vl-meta-method', entry.experimental_method);
     setText('vl-meta-res', entry.resolution_angstrom ? `${entry.resolution_angstrom} Å` : 'غير منطبق (NMR / نموذج حسابي)');
     setText('vl-meta-chain', `Chain ${entry.chain_id || 'A'} (${entry.structure_residue_range || '1..' + entry.sequence_length})`);
-    setText('vl-meta-coverage', `${entry.sequence_coverage_pct}%`);
+    setText('vl-meta-coverage', `${entry.sequence_coverage_pct}% ${entry.sequence_coverage_pct === 100.0 ? '(تغطية كاملة 100%)' : '(تغطية جزئية)'}`);
+    setText('vl-meta-construction', entry.model_construction_type || '—');
     setText('vl-meta-amidation', entry.is_c_terminally_amidated ? 'مأمّد كيميائياً (-CONH₂)' : 'كربوكسيل حر (-COOH)');
     
     // Mass fields with distinguished definitions
@@ -592,6 +593,8 @@ class VenomLabManager {
         break;
       }
       if (line.startsWith('ATOM') || line.startsWith('HETATM')) {
+        const altLoc = line.length > 16 ? line[16] : ' ';
+        if (altLoc !== ' ' && altLoc !== 'A') continue;
         const atomName = line.substring(12, 16).trim();
         const resName = line.substring(17, 20).trim();
         const chainID = line[21].trim() || 'A';

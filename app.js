@@ -810,28 +810,28 @@
     },
     potency_focused: {
       name: 'التركيز الفائق على الفعالية (Potency-Dominant)',
-      rho: '0.9850',
+      rho: '0.9774',
       top: 'StigA31 (#1)',
       imp: 'none',
       w: { mic: 0.75, hemo: 0.00, stab: 0.15, moment: 0.05, charge: 0.05 }
     },
     safety_focused: {
       name: 'الأمان الاستكشافي: تعويض محايد (Exploratory Neutral Safety)',
-      rho: '0.9308',
+      rho: '0.9383',
       top: 'StigA31 (#1)',
       imp: 'neutral',
       w: { mic: 0.40, hemo: 0.20, stab: 0.20, moment: 0.10, charge: 0.10 }
     },
     stability_focused: {
       name: 'الأمان الاستكشافي: عقوبة النقص (Exploratory Pessimistic Safety)',
-      rho: '0.9429',
+      rho: '0.9398',
       top: 'StigA31 (#1)',
       imp: 'pessimistic',
       w: { mic: 0.40, hemo: 0.20, stab: 0.20, moment: 0.10, charge: 0.10 }
     },
     equal_weights: {
       name: 'أوزان فيزيوكيميائية متساوية (Equal Biophysics)',
-      rho: '0.9669',
+      rho: '0.9083',
       top: 'StigA31 (#1)',
       imp: 'none',
       w: { mic: 0.25, hemo: 0.00, stab: 0.25, moment: 0.25, charge: 0.25 }
@@ -922,11 +922,11 @@
       c.origin = isEngineered ? 'engineered' : 'natural';
       c.origin_label = isEngineered ? 'نظير مصمم' : 'سم طبيعي';
 
-      // Transparent exploratory weighting
-      const sMic = Math.max(0, 1 - (c.lowest_mic_ug / 100));
+      // Transparent exploratory weighting with strict [0, 1] normalization & clamping
+      const sMic = Math.min(Math.max(1 - (c.lowest_mic_ug / 100), 0), 1.0);
       const sCharge = Math.min(Math.max(c.net_charge, 0), 6) / 6;
-      const sMoment = Math.min(c.hydrophobic_moment, 1.0) / 1.0;
-      const sStability = Math.max(0, 1 - (c.instability / 60));
+      const sMoment = Math.min(Math.max(c.hydrophobic_moment, 0), 1.0);
+      const sStability = Math.min(Math.max(1 - (c.instability / 60), 0), 1.0);
       
       const sHemo = currentPreset.imp === 'pessimistic' ? c.s_hemo_pessimistic : c.s_hemo_neutral;
       c.composite_score = (w.mic * sMic) + (w.hemo * sHemo) + (w.stab * sStability) + (w.moment * sMoment) + (w.charge * sCharge);
@@ -956,7 +956,7 @@
       return `
         <tr>
           <td class="mono font-bold" dir="ltr">#${idx + 1}</td>
-          <td class="mono font-bold text-success triage-score-cell" dir="ltr">${c.composite_score.toFixed(3)}</td>
+          <td class="mono font-bold text-success triage-score-cell" dir="ltr">${c.composite_score.toFixed(4)}</td>
           <td>
             <strong>${esc(c.peptide_name)}</strong>
             <span class="origin-tag ${c.origin}">${esc(c.origin_label)}</span>

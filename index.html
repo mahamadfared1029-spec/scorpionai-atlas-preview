@@ -574,24 +574,24 @@
         <h3>معادلة الترتيب متعدد الأهداف وأوزان المعايير</h3>
       </div>
       <div class="math-formula" dir="ltr">
-        Score = 0.40 &times; S<sub>MIC</sub> + 0.25 &times; S<sub>Charge</sub> + 0.20 &times; S<sub>Moment</sub> + 0.15 &times; S<sub>Stability</sub>
+        Score<sub>Baseline</sub> = 0.50 &times; S<sub>MIC</sub> + 0.25 &times; S<sub>Stability</sub> + 0.125 &times; S<sub>Moment</sub> + 0.125 &times; S<sub>Charge</sub>
       </div>
       <div class="algo-components-grid">
         <div class="algo-comp">
-          <strong>1. الفعالية المقاسة (40%):</strong>
+          <strong>1. الفعالية المقاسة (50%):</strong>
           <span>S<sub>MIC</sub> = max(0, 1 &minus; MIC<sub>&mu;g/mL</sub> / 100). قياس مخبري تجريبي مباشر (أقل MIC هو الأفضل).</span>
         </div>
         <div class="algo-comp">
-          <strong>2. الشحنة الفسيولوجية (25%):</strong>
-          <span>S<sub>Charge</sub> = min(max(NetCharge, 0), 6) / 6. خاصية محسوبة عند pH 7.4 تدعم الجذب الكهروستاتيكي الأولي.</span>
+          <strong>2. الاستقرارية الفيزيوكيميائية (25%):</strong>
+          <span>S<sub>Stability</sub> = max(0, 1 &minus; Instability / 60). مؤشر Guruprasad المحسوب (&lt;40 مستقر، &gt;40 غير مستقر).</span>
         </div>
         <div class="algo-comp">
-          <strong>3. العزم الكاره للماء (20%):</strong>
+          <strong>3. العزم الكاره للماء (12.5%):</strong>
           <span>S<sub>Moment</sub> = min(&mu;H<sub>&alpha;</sub>, 1.0) / 1.0. قياس الازدواجية الأليفة لتشكيل الوجه الحلزوني المزدوج.</span>
         </div>
         <div class="algo-comp">
-          <strong>4. الاستقرارية (15%):</strong>
-          <span>S<sub>Stability</sub> = max(0, 1 &minus; Instability / 60). مؤشر Guruprasad المحسوب (&lt;40 مستقر، &gt;40 غير مستقر).</span>
+          <strong>4. الشحنة الفسيولوجية (12.5%):</strong>
+          <span>S<sub>Charge</sub> = min(max(NetCharge, 0), 6) / 6. خاصية محسوبة عند pH 7.4 تدعم الجذب الكهروستاتيكي الأولي.</span>
         </div>
       </div>
       <p class="algo-warning">⚠️ <strong>تنبيه منهجي وسريري:</strong> الترتيب يدمج قياسات تجريبية مع واسمات فيزيوكيميائية تنبؤية لمقارنة المرشحين داخل بيئة الأطلس. لا تعني الرتبة المرتفعة تفوقاً علاجياً مطلقاً في بيئات سريرية مختلفة، نظراً لتباين سلالات الفحص وأوساط الزرع وتعديلات الأطراف بين الدراسات.</p>
@@ -608,24 +608,24 @@
       </div>
       <div class="sensitivity-presets-bar">
         <button class="preset-btn active" data-preset="balanced_default" id="preset-btn-balanced">
-          <strong>المتوازن القياسي (Default)</strong>
-          <small>MIC 40% | Hemo 25% | Stab 15% | µH 10% | Q 10%</small>
+          <strong>المرجعي الأساسي: استبعاد الأمان (Baseline)</strong>
+          <small>MIC 50% | Stab 25% | µH 12.5% | Q 12.5% (استبعاد الأمان تماماً)</small>
         </button>
         <button class="preset-btn" data-preset="potency_focused" id="preset-btn-potency">
-          <strong>التركيز على الفعالية (Potency)</strong>
-          <small>MIC 70% | Hemo 10% | Stab 10% | µH 5% | Q 5%</small>
+          <strong>التركيز على الفعالية (Potency-Dominant)</strong>
+          <small>MIC 75% | Stab 15% | µH 5% | Q 5%</small>
         </button>
         <button class="preset-btn" data-preset="safety_focused" id="preset-btn-safety">
-          <strong>الأمان والتوافقية (Safety)</strong>
-          <small>Hemo 50% | MIC 20% | Stab 15% | µH 7.5% | Q 7.5%</small>
+          <strong>الأمان الاستكشافي: تعويض محايد (Neutral Safety)</strong>
+          <small>MIC 40% | Hemo 20% (محايد) | Stab 20% | الخواص 20%</small>
         </button>
         <button class="preset-btn" data-preset="stability_focused" id="preset-btn-stability">
-          <strong>الاستقرار الفيزيوكيميائي (Stability)</strong>
-          <small>Stab 35% | MIC 20% | µH 20% | Q 15% | Hemo 10%</small>
+          <strong>الأمان الاستكشافي: عقوبة النقص (Pessimistic Safety)</strong>
+          <small>MIC 40% | Hemo 20% (عقوبة) | Stab 20% | الخواص 20%</small>
         </button>
         <button class="preset-btn" data-preset="equal_weights" id="preset-btn-equal">
-          <strong>أوزان متساوية (Equal 20%)</strong>
-          <small>20% لكل معيار فيزيوكيميائي وتجريبي</small>
+          <strong>أوزان فيزيوكيميائية متساوية (Equal 25%)</strong>
+          <small>25% لكل معيار: MIC | Stab | µH | Q</small>
         </button>
       </div>
       <div class="sensitivity-summary-metrics" id="sensitivity-metrics-row">
@@ -644,22 +644,32 @@
      <button id="sort-by-moment" class="triage-btn">العزم الكاره للماء (Amphipathicity)</button>
    </div>
 
-   <!-- Prioritization Table -->
-   <div class="table-scroll reveal">
-     <table class="triage-table">
-       <thead>
-         <tr>
-           <th>الرتبة</th>
-           <th>الببتيد والنوع</th>
-           <th>الميكروب المستهدف</th>
-           <th>الفعالية الأدنى (MIC)</th>
-           <th>الشحنة <small>pH 7.4</small></th>
-           <th>العزم الكاره للماء</th>
-           <th>حالة الاستقرار</th>
-           <th>فحص انحلال الدم ومؤشر الانتقائية (Hemolysis & SI)</th>
-           <th>التفاصيل</th>
-         </tr>
-       </thead>
+   <!-- Exploratory Cross-Organism Notice -->
+    <div class="safeguard-banner reveal" style="border-left-color: #f59e0b; margin-top: 1rem; margin-bottom: 1.5rem;">
+      <div class="safeguard-icon">⚠️</div>
+      <div class="safeguard-text">
+        <strong>تنبيه منهجي حول الفرز الاستكشافي واختلاف الكائنات المستهدفة (Cross-Organism Exploratory Notice):</strong>
+        <p>تعتبر هذه المنظومة أداة فرز استكشافية (Exploratory Screening Tool). تم جمع قيم التركيز التثبيطي الأدنى (MIC) من دراسات أولية مستقلة استهدفت ميكروبات متباينة (مثل <em>S. aureus</em>, <em>E. coli</em>, <em>P. aeruginosa</em>, <em>C. albicans</em>, <em>B. subtilis</em>) باستخدام بروتوكولات وأوساط زرع مختلفة (MHB, LB, RPMI). <strong>لا تمثل قيم MIC مقياساً موحداً متكافئاً بيولوجياً عبر الأنواع المختلفة</strong>؛ ويُعرض الكائن المستهدف والسلالة صراحة بجانب كل قيمة لضمان الشفافية العلمية ومنع المقارنات السريرية المضللة.</p>
+      </div>
+    </div>
+
+    <!-- Prioritization Table -->
+    <div class="table-scroll reveal">
+      <table class="triage-table">
+        <thead>
+          <tr>
+            <th>الرتبة</th>
+            <th>الدرجة المركبة (Score)</th>
+            <th>الببتيد والنوع</th>
+            <th>الميكروب وسلالة الفحص</th>
+            <th>الفعالية الأدنى (MIC)</th>
+            <th>الشحنة <small>pH 7.4</small></th>
+            <th>العزم الكاره للماء</th>
+            <th>حالة الاستقرار</th>
+            <th>فحص انحلال الدم ومؤشر الانتقائية (Hemolysis & SI)</th>
+            <th>التفاصيل</th>
+          </tr>
+        </thead>
        <tbody id="prioritization-rows"></tbody>
      </table>
    </div>

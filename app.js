@@ -956,6 +956,7 @@
       return `
         <tr>
           <td class="mono font-bold" dir="ltr">#${idx + 1}</td>
+          <td class="mono font-bold text-success triage-score-cell" dir="ltr">${c.composite_score.toFixed(3)}</td>
           <td>
             <strong>${esc(c.peptide_name)}</strong>
             <span class="origin-tag ${c.origin}">${esc(c.origin_label)}</span>

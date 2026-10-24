@@ -1,0 +1,454 @@
+{
+  "metadata": {
+    "description": "Authoritative machine-readable mapping between candidate identifiers SCA-PEP-001..020 and master atlas identifiers SCA-0001..1232",
+    "version": "1.5-Sprint03-ReleaseGate",
+    "total_candidates": 20,
+    "attribution_verified": true
+  },
+  "candidates": [
+    {
+      "candidate_id": "SCA-PEP-001",
+      "master_atlas_id": "SCA-0001",
+      "peptide_name": "Stigmurin",
+      "uniprot_accession": "P0DQT1",
+      "exact_mature_sequence": "FFSLIPSLVGGLISAFK",
+      "sequence_length": 17,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Tityus stigmurus",
+      "family": "Buthidae",
+      "origin": "natural",
+      "total_assay_rows": 3,
+      "evidence_ids": [
+        "SCA-EVD-0001",
+        "SCA-EVD-0002",
+        "SCA-EVD-0003"
+      ],
+      "tested_microbes": [
+        "Pseudomonas aeruginosa (ATCC 27853)",
+        "Staphylococcus aureus (ATCC 29213)",
+        "Escherichia coli (ATCC 25922)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-002",
+      "master_atlas_id": "SCA-0002",
+      "peptide_name": "StigA25",
+      "uniprot_accession": "Synthetic_Derivative",
+      "exact_mature_sequence": "FFSLIPSLVKKLIKAFK",
+      "sequence_length": 17,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Tityus stigmurus",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "total_assay_rows": 3,
+      "evidence_ids": [
+        "SCA-EVD-0004",
+        "SCA-EVD-0005",
+        "SCA-EVD-0006"
+      ],
+      "tested_microbes": [
+        "Pseudomonas aeruginosa (ATCC 27853)",
+        "Staphylococcus aureus (ATCC 29213)",
+        "Escherichia coli (ATCC 25922)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-003",
+      "master_atlas_id": "SCA-0003",
+      "peptide_name": "StigA31",
+      "uniprot_accession": "Synthetic_Derivative",
+      "exact_mature_sequence": "FFKLIPKLVKKLIKAFK",
+      "sequence_length": 17,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Tityus stigmurus",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "total_assay_rows": 3,
+      "evidence_ids": [
+        "SCA-EVD-0007",
+        "SCA-EVD-0008",
+        "SCA-EVD-0009"
+      ],
+      "tested_microbes": [
+        "Pseudomonas aeruginosa (ATCC 27853)",
+        "Staphylococcus aureus (ATCC 29213)",
+        "Escherichia coli (ATCC 25922)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-004",
+      "master_atlas_id": "SCA-0004",
+      "peptide_name": "StigA6",
+      "uniprot_accession": "Synthetic_Derivative",
+      "exact_mature_sequence": "FFSLIPKLVKGLISAFK",
+      "sequence_length": 17,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Tityus stigmurus",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "total_assay_rows": 1,
+      "evidence_ids": [
+        "SCA-EVD-0010"
+      ],
+      "tested_microbes": [
+        "Pseudomonas aeruginosa (H103)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-005",
+      "master_atlas_id": "SCA-0005",
+      "peptide_name": "StigA16",
+      "uniprot_accession": "Synthetic_Derivative",
+      "exact_mature_sequence": "FFKLIPKLVKGLISAFK",
+      "sequence_length": 17,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Tityus stigmurus",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "total_assay_rows": 1,
+      "evidence_ids": [
+        "SCA-EVD-0011"
+      ],
+      "tested_microbes": [
+        "Pseudomonas aeruginosa (H103)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-006",
+      "master_atlas_id": "SCA-0006",
+      "peptide_name": "AaeAP1",
+      "uniprot_accession": "A0A024FBX7",
+      "exact_mature_sequence": "FLFSLIPSVIAGLVSAIRN",
+      "sequence_length": 19,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Androctonus aeneas",
+      "family": "Buthidae",
+      "origin": "natural",
+      "total_assay_rows": 2,
+      "evidence_ids": [
+        "SCA-EVD-0012",
+        "SCA-EVD-0013"
+      ],
+      "tested_microbes": [
+        "Staphylococcus aureus (NCTC 10788)",
+        "Escherichia coli (NCTC 10418)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-007",
+      "master_atlas_id": "SCA-0007",
+      "peptide_name": "AaeAP1_K_analogue",
+      "uniprot_accession": "Synthetic_Derivative",
+      "exact_mature_sequence": "FLFKLIPKVIKGLVKAIRK",
+      "sequence_length": 19,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Androctonus aeneas",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "total_assay_rows": 2,
+      "evidence_ids": [
+        "SCA-EVD-0014",
+        "SCA-EVD-0015"
+      ],
+      "tested_microbes": [
+        "Staphylococcus aureus (NCTC 10788)",
+        "Escherichia coli (NCTC 10418)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-008",
+      "master_atlas_id": "SCA-0008",
+      "peptide_name": "AaeAP2",
+      "uniprot_accession": "A0A024FBY0",
+      "exact_mature_sequence": "FLFSLIPSAIAGLVSAIRN",
+      "sequence_length": 19,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Androctonus aeneas",
+      "family": "Buthidae",
+      "origin": "natural",
+      "total_assay_rows": 1,
+      "evidence_ids": [
+        "SCA-EVD-0016"
+      ],
+      "tested_microbes": [
+        "Staphylococcus aureus (NCTC 10788)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-009",
+      "master_atlas_id": "SCA-0009",
+      "peptide_name": "AaeAP2_K_analogue",
+      "uniprot_accession": "Synthetic_Derivative",
+      "exact_mature_sequence": "FLFKLIPKAIKGLVKAIRK",
+      "sequence_length": 19,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Androctonus aeneas",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "total_assay_rows": 1,
+      "evidence_ids": [
+        "SCA-EVD-0017"
+      ],
+      "tested_microbes": [
+        "Staphylococcus aureus (NCTC 10788)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-010",
+      "master_atlas_id": "SCA-0010",
+      "peptide_name": "BmKn2",
+      "uniprot_accession": "Q6JQN2",
+      "exact_mature_sequence": "FIGAIARLLSKIF",
+      "sequence_length": 13,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Mesobuthus martensii",
+      "family": "Buthidae",
+      "origin": "natural",
+      "total_assay_rows": 2,
+      "evidence_ids": [
+        "SCA-EVD-0018",
+        "SCA-EVD-0019"
+      ],
+      "tested_microbes": [
+        "Staphylococcus aureus (ATCC 25923)",
+        "Escherichia coli (ATCC 25922)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-011",
+      "master_atlas_id": "SCA-0011",
+      "peptide_name": "Kn2-7",
+      "uniprot_accession": "Synthetic_Derivative",
+      "exact_mature_sequence": "FIKRIARLLRKIF",
+      "sequence_length": 13,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Mesobuthus martensii",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "total_assay_rows": 2,
+      "evidence_ids": [
+        "SCA-EVD-0020",
+        "SCA-EVD-0021"
+      ],
+      "tested_microbes": [
+        "Staphylococcus aureus (ATCC 25923)",
+        "Escherichia coli (ATCC 25922)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-012",
+      "master_atlas_id": "SCA-0012",
+      "peptide_name": "IsCT1",
+      "uniprot_accession": "Q8MMJ7",
+      "exact_mature_sequence": "ILGKIWEGIKSLF",
+      "sequence_length": 13,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Opisthacanthus madagascariensis",
+      "family": "Hormuridae",
+      "origin": "natural",
+      "total_assay_rows": 2,
+      "evidence_ids": [
+        "SCA-EVD-0022",
+        "SCA-EVD-0023"
+      ],
+      "tested_microbes": [
+        "Staphylococcus aureus (ATCC 25923)",
+        "Escherichia coli (ATCC 25922)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-013",
+      "master_atlas_id": "SCA-0013",
+      "peptide_name": "Hp1404",
+      "uniprot_accession": "P0DX64",
+      "exact_mature_sequence": "GILGKLWEGVKSIF",
+      "sequence_length": 14,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Heterometrus petersii",
+      "family": "Scorpionidae",
+      "origin": "natural",
+      "total_assay_rows": 2,
+      "evidence_ids": [
+        "SCA-EVD-0024",
+        "SCA-EVD-0025"
+      ],
+      "tested_microbes": [
+        "Staphylococcus aureus (ATCC 25923)",
+        "Escherichia coli (ATCC 25922)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-014",
+      "master_atlas_id": "SCA-0014",
+      "peptide_name": "ToAP1",
+      "uniprot_accession": "A0A1D3IXR7",
+      "exact_mature_sequence": "FIGMIPGLIGGLISAFK",
+      "sequence_length": 17,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Tityus obscurus",
+      "family": "Scorpiones_incertae",
+      "origin": "natural",
+      "total_assay_rows": 1,
+      "evidence_ids": [
+        "SCA-EVD-0026"
+      ],
+      "tested_microbes": [
+        "Candida albicans (SC5314)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-015",
+      "master_atlas_id": "SCA-0015",
+      "peptide_name": "ToAP3",
+      "uniprot_accession": "P0DQT2",
+      "exact_mature_sequence": "FIGMIPGLIGGLISAIK",
+      "sequence_length": 17,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Tityus obscurus",
+      "family": "Scorpiones_incertae",
+      "origin": "natural",
+      "total_assay_rows": 1,
+      "evidence_ids": [
+        "SCA-EVD-0027"
+      ],
+      "tested_microbes": [
+        "Candida albicans (SC5314)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-016",
+      "master_atlas_id": "SCA-0016",
+      "peptide_name": "AcrAP1",
+      "uniprot_accession": "A0A0A1I6E7",
+      "exact_mature_sequence": "FLFSLIPHAISGLISAFK",
+      "sequence_length": 18,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Androctonus crassicauda",
+      "family": "Buthidae",
+      "origin": "natural",
+      "total_assay_rows": 1,
+      "evidence_ids": [
+        "SCA-EVD-0028"
+      ],
+      "tested_microbes": [
+        "Staphylococcus aureus (NCTC 10788)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-017",
+      "master_atlas_id": "SCA-0017",
+      "peptide_name": "AcrAP1_K_analogue",
+      "uniprot_accession": "Synthetic_Derivative",
+      "exact_mature_sequence": "FLFKLIPKAIKGLIKAFK",
+      "sequence_length": 18,
+      "modification_state": "Amidated C-terminus (-CONH2)",
+      "is_c_terminally_amidated": true,
+      "reported_species": "Androctonus crassicauda",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "total_assay_rows": 1,
+      "evidence_ids": [
+        "SCA-EVD-0029"
+      ],
+      "tested_microbes": [
+        "Staphylococcus aureus (NCTC 10788)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-018",
+      "master_atlas_id": "SCA-0018",
+      "peptide_name": "Hadrurin",
+      "uniprot_accession": "P82656",
+      "exact_mature_sequence": "GILDTIKSIASKVWNSKTVQDLKRKGINWVANKLGVSPQAA",
+      "sequence_length": 41,
+      "modification_state": "Free carboxyl C-terminus (-COOH)",
+      "is_c_terminally_amidated": false,
+      "reported_species": "Hadrurus aztecus",
+      "family": "Caraboctonidae",
+      "origin": "natural",
+      "total_assay_rows": 1,
+      "evidence_ids": [
+        "SCA-EVD-0030"
+      ],
+      "tested_microbes": [
+        "Escherichia coli (ATCC 25922)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-019",
+      "master_atlas_id": "SCA-0019",
+      "peptide_name": "Scorpine",
+      "uniprot_accession": "P56972",
+      "exact_mature_sequence": "GWINEEKIQKKIDERMGNTVLGGMAKAIVHKMAKNEFQCMANMDMLGNCEKHCQTSGEKGYCHGTKCKCGTPLSY",
+      "sequence_length": 75,
+      "modification_state": "Free carboxyl C-terminus (-COOH)",
+      "is_c_terminally_amidated": false,
+      "reported_species": "Pandinus imperator",
+      "family": "Scorpionidae",
+      "origin": "natural",
+      "total_assay_rows": 1,
+      "evidence_ids": [
+        "SCA-EVD-0031"
+      ],
+      "tested_microbes": [
+        "Bacillus subtilis (ATCC 6633)"
+      ],
+      "assay_attribution_verified": true
+    },
+    {
+      "candidate_id": "SCA-PEP-020",
+      "master_atlas_id": "SCA-0020",
+      "peptide_name": "Parabutoporin",
+      "uniprot_accession": "P83312",
+      "exact_mature_sequence": "FKLGSFLKKAWKSKLAKKLRAKGKEMLKDYAKGLLEGGSEEVPGQ",
+      "sequence_length": 45,
+      "modification_state": "Free carboxyl C-terminus (-COOH)",
+      "is_c_terminally_amidated": false,
+      "reported_species": "Parabuthus schlechteri",
+      "family": "Buthidae",
+      "origin": "natural",
+      "total_assay_rows": 1,
+      "evidence_ids": [
+        "SCA-EVD-0032"
+      ],
+      "tested_microbes": [
+        "Staphylococcus aureus (ATCC 25923)"
+      ],
+      "assay_attribution_verified": true
+    }
+  ]
+}

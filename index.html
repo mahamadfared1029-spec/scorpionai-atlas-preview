@@ -5,17 +5,34 @@
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <meta name="googlebot" content="noindex, nofollow">
   <meta name="theme-color" content="#0b100f">
-  <meta name="description" content="أطلس تفاعلي لببتيدات العقارب: استكشف التسلسلات والخصائص والأدلة العلمية المنشورة.">
-  <title>ScorpionAI — أطلس الاحتمالات الصغيرة</title>
+  <meta name="description" content="أطلس تفاعلي لببتيدات العقارب: استكشف التسلسلات والخصائص والأدلة العلمية المنشورة مع تدقيق تجريبي وموضوعي صارم.">
+  <title>ScorpionAI — أطلس الاحتمالات الصغيرة | SCORPION X</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
   <script type="module" src="scene.js"></script><script src="app.js" defer></script>
 </head>
-<body>
+<body class="truth-mode-active">
 <a class="skip" href="#atlas">انتقل إلى البيانات</a>
 <header class="nav">
- <a class="brand" href="#home" aria-label="ScorpionAI، الرئيسية"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M11 28 6 20l7-9 8 4 5 11-7 7Zm13-1 8-7 2-10-6-6-6 3 1 5 5-2 2 4-3 6M12 19l-7-7M12 23 3 25M18 28l-3 9M23 26l6 9"/></svg><span dir="ltr">SCORPION<span class="brand-accent">AI</span><small>PEPTIDE ATLAS</small></span></a>
- <nav aria-label="القائمة الرئيسية"><a href="#atlas">الأطلس</a><a href="#approach">المنهجية</a><a href="#evidence">الأدلة</a><a href="#contact">تواصل</a></nav>
- <a class="nav-download" href="#downloads">البيانات المفتوحة <span aria-hidden="true">↙</span></a>
+ <a class="brand" href="#home" aria-label="ScorpionAI، الرئيسية">
+   <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M11 28 6 20l7-9 8 4 5 11-7 7Zm13-1 8-7 2-10-6-6-6 3 1 5 5-2 2 4-3 6M12 19l-7-7M12 23 3 25M18 28l-3 9M23 26l6 9"/></svg>
+   <span dir="ltr">SCORPION<span class="brand-accent">AI</span><small>PEPTIDE ATLAS</small></span>
+ </a>
+ <nav aria-label="القائمة الرئيسية">
+   <a href="#atlas">الأطلس</a>
+   <a href="#methods-evidence">مركز الأدلة والمناهج</a>
+   <a href="#approach">المنهجية</a>
+   <a href="#evidence">التصنيف</a>
+   <a href="#contact">تواصل</a>
+ </nav>
+ <div class="nav-actions">
+   <!-- MOD-01: Scientific Truth Mode Switch in Navigation -->
+   <button id="truth-mode-toggle" class="truth-toggle active" aria-pressed="true" title="تبديل نمط الحقيقة العلمية الصارم">
+     <span class="truth-indicator active"></span>
+     <span class="truth-label">الحقيقة العلمية</span>
+     <span class="truth-state-badge">مفعّل</span>
+   </button>
+   <a class="nav-download" href="#downloads">البيانات المفتوحة <span aria-hidden="true">↙</span></a>
+ </div>
 </header>
 <main>
  <section class="hero" id="home" aria-labelledby="hero-title">
@@ -23,9 +40,17 @@
   <div class="hero-copy">
    <p class="eyebrow"><span class="live-dot"></span> حيث يلتقي التنوع الحيوي بالذكاء الحسابي</p>
    <h1 id="hero-title">من عالَمٍ صغير،<br>إلى <em>احتمالاتٍ كبيرة.</em></h1>
-   <p class="hero-description">اكتشف الجزيئات الكامنة في سموم العقارب.<br>أطلس يجمع التسلسلات والخصائص والأدلة العلمية،<br class="desktop-break"> ليمنح البحث نقطة انطلاق أوضح.</p>
-   <div class="hero-actions"><a class="button primary" href="#atlas">استكشف الأطلس <span aria-hidden="true">↙</span></a><a class="text-link" href="#approach"><span class="play-icon" aria-hidden="true">▶</span> وراء البيانات</a></div>
-   <div class="hero-edition"><span class="edition-line"></span><span dir="ltr">ATLAS / VOL. 01</span><span>نسخة بحثية · v1.5</span></div>
+   <p class="hero-description">اكتشف الجزيئات الكامنة في سموم العقارب.<br>أطلس يجمع التسلسلات والخصائص والأدلة العلمية،<br class="desktop-break"> ليمنح البحث نقطة انطلاق أوضح وأدق.</p>
+   <div class="hero-actions">
+     <a class="button primary" href="#atlas">استكشف الأطلس <span aria-hidden="true">↙</span></a>
+     <a class="button secondary" href="#methods-evidence">مستكشف الأدلة الـ32 <span aria-hidden="true">🔬</span></a>
+     <a class="text-link" href="#approach"><span class="play-icon" aria-hidden="true">▶</span> وراء البيانات</a>
+   </div>
+   <div class="hero-edition">
+     <span class="edition-line"></span>
+     <span dir="ltr">SCORPION X / SPRINT 01</span>
+     <span>نسخة بحثية مدققة · v1.5</span>
+   </div>
   </div>
   <div class="specimen" id="specimen">
    <div class="specimen-coordinate top-coordinate" dir="ltr"><span id="scene-coordinate">SCORPIONES</span><span>ART STUDY / 001</span></div>
@@ -37,35 +62,361 @@
    <div class="scene-tools"><span id="scene-hint">حرّك المؤشر لاستكشاف العمق <span aria-hidden="true">↔</span></span><button id="rotate-left" aria-label="تدوير المجسم إلى اليسار">↶</button><button id="motion-toggle" aria-label="إيقاف الحركة" aria-pressed="false">Ⅱ</button><button id="rotate-right" aria-label="تدوير المجسم إلى اليمين">↷</button></div>
    <div class="creature-actions" id="creature-actions" hidden><button id="sting-action">لدغة ⚡</button><button id="claw-action">الكلّابات ◇</button><button id="follow-action" aria-pressed="true">يتبع المؤشر ◎</button></div><span class="pointer-aura" id="pointer-aura" aria-hidden="true"></span><p class="sr-only" id="action-status" role="status" aria-live="polite"></p><p class="scene-loading" id="scene-loading" role="status">جارٍ إعداد المجسّم…</p>
   </div>
-  <div class="hero-bottom"><span>صُمّم للفضول. بُني على البيانات.</span><a href="#atlas">انزل للاستكشاف <span aria-hidden="true">↓</span></a><span dir="ltr">OPEN SCIENCE. OPEN POSSIBILITIES.</span></div>
+  <div class="hero-bottom"><span>صُمّم للفضول. بُني على البيانات.</span><a href="#atlas">انزل للاستكشاف <span aria-hidden="true">↓</span></a><span dir="ltr">SCIENTIFIC RIGOR. OPEN POSSIBILITIES.</span></div>
  </section>
- <section class="numbers reveal" aria-label="الأطلس بالأرقام"><div><span class="number" dir="ltr">1,232</span><p>تسلسلاً ببتيدياً فريداً</p></div><div><span class="number" dir="ltr">568</span><p>مجموعة تشابه تسلسلي</p></div><div><span class="number" dir="ltr">32</span><p>سجلاً للأدلة التجريبية</p></div><p class="numbers-note">آلاف التفاصيل.<br><span>مساحة واحدة للاستكشاف.</span><small>تضم البيانات عقارب ومشتقات ببتيدية مُهندسة.</small></p></section>
+
+ <section class="numbers reveal" aria-label="الأطلس بالأرقام">
+   <div><span class="number" dir="ltr">1,232</span><p>تسلسلاً ببتيدياً فريداً</p></div>
+   <div><span class="number" dir="ltr">568</span><p>مجموعة تشابه تسلسلي (CD-HIT 70%)</p></div>
+   <div><span class="number" dir="ltr">32</span><p>سجلاً تجريبياً محكّماً (MIC)</p></div>
+   <p class="numbers-note">آلاف التفاصيل.<br><span>مساحة واحدة للاستكشاف النزيه.</span><small>تضم البيانات عقارب ومشتقات ببتيدية مُهندسة، مع فصل تام للأدلة.</small></p>
+ </section>
+
+ <!-- SECTION 01: THE CATALOG -->
  <section class="atlas section-space" id="atlas" aria-labelledby="atlas-title">
-  <div class="section-heading reveal"><div><p class="eyebrow"><span class="section-index">01 /</span> مكتبة الجزيئات</p><h2 id="atlas-title">اتبع فضولك.<br><span>اعثر على ببتيدك.</span></h2></div><p>ابدأ باسم ببتيد، أو نوع عقرب، أو تسلسل.<br>كل سجل يقودك إلى خصائصه ودليله الأصلي.</p></div>
-  <div class="catalog-controls"><label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg><input id="search" type="search" placeholder="ابحث عن Stigmurin أو نوع العقرب أو التسلسل…" aria-label="البحث في الأطلس" autocomplete="off"><span class="search-key" aria-hidden="true">/</span></label><label class="select-label"><span class="sr-only">حالة الدليل</span><select id="status-filter"><option value="all">كل حالات الدليل</option><option value="measured">MIC مقاس</option><option value="annotated">تعليق UniProt</option><option value="background">خلفية غير مختبرة</option><option value="conditional">حالات الغشاء الحيوي</option></select></label><button class="filter-reset" id="reset-filters" aria-label="إعادة ضبط البحث والتصفية">↻</button></div>
-  <div class="catalog-summary"><span id="result-count" role="status" aria-live="polite">جارٍ تحميل البيانات…</span><span class="summary-note"><i></i> المصدر: بيانات الأطلس المدققة v1.5</span></div>
-  <div class="table-scroll"><table><thead><tr><th>الببتيد / المصدر</th><th>الطول</th><th>الشحنة <small>pH 7.4</small></th><th>حالة الدليل</th><th>المجموعة</th><th><span class="sr-only">عرض التفاصيل</span></th></tr></thead><tbody id="peptide-rows"></tbody></table></div>
-  <div id="empty-state" class="empty-state" hidden><span>∅</span><h3>لا توجد نتائج مطابقة</h3><p>جرّب اسماً أقصر أو غيّر حالة الدليل.</p><button class="button secondary" id="empty-reset">عرض جميع الببتيدات</button></div>
-  <div id="data-error" class="empty-state" hidden><h3>تعذّر تحميل البيانات</h3><p>شغّل الموقع من المشغّل المحلي، ثم حاول مجدداً.</p><button class="button secondary" id="retry-data">إعادة المحاولة</button></div>
-  <div class="pagination"><p>الأدلة متفاوتة؛ وجود سجل هنا لا يثبت نشاطه المخبري.</p><div><button id="prev-page" aria-label="الصفحة السابقة">→</button><span id="page-label">—</span><button id="next-page" aria-label="الصفحة التالية">←</button></div></div>
+  <div class="section-heading reveal">
+    <div>
+      <p class="eyebrow"><span class="section-index">01 /</span> مكتبة الجزيئات</p>
+      <h2 id="atlas-title">اتبع فضولك.<br><span>اعثر على ببتيدك.</span></h2>
+    </div>
+    <p>ابدأ باسم ببتيد، أو نوع عقرب، أو تسلسل.<br>كل سجل يقودك إلى خصائصه، ومستوى دليله، ومصدره الأصلي.</p>
+  </div>
+
+  <!-- MOD-01: Scientific Truth Mode Interactive Banner -->
+  <div id="truth-banner" class="truth-banner reveal">
+    <div class="truth-banner-badge">
+      <span class="live-dot" style="background:#10b981;box-shadow:0 0 10px #10b981aa;"></span>
+      <span>نمط الحقيقة العلمية مفعل · تمييز صارم لمستويات الموثوقية والأدلة</span>
+    </div>
+    <div class="truth-banner-content">
+      <p class="truth-banner-rule">
+        <strong>الفصل المنهجي بين مستويات الأدلة:</strong> يتم التمييز الحصري بين <strong>18 قياساً كمياً مباشراً (MIC)</strong>، و<strong>165 تعليقاً وظيفياً</strong> من UniProt، و<strong>حالتين شرطيتين</strong> للأغشية الحيوية، و<strong>1,047 ببتيداً غير مختبر</strong> كخلفية سموم طبيعية.
+      </p>
+      <p class="truth-banner-warning">
+        ⚠️ <strong>قاعدة قطعية:</strong> غياب القياس المخبري لا يثبت غياب الفعالية؛ يحظر علمياً اعتبار الـ 1,047 ببتيداً كسلبيات مخبرية (إطار التعلم من الإيجابيات والخلفية غير الموسومة PU Learning).
+      </p>
+    </div>
+  </div>
+
+  <div class="catalog-controls">
+    <label class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg>
+      <input id="search" type="search" placeholder="ابحث عن Stigmurin أو نوع العقرب أو التسلسل…" aria-label="البحث في الأطلس" autocomplete="off">
+      <span class="search-key" aria-hidden="true">/</span>
+    </label>
+    <label class="select-label">
+      <span class="sr-only">حالة الدليل</span>
+      <select id="status-filter">
+        <option value="all">كل مستويات الدليل (1,232)</option>
+        <option value="measured">المستوى 1: MIC مقاس مخبرياً (18)</option>
+        <option value="annotated">المستوى 2: تعليق UniProt موثق (165)</option>
+        <option value="conditional">المستوى 3: أدلة غشاء حيوي شرطية (2)</option>
+        <option value="background">المستوى 4: خلفية غير مختبرة (1,047)</option>
+      </select>
+    </label>
+    <button class="filter-reset" id="reset-filters" aria-label="إعادة ضبط البحث والتصفية">↻</button>
+  </div>
+
+  <div class="catalog-summary">
+    <span id="result-count" role="status" aria-live="polite">جارٍ تحميل البيانات…</span>
+    <span class="summary-note"><i></i> المصدر: بيانات الأطلس المدققة v1.5 مع مطابقة المراجع</span>
+  </div>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>الببتيد / المصدر</th>
+          <th>الطول</th>
+          <th>الشحنة <small>pH 7.4</small></th>
+          <th>مستوى الدليل العلمي</th>
+          <th>مجموعة التشابه</th>
+          <th><span class="sr-only">عرض التفاصيل</span></th>
+        </tr>
+      </thead>
+      <tbody id="peptide-rows"></tbody>
+    </table>
+  </div>
+
+  <div id="empty-state" class="empty-state" hidden>
+    <span>∅</span>
+    <h3>لا توجد نتائج مطابقة</h3>
+    <p>جرّب اسماً أقصر أو غيّر حالة الدليل.</p>
+    <button class="button secondary" id="empty-reset">عرض جميع الببتيدات</button>
+  </div>
+
+  <div id="data-error" class="empty-state" hidden>
+    <h3>تعذّر تحميل البيانات</h3>
+    <p>شغّل الموقع من المشغّل المحلي، ثم حاول مجدداً.</p>
+    <button class="button secondary" id="retry-data">إعادة المحاولة</button>
+  </div>
+
+  <div class="pagination">
+    <p>الأدلة متفاوتة الموثوقية؛ وجود سجل هنا لا يثبت نشاطه المخبري ما لم يكن ضمن المستوى 1.</p>
+    <div>
+      <button id="prev-page" aria-label="الصفحة السابقة">→</button>
+      <span id="page-label">—</span>
+      <button id="next-page" aria-label="الصفحة التالية">←</button>
+    </div>
+  </div>
  </section>
+
+ <!-- SECTION 02: MOD-13 METHODS & EVIDENCE CENTER -->
+ <section class="methods-evidence section-space" id="methods-evidence" aria-labelledby="methods-evidence-title">
+   <div class="section-heading reveal">
+     <div>
+       <p class="eyebrow"><span class="section-index">02 /</span> الشفافية التجريبية والمناهج</p>
+       <h2 id="methods-evidence-title">مركز الأدلة والمناهج.<br><span>تتبّع كامل للقياسات الـ32 المنشورة.</span></h2>
+     </div>
+     <p>مستكشف تفاعلي لكافة القياسات الكمية (MIC) المنشورة في الأدبيات الأولية المحكّمة، مع الفصل التام بين القيمة والوحدة المنشورة في المقالة والقيمة المحوّلة، وإظهار المعادلات والقياسات غير المنشورة.</p>
+   </div>
+
+   <!-- Evidence Key Metrics Grid -->
+   <div class="evidence-stats-grid reveal">
+     <div class="stat-card">
+       <span class="stat-val" dir="ltr">32</span>
+       <span class="stat-lbl">سجلاً تجريبياً محكّماً</span>
+       <small>100% موثقة بـ DOI / PMID</small>
+     </div>
+     <div class="stat-card">
+       <span class="stat-val" dir="ltr">10</span>
+       <span class="stat-lbl">ببتيدات كمية فريدة</span>
+       <small>طبيعية ومشتقات مهندسة</small>
+     </div>
+     <div class="stat-card">
+       <span class="stat-val" dir="ltr">0.00%</span>
+       <span class="stat-lbl">تفاوت تحويل الوزن الجزيئي</span>
+       <small>حساب دقيق لكتلة الأميدة (+0.98 Da)</small>
+     </div>
+     <div class="stat-card">
+       <span class="stat-val" dir="ltr">0</span>
+       <span class="stat-lbl">قياسات MBC مفبركة</span>
+       <small>100% مصنفة كـ Null غير مقاس</small>
+     </div>
+   </div>
+
+   <!-- Evidence Explorer Controls -->
+   <div class="evidence-controls reveal">
+     <label class="search">
+       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg>
+       <input id="ev-search" type="search" placeholder="ابحث في الأدلة الـ32 (مثل: ATCC 29213، LB Broth، Chen، Stigmurin)..." aria-label="البحث في الأدلة التجريبية">
+     </label>
+     <label class="select-label">
+       <select id="ev-target-filter" aria-label="تصفية حسب الكائن الميكروبي">
+         <option value="all">كل الكائنات الميكروبية</option>
+         <option value="Staphylococcus aureus">S. aureus (موجبة غرام)</option>
+         <option value="Escherichia coli">E. coli (سالبة غرام)</option>
+         <option value="Pseudomonas aeruginosa">P. aeruginosa (سالبة غرام)</option>
+         <option value="Candida albicans">C. albicans (فطريات)</option>
+       </select>
+     </label>
+     <label class="select-label">
+       <select id="ev-medium-filter" aria-label="تصفية حسب وسط المقايسة">
+         <option value="all">كل أوساط المقايسة</option>
+         <option value="Mueller-Hinton">Mueller-Hinton Broth</option>
+         <option value="LB">LB Broth (Hp1404 / Scorpine / StigA)</option>
+         <option value="RPMI">RPMI-1640 (ToAP)</option>
+         <option value="Nutrient">Nutrient Broth (IsCT1)</option>
+       </select>
+     </label>
+     <button class="filter-reset" id="ev-reset-filters" aria-label="إعادة ضبط تصفية الأدلة">↻</button>
+   </div>
+
+   <div class="catalog-summary reveal">
+     <span id="ev-result-count" role="status" aria-live="polite">عرض 32 سجلاً تجريبياً</span>
+     <span class="summary-note"><i></i> اضغط على «🔍 تدقيق» في أي صف لعرض خطوات الحساب الحسابية ومطابقة المصدر الأصلي</span>
+   </div>
+
+   <!-- Interactive Evidence Table -->
+   <div class="table-scroll reveal">
+     <table class="evidence-table">
+       <thead>
+         <tr>
+           <th>معرف الدليل</th>
+           <th>الببتيد والنوع</th>
+           <th>الميكروب والسلالة</th>
+           <th>وسط المقايسة</th>
+           <th>القيمة المنشورة</th>
+           <th>القيمة المحوّلة</th>
+           <th>MBC / HC50</th>
+           <th>المرجع الأصلي</th>
+           <th>برهان الحساب</th>
+         </tr>
+       </thead>
+       <tbody id="evidence-rows"></tbody>
+     </table>
+   </div>
+
+   <!-- Calculation Transparency Cards -->
+   <div class="math-explorers-grid reveal">
+     <article class="math-card">
+       <div class="math-card-badge">معادلة فيزيائية</div>
+       <h3>تحويل التراكيز (µM ↔ µg/mL)</h3>
+       <div class="math-formula" dir="ltr">MIC<sub>µg/mL</sub> = MIC<sub>µM</sub> × (MW<sub>Da</sub> / 1000)</div>
+       <p>يُحسب التحويل اعتماداً على الوزن الجزيئي النظري الدقيق للتسلسل مع احتساب أميدة الطرف C (+0.984 Da). لا تُعامل القيمة المحوّلة كقياس مخبري مستقل بل كتحويل رياضي مسند.</p>
+     </article>
+
+     <article class="math-card">
+       <div class="math-card-badge">إطار تعلّم الآلة</div>
+       <h3>مبدأ الإيجابي وغير الموسوم (PU Learning)</h3>
+       <div class="math-formula" dir="ltr">P(y = 1 | x, s = 0) ≠ 0</div>
+       <p>الـ 1,047 ببتيداً غير المفحوصة تمثل خلفية غير موسومة (s=0)، ولا يصح افتراض أنها خاملة (y=0). هذا الإطار يحمي البحث من السلبيات الزائفة وتسميم النماذج التنبؤية.</p>
+     </article>
+
+     <article class="math-card">
+       <div class="math-card-badge">سياسة النزاهة</div>
+       <h3>شفافية القياسات المفقودة (Null MBC)</h3>
+       <div class="math-formula" dir="ltr">MBC = [NULL] (Unmeasured)</div>
+       <p>بنسبة 100%، تُترك خانات تركيز القتل الأدنى (MBC) فارغة حين لا تورد المقالة الأصلية مقايسة قتل بكتيري، منعاً لأي افتراض اعتباطي بأن MBC يطابق أو يضاعف MIC.</p>
+     </article>
+
+     <article class="math-card">
+       <div class="math-card-badge">مؤشر الأمان</div>
+       <h3>دليل الانتقائية الخلوية (Selectivity Index)</h3>
+       <div class="math-formula" dir="ltr">SI = HC<sub>50</sub> / MIC<sub>µM</sub></div>
+       <p>لا يُحسب مؤشر الأمان والانتقائية إلا للببتيدات الـ 5 التي خضعت لقياس تجريبي لتحلل الدم (hRBC). غياب القياس يعني حجب المؤشر صراحة لمنع الادعاءات غير المسندة.</p>
+     </article>
+   </div>
+ </section>
+
+ <!-- SECTION 03: APPROACH & METHODOLOGY -->
  <section class="approach section-space" id="approach" aria-labelledby="approach-title">
-  <div class="approach-intro reveal"><p class="eyebrow"><span class="section-index">02 /</span> وراء الأطلس</p><h2 id="approach-title">من التسلسل،<br>إلى <em>رؤية أوضح.</em></h2><p>قيمة الأطلس تبدأ من أثرٍ قابل للتتبّع: من أين جاءت المعلومة، كيف حُسبت، وما الذي يمكن أن تقوله فعلاً.</p><div class="sequence-art" dir="ltr" aria-label="مثال تسلسل Stigmurin">FFSLIPSLV<span>GGLISAFK</span><small>STIGMURIN / 17 AMINO ACIDS</small></div></div>
-  <ol class="method-steps"><li class="reveal"><span>01</span><div><h3>نجمع ونوثّق</h3><p>تسلسلات UniProt وأدلة الأدبيات، مع ربط القياس بالكائن والسلالة والمصدر.</p></div></li><li class="reveal"><span>02</span><div><h3>ننظّم ونحسب</h3><p>تحديد التسلسل الناضج، إزالة التكرار، وحساب الخصائص مع فصل الوحدات المنشورة عن المحوّلة.</p></div></li><li class="reveal"><span>03</span><div><h3>نقارن بمسؤولية</h3><p>تجميع المتشابهات وفصل المجموعات بين التدريب والاختبار، ثم عرض النتائج مع حدود عدم اليقين.</p></div></li></ol>
+  <div class="approach-intro reveal">
+    <p class="eyebrow"><span class="section-index">03 /</span> وراء الأطلس</p>
+    <h2 id="approach-title">من التسلسل،<br>إلى <em>رؤية أوضح.</em></h2>
+    <p>قيمة الأطلس تبدأ من أثرٍ قابل للتتبّع: من أين جاءت المعلومة، كيف حُسبت، وما الذي يمكن أن تقوله فعلاً.</p>
+    <div class="sequence-art" dir="ltr" aria-label="مثال تسلسل Stigmurin">FFSLIPSLV<span>GGLISAFK</span><small>STIGMURIN / 17 AMINO ACIDS</small></div>
+  </div>
+  <ol class="method-steps">
+    <li class="reveal"><span>01</span><div><h3>نجمع ونوثّق</h3><p>تسلسلات UniProt وأدلة الأدبيات، مع ربط القياس بالكائن والسلالة والمصدر بـ DOI / PMID موثق.</p></div></li>
+    <li class="reveal"><span>02</span><div><h3>ننظّم ونحسب</h3><p>تحديد التسلسل الناضج، إزالة التكرار، وحساب الخصائص مع فصل الوحدات المنشورة عن المحوّلة.</p></div></li>
+    <li class="reveal"><span>03</span><div><h3>نقارن بمسؤولية</h3><p>تجميع المتشابهات (CD-HIT 70%) وفصل المجموعات بين التدريب والاختبار، ثم عرض النتائج مع حدود عدم اليقين.</p></div></li>
+  </ol>
  </section>
+
+ <!-- SECTION 04: EVIDENCE DEMARCATION CLASSIFICATION -->
  <section class="evidence section-space" id="evidence" aria-labelledby="evidence-title">
-  <div class="section-heading reveal"><div><p class="eyebrow"><span class="section-index">03 /</span> العلم يبدأ بالتمييز</p><h2 id="evidence-title">ليست كل الأدلة<br><span>على الدرجة نفسها.</span></h2></div><p>نحتفظ بما نعرفه، ونوضح ما لم يُختبر.<br>لا يُقدَّم التنبؤ كإثبات تجريبي.</p></div>
-  <div class="evidence-grid"><article class="reveal"><span class="evidence-count">18</span><span class="badge measured">MIC مقاس</span><h3>قياس منشور</h3><p>ببتيدات ذات قياس كمي في جدول الأدلة. النتيجة مرتبطة بظروف التجربة والكائن المستهدف.</p></article><article class="reveal"><span class="evidence-count">165</span><span class="badge annotated">تعليق UniProt</span><h3>معرفة موثّقة</h3><p>سجلات موسومة بالنشاط في UniProt، دون قياس MIC مباشر في جدول الأدلة الحالي.</p></article><article class="reveal"><span class="evidence-count">1,047</span><span class="badge background">خلفية غير مختبرة</span><h3>سؤال مفتوح</h3><p>غياب القياس لا يعني غياب النشاط. هذه الخلفية ليست مجموعة سلبيات مخبرية مؤكدة.</p></article></div>
-  <p class="evidence-footnote">إضافةً إلى حالتين منفصلتين تخصان أدلة الأغشية الحيوية: StigA6 وStigA16.</p>
-  <div class="model-note reveal"><div><p class="eyebrow">قراءة النموذج</p><h3>التنبؤ بداية سؤال،<br>وليس نهايته.</h3></div><div class="model-metric"><b dir="ltr">0.742</b><span>ROC-AUC · الاختبار المحجوز</span><small dir="rtl">فاصل الثقة بالمجموعات: 0.477–0.948</small></div><p>النموذج خط أساس مقابل خلفية غير موسومة. حدود الثقة واسعة، والنتائج لا تعوّض التجارب المخبرية. القاعدة الفيزيائية البسيطة تحقق F1 أعلى عند العتبات الحالية.</p></div>
+  <div class="section-heading reveal">
+    <div>
+      <p class="eyebrow"><span class="section-index">04 /</span> العلم يبدأ بالتمييز</p>
+      <h2 id="evidence-title">ليست كل الأدلة<br><span>على الدرجة نفسها.</span></h2>
+    </div>
+    <p>نحتفظ بما نعرفه بدقة، ونوضح ما لم يُختبر.<br>لا يُقدَّم التنبؤ كإثبات تجريبي قطعي.</p>
+  </div>
+  <div class="evidence-grid">
+    <article class="reveal">
+      <span class="evidence-count">18</span>
+      <span class="badge measured">MIC مقاس</span>
+      <h3>المستوى 1: قياس منشور</h3>
+      <p>ببتيدات ذات قياس كمي مباشر في جدول الأدلة التجريبية. النتيجة صالحة تحديداً لظروف التجربة والكائن المستهدف.</p>
+    </article>
+    <article class="reveal">
+      <span class="evidence-count">165</span>
+      <span class="badge annotated">تعليق UniProt</span>
+      <h3>المستوى 2: توثيق مكتبي</h3>
+      <p>سجلات موسومة بالنشاط في UniProt دون قياس MIC كمي مباشر في جدول الأدلة الحالي. لا تعتبر إثباتاً رقمياً كافياً.</p>
+    </article>
+    <article class="reveal">
+      <span class="evidence-count">1,047</span>
+      <span class="badge background">خلفية غير مختبرة</span>
+      <h3>المستوى 4: سؤال مفتوح</h3>
+      <p>غياب القياس لا يعني غياب النشاط. هذه الخلفية ليست سلبيات مخبرية مؤكدة (PU Learning).</p>
+    </article>
+  </div>
+  <p class="evidence-footnote">إضافةً إلى حالتين منفصلتين تخصان أدلة الأغشية الحيوية (المستوى 3): StigA6 (غير مؤكد) وStigA16 (تشتت ~38%، MBEC غير مقاس).</p>
+  <div class="model-note reveal">
+    <div>
+      <p class="eyebrow">قراءة النموذج الإحصائي</p>
+      <h3>التنبؤ بداية سؤال،<br>وليس نهايته.</h3>
+    </div>
+    <div class="model-metric">
+      <b dir="ltr">0.742</b>
+      <span>ROC-AUC · الاختبار المحجوز</span>
+      <small dir="rtl">فاصل الثقة بالمجموعات: 0.477–0.948</small>
+    </div>
+    <p>النموذج خط أساس مقابل خلفية غير موسومة. حدود الثقة واسعة، والنتائج لا تعوّض التجارب المخبرية. القاعدة الفيزيائية البسيطة تحقق F1 أعلى عند العتبات الحالية.</p>
+  </div>
  </section>
- <section class="downloads section-space reveal" id="downloads"><div><p class="eyebrow"><span class="section-index">04 /</span> معرفة قابلة للمشاركة</p><h2>خذ البيانات.<br><em>وابنِ عليها.</em></h2><p>ابدأ بحثك بنسخة واضحة المصدر، واذكر المراجع الأصلية<br>وشروط استخدام البيانات عند إعادة الاستعمال.</p></div><div class="download-list"><a href="downloads/atlas_master.csv" download><span><b>الأطلس الكامل</b><small dir="ltr">CSV · 1,232 records</small></span><span aria-hidden="true">↙</span></a><a href="downloads/antimicrobial_evidence.csv" download><span><b>الأدلة والقياسات</b><small dir="ltr">CSV · 32 evidence rows</small></span><span aria-hidden="true">↙</span></a><a href="downloads/atlas_master.fasta" download><span><b>التسلسلات الببتيدية</b><small dir="ltr">FASTA · mature sequences</small></span><span aria-hidden="true">↙</span></a></div></section>
-<section class="creator section-space" id="contact" aria-labelledby="creator-title">
- <div class="creator-heading"><p class="eyebrow">خلف هذا الأطلس</p><h2 id="creator-title">فضولٌ يقود البحث.<br><em>وشغفٌ يصنع التفاصيل.</em></h2></div>
- <div class="creator-card"><span class="creator-monogram" aria-hidden="true">م</span><p class="eyebrow">إعداد وتطوير</p><h3>مصطفى فريد يحيى</h3><div class="supervisor"><span>بإشراف</span><strong>دكتورة تريفة فاروق</strong></div><p class="contact-intro">للتواصل ومتابعة جديد المشروع</p><div class="social-links"><a href="https://www.instagram.com/gtt.j/" target="_blank" rel="noopener noreferrer" aria-label="زيارة حساب مصطفى على إنستغرام gtt.j"><span>Instagram ↗</span><b dir="ltr">@gtt.j</b></a><a href="https://t.me/eq_mc" target="_blank" rel="noopener noreferrer" aria-label="زيارة حساب مصطفى على تليجرام eq_mc"><span>Telegram ↗</span><b dir="ltr">@eq_mc</b></a><a href="tel:07724431510" aria-label="الاتصال بمصطفى على 07724431510"><span>اتصال مباشر ↗</span><b dir="ltr">07724431510</b></a></div></div>
- </section></main>
-<footer><a class="footer-wordmark" dir="ltr" href="#home">SCORPION<span>AI</span><sup>ATLAS</sup></a><div><p>أطلس بحثي مستقل · البيانات v1.5</p><p>للاستكشاف العلمي. الفعالية والسلامة تتطلبان تحققاً تجريبياً.</p></div><a href="#home">العودة للأعلى ↑</a></footer>
-<dialog id="peptide-dialog" aria-labelledby="detail-title"><div class="dialog-top"><span class="eyebrow">داخل السجل</span><button id="close-dialog" aria-label="إغلاق التفاصيل">×</button></div><div id="detail-content"></div></dialog>
+
+ <!-- SECTION 05: OPEN DATA DOWNLOADS -->
+ <section class="downloads section-space reveal" id="downloads">
+   <div>
+     <p class="eyebrow"><span class="section-index">05 /</span> معرفة قابلة للمشاركة والتدقيق</p>
+     <h2>خذ البيانات.<br><em>وابنِ عليها.</em></h2>
+     <p>ابدأ بحثك بنسخة واضحة المصدر، واذكر المراجع الأصلية<br>وشروط استخدام البيانات عند إعادة الاستعمال.</p>
+   </div>
+   <div class="download-list">
+     <a href="downloads/atlas_master.csv" download>
+       <span><b>الأطلس الكامل</b><small dir="ltr">CSV · 1,232 records</small></span>
+       <span aria-hidden="true">↙</span>
+     </a>
+     <a href="downloads/antimicrobial_evidence.csv" download>
+       <span><b>الأدلة والقياسات الـ32</b><small dir="ltr">CSV · 32 evidence rows</small></span>
+       <span aria-hidden="true">↙</span>
+     </a>
+     <a href="downloads/atlas_master.fasta" download>
+       <span><b>التسلسلات الببتيدية</b><small dir="ltr">FASTA · mature sequences</small></span>
+       <span aria-hidden="true">↙</span>
+     </a>
+   </div>
+ </section>
+
+ <!-- SECTION 06: CREATOR & SUPERVISOR -->
+ <section class="creator section-space" id="contact" aria-labelledby="creator-title">
+  <div class="creator-heading">
+    <p class="eyebrow">خلف هذا الأطلس</p>
+    <h2 id="creator-title">فضولٌ يقود البحث.<br><em>وشغفٌ يصنع التفاصيل.</em></h2>
+  </div>
+  <div class="creator-card">
+    <span class="creator-monogram" aria-hidden="true">م</span>
+    <p class="eyebrow">إعداد وتطوير</p>
+    <h3>مصطفى فريد يحيى</h3>
+    <div class="supervisor">
+      <span>بإشراف</span>
+      <strong>دكتورة تريفة فاروق</strong>
+    </div>
+    <p class="contact-intro">للتواصل ومتابعة جديد المشروع والأبحاث المرتبطة</p>
+    <div class="social-links">
+      <a href="https://www.instagram.com/gtt.j/" target="_blank" rel="noopener noreferrer" aria-label="زيارة حساب مصطفى على إنستغرام gtt.j">
+        <span>Instagram ↗</span><b dir="ltr">@gtt.j</b>
+      </a>
+      <a href="https://t.me/eq_mc" target="_blank" rel="noopener noreferrer" aria-label="زيارة حساب مصطفى على تليجرام eq_mc">
+        <span>Telegram ↗</span><b dir="ltr">@eq_mc</b>
+      </a>
+      <a href="tel:07724431510" aria-label="الاتصال بمصطفى على 07724431510">
+        <span>اتصال مباشر ↗</span><b dir="ltr">07724431510</b>
+      </a>
+    </div>
+  </div>
+ </section>
+</main>
+
+<footer>
+  <a class="footer-wordmark" dir="ltr" href="#home">SCORPION<span>AI</span><sup>ATLAS</sup></a>
+  <div>
+    <p>أطلس بحثي مستقل · SCORPION X Sprint 01 · البيانات v1.5</p>
+    <p>للاستكشاف العلمي. الفعالية والسلامة تتطلبان تحققاً تجريبياً حيوياً.</p>
+  </div>
+  <a href="#home">العودة للأعلى ↑</a>
+</footer>
+
+<!-- Peptide Details Dialog -->
+<dialog id="peptide-dialog" aria-labelledby="detail-title">
+  <div class="dialog-top">
+    <span class="eyebrow">داخل السجل الببتيدي</span>
+    <button id="close-dialog" aria-label="إغلاق التفاصيل">×</button>
+  </div>
+  <div id="detail-content"></div>
+</dialog>
+
+<!-- MOD-13: Deep Evidence Audit Dialog -->
+<dialog id="evidence-dialog" aria-labelledby="ev-detail-title">
+  <div class="dialog-top">
+    <span class="eyebrow">تدقيق الدليل التجريبي المنشور ومطابقة الحساب</span>
+    <button id="close-ev-dialog" aria-label="إغلاق تفاصيل الدليل">×</button>
+  </div>
+  <div id="ev-detail-content"></div>
+</dialog>
 
 <!-- Gatekeeper Passcode Overlay (Academic Preview) -->
 <div id="gatekeeper-modal" class="gatekeeper-overlay">

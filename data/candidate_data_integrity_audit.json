@@ -1,0 +1,529 @@
+{
+  "title": "SCORPION X 20-Candidate Data Integrity Audit",
+  "candidates": [
+    {
+      "rank": 1,
+      "candidate_id": "SCA-PEP-001",
+      "master_atlas_id": "SCA-0001",
+      "peptide_name": "Stigmurin",
+      "species": "Tityus stigmurus",
+      "family": "Buthidae",
+      "origin": "natural",
+      "exact_mature_sequence": "FFSLIPSLVGGLISAFK",
+      "sequence_length": 17,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 1795.2,
+      "expasy_avg_molecular_weight_da": 1795.1987,
+      "iupac_avg_molecular_weight_da": 1795.204,
+      "monoisotopic_molecular_weight_da": 1794.0444,
+      "chemical_formula": "C89H139N19O20",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0001",
+        "SCA-EVD-0002",
+        "SCA-EVD-0003"
+      ],
+      "tested_pathogens": [
+        "Staphylococcus aureus (ATCC 29213)",
+        "Escherichia coli (ATCC 25922)",
+        "Pseudomonas aeruginosa (ATCC 27853)"
+      ]
+    },
+    {
+      "rank": 2,
+      "candidate_id": "SCA-PEP-002",
+      "master_atlas_id": "SCA-0002",
+      "peptide_name": "StigA25",
+      "species": "Tityus stigmurus",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "exact_mature_sequence": "FFSLIPSLVKKLIKAFK",
+      "sequence_length": 17,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 1978.54,
+      "expasy_avg_molecular_weight_da": 1978.539,
+      "iupac_avg_molecular_weight_da": 1978.547,
+      "monoisotopic_molecular_weight_da": 1977.2543,
+      "chemical_formula": "C100H164N22O19",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0004",
+        "SCA-EVD-0005",
+        "SCA-EVD-0006"
+      ],
+      "tested_pathogens": [
+        "Staphylococcus aureus (ATCC 29213)",
+        "Escherichia coli (ATCC 25922)",
+        "Pseudomonas aeruginosa (ATCC 27853)"
+      ]
+    },
+    {
+      "rank": 3,
+      "candidate_id": "SCA-PEP-003",
+      "master_atlas_id": "SCA-0003",
+      "peptide_name": "StigA31",
+      "species": "Tityus stigmurus",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "exact_mature_sequence": "FFKLIPKLVKKLIKAFK",
+      "sequence_length": 17,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 2060.73,
+      "expasy_avg_molecular_weight_da": 2060.7308,
+      "iupac_avg_molecular_weight_da": 2060.741,
+      "monoisotopic_molecular_weight_da": 2059.3802,
+      "chemical_formula": "C106H178N24O17",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0007",
+        "SCA-EVD-0008",
+        "SCA-EVD-0009"
+      ],
+      "tested_pathogens": [
+        "Staphylococcus aureus (ATCC 29213)",
+        "Escherichia coli (ATCC 25922)",
+        "Pseudomonas aeruginosa (ATCC 27853)"
+      ]
+    },
+    {
+      "rank": 4,
+      "candidate_id": "SCA-PEP-004",
+      "master_atlas_id": "SCA-0004",
+      "peptide_name": "StigA6",
+      "species": "Tityus stigmurus",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "exact_mature_sequence": "FFSLIPKLVKGLISAFK",
+      "sequence_length": 17,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 1907.42,
+      "expasy_avg_molecular_weight_da": 1907.4168,
+      "iupac_avg_molecular_weight_da": 1907.424,
+      "monoisotopic_molecular_weight_da": 1906.1808,
+      "chemical_formula": "C96H155N21O19",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0010"
+      ],
+      "tested_pathogens": [
+        "Pseudomonas aeruginosa (H103)"
+      ]
+    },
+    {
+      "rank": 5,
+      "candidate_id": "SCA-PEP-005",
+      "master_atlas_id": "SCA-0005",
+      "peptide_name": "StigA16",
+      "species": "Tityus stigmurus",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "exact_mature_sequence": "FFKLIPKLVKGLISAFK",
+      "sequence_length": 17,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 1948.51,
+      "expasy_avg_molecular_weight_da": 1948.5127,
+      "iupac_avg_molecular_weight_da": 1948.521,
+      "monoisotopic_molecular_weight_da": 1947.2437,
+      "chemical_formula": "C99H162N22O18",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0011"
+      ],
+      "tested_pathogens": [
+        "Pseudomonas aeruginosa (H103)"
+      ]
+    },
+    {
+      "rank": 6,
+      "candidate_id": "SCA-PEP-006",
+      "master_atlas_id": "SCA-0006",
+      "peptide_name": "AaeAP1",
+      "species": "Androctonus aeneas",
+      "family": "Buthidae",
+      "origin": "natural",
+      "exact_mature_sequence": "FLFSLIPSVIAGLVSAIRN",
+      "sequence_length": 19,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 2016.46,
+      "expasy_avg_molecular_weight_da": 2016.4582,
+      "iupac_avg_molecular_weight_da": 2016.465,
+      "monoisotopic_molecular_weight_da": 2015.1932,
+      "chemical_formula": "C96H158N24O23",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0012",
+        "SCA-EVD-0013"
+      ],
+      "tested_pathogens": [
+        "Staphylococcus aureus (NCTC 10788)",
+        "Escherichia coli (NCTC 10418)"
+      ]
+    },
+    {
+      "rank": 7,
+      "candidate_id": "SCA-PEP-007",
+      "master_atlas_id": "SCA-0007",
+      "peptide_name": "AaeAP1_K_analogue",
+      "species": "Androctonus aeneas",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "exact_mature_sequence": "FLFKLIPKVIKGLVKAIRK",
+      "sequence_length": 19,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 2210.91,
+      "expasy_avg_molecular_weight_da": 2210.9115,
+      "iupac_avg_molecular_weight_da": 2210.923,
+      "monoisotopic_molecular_weight_da": 2209.4918,
+      "chemical_formula": "C110H192N28O19",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0014",
+        "SCA-EVD-0015"
+      ],
+      "tested_pathogens": [
+        "Staphylococcus aureus (NCTC 10788)",
+        "Escherichia coli (NCTC 10418)"
+      ]
+    },
+    {
+      "rank": 8,
+      "candidate_id": "SCA-PEP-008",
+      "master_atlas_id": "SCA-0008",
+      "peptide_name": "AaeAP2",
+      "species": "Androctonus aeneas",
+      "family": "Buthidae",
+      "origin": "natural",
+      "exact_mature_sequence": "FLFSLIPSAIAGLVSAIRN",
+      "sequence_length": 19,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 1988.4,
+      "expasy_avg_molecular_weight_da": 1988.4044,
+      "iupac_avg_molecular_weight_da": 1988.411,
+      "monoisotopic_molecular_weight_da": 1987.1619,
+      "chemical_formula": "C94H154N24O23",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0016"
+      ],
+      "tested_pathogens": [
+        "Staphylococcus aureus (NCTC 10788)"
+      ]
+    },
+    {
+      "rank": 9,
+      "candidate_id": "SCA-PEP-009",
+      "master_atlas_id": "SCA-0009",
+      "peptide_name": "AaeAP2_K_analogue",
+      "species": "Androctonus aeneas",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "exact_mature_sequence": "FLFKLIPKAIKGLVKAIRK",
+      "sequence_length": 19,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 2182.86,
+      "expasy_avg_molecular_weight_da": 2182.8577,
+      "iupac_avg_molecular_weight_da": 2182.869,
+      "monoisotopic_molecular_weight_da": 2181.4605,
+      "chemical_formula": "C108H188N28O19",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0017"
+      ],
+      "tested_pathogens": [
+        "Staphylococcus aureus (NCTC 10788)"
+      ]
+    },
+    {
+      "rank": 10,
+      "candidate_id": "SCA-PEP-010",
+      "master_atlas_id": "SCA-0010",
+      "peptide_name": "BmKn2",
+      "species": "Mesobuthus martensii",
+      "family": "Buthidae",
+      "origin": "natural",
+      "exact_mature_sequence": "FIGAIARLLSKIF",
+      "sequence_length": 13,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 1447.83,
+      "expasy_avg_molecular_weight_da": 1447.8308,
+      "iupac_avg_molecular_weight_da": 1447.837,
+      "monoisotopic_molecular_weight_da": 1446.9075,
+      "chemical_formula": "C71H118N18O14",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0018",
+        "SCA-EVD-0019"
+      ],
+      "tested_pathogens": [
+        "Staphylococcus aureus (ATCC 25923)",
+        "Escherichia coli (ATCC 25922)"
+      ]
+    },
+    {
+      "rank": 11,
+      "candidate_id": "SCA-PEP-011",
+      "master_atlas_id": "SCA-0011",
+      "peptide_name": "Kn2-7",
+      "species": "Mesobuthus martensii",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "exact_mature_sequence": "FIKRIARLLRKIF",
+      "sequence_length": 13,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 1673.17,
+      "expasy_avg_molecular_weight_da": 1673.171,
+      "iupac_avg_molecular_weight_da": 1673.181,
+      "monoisotopic_molecular_weight_da": 1672.1141,
+      "chemical_formula": "C81H141N25O13",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0020",
+        "SCA-EVD-0021"
+      ],
+      "tested_pathogens": [
+        "Staphylococcus aureus (ATCC 25923)",
+        "Escherichia coli (ATCC 25922)"
+      ]
+    },
+    {
+      "rank": 12,
+      "candidate_id": "SCA-PEP-012",
+      "master_atlas_id": "SCA-0012",
+      "peptide_name": "IsCT1",
+      "species": "Opisthacanthus madagascariensis",
+      "family": "Hormuridae",
+      "origin": "natural",
+      "exact_mature_sequence": "ILGKIWEGIKSLF",
+      "sequence_length": 13,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 1502.86,
+      "expasy_avg_molecular_weight_da": 1502.8638,
+      "iupac_avg_molecular_weight_da": 1502.869,
+      "monoisotopic_molecular_weight_da": 1501.9021,
+      "chemical_formula": "C74H119N17O16",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0022",
+        "SCA-EVD-0023"
+      ],
+      "tested_pathogens": [
+        "Staphylococcus aureus (ATCC 25923)",
+        "Escherichia coli (ATCC 25922)"
+      ]
+    },
+    {
+      "rank": 13,
+      "candidate_id": "SCA-PEP-013",
+      "master_atlas_id": "SCA-0013",
+      "peptide_name": "Hp1404",
+      "species": "Heterometrus petersii",
+      "family": "Scorpionidae",
+      "origin": "natural",
+      "exact_mature_sequence": "GILGKLWEGVKSIF",
+      "sequence_length": 14,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 1545.89,
+      "expasy_avg_molecular_weight_da": 1545.8889,
+      "iupac_avg_molecular_weight_da": 1545.894,
+      "monoisotopic_molecular_weight_da": 1544.9079,
+      "chemical_formula": "C75H120N18O17",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0024",
+        "SCA-EVD-0025"
+      ],
+      "tested_pathogens": [
+        "Staphylococcus aureus (ATCC 25923)",
+        "Escherichia coli (ATCC 25922)"
+      ]
+    },
+    {
+      "rank": 14,
+      "candidate_id": "SCA-PEP-014",
+      "master_atlas_id": "SCA-0014",
+      "peptide_name": "ToAP1",
+      "species": "Tityus obscurus",
+      "family": "Scorpiones_incertae",
+      "origin": "natural",
+      "exact_mature_sequence": "FIGMIPGLIGGLISAFK",
+      "sequence_length": 17,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 1733.19,
+      "expasy_avg_molecular_weight_da": 1733.1889,
+      "iupac_avg_molecular_weight_da": 1733.195,
+      "monoisotopic_molecular_weight_da": 1732.011,
+      "chemical_formula": "C84H137N19O18S1",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0026"
+      ],
+      "tested_pathogens": [
+        "Candida albicans (SC5314)"
+      ]
+    },
+    {
+      "rank": 15,
+      "candidate_id": "SCA-PEP-015",
+      "master_atlas_id": "SCA-0015",
+      "peptide_name": "ToAP3",
+      "species": "Tityus obscurus",
+      "family": "Scorpiones_incertae",
+      "origin": "natural",
+      "exact_mature_sequence": "FIGMIPGLIGGLISAIK",
+      "sequence_length": 17,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 1699.17,
+      "expasy_avg_molecular_weight_da": 1699.1717,
+      "iupac_avg_molecular_weight_da": 1699.178,
+      "monoisotopic_molecular_weight_da": 1698.0266,
+      "chemical_formula": "C81H139N19O18S1",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0027"
+      ],
+      "tested_pathogens": [
+        "Candida albicans (SC5314)"
+      ]
+    },
+    {
+      "rank": 16,
+      "candidate_id": "SCA-PEP-016",
+      "master_atlas_id": "SCA-0016",
+      "peptide_name": "AcrAP1",
+      "species": "Androctonus crassicauda",
+      "family": "Buthidae",
+      "origin": "natural",
+      "exact_mature_sequence": "FLFSLIPHAISGLISAFK",
+      "sequence_length": 18,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 1960.39,
+      "expasy_avg_molecular_weight_da": 1960.3935,
+      "iupac_avg_molecular_weight_da": 1960.4,
+      "monoisotopic_molecular_weight_da": 1959.1346,
+      "chemical_formula": "C97H150N22O21",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0028"
+      ],
+      "tested_pathogens": [
+        "Staphylococcus aureus (NCTC 10788)"
+      ]
+    },
+    {
+      "rank": 17,
+      "candidate_id": "SCA-PEP-017",
+      "master_atlas_id": "SCA-0017",
+      "peptide_name": "AcrAP1_K_analogue",
+      "species": "Androctonus crassicauda",
+      "family": "Buthidae",
+      "origin": "engineered",
+      "exact_mature_sequence": "FLFKLIPKAIKGLIKAFK",
+      "sequence_length": 18,
+      "is_c_terminally_amidated": true,
+      "terminal_modification": "Amidated (-CONH2)",
+      "stored_molecular_weight_da": 2074.71,
+      "expasy_avg_molecular_weight_da": 2074.7142,
+      "iupac_avg_molecular_weight_da": 2074.724,
+      "monoisotopic_molecular_weight_da": 2073.3594,
+      "chemical_formula": "C106H176N24O18",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0029"
+      ],
+      "tested_pathogens": [
+        "Staphylococcus aureus (NCTC 10788)"
+      ]
+    },
+    {
+      "rank": 18,
+      "candidate_id": "SCA-PEP-018",
+      "master_atlas_id": "SCA-0018",
+      "peptide_name": "Hadrurin",
+      "species": "Hadrurus aztecus",
+      "family": "Caraboctonidae",
+      "origin": "natural",
+      "exact_mature_sequence": "GILDTIKSIASKVWNSKTVQDLKRKGINWVANKLGVSPQAA",
+      "sequence_length": 41,
+      "is_c_terminally_amidated": false,
+      "terminal_modification": "Free Carboxyl (-COOH)",
+      "stored_molecular_weight_da": 4436.18,
+      "expasy_avg_molecular_weight_da": 4436.1806,
+      "iupac_avg_molecular_weight_da": 4436.195,
+      "monoisotopic_molecular_weight_da": 4433.4911,
+      "chemical_formula": "C199H333N57O57",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0030"
+      ],
+      "tested_pathogens": [
+        "Escherichia coli (ATCC 25922)"
+      ]
+    },
+    {
+      "rank": 19,
+      "candidate_id": "SCA-PEP-019",
+      "master_atlas_id": "SCA-0019",
+      "peptide_name": "Scorpine",
+      "species": "Pandinus imperator",
+      "family": "Scorpionidae",
+      "origin": "natural",
+      "exact_mature_sequence": "GWINEEKIQKKIDERMGNTVLGGMAKAIVHKMAKNEFQCMANMDMLGNCEKHCQTSGEKGYCHGTKCKCGTPLSY",
+      "sequence_length": 75,
+      "is_c_terminally_amidated": false,
+      "terminal_modification": "Free Carboxyl (-COOH)",
+      "stored_molecular_weight_da": 8356.74,
+      "expasy_avg_molecular_weight_da": 8356.7354,
+      "iupac_avg_molecular_weight_da": 8356.757,
+      "monoisotopic_molecular_weight_da": 8350.8847,
+      "chemical_formula": "C352H569N103O108S12",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0031"
+      ],
+      "tested_pathogens": [
+        "Bacillus subtilis (ATCC 6633)"
+      ]
+    },
+    {
+      "rank": 20,
+      "candidate_id": "SCA-PEP-020",
+      "master_atlas_id": "SCA-0020",
+      "peptide_name": "Parabutoporin",
+      "species": "Parabuthus schlechteri",
+      "family": "Buthidae",
+      "origin": "natural",
+      "exact_mature_sequence": "FKLGSFLKKAWKSKLAKKLRAKGKEMLKDYAKGLLEGGSEEVPGQ",
+      "sequence_length": 45,
+      "is_c_terminally_amidated": false,
+      "terminal_modification": "Free Carboxyl (-COOH)",
+      "stored_molecular_weight_da": 4994.96,
+      "expasy_avg_molecular_weight_da": 4994.9605,
+      "iupac_avg_molecular_weight_da": 4994.977,
+      "monoisotopic_molecular_weight_da": 4991.8151,
+      "chemical_formula": "C229H379N61O61S1",
+      "mw_delta_stored_vs_expasy": 0.0,
+      "source_pmid": [
+        "SCA-EVD-0032"
+      ],
+      "tested_pathogens": [
+        "Staphylococcus aureus (ATCC 25923)"
+      ]
+    }
+  ]
+}

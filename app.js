@@ -312,10 +312,29 @@
     dialog.showModal();
 
     $('copy-sequence').addEventListener('click', async e => {
-      try {
-        await navigator.clipboard.writeText(r.sequence);
+      let copied = false;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          await navigator.clipboard.writeText(r.sequence);
+          copied = true;
+        } catch (_) {}
+      }
+      if (!copied) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = r.sequence;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          copied = document.execCommand('copy');
+          document.body.removeChild(ta);
+        } catch (_) {}
+      }
+      if (copied) {
         e.target.textContent = 'نُسخ التسلسل ✓';
-      } catch {
+        setTimeout(() => { if (e.target) e.target.textContent = 'نسخ التسلسل'; }, 2000);
+      } else {
         e.target.textContent = 'حدد التسلسل أعلاه لنسخه';
       }
     });
@@ -686,13 +705,13 @@
         </div>
 
         <div class="gap-subcol">
-          <h4 class="gap-col-title text-danger">⚠️ مسببات منظمة الصحة العالمية ذات الأولوية القصوى (فجوة بحثية غير مفحوصة: 0 قياسات)</h4>
+          <h4 class="gap-col-title text-danger">⚠️ مسببات منظمة الصحة العالمية ذات الأولوية القصوى (0 سجلات مؤهلة في الأطلس المنسق v1.5)</h4>
           <div class="gap-card-list">
             ${whoCriticalGaps.map(g => `
               <div class="gap-item gap">
                 <div class="gap-item-head">
                   <strong dir="ltr"><em>${esc(g.name)}</em></strong>
-                  <span class="gap-badge gap">0 قياسات مخبرية</span>
+                  <span class="gap-badge gap">0 سجلات في الأطلس المنسق</span>
                 </div>
                 <div class="gap-item-body">
                   <span>الأولوية السريرية: <strong class="text-danger">${esc(g.priority)}</strong></span>
@@ -821,21 +840,38 @@
 
     let candidates = Array.from(candidatesMap.values());
 
+    // Annotate candidates with Origin (Natural vs Engineered) and Multi-criteria Rank Score
+    candidates.forEach(c => {
+      const isEngineered = /_analogue|StigA|Kn2-7/.test(c.peptide_name);
+      c.origin = isEngineered ? 'engineered' : 'natural';
+      c.origin_label = isEngineered ? 'نظير مصمم' : 'سم طبيعي';
+
+      // Transparent Multi-Criteria Ranking Formula
+      // Score = 0.40 * S_MIC + 0.25 * S_Charge + 0.20 * S_Moment + 0.15 * S_Stability
+      const sMic = Math.max(0, 1 - (c.lowest_mic_ug / 100));
+      const sCharge = Math.min(Math.max(c.net_charge, 0), 6) / 6;
+      const sMoment = Math.min(c.hydrophobic_moment, 1.0) / 1.0;
+      const sStability = Math.max(0, 1 - (c.instability / 60));
+      c.composite_score = (0.40 * sMic) + (0.25 * sCharge) + (0.20 * sMoment) + (0.15 * sStability);
+    });
+
     // Sort candidates according to current sort property
     candidates.sort((a, b) => {
       let vA, vB;
       if (currentSortProp === 'mic') {
         vA = a.lowest_mic_ug; vB = b.lowest_mic_ug;
+        return (vA - vB) * sortDirection;
       } else if (currentSortProp === 'charge') {
         vA = a.net_charge; vB = b.net_charge;
         return (vB - vA) * sortDirection;
       } else if (currentSortProp === 'stability') {
         vA = a.instability; vB = b.instability;
+        return (vA - vB) * sortDirection;
       } else if (currentSortProp === 'moment') {
         vA = a.hydrophobic_moment; vB = b.hydrophobic_moment;
         return (vB - vA) * sortDirection;
       }
-      return (vA - vB) * sortDirection;
+      return (b.composite_score - a.composite_score);
     });
 
     triageTbody.innerHTML = candidates.map((c, idx) => {
@@ -845,6 +881,7 @@
           <td class="mono font-bold" dir="ltr">#${idx + 1}</td>
           <td>
             <strong>${esc(c.peptide_name)}</strong>
+            <span class="origin-tag ${c.origin}">${esc(c.origin_label)}</span>
             <small class="block text-muted" dir="ltr">${esc(c.species)}</small>
           </td>
           <td><span dir="ltr" class="text-xs"><em>${esc(c.target_microbe)}</em></span></td>
@@ -873,33 +910,42 @@
         </tr>
       `;
     }).join('');
-
-    // Wire open buttons
-    triageTbody.querySelectorAll('[data-open]').forEach(btn => {
-      btn.addEventListener('click', () => showDetails(btn.dataset.open));
-    });
   }
 
-  // Triage sorting buttons
-  $('sort-by-mic')?.addEventListener('click', () => { currentSortProp = 'mic'; sortDirection = 1; renderLeadPrioritization(); });
-  $('sort-by-charge')?.addEventListener('click', () => { currentSortProp = 'charge'; sortDirection = 1; renderLeadPrioritization(); });
-  $('sort-by-stability')?.addEventListener('click', () => { currentSortProp = 'stability'; sortDirection = 1; renderLeadPrioritization(); });
-  $('sort-by-moment')?.addEventListener('click', () => { currentSortProp = 'moment'; sortDirection = 1; renderLeadPrioritization(); });
+  // Triage sorting buttons with active state updating
+  function setTriageSort(prop, dir, btn) {
+    currentSortProp = prop;
+    sortDirection = dir;
+    document.querySelectorAll('.triage-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    renderLeadPrioritization();
+  }
+
+  $('sort-by-mic')?.addEventListener('click', (e) => setTriageSort('mic', 1, e.currentTarget));
+  $('sort-by-charge')?.addEventListener('click', (e) => setTriageSort('charge', 1, e.currentTarget));
+  $('sort-by-stability')?.addEventListener('click', (e) => setTriageSort('stability', 1, e.currentTarget));
+  $('sort-by-moment')?.addEventListener('click', (e) => setTriageSort('moment', 1, e.currentTarget));
+
+  // Event delegation on triage table body for robust candidate detail dialogs
+  $('prioritization-rows')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-open]');
+    if (btn && btn.dataset.open) showDetails(btn.dataset.open);
+  });
 
   // ============================================================================
   // MOD-10: Explainable AI & Biophysical Drivers
   // ============================================================================
   const learnedCoefficients = {
-    net_charge_ph74_physiological: { weight: 0.7048, label: 'الشحنة الصافية الفسيولوجية (pH 7.4)', role: 'جاذبية كهروستاتيكية أولية لغشاء البكتيريا سالب الشحنة' },
-    hydrophobic_fraction: { weight: 0.4992, label: 'نسبة الأحماض الكارهة للماء', role: 'اختراق قلب الطبقة الدهنية الثنائية وتكوين الثقوب' },
-    aliphatic_index: { weight: 0.3049, label: 'مؤشر السلسلة الأليفاتية', role: 'الاستقرار الحراري والتعبئة البنيوية للسلاسل' },
-    hydrophobic_moment_alpha: { weight: 0.2613, label: 'العزم الكاره للماء (α)', role: 'ازدواجية الألفة وتكوين الوجه الحلزوني المزدوج' },
-    aromatic_fraction: { weight: 0.2092, label: 'نسبة الأحماض العطرية (Trp/Phe)', role: 'تثبيت الببتيد عند السطح البيني الفاصل للغشاء' },
-    instability_index: { weight: 0.0846, label: 'مؤشر عدم الاستقرار', role: 'ديناميكية التغير التشكلي أثناء التفاعل الغشائي' },
-    boman_index: { weight: 0.0677, label: 'مؤشر بومان للتفاعل البروتيني', role: 'إمكانية الارتباط بالبروتينات والإنزيمات الخلوية' },
-    mean_hydrophobicity_eisenberg: { weight: 0.0188, label: 'الوسط الكاره للماء (Eisenberg)', role: 'مساهمة كارهة للماء شاملة' },
-    length_aa: { weight: -0.0044, label: 'طول التسلسل الببتيدي', role: 'عقوبة طفيفة للأطوال الببتيدية الزائدة' },
-    cysteine_count: { weight: -0.5150, label: 'عدد بقايا السيستين (Cys)', role: 'عقوبة سلبية فارقة: يفرّق بين السموم العصبية المعقدة (جسور كبريتيد) والببتيدات الخطية NDBPs' }
+    net_charge_ph74_physiological: { weight: 0.7048, label: 'الشحنة الفسيولوجية (pH 7.4)', role: 'معامل ارتباط إيجابي قوي (+0.7048) مع الببتيدات الموجبة الموسومة في فضاء التدريب' },
+    hydrophobic_fraction: { weight: 0.4992, label: 'نسبة الأحماض الكارهة للماء', role: 'ارتباط إيجابي (+0.4992) مع كراهية الماء (ملاحظة: تداخل خطي مع مؤشر Eisenberg)' },
+    aliphatic_index: { weight: 0.3049, label: 'مؤشر السلسلة الأليفاتية', role: 'معامل ترجيحي (+0.3049) يرتبط إحصائياً بوجود السلاسل الأليفاتية المتفرعة' },
+    hydrophobic_moment_alpha: { weight: 0.2613, label: 'العزم الكاره للماء (α)', role: 'معامل إيجابي معتدل (+0.2613) يعكس توزيع الازدواجية الأليفة على الحلزون' },
+    aromatic_fraction: { weight: 0.2092, label: 'نسبة الأحماض العطرية (Trp/Phe)', role: 'معامل إيجابي (+0.2092) للبقايا العطرية في توزيع ببتيدات التدريب' },
+    instability_index: { weight: 0.0846, label: 'مؤشر عدم الاستقرار', role: 'وزن إحصائي طفيف (+0.0846) تحت النموذج الخطي المقيّد' },
+    boman_index: { weight: 0.0677, label: 'مؤشر بومان للتفاعل البروتيني', role: 'وزن إحصائي منخفض (+0.0677) لقابلية الارتباط العام' },
+    mean_hydrophobicity_eisenberg: { weight: 0.0188, label: 'وسط الكراهية للماء (Eisenberg)', role: 'وزن متبقٍ (+0.0188) نظراً لامتصاص معظم الأثر بواسطة Hydrophobic Fraction' },
+    length_aa: { weight: -0.0044, label: 'طول التسلسل الببتيدي', role: 'معامل شبه محايد (-0.0044) مع عقوبة إحصائية طفيفة للأطوال الكبيرة' },
+    cysteine_count: { weight: -0.5150, label: 'عدد بقايا السيستين (Cys)', role: 'معامل سلبي بارز (-0.5150): يعكس ترجيحاً إحصائياً لفصل السموم العصبية الكلاسيكية (ذات الجسور الكبريتية) عن الببتيدات الخطية، ولا يمثل تثبيطاً كيميائياً للفعالية' }
   };
 
   function renderXAIExplorer() {
@@ -969,31 +1015,31 @@
           <div class="xai-contrib-card">
             <span>الشحنة الفسيولوجية (+${charge.toFixed(1)})</span>
             <b class="text-success">+${chargeContrib.toFixed(3)}</b>
-            <small>دفع كهروستاتيكي إيجابي نحو الأغشية الجرثومية</small>
+            <small>مساهمة إحصائية موجبة ترجح تصنيف الببتيد ضمن الصنف النشط</small>
           </div>
           <div class="xai-contrib-card">
-            <span>جسور السيستين (${cysCount} بقايا)</span>
+            <span>بقايا السيستين (${cysCount} Cys)</span>
             <b class="${cysCount > 0 ? 'text-danger' : 'text-muted'}">${cysContrib.toFixed(3)}</b>
-            <small>${cysCount >= 4 ? 'عقوبة تشابه مع السموم العصبية الكلاسيكية' : 'خالٍ من الجسور المقيدة (AMP خطي حر)'}</small>
+            <small>${cysCount >= 4 ? 'ارتباط إحصائي سلبي بهيكل السموم العصبية في التدريب' : 'خالٍ من السيستين (مطابق لتوزيع NDBPs الخطي)'}</small>
           </div>
           <div class="xai-contrib-card">
             <span>نسبة الكراهية للماء (${hydroFrac.toFixed(2)})</span>
             <b class="text-success">+${hydroContrib.toFixed(3)}</b>
-            <small>مساهمة فعالة في تمزيق الطبقة الدهنية الثنائية</small>
+            <small>مساهمة خطية موجبة مستمدة من تكرار الأحماض الكارهة</small>
           </div>
           <div class="xai-contrib-card">
-            <span>العزم الحلزوني (${moment.toFixed(2)})</span>
+            <span>العزم الكاره للماء (${moment.toFixed(2)})</span>
             <b class="text-success">+${momentContrib.toFixed(3)}</b>
-            <small>ازدواجية ألفة تسهل التموضع الأفقي والانغراس</small>
+            <small>مساهمة إيجابية تحت النموذج ترتبط بتمايز الأوجه الحلزونية</small>
           </div>
         </div>
 
         <div class="xai-rationale-box">
-          <h5>التفسير الفيزيوكيميائي للسجل:</h5>
+          <h5>التفسير الإحصائي للسجل تحت نموذج التدريب (PU Learning Baseline):</h5>
           <p>
             ${cysCount >= 4
-              ? `يحتوي هذا الببتيد على ${cysCount} بقايا سيستين تشكل جسوراً ثنائية الكبريتيد، مما يكسبه بنية مضغوطة تشبه السموم العصبية التقليدية للعقارب. يؤدي هذا إلى خفض ترجيحه كببتيد مضاد للميكروبات خطي (NDBP) بالرغم من شحنته، وهو ما يفسر وزنه السلبي الحاد.`
-              : `يتميز هذا الببتيد بانعدام جسور السيستين المقيدة وشحنة كاتيونية مرتفعة (+${charge.toFixed(1)}) مع عزم كاره للماء ممتاز (${moment.toFixed(2)})، مما يجعله نموذجاً كلاسيكياً للببتيدات المضادة للبكتيريا التي تعمل بآلية التثقيب الغشائي.`}
+              ? `يحتوي هذا الببتيد على ${cysCount} بقايا سيستين؛ في مصفوفة التدريب، ترتبط كثرة السيستين بنيوياً بهياكل السموم العصبية التقليدية ذات الجسور الكبريتية، مما يعطي وزناً إحصائياً سالباً حاداً (${cysContrib.toFixed(2)}) يقلل من احتمالية تصنيفه كببتيد خطي غير مقيد، دون أن يعني ذلك بالضرورة عجزه الكيميائي عن التأثير الحيوي.`
+              : `يخلو هذا الببتيد من السيستين ويتمتع بشحنة كاتيونية موجبة (+${charge.toFixed(1)}) وعزم كاره للماء مرتفع (${moment.toFixed(2)})؛ تحت معاملات النموذج الإحصائي، تتكامل هذه الخصائص لترجيح انتمائه للببتيدات الشبيهة بمضادات الميكروبات، وهي فرضية حسابية تستلزم فحصاً معملياً لتأكيدها.`}
           </p>
         </div>
       `;

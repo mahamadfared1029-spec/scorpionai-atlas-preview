@@ -902,7 +902,13 @@ class VenomLabManager {
 
   checkRaycastClick() {
     if (this.hoveredResidue) {
-      this.selectResidue(this.hoveredResidue.resSeq, this.hoveredResidue.aa1);
+      const offset = this.currentEntry?.mature_cleavage_offset || 0;
+      const matureResSeq = this.hoveredResidue.resSeq - offset;
+      if (this.currentEntry && matureResSeq >= 1 && matureResSeq <= this.currentEntry.sequence_length) {
+        this.selectResidue(matureResSeq, this.hoveredResidue.aa1);
+      } else {
+        this.selectResidue(this.hoveredResidue.resSeq, this.hoveredResidue.aa1);
+      }
     }
   }
 
@@ -934,8 +940,12 @@ class VenomLabManager {
     this.clearHighlight();
     if (!this.currentPdbData) return;
 
+    // Translate mature residue number (1..N) to PDB residue sequence number via cleavage offset
+    const offset = this.currentEntry?.mature_cleavage_offset || 0;
+    const pdbResSeq = resNum + offset;
+
     // Find residue CA
-    const res = Object.values(this.currentPdbData.residues).find(r => r.resSeq === resNum);
+    const res = Object.values(this.currentPdbData.residues).find(r => r.resSeq === pdbResSeq);
     if (res && res.ca) {
       const ringGeom = new THREE.RingGeometry(0.8, 1.05, 32);
       const ringMat = new THREE.MeshBasicMaterial({

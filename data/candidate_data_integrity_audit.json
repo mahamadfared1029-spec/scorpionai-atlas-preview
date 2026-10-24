@@ -1,8 +1,9 @@
 {
-  "title": "SCORPION X 20-Candidate Data Integrity Audit",
+  "title": "SCORPION X 20-Candidate First-Principles Chemical Formula & Mass Audit",
+  "audit_standard": "IUPAC CIAAW 2021 Standard Atomic Weights",
+  "amidation_delta_da": -0.984,
   "candidates": [
     {
-      "rank": 1,
       "candidate_id": "SCA-PEP-001",
       "master_atlas_id": "SCA-0001",
       "peptide_name": "Stigmurin",
@@ -12,14 +13,22 @@
       "exact_mature_sequence": "FFSLIPSLVGGLISAFK",
       "sequence_length": 17,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 89,
+      "hydrogen_atom_count": 139,
+      "nitrogen_atom_count": 19,
+      "oxygen_atom_count": 20,
+      "first_principles_molecular_formula": "C89H139N19O20",
+      "formula_average_molecular_weight_da": 1795.204,
+      "formula_monoisotopic_molecular_weight_da": 1794.0444,
+      "independent_residue_average_molecular_weight_da": 1795.1987,
       "stored_molecular_weight_da": 1795.2,
-      "expasy_avg_molecular_weight_da": 1795.1987,
-      "iupac_avg_molecular_weight_da": 1795.204,
-      "monoisotopic_molecular_weight_da": 1794.0444,
-      "chemical_formula": "C89H139N19O20",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0053,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0001",
         "SCA-EVD-0002",
         "SCA-EVD-0003"
@@ -31,7 +40,6 @@
       ]
     },
     {
-      "rank": 2,
       "candidate_id": "SCA-PEP-002",
       "master_atlas_id": "SCA-0002",
       "peptide_name": "StigA25",
@@ -41,14 +49,22 @@
       "exact_mature_sequence": "FFSLIPSLVKKLIKAFK",
       "sequence_length": 17,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 100,
+      "hydrogen_atom_count": 164,
+      "nitrogen_atom_count": 22,
+      "oxygen_atom_count": 19,
+      "first_principles_molecular_formula": "C100H164N22O19",
+      "formula_average_molecular_weight_da": 1978.547,
+      "formula_monoisotopic_molecular_weight_da": 1977.2543,
+      "independent_residue_average_molecular_weight_da": 1978.539,
       "stored_molecular_weight_da": 1978.54,
-      "expasy_avg_molecular_weight_da": 1978.539,
-      "iupac_avg_molecular_weight_da": 1978.547,
-      "monoisotopic_molecular_weight_da": 1977.2543,
-      "chemical_formula": "C100H164N22O19",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.008,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0004",
         "SCA-EVD-0005",
         "SCA-EVD-0006"
@@ -60,7 +76,6 @@
       ]
     },
     {
-      "rank": 3,
       "candidate_id": "SCA-PEP-003",
       "master_atlas_id": "SCA-0003",
       "peptide_name": "StigA31",
@@ -70,14 +85,22 @@
       "exact_mature_sequence": "FFKLIPKLVKKLIKAFK",
       "sequence_length": 17,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 106,
+      "hydrogen_atom_count": 178,
+      "nitrogen_atom_count": 24,
+      "oxygen_atom_count": 17,
+      "first_principles_molecular_formula": "C106H178N24O17",
+      "formula_average_molecular_weight_da": 2060.741,
+      "formula_monoisotopic_molecular_weight_da": 2059.3802,
+      "independent_residue_average_molecular_weight_da": 2060.7308,
       "stored_molecular_weight_da": 2060.73,
-      "expasy_avg_molecular_weight_da": 2060.7308,
-      "iupac_avg_molecular_weight_da": 2060.741,
-      "monoisotopic_molecular_weight_da": 2059.3802,
-      "chemical_formula": "C106H178N24O17",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0102,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0007",
         "SCA-EVD-0008",
         "SCA-EVD-0009"
@@ -89,7 +112,6 @@
       ]
     },
     {
-      "rank": 4,
       "candidate_id": "SCA-PEP-004",
       "master_atlas_id": "SCA-0004",
       "peptide_name": "StigA6",
@@ -99,14 +121,22 @@
       "exact_mature_sequence": "FFSLIPKLVKGLISAFK",
       "sequence_length": 17,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 96,
+      "hydrogen_atom_count": 155,
+      "nitrogen_atom_count": 21,
+      "oxygen_atom_count": 19,
+      "first_principles_molecular_formula": "C96H155N21O19",
+      "formula_average_molecular_weight_da": 1907.424,
+      "formula_monoisotopic_molecular_weight_da": 1906.1808,
+      "independent_residue_average_molecular_weight_da": 1907.4168,
       "stored_molecular_weight_da": 1907.42,
-      "expasy_avg_molecular_weight_da": 1907.4168,
-      "iupac_avg_molecular_weight_da": 1907.424,
-      "monoisotopic_molecular_weight_da": 1906.1808,
-      "chemical_formula": "C96H155N21O19",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0072,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0010"
       ],
       "tested_pathogens": [
@@ -114,7 +144,6 @@
       ]
     },
     {
-      "rank": 5,
       "candidate_id": "SCA-PEP-005",
       "master_atlas_id": "SCA-0005",
       "peptide_name": "StigA16",
@@ -124,14 +153,22 @@
       "exact_mature_sequence": "FFKLIPKLVKGLISAFK",
       "sequence_length": 17,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 99,
+      "hydrogen_atom_count": 162,
+      "nitrogen_atom_count": 22,
+      "oxygen_atom_count": 18,
+      "first_principles_molecular_formula": "C99H162N22O18",
+      "formula_average_molecular_weight_da": 1948.521,
+      "formula_monoisotopic_molecular_weight_da": 1947.2437,
+      "independent_residue_average_molecular_weight_da": 1948.5127,
       "stored_molecular_weight_da": 1948.51,
-      "expasy_avg_molecular_weight_da": 1948.5127,
-      "iupac_avg_molecular_weight_da": 1948.521,
-      "monoisotopic_molecular_weight_da": 1947.2437,
-      "chemical_formula": "C99H162N22O18",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0083,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0011"
       ],
       "tested_pathogens": [
@@ -139,7 +176,6 @@
       ]
     },
     {
-      "rank": 6,
       "candidate_id": "SCA-PEP-006",
       "master_atlas_id": "SCA-0006",
       "peptide_name": "AaeAP1",
@@ -149,14 +185,22 @@
       "exact_mature_sequence": "FLFSLIPSVIAGLVSAIRN",
       "sequence_length": 19,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 96,
+      "hydrogen_atom_count": 158,
+      "nitrogen_atom_count": 24,
+      "oxygen_atom_count": 23,
+      "first_principles_molecular_formula": "C96H158N24O23",
+      "formula_average_molecular_weight_da": 2016.465,
+      "formula_monoisotopic_molecular_weight_da": 2015.1932,
+      "independent_residue_average_molecular_weight_da": 2016.4582,
       "stored_molecular_weight_da": 2016.46,
-      "expasy_avg_molecular_weight_da": 2016.4582,
-      "iupac_avg_molecular_weight_da": 2016.465,
-      "monoisotopic_molecular_weight_da": 2015.1932,
-      "chemical_formula": "C96H158N24O23",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0068,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0012",
         "SCA-EVD-0013"
       ],
@@ -166,7 +210,6 @@
       ]
     },
     {
-      "rank": 7,
       "candidate_id": "SCA-PEP-007",
       "master_atlas_id": "SCA-0007",
       "peptide_name": "AaeAP1_K_analogue",
@@ -176,14 +219,22 @@
       "exact_mature_sequence": "FLFKLIPKVIKGLVKAIRK",
       "sequence_length": 19,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 110,
+      "hydrogen_atom_count": 192,
+      "nitrogen_atom_count": 28,
+      "oxygen_atom_count": 19,
+      "first_principles_molecular_formula": "C110H192N28O19",
+      "formula_average_molecular_weight_da": 2210.923,
+      "formula_monoisotopic_molecular_weight_da": 2209.4918,
+      "independent_residue_average_molecular_weight_da": 2210.9115,
       "stored_molecular_weight_da": 2210.91,
-      "expasy_avg_molecular_weight_da": 2210.9115,
-      "iupac_avg_molecular_weight_da": 2210.923,
-      "monoisotopic_molecular_weight_da": 2209.4918,
-      "chemical_formula": "C110H192N28O19",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0115,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0014",
         "SCA-EVD-0015"
       ],
@@ -193,7 +244,6 @@
       ]
     },
     {
-      "rank": 8,
       "candidate_id": "SCA-PEP-008",
       "master_atlas_id": "SCA-0008",
       "peptide_name": "AaeAP2",
@@ -203,14 +253,22 @@
       "exact_mature_sequence": "FLFSLIPSAIAGLVSAIRN",
       "sequence_length": 19,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 94,
+      "hydrogen_atom_count": 154,
+      "nitrogen_atom_count": 24,
+      "oxygen_atom_count": 23,
+      "first_principles_molecular_formula": "C94H154N24O23",
+      "formula_average_molecular_weight_da": 1988.411,
+      "formula_monoisotopic_molecular_weight_da": 1987.1619,
+      "independent_residue_average_molecular_weight_da": 1988.4044,
       "stored_molecular_weight_da": 1988.4,
-      "expasy_avg_molecular_weight_da": 1988.4044,
-      "iupac_avg_molecular_weight_da": 1988.411,
-      "monoisotopic_molecular_weight_da": 1987.1619,
-      "chemical_formula": "C94H154N24O23",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0066,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0016"
       ],
       "tested_pathogens": [
@@ -218,7 +276,6 @@
       ]
     },
     {
-      "rank": 9,
       "candidate_id": "SCA-PEP-009",
       "master_atlas_id": "SCA-0009",
       "peptide_name": "AaeAP2_K_analogue",
@@ -228,14 +285,22 @@
       "exact_mature_sequence": "FLFKLIPKAIKGLVKAIRK",
       "sequence_length": 19,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 108,
+      "hydrogen_atom_count": 188,
+      "nitrogen_atom_count": 28,
+      "oxygen_atom_count": 19,
+      "first_principles_molecular_formula": "C108H188N28O19",
+      "formula_average_molecular_weight_da": 2182.869,
+      "formula_monoisotopic_molecular_weight_da": 2181.4605,
+      "independent_residue_average_molecular_weight_da": 2182.8577,
       "stored_molecular_weight_da": 2182.86,
-      "expasy_avg_molecular_weight_da": 2182.8577,
-      "iupac_avg_molecular_weight_da": 2182.869,
-      "monoisotopic_molecular_weight_da": 2181.4605,
-      "chemical_formula": "C108H188N28O19",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0113,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0017"
       ],
       "tested_pathogens": [
@@ -243,7 +308,6 @@
       ]
     },
     {
-      "rank": 10,
       "candidate_id": "SCA-PEP-010",
       "master_atlas_id": "SCA-0010",
       "peptide_name": "BmKn2",
@@ -253,14 +317,22 @@
       "exact_mature_sequence": "FIGAIARLLSKIF",
       "sequence_length": 13,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 71,
+      "hydrogen_atom_count": 118,
+      "nitrogen_atom_count": 18,
+      "oxygen_atom_count": 14,
+      "first_principles_molecular_formula": "C71H118N18O14",
+      "formula_average_molecular_weight_da": 1447.837,
+      "formula_monoisotopic_molecular_weight_da": 1446.9075,
+      "independent_residue_average_molecular_weight_da": 1447.8308,
       "stored_molecular_weight_da": 1447.83,
-      "expasy_avg_molecular_weight_da": 1447.8308,
-      "iupac_avg_molecular_weight_da": 1447.837,
-      "monoisotopic_molecular_weight_da": 1446.9075,
-      "chemical_formula": "C71H118N18O14",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0062,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0018",
         "SCA-EVD-0019"
       ],
@@ -270,7 +342,6 @@
       ]
     },
     {
-      "rank": 11,
       "candidate_id": "SCA-PEP-011",
       "master_atlas_id": "SCA-0011",
       "peptide_name": "Kn2-7",
@@ -280,14 +351,22 @@
       "exact_mature_sequence": "FIKRIARLLRKIF",
       "sequence_length": 13,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 81,
+      "hydrogen_atom_count": 141,
+      "nitrogen_atom_count": 25,
+      "oxygen_atom_count": 13,
+      "first_principles_molecular_formula": "C81H141N25O13",
+      "formula_average_molecular_weight_da": 1673.181,
+      "formula_monoisotopic_molecular_weight_da": 1672.1141,
+      "independent_residue_average_molecular_weight_da": 1673.171,
       "stored_molecular_weight_da": 1673.17,
-      "expasy_avg_molecular_weight_da": 1673.171,
-      "iupac_avg_molecular_weight_da": 1673.181,
-      "monoisotopic_molecular_weight_da": 1672.1141,
-      "chemical_formula": "C81H141N25O13",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.01,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0020",
         "SCA-EVD-0021"
       ],
@@ -297,7 +376,6 @@
       ]
     },
     {
-      "rank": 12,
       "candidate_id": "SCA-PEP-012",
       "master_atlas_id": "SCA-0012",
       "peptide_name": "IsCT1",
@@ -307,14 +385,22 @@
       "exact_mature_sequence": "ILGKIWEGIKSLF",
       "sequence_length": 13,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 74,
+      "hydrogen_atom_count": 119,
+      "nitrogen_atom_count": 17,
+      "oxygen_atom_count": 16,
+      "first_principles_molecular_formula": "C74H119N17O16",
+      "formula_average_molecular_weight_da": 1502.869,
+      "formula_monoisotopic_molecular_weight_da": 1501.9021,
+      "independent_residue_average_molecular_weight_da": 1502.8638,
       "stored_molecular_weight_da": 1502.86,
-      "expasy_avg_molecular_weight_da": 1502.8638,
-      "iupac_avg_molecular_weight_da": 1502.869,
-      "monoisotopic_molecular_weight_da": 1501.9021,
-      "chemical_formula": "C74H119N17O16",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0052,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0022",
         "SCA-EVD-0023"
       ],
@@ -324,7 +410,6 @@
       ]
     },
     {
-      "rank": 13,
       "candidate_id": "SCA-PEP-013",
       "master_atlas_id": "SCA-0013",
       "peptide_name": "Hp1404",
@@ -334,14 +419,22 @@
       "exact_mature_sequence": "GILGKLWEGVKSIF",
       "sequence_length": 14,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 75,
+      "hydrogen_atom_count": 120,
+      "nitrogen_atom_count": 18,
+      "oxygen_atom_count": 17,
+      "first_principles_molecular_formula": "C75H120N18O17",
+      "formula_average_molecular_weight_da": 1545.894,
+      "formula_monoisotopic_molecular_weight_da": 1544.9079,
+      "independent_residue_average_molecular_weight_da": 1545.8889,
       "stored_molecular_weight_da": 1545.89,
-      "expasy_avg_molecular_weight_da": 1545.8889,
-      "iupac_avg_molecular_weight_da": 1545.894,
-      "monoisotopic_molecular_weight_da": 1544.9079,
-      "chemical_formula": "C75H120N18O17",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0051,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0024",
         "SCA-EVD-0025"
       ],
@@ -351,7 +444,6 @@
       ]
     },
     {
-      "rank": 14,
       "candidate_id": "SCA-PEP-014",
       "master_atlas_id": "SCA-0014",
       "peptide_name": "ToAP1",
@@ -361,14 +453,22 @@
       "exact_mature_sequence": "FIGMIPGLIGGLISAFK",
       "sequence_length": 17,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 1,
+      "sulfur_atom_count": 1,
+      "carbon_atom_count": 84,
+      "hydrogen_atom_count": 137,
+      "nitrogen_atom_count": 19,
+      "oxygen_atom_count": 18,
+      "first_principles_molecular_formula": "C84H137N19O18S1",
+      "formula_average_molecular_weight_da": 1733.195,
+      "formula_monoisotopic_molecular_weight_da": 1732.011,
+      "independent_residue_average_molecular_weight_da": 1733.1889,
       "stored_molecular_weight_da": 1733.19,
-      "expasy_avg_molecular_weight_da": 1733.1889,
-      "iupac_avg_molecular_weight_da": 1733.195,
-      "monoisotopic_molecular_weight_da": 1732.011,
-      "chemical_formula": "C84H137N19O18S1",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0061,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0026"
       ],
       "tested_pathogens": [
@@ -376,7 +476,6 @@
       ]
     },
     {
-      "rank": 15,
       "candidate_id": "SCA-PEP-015",
       "master_atlas_id": "SCA-0015",
       "peptide_name": "ToAP3",
@@ -386,14 +485,22 @@
       "exact_mature_sequence": "FIGMIPGLIGGLISAIK",
       "sequence_length": 17,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 1,
+      "sulfur_atom_count": 1,
+      "carbon_atom_count": 81,
+      "hydrogen_atom_count": 139,
+      "nitrogen_atom_count": 19,
+      "oxygen_atom_count": 18,
+      "first_principles_molecular_formula": "C81H139N19O18S1",
+      "formula_average_molecular_weight_da": 1699.178,
+      "formula_monoisotopic_molecular_weight_da": 1698.0266,
+      "independent_residue_average_molecular_weight_da": 1699.1717,
       "stored_molecular_weight_da": 1699.17,
-      "expasy_avg_molecular_weight_da": 1699.1717,
-      "iupac_avg_molecular_weight_da": 1699.178,
-      "monoisotopic_molecular_weight_da": 1698.0266,
-      "chemical_formula": "C81H139N19O18S1",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0063,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0027"
       ],
       "tested_pathogens": [
@@ -401,7 +508,6 @@
       ]
     },
     {
-      "rank": 16,
       "candidate_id": "SCA-PEP-016",
       "master_atlas_id": "SCA-0016",
       "peptide_name": "AcrAP1",
@@ -411,14 +517,22 @@
       "exact_mature_sequence": "FLFSLIPHAISGLISAFK",
       "sequence_length": 18,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 97,
+      "hydrogen_atom_count": 150,
+      "nitrogen_atom_count": 22,
+      "oxygen_atom_count": 21,
+      "first_principles_molecular_formula": "C97H150N22O21",
+      "formula_average_molecular_weight_da": 1960.4,
+      "formula_monoisotopic_molecular_weight_da": 1959.1346,
+      "independent_residue_average_molecular_weight_da": 1960.3935,
       "stored_molecular_weight_da": 1960.39,
-      "expasy_avg_molecular_weight_da": 1960.3935,
-      "iupac_avg_molecular_weight_da": 1960.4,
-      "monoisotopic_molecular_weight_da": 1959.1346,
-      "chemical_formula": "C97H150N22O21",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0065,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0028"
       ],
       "tested_pathogens": [
@@ -426,7 +540,6 @@
       ]
     },
     {
-      "rank": 17,
       "candidate_id": "SCA-PEP-017",
       "master_atlas_id": "SCA-0017",
       "peptide_name": "AcrAP1_K_analogue",
@@ -436,14 +549,22 @@
       "exact_mature_sequence": "FLFKLIPKAIKGLIKAFK",
       "sequence_length": 18,
       "is_c_terminally_amidated": true,
-      "terminal_modification": "Amidated (-CONH2)",
+      "terminal_modification": "Amidated C-terminus (-CONH2)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 106,
+      "hydrogen_atom_count": 176,
+      "nitrogen_atom_count": 24,
+      "oxygen_atom_count": 18,
+      "first_principles_molecular_formula": "C106H176N24O18",
+      "formula_average_molecular_weight_da": 2074.724,
+      "formula_monoisotopic_molecular_weight_da": 2073.3594,
+      "independent_residue_average_molecular_weight_da": 2074.7142,
       "stored_molecular_weight_da": 2074.71,
-      "expasy_avg_molecular_weight_da": 2074.7142,
-      "iupac_avg_molecular_weight_da": 2074.724,
-      "monoisotopic_molecular_weight_da": 2073.3594,
-      "chemical_formula": "C106H176N24O18",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0098,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0029"
       ],
       "tested_pathogens": [
@@ -451,7 +572,6 @@
       ]
     },
     {
-      "rank": 18,
       "candidate_id": "SCA-PEP-018",
       "master_atlas_id": "SCA-0018",
       "peptide_name": "Hadrurin",
@@ -461,14 +581,22 @@
       "exact_mature_sequence": "GILDTIKSIASKVWNSKTVQDLKRKGINWVANKLGVSPQAA",
       "sequence_length": 41,
       "is_c_terminally_amidated": false,
-      "terminal_modification": "Free Carboxyl (-COOH)",
+      "terminal_modification": "Free carboxyl C-terminus (-COOH)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 0,
+      "sulfur_atom_count": 0,
+      "carbon_atom_count": 199,
+      "hydrogen_atom_count": 333,
+      "nitrogen_atom_count": 57,
+      "oxygen_atom_count": 57,
+      "first_principles_molecular_formula": "C199H333N57O57",
+      "formula_average_molecular_weight_da": 4436.195,
+      "formula_monoisotopic_molecular_weight_da": 4433.4911,
+      "independent_residue_average_molecular_weight_da": 4436.1806,
       "stored_molecular_weight_da": 4436.18,
-      "expasy_avg_molecular_weight_da": 4436.1806,
-      "iupac_avg_molecular_weight_da": 4436.195,
-      "monoisotopic_molecular_weight_da": 4433.4911,
-      "chemical_formula": "C199H333N57O57",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0144,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0030"
       ],
       "tested_pathogens": [
@@ -476,7 +604,6 @@
       ]
     },
     {
-      "rank": 19,
       "candidate_id": "SCA-PEP-019",
       "master_atlas_id": "SCA-0019",
       "peptide_name": "Scorpine",
@@ -486,14 +613,22 @@
       "exact_mature_sequence": "GWINEEKIQKKIDERMGNTVLGGMAKAIVHKMAKNEFQCMANMDMLGNCEKHCQTSGEKGYCHGTKCKCGTPLSY",
       "sequence_length": 75,
       "is_c_terminally_amidated": false,
-      "terminal_modification": "Free Carboxyl (-COOH)",
+      "terminal_modification": "Free carboxyl C-terminus (-COOH)",
+      "cysteine_residue_count": 6,
+      "methionine_residue_count": 6,
+      "sulfur_atom_count": 12,
+      "carbon_atom_count": 352,
+      "hydrogen_atom_count": 569,
+      "nitrogen_atom_count": 103,
+      "oxygen_atom_count": 108,
+      "first_principles_molecular_formula": "C352H569N103O108S12",
+      "formula_average_molecular_weight_da": 8356.757,
+      "formula_monoisotopic_molecular_weight_da": 8350.8847,
+      "independent_residue_average_molecular_weight_da": 8356.7354,
       "stored_molecular_weight_da": 8356.74,
-      "expasy_avg_molecular_weight_da": 8356.7354,
-      "iupac_avg_molecular_weight_da": 8356.757,
-      "monoisotopic_molecular_weight_da": 8350.8847,
-      "chemical_formula": "C352H569N103O108S12",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0216,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0031"
       ],
       "tested_pathogens": [
@@ -501,7 +636,6 @@
       ]
     },
     {
-      "rank": 20,
       "candidate_id": "SCA-PEP-020",
       "master_atlas_id": "SCA-0020",
       "peptide_name": "Parabutoporin",
@@ -511,14 +645,22 @@
       "exact_mature_sequence": "FKLGSFLKKAWKSKLAKKLRAKGKEMLKDYAKGLLEGGSEEVPGQ",
       "sequence_length": 45,
       "is_c_terminally_amidated": false,
-      "terminal_modification": "Free Carboxyl (-COOH)",
+      "terminal_modification": "Free carboxyl C-terminus (-COOH)",
+      "cysteine_residue_count": 0,
+      "methionine_residue_count": 1,
+      "sulfur_atom_count": 1,
+      "carbon_atom_count": 229,
+      "hydrogen_atom_count": 379,
+      "nitrogen_atom_count": 61,
+      "oxygen_atom_count": 61,
+      "first_principles_molecular_formula": "C229H379N61O61S1",
+      "formula_average_molecular_weight_da": 4994.977,
+      "formula_monoisotopic_molecular_weight_da": 4991.8151,
+      "independent_residue_average_molecular_weight_da": 4994.9605,
       "stored_molecular_weight_da": 4994.96,
-      "expasy_avg_molecular_weight_da": 4994.9605,
-      "iupac_avg_molecular_weight_da": 4994.977,
-      "monoisotopic_molecular_weight_da": 4991.8151,
-      "chemical_formula": "C229H379N61O61S1",
-      "mw_delta_stored_vs_expasy": 0.0,
-      "source_pmid": [
+      "delta_formula_vs_residue_da": 0.0165,
+      "delta_stored_vs_residue_da": 0.0,
+      "evidence_ids": [
         "SCA-EVD-0032"
       ],
       "tested_pathogens": [

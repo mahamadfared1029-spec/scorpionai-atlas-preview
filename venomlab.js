@@ -472,7 +472,10 @@ class VenomLabManager {
     const ssEl = document.getElementById('vl-meta-disulfides');
     if (ssEl) {
       if (entry.disulfide_bonds && entry.disulfide_bonds.length > 0) {
-        ssEl.innerHTML = entry.disulfide_bonds.map(b => `<span class="vl-ss-tag"> جسر ${b.bond || 'Cys-Cys'}: Cys${b.res1}–Cys${b.res2}</span>`).join(' ');
+        const isExp = entry.provenance_class.includes('Class A') || entry.disulfide_bonds.some(b => b.experimental_source);
+        const tagText = isExp ? '[مثبت تجريبياً بـ NMR]' : '[تقارب هندسي بـ AlphaFold]';
+        ssEl.innerHTML = entry.disulfide_bonds.map(b => `<span class="vl-ss-tag"> جسر ${b.bond || 'Cys-Cys'}: Cys${b.res1}–Cys${b.res2} ${tagText}</span>`).join(' ') +
+          `<div class="vl-ss-note" style="margin-top:6px;font-size:0.75rem;color:var(--text-muted);">${entry.disulfide_provenance || ''}</div>`;
       } else {
         ssEl.textContent = entry.disulfide_provenance || 'لا توجد (ببتيد خطي)';
       }

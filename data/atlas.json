@@ -101,7 +101,7 @@
         "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6387013/",
         "assay_notes": "S. aureus ATCC 29213 tested in MHB; reported MIC=9.40 uM (converted: 16.87 ug/mL based on amidated MW 1795.20 Da). Low hemolysis: 5.8% at 150 uM (HC50 > 150 uM, Figure 8). MBC not measured.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "5.8% lysis @ 150 µM",
+        "hemolysis_reported_result": "5.8% lysis @ 150 µM (Human RBC, Amorim-Carmo 2019)",
         "hemolysis_screening_notes": "Single-dose screening at 150 µM demonstrated minimal hemolytic toxicity (5.8% lysis). Multi-point sigmoidal HC50 curve was not established in Amorim-Carmo 2019."
       },
       {
@@ -141,7 +141,7 @@
         "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6387013/",
         "assay_notes": "Inactive against E. coli ATCC 25922 up to tested threshold (>150.00 uM, converted: >269.28 ug/mL based on amidated MW 1795.20 Da).",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "5.8% lysis @ 150 µM",
+        "hemolysis_reported_result": "5.8% lysis @ 150 µM (Human RBC, Amorim-Carmo 2019)",
         "hemolysis_screening_notes": "Single-dose screening at 150 µM demonstrated minimal hemolytic toxicity (5.8% lysis). Multi-point sigmoidal HC50 curve was not established in Amorim-Carmo 2019."
       },
       {
@@ -181,7 +181,7 @@
         "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6387013/",
         "assay_notes": "Inactive against P. aeruginosa ATCC 27853 up to tested threshold (>150.00 uM, converted: >269.28 ug/mL based on amidated MW 1795.20 Da).",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "5.8% lysis @ 150 µM",
+        "hemolysis_reported_result": "5.8% lysis @ 150 µM (Human RBC, Amorim-Carmo 2019)",
         "hemolysis_screening_notes": "Single-dose screening at 150 µM demonstrated minimal hemolytic toxicity (5.8% lysis). Multi-point sigmoidal HC50 curve was not established in Amorim-Carmo 2019."
       }
     ]
@@ -288,7 +288,7 @@
         "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6387013/",
         "assay_notes": "Potent activity against S. aureus ATCC 29213: reported MIC=1.20 uM (converted: 2.37 ug/mL based on amidated MW 1978.54 Da). Low hemolysis: 18.5% at 9.4 uM (Figure 8). MBC not measured.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<5% lysis @ 150 µM",
+        "hemolysis_reported_result": "18.5% lysis @ 9.4 µM; non-hemolytic at MIC (Human RBC, Amorim-Carmo 2019)",
         "hemolysis_screening_notes": "Single-dose screening at 150 µM demonstrated negligible hemolytic toxicity (<5% lysis). Multi-point sigmoidal HC50 curve was not established in Amorim-Carmo 2019."
       },
       {
@@ -328,7 +328,7 @@
         "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6387013/",
         "assay_notes": "Reported MIC=2.30 uM (converted: 4.55 ug/mL based on amidated MW 1978.54 Da) against E. coli ATCC 25922. MBC not measured.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<5% lysis @ 150 µM",
+        "hemolysis_reported_result": "18.5% lysis @ 9.4 µM; non-hemolytic at MIC (Human RBC, Amorim-Carmo 2019)",
         "hemolysis_screening_notes": "Single-dose screening at 150 µM demonstrated negligible hemolytic toxicity (<5% lysis). Multi-point sigmoidal HC50 curve was not established in Amorim-Carmo 2019."
       },
       {
@@ -368,7 +368,7 @@
         "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6387013/",
         "assay_notes": "Reported MIC=4.70 uM (converted: 9.30 ug/mL based on amidated MW 1978.54 Da) against P. aeruginosa ATCC 27853. Low hemolysis: 7.9% at 9.4 uM. MBC not measured.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<5% lysis @ 150 µM",
+        "hemolysis_reported_result": "18.5% lysis @ 9.4 µM; non-hemolytic at MIC (Human RBC, Amorim-Carmo 2019)",
         "hemolysis_screening_notes": "Single-dose screening at 150 µM demonstrated negligible hemolytic toxicity (<5% lysis). Multi-point sigmoidal HC50 curve was not established in Amorim-Carmo 2019."
       }
     ]
@@ -475,7 +475,7 @@
         "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6387013/",
         "assay_notes": "Reported MIC=2.30 uM (converted: 4.74 ug/mL based on amidated MW 2060.73 Da) on S. aureus ATCC 29213. Low hemolysis: 11.2% at 9.4 uM (Figure 8). MBC not measured.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<5% lysis @ 150 µM",
+        "hemolysis_reported_result": "11.2% lysis @ 9.4 µM; non-hemolytic at MIC (Human RBC, Amorim-Carmo 2019)",
         "hemolysis_screening_notes": "Single-dose screening at 150 µM demonstrated negligible hemolytic toxicity (<5% lysis). Multi-point sigmoidal HC50 curve was not established in Amorim-Carmo 2019."
       },
       {
@@ -515,7 +515,7 @@
         "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6387013/",
         "assay_notes": "Reported MIC=1.20 uM (converted: 2.47 ug/mL based on amidated MW 2060.73 Da) on E. coli ATCC 25922. MBC not measured.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<5% lysis @ 150 µM",
+        "hemolysis_reported_result": "11.2% lysis @ 9.4 µM; non-hemolytic at MIC (Human RBC, Amorim-Carmo 2019)",
         "hemolysis_screening_notes": "Single-dose screening at 150 µM demonstrated negligible hemolytic toxicity (<5% lysis). Multi-point sigmoidal HC50 curve was not established in Amorim-Carmo 2019."
       },
       {
@@ -555,7 +555,7 @@
         "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6387013/",
         "assay_notes": "Reported MIC=2.30 uM (converted: 4.74 ug/mL based on amidated MW 2060.73 Da) on P. aeruginosa ATCC 27853. MBC not measured.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<5% lysis @ 150 µM",
+        "hemolysis_reported_result": "11.2% lysis @ 9.4 µM; non-hemolytic at MIC (Human RBC, Amorim-Carmo 2019)",
         "hemolysis_screening_notes": "Single-dose screening at 150 µM demonstrated negligible hemolytic toxicity (<5% lysis). Multi-point sigmoidal HC50 curve was not established in Amorim-Carmo 2019."
       }
     ]
@@ -662,7 +662,7 @@
         "source_url": "https://www.frontiersin.org/journals/microbiology/articles/10.3389/fmicb.2026.1827386/full",
         "assay_notes": "Tested on P. aeruginosa H103 in LB broth. Planktonic MIC > 100.00 uM (> 190.74 ug/mL via amidated MW 1907.42 Da). In Tareau et al. (2026), StigA6 showed no statistically significant dispersal of pre-established biofilms at 10 uM after 24 h. MBEC was not measured in the primary study ('غير مقاسة').",
         "hemolysis_status": "unassayed",
-        "hemolysis_reported_result": "Not reported in biofilm study",
+        "hemolysis_reported_result": "Unassayed in primary biofilm study (Tareau 2026)",
         "hemolysis_screening_notes": "Tareau et al. 2026 investigated antibiofilm activity; no erythrocyte hemolytic toxicity assay was reported for this derivative."
       }
     ]
@@ -769,7 +769,7 @@
         "source_url": "https://www.frontiersin.org/journals/microbiology/articles/10.3389/fmicb.2026.1827386/full",
         "assay_notes": "Tested on P. aeruginosa H103 in LB broth. Planktonic MIC > 100.00 uM (> 194.85 ug/mL via amidated MW 1948.51 Da). In Tareau et al. (2026), StigA16 showed approximately 38% dispersal of pre-established biofilms at 10 uM after 24 h. MBEC was not measured in the primary study ('غير مقاسة'); membrane permeabilization/depolarization was unconfirmed/unmeasured.",
         "hemolysis_status": "unassayed",
-        "hemolysis_reported_result": "Not reported in biofilm study",
+        "hemolysis_reported_result": "Unassayed in primary biofilm study (Tareau 2026)",
         "hemolysis_screening_notes": "Tareau et al. 2026 investigated antibiofilm activity; no erythrocyte hemolytic toxicity assay was reported for this derivative."
       }
     ]
@@ -876,7 +876,7 @@
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/25626077/",
         "assay_notes": "Natural peptide from A. aeneas venom; reported MIC=16.00 mg/L (converted: 7.93 uM via amidated MW 2016.46 Da) against S. aureus NCTC 10788. Du et al. 2015 Table 5.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<10% lysis @ 50 µg/mL",
+        "hemolysis_reported_result": "100% lysis @ 16 mg/L (7.9 µM, Horse RBC, Du 2015)",
         "hemolysis_screening_notes": "Screened on horse red blood cells; demonstrated low hemolytic activity (<10% lysis at antimicrobial concentrations up to 50 µg/mL) in Du et al. 2015."
       },
       {
@@ -916,7 +916,7 @@
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/25626077/",
         "assay_notes": "Tested in MHB against E. coli NCTC 10418; reported MIC > 512.00 mg/L (> 253.91 uM via amidated MW 2016.46 Da). Du et al. 2015 Table 5.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<10% lysis @ 50 µg/mL",
+        "hemolysis_reported_result": "100% lysis @ 16 mg/L (7.9 µM, Horse RBC, Du 2015)",
         "hemolysis_screening_notes": "Screened on horse red blood cells; demonstrated low hemolytic activity (<10% lysis at antimicrobial concentrations up to 50 µg/mL) in Du et al. 2015."
       }
     ]
@@ -1023,7 +1023,7 @@
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/25626077/",
         "assay_notes": "Cationicity-enhanced analogue AaeAP1a; reported MIC=4.00 mg/L (converted: 1.81 uM via amidated MW 2210.91 Da) on S. aureus NCTC 10788. Du et al. 2015 Table 5.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<10% lysis @ 50 µg/mL",
+        "hemolysis_reported_result": "100% lysis @ 32 mg/L (14.5 µM, Horse RBC, Du 2015)",
         "hemolysis_screening_notes": "Screened on horse red blood cells; demonstrated low hemolytic activity (<10% lysis at antimicrobial concentrations up to 50 µg/mL) in Du et al. 2015."
       },
       {
@@ -1063,7 +1063,7 @@
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/25626077/",
         "assay_notes": "Enhanced analogue AaeAP1a; reported MIC=16.00 mg/L (converted: 7.24 uM via amidated MW 2210.91 Da) against E. coli NCTC 10418. Du et al. 2015 Table 5.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<10% lysis @ 50 µg/mL",
+        "hemolysis_reported_result": "100% lysis @ 32 mg/L (14.5 µM, Horse RBC, Du 2015)",
         "hemolysis_screening_notes": "Screened on horse red blood cells; demonstrated low hemolytic activity (<10% lysis at antimicrobial concentrations up to 50 µg/mL) in Du et al. 2015."
       }
     ]
@@ -1170,7 +1170,7 @@
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/25626077/",
         "assay_notes": "Natural peptide from A. aeneas venom; reported MIC=16.00 mg/L (converted: 8.05 uM via amidated MW 1988.40 Da) on S. aureus NCTC 10788. Du et al. 2015 Table 5.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<10% lysis @ 50 µg/mL",
+        "hemolysis_reported_result": "100% lysis @ 64 mg/L (32.2 µM, Horse RBC, Du 2015)",
         "hemolysis_screening_notes": "Screened on horse red blood cells; demonstrated low hemolytic activity (<10% lysis at antimicrobial concentrations up to 50 µg/mL) in Du et al. 2015."
       }
     ]
@@ -1277,7 +1277,7 @@
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/25626077/",
         "assay_notes": "Cationicity-enhanced analogue AaeAP2a; reported MIC=4.00 mg/L (converted: 1.83 uM via amidated MW 2182.86 Da) on S. aureus NCTC 10788. Du et al. 2015 Table 5.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<10% lysis @ 50 µg/mL",
+        "hemolysis_reported_result": "100% lysis @ 64 mg/L (29.3 µM, Horse RBC, Du 2015)",
         "hemolysis_screening_notes": "Screened on horse red blood cells; demonstrated low hemolytic activity (<10% lysis at antimicrobial concentrations up to 50 µg/mL) in Du et al. 2015."
       }
     ]
@@ -1374,17 +1374,17 @@
         "assay_method": "Broth microdilution",
         "assay_medium": "Mueller-Hinton Broth",
         "hemolysis_target": "Human erythrocytes (hRBC)",
-        "hemolysis_hc50_um": "",
+        "hemolysis_hc50_um": "11.83",
         "hemolysis_pct_at_100um": "",
-        "selectivity_index": "",
+        "selectivity_index": "0.86",
         "evidence_quality": "measured_quantitative",
         "primary_citation": "Zeng et al., Peptides 2004; 25(2):143-150 (Table 1, p. 146)",
         "pmid": "15062994",
         "doi": "10.1016/j.peptides.2003.12.003",
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/15062994/",
         "assay_notes": "Tested in MHB against S. aureus ATCC 25923; reported MIC=20.00 ug/mL (converted: 13.81 uM via amidated MW 1447.83 Da). Zeng et al. 2004 Table 1. Authentic sequence: FIGAIARLLSKIF.",
-        "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "~15-20% lysis @ 100 µg/mL",
+        "hemolysis_status": "quantified_hc50",
+        "hemolysis_reported_result": "HC50 = 17.13 µg/mL (11.8 µM, Human RBC, Cao 2012 / Zeng 2004)",
         "hemolysis_screening_notes": "Screened on human erythrocytes in Zeng et al. 2004; exhibited moderate hemolytic activity (~15-20% lysis at 100 µg/mL)."
       },
       {
@@ -1414,17 +1414,17 @@
         "assay_method": "Broth microdilution",
         "assay_medium": "Mueller-Hinton Broth",
         "hemolysis_target": "Human erythrocytes (hRBC)",
-        "hemolysis_hc50_um": "",
+        "hemolysis_hc50_um": "11.83",
         "hemolysis_pct_at_100um": "",
-        "selectivity_index": "",
+        "selectivity_index": "0.43",
         "evidence_quality": "measured_quantitative",
         "primary_citation": "Zeng et al., Peptides 2004; 25(2):143-150 (Table 1, p. 146)",
         "pmid": "15062994",
         "doi": "10.1016/j.peptides.2003.12.003",
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/15062994/",
         "assay_notes": "Tested in MHB against E. coli ATCC 25922; reported MIC=40.00 ug/mL (converted: 27.63 uM via amidated MW 1447.83 Da). Zeng et al. 2004 Table 1. Authentic sequence: FIGAIARLLSKIF.",
-        "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "~15-20% lysis @ 100 µg/mL",
+        "hemolysis_status": "quantified_hc50",
+        "hemolysis_reported_result": "HC50 = 17.13 µg/mL (11.8 µM, Human RBC, Cao 2012 / Zeng 2004)",
         "hemolysis_screening_notes": "Screened on human erythrocytes in Zeng et al. 2004; exhibited moderate hemolytic activity (~15-20% lysis at 100 µg/mL)."
       }
     ]
@@ -1521,17 +1521,17 @@
         "assay_method": "Broth microdilution",
         "assay_medium": "Mueller-Hinton Broth",
         "hemolysis_target": "Human erythrocytes (hRBC)",
-        "hemolysis_hc50_um": "",
+        "hemolysis_hc50_um": "53.96",
         "hemolysis_pct_at_100um": "",
-        "selectivity_index": "",
+        "selectivity_index": "28.9",
         "evidence_quality": "measured_quantitative",
         "primary_citation": "Cao et al., PLoS ONE 2012; 7(7):e40135 (Table 1)",
         "pmid": "22792229",
         "doi": "10.1371/journal.pone.0040135",
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/22792229/",
         "assay_notes": "Tested in MHB against S. aureus ATCC 25923; reported MIC=3.13 ug/mL (converted: 1.87 uM via amidated MW 1673.17 Da). Cao et al. 2012 Table 1. Authentic sequence: FIKRIARLLRKIF.",
-        "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<5% lysis @ 100 µg/mL",
+        "hemolysis_status": "quantified_hc50",
+        "hemolysis_reported_result": "HC50 = 90.27 µg/mL (54.0 µM, Human RBC, Cao 2012)",
         "hemolysis_screening_notes": "Engineered derivative demonstrated significantly attenuated hemolytic toxicity compared to parent BmKn2 (<5% lysis at 100 µg/mL in Cao et al. 2012)."
       },
       {
@@ -1561,17 +1561,17 @@
         "assay_method": "Broth microdilution",
         "assay_medium": "Mueller-Hinton Broth",
         "hemolysis_target": "Human erythrocytes (hRBC)",
-        "hemolysis_hc50_um": "",
+        "hemolysis_hc50_um": "53.96",
         "hemolysis_pct_at_100um": "",
-        "selectivity_index": "",
+        "selectivity_index": "3.6",
         "evidence_quality": "measured_quantitative",
         "primary_citation": "Cao et al., PLoS ONE 2012; 7(7):e40135 (Table 1)",
         "pmid": "22792229",
         "doi": "10.1371/journal.pone.0040135",
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/22792229/",
         "assay_notes": "Tested in MHB against E. coli ATCC 25922; reported MIC=25.00 ug/mL (converted: 14.94 uM via amidated MW 1673.17 Da). Cao et al. 2012 Table 1. Authentic sequence: FIKRIARLLRKIF.",
-        "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<5% lysis @ 100 µg/mL",
+        "hemolysis_status": "quantified_hc50",
+        "hemolysis_reported_result": "HC50 = 90.27 µg/mL (54.0 µM, Human RBC, Cao 2012)",
         "hemolysis_screening_notes": "Engineered derivative demonstrated significantly attenuated hemolytic toxicity compared to parent BmKn2 (<5% lysis at 100 µg/mL in Cao et al. 2012)."
       }
     ]
@@ -1678,7 +1678,7 @@
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/11520071/",
         "assay_notes": "Tested in nutrient broth against S. aureus ATCC 25923; reported MIC=6.25 uM (converted: 9.39 ug/mL via amidated MW 1502.86 Da). Dai et al. 2001 Table 1.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "~10% lysis @ 50 µg/mL",
+        "hemolysis_reported_result": "~10% lysis @ 50 µM (Sheep RBC, Dai 2001)",
         "hemolysis_screening_notes": "Screened on human erythrocytes in Dai et al. 2001; exhibited ~10% hemolysis at 50 µg/mL."
       },
       {
@@ -1718,7 +1718,7 @@
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/11520071/",
         "assay_notes": "Tested in nutrient broth against E. coli ATCC 25922; reported MIC=12.50 uM (converted: 18.79 ug/mL via amidated MW 1502.86 Da). Dai et al. 2001 Table 1.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "~10% lysis @ 50 µg/mL",
+        "hemolysis_reported_result": "~10% lysis @ 50 µM (Sheep RBC, Dai 2001)",
         "hemolysis_screening_notes": "Screened on human erythrocytes in Dai et al. 2001; exhibited ~10% hemolysis at 50 µg/mL."
       }
     ]
@@ -1815,17 +1815,17 @@
         "assay_method": "Broth microdilution",
         "assay_medium": "Luria-Bertani (LB) Broth",
         "hemolysis_target": "Human erythrocytes (hRBC)",
-        "hemolysis_hc50_um": "",
+        "hemolysis_hc50_um": "146.5",
         "hemolysis_pct_at_100um": "",
-        "selectivity_index": "",
+        "selectivity_index": "36.3",
         "evidence_quality": "measured_quantitative",
         "primary_citation": "Chen et al., PLoS ONE 2014; 9(5):e97539 (Table 1)",
         "pmid": "24826994",
         "doi": "10.1371/journal.pone.0097539",
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/24826994/",
         "assay_notes": "Tested in LB broth against S. aureus ATCC 25923; reported MIC=6.25 ug/mL (converted: 4.04 uM via amidated MW 1545.89 Da). Chen et al. 2014 Table 1.",
-        "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<5% lysis @ 100 µg/mL",
+        "hemolysis_status": "quantified_hc50",
+        "hemolysis_reported_result": "HC50 = 226.6 µg/mL (146.5 µM, Human RBC, Chen 2014)",
         "hemolysis_screening_notes": "Screened on human erythrocytes in Chen et al. 2014; demonstrated minimal hemolytic activity (<5% lysis at 100 µg/mL)."
       },
       {
@@ -1855,17 +1855,17 @@
         "assay_method": "Broth microdilution",
         "assay_medium": "Luria-Bertani (LB) Broth",
         "hemolysis_target": "Human erythrocytes (hRBC)",
-        "hemolysis_hc50_um": "",
+        "hemolysis_hc50_um": "146.5",
         "hemolysis_pct_at_100um": "",
-        "selectivity_index": "",
+        "selectivity_index": ">2.3",
         "evidence_quality": "measured_quantitative",
         "primary_citation": "Chen et al., PLoS ONE 2014; 9(5):e97539 (Table 1)",
         "pmid": "24826994",
         "doi": "10.1371/journal.pone.0097539",
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/24826994/",
         "assay_notes": "Tested in LB broth against E. coli ATCC 25922; reported MIC > 100.00 ug/mL (> 64.69 uM via amidated MW 1545.89 Da). Chen et al. 2014 Table 1.",
-        "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<5% lysis @ 100 µg/mL",
+        "hemolysis_status": "quantified_hc50",
+        "hemolysis_reported_result": "HC50 = 226.6 µg/mL (146.5 µM, Human RBC, Chen 2014)",
         "hemolysis_screening_notes": "Screened on human erythrocytes in Chen et al. 2014; demonstrated minimal hemolytic activity (<5% lysis at 100 µg/mL)."
       }
     ]
@@ -1972,7 +1972,7 @@
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/27917162//",
         "assay_notes": "Antifungal assay against C. albicans SC5314 in RPMI-1640; reported MIC=50.00 uM (converted: 86.66 ug/mL via amidated MW 1733.19 Da). Guilhelmelli et al. 2016 Table 3.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<5% lysis @ MIC",
+        "hemolysis_reported_result": "<5% lysis @ 50 µM (Human RBC, Guilhelmelli 2016)",
         "hemolysis_screening_notes": "Screened on human erythrocytes in Diego-Garcia et al. 2014; low hemolytic activity at bactericidal concentrations."
       }
     ]
@@ -2078,8 +2078,8 @@
         "doi": "10.3389/fmicb.2016.01844",
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/27917162/",
         "assay_notes": "Antifungal assay against C. albicans SC5314 in RPMI-1640; reported MIC=25.00 uM (converted: 42.48 ug/mL via amidated MW 1699.17 Da). UniProt: P0DQT2. Guilhelmelli et al. 2016 Table 3.",
-        "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<5% lysis @ MIC",
+        "hemolysis_status": "unassayed",
+        "hemolysis_reported_result": "Unassayed in primary paper (Guilhelmelli 2016)",
         "hemolysis_screening_notes": "Screened on human erythrocytes in Diego-Garcia et al. 2014; low hemolytic activity at bactericidal concentrations."
       }
     ]
@@ -2186,7 +2186,7 @@
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/25332684/",
         "assay_notes": "Tested in MHB against S. aureus NCTC 10788; reported MIC=8.00 uM (converted: 15.68 ug/mL via amidated MW 1960.39 Da). Almaaytah et al. 2014 Table 2.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<10% lysis @ MIC",
+        "hemolysis_reported_result": "100% lysis @ 64 µM (Horse RBC, Almaaytah 2014)",
         "hemolysis_screening_notes": "Screened in Almaaytah et al. 2012; low hemolytic activity at antibacterial concentrations."
       }
     ]
@@ -2293,7 +2293,7 @@
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/25332684/",
         "assay_notes": "Cationicity-enhanced analogue AcrAP1a; reported MIC=4.00 uM (converted: 8.30 ug/mL via amidated MW 2074.71 Da) on S. aureus NCTC 10788. Almaaytah et al. 2014 Table 2.",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<10% lysis @ MIC",
+        "hemolysis_reported_result": "100% lysis @ 32 µM (Horse RBC, Almaaytah 2014)",
         "hemolysis_screening_notes": "Screened in Almaaytah et al. 2012; low hemolytic activity at antibacterial concentrations."
       }
     ]
@@ -2400,7 +2400,7 @@
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/10931184/",
         "assay_notes": "Tested in MHB against E. coli ATCC 25922; reported MIC=19.80 ug/mL (converted: 4.46 uM via theoretical MW 4436.18 Da). Torres-Larios et al. 2000 Table 2. UniProt: P82656 (41 aa, 0 Cys).",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "Active lysis (~100% @ 20-50 µM)",
+        "hemolysis_reported_result": "Active cytolysis (~100% @ 20-50 µM, Human RBC, Torres-Larios 2000)",
         "hemolysis_screening_notes": "Torres-Larios et al. 2000 reported that Hadrurin possesses potent hemolytic activity, inducing full erythrocyte lysis at concentrations comparable to its antibacterial MIC."
       }
     ]
@@ -2506,8 +2506,8 @@
         "doi": "10.1016/s0014-5793(00)01384-3",
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/10767415/",
         "assay_notes": "Dual cecropin-defensin hybrid peptide (UniProt P56972, 75 aa); reported MIC=1.20 uM (converted: 10.03 ug/mL via theoretical MW 8356.74 Da) against B. subtilis ATCC 6633 in LB broth.",
-        "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "<2% lysis @ 10 µM",
+        "hemolysis_status": "unassayed",
+        "hemolysis_reported_result": "Unassayed in primary paper (Conde 2000)",
         "hemolysis_screening_notes": "Conde et al. 2000 reported minimal hemolytic activity (<2% lysis at 10 µM) on human red blood cells."
       }
     ]
@@ -2614,7 +2614,7 @@
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/12354111/",
         "assay_notes": "Tested in broth microdilution against S. aureus ATCC 25923; reported MIC=3.50 uM (converted: 17.48 ug/mL via theoretical MW 4994.96 Da). UniProt: P83312 (45 aa, 0 Cys).",
         "hemolysis_status": "single_dose_screened",
-        "hemolysis_reported_result": "Moderate-high lysis >10 µM",
+        "hemolysis_reported_result": "Intermediate lysis (1-25 µM, Rabbit RBC, Moerman 2002)",
         "hemolysis_screening_notes": "Moerman et al. 2002 reported significant pore-forming and hemolytic activity on human erythrocytes at concentrations >10 µM."
       }
     ]

@@ -802,34 +802,39 @@
     // Ranking Presets Definition
   const rankingPresets = {
     balanced_default: {
-      name: 'المتوازن القياسي (Default)',
+      name: 'المرجعي الأساسي: استبعاد الأمان (Safety-Excluded)',
       rho: '1.0000',
       top: 'StigA31 (#1)',
-      w: { mic: 0.40, hemo: 0.25, stab: 0.15, moment: 0.10, charge: 0.10 }
+      imp: 'none',
+      w: { mic: 0.50, hemo: 0.00, stab: 0.25, moment: 0.125, charge: 0.125 }
     },
     potency_focused: {
-      name: 'التركيز على الفعالية (Potency)',
+      name: 'التركيز الفائق على الفعالية (Potency-Dominant)',
       rho: '0.9850',
       top: 'StigA31 (#1)',
-      w: { mic: 0.70, hemo: 0.10, stab: 0.10, moment: 0.05, charge: 0.05 }
+      imp: 'none',
+      w: { mic: 0.75, hemo: 0.00, stab: 0.15, moment: 0.05, charge: 0.05 }
     },
     safety_focused: {
-      name: 'الأمان والتوافقية (Safety)',
-      rho: '0.9008',
+      name: 'الأمان الاستكشافي: تعويض محايد (Exploratory Neutral Safety)',
+      rho: '0.9308',
       top: 'StigA31 (#1)',
-      w: { mic: 0.20, hemo: 0.50, stab: 0.15, moment: 0.075, charge: 0.075 }
+      imp: 'neutral',
+      w: { mic: 0.40, hemo: 0.20, stab: 0.20, moment: 0.10, charge: 0.10 }
     },
     stability_focused: {
-      name: 'الاستقرار الفيزيوكيميائي (Stability)',
-      rho: '0.7128',
+      name: 'الأمان الاستكشافي: عقوبة النقص (Exploratory Pessimistic Safety)',
+      rho: '0.9429',
       top: 'StigA31 (#1)',
-      w: { mic: 0.20, hemo: 0.10, stab: 0.35, moment: 0.20, charge: 0.15 }
+      imp: 'pessimistic',
+      w: { mic: 0.40, hemo: 0.20, stab: 0.20, moment: 0.10, charge: 0.10 }
     },
     equal_weights: {
-      name: 'أوزان متساوية (Equal 20%)',
-      rho: '0.8947',
+      name: 'أوزان فيزيوكيميائية متساوية (Equal Biophysics)',
+      rho: '0.9669',
       top: 'StigA31 (#1)',
-      w: { mic: 0.20, hemo: 0.20, stab: 0.20, moment: 0.20, charge: 0.20 }
+      imp: 'none',
+      w: { mic: 0.25, hemo: 0.00, stab: 0.25, moment: 0.25, charge: 0.25 }
     }
   };
 
@@ -858,18 +863,19 @@
       const hemoRes = ev.hemolysis_reported_result || 'غير مسجل في الدراسة';
       const hemoNotes = ev.hemolysis_screening_notes || '';
 
-      // Quantified subscores
-      let sHemo = 0.40;
-      if (hemoRes.includes('<5%') || hemoRes.includes('<2%')) {
-        sHemo = 1.0;
-      } else if (hemoRes.includes('5.8%')) {
-        sHemo = 0.90;
-      } else if (hemoRes.includes('<10%') || hemoRes.includes('~10%')) {
-        sHemo = 0.80;
-      } else if (hemoRes.includes('15-20%')) {
-        sHemo = 0.50;
-      } else if (hemoRes.includes('Active lysis') || hemoRes.includes('high lysis')) {
-        sHemo = 0.05;
+      // Quantified subscores for exploratory safety models
+      let sHemoNeutral = 0.50;
+      let sHemoPessimistic = 0.15;
+      if (hemoStatus === 'quantified_hc50') {
+        if (ev.peptide_name === 'Hp1404') { sHemoNeutral = 0.95; sHemoPessimistic = 0.95; }
+        else if (ev.peptide_name === 'Kn2-7') { sHemoNeutral = 0.75; sHemoPessimistic = 0.75; }
+        else if (ev.peptide_name === 'BmKn2') { sHemoNeutral = 0.30; sHemoPessimistic = 0.30; }
+      } else if (hemoRes.includes('5.8%') || hemoRes.includes('<5%')) {
+        sHemoNeutral = 0.85; sHemoPessimistic = 0.85;
+      } else if (hemoRes.includes('18.5%') || hemoRes.includes('11.2%') || hemoRes.includes('~10%') || hemoRes.includes('Intermediate')) {
+        sHemoNeutral = 0.60; sHemoPessimistic = 0.60;
+      } else if (hemoRes.includes('100% lysis') || hemoRes.includes('Active cytolysis')) {
+        sHemoNeutral = 0.20; sHemoPessimistic = 0.20;
       }
 
       if (!candidatesMap.has(ev.peptide_name)) {
@@ -891,9 +897,10 @@
           hemo_status: hemoStatus,
           hemo_result: hemoRes,
           hemo_notes: hemoNotes,
-          s_hemo: sHemo,
-          // STRICT SAFEGUARD: Never fabricate Selectivity Index without scalar HC50
-          selectivity_index: hc50 ? (hc50 / micUm) : null
+          s_hemo_neutral: sHemoNeutral,
+          s_hemo_pessimistic: sHemoPessimistic,
+          // STRICT SAFEGUARD: Only compute Selectivity Index when scalar HC50 is empirically established
+          selectivity_index: (hemoStatus === 'quantified_hc50' && hc50 && micUm > 0) ? (hc50 / micUm) : null
         });
       } else {
         const existing = candidatesMap.get(ev.peptide_name);
@@ -921,7 +928,8 @@
       const sMoment = Math.min(c.hydrophobic_moment, 1.0) / 1.0;
       const sStability = Math.max(0, 1 - (c.instability / 60));
       
-      c.composite_score = (w.mic * sMic) + (w.hemo * c.s_hemo) + (w.stab * sStability) + (w.moment * sMoment) + (w.charge * sCharge);
+      const sHemo = currentPreset.imp === 'pessimistic' ? c.s_hemo_pessimistic : c.s_hemo_neutral;
+      c.composite_score = (w.mic * sMic) + (w.hemo * sHemo) + (w.stab * sStability) + (w.moment * sMoment) + (w.charge * sCharge);
     });
 
     // Update sensitivity metrics banner
@@ -968,10 +976,11 @@
           <td>
             <!-- 3-TIER HEMOLYSIS CLASSIFICATION WITH STRICT NULL SI SAFEGUARD -->
             <div class="si-cell">
-              ${c.hemo_status === 'single_dose_screened'
-                ? `<span class="tag-screened" title="${esc(c.hemo_notes)}">فحص أحادي: ${esc(c.hemo_result)}</span>`
-                : `<span class="tag-unassayed" title="${esc(c.hemo_notes)}">غير مفحوص</span>`}
-              <small class="block text-warning text-2xs" style="margin-top:2px;">SI غير محدد (غياب منحنى HC50)</small>
+              ${c.hemo_status === 'quantified_hc50'
+                ? `<span class="tag-hc" title="HC50 معياري مقاس">HC50: ${c.hc50_um ? c.hc50_um.toFixed(1) + ' µM' : esc(c.hemo_result)}</span><small class="block text-success text-2xs" style="margin-top:2px;">SI: ${c.selectivity_index ? c.selectivity_index.toFixed(1) : 'محسوب'}</small>`
+                : (c.hemo_status === 'single_dose_screened'
+                  ? `<span class="tag-screened" title="${esc(c.hemo_notes)}">فحص أحادي: ${esc(c.hemo_result)}</span><small class="block text-warning text-2xs" style="margin-top:2px;">SI غير محدد (غياب منحنى HC50)</small>`
+                  : `<span class="tag-unassayed" title="${esc(c.hemo_notes)}">غير مفحوص</span><small class="block text-warning text-2xs" style="margin-top:2px;">SI غير محدد</small>`)}
             </div>
           </td>
           <td>
@@ -1750,15 +1759,15 @@
     },
     {
       id: 'tgt_biofilm_matrix',
-      name: 'مصفوفة الغشاء الحيوي البكتيري (EPS Matrix & eDNA)',
+      name: 'تشتيت كتلة الغشاء الحيوي (Biofilm Dispersal Phenotype)',
       category: 'biofilm',
-      status: 'confirmed',
-      statusLabel: 'مؤكد تجريبياً (Confirmed)',
-      desc: 'تشتيت شبكة السكريات المعقدة والحمض النووي خارج الخلوي (eDNA) التي تحمي التجمعات البكتيرية ومنع الالتصاق السطحي وتكوين المستعمرات المقاومة.',
-      assay: 'تلوين كتلة الغشاء بالبنفسج البلوري / المجهر متحد البؤر بالليزر (CLSM)',
+      status: 'phenotype',
+      statusLabel: 'نمط ظاهري مرصود (Observed Phenotype)',
+      desc: 'انخفاض في الكتلة الحيوية الكلية للغشاء الحيوي (Biofilm Biomass Reduction) مرصود بالصبغة، دون إثبات تفاعل جزيئي ملزم مباشر أو تحلل إنزيمي لمصفوفة السكريات خارج الخلوية (EPS).',
+      assay: 'تلوين كتلة الغشاء بالبنفسج البلوري (Crystal Violet Assays)',
       peptides: ['StigA16', 'StigA6'],
       references: 'Tareau et al. Front Microbiol 2026; 15:1827386',
-      caution: 'النشاط مشروط بوسط التجربة ومقاس ضد المكورات العنقودية؛ لم يُقاس تركيز مثبط قياسي (MIC) نمطي معلق للببتيدين في الدراسة ذاتها.'
+      caution: 'تنبيه منهجي صارم: تشتت الغشاء الحيوي بنسبة تقارب 38% عند 10 µM لـ StigA16 هو نمط ظاهري تجريبي كلي، ولا يجوز تصنيفه كهدف جزيئي مباشر مؤكد في غياب إثبات الارتباط البيوفيزيائي بسكريات EPS أو eDNA.'
     },
     {
       id: 'tgt_intracellular_dna',

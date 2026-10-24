@@ -17,8 +17,10 @@
  </a>
  <nav aria-label="القائمة الرئيسية">
    <a href="#atlas">الأطلس</a>
+   <a href="#venomlab">مختبر البنى 3D</a>
+   <a href="#research-agent" id="nav-research-agent">المساعد العلمي (MOD-04)</a>
    <a href="#knowledge-graph">شبكة المعرفة</a>
-    <a href="#venomlab">مختبر البنى 3D</a>
+   <a href="anatomy.html">تشريح العقرب 3D</a>
    <a href="#target-explorer">مستكشف الأهداف</a>
    <a href="#gap-analyzer">محلل الفجوات</a>
    <a href="#prioritization">فرز المرشحين</a>
@@ -45,6 +47,7 @@
    <h1 id="hero-title">من عالَمٍ صغير،<br>إلى <em>احتمالاتٍ كبيرة.</em></h1>
    <p class="hero-description">اكتشف الجزيئات الكامنة في سموم العقارب.<br>أطلس يجمع التسلسلات والخصائص والأدلة العلمية،<br class="desktop-break"> ليمنح البحث نقطة انطلاق أوضح وأدق.</p>
    <div class="hero-actions">
+     <a class="button secondary" href="anatomy.html">استكشف العقرب من الداخل والخارج <span aria-hidden="true">◈</span></a>
      <a class="button primary" href="#atlas">استكشف الأطلس <span aria-hidden="true">↙</span></a>
      <a class="button secondary" href="#methods-evidence">مستكشف الأدلة الـ32 <span aria-hidden="true">🔬</span></a>
      <a class="text-link" href="#approach"><span class="play-icon" aria-hidden="true">▶</span> وراء البيانات</a>
@@ -373,6 +376,78 @@
 
 
   <!-- SECTION 02: MOD-13 METHODS & EVIDENCE CENTER -->
+  <!-- SECTION 04: MOD-04 EVIDENCE-GROUNDED SCIENTIFIC RESEARCH AGENT -->
+  <section class="research-agent-section section-space" id="research-agent" aria-labelledby="agent-title">
+    <div class="section-heading reveal">
+      <div>
+        <p class="eyebrow"><span class="section-index">04 /</span> المساعد البحثي المعتمد على الأدلة (MOD-04)</p>
+        <h2 id="agent-title">المساعد العلمي: إجابات موثقة بالأدلة والتتبع التجريبي الحصري.<br><span>نظام استرجاع دقيق يجيب بشفافية إبستيمولوجية، دون اختلاق مراجع أو قياسات، ويوثق مستويات عدم اليقين.</span></h2>
+      </div>
+      <p>محرك بحث واسترجاع علمي يعتمد كلياً على سجلات أطلس العقارب الـ1,232، ومصفوفة الأدلة الـ32، ومختبر البنى 3D، وشبكة المعرفة. يلتزم المساعد بمبدأ عدم التوليد العشوائي (Zero-Hallucination)، ويوثق تصنيف الأدلة (Class A تجريبي، Class B تنبؤي، Class C أدبيات)، مع الامتناع الصارم عن إعطاء نصائح علاجية أو ادعاءات غير مدعومة مخبرياً.</p>
+    </div>
+
+    <!-- Epistemic Demarcation & Integrity Safeguard Banner -->
+    <div class="agent-integrity-banner reveal">
+      <div class="agent-banner-item">
+        <span class="agent-banner-icon">🛡️</span>
+        <div>
+          <strong>ضمان الحقيقة العلمية الصارم (Anti-Hallucination Guarantee)</strong>
+          <p>تُسترجع قيم التراكيز المثبطة الدنيا (MIC)، وسمية تحلل الدم (HC50)، وهياكل البروتين حصرياً من القياسات المنشورة المعملية. أي ببتيد يفتقر إلى قياس حقيقي يُعلن بصراحة كـ «غير مفحوص (Unassayed)». يمتنع المساعد تماماً عن الترويج لعلاجات سريرية أو مزاعم شفاء.</p>
+        </div>
+      </div>
+      <div class="agent-banner-item">
+        <span class="agent-banner-icon">⚖️</span>
+        <div>
+          <strong>إطار التعلّم الإيجابي غير الموسوم (PU Learning Transparency)</strong>
+          <p>أكثر من 1,200 ببتيد في الأطلس تمثل بيانات غير موسومة (Unlabeled background)؛ ولا يجوز افتراض أنها غير فعالة بيولوجياً تجنباً لخداع النماذج التنبؤية بالسلبيات الزائفة (False Negatives).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agent Control Bar (Language Selector & Presets) -->
+    <div class="agent-controls-container reveal">
+      <div class="agent-lang-selector">
+        <span class="agent-control-label">لغة الإجابة:</span>
+        <button id="agent-lang-auto" class="agent-lang-btn active" title="التعرف التلقائي على لغة السؤال">تلقائي (Auto)</button>
+        <button id="agent-lang-ar" class="agent-lang-btn" title="الإجابة بالعربية دائماً">العربية</button>
+        <button id="agent-lang-en" class="agent-lang-btn" title="Always answer in English">English</button>
+      </div>
+
+      <div class="agent-presets-group">
+        <span class="agent-control-label">استعلامات بحثية مقترحة:</span>
+        <div class="agent-presets-pills">
+          <button class="agent-preset-btn" data-query="ما هي خصائص وأدلة ببتيد Stigmurin؟">1. ملف Stigmurin والأدلة</button>
+          <button class="agent-preset-btn" data-query="ما هي قيم MIC المنشورة للببتيدات ضد بكتيريا S. aureus؟">2. قيم MIC ضد S. aureus</button>
+          <button class="agent-preset-btn" data-query="ما هي ببتيدات العقارب التي تمتلك قياسات سمية تحلل الدم HC50 حقيقية؟">3. قياسات السمية HC50</button>
+          <button class="agent-preset-btn" data-query="ما هو الدليل التجريبي على الهدف الجزيئي للغشاء البكتيري؟">4. إثبات الهدف الجزيئي</button>
+          <button class="agent-preset-btn" data-query="لماذا يتصدر StigA31 التصنيف المتوازن للـ 20 مرشحاً؟">5. تفسير تصنيف StigA31</button>
+          <button class="agent-preset-btn" data-query="ما هي البنى ثلاثية الأبعاد المحددة معملياً (Class A)؟">6. بنى PDB المعملية</button>
+          <button class="agent-preset-btn" data-query="ما الفرق بين بنية AlphaFold التنبؤية والبنية المعملية لـ AaH2؟">7. AlphaFold مقابل المعمل</button>
+          <button class="agent-preset-btn" data-query="كيف يتعامل الأطلس مع الببتيدات غير المفحوصة وإطار PU Learning؟">8. قيود PU Learning</button>
+          <button class="agent-preset-btn" data-query="ما هي أبرز الفجوات البحثية في سموم العقارب وممرضات منظمة الصحة العالمية؟">9. الفجوات البحثية وWHO</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agent Interactive Form -->
+    <div class="agent-input-container reveal">
+      <div class="agent-input-box">
+        <input type="text" id="agent-query-input" placeholder="اطرح سؤالاً علمياً عن ببتيدات العقارب، قيم MIC، الهياكل ثلاثية الأبعاد، أو الفجوات البحثية..." aria-label="حقل استعلام المساعد العلمي">
+        <button id="agent-submit-btn" class="button primary">استعلام ↵</button>
+        <button id="agent-clear-btn" class="button secondary" title="مسح سجل المحادثة">مسح ↻</button>
+      </div>
+    </div>
+
+    <!-- Conversation & Response Container -->
+    <div id="agent-conversation-log" class="agent-conversation-log reveal" aria-live="polite">
+      <div class="agent-empty-state">
+        <span class="agent-empty-icon">🤖</span>
+        <h4>مرحباً بك في المساعد البحثي المقيد بالأدلة (MOD-04)</h4>
+        <p>اختر أحد الأسئلة المقترحة أعلاه أو اكتب استفسارك العلمي حول الببتيدات، الممرضات، الأهداف الجزيئية، أو البنى ثلاثية الأبعاد.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- SECTION 02: MOD-02 EVIDENCE-BASED VENOM KNOWLEDGE GRAPH -->
  <section class="knowledge-graph-section section-space" id="knowledge-graph" aria-labelledby="kg-title">
    <div class="section-heading reveal">
@@ -1077,5 +1152,6 @@
 <script src="app.js" defer></script>
 <script type="module" src="scene.js"></script>
 <script type="module" src="venomlab.js"></script>
+<script type="module" src="agent.js"></script>
 </body>
 </html>

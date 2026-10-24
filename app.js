@@ -26,6 +26,9 @@
   // Prioritization State
   let currentSortProp = 'mic';
   let sortDirection = 1; // 1 = asc, -1 = desc
+  let activeRankingPreset = 'balanced_default';
+  let kgGraphInstance = null;
+  let targetExplorerInitialized = false;
 
   // Elements
   const tbody = $('peptide-rows');
@@ -796,6 +799,49 @@
   // ============================================================================
   // MOD-07: Evidence-Based Lead Prioritization (Triage & Strict Safeguards)
   // ============================================================================
+    // Ranking Presets Definition
+  const rankingPresets = {
+    balanced_default: {
+      name: 'المتوازن القياسي (Default)',
+      rho: '1.0000',
+      top: 'StigA31 (#1)',
+      w: { mic: 0.40, hemo: 0.25, stab: 0.15, moment: 0.10, charge: 0.10 }
+    },
+    potency_focused: {
+      name: 'التركيز على الفعالية (Potency)',
+      rho: '0.9850',
+      top: 'StigA31 (#1)',
+      w: { mic: 0.70, hemo: 0.10, stab: 0.10, moment: 0.05, charge: 0.05 }
+    },
+    safety_focused: {
+      name: 'الأمان والتوافقية (Safety)',
+      rho: '0.9008',
+      top: 'StigA31 (#1)',
+      w: { mic: 0.20, hemo: 0.50, stab: 0.15, moment: 0.075, charge: 0.075 }
+    },
+    stability_focused: {
+      name: 'الاستقرار الفيزيوكيميائي (Stability)',
+      rho: '0.7128',
+      top: 'StigA31 (#1)',
+      w: { mic: 0.20, hemo: 0.10, stab: 0.35, moment: 0.20, charge: 0.15 }
+    },
+    equal_weights: {
+      name: 'أوزان متساوية (Equal 20%)',
+      rho: '0.8947',
+      top: 'StigA31 (#1)',
+      w: { mic: 0.20, hemo: 0.20, stab: 0.20, moment: 0.20, charge: 0.20 }
+    }
+  };
+
+  function setRankingPreset(presetKey) {
+    if (!rankingPresets[presetKey]) return;
+    activeRankingPreset = presetKey;
+    document.querySelectorAll('.preset-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.preset === presetKey);
+    });
+    renderLeadPrioritization();
+  }
+
   function renderLeadPrioritization() {
     const triageTbody = $('prioritization-rows');
     if (!triageTbody) return;
@@ -808,6 +854,23 @@
       const micUg = parseFloat(ev.converted_mic_value_ug_ml) || 999;
       const micUm = parseFloat(ev.converted_mic_value_um) || 999;
       const hc50 = ev.hemolysis_hc50_um ? parseFloat(ev.hemolysis_hc50_um) : null;
+      const hemoStatus = ev.hemolysis_status || 'unassayed';
+      const hemoRes = ev.hemolysis_reported_result || 'غير مسجل في الدراسة';
+      const hemoNotes = ev.hemolysis_screening_notes || '';
+
+      // Quantified subscores
+      let sHemo = 0.40;
+      if (hemoRes.includes('<5%') || hemoRes.includes('<2%')) {
+        sHemo = 1.0;
+      } else if (hemoRes.includes('5.8%')) {
+        sHemo = 0.90;
+      } else if (hemoRes.includes('<10%') || hemoRes.includes('~10%')) {
+        sHemo = 0.80;
+      } else if (hemoRes.includes('15-20%')) {
+        sHemo = 0.50;
+      } else if (hemoRes.includes('Active lysis') || hemoRes.includes('high lysis')) {
+        sHemo = 0.05;
+      }
 
       if (!candidatesMap.has(ev.peptide_name)) {
         candidatesMap.set(ev.peptide_name, {
@@ -825,7 +888,11 @@
           is_stable: f.is_predicted_stable === 'yes',
           is_amidated: ev.c_terminal_amidation_considered === 'yes',
           hc50_um: hc50,
-          // STRICT SAFEGUARD: Never fabricate Selectivity Index if HC50 is null
+          hemo_status: hemoStatus,
+          hemo_result: hemoRes,
+          hemo_notes: hemoNotes,
+          s_hemo: sHemo,
+          // STRICT SAFEGUARD: Never fabricate Selectivity Index without scalar HC50
           selectivity_index: hc50 ? (hc50 / micUm) : null
         });
       } else {
@@ -839,37 +906,39 @@
     });
 
     let candidates = Array.from(candidatesMap.values());
+    const currentPreset = rankingPresets[activeRankingPreset] || rankingPresets.balanced_default;
+    const w = currentPreset.w;
 
-    // Annotate candidates with Origin (Natural vs Engineered) and Multi-criteria Rank Score
+    // Annotate candidates with Origin and Dynamic Multi-Criteria Rank Score
     candidates.forEach(c => {
       const isEngineered = /_analogue|StigA|Kn2-7/.test(c.peptide_name);
       c.origin = isEngineered ? 'engineered' : 'natural';
       c.origin_label = isEngineered ? 'نظير مصمم' : 'سم طبيعي';
 
-      // Transparent Multi-Criteria Ranking Formula
-      // Score = 0.40 * S_MIC + 0.25 * S_Charge + 0.20 * S_Moment + 0.15 * S_Stability
+      // Transparent exploratory weighting
       const sMic = Math.max(0, 1 - (c.lowest_mic_ug / 100));
       const sCharge = Math.min(Math.max(c.net_charge, 0), 6) / 6;
       const sMoment = Math.min(c.hydrophobic_moment, 1.0) / 1.0;
       const sStability = Math.max(0, 1 - (c.instability / 60));
-      c.composite_score = (0.40 * sMic) + (0.25 * sCharge) + (0.20 * sMoment) + (0.15 * sStability);
+      
+      c.composite_score = (w.mic * sMic) + (w.hemo * c.s_hemo) + (w.stab * sStability) + (w.moment * sMoment) + (w.charge * sCharge);
     });
 
-    // Sort candidates according to current sort property
+    // Update sensitivity metrics banner
+    if ($('active-model-name')) $('active-model-name').textContent = currentPreset.name;
+    if ($('active-model-rho')) $('active-model-rho').textContent = `ρ = ${currentPreset.rho}`;
+    if ($('active-top-candidate')) $('active-top-candidate').textContent = currentPreset.top;
+
+    // Sort candidates
     candidates.sort((a, b) => {
-      let vA, vB;
       if (currentSortProp === 'mic') {
-        vA = a.lowest_mic_ug; vB = b.lowest_mic_ug;
-        return (vA - vB) * sortDirection;
+        return (a.lowest_mic_ug - b.lowest_mic_ug) * sortDirection;
       } else if (currentSortProp === 'charge') {
-        vA = a.net_charge; vB = b.net_charge;
-        return (vB - vA) * sortDirection;
+        return (b.net_charge - a.net_charge) * sortDirection;
       } else if (currentSortProp === 'stability') {
-        vA = a.instability; vB = b.instability;
-        return (vA - vB) * sortDirection;
+        return (a.instability - b.instability) * sortDirection;
       } else if (currentSortProp === 'moment') {
-        vA = a.hydrophobic_moment; vB = b.hydrophobic_moment;
-        return (vB - vA) * sortDirection;
+        return (b.hydrophobic_moment - a.hydrophobic_moment) * sortDirection;
       }
       return (b.composite_score - a.composite_score);
     });
@@ -897,11 +966,12 @@
             </span>
           </td>
           <td>
-            <!-- STRICT CYTOTOXICITY SAFEGUARD: Never fabricate SI without empirical HC50 -->
+            <!-- 3-TIER HEMOLYSIS CLASSIFICATION WITH STRICT NULL SI SAFEGUARD -->
             <div class="si-cell">
-              ${c.selectivity_index !== null
-                ? `<span class="si-val font-bold text-success">${c.selectivity_index.toFixed(1)}</span>`
-                : `<span class="tag-null">غير مقاس (Null)</span><small class="block text-warning text-2xs">Efficacy Only / Toxicity Unassayed</small>`}
+              ${c.hemo_status === 'single_dose_screened'
+                ? `<span class="tag-screened" title="${esc(c.hemo_notes)}">فحص أحادي: ${esc(c.hemo_result)}</span>`
+                : `<span class="tag-unassayed" title="${esc(c.hemo_notes)}">غير مفحوص</span>`}
+              <small class="block text-warning text-2xs" style="margin-top:2px;">SI غير محدد (غياب منحنى HC50)</small>
             </div>
           </td>
           <td>
@@ -911,6 +981,13 @@
       `;
     }).join('');
   }
+
+  // Preset switching click listeners
+  $('preset-btn-balanced')?.addEventListener('click', () => setRankingPreset('balanced_default'));
+  $('preset-btn-potency')?.addEventListener('click', () => setRankingPreset('potency_focused'));
+  $('preset-btn-safety')?.addEventListener('click', () => setRankingPreset('safety_focused'));
+  $('preset-btn-stability')?.addEventListener('click', () => setRankingPreset('stability_focused'));
+  $('preset-btn-equal')?.addEventListener('click', () => setRankingPreset('equal_weights'));
 
   // Triage sorting buttons with active state updating
   function setTriageSort(prop, dir, btn) {
@@ -926,7 +1003,6 @@
   $('sort-by-stability')?.addEventListener('click', (e) => setTriageSort('stability', 1, e.currentTarget));
   $('sort-by-moment')?.addEventListener('click', (e) => setTriageSort('moment', 1, e.currentTarget));
 
-  // Event delegation on triage table body for robust candidate detail dialogs
   $('prioritization-rows')?.addEventListener('click', (e) => {
     const btn = e.target.closest('[data-open]');
     if (btn && btn.dataset.open) showDetails(btn.dataset.open);
@@ -1061,6 +1137,774 @@
   // ============================================================================
   // Initial Data Load
   // ============================================================================
+  
+  // ============================================================================
+  // SPRINT 03: MOD-02 EVIDENCE-BASED VENOM KNOWLEDGE GRAPH
+  // ============================================================================
+  function initKnowledgeGraph() {
+    const canvas = $('knowledge-graph-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const drawer = $('kg-inspector-drawer');
+    const closeBtn = $('kg-inspector-close');
+    const tooltip = $('kg-tooltip');
+    const scopeSelect = $('kg-scope-select');
+    const tierFilter = $('kg-tier-filter');
+    const nodeFilter = $('kg-node-filter');
+    const searchInput = $('kg-search-input');
+    const resetBtn = $('kg-btn-reset');
+    const physicsBtn = $('kg-btn-physics');
+    const statsNodes = $('kg-stats-nodes');
+    const statsEdges = $('kg-stats-edges');
+
+    let isPhysicsRunning = true;
+    let cameraX = canvas.width / 2;
+    let cameraY = canvas.height / 2;
+    let cameraZoom = 1.0;
+    let isDraggingCanvas = false;
+    let dragStartX = 0, dragStartY = 0;
+    let hoveredNode = null;
+    let selectedNode = null;
+    let draggedNode = null;
+
+    // Build Graph Data Model
+    let allNodes = [];
+    let allLinks = [];
+    let activeNodes = [];
+    let activeLinks = [];
+
+    function buildGraphData() {
+      const nodesMap = new Map();
+      allLinks = [];
+
+      function addNode(id, label, type, group, meta) {
+        if (!nodesMap.has(id)) {
+          const angle = Math.random() * Math.PI * 2;
+          const radius = 100 + Math.random() * 200;
+          nodesMap.set(id, {
+            id,
+            label,
+            type,
+            group,
+            meta,
+            x: (canvas.width / 2) + Math.cos(angle) * radius,
+            y: (canvas.height / 2) + Math.sin(angle) * radius,
+            vx: 0,
+            vy: 0,
+            radius: type === 'pathogen' ? 15 : (type === 'species' ? 13 : 9)
+          });
+        }
+        return nodesMap.get(id);
+      }
+
+      // Populate nodes and links from data and evidenceData
+      const empiricalNames = new Set(evidenceData.map(e => e.peptide_name));
+
+      data.forEach(item => {
+        const isEmpirical = empiricalNames.has(item.peptide_name);
+        const aid = item.atlas_id;
+        const pname = item.peptide_name;
+        const species = item.species;
+        const origin = item.origin;
+
+        // Species node
+        const spId = `sp_${species.replace(/\s+/g, '_')}`;
+        addNode(spId, species, 'species', 'species', {
+          species,
+          family: item.family,
+          count: 1
+        });
+
+        // Peptide node
+        const pepId = `pep_${aid}`;
+        addNode(pepId, pname, 'peptide', origin === 'engineered' ? 'engineered' : 'natural', {
+          atlas_id: aid,
+          peptide_name: pname,
+          species,
+          sequence: item.sequence,
+          length_aa: item.length_aa,
+          origin,
+          status: item.evidence_activity_status,
+          lowest_mic: item.lowest_mic_um || '—',
+          features: item.features || {}
+        });
+
+        // Species -> Peptide edge (Tier 2 Curated)
+        allLinks.push({
+          source: spId,
+          target: pepId,
+          type: 'produces',
+          tier: 'tier2',
+          label: `${species} -> ${pname}`,
+          meta: { relation: 'أصل الببتيد / نظير مصمم' }
+        });
+
+        // Publication node
+        const pmid = item.primary_pmid;
+        const doi = item.primary_doi;
+        const ref = item.primary_reference || '';
+        if (pmid || doi) {
+          const pubId = `pub_${pmid || doi.replace(/[^a-zA-Z0-9]/g, '_')}`;
+          addNode(pubId, ref.length > 28 ? ref.slice(0, 28) + '...' : ref, 'publication', 'publication', {
+            pmid,
+            doi,
+            citation: ref,
+            source_url: item.source_url || ''
+          });
+
+          allLinks.push({
+            source: pepId,
+            target: pubId,
+            type: 'documented_in',
+            tier: isEmpirical ? 'tier1' : 'tier2',
+            label: 'موثق في',
+            meta: { citation: ref, pmid, doi }
+          });
+        }
+      });
+
+      // Add empirical pathogen links (Tier 1 Gold)
+      evidenceData.forEach(ev => {
+        const pepNodeId = `pep_${ev.atlas_id}`;
+        const pathId = `path_${ev.target_species.replace(/\s+/g, '_')}`;
+        
+        addNode(pathId, ev.target_species, 'pathogen', ev.target_gram_status, {
+          target_species: ev.target_species,
+          gram_status: ev.target_gram_status,
+          strain: ev.strain_designation
+        });
+
+        allLinks.push({
+          source: pepNodeId,
+          target: pathId,
+          type: 'inhibits',
+          tier: 'tier1',
+          label: `MIC: ${ev.converted_mic_value_ug_ml} µg/mL`,
+          meta: {
+            evidence_id: ev.evidence_id,
+            mic_ug_ml: ev.converted_mic_value_ug_ml,
+            mic_um: ev.converted_mic_value_um,
+            reported_unit: ev.reported_mic_unit,
+            strain: ev.strain_designation,
+            medium: ev.assay_medium,
+            hemo_res: ev.hemolysis_reported_result || 'غير مسجل',
+            citation: ev.primary_citation,
+            pmid: ev.pmid,
+            doi: ev.doi
+          }
+        });
+      });
+
+      allNodes = Array.from(nodesMap.values());
+    }
+
+    function filterGraph() {
+      const scope = scopeSelect ? scopeSelect.value : 'empirical';
+      const tier = tierFilter ? tierFilter.value : 'all';
+      const nodeType = nodeFilter ? nodeFilter.value : 'all';
+      const q = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+      const empiricalPeptideNames = new Set(evidenceData.map(e => e.peptide_name));
+      const empiricalSpecies = new Set(evidenceData.map(e => e.species));
+      const empiricalPubs = new Set(evidenceData.map(e => e.pmid).filter(Boolean));
+
+      let filteredNodes = allNodes.filter(n => {
+        if (scope === 'empirical') {
+          if (n.type === 'peptide') return empiricalPeptideNames.has(n.label);
+          if (n.type === 'species') return empiricalSpecies.has(n.label);
+          if (n.type === 'pathogen') return true;
+          if (n.type === 'publication') return empiricalPubs.has(n.meta.pmid);
+          return false;
+        }
+        return true;
+      });
+
+      if (nodeType !== 'all') {
+        filteredNodes = filteredNodes.filter(n => n.type === nodeType);
+      }
+
+      if (q) {
+        filteredNodes = filteredNodes.filter(n => 
+          n.label.toLowerCase().includes(q) || 
+          (n.meta && JSON.stringify(n.meta).toLowerCase().includes(q))
+        );
+      }
+
+      const visibleNodeIds = new Set(filteredNodes.map(n => n.id));
+
+      activeLinks = allLinks.filter(l => {
+        const hasNodes = visibleNodeIds.has(l.source) && visibleNodeIds.has(l.target);
+        if (!hasNodes) return false;
+        if (tier === 'all') return true;
+        return l.tier === tier;
+      });
+
+      // Keep only connected nodes or filtered matches
+      activeNodes = filteredNodes;
+
+      if (statsNodes) statsNodes.textContent = `العقد: ${activeNodes.length}`;
+      if (statsEdges) statsEdges.textContent = `الروابط: ${activeLinks.length}`;
+    }
+
+    // Force Simulation Step
+    function stepSimulation() {
+      if (!isPhysicsRunning) return;
+
+      const nodeIndex = new Map(activeNodes.map(n => [n.id, n]));
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+
+      // Charge repulsion between nodes
+      for (let i = 0; i < activeNodes.length; i++) {
+        const n1 = activeNodes[i];
+        for (let j = i + 1; j < activeNodes.length; j++) {
+          const n2 = activeNodes[j];
+          const dx = n2.x - n1.x;
+          const dy = n2.y - n1.y;
+          const distSq = dx * dx + dy * dy + 100;
+          const dist = Math.sqrt(distSq);
+          if (dist < 350) {
+            const force = (n1.radius * n2.radius * 25) / distSq;
+            const fx = (dx / dist) * force;
+            const fy = (dy / dist) * force;
+            if (n1 !== draggedNode) { n1.vx -= fx; n1.vy -= fy; }
+            if (n2 !== draggedNode) { n2.vx += fx; n2.vy += fy; }
+          }
+        }
+
+        // Center gravity
+        const dCenter = Math.hypot(n1.x - cx, n1.y - cy);
+        if (dCenter > 20) {
+          n1.vx += (cx - n1.x) * 0.0015;
+          n1.vy += (cy - n1.y) * 0.0015;
+        }
+      }
+
+      // Link spring attraction
+      activeLinks.forEach(l => {
+        const s = nodeIndex.get(l.source);
+        const t = nodeIndex.get(l.target);
+        if (s && t) {
+          const dx = t.x - s.x;
+          const dy = t.y - s.y;
+          const dist = Math.hypot(dx, dy) || 1;
+          const targetDist = l.tier === 'tier1' ? 70 : 110;
+          const force = (dist - targetDist) * 0.003;
+          const fx = (dx / dist) * force;
+          const fy = (dy / dist) * force;
+          if (s !== draggedNode) { s.vx += fx; s.vy += fy; }
+          if (t !== draggedNode) { t.vx -= fx; t.vy -= fy; }
+        }
+      });
+
+      // Update velocities and positions with damping
+      activeNodes.forEach(n => {
+        if (n !== draggedNode) {
+          n.vx *= 0.82;
+          n.vy *= 0.82;
+          n.x += n.vx;
+          n.y += n.vy;
+          // Boundary confinement
+          n.x = Math.max(40, Math.min(canvas.width - 40, n.x));
+          n.y = Math.max(40, Math.min(canvas.height - 40, n.y));
+        }
+      });
+    }
+
+    // Canvas Render Loop
+    function renderGraph() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.save();
+
+      // Apply camera transformation
+      ctx.translate(cameraX, cameraY);
+      ctx.scale(cameraZoom, cameraZoom);
+      ctx.translate(-canvas.width / 2, -canvas.height / 2);
+
+      const nodeIndex = new Map(activeNodes.map(n => [n.id, n]));
+
+      // 1. Draw Links
+      activeLinks.forEach(l => {
+        const s = nodeIndex.get(l.source);
+        const t = nodeIndex.get(l.target);
+        if (!s || !t) return;
+
+        ctx.beginPath();
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(t.x, t.y);
+
+        if (l.tier === 'tier1') {
+          ctx.strokeStyle = '#8ec285';
+          ctx.lineWidth = 2.4;
+          ctx.setLineDash([]);
+        } else if (l.tier === 'tier2') {
+          ctx.strokeStyle = 'rgba(96, 165, 250, 0.45)';
+          ctx.lineWidth = 1.2;
+          ctx.setLineDash([4, 4]);
+        } else {
+          ctx.strokeStyle = 'rgba(192, 132, 252, 0.35)';
+          ctx.lineWidth = 1.0;
+          ctx.setLineDash([2, 4]);
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+      });
+
+      // 2. Draw Nodes
+      activeNodes.forEach(n => {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+
+        // Node coloring by type
+        let fill = '#60a5fa';
+        let stroke = '#93c5fd';
+        if (n.type === 'peptide') {
+          fill = n.group === 'engineered' ? '#d4bc84' : '#8ec285';
+          stroke = n.group === 'engineered' ? '#fef08a' : '#bbf7d0';
+        } else if (n.type === 'pathogen') {
+          fill = '#f87171';
+          stroke = '#fca5a5';
+        } else if (n.type === 'publication') {
+          fill = '#c084fc';
+          stroke = '#e9d5ff';
+        }
+
+        ctx.fillStyle = fill;
+        ctx.fill();
+
+        // Highlight ring on hover or select
+        if (n === hoveredNode || n === selectedNode) {
+          ctx.lineWidth = 3.5;
+          ctx.strokeStyle = '#ffffff';
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.radius + 6, 0, Math.PI * 2);
+          ctx.strokeStyle = fill;
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        } else {
+          ctx.lineWidth = 1.5;
+          ctx.strokeStyle = stroke;
+          ctx.stroke();
+        }
+
+        // Draw node labels if zoomed or high-priority
+        if (cameraZoom > 0.8 || n.type === 'pathogen' || n === hoveredNode || n === selectedNode) {
+          ctx.font = '10px Cairo, sans-serif';
+          ctx.fillStyle = '#e6ece6';
+          ctx.textAlign = 'center';
+          ctx.fillText(n.label, n.x, n.y + n.radius + 12);
+        }
+      });
+
+      ctx.restore();
+    }
+
+    function loop() {
+      stepSimulation();
+      renderGraph();
+      requestAnimationFrame(loop);
+    }
+
+    // Convert Screen to World Coords
+    function screenToWorld(sx, sy) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = sx - rect.left;
+      const clientY = sy - rect.top;
+      const wx = ((clientX - cameraX) / cameraZoom) + (canvas.width / 2);
+      const wy = ((clientY - cameraY) / cameraZoom) + (canvas.height / 2);
+      return { x: wx, y: wy };
+    }
+
+    // Node Hit Detection
+    function findNodeAt(sx, sy) {
+      const w = screenToWorld(sx, sy);
+      for (let i = activeNodes.length - 1; i >= 0; i--) {
+        const n = activeNodes[i];
+        const dist = Math.hypot(n.x - w.x, n.y - w.y);
+        if (dist <= n.radius + 4) return n;
+      }
+      return null;
+    }
+
+    // Inspector Drawer Display
+    function openInspector(node) {
+      if (!drawer) return;
+      selectedNode = node;
+      drawer.hidden = false;
+
+      const badge = $('kg-node-badge');
+      const title = $('kg-node-title');
+      const content = $('kg-inspector-content');
+
+      const typeLabels = {
+        species: 'نوع عقرب (Species)',
+        peptide: node.group === 'engineered' ? 'ببتيد مصمم (Engineered)' : 'ببتيد طبيعي (Natural)',
+        pathogen: 'ممرض بكتيري (Pathogen)',
+        publication: 'مرجع علمي محكّم (Publication)'
+      };
+
+      if (badge) badge.textContent = typeLabels[node.type] || node.type;
+      if (title) title.textContent = node.label;
+
+      // Collect connected edges and evidence
+      const connectedEdges = activeLinks.filter(l => l.source === node.id || l.target === node.id);
+
+      let html = `<div class="kg-inspector-summary">`;
+      if (node.type === 'peptide') {
+        const f = node.meta.features || {};
+        html += `
+          <p><strong>معرّف الأطلس:</strong> <span class="mono">${esc(node.meta.atlas_id)}</span></p>
+          <p><strong>النوع الأصلي:</strong> <em>${esc(node.meta.species)}</em></p>
+          <p><strong>الطول:</strong> ${esc(node.meta.length_aa)} حمض أميني</p>
+          <p><strong>الشحنة الفسيولوجية:</strong> ${esc(f.net_charge_ph74_physiological || '—')}</p>
+          <p><strong>عزم الكراهية للماء:</strong> ${esc(f.hydrophobic_moment_alpha || '—')}</p>
+          <p class="mono text-2xs" style="word-break:break-all; background:#0c140e; padding:6px; border-radius:4px;">${esc(node.meta.sequence)}</p>
+        `;
+      } else if (node.type === 'species') {
+        html += `
+          <p><strong>العائلة التصنيفية:</strong> ${esc(node.meta.family)}</p>
+          <p><strong>الاسم العلمي:</strong> <em>${esc(node.meta.species)}</em></p>
+        `;
+      } else if (node.type === 'pathogen') {
+        html += `
+          <p><strong>الكائن المستهدف:</strong> <em>${esc(node.meta.target_species)}</em></p>
+          <p><strong>صبغة غرام:</strong> ${esc(node.meta.gram_status)}</p>
+        `;
+      } else if (node.type === 'publication') {
+        html += `
+          <p><strong>الاستشهاد الأولي:</strong> ${esc(node.meta.citation)}</p>
+          ${node.meta.pmid ? `<p><strong>PMID:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/${esc(node.meta.pmid)}/" target="_blank" rel="noopener" class="text-accent">${esc(node.meta.pmid)} ↗</a></p>` : ''}
+          ${node.meta.doi ? `<p><strong>DOI:</strong> <a href="https://doi.org/${esc(node.meta.doi)}" target="_blank" rel="noopener" class="text-accent">${esc(node.meta.doi)} ↗</a></p>` : ''}
+        `;
+      }
+
+      html += `<h4>الروابط التجريبية والمرجعية (${connectedEdges.length})</h4><ul class="kg-edge-list">`;
+      connectedEdges.forEach(e => {
+        const tierClass = e.tier;
+        const tierName = e.tier === 'tier1' ? 'المستوى 1: مقاس مخبرياً' : (e.tier === 'tier2' ? 'المستوى 2: توثيق وراثي' : 'المستوى 3: استدلال حسابي');
+        html += `
+          <li class="kg-edge-item ${tierClass}">
+            <div class="flex justify-between items-center">
+              <strong>${esc(e.label)}</strong>
+              <span class="badge ${tierClass === 'tier1' ? 'measured' : 'annotated'} text-3xs">${tierName}</span>
+            </div>
+            ${e.meta.strain ? `<p class="text-2xs text-muted">السلالة: ${esc(e.meta.strain)} | الوسط: ${esc(e.meta.medium)}</p>` : ''}
+            ${e.meta.hemo_res ? `<p class="text-2xs text-warning">فحص انحلال الدم: ${esc(e.meta.hemo_res)}</p>` : ''}
+          </li>
+        `;
+      });
+      html += `</ul></div>`;
+
+      if (content) content.innerHTML = html;
+    }
+
+    // Event Listeners for Canvas Interactivity
+    canvas.addEventListener('mousedown', e => {
+      const hit = findNodeAt(e.clientX, e.clientY);
+      if (hit) {
+        draggedNode = hit;
+        hit.vx = 0; hit.vy = 0;
+      } else {
+        isDraggingCanvas = true;
+        dragStartX = e.clientX - cameraX;
+        dragStartY = e.clientY - cameraY;
+      }
+    });
+
+    window.addEventListener('mousemove', e => {
+      if (draggedNode) {
+        const w = screenToWorld(e.clientX, e.clientY);
+        draggedNode.x = w.x;
+        draggedNode.y = w.y;
+        draggedNode.vx = 0;
+        draggedNode.vy = 0;
+      } else if (isDraggingCanvas) {
+        cameraX = e.clientX - dragStartX;
+        cameraY = e.clientY - dragStartY;
+      } else {
+        const hit = findNodeAt(e.clientX, e.clientY);
+        if (hit !== hoveredNode) {
+          hoveredNode = hit;
+          if (hoveredNode && tooltip) {
+            tooltip.hidden = false;
+            tooltip.textContent = `${hoveredNode.label} (${hoveredNode.type})`;
+            tooltip.style.left = `${e.clientX - canvas.getBoundingClientRect().left}px`;
+            tooltip.style.top = `${e.clientY - canvas.getBoundingClientRect().top}px`;
+          } else if (tooltip) {
+            tooltip.hidden = true;
+          }
+        }
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      draggedNode = null;
+      isDraggingCanvas = false;
+    });
+
+    canvas.addEventListener('click', e => {
+      const hit = findNodeAt(e.clientX, e.clientY);
+      if (hit) {
+        openInspector(hit);
+      }
+    });
+
+    canvas.addEventListener('wheel', e => {
+      e.preventDefault();
+      const zoomFactor = e.deltaY < 0 ? 1.12 : 0.89;
+      cameraZoom = Math.max(0.4, Math.min(3.0, cameraZoom * zoomFactor));
+    }, { passive: false });
+
+    // Drawer close button
+    closeBtn?.addEventListener('click', () => {
+      drawer.hidden = true;
+      selectedNode = null;
+    });
+
+    // Toolbar Controls
+    scopeSelect?.addEventListener('change', filterGraph);
+    tierFilter?.addEventListener('change', filterGraph);
+    nodeFilter?.addEventListener('change', filterGraph);
+    searchInput?.addEventListener('input', () => {
+      filterGraph();
+      if (searchInput.value.trim() && activeNodes.length > 0) {
+        const target = activeNodes[0];
+        cameraX = (canvas.width / 2) - ((target.x - canvas.width / 2) * cameraZoom);
+        cameraY = (canvas.height / 2) - ((target.y - canvas.height / 2) * cameraZoom);
+      }
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      cameraX = canvas.width / 2;
+      cameraY = canvas.height / 2;
+      cameraZoom = 1.0;
+    });
+
+    physicsBtn?.addEventListener('click', () => {
+      isPhysicsRunning = !isPhysicsRunning;
+      physicsBtn.textContent = isPhysicsRunning ? '⏸ تجميد الحركة' : '▶ تشغيل الحركة';
+    });
+
+    // Build and Launch
+    buildGraphData();
+    filterGraph();
+    loop();
+  }
+
+
+  // ============================================================================
+  // SPRINT 03: MOD-05 MOLECULAR TARGET EXPLORER
+  // ============================================================================
+  const targetCatalog = [
+    {
+      id: 'tgt_membrane_pg',
+      name: 'غشاء السيتوبلازم البكتيري (الفوسفوليبيدات سالبة الشحنة PG / CL)',
+      category: 'membrane',
+      status: 'confirmed',
+      statusLabel: 'مؤكد تجريبياً (Confirmed)',
+      desc: 'ارتباط كهروستاتيكي بين الببتيدات الموجبة متعددة الشحنات ورؤوس الفوسفوليبيدات سالبة الشحنة (Phosphatidylglycerol / Cardiolipin) يتبعه غرس حلزوني كاره للماء وانهيار فرق الجهد الغشائي ونفاذية الخلية.',
+      assay: 'امتصاص صبغة SYTOX Green / تسرب صبغة الكالسين الفلورية / فحص التدفق الخلوي',
+      peptides: ['Stigmurin', 'StigA25', 'StigA31', 'AaeAP1', 'AaeAP1_K_analogue', 'Kn2-7', 'BmKn2', 'IsCT1', 'Parabutoporin'],
+      references: 'Amorim-Carmo et al. 2019, Du et al. 2015, Zeng et al. 2004',
+      caution: 'تثبت التجارب تدمير الغشاء وتشتيت فرق الجهد، ولا تثبت نموذجاً ثقبياً هندسياً منفرداً (Toroidal vs Carpet) دون فحوصات رنين مغناطيسي نووي في الحالة الصلبة (Solid-state NMR).'
+    },
+    {
+      id: 'tgt_membrane_lps',
+      name: 'الغشاء الخارجي للبكتيريا سالبة غرام (LPS / Lipid A)',
+      category: 'membrane',
+      status: 'confirmed',
+      statusLabel: 'مؤكد تجريبياً (Confirmed)',
+      desc: 'إزاحة تنافسية لكاتيونات المغنيسيوم والكالسيوم الثنائية التي تثبت شبكة عديد السكاريد الشحمي (LPS)، مما يؤدي لخلخلة الحاجز الخارجي وتعزيز النفاذية الذاتية إلى الغشاء الداخلي.',
+      assay: 'اختبار نفاذية النيتروسيفين المحيطي بالجبلة / إزاحة دانسيل-بوليميكسين ب',
+      peptides: ['Kn2-7', 'AaeAP1_K_analogue', 'StigA25', 'AcrAP1_K_analogue'],
+      references: 'Cao et al. 2012, Du et al. 2015',
+      caution: 'النفاذية عبر LPS تتطلب شحنة موجبة عالية (+4 إلى +6)، وتستلزم ضبط عزم الكراهية للماء لمنع تحلل كرات الدم الحمراء.'
+    },
+    {
+      id: 'tgt_channel_kv',
+      name: 'قنوات البوتاسيوم المبوّبة بالجهد (Kv1.1, Kv1.2, Kv1.3, KCa1.1)',
+      category: 'ion-channel',
+      status: 'confirmed',
+      statusLabel: 'مؤكد تجريبياً (Confirmed)',
+      desc: 'سد مباشر للدهليز الخارجي لمسام القناة بواسطة سموم عصبية كلاسيكية منطوية بـ3 إلى 4 جسور كبريتية عبر سدادة لايسين محفوظة (Lys27) تتفاعل مع مرشح الانتقائية الأيوني.',
+      assay: 'التخطيط الكهربائي لتقنية رقعة الغشاء في الخلايا الكاملة (Patch-Clamp Electrophysiology)',
+      peptides: ['Kaliotoxin', 'Charybdotoxin', 'Margatoxin', 'TsTXK-beta', 'MeuTXKbeta3'],
+      references: 'Garcia et al. 1997, Batista et al. 2007',
+      caution: 'هدف خاص بالسموم العصبية المنطوية بجسور كبريتية؛ لا تنطبق آلية سد القنوات هذه على الببتيدات الخطية غير الكبريتية (NDBPs).'
+    },
+    {
+      id: 'tgt_channel_nav',
+      name: 'قنوات الصوديوم المبوّبة بالجهد (Nav1.1 - Nav1.7)',
+      category: 'ion-channel',
+      status: 'confirmed',
+      statusLabel: 'مؤكد تجريبياً (Confirmed)',
+      desc: 'ارتباط بموقع المستقبل 3 (إبطاء تعطيل القناة) أو موقع 4 (إزاحة عتبة التنشيط إلى جهود أكثر سلبية) مما يسبب إطلاقاً عصبياً متكرراً وشللاً تشنجياً.',
+      assay: 'تثبيت الجهد ثنائي القطب (TEVC) والتخطيط الكهربائي العصبي',
+      peptides: ['AaHII', 'Ts1', 'BmK M1', 'Lqh alphaIT'],
+      references: 'Cestele & Catterall 2000, Gordon 1997',
+      caution: 'هدف سمي عصبي يقتصر على السموم الطويلة المعقدة؛ لا توجد أي أدلة على تثبيط قنوات الصوديوم بواسطة الببتيدات المضادة للبكتيريا.'
+    },
+    {
+      id: 'tgt_biofilm_matrix',
+      name: 'مصفوفة الغشاء الحيوي البكتيري (EPS Matrix & eDNA)',
+      category: 'biofilm',
+      status: 'confirmed',
+      statusLabel: 'مؤكد تجريبياً (Confirmed)',
+      desc: 'تشتيت شبكة السكريات المعقدة والحمض النووي خارج الخلوي (eDNA) التي تحمي التجمعات البكتيرية ومنع الالتصاق السطحي وتكوين المستعمرات المقاومة.',
+      assay: 'تلوين كتلة الغشاء بالبنفسج البلوري / المجهر متحد البؤر بالليزر (CLSM)',
+      peptides: ['StigA16', 'StigA6'],
+      references: 'Tareau et al. Front Microbiol 2026; 15:1827386',
+      caution: 'النشاط مشروط بوسط التجربة ومقاس ضد المكورات العنقودية؛ لم يُقاس تركيز مثبط قياسي (MIC) نمطي معلق للببتيدين في الدراسة ذاتها.'
+    },
+    {
+      id: 'tgt_intracellular_dna',
+      name: 'الأهداف داخل الخلوية (تثبيط تخليق الحمض النووي والبروتين)',
+      category: 'intracellular',
+      status: 'unsubstantiated',
+      statusLabel: 'فرضية غير مثبتة (Negative Control)',
+      desc: 'فرضية نظرية مفادها أن الببتيدات القصيرة قد تخترق الغشاء دون تمزيقه للارتباط المباشر بالحمض النووي (DNA/RNA) أو الريبوسومات لمنع التكاثر.',
+      assay: 'لا توجد تجارب إزاحة هلامية (EMSA) أو تثبيط ترجمة منشورة لسموم العقارب',
+      peptides: ['لا يوجد مرشح مؤكد في سموم العقارب'],
+      references: 'فرضية منقولة نظرياً من ببتيدات البرمائيات (مثل Buforin II) دون إثبات في العقارب',
+      caution: 'تحذير إبستيمولوجي: ترفض المنصة تصنيف هذا المسار كهدف مؤكد؛ لا توجد أي دراسة محكّمة تثبت تثبيطاً داخل خلوي مباشر لببتيدات سموم العقارب.'
+    }
+  ];
+
+  function initTargetExplorer() {
+    const container = $('target-cards-container');
+    const dialog = $('target-detail-dialog');
+    const closeBtn = $('target-modal-close');
+    if (!container || !dialog) return;
+
+    let selectedCat = 'all';
+    let selectedStatus = 'all';
+
+    function renderTargets() {
+      const filtered = targetCatalog.filter(t => {
+        const matchCat = (selectedCat === 'all' || t.category === selectedCat);
+        const matchStatus = (selectedStatus === 'all' || t.status === selectedStatus);
+        return matchCat && matchStatus;
+      });
+
+      container.innerHTML = filtered.map(t => {
+        return `
+          <div class="target-card" data-tid="${t.id}" tabindex="0" role="button" aria-label="عرض تفاصيل ${esc(t.name)}">
+            <div>
+              <div class="target-card-header">
+                <h3>${esc(t.name)}</h3>
+                <span class="target-status-badge ${t.status}">${esc(t.statusLabel)}</span>
+              </div>
+              <p class="target-desc">${esc(t.desc)}</p>
+            </div>
+            <div>
+              <div class="target-meta-row">
+                <div class="target-meta-item">
+                  <span>منهج الفحص:</span> ${esc(t.assay)}
+                </div>
+              </div>
+              <div class="target-meta-row" style="margin-top:6px;">
+                <div class="target-meta-item">
+                  <span>الببتيدات المرتبطة:</span> <strong>${t.peptides.length}</strong> ببتيداً في الأطلس
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function showTargetDetail(targetId) {
+      const t = targetCatalog.find(x => x.id === targetId);
+      if (!t) return;
+
+      const badge = $('target-modal-badge');
+      const title = $('target-modal-title');
+      const body = $('target-modal-body');
+
+      if (badge) {
+        badge.textContent = t.statusLabel;
+        badge.className = `badge ${t.status === 'confirmed' ? 'measured' : 'conditional'}`;
+      }
+      if (title) title.textContent = t.name;
+
+      if (body) {
+        body.innerHTML = `
+          <div class="target-detail-content">
+            <h4 style="color:#d4bc84; margin-top:0;">الآلية الجزيئية المفصلة</h4>
+            <p>${esc(t.desc)}</p>
+
+            <h4 style="color:#d4bc84;">التحقق التجريبي ومنهج القياس</h4>
+            <p><strong>طريقة الفحص المخبري:</strong> ${esc(t.assay)}</p>
+            <p><strong>المراجع الأولية:</strong> ${esc(t.references)}</p>
+
+            <h4 style="color:#d4bc84;">الببتيدات المتفاعلة في الأطلس (${t.peptides.length})</h4>
+            <div class="flex flex-wrap gap-2" style="margin-bottom:16px;">
+              ${t.peptides.map(p => `<span class="badge ${t.status === 'confirmed' ? 'measured' : 'annotated'}">${esc(p)}</span>`).join(' ')}
+            </div>
+
+            <div style="background:rgba(239, 68, 68, 0.1); border:1px solid rgba(239, 68, 68, 0.3); border-radius:6px; padding:12px; margin-top:16px;">
+              <strong style="color:#fca5a5; display:block; margin-bottom:4px;">تنبيه إبستيمولوجي وحدود المنهج:</strong>
+              <p style="margin:0; font-size:12px; color:#e2e8f0; line-height:1.7;">${esc(t.caution)}</p>
+            </div>
+          </div>
+        `;
+      }
+
+      dialog.showModal();
+    }
+
+    // Category pills click handlers
+    document.querySelectorAll('.target-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.target-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedCat = btn.dataset.cat;
+        renderTargets();
+      });
+    });
+
+    // Status pills click handlers
+    document.querySelectorAll('.status-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.status-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedStatus = btn.dataset.stat;
+        renderTargets();
+      });
+    });
+
+    // Card click delegation
+    container.addEventListener('click', e => {
+      const card = e.target.closest('.target-card');
+      if (card && card.dataset.tid) {
+        showTargetDetail(card.dataset.tid);
+      }
+    });
+
+    // Keyboard support for card accessibility
+    container.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const card = e.target.closest('.target-card');
+        if (card && card.dataset.tid) {
+          e.preventDefault();
+          showTargetDetail(card.dataset.tid);
+        }
+      }
+    });
+
+    closeBtn?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', e => {
+      if (e.target === dialog) dialog.close();
+    });
+
+    renderTargets();
+    targetExplorerInitialized = true;
+  }
+
   async function loadData() {
     $('data-error').hidden = true;
     try {
@@ -1074,10 +1918,12 @@
       applyEvidenceFilters();
       updateTruthModeUI();
 
-      // Initialize Sprint 02 modules
+      // Initialize Sprint 02 & Sprint 03 modules
       renderGapAnalyzer();
       renderLeadPrioritization();
       renderXAIExplorer();
+      initKnowledgeGraph();
+      initTargetExplorer();
     } catch (err) {
       console.error(err);
       $('result-count').textContent = 'البيانات غير متاحة حالياً';

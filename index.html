@@ -17,10 +17,12 @@
  </a>
  <nav aria-label="القائمة الرئيسية">
    <a href="#atlas">الأطلس</a>
-   <a href="#methods-evidence">الأدلة الـ32</a>
+   <a href="#knowledge-graph">شبكة المعرفة</a>
+   <a href="#target-explorer">مستكشف الأهداف</a>
    <a href="#gap-analyzer">محلل الفجوات</a>
    <a href="#prioritization">فرز المرشحين</a>
    <a href="#xai">تفسير الذكاء الاصطناعي</a>
+   <a href="#methods-evidence">الأدلة الـ32</a>
    <a href="#approach">المنهجية</a>
    <a href="#contact">تواصل</a>
  </nav>
@@ -162,7 +164,111 @@
  </section>
 
  <!-- SECTION 02: MOD-13 METHODS & EVIDENCE CENTER -->
- <section class="methods-evidence section-space" id="methods-evidence" aria-labelledby="methods-evidence-title">
+  <!-- SECTION 02: MOD-02 EVIDENCE-BASED VENOM KNOWLEDGE GRAPH -->
+ <section class="knowledge-graph-section section-space" id="knowledge-graph" aria-labelledby="kg-title">
+   <div class="section-heading reveal">
+     <div>
+       <p class="eyebrow"><span class="section-index">02 /</span> شبكة المعرفة البيولوجية (MOD-02)</p>
+       <h2 id="kg-title">شبكة سموم العقارب المبنية على الأدلة.<br><span>ربط تجريبي متكامل بين الأنواع، الببتيدات، الممرضات، والأدبيات.</span></h2>
+     </div>
+     <p>شبكة تفاعلية مبنية حصرياً على سجلات الأطلس المحققة. تميّز الشبكة بصرامة إبستيمولوجية بين القياسات المخبرية المباشرة (المستوى 1: ذهبي)، والتوثيقات التصنيفية (المستوى 2: فضي)، والاستدلالات الحسابية (المستوى 3: برونزي). انقر على أي عقدة لفتح سجل الإثبات والتتبع الكامل.</p>
+   </div>
+
+   <!-- Epistemic Demarcation & Legend Bar -->
+   <div class="kg-tier-legend reveal">
+     <div class="kg-legend-item tier1">
+       <span class="kg-legend-dot tier1"></span>
+       <div>
+         <strong>المستوى 1: أدلة تجريبية مؤكدة (Empirical Gold)</strong>
+         <p>قياسات MIC مباشرة ومثبتة معملياً ضد سلالات بكتيرية محددة مع معرف DOI/PMID.</p>
+       </div>
+     </div>
+     <div class="kg-legend-item tier2">
+       <span class="kg-legend-dot tier2"></span>
+       <div>
+         <strong>المستوى 2: توثيق وراثي وتصنيفي (Curated Silver)</strong>
+         <p>سجلات مستخلصة من UniProt Swiss-Prot/TrEMBL تصنف تسلسل الببتيد ونوعه البيولوجي.</p>
+       </div>
+     </div>
+     <div class="kg-legend-item tier3">
+       <span class="kg-legend-dot tier3"></span>
+       <div>
+         <strong>المستوى 3: استدلالات حسابية (Computational Bronze)</strong>
+         <p>تنبؤات نموذج PU Learning للنشاط المضاد ومجموعات تشابه تسلسلات CD-HIT (70%).</p>
+       </div>
+     </div>
+   </div>
+
+   <!-- Interactive Graph Control Toolbar -->
+   <div class="kg-controls-toolbar reveal">
+     <div class="kg-controls-group">
+       <label for="kg-scope-select">نطاق العرض:</label>
+       <select id="kg-scope-select" class="kg-select">
+         <option value="empirical">الشبكة التجريبية المركزة (المرشحون الـ20 والممرضات)</option>
+         <option value="all">الأطلس الكامل (1,232 ببتيداً عبر 105 أنواع)</option>
+       </select>
+     </div>
+
+     <div class="kg-controls-group">
+       <label for="kg-tier-filter">مستوى الدليل:</label>
+       <select id="kg-tier-filter" class="kg-select">
+         <option value="all">جميع المستويات (1 + 2 + 3)</option>
+         <option value="tier1">المستوى 1: الأدلة التجريبية فقط</option>
+         <option value="tier2">المستوى 2: التوثيقات المرجعية</option>
+         <option value="tier3">المستوى 3: الاستدلالات الحسابية</option>
+       </select>
+     </div>
+
+     <div class="kg-controls-group">
+       <label for="kg-node-filter">نوع الكيان:</label>
+       <select id="kg-node-filter" class="kg-select">
+         <option value="all">كافة الكيانات</option>
+         <option value="species">أنواع العقارب (Species)</option>
+         <option value="peptide">الببتيدات (Peptides)</option>
+         <option value="pathogen">الممرضات المستهدفة (Pathogens)</option>
+         <option value="publication">المنشورات العلمية (Publications)</option>
+       </select>
+     </div>
+
+     <div class="kg-controls-search">
+       <input type="text" id="kg-search-input" placeholder="ابحث عن ببتيد، نوع عقرب، أو ممرض..." />
+     </div>
+
+     <div class="kg-action-buttons">
+       <button id="kg-btn-reset" class="button secondary btn-sm" title="إعادة ضبط زاوية الرؤية والتكبير">⟲ إعادة التمركز</button>
+       <button id="kg-btn-physics" class="button secondary btn-sm" title="إيقاف أو استئناف المحاكاة الفيزيائية">⏸ تجميد الحركة</button>
+     </div>
+   </div>
+
+   <!-- Graph Canvas Container & Evidence Inspector Drawer -->
+   <div class="kg-viewport-wrapper reveal">
+     <div class="kg-canvas-container" id="kg-canvas-container">
+       <canvas id="knowledge-graph-canvas" width="1120" height="580" aria-label="رسم بياني تفاعلي لشبكة المعرفة"></canvas>
+       <div class="kg-hud-overlay">
+         <span id="kg-stats-nodes">العقد: 0</span> • 
+         <span id="kg-stats-edges">الروابط: 0</span> • 
+         <span class="text-muted">اسحب للتحريك | عجلة الفأرة للتكبير | انقر للفحص</span>
+       </div>
+       <div id="kg-tooltip" class="kg-tooltip" hidden></div>
+     </div>
+
+     <!-- Slide-in Evidence Inspector Drawer -->
+     <div id="kg-inspector-drawer" class="kg-inspector-drawer" hidden>
+       <div class="kg-inspector-header">
+         <div class="flex items-center gap-2">
+           <span id="kg-node-badge" class="badge">نوع الكيان</span>
+           <h3 id="kg-node-title" class="kg-node-title">اسم الكيان</h3>
+         </div>
+         <button id="kg-inspector-close" class="kg-close-btn" aria-label="إغلاق لوحة الفحص">✕</button>
+       </div>
+       <div id="kg-inspector-content" class="kg-inspector-body">
+         <!-- Injected via app.js -->
+       </div>
+     </div>
+   </div>
+ </section>
+
+<section class="methods-evidence section-space" id="methods-evidence" aria-labelledby="methods-evidence-title">
    <div class="section-heading reveal">
      <div>
        <p class="eyebrow"><span class="section-index">02 /</span> الشفافية التجريبية والمناهج</p>
@@ -286,7 +392,7 @@
         <p class="eyebrow"><span class="section-index">03 /</span> فجوات البحث والاستكشاف</p>
         <h2 id="gap-title">محلل فجوات البحث العلمي.<br><span>خريطة المسببات غير المختبرة والتصنيف.</span></h2>
       </div>
-      <p>تحليل استكشافي للفجوات التجريبية مقارنةً بمسببات منظمة الصحة العالمية ذات الأولوية الحرجة (WHO Bacterial Priority Pathogens List 2024)، وفق حدود مجموعة بيانات SCORPION X v1.5 المنسقة (تاريخ التحديث: أكتوبر 2026، 1,233 ببتيداً عبر 147 نوعاً، بمعايير إدراج تشترط قياسات كمية محددة السلالة والوسط). توثق هذه اللوحة حدود التغطية الحالية للمجموعة والبحث المرجعي، ولا تدعي خلو كامل سموم العقارب عالمياً من الفعالية.</p>
+      <p>تحليل استكشافي للفجوات التجريبية مقارنةً بمسببات منظمة الصحة العالمية ذات الأولوية الحرجة (WHO Bacterial Priority Pathogens List 2024)، وفق حدود مجموعة بيانات SCORPION X v1.5 المنسقة (تاريخ التحديث: أكتوبر 2026، 1,232 ببتيداً فريداً (1,233 سطراً في CSV شاملاً سطر العناوين) عبر 147 نوعاً، بمعايير إدراج تشترط قياسات كمية محددة السلالة والوسط). توثق هذه اللوحة حدود التغطية الحالية للمجموعة والبحث المرجعي، ولا تدعي خلو كامل سموم العقارب عالمياً من الفعالية.</p>
     </div>
 
     <!-- Gap Analyzer Key Metrics -->
@@ -379,7 +485,71 @@
   </section>
 
     <!-- SECTION 04: MOD-07 EVIDENCE-BASED LEAD PRIORITIZATION -->
-  <section class="lead-prioritization section-space" id="prioritization" aria-labelledby="prioritization-title">
+    <!-- SECTION 05: MOD-05 MOLECULAR TARGET EXPLORER -->
+  <section class="target-explorer-section section-space" id="target-explorer" aria-labelledby="target-explorer-title">
+    <div class="section-heading reveal">
+      <div>
+        <p class="eyebrow"><span class="section-index">05 /</span> استكشاف الأهداف الجزيئية (MOD-05)</p>
+        <h2 id="target-explorer-title">مستكشف الأهداف الجزيئية والآليات.<br><span>تمييز صارم بين التفاعل المؤكد مخبرياً والنموذج النظري المقترح.</span></h2>
+      </div>
+      <p>دليل تحليلي للأهداف الحيوية المباشرة لمكونات سموم العقارب. لا يصنَّف أي هدف كـ "مؤكد" ما لم تكن هناك تجارب نفاذية غشائية مباشرة (SYTOX Green / Calcein) أو تخطيط كهربائي للقنوات (Patch-Clamp). يمنع المنهاج العلمي للمنصة استنتاج نوع الثقب أو المستقبل اعتماداً على الشحنة أو الكراهية للماء فقط.</p>
+    </div>
+
+    <!-- Epistemic Guardrail Banner -->
+    <div class="target-epistemic-guardrail reveal">
+      <div class="guardrail-icon" aria-hidden="true">🛡️</div>
+      <div class="guardrail-body">
+        <strong>حاجز منهجي صارم: منع استنتاج الأهداف الجزيئية من السمات الفيزيوكيميائية وحدها</strong>
+        <p>يؤكد أطلس SCORPION X أن السمات العامة (مثل الشحنة الإيجابية العالية +4 أو عزم الكراهية للماء 0.70) تمثل مؤشرات ميل إحصائي للارتباط بالأغشية، وليست إثباتاً بيولوجياً لآلية محددة لتكوين الثقوب (Toroidal vs Barrel-Stave vs Carpet) ولا تؤكد استهداف مستقبل بروتيني بعينه. يتطلب تأكيد التفاعل الجزيئي اختبارات بيوفيزيائية مستقلة.</p>
+      </div>
+    </div>
+
+    <!-- Target Filter Bar -->
+    <div class="target-filter-bar reveal">
+      <div class="target-filter-group">
+        <span class="filter-label">فئة الهدف:</span>
+        <div class="pill-group" id="target-category-pills">
+          <button class="target-pill active" data-cat="all" id="t-cat-all">جميع الفئات</button>
+          <button class="target-pill" data-cat="membrane" id="t-cat-membrane">أغشية البكتيريا الدهنية</button>
+          <button class="target-pill" data-cat="ion-channel" id="t-cat-ion">قنوات الأيونات المبوّبة</button>
+          <button class="target-pill" data-cat="biofilm" id="t-cat-biofilm">المصفوفة الحيوية (Biofilm)</button>
+          <button class="target-pill" data-cat="intracellular" id="t-cat-intra">الأهداف داخل الخلوية</button>
+        </div>
+      </div>
+      <div class="target-filter-group">
+        <span class="filter-label">حالة التحقق:</span>
+        <div class="pill-group" id="target-status-pills">
+          <button class="status-pill active" data-stat="all" id="t-stat-all">الكل</button>
+          <button class="status-pill" data-stat="confirmed" id="t-stat-confirmed">مؤكد تجريبياً (Confirmed)</button>
+          <button class="status-pill" data-stat="proposed" id="t-stat-proposed">نموذج مقترح (Proposed)</button>
+          <button class="status-pill" data-stat="unsubstantiated" id="t-stat-unsub">فرضية غير مثبتة (Negative Control)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Targets Cards Grid -->
+    <div class="target-cards-grid reveal" id="target-cards-container">
+      <!-- Populated dynamically via app.js -->
+    </div>
+
+    <!-- Target Detail Dialog Modal -->
+    <dialog id="target-detail-dialog" class="target-modal">
+      <div class="target-modal-content">
+        <div class="target-modal-header">
+          <div class="flex items-center gap-2">
+            <span id="target-modal-badge" class="badge">حالة الهدف</span>
+            <h3 id="target-modal-title" class="target-modal-title">اسم الهدف</h3>
+          </div>
+          <button id="target-modal-close" class="target-close-btn" aria-label="إغلاق نافذة الهدف">✕</button>
+        </div>
+        <div id="target-modal-body" class="target-modal-body">
+          <!-- Injected via app.js -->
+        </div>
+      </div>
+    </dialog>
+  </section>
+
+<section class="lead-prioritization section-space" id="prioritization" aria-labelledby="prioritization-title">
     <div class="section-heading reveal">
       <div>
         <p class="eyebrow"><span class="section-index">04 /</span> الترشيح المبني على الأدلة</p>
@@ -427,6 +597,44 @@
       <p class="algo-warning">⚠️ <strong>تنبيه منهجي وسريري:</strong> الترتيب يدمج قياسات تجريبية مع واسمات فيزيوكيميائية تنبؤية لمقارنة المرشحين داخل بيئة الأطلس. لا تعني الرتبة المرتفعة تفوقاً علاجياً مطلقاً في بيئات سريرية مختلفة، نظراً لتباين سلالات الفحص وأوساط الزرع وتعديلات الأطراف بين الدراسات.</p>
     </div>
 
+    <!-- Ranking Sensitivity Explorer Box -->
+    <div class="ranking-sensitivity-box reveal">
+      <div class="sensitivity-header">
+        <div class="flex items-center gap-2">
+          <span class="badge measured">تحليل الحساسية المنهجي</span>
+          <h3 class="sensitivity-title">استكشاف حساسية أوزان فرز المرشحين (Sensitivity Check)</h3>
+        </div>
+        <p class="text-sm text-muted">الأوزان المحددة هي فرضيات استكشافية قابلة للاختبار وليست ثوابت بيولوجية مطلقة. اختبر استقرار ترتيب المرشحين الـ20 عند تغيير أولويات الفرز عبر 5 نماذج:</p>
+      </div>
+      <div class="sensitivity-presets-bar">
+        <button class="preset-btn active" data-preset="balanced_default" id="preset-btn-balanced">
+          <strong>المتوازن القياسي (Default)</strong>
+          <small>MIC 40% | Hemo 25% | Stab 15% | µH 10% | Q 10%</small>
+        </button>
+        <button class="preset-btn" data-preset="potency_focused" id="preset-btn-potency">
+          <strong>التركيز على الفعالية (Potency)</strong>
+          <small>MIC 70% | Hemo 10% | Stab 10% | µH 5% | Q 5%</small>
+        </button>
+        <button class="preset-btn" data-preset="safety_focused" id="preset-btn-safety">
+          <strong>الأمان والتوافقية (Safety)</strong>
+          <small>Hemo 50% | MIC 20% | Stab 15% | µH 7.5% | Q 7.5%</small>
+        </button>
+        <button class="preset-btn" data-preset="stability_focused" id="preset-btn-stability">
+          <strong>الاستقرار الفيزيوكيميائي (Stability)</strong>
+          <small>Stab 35% | MIC 20% | µH 20% | Q 15% | Hemo 10%</small>
+        </button>
+        <button class="preset-btn" data-preset="equal_weights" id="preset-btn-equal">
+          <strong>أوزان متساوية (Equal 20%)</strong>
+          <small>20% لكل معيار فيزيوكيميائي وتجريبي</small>
+        </button>
+      </div>
+      <div class="sensitivity-summary-metrics" id="sensitivity-metrics-row">
+        <span>النموذج النشط: <strong class="sensitivity-metric-val" id="active-model-name">المتوازن القياسي</strong></span> • 
+        <span>معامل ارتباط سبيرمان مع المتوازن: <strong class="sensitivity-metric-val" id="active-model-rho">ρ = 1.0000</strong></span> • 
+        <span>المرشح الأول: <strong class="sensitivity-metric-val" id="active-top-candidate">StigA31 (#1)</strong></span>
+      </div>
+    </div>
+
     <!-- Triage Sorting Controls -->
    <div class="triage-controls reveal">
      <span class="control-label">ترتيب الأولويات حسب:</span>
@@ -448,7 +656,7 @@
            <th>الشحنة <small>pH 7.4</small></th>
            <th>العزم الكاره للماء</th>
            <th>حالة الاستقرار</th>
-           <th>مؤشر الانتقائية (SI)</th>
+           <th>فحص انحلال الدم ومؤشر الانتقائية (Hemolysis & SI)</th>
            <th>التفاصيل</th>
          </tr>
        </thead>

@@ -1,17 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-  <meta name="googlebot" content="noindex, nofollow">
-  <meta name="theme-color" content="#0b100f">
-  <meta name="description" content="أطلس تفاعلي لببتيدات العقارب: استكشف التسلسلات والخصائص والأدلة العلمية المنشورة مع تدقيق تجريبي وموضوعي صارم.">
-  <title>ScorpionAI — أطلس الاحتمالات الصغيرة | SCORPION X</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
-  <script type="module" src="scene.js"></script><script src="app.js" defer></script>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>ScorpionAI Peptide Atlas — SCORPION X v1.5</title>
+ <meta name="description" content="أطلس بحثي متكامل لببتيدات سموم العقارب يجمع بين دقة الأدلة التجريبية ونماذج التعلّم الإحصائي والشفافية المنهجية.">
+ <link rel="icon" type="image/svg+xml" href="favicon.svg">
+ <link rel="stylesheet" href="styles.css">
 </head>
-<body class="truth-mode-active">
-<a class="skip" href="#atlas">انتقل إلى البيانات</a>
+<body>
+<a class="skip" href="#atlas">انتقل إلى جدول البيانات مباشرة</a>
 <header class="nav">
  <a class="brand" href="#home" aria-label="ScorpionAI، الرئيسية">
    <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M11 28 6 20l7-9 8 4 5 11-7 7Zm13-1 8-7 2-10-6-6-6 3 1 5 5-2 2 4-3 6M12 19l-7-7M12 23 3 25M18 28l-3 9M23 26l6 9"/></svg>
@@ -19,9 +17,11 @@
  </a>
  <nav aria-label="القائمة الرئيسية">
    <a href="#atlas">الأطلس</a>
-   <a href="#methods-evidence">مركز الأدلة والمناهج</a>
+   <a href="#methods-evidence">الأدلة الـ32</a>
+   <a href="#gap-analyzer">محلل الفجوات</a>
+   <a href="#prioritization">فرز المرشحين</a>
+   <a href="#xai">تفسير الذكاء الاصطناعي</a>
    <a href="#approach">المنهجية</a>
-   <a href="#evidence">التصنيف</a>
    <a href="#contact">تواصل</a>
  </nav>
  <div class="nav-actions">
@@ -48,7 +48,7 @@
    </div>
    <div class="hero-edition">
      <span class="edition-line"></span>
-     <span dir="ltr">SCORPION X / SPRINT 01</span>
+     <span dir="ltr">SCORPION X / SPRINT 02</span>
      <span>نسخة بحثية مدققة · v1.5</span>
    </div>
   </div>
@@ -186,7 +186,7 @@
      <div class="stat-card">
        <span class="stat-val" dir="ltr">0.00%</span>
        <span class="stat-lbl">تفاوت تحويل الوزن الجزيئي</span>
-       <small>حساب دقيق لكتلة الأميدة (+0.98 Da)</small>
+       <small>حساب دقيق لكتلة الأميدة (−0.984 Da)</small>
      </div>
      <div class="stat-card">
        <span class="stat-val" dir="ltr">0</span>
@@ -253,7 +253,7 @@
        <div class="math-card-badge">معادلة فيزيائية</div>
        <h3>تحويل التراكيز (µM ↔ µg/mL)</h3>
        <div class="math-formula" dir="ltr">MIC<sub>µg/mL</sub> = MIC<sub>µM</sub> × (MW<sub>Da</sub> / 1000)</div>
-       <p>يُحسب التحويل اعتماداً على الوزن الجزيئي النظري الدقيق للتسلسل مع احتساب أميدة الطرف C (+0.984 Da). لا تُعامل القيمة المحوّلة كقياس مخبري مستقل بل كتحويل رياضي مسند.</p>
+       <p>يُحسب التحويل اعتماداً على الوزن الجزيئي النظري الدقيق للتسلسل مع احتساب أميدة الطرف C (نقصان الكتلة بمقدار −0.984 Da: استبدال −OH بـ −NH2). لا تُعامل القيمة المحوّلة كقياس مخبري مستقل بل كتحويل رياضي مسند.</p>
      </article>
 
      <article class="math-card">
@@ -274,15 +274,190 @@
        <div class="math-card-badge">مؤشر الأمان</div>
        <h3>دليل الانتقائية الخلوية (Selectivity Index)</h3>
        <div class="math-formula" dir="ltr">SI = HC<sub>50</sub> / MIC<sub>µM</sub></div>
-       <p>لا يُحسب مؤشر الأمان والانتقائية إلا للببتيدات الـ 5 التي خضعت لقياس تجريبي لتحلل الدم (hRBC). غياب القياس يعني حجب المؤشر صراحة لمنع الادعاءات غير المسندة.</p>
+       <p>لا يُحسب مؤشر الأمان والانتقائية إلا عند توفر قياس تجريبي لتحلل الدم (hRBC). غياب القياس يعني حجب المؤشر صراحة وتصنيف الببتيد كـ Efficacy Only منعاً للادعاءات غير المسندة.</p>
      </article>
    </div>
  </section>
 
- <!-- SECTION 03: APPROACH & METHODOLOGY -->
+ <!-- SECTION 03: MOD-06 RESEARCH GAP ANALYZER -->
+ <section class="gap-analyzer section-space" id="gap-analyzer" aria-labelledby="gap-title">
+   <div class="section-heading reveal">
+     <div>
+       <p class="eyebrow"><span class="section-index">03 /</span> فجوات البحث والاستكشاف</p>
+       <h2 id="gap-title">محلل فجوات البحث العلمي.<br><span>خريطة المسببات غير المختبرة والتصنيف.</span></h2>
+     </div>
+     <p>تحليل مقارن للمسببات المرضية الخمسة المفحوصة مخبرياً في سموم العقارب مقابل مسببات منظمة الصحة العالمية الحرجة، مع توثيق الفصائل التصنيفية الكاملة وتوزيع الـ 1,047 ببتيداً في الخلفية غير المختبرة.</p>
+   </div>
+
+   <!-- Gap Analyzer Key Metrics -->
+   <div class="gap-stats-grid reveal">
+     <div class="stat-card">
+       <span class="stat-val text-success" dir="ltr">5</span>
+       <span class="stat-lbl">مسببات مفحوصة فقط</span>
+       <small>معظمها سلالات ATCC مرجعية</small>
+     </div>
+     <div class="stat-card">
+       <span class="stat-val text-danger" dir="ltr">0</span>
+       <span class="stat-lbl">مسببات WHO الحرجة المفحوصة</span>
+       <small>CRAB, CRE, VRE غير مختبرة نهائياً</small>
+     </div>
+     <div class="stat-card">
+       <span class="stat-val" dir="ltr">85.0%</span>
+       <span class="stat-lbl">ببتيدات الأطلس غير مفحوصة</span>
+       <small>1,047 ببتيداً خلفية سموم طبيعية</small>
+     </div>
+     <div class="stat-card">
+       <span class="stat-val text-danger" dir="ltr">100%</span>
+       <span class="stat-lbl">غياب قياسات MBC / HC50</span>
+       <small>فراغ تجريبي كامل في السمية والقتل</small>
+     </div>
+   </div>
+
+   <!-- Gap Navigation Tabs -->
+   <div class="gap-tabs reveal">
+     <button id="gap-tab-pathogens" class="gap-tab-btn active">مصفوفة المسببات المرضية (Pathogen Matrix)</button>
+     <button id="gap-tab-taxonomy" class="gap-tab-btn">توزيع الفصائل التصنيفية (Taxonomic Gaps)</button>
+     <button id="gap-tab-priorities" class="gap-tab-btn">أهم 5 أولويات بحثية ملحّة (Top 5 Priorities)</button>
+   </div>
+
+   <!-- View 1: Pathogen Coverage Matrix -->
+   <div id="gap-pathogen-view" class="gap-view reveal">
+     <div id="gap-pathogen-matrix"></div>
+   </div>
+
+   <!-- View 2: Taxonomy Distribution Matrix -->
+   <div id="gap-taxonomy-view" class="gap-view reveal" hidden>
+     <div id="gap-taxonomy-matrix"></div>
+   </div>
+
+   <!-- View 3: Top 5 Urgent Priorities -->
+   <div id="gap-priorities-view" class="gap-view reveal" hidden>
+     <div class="priorities-grid">
+       <article class="priority-card">
+         <span class="p-num">01</span>
+         <h4>غياب كامل لفحص مسببات منظمة الصحة العالمية ذات الأولوية القصوى</h4>
+         <p>لم يخضع أي ببتيد في الأدبيات المنشورة لفحص ضد <em>Acinetobacter baumannii</em> المقاومة للكاربابينيم أو <em>Klebsiella pneumoniae</em> المنتجة لإنزيمات بيتا لاكتاماز، مما يمثل فجوة بحثية علاجية ملحّة.</p>
+       </article>
+       <article class="priority-card">
+         <span class="p-num">02</span>
+         <h4>فراغ بيانات السمية الخلوية وتحلل كريات الدم (HC50)</h4>
+         <p>بنسبة 100% من السجلات التجريبية الـ 32 المنشورة، لا تورد الدراسات قياساً معيارياً لـ HC50 تجاه كريات الدم الحمراء البشرية (hRBC)، مما يجعل ادعاءات الأمان السريري غير مدعومة مخبرياً.</p>
+       </article>
+       <article class="priority-card">
+         <span class="p-num">03</span>
+         <h4>غياب قياسات تركيز القتل الأدنى (MBC) ومنحنيات القتل الزمني</h4>
+         <p>كافة القياسات تقتصر على التثبيط الظاهري للنمو (MIC) دون التحقق مما إذا كان التأثير قاتلاً للبكتيريا (Bactericidal) أو كابحاً لنموها فقط (Bacteriostatic).</p>
+       </article>
+       <article class="priority-card">
+         <span class="p-num">04</span>
+         <h4>انحياز تصنيفي هائل نحو فصيلة Buthidae</h4>
+         <p>أكثر من 95% من الأبحاث ركزت على فصيلة واحدة (Buthidae)، في حين أن فصائل كاملة مثل Hemiscorpiidae و Chactidae و Euscorpiidae تضم 148 ببتيداً مسجلاً دون فحص تجريبي كمي واحد.</p>
+       </article>
+       <article class="priority-card">
+         <span class="p-num">05</span>
+         <h4>غياب التقييم المعياري لتراكيز القضاء على الأغشية الحيوية (MBEC)</h4>
+         <p>الدراسات التي تدعي مكافحة الأغشية الحيوية (مثل StigA6 و StigA16) اعتمدت نسب تشتت جزئية تقريبية دون تحديد التركيز المعياري القاتل للغشاء (MBEC).</p>
+       </article>
+     </div>
+   </div>
+ </section>
+
+ <!-- SECTION 04: MOD-07 EVIDENCE-BASED LEAD PRIORITIZATION -->
+ <section class="lead-prioritization section-space" id="prioritization" aria-labelledby="prioritization-title">
+   <div class="section-heading reveal">
+     <div>
+       <p class="eyebrow"><span class="section-index">04 /</span> الترشيح المبني على الأدلة</p>
+       <h2 id="prioritization-title">فرز وترتيب المرشحين الرائدين.<br><span>توازن الفعالية والسمية والاستقرار.</span></h2>
+     </div>
+     <p>نظام فرز متعدد الأهداف لترتيب الببتيدات المفحوصة كمياً وفق معايير الفعالية (MIC)، والشحنة الفسيولوجية، والاستقرار المحسوب، مع فرض درع الأمان الصارم للسمية الخلوية.</p>
+   </div>
+
+   <!-- Strict Cytotoxicity Safeguard Notice -->
+   <div class="safeguard-banner reveal">
+     <div class="safeguard-icon">🛡️</div>
+     <div class="safeguard-text">
+       <strong>درع الأمان الحيوي الصارم (Cytotoxicity Safeguard):</strong>
+       <p>يُحظر حظراً تاماً حساب أو تخمين مؤشر انتقائية (Selectivity Index) لأي ببتيد ما لم يتوفر قياس تجريبي موثق لتحلل الدم (HC50). كافة الببتيدات الخالية من فحص HC50 في الأدبيات تصنف صراحة كـ <code>Efficacy Only / Toxicity Unassayed (فعالية مثبتة / سمية غير مفحوصة)</code>، حمايةً للمشروع من الادعاءات السريرية الزائفة.</p>
+     </div>
+   </div>
+
+   <!-- Triage Sorting Controls -->
+   <div class="triage-controls reveal">
+     <span class="control-label">ترتيب الأولويات حسب:</span>
+     <button id="sort-by-mic" class="triage-btn active">الأعلى فعالية (أقل MIC)</button>
+     <button id="sort-by-charge" class="triage-btn">الشحنة الفسيولوجية (pH 7.4)</button>
+     <button id="sort-by-stability" class="triage-btn">مؤشر الاستقرار الفيزيوكيميائي</button>
+     <button id="sort-by-moment" class="triage-btn">العزم الكاره للماء (Amphipathicity)</button>
+   </div>
+
+   <!-- Prioritization Table -->
+   <div class="table-scroll reveal">
+     <table class="triage-table">
+       <thead>
+         <tr>
+           <th>الرتبة</th>
+           <th>الببتيد والنوع</th>
+           <th>الميكروب المستهدف</th>
+           <th>الفعالية الأدنى (MIC)</th>
+           <th>الشحنة <small>pH 7.4</small></th>
+           <th>العزم الكاره للماء</th>
+           <th>حالة الاستقرار</th>
+           <th>مؤشر الانتقائية (SI)</th>
+           <th>التفاصيل</th>
+         </tr>
+       </thead>
+       <tbody id="prioritization-rows"></tbody>
+     </table>
+   </div>
+ </section>
+
+ <!-- SECTION 05: MOD-10 EXPLAINABLE AI & BIOPHYSICAL DRIVERS -->
+ <section class="xai-explorer section-space" id="xai" aria-labelledby="xai-title">
+   <div class="section-heading reveal">
+     <div>
+       <p class="eyebrow"><span class="section-index">05 /</span> الذكاء الاصطناعي الشارح</p>
+       <h2 id="xai-title">تفسير الذكاء الاصطناعي والمحركات الفيزيوكيميائية.<br><span>تفكيك أوزان النموذج الإحصائي المتعلمة.</span></h2>
+     </div>
+     <p>استكشاف مباشر للأوزان المعيارية للنموذج الإحصائي (Group-K-Fold Logistic Regression) من تقرير التقييم المحكّم، مع بيان الدور البيولوجي والفيزيوكيميائي لكل خاصية وتطبيقها التفاعلي على ببتيدات الأطلس.</p>
+   </div>
+
+   <!-- Scientific Governance & Epistemic Disclaimer -->
+   <div class="xai-disclaimer reveal">
+     <div class="disc-icon">⚠️</div>
+     <div class="disc-content">
+       <strong>محددات المعرفة وإقرار الشفافية الخوارزمية:</strong>
+       <p>الأوزان المعيارية تعكس ترجيحات إحصائية في التوزيع التدريبي للتفريق بين الببتيدات الموسومة وخلفية السموم غير الموسومة (PU Learning)، ولا تمثل إثباتاً للآلية البيولوجية الحيوية أو برهاناً مخبرياً على قتل الخلايا البكتيرية. التنبؤ الحسابي هو بداية السؤال العلمي وليس إثباتاً قاطعاً.</p>
+     </div>
+   </div>
+
+   <div class="xai-grid reveal">
+     <!-- Left Col: Global Feature Importances -->
+     <div class="xai-col-global">
+       <div class="col-head">
+         <h3>الأوزان الفيزيوكيميائية المعيارية للنموذج</h3>
+         <p>مستخرجة مباشرة من تقرير التقييم <code>model_evaluation_report.json</code> (الأوزان الموجبة تدعم الفعالية، والأوزان السالبة تعاقب التشابه مع السموم العصبية).</p>
+       </div>
+       <div id="xai-weights-container" class="xai-weights-list"></div>
+     </div>
+
+     <!-- Right Col: Individual Peptide Biophysical Breakdown -->
+     <div class="xai-col-specimen">
+       <div class="col-head">
+         <h3>محلل السجل الببتيدي التفاعلي (Feature Attribution)</h3>
+         <p>اختر ببتيداً لمعاينة تفكيك مساهماته الفيزيوكيميائية وفق أوزان النموذج:</p>
+       </div>
+       <div class="select-wrapper">
+         <select id="xai-peptide-select" aria-label="اختر ببتيداً لمعاينة تفسيره"></select>
+       </div>
+       <div id="xai-peptide-breakdown" class="xai-breakdown-box"></div>
+     </div>
+   </div>
+ </section>
+
+ <!-- SECTION 06: APPROACH & METHODOLOGY -->
  <section class="approach section-space" id="approach" aria-labelledby="approach-title">
   <div class="approach-intro reveal">
-    <p class="eyebrow"><span class="section-index">03 /</span> وراء الأطلس</p>
+    <p class="eyebrow"><span class="section-index">06 /</span> وراء الأطلس</p>
     <h2 id="approach-title">من التسلسل،<br>إلى <em>رؤية أوضح.</em></h2>
     <p>قيمة الأطلس تبدأ من أثرٍ قابل للتتبّع: من أين جاءت المعلومة، كيف حُسبت، وما الذي يمكن أن تقوله فعلاً.</p>
     <div class="sequence-art" dir="ltr" aria-label="مثال تسلسل Stigmurin">FFSLIPSLV<span>GGLISAFK</span><small>STIGMURIN / 17 AMINO ACIDS</small></div>
@@ -294,11 +469,11 @@
   </ol>
  </section>
 
- <!-- SECTION 04: EVIDENCE DEMARCATION CLASSIFICATION -->
+ <!-- SECTION 07: EVIDENCE DEMARCATION CLASSIFICATION -->
  <section class="evidence section-space" id="evidence" aria-labelledby="evidence-title">
   <div class="section-heading reveal">
     <div>
-      <p class="eyebrow"><span class="section-index">04 /</span> العلم يبدأ بالتمييز</p>
+      <p class="eyebrow"><span class="section-index">07 /</span> العلم يبدأ بالتمييز</p>
       <h2 id="evidence-title">ليست كل الأدلة<br><span>على الدرجة نفسها.</span></h2>
     </div>
     <p>نحتفظ بما نعرفه بدقة، ونوضح ما لم يُختبر.<br>لا يُقدَّم التنبؤ كإثبات تجريبي قطعي.</p>
@@ -338,10 +513,10 @@
   </div>
  </section>
 
- <!-- SECTION 05: OPEN DATA DOWNLOADS -->
+ <!-- SECTION 08: OPEN DATA DOWNLOADS -->
  <section class="downloads section-space reveal" id="downloads">
    <div>
-     <p class="eyebrow"><span class="section-index">05 /</span> معرفة قابلة للمشاركة والتدقيق</p>
+     <p class="eyebrow"><span class="section-index">08 /</span> معرفة قابلة للمشاركة والتدقيق</p>
      <h2>خذ البيانات.<br><em>وابنِ عليها.</em></h2>
      <p>ابدأ بحثك بنسخة واضحة المصدر، واذكر المراجع الأصلية<br>وشروط استخدام البيانات عند إعادة الاستعمال.</p>
    </div>
@@ -361,7 +536,7 @@
    </div>
  </section>
 
- <!-- SECTION 06: CREATOR & SUPERVISOR -->
+ <!-- SECTION 09: CREATOR & SUPERVISOR -->
  <section class="creator section-space" id="contact" aria-labelledby="creator-title">
   <div class="creator-heading">
     <p class="eyebrow">خلف هذا الأطلس</p>
@@ -394,7 +569,7 @@
 <footer>
   <a class="footer-wordmark" dir="ltr" href="#home">SCORPION<span>AI</span><sup>ATLAS</sup></a>
   <div>
-    <p>أطلس بحثي مستقل · SCORPION X Sprint 01 · البيانات v1.5</p>
+    <p>أطلس بحثي مستقل · SCORPION X Sprint 02 · البيانات v1.5</p>
     <p>للاستكشاف العلمي. الفعالية والسلامة تتطلبان تحققاً تجريبياً حيوياً.</p>
   </div>
   <a href="#home">العودة للأعلى ↑</a>
@@ -418,58 +593,7 @@
   <div id="ev-detail-content"></div>
 </dialog>
 
-<!-- Gatekeeper Passcode Overlay (Academic Preview) -->
-<div id="gatekeeper-modal" class="gatekeeper-overlay">
-  <div class="gatekeeper-card">
-    <div class="gatekeeper-badge">معاينة أكاديمية مقيدة · SCORPIONAI ATLAS</div>
-    <h2>رمز المرور للمعاينة</h2>
-    <p>هذه النسخة مخصصة للمراجعة والتقييم الأكاديمي بإشراف <strong>دكتورة تريفة فاروق</strong> والباحث <strong>مصطفى فريد يحيى</strong>. يرجى إدخال رمز المرور للمتابعة.</p>
-    <form id="gatekeeper-form" class="gatekeeper-form">
-      <input type="password" id="gatekeeper-input" class="gatekeeper-input" placeholder="رمز المرور للمعاينة..." autocomplete="current-password" required autofocus />
-      <button type="submit" id="gatekeeper-btn" class="gatekeeper-btn">دخول المعاينة ←</button>
-    </form>
-    <p id="gatekeeper-error" class="gatekeeper-error">رمز المرور غير صحيح. يرجى التأكد والمحاولة مجدداً.</p>
-    <div class="gatekeeper-footer">
-      <span>جميع البيانات محمية برمجياً · الاستكشاف الأكاديمي فقط</span>
-    </div>
-  </div>
-</div>
-
-<script>
-(() => {
-  const PASSCODE = 'Atlas2026';
-  const overlay = document.getElementById('gatekeeper-modal');
-  const form = document.getElementById('gatekeeper-form');
-  const input = document.getElementById('gatekeeper-input');
-  const err = document.getElementById('gatekeeper-error');
-
-  function unlock() {
-    sessionStorage.setItem('atlas_auth_unlocked', 'true');
-    overlay.classList.add('unlocked');
-    setTimeout(() => { if (overlay) overlay.style.display = 'none'; }, 400);
-  }
-
-  // Check URL key param or hash (#key=Atlas2026 or ?key=Atlas2026)
-  const hashKey = (window.location.hash || '').match(/key=([^&]+)/);
-  const searchKey = new URLSearchParams(window.location.search).get('key');
-  const providedKey = (hashKey ? hashKey[1] : searchKey);
-
-  if (sessionStorage.getItem('atlas_auth_unlocked') === 'true' || providedKey === PASSCODE) {
-    unlock();
-  }
-
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (input.value.trim() === PASSCODE) {
-        unlock();
-      } else {
-        err.classList.add('show');
-        input.select();
-      }
-    });
-  }
-})();
-</script>
-
-</body></html>
+<script src="app.js" defer></script>
+<script src="scene.js" defer></script>
+</body>
+</html>

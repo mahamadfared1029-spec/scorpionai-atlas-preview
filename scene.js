@@ -41,11 +41,12 @@ reduced.addEventListener('change', e => {
 async function init() {
   if (renderer || !canvas) return;
 
-  // 1. WebGL Renderer with ACES Filmic Tone Mapping
+  // 1. WebGL Renderer with ACES Filmic Tone Mapping and preserved drawing buffer
   renderer = new THREE.WebGLRenderer({
     canvas,
     alpha: true,
     antialias: true,
+    preserveDrawingBuffer: true,
     powerPreference: 'high-performance'
   });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -53,35 +54,31 @@ async function init() {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.35;
 
-  // 2. Camera Setup (Elevated front-angled view)
+  // 2. Camera Setup (Elevated front-angled perspective)
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(35, 1, 0.01, 100);
-  camera.position.set(0, 1.55, targetZoom);
-  camera.lookAt(0, 0.15, 0);
+  camera.position.set(0, 1.45, targetZoom);
+  camera.lookAt(0, 0.1, 0);
 
   // 3. Multi-Source Lighting Environment
-  // Ambient fill
   const hemiLight = new THREE.HemisphereLight(0xfff5ea, 0x4a443b, 2.4);
   scene.add(hemiLight);
 
-  // Key Light (top-front-right, warm gold)
   const keyLight = new THREE.DirectionalLight(0xffecd2, 3.2);
   keyLight.position.set(3, 4, 3);
   scene.add(keyLight);
 
-  // Fill Light (top-front-left, soft cool)
   const fillLight = new THREE.DirectionalLight(0xa6c9df, 2.0);
   fillLight.position.set(-3, 3, 2);
   scene.add(fillLight);
 
-  // Rim Light (back-top, creates dorsal highlights)
   const rimLight = new THREE.DirectionalLight(0xd7bb80, 2.5);
   rimLight.position.set(0, 4, -3);
   scene.add(rimLight);
 
   scene.add(root);
 
-  // 4. Load Owner-Supplied Educational Anatomical Model
+  // 4. Load Owner-Supplied 3D Model with cache-busting
   try {
     if (loading) {
       loading.hidden = false;
@@ -89,11 +86,11 @@ async function init() {
     }
 
     const loader = new GLTFLoader();
-    const gltf = await loader.loadAsync('assets/scorpion.glb');
+    const gltf = await loader.loadAsync('assets/scorpion.glb?v=sprint05_owner_v2');
     model = gltf.scene;
     model.updateMatrixWorld(true);
 
-    // 5. Automatic Bounding Box, Scale Normalization & Centering
+    // 5. Normalization & Centering
     const box = new THREE.Box3().setFromObject(model);
     const size = box.getSize(new THREE.Vector3());
     const center = box.getCenter(new THREE.Vector3());
@@ -104,18 +101,14 @@ async function init() {
     model.position.sub(center.multiplyScalar(scale));
     model.position.y += 0.12;
 
-    // 6. Shader & Material Enhancements for Anatomical Organs
+    // 6. Preserve Original Geometry and Materials
     model.traverse(o => {
       if (o.isMesh) {
         o.frustumCulled = false;
         const mats = Array.isArray(o.material) ? o.material : [o.material];
         mats.forEach(m => {
-          if (m && m.isMeshStandardMaterial) {
-            if (m.color && m.color.getHex() === 0) {
-              m.color.set(0x302c26);
-            }
-            m.roughness = Math.max(0.25, Math.min(0.7, m.roughness || 0.45));
-            m.metalness = Math.min(0.4, m.metalness || 0.1);
+          if (m) {
+            m.side = THREE.DoubleSide;
             m.needsUpdate = true;
           }
         });
@@ -125,7 +118,10 @@ async function init() {
     root.add(model);
     canvas.dataset.modelLoaded = 'true';
     if (loading) loading.hidden = true;
+
+    // Trigger initial resize & synchronous first render
     resize();
+    renderer.render(scene, camera);
   } catch (err) {
     console.error('Failed to load owner-supplied 3D model:', err);
     if (loading) {
@@ -141,14 +137,14 @@ function resize() {
   renderer.setSize(r.width, r.height, false);
   camera.aspect = r.width / r.height;
   camera.updateProjectionMatrix();
+  if (scene && camera) {
+    renderer.render(scene, camera);
+  }
 }
 
 const spec = getEl('specimen');
 if (spec) {
   new ResizeObserver(resize).observe(spec);
-  new IntersectionObserver(entries => {
-    visible = entries[0].isIntersecting;
-  }).observe(spec);
 }
 
 // 7. Interactive Controls: Pointer Drag & Wheel Zoom
@@ -196,7 +192,8 @@ function animate(now) {
   const dt = Math.min((now - last) / 1000, 0.05);
   last = now;
 
-  if (!renderer || !model || !visible || document.hidden) return;
+  // Never block render if visible flag fluctuates; only pause if page is hidden
+  if (!renderer || !model || document.hidden) return;
 
   if (auto && !drag) {
     rotation += 0.28 * dt;

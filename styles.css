@@ -1996,3 +1996,615 @@
   border-radius: 4px;
   font-size: 10px;
 }
+
+/* ==========================================================================
+   SCORPION X — MOD-03: VENOM-LAB 3D STYLES
+   Evidence-Grounded Molecular Visualization
+   ========================================================================== */
+
+.venomlab-section {
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 64px 0 80px;
+}
+
+/* Epistemic Provenance Tier Bar */
+.vl-tier-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.vl-tier-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  backdrop-filter: blur(8px);
+}
+
+.vl-tier-item.tier-a {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.vl-tier-item.tier-b {
+  border-color: rgba(59, 130, 246, 0.35);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.vl-tier-item.tier-c {
+  border-color: rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.05);
+}
+
+.vl-tier-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.vl-tier-indicator.tier-a { background: #10b981; box-shadow: 0 0 10px rgba(16, 185, 129, 0.6); }
+.vl-tier-indicator.tier-b { background: #3b82f6; box-shadow: 0 0 10px rgba(59, 130, 246, 0.6); }
+.vl-tier-indicator.tier-c { background: #f59e0b; box-shadow: 0 0 10px rgba(245, 158, 11, 0.6); }
+
+.vl-tier-item b {
+  display: block;
+  font-size: 13px;
+  color: #f1f5f9;
+  margin-bottom: 4px;
+}
+
+.vl-tier-item small {
+  display: block;
+  font-size: 11px;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* Main Workspace Grid */
+.vl-workspace-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 1080px) {
+  .vl-workspace-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Control Panel */
+.vl-control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vl-panel-header label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.vl-select {
+  width: 100%;
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.vl-select:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+}
+
+.vl-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 18px;
+  backdrop-filter: blur(12px);
+}
+
+.vl-card-header {
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vl-tier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.vl-tier-badge.tier-a {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.vl-tier-badge.tier-b {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.35);
+}
+
+.vl-tier-badge.tier-c {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.vl-tier-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.vl-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px;
+  font-size: 12px;
+  margin-bottom: 14px;
+}
+
+.vl-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.vl-meta-item.full {
+  grid-column: 1 / -1;
+}
+
+.vl-meta-label {
+  color: #64748b;
+  font-size: 11px;
+}
+
+.vl-meta-item strong, .vl-meta-item span {
+  color: #e2e8f0;
+  word-break: break-word;
+}
+
+.vl-ss-tag {
+  display: inline-block;
+  background: rgba(250, 204, 21, 0.15);
+  color: #facc15;
+  border: 1px solid rgba(250, 204, 21, 0.35);
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 11px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+.vl-conf-pill {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+  margin-right: 4px;
+}
+
+.vl-conf-pill.exp {
+  background: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
+}
+
+.vl-epistemic-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+}
+
+.vl-alert-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.vl-epistemic-alert p {
+  font-size: 11px;
+  color: #fde68a;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.vl-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.vl-external-btn {
+  font-size: 12px;
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.vl-external-btn:hover {
+  color: #7dd3fc;
+  text-decoration: underline;
+}
+
+/* 3D Viewport Toolbar */
+.vl-toolbar {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vl-toolbar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vl-group-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.vl-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.vl-rep-btn, .vl-color-btn {
+  flex: 1;
+  min-width: 75px;
+  background: #1e293b;
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.vl-rep-btn:hover, .vl-color-btn:hover {
+  background: #334155;
+  color: #f8fafc;
+}
+
+.vl-rep-btn.active, .vl-color-btn.active {
+  background: #10b981;
+  color: #0f172a;
+  font-weight: 600;
+  border-color: #10b981;
+}
+
+.vl-btn-row.icon-row button {
+  background: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.vl-btn-row.icon-row button:hover {
+  background: #334155;
+}
+
+.vl-btn-row.icon-row button.export-btn {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.35);
+  font-weight: 600;
+  margin-inline-start: auto;
+}
+
+.vl-btn-row.icon-row button.export-btn:hover {
+  background: rgba(56, 189, 248, 0.25);
+  color: #7dd3fc;
+}
+
+/* 3D Viewport Container */
+.vl-viewport-container {
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, #172033 0%, #0a0d14 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#venomlab-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+  outline: none;
+}
+
+#venomlab-canvas:active {
+  cursor: grabbing;
+}
+
+.vl-canvas-overlay {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+
+.vl-canvas-overlay.tier-a {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.vl-canvas-overlay.tier-b {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.vl-canvas-overlay.tier-c {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.vl-hover-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(15, 23, 42, 0.9);
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.vl-spinner-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 13, 20, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #94a3b8;
+  font-size: 13px;
+  z-index: 5;
+}
+
+.vl-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(16, 185, 129, 0.2);
+  border-top-color: #10b981;
+  border-radius: 50%;
+  animation: vl-spin 0.8s linear infinite;
+}
+
+@keyframes vl-spin {
+  to { transform: rotate(360deg); }
+}
+
+.vl-unavailable-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 13, 20, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 4;
+}
+
+.vl-unavail-box {
+  max-width: 440px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.vl-unavail-icon {
+  font-size: 40px;
+}
+
+.vl-unavail-box h3 {
+  font-size: 16px;
+  color: #f1f5f9;
+  margin: 0;
+}
+
+.vl-unavail-box p {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.vl-unavail-box small {
+  font-size: 11px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.vl-error-banner {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  z-index: 6;
+}
+
+/* Sequence Bar Section */
+.vl-sequence-section {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+
+.vl-seq-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.vl-seq-hint {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.vl-seq-track {
+  display: flex;
+  overflow-x: auto;
+  gap: 4px;
+  padding: 8px 4px 12px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.vl-seq-track::-webkit-scrollbar {
+  height: 6px;
+}
+
+.vl-seq-track::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.vl-seq-res-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 46px;
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #f8fafc;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  outline: none;
+}
+
+.vl-seq-res-btn:hover {
+  transform: translateY(-2px);
+  border-color: #38bdf8;
+  box-shadow: 0 4px 10px rgba(56, 189, 248, 0.2);
+}
+
+.vl-seq-res-btn.active {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.25);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+  transform: scale(1.08);
+}
+
+.vl-res-num {
+  font-size: 9px;
+  color: #64748b;
+  margin-bottom: 1px;
+}
+
+.vl-res-aa {
+  font-size: 13px;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+/* Residue Property Colors on Sequence Track */
+.vl-seq-res-btn.prop-hydrophobic .vl-res-aa { color: #f59e0b; }
+.vl-seq-res-btn.prop-polar .vl-res-aa { color: #06b6d4; }
+.vl-seq-res-btn.prop-basic .vl-res-aa { color: #3b82f6; }
+.vl-seq-res-btn.prop-acidic .vl-res-aa { color: #ef4444; }
+.vl-seq-res-btn.prop-cysteine .vl-res-aa { color: #eab308; }
+.vl-seq-res-btn.prop-glycine .vl-res-aa { color: #10b981; }
+
+.vl-res-card {
+  margin-top: 12px;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.vl-res-card-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.vl-res-card-content strong {
+  color: #38bdf8;
+}
+
+.vl-res-card-content span {
+  color: #cbd5e1;
+}

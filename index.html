@@ -18,6 +18,7 @@
  <nav aria-label="القائمة الرئيسية">
    <a href="#atlas">الأطلس</a>
    <a href="#knowledge-graph">شبكة المعرفة</a>
+    <a href="#venomlab">مختبر البنى 3D</a>
    <a href="#target-explorer">مستكشف الأهداف</a>
    <a href="#gap-analyzer">محلل الفجوات</a>
    <a href="#prioritization">فرز المرشحين</a>
@@ -163,7 +164,207 @@
   </div>
  </section>
 
- <!-- SECTION 02: MOD-13 METHODS & EVIDENCE CENTER -->
+ 
+  <!-- SECTION 03: MOD-03 VENOM-LAB 3D EVIDENCE-GROUNDED MOLECULAR VISUALIZATION -->
+  <section class="venomlab-section section-space" id="venomlab" aria-labelledby="venomlab-title">
+    <div class="section-heading reveal">
+      <div>
+        <p class="eyebrow"><span class="section-index">03 /</span> مختبر البنى الجزيئية ثلاثي الأبعاد (MOD-03)</p>
+        <h2 id="venomlab-title">VenomLab 3D: استكشاف البنى الجزيئية ثلاثية الأبعاد.<br><span>توثيق دقيق للأصل المعملي والتنبؤ الحسابي دون ادعاءات غير مدعومة.</span></h2>
+      </div>
+      <p>بيئة بحثية تفاعلية حقيقية لعرض البنى الفراغية للببتيدات مع تصنيف إبستيمولوجي شفاف لمصدر كل بنية: فئة (A) محددة معملياً (PDB)، فئة (B) متنبأ بها حسابياً (AlphaFold DB)، وفئة (C) تمثيلات توضيحية هندسية للمشتقات غير المحلولة دون فبركة إحداثيات ذرية.</p>
+    </div>
+
+    <!-- Epistemic Provenance Tier Bar -->
+    <div class="vl-tier-bar reveal">
+      <div class="vl-tier-item tier-a">
+        <span class="vl-tier-indicator tier-a"></span>
+        <div>
+          <b>فئة A: بنية معملية تجريبية (Experimentally Determined)</b>
+          <small>محلولة بالرنين المغناطيسي النووي (NMR)، أو حيود الأشعة السينية (X-ray)، أو المجهر الإلكتروني المبرد (Cryo-EM) مع معرف PDB رسمي.</small>
+        </div>
+      </div>
+      <div class="vl-tier-item tier-b">
+        <span class="vl-tier-indicator tier-b"></span>
+        <div>
+          <b>فئة B: نموذج متنبأ به حسابياً (AlphaFold DB Predicted)</b>
+          <small>نموذج من قاعدة بيانات AlphaFold مع إظهار درجات الثقة الحقيقية (pLDDT) وتنبيه صريح بأنها غير مثبتة معملياً.</small>
+        </div>
+      </div>
+      <div class="vl-tier-item tier-c">
+        <span class="vl-tier-indicator tier-c"></span>
+        <div>
+          <b>فئة C: تمثيل توضيحي هندسي (Illustrative Representation)</b>
+          <small>رسم كارتوني/شريطي للمشتقات غير المحلولة مستوحى من أطياف الدائرية ثنائية اللون (CD) دون فبركة إحداثيات ذرية.</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main VenomLab Interactive Workspace -->
+    <div class="vl-workspace-grid reveal">
+      <!-- Left Panel: Selector, Controls & Provenance Metadata -->
+      <div class="vl-control-panel">
+        <div class="vl-panel-header">
+          <label for="venomlab-peptide-select">اختر الببتيد أو البنية الجزيئية للتحليل الفراغي:</label>
+          <select id="venomlab-peptide-select" class="vl-select"></select>
+        </div>
+
+        <!-- Provenance Status Card -->
+        <div class="vl-card" id="vl-provenance-card">
+          <div class="vl-card-header">
+            <span id="vl-provenance-tier-badge" class="vl-tier-badge tier-a">
+              <span class="vl-tier-dot"></span> جارٍ التحميل...
+            </span>
+          </div>
+
+          <div class="vl-meta-grid">
+            <div class="vl-meta-item">
+              <span class="vl-meta-label">اسم الببتيد والمعرف:</span>
+              <strong id="vl-meta-name" dir="ltr">—</strong>
+            </div>
+            <div class="vl-meta-item">
+              <span class="vl-meta-label">معرّف الأطلس الرئيسي:</span>
+              <span id="vl-meta-master" dir="ltr">—</span>
+            </div>
+            <div class="vl-meta-item full">
+              <span class="vl-meta-label">مصدر البنية:</span>
+              <span id="vl-meta-source">—</span>
+            </div>
+            <div class="vl-meta-item">
+              <span class="vl-meta-label">طريقة التحديد / النمذجة:</span>
+              <span id="vl-meta-method">—</span>
+            </div>
+            <div class="vl-meta-item">
+              <span class="vl-meta-label">الدقة (Resolution):</span>
+              <span id="vl-meta-res">—</span>
+            </div>
+            <div class="vl-meta-item">
+              <span class="vl-meta-label">السلسلة ومجال البنية:</span>
+              <span id="vl-meta-chain" dir="ltr">—</span>
+            </div>
+            <div class="vl-meta-item">
+              <span class="vl-meta-label">تغطية التسلسل الناضج:</span>
+              <span id="vl-meta-coverage">—</span>
+            </div>
+            <div class="vl-meta-item">
+              <span class="vl-meta-label">تعديل الطرف الكربوكسيلي:</span>
+              <span id="vl-meta-amidation">—</span>
+            </div>
+            <div class="vl-meta-item">
+              <span class="vl-meta-label">الصيغة الكيميائية:</span>
+              <span id="vl-meta-formula" dir="ltr">—</span>
+            </div>
+            <div class="vl-meta-item full">
+              <span class="vl-meta-label">الكتلة الجزيئية المتوسطة (IUPAC Avg MW):</span>
+              <span id="vl-meta-avg-mw" dir="ltr">—</span>
+            </div>
+            <div class="vl-meta-item full">
+              <span class="vl-meta-label">الكتلة أحادية النظير (Monoisotopic MW):</span>
+              <span id="vl-meta-mono-mw" dir="ltr">—</span>
+            </div>
+            <div class="vl-meta-item full">
+              <span class="vl-meta-label">جسور ثنائي الكبريت (Disulfide Bonds):</span>
+              <div id="vl-meta-disulfides">—</div>
+            </div>
+            <div class="vl-meta-item full">
+              <span class="vl-meta-label">مستوى الثقة / الجودة:</span>
+              <div id="vl-meta-confidence">—</div>
+            </div>
+          </div>
+
+          <div class="vl-epistemic-alert">
+            <span class="vl-alert-icon">⚠️</span>
+            <p id="vl-epistemic-text">—</p>
+          </div>
+
+          <div class="vl-card-actions">
+            <a id="vl-meta-link" href="#" target="_blank" rel="noopener noreferrer" class="vl-external-btn">افتح السجل الرسمي ↗</a>
+          </div>
+        </div>
+
+        <!-- 3D Toolbar & Camera Settings -->
+        <div class="vl-toolbar">
+          <div class="vl-toolbar-group">
+            <span class="vl-group-label">نمط العرض:</span>
+            <div class="vl-btn-row">
+              <button id="vl-rep-cartoon" class="vl-rep-btn active" title="عرض شريطي للعمود الفقري">شريطي (Ribbon)</button>
+              <button id="vl-rep-sticks" class="vl-rep-btn" title="عصي وذرات للروابط الكيميائية">عصي (Sticks)</button>
+              <button id="vl-rep-surface" class="vl-rep-btn" title="سطح فان دير فالس">سطحي (Spheres)</button>
+            </div>
+          </div>
+
+          <div class="vl-toolbar-group">
+            <span class="vl-group-label">التلوين:</span>
+            <div class="vl-btn-row">
+              <button id="vl-color-property" class="vl-color-btn active" title="تلوين حسب الخواص الكيميائية للثمالات">كيميائي</button>
+              <button id="vl-color-confidence" class="vl-color-btn" title="تلوين حسب ثقة AlphaFold pLDDT">ثقة pLDDT</button>
+              <button id="vl-color-chain" class="vl-color-btn" title="تلوين حسب السلاسل">السلاسل</button>
+            </div>
+          </div>
+
+          <div class="vl-toolbar-group">
+            <span class="vl-group-label">أدوات الكاميرا والتحكم:</span>
+            <div class="vl-btn-row icon-row">
+              <button id="vl-rotate-left" title="تدوير يسار">↶</button>
+              <button id="vl-rotate-right" title="تدوير يمين">↷</button>
+              <button id="vl-zoom-in" title="تكبير">+</button>
+              <button id="vl-zoom-out" title="تصغير">−</button>
+              <button id="vl-spin-toggle" title="تبديل الدوران التلقائي"><span>⏵</span> دوران تلقائي</button>
+              <button id="vl-reset-view" title="إعادة ضبط الكاميرا">⟲ ضبط</button>
+              <button id="vl-export-image" class="export-btn" title="تصدير لقطة ثلاثية الأبعاد بدقة عالية مع الختم العلمي">📷 حفظ لقطة مع الختم</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel: 3D WebGL Canvas Viewport -->
+      <div class="vl-viewport-container">
+        <canvas id="venomlab-canvas" role="img" aria-label="عارض ثلاثي الأبعاد تفاعلي للبنية الجزيئية للببتيد"></canvas>
+        <div id="vl-canvas-overlay-badge" class="vl-canvas-overlay tier-a">Class A: Experimentally Determined</div>
+        <div id="vl-hover-tooltip" class="vl-hover-tooltip" hidden></div>
+        
+        <!-- Loading Spinner -->
+        <div id="vl-loading-spinner" class="vl-spinner-overlay" hidden>
+          <div class="vl-spinner"></div>
+          <span>جارٍ تحميل ملف PDB والتحقق من سلامة التسلسل...</span>
+        </div>
+
+        <!-- Honest Unavailable State (For Class C) -->
+        <div id="vl-unavailable-state" class="vl-unavailable-overlay" hidden>
+          <div class="vl-unavail-box">
+            <div class="vl-unavail-icon">📐</div>
+            <h3>لا توجد بنية ذرية مؤكدة معملياً أو متنبأ بها حسابياً</h3>
+            <p>هذا المرشح مشتق اصطناعي مهندس لم يتم إيداع بنية بلورية أو طيف رنين مغناطيسي نووي له في بنك البروتينات (PDB) ولا يتوفر له نموذج متطابق في AlphaFold DB.</p>
+            <button id="vl-load-illustrative-btn" class="button secondary">عرض تمثيل توضيحي هندسي (Illustrative Model) ↗</button>
+            <small>تنبيه: النموذج التوضيحي مبني على التماثل الحلزوني العام ولا يمثل دليلاً بنيوياً معملياً.</small>
+          </div>
+        </div>
+
+        <div id="vl-status-error" class="vl-error-banner" hidden></div>
+      </div>
+    </div>
+
+    <!-- Interactive Canonical Sequence Track & Residue Inspector -->
+    <div class="vl-sequence-section reveal">
+      <div class="vl-seq-header">
+        <span class="eyebrow">التسلسل الناضج القياسي وثمالات البنية (Canonical Mature Sequence & Residue Inspector)</span>
+        <span class="vl-seq-hint">انقر على أي ثمالة للتركيز عليها في الفراغ ثلاثي الأبعاد وعرض خصائصها التفصيلية</span>
+      </div>
+      <div id="vl-sequence-track" class="vl-seq-track" tabindex="0" role="region" aria-label="شريط تسلسل الثمالات الببتيدية"></div>
+
+      <!-- Residue Detail Modal / Card -->
+      <div id="vl-residue-detail-card" class="vl-res-card" hidden>
+        <div class="vl-res-card-content">
+          <strong id="vl-res-title">—</strong>
+          <span id="vl-res-prop">—</span>
+          <span id="vl-res-plddt">—</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION 02: MOD-13 METHODS & EVIDENCE CENTER -->
   <!-- SECTION 02: MOD-02 EVIDENCE-BASED VENOM KNOWLEDGE GRAPH -->
  <section class="knowledge-graph-section section-space" id="knowledge-graph" aria-labelledby="kg-title">
    <div class="section-heading reveal">
@@ -867,5 +1068,6 @@
 
 <script src="app.js" defer></script>
 <script type="module" src="scene.js"></script>
+<script type="module" src="venomlab.js"></script>
 </body>
 </html>

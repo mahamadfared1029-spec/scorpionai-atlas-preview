@@ -308,11 +308,19 @@
       <div class="detail-tools">
         <button id="copy-sequence">نسخ التسلسل</button>
         <button id="download-sequence">تنزيل FASTA</button>
+        <button id="view-in-venomlab-btn" class="button secondary" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.35);">عرض البنية في VenomLab 3D 🔬</button>
         ${uniprot ? `<a href="${uniprot}" target="_blank" rel="noopener noreferrer">سجل UniProt ↗</a>` : ''}
       </div>
     `;
 
     dialog.showModal();
+
+    $('view-in-venomlab-btn')?.addEventListener('click', () => {
+      dialog.close();
+      if (window.openInVenomLab) {
+        window.openInVenomLab(r.candidate_id || r.atlas_id || r.peptide_name);
+      }
+    });
 
     $('copy-sequence').addEventListener('click', async e => {
       let copied = false;

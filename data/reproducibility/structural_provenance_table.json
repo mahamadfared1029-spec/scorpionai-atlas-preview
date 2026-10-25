@@ -1,0 +1,117 @@
+[
+  {
+    "case_id": "DCS-001",
+    "title_en": "AaH2 Alpha-Toxin vs Chimeric Nav Channel (Cockroach NavPas with Human Nav1.7 VSD4 Graft)",
+    "peptide_name": "AaH2 (Alpha-Mammal Toxin)",
+    "target_name_en": "Chimeric Voltage-Gated Sodium Channel Nav (Periplaneta americana NavPas core with Homo sapiens Nav1.7 VSD4 loop)",
+    "target_species": "Periplaneta americana / Homo sapiens chimera",
+    "pdb_id": "6NT4",
+    "evidence_class": "Class A: Experimentally Determined Complex",
+    "experimental_method": "Single-particle cryo-electron microscopy (Cryo-EM)",
+    "resolution_angstrom": 3.5,
+    "is_empirical_complex": true,
+    "deposited_entities": {
+      "chain_A": "Chimeric Nav channel (PaFPC1 + human Nav1.7 VSD4, residues 52-1613)",
+      "chains_B_C": "Alpha-mammal toxin AaH2 (Androctonus australis, residues 1-65)"
+    },
+    "recalculated_contacts": [
+      "Empirical polar contact: AaH2-Thr13 (N) to Nav-Asp219 (OD2) at 2.95 A",
+      "Empirical aromatic contact: AaH2-Ser40 (O) to Nav-Tyr166 (OH) at 2.75 A and Ala39 (O) to Tyr166 (OH) at 2.86 A",
+      "Empirical extended electrostatic contact: AaH2-Arg62 (NH1) to Nav-Asp669 (OD2) at 3.96 A",
+      "Modeled/Constructed contacts: Re-oriented loop in Pose 1 vs inverted loop in Pose 2 (Arg62 >10 A from Asp669)",
+      "Hypothetical mutation: Charge-reversal double mutant AaH2-Arg62Glu with Nav-Asp669Lys"
+    ],
+    "measured_affinity_kd_nm": 2.1,
+    "affinity_status": "Experimentally Measured (Radioligand competition)",
+    "primary_doi": "10.1126/science.aav8573"
+  },
+  {
+    "case_id": "DCS-002",
+    "title_en": "Charybdotoxin vs Kv1.2-2.1 Paddle Chimera Channel (Selectivity Filter Pore Occlusion)",
+    "peptide_name": "Charybdotoxin (ChTX / alpha-KTx 1.1)",
+    "target_name_en": "Kv1.2-2.1 Paddle Chimera Channel (Rattus norvegicus) [Kv1.3 Pharmacological Homologue]",
+    "target_species": "Rattus norvegicus",
+    "pdb_id": "4JTA",
+    "evidence_class": "Class A: Experimentally Determined Complex",
+    "experimental_method": "X-ray diffraction",
+    "resolution_angstrom": 2.5,
+    "is_empirical_complex": true,
+    "deposited_entities": {
+      "chains_A_P": "Voltage-gated potassium channel subunit beta-2",
+      "chains_B_Q": "Kv1.2-2.1 paddle chimera channel pore-forming subunit",
+      "chain_Y": "Charybdotoxin (alpha-KTx 1.1, residues 1-37, PCA1 to SER37)"
+    },
+    "recalculated_contacts": [
+      "Empirical pore-plugging contact: ChTX-Lys27 (NZ) to Kv-Tyr373 (O) at 2.78 A",
+      "Empirical aromatic contact: ChTX-Tyr36 (OH) to Kv-Gly374 (O) at 2.94 A",
+      "Empirical electrostatic contact: ChTX-Arg34 (NH2) to Kv-Gln353 (OE1) at 3.05 A"
+    ],
+    "measured_affinity_kd_nm": 2.5,
+    "affinity_status": "Experimentally Measured (Electrophysiological block / crystal complex)",
+    "primary_doi": "10.1126/science.1235188"
+  },
+  {
+    "case_id": "DCS-003",
+    "title_en": "Wasabi Receptor Toxin (WaTx) Apo Structure & Functional TRPA1 Modulation",
+    "peptide_name": "Wasabi Receptor Toxin (WaTx)",
+    "target_name_en": "Transient Receptor Potential Ankyrin 1 (TRPA1)",
+    "target_species": "Homo sapiens / Mus musculus",
+    "pdb_id": "6OFA",
+    "evidence_class": "Class B: Apo Experimental Structure & Functional Electrophysiology",
+    "experimental_method": "Solution NMR (free peptide) + Cryo-EM (receptor) + In-silico docking model",
+    "resolution_angstrom": null,
+    "is_empirical_complex": false,
+    "deposited_entities": {
+      "chain_A": "Wasabi receptor toxin (WaTx, 33 residues, 50 NMR conformers)"
+    },
+    "recalculated_contacts": [
+      "Non-canonical intracellular entry: Penetrates lipid bilayer without pore lysis",
+      "Allosteric lock: Binds cytosolic nexus, stabilizing sub-conductance open state without acute pain behavior"
+    ],
+    "measured_affinity_kd_nm": null,
+    "affinity_status": "Not Measured (Direct Kd null; in vitro functional EC50 = 12-16 uM)",
+    "primary_doi": "10.1016/j.cell.2019.07.014"
+  },
+  {
+    "case_id": "DCS-004",
+    "title_en": "Stigmurin vs Bacterial Lipid II Precursor (Theoretical Computational Hypothesis)",
+    "peptide_name": "Stigmurin",
+    "target_name_en": "Bacterial Peptidoglycan Precursor (Lipid II)",
+    "target_species": "Bacteria (Staphylococcus aureus)",
+    "pdb_id": "N/A (In-Silico Docking Hypothesis)",
+    "evidence_class": "Class D: In Silico Computational Hypothesis (No Experimental Complex)",
+    "experimental_method": "AutoDock Vina In-Silico Docking (Literature hypothesis)",
+    "resolution_angstrom": null,
+    "is_empirical_complex": false,
+    "deposited_entities": null,
+    "recalculated_contacts": [
+      "Hypothesized ionic coordination between Lys sidechains and lipid pyrophosphate oxygen atoms"
+    ],
+    "measured_affinity_kd_nm": null,
+    "affinity_status": "Not Measured (Direct Kd null; antibacterial MIC = 12.5 - 25 uM)",
+    "primary_doi": "10.3390/ijms20030623"
+  },
+  {
+    "case_id": "DCS-005",
+    "title_en": "TOPI1 vs Bovine Trypsin (Protease Inhibitor X-ray Complex Reference)",
+    "peptide_name": "TOPI1 (Tityus obscurus Protease Inhibitor 1)",
+    "target_name_en": "Cationic Trypsin (Bos taurus, EC 3.4.21.4)",
+    "target_species": "Bos taurus",
+    "pdb_id": "6MRQ",
+    "evidence_class": "Class A: Experimentally Determined Complex",
+    "experimental_method": "X-ray diffraction",
+    "resolution_angstrom": 1.29,
+    "is_empirical_complex": true,
+    "deposited_entities": {
+      "chain_A": "Cationic Trypsin (Bos taurus, residues 16-245)",
+      "chain_I": "Inhibitor from Tityus obscurus scorpion venom (TOPI1, residues 1-62)"
+    },
+    "recalculated_contacts": [
+      "Empirical primary specificity contact: TOPI1-Lys32 (HZ2) to Trypsin-Asp189 (OD1) at 2.85 A",
+      "Empirical oxyanion hole contact: TOPI1-Lys32 (O) to Trypsin-Gly193 (H) at 1.98 A and Ser195 (H) at 2.09 A"
+    ],
+    "measured_affinity_kd_nm": 12.4,
+    "affinity_status": "Experimentally Measured (Inhibition constant Ki = 12.4 nM)",
+    "primary_doi": "10.1021/acs.jmedchem.0c00684"
+  }
+]

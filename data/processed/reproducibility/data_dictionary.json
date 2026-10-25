@@ -1,0 +1,54 @@
+{
+  "title": "ScorpionAI Atlas Dataset Dictionary & Schema Specification",
+  "version": "1.5.0",
+  "release_date": "2026-10-26",
+  "license": "Creative Commons Attribution 4.0 International (CC-BY 4.0)",
+  "reconciled_statistics": {
+    "unique_mature_peptides": 1232,
+    "species_count": 147,
+    "literature_sources_count": 907,
+    "sequence_clusters_70pct_identity": 568,
+    "physicochemical_descriptors_count": 29,
+    "measured_assay_rows_count": 32,
+    "parent_peptides_experimentally_assayed": 10,
+    "mic_positive_records_count": 18,
+    "prioritized_candidates_count": 20,
+    "uniprot_curated_annotations": 165,
+    "conditional_biofilm_observations": 2,
+    "unassayed_background_entries": 1047
+  },
+  "entities": [
+    {
+      "name": "Mature Peptides",
+      "source_file": "data/processed/atlas_master.csv",
+      "count": 1232,
+      "inclusion_criteria": "Scorpion-derived peptide sequences without ambiguous characters, with verified mature sequence cleavage and known species origin.",
+      "exclusion_criteria": "Non-scorpion sequences, truncated non-functional fragments lacking terminal boundaries, uncurated duplicates."
+    },
+    {
+      "name": "Assay Evidence Rows",
+      "source_file": "data/processed/antimicrobial_evidence.csv",
+      "count": 32,
+      "inclusion_criteria": "Primary literature-reported microdilution assays against bacterial or fungal reference strains under CLSI/EUCAST standards.",
+      "exclusion_criteria": "Aggregated reviews lacking primary experimental data, qualitative agar-diffusion-only assays without MIC."
+    },
+    {
+      "name": "Prioritized Candidate Cohort",
+      "source_file": "data/processed/candidate_data_integrity_audit.json",
+      "count": 20,
+      "inclusion_criteria": "The canonical 20 candidates established and frozen at baseline commit a36050a evaluated across MOD-07 through MOD-11."
+    },
+    {
+      "name": "Sequence Clusters",
+      "source_file": "data/processed/atlas_master.csv (cluster_id)",
+      "count": 568,
+      "inclusion_criteria": "Single-linkage connected-component clusters generated at 70% pairwise sequence identity threshold to prevent cross-fold evaluation leakage."
+    },
+    {
+      "name": "Literature & Database Sources",
+      "source_file": "data/processed/source_registry.csv",
+      "count": 907,
+      "inclusion_criteria": "Peer-reviewed publications (PMID/DOI) and primary database accessions (UniProtKB/Swiss-Prot) cited across peptide records."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "model_id": "MOD-07-M1",
+  "name": "ScorpionAI Multi-Criteria Decision Analysis (MCDA) Baseline",
+  "status": "Immutable Approved Scientific Baseline (Locked at commit a36050a)",
+  "weights": {
+    "potency_mic": 0.5,
+    "in_vitro_stability": 0.25,
+    "hydrophobic_moment": 0.125,
+    "net_charge_ph74": 0.125,
+    "hemolysis_safety": 0.0
+  },
+  "normalization_functions": {
+    "mic": "Log10 min-max scaling (lower is better, mapped to 0..1)",
+    "instability_index": "Linear piecewise score (cutoff 40: <=40 stable = 1.0, >40 penalized to 0.0)",
+    "hydrophobic_moment": "Normalized alpha-helical Eisenberg moment (scaled to [0, 1])",
+    "net_charge": "Physiological net charge mapped to ideal cationic window (+2 to +7)"
+  },
+  "safety_exclusion_rationale": "Hemolysis (w_hemo = 0.00) is excluded from the ranking equation because human RBC HC50 is documented for only 3 out of 20 candidates. Assigning a zero weight avoids penalizing unmeasured candidates or fabricating safety estimates, but MUST NEVER be interpreted as evidence of candidate non-toxicity.",
+  "eri_independence_principle": "The Evidence Readiness Index (ERI) is calculated independently across 5 objective evidence dimensions and does NOT influence the M1 ranking score."
+}

@@ -43,6 +43,7 @@
     <a href="#translation-explorer" id="nav-translation">المسار الترجمي (MOD-09)</a>
    <a href="#xai">تفسير الذكاء الاصطناعي</a>
     <a href="#docking-twin" id="nav-docking-twin">التوأم الرقمي والإرساء (MOD-11)</a>
+    <a href="#methods-center" id="nav-methods-center">مركز المنهجية والأدلة (MOD-12)</a>
    <a href="#methods-evidence">الأدلة الـ32</a>
    <a href="#approach">المنهجية</a>
    <a href="#contact">تواصل</a>
@@ -2029,7 +2030,106 @@
   </div>
  </section>
 
- <!-- SECTION 08: OPEN DATA DOWNLOADS -->
+ 
+  <!-- =========================================================================
+       SCORPION X — MOD-12: METHODS, EVIDENCE & REPRODUCIBILITY CENTER
+       ========================================================================= -->
+  <section class="methods-center-section section-space" id="methods-center" aria-labelledby="methods-center-title">
+    <div class="repro-container">
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow"><span class="section-index">12 /</span> مركز المنهجية والأدلة وقابلية التكرار (MOD-12)</p>
+          <h2 id="methods-center-title">التوثيق العلمي الشامل<br><span>وقابلية التحقق المنهجي (Reproducibility Center).</span></h2>
+        </div>
+        <p>بنية موحدة للشفافية العلمية تتيح تتبع الأدلة التجريبية، والمعايير الإحصائية، ونماذج التنبؤ، وتدقيق البنى الجزيئية، والحدود المعرفية للأطلس، مع إتاحة البيانات المفتوحة للمراجعة الأكاديمية الخارجية وفق مبادئ FAIR.</p>
+      </div>
+
+      <!-- Live Reconciled KPI Counters Bar -->
+      <div class="repro-kpi-grid reveal">
+        <div class="repro-kpi-card">
+          <span class="kpi-num mono" id="repro-stat-peptides">1,232</span>
+          <span class="kpi-label">ببتيد ناضج موثق</span>
+          <small>خالٍ من الرموز المبهمة</small>
+        </div>
+        <div class="repro-kpi-card">
+          <span class="kpi-num mono" id="repro-stat-species">147</span>
+          <span class="kpi-label">نوع عقرب موثق</span>
+          <small>في السجل التصنيفي</small>
+        </div>
+        <div class="repro-kpi-card">
+          <span class="kpi-num mono" id="repro-stat-sources">907</span>
+          <span class="kpi-label">مرجع ومصدر علمي</span>
+          <small>100% موثقة بـ DOI/PMID</small>
+        </div>
+        <div class="repro-kpi-card">
+          <span class="kpi-num mono" id="repro-stat-clusters">568</span>
+          <span class="kpi-label">عنقود تسلسل (70%)</span>
+          <small>لعزل تسريب البيانات</small>
+        </div>
+        <div class="repro-kpi-card">
+          <span class="kpi-num mono" id="repro-stat-descriptors">29</span>
+          <span class="kpi-label">واصف فيزيوكيميائي</span>
+          <small>محسوبة بمعادلات محكمة</small>
+        </div>
+        <div class="repro-kpi-card">
+          <span class="kpi-num mono" id="repro-stat-assays">32</span>
+          <span class="kpi-label">قياس فحص تجريبي</span>
+          <small>من 10 ببتيدات أصلية</small>
+        </div>
+        <div class="repro-kpi-card">
+          <span class="kpi-num mono" id="repro-stat-candidates">20</span>
+          <span class="kpi-label">مرشح كانوني مجمد</span>
+          <small>بخط الأساس a36050a</small>
+        </div>
+        <div class="repro-kpi-card">
+          <span class="kpi-num mono text-rose-400" id="repro-stat-limitations">9</span>
+          <span class="kpi-label">حدود معرفية حاكمة</span>
+          <small>لضمان النزاهة العلمية</small>
+        </div>
+      </div>
+
+      <!-- Interactive 10-Tab Navigation Bar -->
+      <div class="repro-tabs-nav reveal" role="tablist" aria-label="أقسام مركز المنهجية العشرة">
+        <button class="repro-tab-btn active" data-tab="tab-dataset" role="tab" aria-selected="true">
+          <span>📊</span> 01. قاعدة البيانات والمعايير
+        </button>
+        <button class="repro-tab-btn" data-tab="tab-identity" role="tab" aria-selected="false">
+          <span>🧬</span> 02. هوية المتتاليات والكيمياء
+        </button>
+        <button class="repro-tab-btn" data-tab="tab-assays" role="tab" aria-selected="false">
+          <span>🧪</span> 03. أدلة الفحص المخبري (MIC)
+        </button>
+        <button class="repro-tab-btn" data-tab="tab-descriptors" role="tab" aria-selected="false">
+          <span>📐</span> 04. الواصفات الفيزيوكيميائية
+        </button>
+        <button class="repro-tab-btn" data-tab="tab-models" role="tab" aria-selected="false">
+          <span>🤖</span> 05. نماذج التنبؤ (PU Learning)
+        </button>
+        <button class="repro-tab-btn" data-tab="tab-ranking" role="tab" aria-selected="false">
+          <span>🏆</span> 06. الترتيب وجاهزية الأدلة (ERI)
+        </button>
+        <button class="repro-tab-btn" data-tab="tab-structures" role="tab" aria-selected="false">
+          <span>🔬</span> 07. البنية الجزيئية والإرساء
+        </button>
+        <button class="repro-tab-btn" data-tab="tab-translation" role="tab" aria-selected="false">
+          <span>🩺</span> 08. المسار الانتقالي والسلامة
+        </button>
+        <button class="repro-tab-btn" data-tab="tab-geography" role="tab" aria-selected="false">
+          <span>🗺️</span> 09. التوزيع الجغرافي والمصادر
+        </button>
+        <button class="repro-tab-btn" data-tab="tab-limitations" role="tab" aria-selected="false">
+          <span>⚠️</span> 10. لوحة الحدود والتنزيلات
+        </button>
+      </div>
+
+      <!-- Active Tab Content Region -->
+      <div id="repro-tab-content" class="reveal" role="region" aria-live="polite">
+        <!-- Dynamically rendered by reproducibility_center.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 08: OPEN DATA DOWNLOADS -->
  <section class="downloads section-space reveal" id="downloads">
    <div>
      <p class="eyebrow"><span class="section-index">08 /</span> معرفة قابلة للمشاركة والتدقيق</p>
@@ -2115,5 +2215,6 @@
 <script type="module" src="venomlab.js"></script>
 <script type="module" src="agent.js"></script>
 <script type="module" src="docking_twin.js"></script>
+<script type="module" src="reproducibility_center.js"></script>
 </body>
 </html>

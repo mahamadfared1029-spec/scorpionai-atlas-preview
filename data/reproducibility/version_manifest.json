@@ -1,0 +1,27 @@
+{
+  "atlas_name": "ScorpionAI Peptide Atlas",
+  "version": "1.5.0",
+  "sprint": "13 of 13 (Final Core Development Sprint)",
+  "module_scope": "MOD-12: Methods, Evidence & Reproducibility Center",
+  "git_baselines": {
+    "core_baseline_approved": "575e12a",
+    "deployment_baseline_approved": "fb3e04d",
+    "canonical_reference_baseline": "a36050a"
+  },
+  "runtime_stack": {
+    "client_engine": "Vanilla ES2022 JavaScript / Modern Web Standards (No Node build lock-in)",
+    "3d_graphics": "Three.js r128 (WebGL 2.0)",
+    "testing_framework": "Pytest 9.1+ / Python 3.13+",
+    "deployment_target": "GitHub Pages (Static HTTPS)"
+  },
+  "data_manifests": {
+    "master_dataset": "data/processed/atlas_master.csv",
+    "antimicrobial_evidence": "data/processed/antimicrobial_evidence.csv",
+    "sequence_features": "data/processed/sequence_features.csv",
+    "candidate_audit": "data/processed/candidate_data_integrity_audit.json",
+    "translational_profiles": "data/processed/candidate_translational_profiles.json",
+    "xai_explanations": "data/processed/candidate_xai_explanations.json",
+    "docking_case_studies": "data/processed/docking_case_studies.json",
+    "docking_metadata": "data/processed/docking_workflow_metadata.json"
+  }
+}

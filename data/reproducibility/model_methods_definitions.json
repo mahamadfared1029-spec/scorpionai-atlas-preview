@@ -1,0 +1,27 @@
+{
+  "framework": "Positive-Unlabeled (PU) Machine Learning",
+  "estimator": "LogisticRegression (L2 regularization, solver='lbfgs', max_iter=1000)",
+  "training_positive_n": 183,
+  "training_unlabeled_n": 1047,
+  "independent_holdout_peptides": [
+    "Kn2-7",
+    "BmKn2"
+  ],
+  "cross_validation_strategy": "4-fold Group-Aware Stratified Cross-Validation (Groups = 568 sequence clusters at 70% identity)",
+  "mathematical_formulation": {
+    "logit_formula": "logit(x) = intercept + sum(coef_i * z_i)",
+    "standardization": "z_i = (x_i - mean_i) / std_i",
+    "sigmoid_mapping": "PU_score = 1 / (1 + exp(-logit(x)))"
+  },
+  "scientific_qualification": "PU model scores represent relative ranking against an uncharacterized background. They are NOT calibrated probabilities of biological activity. Absence of activity cannot be inferred from unassayed status.",
+  "model_parameters": {
+    "intercept": -0.5784,
+    "features": {}
+  },
+  "evaluation_metrics": {
+    "evaluation_protocol": "Positive-versus-Unlabeled rank evaluation (Holdout test fold)",
+    "roc_auc_positive_vs_unlabeled": 0.884,
+    "pr_auc_positive_vs_unlabeled": 0.742,
+    "interpretation": "Evaluates separation between curated positives and unassayed background; does not measure true-negative specificity against confirmed inactives."
+  }
+}

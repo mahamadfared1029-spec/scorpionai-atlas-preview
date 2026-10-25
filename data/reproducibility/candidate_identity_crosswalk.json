@@ -1,0 +1,402 @@
+[
+  {
+    "canonical_id": "SCA-PEP-001",
+    "peptide_name": "Stigmurin",
+    "approved_aliases": [
+      "Stigmurin"
+    ],
+    "parent_species": "Tityus stigmurus",
+    "origin_type": "natural",
+    "exact_mature_sequence": "FFSLIPSLVGGLISAFK",
+    "sequence_length": 17,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1795.2,
+    "mod07_m1_baseline_rank": 12,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9319,
+    "linear_logit": 2.6156,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-002",
+    "peptide_name": "StigA25",
+    "approved_aliases": [
+      "StigA25"
+    ],
+    "parent_species": "Tityus stigmurus",
+    "origin_type": "engineered",
+    "exact_mature_sequence": "FFSLIPSLVKKLIKAFK",
+    "sequence_length": 17,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1978.54,
+    "mod07_m1_baseline_rank": 4,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9713,
+    "linear_logit": 3.5222,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-003",
+    "peptide_name": "StigA31",
+    "approved_aliases": [
+      "StigA31"
+    ],
+    "parent_species": "Tityus stigmurus",
+    "origin_type": "engineered",
+    "exact_mature_sequence": "FFKLIPKLVKKLIKAFK",
+    "sequence_length": 17,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 2060.73,
+    "mod07_m1_baseline_rank": 1,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9826,
+    "linear_logit": 4.0326,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-004",
+    "peptide_name": "StigA6",
+    "approved_aliases": [
+      "StigA6"
+    ],
+    "parent_species": "Tityus stigmurus",
+    "origin_type": "engineered",
+    "exact_mature_sequence": "FFSLIPKLVKGLISAFK",
+    "sequence_length": 17,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1907.42,
+    "mod07_m1_baseline_rank": 19,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9607,
+    "linear_logit": 3.1968,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-005",
+    "peptide_name": "StigA16",
+    "approved_aliases": [
+      "StigA16"
+    ],
+    "parent_species": "Tityus stigmurus",
+    "origin_type": "engineered",
+    "exact_mature_sequence": "FFKLIPKLVKGLISAFK",
+    "sequence_length": 17,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1948.51,
+    "mod07_m1_baseline_rank": 18,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9696,
+    "linear_logit": 3.4635,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-006",
+    "peptide_name": "AaeAP1",
+    "approved_aliases": [
+      "AaeAP1"
+    ],
+    "parent_species": "Androctonus aeneas",
+    "origin_type": "natural",
+    "exact_mature_sequence": "FLFSLIPSVIAGLVSAIRN",
+    "sequence_length": 19,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 2016.46,
+    "mod07_m1_baseline_rank": 13,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9432,
+    "linear_logit": 2.8092,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-007",
+    "peptide_name": "AaeAP1_K_analogue",
+    "approved_aliases": [
+      "AaeAP1_K_analogue"
+    ],
+    "parent_species": "Androctonus aeneas",
+    "origin_type": "engineered",
+    "exact_mature_sequence": "FLFKLIPKVIKGLVKAIRK",
+    "sequence_length": 19,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 2210.91,
+    "mod07_m1_baseline_rank": 2,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9798,
+    "linear_logit": 3.8793,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-008",
+    "peptide_name": "AaeAP2",
+    "approved_aliases": [
+      "AaeAP2"
+    ],
+    "parent_species": "Androctonus aeneas",
+    "origin_type": "natural",
+    "exact_mature_sequence": "FLFSLIPSAIAGLVSAIRN",
+    "sequence_length": 19,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1988.4,
+    "mod07_m1_baseline_rank": 15,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.937,
+    "linear_logit": 2.6997,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-009",
+    "peptide_name": "AaeAP2_K_analogue",
+    "approved_aliases": [
+      "AaeAP2_K_analogue"
+    ],
+    "parent_species": "Androctonus aeneas",
+    "origin_type": "engineered",
+    "exact_mature_sequence": "FLFKLIPKAIKGLVKAIRK",
+    "sequence_length": 19,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 2182.86,
+    "mod07_m1_baseline_rank": 3,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9779,
+    "linear_logit": 3.7884,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-010",
+    "peptide_name": "BmKn2",
+    "approved_aliases": [
+      "BmKn2"
+    ],
+    "parent_species": "Mesobuthus martensii",
+    "origin_type": "natural",
+    "exact_mature_sequence": "FIGAIARLLSKIF",
+    "sequence_length": 13,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1447.83,
+    "mod07_m1_baseline_rank": 8,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9774,
+    "linear_logit": 3.7654,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-011",
+    "peptide_name": "Kn2-7",
+    "approved_aliases": [
+      "Kn2-7"
+    ],
+    "parent_species": "Mesobuthus martensii",
+    "origin_type": "engineered",
+    "exact_mature_sequence": "FIKRIARLLRKIF",
+    "sequence_length": 13,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1673.17,
+    "mod07_m1_baseline_rank": 6,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9918,
+    "linear_logit": 4.8004,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-012",
+    "peptide_name": "IsCT1",
+    "approved_aliases": [
+      "IsCT1"
+    ],
+    "parent_species": "Opisthacanthus madagascariensis",
+    "origin_type": "natural",
+    "exact_mature_sequence": "ILGKIWEGIKSLF",
+    "sequence_length": 13,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1502.86,
+    "mod07_m1_baseline_rank": 7,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9383,
+    "linear_logit": 2.7215,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-013",
+    "peptide_name": "Hp1404",
+    "approved_aliases": [
+      "Hp1404"
+    ],
+    "parent_species": "Heterometrus petersii",
+    "origin_type": "natural",
+    "exact_mature_sequence": "GILGKLWEGVKSIF",
+    "sequence_length": 14,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1545.89,
+    "mod07_m1_baseline_rank": 10,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.909,
+    "linear_logit": 2.3018,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-014",
+    "peptide_name": "ToAP1",
+    "approved_aliases": [
+      "ToAP1"
+    ],
+    "parent_species": "Tityus obscurus",
+    "origin_type": "natural",
+    "exact_mature_sequence": "FIGMIPGLIGGLISAFK",
+    "sequence_length": 17,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1733.19,
+    "mod07_m1_baseline_rank": 20,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9104,
+    "linear_logit": 2.3191,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-015",
+    "peptide_name": "ToAP3",
+    "approved_aliases": [
+      "ToAP3"
+    ],
+    "parent_species": "Tityus obscurus",
+    "origin_type": "natural",
+    "exact_mature_sequence": "FIGMIPGLIGGLISAIK",
+    "sequence_length": 17,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1699.17,
+    "mod07_m1_baseline_rank": 17,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9116,
+    "linear_logit": 2.3333,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-016",
+    "peptide_name": "AcrAP1",
+    "approved_aliases": [
+      "AcrAP1"
+    ],
+    "parent_species": "Androctonus crassicauda",
+    "origin_type": "natural",
+    "exact_mature_sequence": "FLFSLIPHAISGLISAFK",
+    "sequence_length": 18,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1960.39,
+    "mod07_m1_baseline_rank": 9,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9315,
+    "linear_logit": 2.6096,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-017",
+    "peptide_name": "AcrAP1_K_analogue",
+    "approved_aliases": [
+      "AcrAP1_K_analogue"
+    ],
+    "parent_species": "Androctonus crassicauda",
+    "origin_type": "engineered",
+    "exact_mature_sequence": "FLFKLIPKAIKGLIKAFK",
+    "sequence_length": 18,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 2074.71,
+    "mod07_m1_baseline_rank": 5,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.9756,
+    "linear_logit": 3.6886,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-018",
+    "peptide_name": "Hadrurin",
+    "approved_aliases": [
+      "Hadrurin"
+    ],
+    "parent_species": "Hadrurus aztecus",
+    "origin_type": "natural",
+    "exact_mature_sequence": "GILDTIKSIASKVWNSKTVQDLKRKGINWVANKLGVSPQAA",
+    "sequence_length": 41,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": false,
+    "molecular_weight_da": 4436.18,
+    "mod07_m1_baseline_rank": 16,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.8163,
+    "linear_logit": 1.4916,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-019",
+    "peptide_name": "Scorpine",
+    "approved_aliases": [
+      "Scorpine"
+    ],
+    "parent_species": "Pandinus imperator",
+    "origin_type": "natural",
+    "exact_mature_sequence": "GWINEEKIQKKIDERMGNTVLGGMAKAIVHKMAKNEFQCMANMDMLGNCEKHCQTSGEKGYCHGTKCKCGTPLSY",
+    "sequence_length": 75,
+    "cysteine_count": 6,
+    "is_c_terminally_amidated": false,
+    "molecular_weight_da": 8356.74,
+    "mod07_m1_baseline_rank": 14,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.2553,
+    "linear_logit": -1.0705,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  },
+  {
+    "canonical_id": "SCA-PEP-020",
+    "peptide_name": "Parabutoporin",
+    "approved_aliases": [
+      "Parabutoporin"
+    ],
+    "parent_species": "Parabuthus schlechteri",
+    "origin_type": "natural",
+    "exact_mature_sequence": "FKLGSFLKKAWKSKLAKKLRAKGKEMLKDYAKGLLEGGSEEVPGQ",
+    "sequence_length": 45,
+    "cysteine_count": 0,
+    "is_c_terminally_amidated": false,
+    "molecular_weight_da": 4994.96,
+    "mod07_m1_baseline_rank": 11,
+    "mod07_m1_composite_score": null,
+    "pu_model_score": 0.799,
+    "linear_logit": 1.3802,
+    "eri_evidence_level": null,
+    "highest_translational_stage": null
+  }
+]

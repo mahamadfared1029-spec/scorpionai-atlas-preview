@@ -1,0 +1,139 @@
+[
+  {
+    "id": "Cao2012_Kn27",
+    "type": "article",
+    "title": "Design of antimicrobial peptides from a scorpion venom peptide Kn2-7",
+    "authors": [
+      "Cao, L.",
+      "Dai, C.",
+      "Li, Z.",
+      "Fan, Z.",
+      "Song, Y.",
+      "Wu, Y.",
+      "Li, W."
+    ],
+    "journal": "PLoS ONE",
+    "year": 2012,
+    "volume": "7",
+    "issue": "7",
+    "pages": "e40135",
+    "pmid": "22792229",
+    "doi": "10.1371/journal.pone.0040135"
+  },
+  {
+    "id": "Chen2014_Hp1404",
+    "type": "article",
+    "title": "Hp1404, a new antimicrobial peptide from the scorpion Heterometrus petersii",
+    "authors": [
+      "Chen, J.",
+      "Xu, X.",
+      "Li, B."
+    ],
+    "journal": "Peptides",
+    "year": 2014,
+    "volume": "53",
+    "pages": "285-291",
+    "pmid": "24826994",
+    "doi": "10.1016/j.peptides.2014.05.006"
+  },
+  {
+    "id": "Zeng2004_BmKn2",
+    "type": "article",
+    "title": "Purification and characterization of BmKn2 from venom of scorpion Mesobuthus martensii",
+    "authors": [
+      "Zeng, X. C.",
+      "Wang, S. X.",
+      "Zhu, Y."
+    ],
+    "journal": "Toxicon",
+    "year": 2004,
+    "volume": "44",
+    "issue": "7",
+    "pages": "781-789",
+    "pmid": "15062994",
+    "doi": "10.1016/j.toxicon.2004.03.023"
+  },
+  {
+    "id": "Clairfeuille2019_AaH2_Nav",
+    "type": "article",
+    "title": "Structural basis of alpha-scorpion toxin action on Nav channels",
+    "authors": [
+      "Clairfeuille, T.",
+      "Cloake, A.",
+      "Infield, D. T.",
+      "Llongueras, J. P.",
+      "Arthur, C. P.",
+      "Li, Z. R.",
+      "Jian, Y.",
+      "Martin-Eauclaire, M. F.",
+      "Bougis, P. E.",
+      "Catterall, W. A.",
+      "Payandeh, J."
+    ],
+    "journal": "Science",
+    "year": 2019,
+    "volume": "363",
+    "issue": "6433",
+    "pages": "eaav8573",
+    "pmid": "30765606",
+    "doi": "10.1126/science.aav8573"
+  },
+  {
+    "id": "Banerjee2013_ChTX_Kv",
+    "type": "article",
+    "title": "Structure of the Kv1.2-Kv2.1 paddle chimera channel in complex with charybdotoxin",
+    "authors": [
+      "Banerjee, A.",
+      "Lee, A.",
+      "Campbell, E.",
+      "Mackinnon, R."
+    ],
+    "journal": "eLife",
+    "year": 2013,
+    "volume": "2",
+    "pages": "e00594",
+    "pmid": "23705070",
+    "doi": "10.7554/eLife.00594"
+  },
+  {
+    "id": "LinKing2019_WaTx",
+    "type": "article",
+    "title": "A Cell-Penetrating Scorpion Peptide Enables Mode-Specific Modulation of TRPA1 and Pain",
+    "authors": [
+      "Lin King, J. V.",
+      "Emrick, J. J.",
+      "Kelly, M. J. S.",
+      "Herzig, V.",
+      "King, G. F.",
+      "Medzihradszky, K. F.",
+      "Julius, D."
+    ],
+    "journal": "Cell",
+    "year": 2019,
+    "volume": "178",
+    "issue": "6",
+    "pages": "1362-1374.e16",
+    "pmid": "31442403",
+    "doi": "10.1016/j.cell.2019.07.014"
+  },
+  {
+    "id": "ChavesMoreira2020_TOPI1",
+    "type": "article",
+    "title": "Structural characterization of a novel Kunitz-type trypsin inhibitor from Tityus obscurus scorpion venom",
+    "authors": [
+      "Chaves-Moreira, D.",
+      "Senff-Ribeiro, A.",
+      "Wille, A. C. M.",
+      "Gremski, L. H.",
+      "Chaim, O. M.",
+      "Veiga, S. S."
+    ],
+    "journal": "ACS J. Med. Chem.",
+    "year": 2020,
+    "volume": "63",
+    "issue": "14",
+    "pages": "7800-7812",
+    "pmid": "32584550",
+    "doi": "10.1021/acs.jmedchem.0c00686"
+  }
+]

@@ -7,6 +7,7 @@
  <meta name="description" content="أطلس بحثي متكامل لببتيدات سموم العقارب يجمع بين دقة الأدلة التجريبية ونماذج التعلّم الإحصائي والشفافية المنهجية.">
  <link rel="icon" type="image/svg+xml" href="favicon.svg">
  <link rel="stylesheet" href="styles.css">
+ <link rel="stylesheet" href="scorpion-viewer/atlas-integration.css">
 </head>
 <body>
 <a class="skip" href="#atlas">انتقل إلى جدول البيانات مباشرة</a>
@@ -18,6 +19,7 @@
  <nav aria-label="القائمة الرئيسية">
    <a href="#atlas">الأطلس</a>
    <a href="#venomlab">مختبر البنى 3D</a>
+   <a href="#scorpion-anatomy">تشريح العقرب 3D</a>
    <a href="#research-agent" id="nav-research-agent">المساعد العلمي (MOD-04)</a>
    <a href="#knowledge-graph">شبكة المعرفة</a>
    
@@ -59,14 +61,17 @@
    </div>
   </div>
   <div class="specimen" id="specimen">
-   <div class="specimen-coordinate top-coordinate" dir="ltr"><span id="scene-coordinate">SCORPIONES</span><span>ANATOMY / 001</span></div>
-   <canvas id="scorpion" aria-label="المجسم التعليمي التشريحي ثلاثي الأبعاد للعقرب؛ اسحب بالفأرة أو اللمس لتدويره" tabindex="0" role="img"></canvas>
-   <div class="scene-fallback" id="scene-fallback" hidden><svg viewBox="0 0 360 300" aria-hidden="true"><path d="M165 195 120 170 90 100 48 75 32 112 62 136 93 122M195 195l45-25 30-70 42-25 16 37-30 24-31-14M155 179l-60 26-50 48M161 200l-45 39-20 44M201 179l60 26 50 48M199 200l45 39 20 44M178 194c30-20 100-54 94-112-3-39-72-73-105-38-32 34 2 62 25 37"/><ellipse cx="180" cy="187" rx="28" ry="49"/></svg><p>يمكنك متابعة استكشاف الأطلس على هذا الجهاز.</p></div>
-   <div class="specimen-tag"><span class="tag-rule"></span><div><b id="scene-title">العقرب · المجسّم ثلاثي الأبعاد</b><small id="scene-disclaimer">المجسم التعليمي التشريحي المرفق من صاحب المشروع (Scorpion X Anatomy Model)</small></div></div>
-   <div class="scene-tools"><span id="scene-hint">حرّك المؤشر لاستكشاف الزوايا · اسحب للتدوير <span aria-hidden="true">↔</span></span><button id="rotate-left" aria-label="تدوير المجسم إلى اليسار">↶</button><button id="motion-toggle" aria-label="إيقاف الحركة" aria-pressed="false">Ⅱ</button><button id="rotate-right" aria-label="تدوير المجسم إلى اليمين">↷</button></div>
-   <span class="pointer-aura" id="pointer-aura" aria-hidden="true"></span><p class="sr-only" id="action-status" role="status" aria-live="polite"></p><p class="scene-loading" id="scene-loading" role="status" hidden>جارٍ إعداد المجسّم…</p>
+   <div class="specimen-coordinate top-coordinate" dir="ltr"><span id="scene-coordinate">SCORPIONES</span><span>ART STUDY / 001</span></div>
+   <div class="render-art" id="render-art"><div class="render-image-frame"><img id="render-image" src="assets/scorpion-render.png" alt="رندر فني لعقرب داكن بملمس قشري ومخالب وذيل مقوس، بإضاءة برونزية" width="1280" height="1280" fetchpriority="high"></div></div>
+   <div class="specimen-tag"><span class="tag-rule"></span><div><b id="scene-title">رندر فني مستوحى من العقرب</b><small id="scene-disclaimer">دراسة مظهرية فنية · العارض التشريحي والقتالي الحي الكامل مدمج أدناه</small></div></div>
   </div>
   <div class="hero-bottom"><span>صُمّم للفضول. بُني على البيانات.</span><a href="#atlas">انزل للاستكشاف <span aria-hidden="true">↓</span></a><span dir="ltr">SCIENTIFIC RIGOR. OPEN POSSIBILITIES.</span></div>
+ </section>
+
+ <!-- عارض تشريح العقرب ثلاثي الأبعاد والعمليات الحيوية والقتال المدمج من حزمة المالك -->
+ <section class="atlas-anatomy" id="scorpion-anatomy" aria-labelledby="atlas-anatomy-title">
+   <h2 id="atlas-anatomy-title">العقرب من الداخل والخارج</h2>
+   <iframe id="atlas-anatomy-frame" src="scorpion-viewer/anatomy.html?embedded=1" title="تشريح العقرب والعمليات الحيوية والقتال" allow="fullscreen" allowfullscreen></iframe>
  </section>
 
  <section class="numbers reveal" aria-label="الأطلس بالأرقام">
@@ -1148,7 +1153,7 @@
 </dialog>
 
 <script src="app.js" defer></script>
-<script type="module" src="scene.js?v=sprint05_owner_v2"></script>
+<script type="module" src="scorpion-viewer/atlas-anatomy.js"></script>
 <script type="module" src="venomlab.js"></script>
 <script type="module" src="agent.js"></script>
 </body>

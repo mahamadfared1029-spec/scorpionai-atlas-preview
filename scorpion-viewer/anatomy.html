@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SCORPION X — مستكشف تشريح العقرب</title>
+  <script>if(new URLSearchParams(location.search).get('embedded')==='1')document.documentElement.classList.add('atlas-embedded');</script>
+  <link rel="stylesheet" href="anatomy.css?v=2">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="../index.html#scorpion-anatomy" dir="ltr">SCORPION <b>X</b><small>ANATOMY ATLAS / 01</small></a><span class="header-note">من السطح إلى الداخل.</span><a class="back" href="../index.html#scorpion-anatomy">العودة إلى الأطلس ↖</a></header>
+  <main class="workspace">
+    <aside class="sidebar">
+      <p class="eyebrow">مختبر الاستكشاف / ثلاثي الأبعاد</p>
+      <h1>كل تفصيلة،<br><em>تحت المجهر.</em></h1>
+      <p class="intro">دوّر العقرب، اكشف ما تحت الهيكل، واستكشف أجهزة جسمه عضوًا تلو الآخر.</p>
+      <h2>طريقة العرض</h2>
+      <div class="modes" role="group" aria-label="طريقة العرض">
+        <button data-mode="surface" aria-pressed="true"><span>◈</span> القشرة فقط</button>
+        <button data-mode="inner" aria-pressed="false"><span>◔</span> باطن القشرة فقط</button>
+        <button data-mode="transparent" aria-pressed="false"><span>◉</span> القشرة والأعضاء معًا</button>
+        <button data-mode="section" aria-pressed="false"><span>◐</span> مقطع طولي</button>
+        <button data-mode="internal" aria-pressed="false"><span>⌘</span> الأعضاء الداخلية</button>
+      </div>
+      <div class="range-field"><label for="opacity">وضوح الهيكل <output id="opacity-value">100%</output></label><input id="opacity" type="range" min="0" max="100" value="100"></div>
+      <div class="range-field" id="cut-field" hidden><label for="cut">موضع القطع <output id="cut-value">50%</output></label><input id="cut" type="range" min="0" max="100" value="50"></div>
+      <p id="layer-note" class="control-note">القشرة الخارجية وحدها دون الأعضاء.</p>
+      <h2>العمليات الفسيولوجية <span class="count">محاكاة توضيحية</span></h2>
+      <div class="physiology" role="group" aria-label="العمليات الفسيولوجية">
+        <label><input type="checkbox" data-process="heart"><i style="--swatch:#f78d87"></i><span>نبض القلب وتدفق الهيمولِمف</span></label>
+        <label><input type="checkbox" data-process="venom"><i style="--swatch:#d8a9ff"></i><span>مسار خروج السم</span></label>
+        <label><input type="checkbox" data-process="lungs"><i style="--swatch:#a9e7b1"></i><span>تبادل الغازات</span></label>
+        <label><input type="checkbox" data-process="nerves"><i style="--swatch:#8ed8ff"></i><span>الإشارات العصبية</span></label>
+        <label><input type="checkbox" data-process="digestive"><i style="--swatch:#ffe09c"></i><span>انتقال الغذاء</span></label>
+      </div>
+      <div class="simulation-controls"><button id="phys-play" aria-pressed="true">Ⅱ إيقاف المحاكاة</button><button id="phys-all">تشغيل الكل</button></div>
+      <div class="range-field"><label for="phys-speed">سرعة العرض <output id="speed-value">1×</output></label><input id="phys-speed" type="range" min="25" max="200" step="25" value="100"></div>
+      <p class="control-note">الهيمولِمف هو السائل الدوري للعقرب. الجسيمات والألوان وسرعة النبض توضيحية؛ لا تمثل قياسات أو محاكاة فسيولوجية كمية.</p>
+      <h2>الأجهزة والأعضاء <span class="count">06</span></h2>
+      <div id="systems" class="systems" role="group" aria-label="اختيار الجهاز"></div>
+      <div class="side-footer"><span class="status-dot"></span> الملف الخارجي الأصلي · أعضاء توضيحية</div>
+    </aside>
+    <section class="stage" aria-label="مستكشف العقرب">
+      <div class="stage-header"><div><span class="eyebrow" dir="ltr">SPECIMEN / SCORPIONES</span><h2 id="view-title">الهيكل الخارجي</h2><p id="activity-status" role="status">استكشف طبقات الجسم</p></div><div class="stage-header-actions"><span class="live-badge">عرض تفاعلي <i></i></span><button id="combat-quick" aria-pressed="false">⚡ وضع القتال</button></div></div>
+      <canvas id="anatomy-canvas" tabindex="0" aria-label="مجسم عقرب ثلاثي الأبعاد. اسحب للتدوير، عجلة الفأرة للتقريب، مفاتيح الأسهم للتدوير، وزائد وناقص للتقريب."></canvas>
+      <img id="fallback" src="assets/scorpion-render.png" alt="صورة فنية لعقرب، بديل عند تعذر تشغيل العرض ثلاثي الأبعاد" hidden>
+      <p id="load-status" class="loading" role="status">جارٍ تحميل النموذج الأصلي…</p>
+      <div id="labels" class="labels" aria-hidden="true"></div>
+      <div id="combat-target" class="combat-target" aria-hidden="true"><span></span></div>
+      <div id="process-legend" class="process-legend" aria-label="العمليات المعروضة" hidden></div>
+      <div class="view-presets" role="group" aria-label="اتجاه الكاميرا"><button data-view="perspective" aria-pressed="true">منظور</button><button data-view="top" aria-pressed="false">علوي</button><button data-view="side" aria-pressed="false">جانبي</button><button data-view="bottom" aria-pressed="false">سفلي</button></div>
+      <div class="stage-tools"><button id="zoom-in" aria-label="تقريب">＋</button><button id="zoom-out" aria-label="إبعاد">−</button><span></span><button id="reset" aria-label="إعادة ضبط العرض">↺</button><button id="spin" aria-label="تدوير تلقائي" aria-pressed="false">⟳</button><button id="fullscreen" aria-label="ملء الشاشة">⛶</button></div>
+      <div class="stage-bottom"><span id="interaction-hint">اسحب للتدوير · مرّر للتقريب · انقر على عضو لاستكشافه</span><span dir="ltr">3D / INTERACTIVE</span></div>
+    </section>
+    <aside class="details">
+      <p class="eyebrow">دليل الأجزاء</p><div id="detail-color" class="detail-swatch"></div><h2 id="detail-title" aria-live="polite">الهيكل الخارجي</h2><p id="detail-latin" class="latin" dir="ltr">EXOSKELETON</p><p id="detail-copy"></p>
+      <div class="detail-rule"></div><h3>ما الذي تراه؟</h3><p id="detail-location"></p>
+      <button id="focus" class="focus">التركيز على هذا الجزء ↖</button>
+      <button id="download-model" class="focus" disabled>تنزيل المجسم كاملًا · GLB ↓</button>
+      <label class="toggle"><input id="isolate" type="checkbox"> إظهار الجهاز المحدد وحده</label>
+      <label class="toggle"><input id="show-labels" type="checkbox" checked> إظهار أسماء الأعضاء</label>
+      <div class="combat-card"><p class="eyebrow">سلوك دفاعي تفاعلي</p><h3>واجه العقرب.</h3><p>فعّل المواجهة ثم حرّك المؤشر داخل المشهد. انقر على مكان ليوجّه كلّاباته وذيله نحوه.</p><button id="combat-toggle" aria-pressed="false">تفعيل وضع القتال</button><button id="combat-strike" disabled>هجوم بالكلّابات والذيل ⚡</button><p class="control-note">حركة فنية مبالغ بها. تعرض المواجهة القشرة وحدها؛ يعود التشريح إلى وضعه السابق عند إيقافها.</p></div>
+      <div class="accuracy"><span>عن دقة هذا المجسم</span><p>السطح من ملفك الأصلي. الأعضاء الداخلية أشكال تعليمية تقريبية مضافة، وليست مسحًا تشريحيًا لهذا العقرب أو لنوع محدد. باطن القشرة هو الوجه الداخلي لسطح النموذج، دون طبقات نسيجية أو سماكة مقاسة.</p><details><summary>المراجع التشريحية</summary><a href="https://www.vetmeduni.ac.at/hochschulschriften/diplomarbeiten/AC07942458.pdf" target="_blank" rel="noopener">جامعة الطب البيطري بفيينا · التشريح العام</a><a href="https://pubmed.ncbi.nlm.nih.gov/22735399/" target="_blank" rel="noopener">تشريح جهاز الهيمولِمف · دراسة مقارنة</a><a href="https://www.sciencedirect.com/science/article/pii/004081669090083L" target="_blank" rel="noopener">تدفق الهيمولِمف عبر الرئات الكتبية</a><a href="https://pubmed.ncbi.nlm.nih.gov/30366479/" target="_blank" rel="noopener">البنية المجهرية لغدد السم</a></details></div>
+    </aside>
+  </main>
+  <script type="module" src="anatomy.js?v=2"></script>
+</body>
+</html>

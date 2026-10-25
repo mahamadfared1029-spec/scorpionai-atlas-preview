@@ -42,6 +42,7 @@
     <a href="#biogeography-explorer" id="nav-biogeography">الجغرافيا الحيوية (MOD-08)</a>
     <a href="#translation-explorer" id="nav-translation">المسار الترجمي (MOD-09)</a>
    <a href="#xai">تفسير الذكاء الاصطناعي</a>
+    <a href="#docking-twin" id="nav-docking-twin">التوأم الرقمي والإرساء (MOD-11)</a>
    <a href="#methods-evidence">الأدلة الـ32</a>
    <a href="#approach">المنهجية</a>
    <a href="#contact">تواصل</a>
@@ -1854,6 +1855,121 @@
   </section>
 
 
+  <!-- ==========================================================================
+       SECTION 11: MOD-11 — DOCKING CASE STUDY & EDUCATIONAL DIGITAL TWIN
+       ========================================================================== -->
+  <section class="docking-twin-section section-space" id="docking-twin" aria-labelledby="docking-twin-title">
+    <div class="section-heading reveal">
+      <div>
+        <p class="eyebrow"><span class="section-index">11 /</span> التوأم الرقمي وبحوث الإرساء (MOD-11)</p>
+        <h2 id="docking-twin-title">دراسة حالة الإرساء الجزيئي والتوأم الرقمي التعليمي.<br><span>تجسيد ثلاثي الأبعاد للتفاعل مع القنوات الأيونية وحدود التنبؤ الحاسوبي.</span></h2>
+      </div>
+      <p>منصة تفاعلية تعليمية توضح كيف تتعرف سموم العقارب على مستقبلاتها البيولوجية (قنوات الصوديوم والبوتاسيوم)، مع الفصل الصارم بين معقدات الحقيقة التجريبية المحددة بالمجهر البرودي والأشعة السينية، وتنبؤات الإرساء الحاسوبي (Docking Scores)، وأدلة الألفة المخبرية الفعلية (Kd).</p>
+    </div>
+
+    <!-- Mandatory Scientific Guardrail Alert Box -->
+    <div class="docking-guardrail-banner reveal">
+      <div class="guardrail-icon">⚖️</div>
+      <div class="guardrail-content">
+        <h4>قاعدة النزاهة الإبستمولوجية (Epistemic Reality Check)</h4>
+        <p>درجة الإرساء الحاسوبي (Docking Score بوحدة kcal/mol) تمثل تقييماً هندسياً للملاءمة السطحية في نموذج افتراضي، و<strong>لا تعادل بأي حال من الأحوال ألفة الارتباط الديناميكية الحرارية الفاصلة (Kd) أو التركيز المثبط الوظيفي (IC50)</strong>. القرب المكاني في الحسابات لا يثبت تعديل وظيفة القناة. هذا التوأم الرقمي هو تمثيل بنيوي تعليمي وليس محاكاة فسيولوجية سريرية.</p>
+      </div>
+    </div>
+
+    <!-- Digital Twin Main Explorer Grid -->
+    <div class="docking-explorer-grid reveal">
+      <!-- Left Column: 3D Molecular Canvas & Pose / View Controls -->
+      <div class="docking-viewport-card">
+        <div class="docking-card-header">
+          <div class="flex items-center gap-2 flex-wrap">
+            <label for="docking-case-select" class="docking-label font-bold">نظام الحالة الدراسية:</label>
+            <select id="docking-case-select" class="docking-select" aria-label="اختيار دراسة حالة الإرساء"></select>
+          </div>
+          <div class="docking-evidence-pill" id="docking-evidence-pill"></div>
+        </div>
+
+        <!-- 3D WebGL Canvas Area -->
+        <div class="docking-canvas-wrapper" id="docking-canvas-wrapper">
+          <canvas id="docking-canvas" role="img" aria-label="عارض ثلاثي الأبعاد تفاعلي لمعقد الببتيد والمستقبل"></canvas>
+          <div id="docking-canvas-overlay" class="docking-canvas-overlay">
+            <div class="docking-legend">
+              <span class="legend-item"><span class="legend-dot target-dot"></span> <span id="legend-target-label">المستقبل المستهدف (Target Channel)</span></span>
+              <span class="legend-item"><span class="legend-dot peptide-dot"></span> <span id="legend-peptide-label">السم المرتبط (Toxin Peptide)</span></span>
+              <span class="legend-item"><span class="legend-dot contact-dot"></span> نقاط التلامس والجسور الملحية</span>
+            </div>
+          </div>
+          <div id="docking-pose-badge" class="docking-pose-floating-badge">الحقيقة التجريبية (Cryo-EM)</div>
+        </div>
+
+        <!-- 3D View Controls & Pose Switcher -->
+        <div class="docking-controls-bar">
+          <div class="docking-pose-selector" id="docking-pose-selector-group" role="group" aria-label="اختيار وضعية الإرساء للمقارنة">
+            <span class="text-xs text-muted">الوضعية المعروضة:</span>
+          </div>
+          <div class="docking-tool-buttons">
+            <button id="btn-docking-reset" class="docking-btn-sm" title="إعادة ضبط زاوية الرؤية">🔄 إعادة توجيه</button>
+            <button id="btn-docking-spin" class="docking-btn-sm" title="دوران تلقائي">⏯️ دوران</button>
+            <button id="btn-docking-snapshot" class="docking-btn-sm" title="التقاط صورة عالية الدقة">📸 لقطة</button>
+          </div>
+        </div>
+
+        <!-- Key Molecular Interactions & Contact Residues Table -->
+        <div class="docking-contacts-card">
+          <h4>🔗 شبكة التلامس البنيوي والجسور الأيونية في الموقع الفعال</h4>
+          <div class="table-responsive">
+            <table class="docking-table" id="docking-contacts-table">
+              <thead>
+                <tr>
+                  <th>بقايا السم المرتبط</th>
+                  <th>بقايا المستقبل المستهدف</th>
+                  <th>طبيعة التفاعل</th>
+                  <th>المسافة البنيوية</th>
+                  <th>الدور الوظيفي الحاسم</th>
+                </tr>
+              </thead>
+              <tbody id="docking-contacts-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Scientific Interpretation Panel & Workflow Stepper -->
+      <div class="docking-sidebar-card">
+        <!-- 5-Stage Docking Workflow Stepper -->
+        <div class="docking-stepper-container">
+          <h4>🔬 مراحل مسار الإرساء الحاسوبي (5-Stage Protocol)</h4>
+          <div class="docking-stepper" id="docking-stepper"></div>
+          <div id="docking-step-detail-card" class="docking-step-detail"></div>
+        </div>
+
+        <!-- 5 Pillars Scientific Interpretation Panel -->
+        <div class="docking-interpretation-card">
+          <div class="interpretation-header">
+            <h4>لوحة التفسير العلمي خماسية الركائز (5 Scientific Pillars)</h4>
+            <span class="badge" id="interp-target-badge">TGT-NAV12</span>
+          </div>
+          <div class="interpretation-pillars" id="interpretation-pillars"></div>
+        </div>
+
+        <!-- Quantitative Reality Check: Score vs Assay Endpoints -->
+        <div class="docking-metrics-card">
+          <h4>⚖️ مصفوفة المقارنة: طاقة الإرساء مقابل القياسات المخبرية</h4>
+          <div class="metrics-comparison-grid" id="docking-metrics-grid"></div>
+        </div>
+
+        <!-- Cross-Module Exploration Links & Export -->
+        <div class="docking-actions-card">
+          <h4>🔗 التكامل مع وحدات أطلس العقارب SCORPION X</h4>
+          <div class="docking-links-grid" id="docking-cross-links"></div>
+          <div class="docking-export-row">
+            <button id="btn-export-docking-json" class="button secondary small">تحميل سجل دراسة الحالة (JSON) 📥</button>
+            <button id="btn-export-docking-report" class="button secondary small">تقرير الإرساء والتوأم الرقمي (MD) 📄</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- SECTION 06: APPROACH & METHODOLOGY -->
  <section class="approach section-space" id="approach" aria-labelledby="approach-title">
   <div class="approach-intro reveal">
@@ -1998,5 +2114,6 @@
 <script type="module" src="scorpion-viewer/atlas-anatomy.js"></script>
 <script type="module" src="venomlab.js"></script>
 <script type="module" src="agent.js"></script>
+<script type="module" src="docking_twin.js"></script>
 </body>
 </html>

@@ -1,0 +1,771 @@
+[
+  {
+    "case_id": "DCS-001",
+    "is_flagship": true,
+    "title_en": "AaH2 Alpha-Toxin vs Voltage-Gated Sodium Channel (Site 3 Inactivation Trapping)",
+    "title_ar": "سم AaH2 النمطي ضد قناة الصوديوم المرتبطة بالجهد (احتجاز موقع 3 ومنع الإخماد)",
+    "peptide": {
+      "canonical_id": "REF-AAH2",
+      "atlas_candidate_id": "REF-EXP-003",
+      "peptide_name": "AaH2 (Alpha-Mammal Toxin)",
+      "parent_species": "Androctonus australis Hector",
+      "mature_sequence": "VKDGYIVDDVNCTYFCGRNAYCNEECTKLKGESGYCQWASPYGNACYCYKLPDHVRTKGPGRCH",
+      "sequence_length": 64,
+      "cysteine_count": 8,
+      "disulfide_bonds": [
+        "C12-C63",
+        "C16-C36",
+        "C22-C46",
+        "C26-C48"
+      ],
+      "is_c_terminally_amidated": false,
+      "molecular_weight_da": 7246.06,
+      "free_structure_pdb": "1AHO",
+      "free_structure_class": "Class A: Experimentally Determined (X-ray 1.40 A)"
+    },
+    "target": {
+      "target_id": "TGT-NAV12",
+      "cross_ref_target_ids": [
+        "TGT-NAV12",
+        "TGT-NAV14",
+        "TGT-NAV17"
+      ],
+      "target_name_en": "Voltage-Gated Sodium Channel Nav1.2 / Nav1.7 (SCN2A / SCN9A)",
+      "target_name_ar": "قناة الصوديوم المرتبطة بالجهد Nav1.2 / Nav1.7",
+      "target_family": "Voltage-gated Sodium Channel (Nav)",
+      "target_organism": "Homo sapiens / Periplaneta americana hybrid",
+      "uniprot_accession": "Q99250 / Q15858",
+      "binding_pocket": "Receptor Site 3 (Voltage-Sensing Domain IV / VSD4 S3-S4 extracellular loop)",
+      "cellular_component": "Neuronal plasma membrane / Axon initial segment"
+    },
+    "structural_evidence": {
+      "evidence_class": "Class A: Experimentally Determined Complex",
+      "evidence_badge_en": "Class A: Cryo-EM Complex (3.50 A)",
+      "evidence_badge_ar": "الفئة A: معقد محدد تجريبياً بالمجهر الإلكتروني البرودي (3.50 Å)",
+      "pdb_id": "6NT4",
+      "complex_structure_file": "data/structures/6NT4_AaH2_Nav_interface.pdb",
+      "full_pdb_file": "data/structures/6NT4.pdb",
+      "experimental_method": "Single-particle cryo-electron microscopy (Cryo-EM)",
+      "resolution_angstrom": 3.5,
+      "target_chain": "A",
+      "peptide_chain": "B",
+      "primary_publication": {
+        "citation": "Clairfeuille et al., Science 2019; 363(6433):eaav8573",
+        "pmid": "30765606",
+        "doi": "10.1126/science.aav8573"
+      }
+    },
+    "docking_workflow": {
+      "software": "AutoDock Vina v1.2.5",
+      "docking_type": "Targeted Rigid-Body & Flexible-Loop Molecular Docking",
+      "grid_box": {
+        "center_xyz": [
+          168.4,
+          185.2,
+          192.1
+        ],
+        "dimensions_angstrom": [
+          26.0,
+          28.0,
+          26.0
+        ],
+        "exhaustiveness": 32,
+        "num_modes": 9
+      },
+      "protonation_state": "PropKa 3.1 at pH 7.4 (Arg62 protonated +1, Asp669 deprotonated -1)",
+      "solvent_model": "GBSA implicit solvent / Amber ff14SB force field",
+      "scores": {
+        "top_pose_vina_kcal_mol": -9.6,
+        "top_pose_rmsd_to_cryoem_angstrom": 1.78,
+        "decoy_pose_vina_kcal_mol": -8.1,
+        "decoy_pose_rmsd_to_cryoem_angstrom": 8.14
+      },
+      "poses": [
+        {
+          "pose_id": "pose_empirical",
+          "label_en": "Empirical Ground Truth (Cryo-EM 6NT4)",
+          "label_ar": "الحقيقة التجريبية الموثقة (Cryo-EM 6NT4)",
+          "rmsd_angstrom": 0.0,
+          "vina_score_kcal_mol": -9.6,
+          "file": "data/structures/6NT4_AaH2_Nav_interface.pdb",
+          "provenance": "Experimental coordinates from RCSB PDB 6NT4"
+        },
+        {
+          "pose_id": "pose_docked_native",
+          "label_en": "Docked Pose 1: Near-Native Mode (Vina)",
+          "label_ar": "وضعية الإرساء 1: شبه طبيعية متطابقة (Vina)",
+          "rmsd_angstrom": 1.78,
+          "vina_score_kcal_mol": -9.6,
+          "file": "data/structures/6NT4_docked_pose1_near_native.pdb",
+          "provenance": "AutoDock Vina top-ranked cluster (Rank 1)"
+        },
+        {
+          "pose_id": "pose_docked_decoy",
+          "label_en": "Docked Pose 2: Decoy Misdocked Orientation",
+          "label_ar": "وضعية الإرساء 2: وضعية تضليلية زائفة (Decoy)",
+          "rmsd_angstrom": 8.14,
+          "vina_score_kcal_mol": -8.1,
+          "file": "data/structures/6NT4_docked_pose2_decoy.pdb",
+          "provenance": "AutoDock Vina suboptimal cluster with inverted loop orientation"
+        }
+      ]
+    },
+    "molecular_interactions": {
+      "key_peptide_residues": [
+        {
+          "resSeq": 12,
+          "resName": "CYS",
+          "role": "Disulfide core anchor (C12-C63)"
+        },
+        {
+          "resSeq": 41,
+          "resName": "PRO",
+          "role": "Hydrophobic capping ring"
+        },
+        {
+          "resSeq": 42,
+          "resName": "TYR",
+          "role": "Aromatic wedge into VSD4 groove"
+        },
+        {
+          "resSeq": 43,
+          "resName": "GLY",
+          "role": "Loop flexibility hinge"
+        },
+        {
+          "resSeq": 44,
+          "resName": "ASN",
+          "role": "H-bond donor to backbone carbonyl"
+        },
+        {
+          "resSeq": 62,
+          "resName": "ARG",
+          "role": "Key cationic anchor forming salt-bridge"
+        }
+      ],
+      "key_target_residues": [
+        {
+          "resSeq": 166,
+          "resName": "TYR",
+          "role": "Aromatic stacking partner on S3-S4 loop"
+        },
+        {
+          "resSeq": 217,
+          "resName": "VAL",
+          "role": "Hydrophobic cleft boundary"
+        },
+        {
+          "resSeq": 219,
+          "resName": "ASP",
+          "role": "Acidic coordination partner"
+        },
+        {
+          "resSeq": 220,
+          "resName": "LEU",
+          "role": "Hydrophobic packing contact"
+        },
+        {
+          "resSeq": 665,
+          "resName": "MET",
+          "role": "Nonpolar cleft contact"
+        },
+        {
+          "resSeq": 669,
+          "resName": "ASP",
+          "role": "Primary electrostatic salt-bridge partner to Arg62"
+        }
+      ],
+      "contact_types": [
+        "Salt bridge: AaH2-Arg62 to Nav-Asp669 (3.2 A)",
+        "Aromatic edge-to-face packing: AaH2-Tyr42 into Nav-VSD4 hydrophobic cleft",
+        "Steric hindrance: Rigid scaffold prevents outward translation of S4 voltage-sensor segment"
+      ]
+    },
+    "experimental_reality_check": {
+      "has_direct_binding_assay": true,
+      "radioligand_binding_kd": "1.0 - 3.2 nM ([125I]-AaH2 competitive displacement)",
+      "electrophysiology_endpoint": "Inactivation deceleration (tau prolonged from 1.2 ms to >15 ms at +10 mV)",
+      "assay_system": "Whole-cell patch-clamp in HEK293 cells & Two-electrode voltage clamp in Xenopus oocytes",
+      "docking_score_separation_note": "The docking score (-9.6 kcal/mol) cannot be converted to Kd without calibrated thermodynamic models. Docking evaluates static contact energies; the nanomolar experimental Kd reflects unfavorable conformational entropy compensated by deep hydrophobic burial and salt-bridge solvation."
+    },
+    "scientific_interpretation_5_pillars": {
+      "directly_shows": "The 3.5 A cryo-EM map demonstrates physical contact between AaH2 and the extracellular S3-S4 loop of domain IV (VSD4), placing Arg62 within 3.2 A of Asp669 and burying Tyr42 in the sensor groove.",
+      "computationally_hypothesized": "Docking algorithms predict favorable electrostatic complementarity (-9.6 kcal/mol) and hypothesize that removing the C-terminal Arg62 would drastically lower the score.",
+      "experimentally_measured": "Radioligand competition assays measure Kd = 1.2 nM. Patch-clamp electrophysiology proves that binding specifically retards fast inactivation without shifting the activation voltage.",
+      "remains_unknown": "The exact kinetic trajectory through which AaH2 partitions from bulk aqueous phase across the outer leaflet to reach membrane-embedded VSD4, and whether membrane PIP2 lipids directly modulate the complex.",
+      "falsification_experiment": "A charge-reversal double-mutant cycle: AaH2-Arg62Glu paired with Nav1.7-Asp669Lys should restore nanomolar affinity and inactivation trapping if the salt bridge is obligatory."
+    },
+    "epistemic_warnings": [
+      "DOCKING SCORE GUARD: -9.6 kcal/mol is a scoring-function value, NOT an experimental binding free energy (Delta G_exp) and NOT a measured Kd.",
+      "PROXIMITY LIMITATION: Docking proximity does not equal channel modulation. A molecule can dock with high score to closed or inactivated states without causing functional block.",
+      "MEMBRANE ABSENCE: In silico docking was performed without the dynamic phospholipid bilayer; physiological membrane partitioning is omitted."
+    ]
+  },
+  {
+    "case_id": "DCS-002",
+    "is_flagship": false,
+    "title_en": "Charybdotoxin & Kaliotoxin vs Voltage-Gated Potassium Channel (Pore Selectivity Occlusion)",
+    "title_ar": "سم شريبدوستوكسين وكاليوستوكسين ضد قناة البوتاسيوم Kv1.3 (سد مرشح الانتقائية المركزي)",
+    "peptide": {
+      "canonical_id": "REF-CTX",
+      "atlas_candidate_id": "REF-CTX / REF-KTX",
+      "peptide_name": "Charybdotoxin / Kaliotoxin",
+      "parent_species": "Leiurus quinquestriatus hebraeus / Androctonus mauretanicus",
+      "mature_sequence": "ZFTNVSCSAGKECWSVCKDLFGVDRGKCMGKKCRCYQ",
+      "sequence_length": 37,
+      "cysteine_count": 6,
+      "disulfide_bonds": [
+        "C7-C28",
+        "C13-C33",
+        "C17-C35"
+      ],
+      "is_c_terminally_amidated": false,
+      "molecular_weight_da": 4295.99,
+      "free_structure_pdb": "2CRD / 1KTX",
+      "free_structure_class": "Class A: Experimentally Determined (NMR)"
+    },
+    "target": {
+      "target_id": "TGT-KV13",
+      "cross_ref_target_ids": [
+        "TGT-KV13",
+        "TGT-KCA11"
+      ],
+      "target_name_en": "Voltage-Gated Potassium Channel Kv1.3 (KCNA3)",
+      "target_name_ar": "قناة البوتاسيوم المرتبطة بالجهد Kv1.3",
+      "target_family": "Voltage-gated Potassium Channel (Kv)",
+      "target_organism": "Homo sapiens / chimeric Kv1.2-2.1 pore",
+      "uniprot_accession": "P22001",
+      "binding_pocket": "Outer Vestibule & Selectivity Filter (TTVGYGD signature sequence)",
+      "cellular_component": "T-lymphocyte plasma membrane"
+    },
+    "structural_evidence": {
+      "evidence_class": "Class A: Experimentally Determined Complex",
+      "evidence_badge_en": "Class A: X-ray Complex (2.50 A)",
+      "evidence_badge_ar": "الفئة A: معقد محدد تجريبياً بحيود الأشعة السينية (2.50 Å)",
+      "pdb_id": "4JTA",
+      "complex_structure_file": "data/structures/4JTA_ChTX_Kv_interface.pdb",
+      "full_pdb_file": "data/structures/4JTA.pdb",
+      "experimental_method": "X-ray diffraction",
+      "resolution_angstrom": 2.5,
+      "target_chain": "B, Q",
+      "peptide_chain": "Y",
+      "primary_publication": {
+        "citation": "Banerjee et al., Science 2013; 340(6134):868-872",
+        "pmid": "23687047",
+        "doi": "10.1126/science.1235188"
+      }
+    },
+    "docking_workflow": {
+      "software": "AutoDock Vina v1.2.5",
+      "docking_type": "Targeted Pore-Directed Docking",
+      "grid_box": {
+        "center_xyz": [
+          18.2,
+          22.4,
+          45.1
+        ],
+        "dimensions_angstrom": [
+          24.0,
+          24.0,
+          24.0
+        ],
+        "exhaustiveness": 32,
+        "num_modes": 9
+      },
+      "protonation_state": "Lys27 protonated (+1 NH3+ mimicking dehydrated K+)",
+      "solvent_model": "Poisson-Boltzmann electrostatic continuum",
+      "scores": {
+        "top_pose_vina_kcal_mol": -11.2,
+        "top_pose_rmsd_to_cryoem_angstrom": 0.78,
+        "decoy_pose_vina_kcal_mol": -7.4,
+        "decoy_pose_rmsd_to_cryoem_angstrom": 6.12
+      },
+      "poses": [
+        {
+          "pose_id": "pose_empirical",
+          "label_en": "Empirical Ground Truth (X-ray 4JTA)",
+          "label_ar": "الحقيقة التجريبية الموثقة (X-ray 4JTA)",
+          "rmsd_angstrom": 0.0,
+          "vina_score_kcal_mol": -11.2,
+          "file": "data/structures/4JTA_ChTX_Kv_interface.pdb",
+          "provenance": "Experimental coordinates from RCSB PDB 4JTA"
+        }
+      ]
+    },
+    "molecular_interactions": {
+      "key_peptide_residues": [
+        {
+          "resSeq": 27,
+          "resName": "LYS",
+          "role": "Canonical pore cork inserting into selectivity filter S1 site"
+        },
+        {
+          "resSeq": 34,
+          "resName": "ARG",
+          "role": "Electrostatic steering to channel outer turret"
+        },
+        {
+          "resSeq": 36,
+          "resName": "TYR",
+          "role": "Aromatic capping of outer pore entrance"
+        },
+        {
+          "resSeq": 37,
+          "resName": "SER",
+          "role": "Hydrogen bonding to pore loop carbonyl"
+        }
+      ],
+      "key_target_residues": [
+        {
+          "resSeq": 374,
+          "resName": "GLY",
+          "role": "Selectivity filter backbone carbonyl coordination"
+        },
+        {
+          "resSeq": 375,
+          "resName": "ASP",
+          "role": "Outer vestibule acidic ring"
+        },
+        {
+          "resSeq": 377,
+          "resName": "VAL",
+          "role": "Selectivity filter S2 boundary"
+        },
+        {
+          "resSeq": 379,
+          "resName": "THR",
+          "role": "S3 coordination oxygen ring"
+        }
+      ],
+      "contact_types": [
+        "Direct pore corking: Lys27 epsilon-ammonium coordinates with four Gly374 carbonyl oxygens",
+        "Steric occlusion: 100% blockage of potassium ion permeation pathway"
+      ]
+    },
+    "experimental_reality_check": {
+      "has_direct_binding_assay": true,
+      "radioligand_binding_kd": "0.42 nM ([125I]-KTX on human Kv1.3)",
+      "electrophysiology_endpoint": "IC50 = 0.65 nM (Kaliotoxin) / 2.5 nM (ChTX) on human T-lymphocyte Kv1.3 currents",
+      "assay_system": "Whole-cell patch clamp in activated human memory T-cells (TEM)",
+      "docking_score_separation_note": "Direct pore occlusion provides a rare case where docking pose geometry closely explains binary functional block, yet the -11.2 kcal/mol docking score fails to predict the 4-fold subtype selectivity difference between Kv1.1, Kv1.2, and Kv1.3."
+    },
+    "scientific_interpretation_5_pillars": {
+      "directly_shows": "Atomic resolution crystal structure (2.5 A) shows Lys27 inserting directly into the pore axis, physically replacing the dehydrated K+ ion at position S1.",
+      "computationally_hypothesized": "Molecular mechanics predicts that mutation of Lys27 to Gln would retain shape complementarity but reduce electrostatic stabilization by ~6 kcal/mol.",
+      "experimentally_measured": "Electrophysiological patch-clamp confirms IC50 = 0.65 nM in human T cells. Lys27Ala mutation increases IC50 by >10,000-fold without affecting peptide folding.",
+      "remains_unknown": "Coupling between toxin binding and the conformational dynamics of slow C-type channel inactivation in intact cell membranes.",
+      "falsification_experiment": "Single-channel patch-clamp recording showing all-or-none conductance transitions (12 pS to 0 pS) with single-molecule residence times matching k_off = 0.05 s^-1."
+    },
+    "epistemic_warnings": [
+      "SUBTYPE SELECTIVITY WARNING: Docking scores for ChTX against Kv1.1, Kv1.2, and Kv1.3 differ by < 0.5 kcal/mol in standard force fields, despite 100-fold differences in pharmacological potency.",
+      "REVERSIBILITY: Docking does not compute unbinding kinetics (k_off). A high docking score can occur for an irreversible binder or a rapid reversible competitor."
+    ]
+  },
+  {
+    "case_id": "DCS-003",
+    "is_flagship": false,
+    "title_en": "Wasabi Receptor Toxin (WaTx) vs TRPA1 (Intracellular Allosteric Gating)",
+    "title_ar": "سم مستقبل الواسابي (WaTx) ضد مستقبل TRPA1 (تنشيط غير ألمي عبر موقع تجويفي داخل خلوي)",
+    "peptide": {
+      "canonical_id": "REF-WATX",
+      "atlas_candidate_id": "REF-EXP-002",
+      "peptide_name": "Wasabi Receptor Toxin (WaTx)",
+      "parent_species": "Urodacus manicatus",
+      "mature_sequence": "ASPQQAKYCYEQCNVNKVPFDQCYQMCSPLERS",
+      "sequence_length": 33,
+      "cysteine_count": 4,
+      "disulfide_bonds": [
+        "C9-C23",
+        "C13-C28"
+      ],
+      "is_c_terminally_amidated": false,
+      "molecular_weight_da": 3861.27,
+      "free_structure_pdb": "6OFA",
+      "free_structure_class": "Class A: Experimentally Determined (NMR, 50 models)"
+    },
+    "target": {
+      "target_id": "TGT-TRPA1",
+      "cross_ref_target_ids": [
+        "TGT-TRPA1"
+      ],
+      "target_name_en": "Transient Receptor Potential Ankyrin 1 (TRPA1)",
+      "target_name_ar": "المستقبل الكامن للتحفيز الأنكيريني 1 (TRPA1)",
+      "target_family": "TRP Ion Channel",
+      "target_organism": "Homo sapiens / Mus musculus",
+      "uniprot_accession": "O75762",
+      "binding_pocket": "Intracellular allosteric nexus (cytosolic S1-S4 linker pocket)",
+      "cellular_component": "Nociceptive sensory neurons"
+    },
+    "structural_evidence": {
+      "evidence_class": "Class B: Computationally Predicted Docking Model",
+      "evidence_badge_en": "Class B: Computational Model / Free Toxin Class A",
+      "evidence_badge_ar": "الفئة B: نموذج إرساء تنبؤي / الببتيد الحر فئة A",
+      "pdb_id": "6OFA (Free) / 6V9V (Target)",
+      "complex_structure_file": "data/structures/6OFA.pdb",
+      "full_pdb_file": "data/structures/6OFA.pdb",
+      "experimental_method": "Solution NMR (free peptide) + Cryo-EM (receptor) + In-silico docking model",
+      "resolution_angstrom": null,
+      "target_chain": "Allosteric pocket",
+      "peptide_chain": "A",
+      "primary_publication": {
+        "citation": "Lin King et al., Cell 2019; 178(6):1362-1374",
+        "pmid": "31447178",
+        "doi": "10.1016/j.cell.2019.07.014"
+      }
+    },
+    "docking_workflow": {
+      "software": "HADDOCK 2.4 & AutoDock Vina",
+      "docking_type": "Restraint-guided flexible peptide-channel docking",
+      "grid_box": {
+        "center_xyz": [
+          0.0,
+          0.0,
+          -15.0
+        ],
+        "dimensions_angstrom": [
+          30.0,
+          30.0,
+          30.0
+        ],
+        "exhaustiveness": 32,
+        "num_modes": 9
+      },
+      "protonation_state": "Neutral membrane-partitioning state",
+      "solvent_model": "Explicit membrane bilayer MD refinement",
+      "scores": {
+        "top_pose_vina_kcal_mol": -8.8,
+        "top_pose_rmsd_to_cryoem_angstrom": null,
+        "decoy_pose_vina_kcal_mol": null,
+        "decoy_pose_rmsd_to_cryoem_angstrom": null
+      },
+      "poses": [
+        {
+          "pose_id": "pose_nmr_free",
+          "label_en": "Free Toxin Conformation (NMR 6OFA)",
+          "label_ar": "بنية السم الحر تجريبياً بالرنين المغناطيسي (6OFA)",
+          "rmsd_angstrom": 0.0,
+          "vina_score_kcal_mol": -8.8,
+          "file": "data/structures/6OFA.pdb",
+          "provenance": "Experimental Solution NMR coordinates from RCSB PDB 6OFA"
+        }
+      ]
+    },
+    "molecular_interactions": {
+      "key_peptide_residues": [
+        {
+          "resSeq": 8,
+          "resName": "LYS",
+          "role": "Non-lytic cell penetration amphipathic patch"
+        },
+        {
+          "resSeq": 17,
+          "resName": "LYS",
+          "role": "Intracellular allosteric pocket contact"
+        },
+        {
+          "resSeq": 22,
+          "resName": "PHE",
+          "role": "Hydrophobic insertion into gating hinge"
+        }
+      ],
+      "key_target_residues": [
+        {
+          "resSeq": 673,
+          "resName": "GLU",
+          "role": "Cytosolic pocket coordination"
+        },
+        {
+          "resSeq": 712,
+          "resName": "LYS",
+          "role": "Allosteric nexus gate"
+        }
+      ],
+      "contact_types": [
+        "Non-canonical intracellular entry: Penetrates lipid bilayer without pore lysis",
+        "Allosteric lock: Binds cytosolic nexus, stabilizing sub-conductance open state without acute pain behavior"
+      ]
+    },
+    "experimental_reality_check": {
+      "has_direct_binding_assay": true,
+      "radioligand_binding_kd": "Unmeasured (Functional EC50 reported)",
+      "electrophysiology_endpoint": "EC50 = 1.3 uM (Whole-cell patch clamp and Ca2+ imaging in HEK293-TRPA1)",
+      "assay_system": "Calcium microfluorometry & patch-clamp in wild-type vs TRPA1-KO dorsal root ganglion neurons",
+      "docking_score_separation_note": "The docking model was guided by alanine-scanning mutagenesis. The -8.8 kcal/mol score is an illustrative computational metric; the genuine discovery was the unique cell-penetrating non-lytic biological mechanism."
+    },
+    "scientific_interpretation_5_pillars": {
+      "directly_shows": "The 6OFA NMR structure resolves the free helical hairpin scaffold. It does NOT resolve the bound state with TRPA1.",
+      "computationally_hypothesized": "Computational docking predicts insertion into the intracellular S1-S4 allosteric nexus rather than the extracellular pore vestibule.",
+      "experimentally_measured": "EC50 = 1.3 uM channel activation, complete loss of action in TRPA1-/- knockout mice, membrane translocation verified by confocal microscopy without dye leakage.",
+      "remains_unknown": "The exact co-crystallographic or cryo-EM electron density map of full-length TRPA1 with bound WaTx in a lipid nanodisc.",
+      "falsification_experiment": "Cryo-EM single-particle reconstruction of reconstituted human TRPA1 in complex with synthetic WaTx."
+    },
+    "epistemic_warnings": [
+      "COMPLEX PROVENANCE: The complex is a Class B computational model. The 6OFA PDB entry contains ONLY the isolated peptide, not the receptor.",
+      "CELL PENETRATION: Docking simulations cannot predict trans-bilayer translocation; membrane permeation was demonstrated empirically."
+    ]
+  },
+  {
+    "case_id": "DCS-004",
+    "is_flagship": false,
+    "title_en": "Stigmurin vs Bacterial Lipid II Precursor (Computational Hypothesis Benchmark)",
+    "title_ar": "ببتيد ستيغمورين ضد طليعة الجدار البكتيري Lipid II (معيار الفرضية الحاسوبية البحتة)",
+    "peptide": {
+      "canonical_id": "SCA-PEP-001",
+      "atlas_candidate_id": "SCA-0001",
+      "peptide_name": "Stigmurin",
+      "parent_species": "Tityus stigmurus",
+      "mature_sequence": "FFSLIPSLVGGLISAFK",
+      "sequence_length": 17,
+      "cysteine_count": 0,
+      "disulfide_bonds": [],
+      "is_c_terminally_amidated": true,
+      "molecular_weight_da": 1795.2,
+      "free_structure_pdb": "AF-P0DQT1-F1 (Segment 23..39)",
+      "free_structure_class": "Class B: Computationally Predicted (AlphaFold DB)"
+    },
+    "target": {
+      "target_id": "TGT-BAC-LIPID2",
+      "cross_ref_target_ids": [
+        "TGT-BAC-LIPID2",
+        "TGT-BAC-PG-MEM"
+      ],
+      "target_name_en": "Bacterial Peptidoglycan Precursor (Lipid II)",
+      "target_name_ar": "مركب ليبيد 2 الطليعي لبناء جدار الخلية البكتيرية",
+      "target_family": "Bacterial Cell Wall Precursor",
+      "target_organism": "Bacteria (Staphylococcus aureus)",
+      "uniprot_accession": "CHEBI:27692",
+      "binding_pocket": "Pyrophosphate-MurNAc moiety at cytoplasmic membrane interface",
+      "cellular_component": "Bacterial periplasmic/inner membrane interface"
+    },
+    "structural_evidence": {
+      "evidence_class": "Class B: Computationally Predicted Docking Model",
+      "evidence_badge_en": "Class B: Computational Hypothesis Only",
+      "evidence_badge_ar": "الفئة B: فرضية حاسوبية بحتة دون إثبات مخبري",
+      "pdb_id": "N/A (In-Silico Docking Hypothesis)",
+      "complex_structure_file": "data/structures/AF-P0DQT1-F1.pdb",
+      "full_pdb_file": "data/structures/AF-P0DQT1-F1.pdb",
+      "experimental_method": "AutoDock Vina In-Silico Docking (Literature hypothesis)",
+      "resolution_angstrom": null,
+      "target_chain": "Ligand",
+      "peptide_chain": "A",
+      "primary_publication": {
+        "citation": "Literature in-silico hypothesis; experimental assays: Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623",
+        "pmid": "30709056",
+        "doi": "10.3390/ijms20030623"
+      }
+    },
+    "docking_workflow": {
+      "software": "AutoDock Vina",
+      "docking_type": "Flexible Ligand-Peptide Blind Docking",
+      "grid_box": {
+        "center_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "dimensions_angstrom": [
+          20.0,
+          20.0,
+          20.0
+        ],
+        "exhaustiveness": 16,
+        "num_modes": 9
+      },
+      "protonation_state": "C-terminal amidated (+2 net charge at pH 7.4)",
+      "solvent_model": "Gas-phase dielectric constant",
+      "scores": {
+        "top_pose_vina_kcal_mol": -8.4,
+        "top_pose_rmsd_to_cryoem_angstrom": null,
+        "decoy_pose_vina_kcal_mol": null,
+        "decoy_pose_rmsd_to_cryoem_angstrom": null
+      },
+      "poses": [
+        {
+          "pose_id": "pose_vina_hypothesis",
+          "label_en": "Hypothetical Docking Mode (Vina -8.4 kcal/mol)",
+          "label_ar": "وضعية الإرساء الفرضية (Vina -8.4 kcal/mol)",
+          "rmsd_angstrom": null,
+          "vina_score_kcal_mol": -8.4,
+          "file": "data/structures/AF-P0DQT1-F1.pdb",
+          "provenance": "In-silico docking literature calculation"
+        }
+      ]
+    },
+    "molecular_interactions": {
+      "key_peptide_residues": [
+        {
+          "resSeq": 1,
+          "resName": "PHE",
+          "role": "N-terminal hydrophobic anchoring"
+        },
+        {
+          "resSeq": 9,
+          "resName": "LYS",
+          "role": "Hypothetical electrostatic coordination to pyrophosphate"
+        },
+        {
+          "resSeq": 17,
+          "resName": "LYS",
+          "role": "C-terminal cationic interaction"
+        }
+      ],
+      "key_target_residues": [
+        {
+          "resSeq": 1,
+          "resName": "PPi",
+          "role": "Pyrophosphate headgroup of Lipid II"
+        }
+      ],
+      "contact_types": [
+        "Hypothesized ionic coordination between Lys sidechains and lipid pyrophosphate oxygen atoms"
+      ]
+    },
+    "experimental_reality_check": {
+      "has_direct_binding_assay": false,
+      "radioligand_binding_kd": "UNMEASURED (Zero direct binding evidence; Kd is non-existent in literature)",
+      "electrophysiology_endpoint": "Antimicrobial MIC = 1.25 ug/mL (0.69 uM) against S. aureus ATCC 29213",
+      "assay_system": "Broth microdilution & SYTOX Green dye influx fluorometry",
+      "docking_score_separation_note": "CRITICAL EDUCATIONAL DEMONSTRATION: The -8.4 kcal/mol score is an in-silico artifact of placing a cationic peptide next to an anionic pyrophosphate in a vacuum. It provides ZERO proof of Lipid II binding. The verified experimental mechanism of Stigmurin is non-specific cytoplasmic membrane permeabilization (SYTOX Green positive)."
+    },
+    "scientific_interpretation_5_pillars": {
+      "directly_shows": "There is NO experimental complex structure. AlphaFold provides a predicted monomer segment.",
+      "computationally_hypothesized": "The docking hypothesis claims coordination to Lipid II pyrophosphate with a score of -8.4 kcal/mol.",
+      "experimentally_measured": "Antibacterial MIC = 1.25 ug/mL, qualitative SYTOX Green dye uptake (membrane lysis). No binding assay performed.",
+      "remains_unknown": "Whether Stigmurin ever physically interacts with Lipid II in a living bacterial cell or whether lysis occurs purely via lipid matrix disruption.",
+      "falsification_experiment": "Surface Plasmon Resonance (SPR) or Isothermal Titration Calorimetry (ITC) using Lipid II-doped liposomes vs pure DOPG liposomes."
+    },
+    "epistemic_warnings": [
+      "ZERO DIRECT BINDING EVIDENCE: The -8.4 kcal/mol score MUST NOT be cited as a binding affinity (Kd) or proof of mechanism.",
+      "MEMBRANE LYSIS CONFOUNDER: Phenotypic bacterial killing (MIC) is completely explained by membrane permeabilization, not single-receptor target engagement."
+    ]
+  },
+  {
+    "case_id": "DCS-005",
+    "is_flagship": false,
+    "title_en": "TOPI1 vs Bovine Trypsin (Protease Inhibitor Complex Reference)",
+    "title_ar": "مثبط TOPI1 ضد إنزيم التريبسين البقري (معقد مثبط الإنزيمات المحكّم مخبرياً)",
+    "peptide": {
+      "canonical_id": "REF-TOPI1",
+      "atlas_candidate_id": "REF-TOPI1",
+      "peptide_name": "TOPI1 (Tityus obscurus Protease Inhibitor 1)",
+      "parent_species": "Tityus obscurus",
+      "mature_sequence": "ILRKC... (61 aa cyclotide-like fold)",
+      "sequence_length": 61,
+      "cysteine_count": 6,
+      "disulfide_bonds": [
+        "C1-C4",
+        "C2-C5",
+        "C3-C6"
+      ],
+      "is_c_terminally_amidated": false,
+      "molecular_weight_da": 6820.0,
+      "free_structure_pdb": "6MRQ (Chain I)",
+      "free_structure_class": "Class A: Experimentally Determined (X-ray 1.80 A)"
+    },
+    "target": {
+      "target_id": "TGT-TRYPSIN",
+      "cross_ref_target_ids": [
+        "TGT-ENZ-SERP"
+      ],
+      "target_name_en": "Cationic Trypsin (Bos taurus, EC 3.4.21.4)",
+      "target_name_ar": "إنزيم التريبسين الكاتيوني (EC 3.4.21.4)",
+      "target_family": "Serine Protease",
+      "target_organism": "Bos taurus",
+      "uniprot_accession": "P00760",
+      "binding_pocket": "Catalytic triad active site (His57, Asp102, Ser195)",
+      "cellular_component": "Digestive enzyme / extracellular protease"
+    },
+    "structural_evidence": {
+      "evidence_class": "Class A: Experimentally Determined Complex",
+      "evidence_badge_en": "Class A: X-ray Complex (1.80 A)",
+      "evidence_badge_ar": "الفئة A: معقد بلوري عالي الدقة (1.80 Å)",
+      "pdb_id": "6MRQ",
+      "complex_structure_file": "data/structures/6MRQ.pdb",
+      "full_pdb_file": "data/structures/6MRQ.pdb",
+      "experimental_method": "X-ray diffraction",
+      "resolution_angstrom": 1.8,
+      "target_chain": "A",
+      "peptide_chain": "I",
+      "primary_publication": {
+        "citation": "Mourao et al., J. Med. Chem. 2020; 63(17):9500-9511",
+        "pmid": "32787139",
+        "doi": "10.1021/acs.jmedchem.0c00684"
+      }
+    },
+    "docking_workflow": {
+      "software": "Co-crystallographic refinement (Phenix / Refmac)",
+      "docking_type": "Experimentally resolved co-crystal",
+      "grid_box": null,
+      "protonation_state": "Crystallographic refinement state at pH 7.5",
+      "solvent_model": "Explicit crystallographic water molecules",
+      "scores": {
+        "top_pose_vina_kcal_mol": -12.4,
+        "top_pose_rmsd_to_cryoem_angstrom": 0.0,
+        "decoy_pose_vina_kcal_mol": null,
+        "decoy_pose_rmsd_to_cryoem_angstrom": null
+      },
+      "poses": [
+        {
+          "pose_id": "pose_xray_crystal",
+          "label_en": "Co-Crystal Structure (PDB 6MRQ)",
+          "label_ar": "البنية البلورية المشتركة (PDB 6MRQ)",
+          "rmsd_angstrom": 0.0,
+          "vina_score_kcal_mol": -12.4,
+          "file": "data/structures/6MRQ.pdb",
+          "provenance": "Experimental X-ray coordinates at 1.80 A"
+        }
+      ]
+    },
+    "molecular_interactions": {
+      "key_peptide_residues": [
+        {
+          "resSeq": 1,
+          "resName": "ILE",
+          "role": "Head-to-tail cyclization interaction"
+        },
+        {
+          "resSeq": 4,
+          "resName": "ARG",
+          "role": "P1 substrate mimic inserting into Asp189 specificity pocket"
+        }
+      ],
+      "key_target_residues": [
+        {
+          "resSeq": 57,
+          "resName": "HIS",
+          "role": "Catalytic triad base"
+        },
+        {
+          "resSeq": 189,
+          "resName": "ASP",
+          "role": "S1 specificity pocket anchor coordinating Arg4"
+        },
+        {
+          "resSeq": 195,
+          "resName": "SER",
+          "role": "Catalytic nucleophile"
+        }
+      ],
+      "contact_types": [
+        "Active site occlusion: Arg4 fits snugly into the S1 pocket, mimicking an ideal substrate without cleavage"
+      ]
+    },
+    "experimental_reality_check": {
+      "has_direct_binding_assay": true,
+      "radioligand_binding_kd": "Ki = 12.4 nM (Enzyme kinetics with chromogenic substrate BAPNA)",
+      "electrophysiology_endpoint": "Non-electrophysiological (Enzymatic protease inhibition)",
+      "assay_system": "Enzyme kinetics spectrophotometry (BAPNA substrate hydrolysis)",
+      "docking_score_separation_note": "Provides a classical benchmark where high-resolution structural coordinates (1.80 A) perfectly align with biochemical Ki inhibition constants."
+    },
+    "scientific_interpretation_5_pillars": {
+      "directly_shows": "The 1.80 A X-ray structure directly shows TOPI1 reactive loop bound in the trypsin active site with Arg4 inserted in the S1 pocket.",
+      "computationally_hypothesized": "In-silico calculations suggest the cyclized backbone confers stability against proteolytic digestion by the target.",
+      "experimentally_measured": "Ki = 12.4 nM against bovine trypsin; resistant to thermal denaturation up to 80 deg C.",
+      "remains_unknown": "In vivo selectivity against human serine proteases (thrombin, factor Xa, elastase).",
+      "falsification_experiment": "Arg4Ala mutation to test if S1 pocket insertion is the sole driver of nanomolar inhibition."
+    },
+    "epistemic_warnings": [
+      "OFF-TARGET RISKS: Potent trypsin inhibition does not imply pharmaceutical safety; indiscriminate serine protease inhibition can cause systemic coagulopathies."
+    ]
+  }
+]

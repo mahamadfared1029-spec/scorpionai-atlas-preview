@@ -1,0 +1,51 @@
+{
+  "module": "MOD-11",
+  "name_en": "Docking Case Study & Educational Digital Twin",
+  "name_ar": "دراسة حالة الإرساء الجزيئي والتوأم الرقمي التعليمي",
+  "version": "1.0.0",
+  "total_case_studies": 5,
+  "docking_stages": [
+    {
+      "stage": 1,
+      "name_en": "Receptor & Peptide Preparation",
+      "name_ar": "إعداد المستقبل والببتيد المرتبط",
+      "description_en": "Assigning partial charges (Gasteiger/AM1-BCC), protonation states at physiological pH 7.4 via PropKa, adding missing hydrogens, checking disulfide connectivity.",
+      "description_ar": "تعيين الشحنات الجزئية، وحالات التأين عند pH 7.4 عبر PropKa، وإضافة ذرات الهيدروجين المفقودة والتحقق من روابط ثنائي الكبريتيد."
+    },
+    {
+      "stage": 2,
+      "name_en": "Grid Box & Search Space Definition",
+      "name_ar": "تحديد صندوق الفضاء وحيز البحث",
+      "description_en": "Defining 3D Cartesian coordinates (center x,y,z and box dimensions in Angstroms) targeting the functional extracellular loop (e.g. Nav VSD4) or outer pore vestibule.",
+      "description_ar": "تحديد الإحداثيات الديكارتية ثلاثية الأبعاد وأبعاد الصندوق بالأنغستروم مستهدفة الموقع الوظيفي أو فوهة المرشح الأيوني."
+    },
+    {
+      "stage": 3,
+      "name_en": "Conformational Search & Scoring",
+      "name_ar": "استكشاف التشكلات وحساب طاقة الإرساء",
+      "description_en": "Stochastic Monte Carlo global optimization with Lamarckian genetic algorithm; scoring via empirical free energy potential (van der Waals, electrostatics, desolvation, torsion penalties).",
+      "description_ar": "استكشاف التشكلات عبر خوارزميات مونت كارلو الجينية، وحساب درجات التقييم وفق طاقات فان دير فالس والتجاذب الكهربائي وعقوبات الدوران."
+    },
+    {
+      "stage": 4,
+      "name_en": "Pose Clustering & RMSD Validation",
+      "name_ar": "تجميع الوضعيات والتحقق البنيوي بالـ RMSD",
+      "description_en": "Clustering candidate poses within a 2.0 A tolerance; comparing top-ranked computational poses against ground-truth Cryo-EM/X-ray coordinates (RMSD <= 2.0 A is near-native; > 5.0 A is a decoy).",
+      "description_ar": "تجميع الوضعيات ومقارنة نتائج التنبؤ الحاسوبي بالبنية التجريبية المحددة بالـ Cryo-EM أو الأشعة السينية لحساب الانحراف الجذري الفعلي."
+    },
+    {
+      "stage": 5,
+      "name_en": "Epistemic Ground-Truthing & Assay Reality Check",
+      "name_ar": "الفصل الإبستمولوجي والتحقق التجريبي بالمختبر",
+      "description_en": "Strictly separating computational docking scores (kcal/mol) from experimentally measured binding affinities (Kd / Ki) and electrophysiological functional modulation.",
+      "description_ar": "الفصل الصارم بين درجات الإرساء الحاسوبي (kcal/mol) وألفة الارتباط المقاسة مخبرياً (Kd) والفاعلية الوظيفية بتخطيط الجهد (Patch Clamp)."
+    }
+  ],
+  "epistemic_principles": [
+    "A molecular docking score represents scoring-function geometric complementarity, NOT a thermodynamic binding affinity (Kd).",
+    "Spatial proximity in an in-silico model does not establish functional channel gating or receptor modulation.",
+    "An isolated peptide PDB structure (e.g. 1AHO, 6OFA) must never be conflated with a receptor-bound complex.",
+    "Class A complexes (6NT4, 4JTA, 6MRQ) represent empirical ground truth; Class B models represent computational hypotheses.",
+    "Docking cannot replace biological assays: MIC assays measure membrane lysis, not single-receptor affinity."
+  ]
+}

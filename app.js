@@ -672,139 +672,6186 @@
   // ============================================================================
   // MOD-06: Research Gap Analyzer (Pathogen & Taxonomy Matrix)
   // ============================================================================
-  function renderGapAnalyzer() {
-    const pathogenMatrixEl = $('gap-pathogen-matrix');
-    const taxonomyMatrixEl = $('gap-taxonomy-matrix');
-    if (!pathogenMatrixEl || !taxonomyMatrixEl) return;
-
-    // Tested Pathogens in Atlas
-    const testedPathogens = [
-      { name: 'Staphylococcus aureus', strain: 'ATCC 25923 / 29213', gram: 'Gram-positive', count: 14, status: 'tested' },
-      { name: 'Escherichia coli', strain: 'ATCC 25922 / UB1005', gram: 'Gram-negative', count: 10, status: 'tested' },
-      { name: 'Pseudomonas aeruginosa', strain: 'ATCC 27853 / PAO1', gram: 'Gram-negative', count: 5, status: 'tested' },
-      { name: 'Candida albicans', strain: 'ATCC 10231 / SC5314', gram: 'Fungal / Yeast', count: 2, status: 'tested' },
-      { name: 'Bacillus subtilis', strain: 'ATCC 6633', gram: 'Gram-positive', count: 1, status: 'tested' }
-    ];
-
-    // WHO Top Critical Priority Pathogens (Gaps in Scorpion Research)
-    const whoCriticalGaps = [
-      { name: 'Acinetobacter baumannii (CRAB)', priority: 'WHO Priority 1: Critical', gram: 'Gram-negative', count: 0, status: 'gap' },
-      { name: 'Klebsiella pneumoniae (CRE)', priority: 'WHO Priority 1: Critical', gram: 'Gram-negative', count: 0, status: 'gap' },
-      { name: 'Enterococcus faecium (VRE)', priority: 'WHO Priority 2: High', gram: 'Gram-positive', count: 0, status: 'gap' },
-      { name: 'Helicobacter pylori (Clarithromycin-R)', priority: 'WHO Priority 2: High', gram: 'Gram-negative', count: 0, status: 'gap' },
-      { name: 'Salmonella spp. (Fluoroquinolone-R)', priority: 'WHO Priority 2: High', gram: 'Gram-negative', count: 0, status: 'gap' }
-    ];
-
-    pathogenMatrixEl.innerHTML = `
-      <div class="gap-grid-container">
-        <div class="gap-subcol">
-          <h4 class="gap-col-title text-success">✓ المسببات المرضية المفحوصة مخبرياً (${testedPathogens.reduce((a,b)=>a+b.count,0)} قياساً)</h4>
-          <div class="gap-card-list">
-            ${testedPathogens.map(p => `
-              <div class="gap-item tested">
-                <div class="gap-item-head">
-                  <strong dir="ltr"><em>${esc(p.name)}</em></strong>
-                  <span class="gap-badge tested">${p.count} قياسات</span>
-                </div>
-                <div class="gap-item-body">
-                  <span>السلالات: <code dir="ltr">${esc(p.strain)}</code></span>
-                  <span class="gap-gram">${esc(p.gram)}</span>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-
-        <div class="gap-subcol">
-          <h4 class="gap-col-title text-danger">⚠️ مسببات منظمة الصحة العالمية ذات الأولوية القصوى (0 سجلات مؤهلة في الأطلس المنسق v1.5)</h4>
-          <div class="gap-card-list">
-            ${whoCriticalGaps.map(g => `
-              <div class="gap-item gap">
-                <div class="gap-item-head">
-                  <strong dir="ltr"><em>${esc(g.name)}</em></strong>
-                  <span class="gap-badge gap">0 سجلات في الأطلس المنسق</span>
-                </div>
-                <div class="gap-item-body">
-                  <span>الأولوية السريرية: <strong class="text-danger">${esc(g.priority)}</strong></span>
-                  <span class="gap-gram">${esc(g.gram)}</span>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      </div>
-    `;
-
-    // Taxonomy Breakdown
-    const taxonomyData = [
-      { family: 'Buthidae', total: 960, tested: 14, unassayed: 946, pct: '1.5%' },
-      { family: 'Scorpionidae', total: 89, tested: 2, unassayed: 87, pct: '2.2%' },
-      { family: 'Hemiscorpiidae', total: 58, tested: 0, unassayed: 58, pct: '0.0%' },
-      { family: 'Chactidae', total: 58, tested: 0, unassayed: 58, pct: '0.0%' },
-      { family: 'Euscorpiidae', total: 17, tested: 0, unassayed: 17, pct: '0.0%' },
-      { family: 'Chaerilidae', total: 17, tested: 0, unassayed: 17, pct: '0.0%' },
-      { family: 'Vaejovidae', total: 16, tested: 0, unassayed: 16, pct: '0.0%' },
-      { family: 'Hormuridae', total: 2, tested: 1, unassayed: 1, pct: '50.0%' },
-      { family: 'Caraboctonidae', total: 1, tested: 1, unassayed: 0, pct: '100.0%' }
-    ];
-
-    taxonomyMatrixEl.innerHTML = `
-      <div class="table-scroll">
-        <table class="gap-tax-table">
-          <thead>
-            <tr>
-              <th>الفصيلة التصنيفية (Family)</th>
-              <th>إجمالي الببتيدات</th>
-              <th>مفحوصة كمياً (MIC)</th>
-              <th>خلفية غير مفحوصة (Unassayed)</th>
-              <th>نسبة التغطية المخبرية</th>
-              <th>حالة الاستكشاف</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${taxonomyData.map(t => `
-              <tr>
-                <td class="font-bold" dir="ltr"><strong>${esc(t.family)}</strong></td>
-                <td class="mono">${t.total}</td>
-                <td class="mono ${t.tested > 0 ? 'text-success font-bold' : 'text-muted'}">${t.tested}</td>
-                <td class="mono text-muted">${t.unassayed}</td>
-                <td class="mono">${t.pct}</td>
-                <td>
-                  ${t.tested === 0
-                    ? '<span class="badge background">فصيلة غير مستكشفة مخبرياً</span>'
-                    : '<span class="badge measured">استكشاف جزئي محدود</span>'}
-                </td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      </div>
-    `;
-  }
-
-  // Gap tabs switcher
-  const gapTabPathogens = $('gap-tab-pathogens');
-  const gapTabTaxonomy = $('gap-tab-taxonomy');
-  const gapTabPriorities = $('gap-tab-priorities');
-  const gapPathogenSec = $('gap-pathogen-view');
-  const gapTaxonomySec = $('gap-taxonomy-view');
-  const gapPrioritiesSec = $('gap-priorities-view');
-
-  if (gapTabPathogens && gapTabTaxonomy && gapTabPriorities) {
-    function switchGapTab(tab) {
-      gapTabPathogens.classList.toggle('active', tab === 'pathogens');
-      gapTabTaxonomy.classList.toggle('active', tab === 'taxonomy');
-      gapTabPriorities.classList.toggle('active', tab === 'priorities');
-      gapPathogenSec.hidden = (tab !== 'pathogens');
-      gapTaxonomySec.hidden = (tab !== 'taxonomy');
-      gapPrioritiesSec.hidden = (tab !== 'priorities');
-    }
-    gapTabPathogens.addEventListener('click', () => switchGapTab('pathogens'));
-    gapTabTaxonomy.addEventListener('click', () => switchGapTab('taxonomy'));
-    gapTabPriorities.addEventListener('click', () => switchGapTab('priorities'));
-  }
-
+  
   // ============================================================================
+  // MOD-06: Authoritative Research Gap Analyzer Embedded Data & Logic (Sprint 07)
+  // ============================================================================
+  const RESEARCH_GAPS_DATA = [
+  {
+    "gap_id": "GAP-0044",
+    "peptide_canonical_id": "SCA-0002",
+    "peptide_name": "StigA25",
+    "species": "Tityus stigmurus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 93.75,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0002",
+      "venomlab": "#venomlab?id=SCA-0002",
+      "agent": "#agent?query=SCA-0002",
+      "target_explorer": "#target-explorer?peptide=SCA-0002",
+      "prioritization": "#prioritization?highlight=SCA-0002"
+    },
+    "priority_rank": 1
+  },
+  {
+    "gap_id": "GAP-0045",
+    "peptide_canonical_id": "SCA-0003",
+    "peptide_name": "StigA31",
+    "species": "Tityus stigmurus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 93.75,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0003",
+      "venomlab": "#venomlab?id=SCA-0003",
+      "agent": "#agent?query=SCA-0003",
+      "target_explorer": "#target-explorer?peptide=SCA-0003",
+      "prioritization": "#prioritization?highlight=SCA-0003"
+    },
+    "priority_rank": 2
+  },
+  {
+    "gap_id": "GAP-0049",
+    "peptide_canonical_id": "SCA-0007",
+    "peptide_name": "AaeAP1_K_analogue",
+    "species": "Androctonus aeneas",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 93.75,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0007",
+      "venomlab": "#venomlab?id=SCA-0007",
+      "agent": "#agent?query=SCA-0007",
+      "target_explorer": "#target-explorer?peptide=SCA-0007",
+      "prioritization": "#prioritization?highlight=SCA-0007"
+    },
+    "priority_rank": 3
+  },
+  {
+    "gap_id": "GAP-0051",
+    "peptide_canonical_id": "SCA-0009",
+    "peptide_name": "AaeAP2_K_analogue",
+    "species": "Androctonus aeneas",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 93.75,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0009",
+      "venomlab": "#venomlab?id=SCA-0009",
+      "agent": "#agent?query=SCA-0009",
+      "target_explorer": "#target-explorer?peptide=SCA-0009",
+      "prioritization": "#prioritization?highlight=SCA-0009"
+    },
+    "priority_rank": 4
+  },
+  {
+    "gap_id": "GAP-0056",
+    "peptide_canonical_id": "SCA-0017",
+    "peptide_name": "AcrAP1_K_analogue",
+    "species": "Androctonus crassicauda",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Almaaytah et al., Int J Biol Sci 2014; 10(9):982-995 (Table 2)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 93.75,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0017",
+      "venomlab": "#venomlab?id=SCA-0017",
+      "agent": "#agent?query=SCA-0017",
+      "target_explorer": "#target-explorer?peptide=SCA-0017",
+      "prioritization": "#prioritization?highlight=SCA-0017"
+    },
+    "priority_rank": 5
+  },
+  {
+    "gap_id": "GAP-0052",
+    "peptide_canonical_id": "SCA-0012",
+    "peptide_name": "IsCT1",
+    "species": "Opisthacanthus madagascariensis",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Dai et al., Biochem Biophys Res Commun 2001; 286(4):820-825 (Table 1, p. 822)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 91.25,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 85.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0012",
+      "venomlab": "#venomlab?id=SCA-0012",
+      "agent": "#agent?query=SCA-0012",
+      "target_explorer": "#target-explorer?peptide=SCA-0012",
+      "prioritization": "#prioritization?highlight=SCA-0012"
+    },
+    "priority_rank": 6
+  },
+  {
+    "gap_id": "GAP-0055",
+    "peptide_canonical_id": "SCA-0016",
+    "peptide_name": "AcrAP1",
+    "species": "Androctonus crassicauda",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Almaaytah et al., Int J Biol Sci 2014; 10(9):982-995 (Table 2)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 91.25,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 85.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0016",
+      "venomlab": "#venomlab?id=SCA-0016",
+      "agent": "#agent?query=SCA-0016",
+      "target_explorer": "#target-explorer?peptide=SCA-0016",
+      "prioritization": "#prioritization?highlight=SCA-0016"
+    },
+    "priority_rank": 7
+  },
+  {
+    "gap_id": "GAP-0002",
+    "peptide_canonical_id": "SCA-0002",
+    "peptide_name": "StigA25",
+    "species": "Tityus stigmurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 2.37 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 89.75,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 90.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0002",
+      "venomlab": "#venomlab?id=SCA-0002",
+      "agent": "#agent?query=SCA-0002",
+      "target_explorer": "#target-explorer?peptide=SCA-0002",
+      "prioritization": "#prioritization?highlight=SCA-0002"
+    },
+    "priority_rank": 8
+  },
+  {
+    "gap_id": "GAP-0003",
+    "peptide_canonical_id": "SCA-0003",
+    "peptide_name": "StigA31",
+    "species": "Tityus stigmurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 2.47 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 89.75,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 90.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0003",
+      "venomlab": "#venomlab?id=SCA-0003",
+      "agent": "#agent?query=SCA-0003",
+      "target_explorer": "#target-explorer?peptide=SCA-0003",
+      "prioritization": "#prioritization?highlight=SCA-0003"
+    },
+    "priority_rank": 9
+  },
+  {
+    "gap_id": "GAP-0007",
+    "peptide_canonical_id": "SCA-0007",
+    "peptide_name": "AaeAP1_K_analogue",
+    "species": "Androctonus aeneas",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 4.0 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 89.75,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 90.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0007",
+      "venomlab": "#venomlab?id=SCA-0007",
+      "agent": "#agent?query=SCA-0007",
+      "target_explorer": "#target-explorer?peptide=SCA-0007",
+      "prioritization": "#prioritization?highlight=SCA-0007"
+    },
+    "priority_rank": 10
+  },
+  {
+    "gap_id": "GAP-0009",
+    "peptide_canonical_id": "SCA-0009",
+    "peptide_name": "AaeAP2_K_analogue",
+    "species": "Androctonus aeneas",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 4.0 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 89.75,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 90.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0009",
+      "venomlab": "#venomlab?id=SCA-0009",
+      "agent": "#agent?query=SCA-0009",
+      "target_explorer": "#target-explorer?peptide=SCA-0009",
+      "prioritization": "#prioritization?highlight=SCA-0009"
+    },
+    "priority_rank": 11
+  },
+  {
+    "gap_id": "GAP-0017",
+    "peptide_canonical_id": "SCA-0017",
+    "peptide_name": "AcrAP1_K_analogue",
+    "species": "Androctonus crassicauda",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 8.3 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Almaaytah et al., Int J Biol Sci 2014; 10(9):982-995 (Table 2)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 89.75,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 90.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0017",
+      "venomlab": "#venomlab?id=SCA-0017",
+      "agent": "#agent?query=SCA-0017",
+      "target_explorer": "#target-explorer?peptide=SCA-0017",
+      "prioritization": "#prioritization?highlight=SCA-0017"
+    },
+    "priority_rank": 12
+  },
+  {
+    "gap_id": "GAP-0061",
+    "peptide_canonical_id": "SCA-0002",
+    "peptide_name": "StigA25",
+    "species": "Tityus stigmurus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 88.75,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0002",
+      "venomlab": "#venomlab?id=SCA-0002",
+      "agent": "#agent?query=SCA-0002",
+      "target_explorer": "#target-explorer?peptide=SCA-0002",
+      "prioritization": "#prioritization?highlight=SCA-0002"
+    },
+    "priority_rank": 13
+  },
+  {
+    "gap_id": "GAP-0062",
+    "peptide_canonical_id": "SCA-0003",
+    "peptide_name": "StigA31",
+    "species": "Tityus stigmurus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 88.75,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0003",
+      "venomlab": "#venomlab?id=SCA-0003",
+      "agent": "#agent?query=SCA-0003",
+      "target_explorer": "#target-explorer?peptide=SCA-0003",
+      "prioritization": "#prioritization?highlight=SCA-0003"
+    },
+    "priority_rank": 14
+  },
+  {
+    "gap_id": "GAP-0066",
+    "peptide_canonical_id": "SCA-0007",
+    "peptide_name": "AaeAP1_K_analogue",
+    "species": "Androctonus aeneas",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 88.75,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0007",
+      "venomlab": "#venomlab?id=SCA-0007",
+      "agent": "#agent?query=SCA-0007",
+      "target_explorer": "#target-explorer?peptide=SCA-0007",
+      "prioritization": "#prioritization?highlight=SCA-0007"
+    },
+    "priority_rank": 15
+  },
+  {
+    "gap_id": "GAP-0068",
+    "peptide_canonical_id": "SCA-0009",
+    "peptide_name": "AaeAP2_K_analogue",
+    "species": "Androctonus aeneas",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 88.75,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0009",
+      "venomlab": "#venomlab?id=SCA-0009",
+      "agent": "#agent?query=SCA-0009",
+      "target_explorer": "#target-explorer?peptide=SCA-0009",
+      "prioritization": "#prioritization?highlight=SCA-0009"
+    },
+    "priority_rank": 16
+  },
+  {
+    "gap_id": "GAP-0076",
+    "peptide_canonical_id": "SCA-0017",
+    "peptide_name": "AcrAP1_K_analogue",
+    "species": "Androctonus crassicauda",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Almaaytah et al., Int J Biol Sci 2014; 10(9):982-995 (Table 2)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 88.75,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0017",
+      "venomlab": "#venomlab?id=SCA-0017",
+      "agent": "#agent?query=SCA-0017",
+      "target_explorer": "#target-explorer?peptide=SCA-0017",
+      "prioritization": "#prioritization?highlight=SCA-0017"
+    },
+    "priority_rank": 17
+  },
+  {
+    "gap_id": "GAP-0129",
+    "peptide_canonical_id": "SCA-0002",
+    "peptide_name": "StigA25",
+    "species": "Tityus stigmurus",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 88.5,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0002",
+      "venomlab": "#venomlab?id=SCA-0002",
+      "agent": "#agent?query=SCA-0002",
+      "target_explorer": "#target-explorer?peptide=SCA-0002",
+      "prioritization": "#prioritization?highlight=SCA-0002"
+    },
+    "priority_rank": 18
+  },
+  {
+    "gap_id": "GAP-0130",
+    "peptide_canonical_id": "SCA-0003",
+    "peptide_name": "StigA31",
+    "species": "Tityus stigmurus",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 88.5,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0003",
+      "venomlab": "#venomlab?id=SCA-0003",
+      "agent": "#agent?query=SCA-0003",
+      "target_explorer": "#target-explorer?peptide=SCA-0003",
+      "prioritization": "#prioritization?highlight=SCA-0003"
+    },
+    "priority_rank": 19
+  },
+  {
+    "gap_id": "GAP-0134",
+    "peptide_canonical_id": "SCA-0007",
+    "peptide_name": "AaeAP1_K_analogue",
+    "species": "Androctonus aeneas",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 88.5,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0007",
+      "venomlab": "#venomlab?id=SCA-0007",
+      "agent": "#agent?query=SCA-0007",
+      "target_explorer": "#target-explorer?peptide=SCA-0007",
+      "prioritization": "#prioritization?highlight=SCA-0007"
+    },
+    "priority_rank": 20
+  },
+  {
+    "gap_id": "GAP-0136",
+    "peptide_canonical_id": "SCA-0009",
+    "peptide_name": "AaeAP2_K_analogue",
+    "species": "Androctonus aeneas",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 88.5,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0009",
+      "venomlab": "#venomlab?id=SCA-0009",
+      "agent": "#agent?query=SCA-0009",
+      "target_explorer": "#target-explorer?peptide=SCA-0009",
+      "prioritization": "#prioritization?highlight=SCA-0009"
+    },
+    "priority_rank": 21
+  },
+  {
+    "gap_id": "GAP-0144",
+    "peptide_canonical_id": "SCA-0017",
+    "peptide_name": "AcrAP1_K_analogue",
+    "species": "Androctonus crassicauda",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 88.5,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 95.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0017",
+      "venomlab": "#venomlab?id=SCA-0017",
+      "agent": "#agent?query=SCA-0017",
+      "target_explorer": "#target-explorer?peptide=SCA-0017",
+      "prioritization": "#prioritization?highlight=SCA-0017"
+    },
+    "priority_rank": 22
+  },
+  {
+    "gap_id": "GAP-0043",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "species": "Tityus stigmurus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 87.5,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0001",
+      "venomlab": "#venomlab?id=SCA-0001",
+      "agent": "#agent?query=SCA-0001",
+      "target_explorer": "#target-explorer?peptide=SCA-0001",
+      "prioritization": "#prioritization?highlight=SCA-0001"
+    },
+    "priority_rank": 23
+  },
+  {
+    "gap_id": "GAP-0046",
+    "peptide_canonical_id": "SCA-0004",
+    "peptide_name": "StigA6",
+    "species": "Tityus stigmurus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Tareau et al., Front Microbiol 2026; 15:1827386",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 87.5,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0004",
+      "venomlab": "#venomlab?id=SCA-0004",
+      "agent": "#agent?query=SCA-0004",
+      "target_explorer": "#target-explorer?peptide=SCA-0004",
+      "prioritization": "#prioritization?highlight=SCA-0004"
+    },
+    "priority_rank": 24
+  },
+  {
+    "gap_id": "GAP-0047",
+    "peptide_canonical_id": "SCA-0005",
+    "peptide_name": "StigA16",
+    "species": "Tityus stigmurus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Tareau et al., Front Microbiol 2026; 15:1827386",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 87.5,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0005",
+      "venomlab": "#venomlab?id=SCA-0005",
+      "agent": "#agent?query=SCA-0005",
+      "target_explorer": "#target-explorer?peptide=SCA-0005",
+      "prioritization": "#prioritization?highlight=SCA-0005"
+    },
+    "priority_rank": 25
+  },
+  {
+    "gap_id": "GAP-0048",
+    "peptide_canonical_id": "SCA-0006",
+    "peptide_name": "AaeAP1",
+    "species": "Androctonus aeneas",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 87.5,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0006",
+      "venomlab": "#venomlab?id=SCA-0006",
+      "agent": "#agent?query=SCA-0006",
+      "target_explorer": "#target-explorer?peptide=SCA-0006",
+      "prioritization": "#prioritization?highlight=SCA-0006"
+    },
+    "priority_rank": 26
+  },
+  {
+    "gap_id": "GAP-0050",
+    "peptide_canonical_id": "SCA-0008",
+    "peptide_name": "AaeAP2",
+    "species": "Androctonus aeneas",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 87.5,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0008",
+      "venomlab": "#venomlab?id=SCA-0008",
+      "agent": "#agent?query=SCA-0008",
+      "target_explorer": "#target-explorer?peptide=SCA-0008",
+      "prioritization": "#prioritization?highlight=SCA-0008"
+    },
+    "priority_rank": 27
+  },
+  {
+    "gap_id": "GAP-0053",
+    "peptide_canonical_id": "SCA-0014",
+    "peptide_name": "ToAP1",
+    "species": "Tityus obscurus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Guilhelmelli et al., Front Microbiol 2016; 7:1844 (Table 3)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 87.5,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0014",
+      "venomlab": "#venomlab?id=SCA-0014",
+      "agent": "#agent?query=SCA-0014",
+      "target_explorer": "#target-explorer?peptide=SCA-0014",
+      "prioritization": "#prioritization?highlight=SCA-0014"
+    },
+    "priority_rank": 28
+  },
+  {
+    "gap_id": "GAP-0054",
+    "peptide_canonical_id": "SCA-0015",
+    "peptide_name": "ToAP3",
+    "species": "Tityus obscurus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Guilhelmelli et al., Front Microbiol 2016; 7:1844 (Table 3)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 87.5,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0015",
+      "venomlab": "#venomlab?id=SCA-0015",
+      "agent": "#agent?query=SCA-0015",
+      "target_explorer": "#target-explorer?peptide=SCA-0015",
+      "prioritization": "#prioritization?highlight=SCA-0015"
+    },
+    "priority_rank": 29
+  },
+  {
+    "gap_id": "GAP-0057",
+    "peptide_canonical_id": "SCA-0018",
+    "peptide_name": "Hadrurin",
+    "species": "Hadrurus aztecus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Torres-Larios et al., Eur J Biochem 2000; 267(16):5023-5031 (Table 2, p. 5026)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 87.5,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0018",
+      "venomlab": "#venomlab?id=SCA-0018",
+      "agent": "#agent?query=SCA-0018",
+      "target_explorer": "#target-explorer?peptide=SCA-0018",
+      "prioritization": "#prioritization?highlight=SCA-0018"
+    },
+    "priority_rank": 30
+  },
+  {
+    "gap_id": "GAP-0058",
+    "peptide_canonical_id": "SCA-0019",
+    "peptide_name": "Scorpine",
+    "species": "Pandinus imperator",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Conde et al., FEBS Lett 2000; 471(2-3):165-168 (Figure 3, p. 167)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 87.5,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0019",
+      "venomlab": "#venomlab?id=SCA-0019",
+      "agent": "#agent?query=SCA-0019",
+      "target_explorer": "#target-explorer?peptide=SCA-0019",
+      "prioritization": "#prioritization?highlight=SCA-0019"
+    },
+    "priority_rank": 31
+  },
+  {
+    "gap_id": "GAP-0059",
+    "peptide_canonical_id": "SCA-0020",
+    "peptide_name": "Parabutoporin",
+    "species": "Parabuthus schlechteri",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of multi-point sigmoidal HC50 concentration-response curve (single-dose screen only)",
+    "specific_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / منحنى غير مكتمل",
+    "available_supporting_observations": "Literature reports only single-dose screening or minimal lysis at fixed concentration (e.g., <10% at 100-150 µM).",
+    "why_missing_evidence_matters": "Single-dose lysis cannot fit a 4-parameter Hill equation. Without a genuine numerical HC50, a mathematically defensible Therapeutic Selectivity Index (SI = HC50 / MIC) cannot be computed, enforcing a Null SI shield.",
+    "relevant_assay_context": "Spectrophotometric hemoglobin release at 540 nm from freshly isolated human erythrocytes (hRBC) across 8 serial concentrations (0.5 to 500 µM).",
+    "evidence_provenance": "Moerman, Verdonck et al., Eur J Biochem 2002; 269(19):4799-4810 (Table 1)",
+    "confidence_level": "High (Verified from Sprint 05 authoritative hemolysis evidence audit)",
+    "uncertainty_and_limitations": "Low single-dose hemolysis is a favorable preliminary signal, but cannot rule out steep cooperativity at slightly higher concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Multi-point serial dilution hemolysis assay (0.1 to 500 µM, 8 concentrations in triplicate) against human erythrocytes (hRBC) with 1% Triton X-100 positive control and sigmoidal curve fitting.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني.",
+    "priority_score": 87.5,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0020",
+      "venomlab": "#venomlab?id=SCA-0020",
+      "agent": "#agent?query=SCA-0020",
+      "target_explorer": "#target-explorer?peptide=SCA-0020",
+      "prioritization": "#prioritization?highlight=SCA-0020"
+    },
+    "priority_rank": 32
+  },
+  {
+    "gap_id": "GAP-0022",
+    "peptide_canonical_id": "SCA-0002",
+    "peptide_name": "StigA25",
+    "species": "Tityus stigmurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 86.75,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0002",
+      "venomlab": "#venomlab?id=SCA-0002",
+      "agent": "#agent?query=SCA-0002",
+      "target_explorer": "#target-explorer?peptide=SCA-0002",
+      "prioritization": "#prioritization?highlight=SCA-0002"
+    },
+    "priority_rank": 33
+  },
+  {
+    "gap_id": "GAP-0023",
+    "peptide_canonical_id": "SCA-0003",
+    "peptide_name": "StigA31",
+    "species": "Tityus stigmurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 86.75,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0003",
+      "venomlab": "#venomlab?id=SCA-0003",
+      "agent": "#agent?query=SCA-0003",
+      "target_explorer": "#target-explorer?peptide=SCA-0003",
+      "prioritization": "#prioritization?highlight=SCA-0003"
+    },
+    "priority_rank": 34
+  },
+  {
+    "gap_id": "GAP-0027",
+    "peptide_canonical_id": "SCA-0007",
+    "peptide_name": "AaeAP1_K_analogue",
+    "species": "Androctonus aeneas",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 86.75,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0007",
+      "venomlab": "#venomlab?id=SCA-0007",
+      "agent": "#agent?query=SCA-0007",
+      "target_explorer": "#target-explorer?peptide=SCA-0007",
+      "prioritization": "#prioritization?highlight=SCA-0007"
+    },
+    "priority_rank": 35
+  },
+  {
+    "gap_id": "GAP-0029",
+    "peptide_canonical_id": "SCA-0009",
+    "peptide_name": "AaeAP2_K_analogue",
+    "species": "Androctonus aeneas",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 86.75,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0009",
+      "venomlab": "#venomlab?id=SCA-0009",
+      "agent": "#agent?query=SCA-0009",
+      "target_explorer": "#target-explorer?peptide=SCA-0009",
+      "prioritization": "#prioritization?highlight=SCA-0009"
+    },
+    "priority_rank": 36
+  },
+  {
+    "gap_id": "GAP-0037",
+    "peptide_canonical_id": "SCA-0017",
+    "peptide_name": "AcrAP1_K_analogue",
+    "species": "Androctonus crassicauda",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Almaaytah et al., Int J Biol Sci 2014; 10(9):982-995 (Table 2)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 86.75,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0017",
+      "venomlab": "#venomlab?id=SCA-0017",
+      "agent": "#agent?query=SCA-0017",
+      "target_explorer": "#target-explorer?peptide=SCA-0017",
+      "prioritization": "#prioritization?highlight=SCA-0017"
+    },
+    "priority_rank": 37
+  },
+  {
+    "gap_id": "GAP-0069",
+    "peptide_canonical_id": "SCA-0010",
+    "peptide_name": "BmKn2",
+    "species": "Mesobuthus martensii",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Zeng et al., Peptides 2004; 25(2):143-150 (Table 1, p. 146)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 86.25,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 80.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0010",
+      "venomlab": "#venomlab?id=SCA-0010",
+      "agent": "#agent?query=SCA-0010",
+      "target_explorer": "#target-explorer?peptide=SCA-0010",
+      "prioritization": "#prioritization?highlight=SCA-0010"
+    },
+    "priority_rank": 38
+  },
+  {
+    "gap_id": "GAP-0070",
+    "peptide_canonical_id": "SCA-0011",
+    "peptide_name": "Kn2-7",
+    "species": "Mesobuthus martensii",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Cao et al., PLoS ONE 2012; 7(7):e40135 (Table 1)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 86.25,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 80.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0011",
+      "venomlab": "#venomlab?id=SCA-0011",
+      "agent": "#agent?query=SCA-0011",
+      "target_explorer": "#target-explorer?peptide=SCA-0011",
+      "prioritization": "#prioritization?highlight=SCA-0011"
+    },
+    "priority_rank": 39
+  },
+  {
+    "gap_id": "GAP-0071",
+    "peptide_canonical_id": "SCA-0012",
+    "peptide_name": "IsCT1",
+    "species": "Opisthacanthus madagascariensis",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Dai et al., Biochem Biophys Res Commun 2001; 286(4):820-825 (Table 1, p. 822)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 86.25,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 80.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0012",
+      "venomlab": "#venomlab?id=SCA-0012",
+      "agent": "#agent?query=SCA-0012",
+      "target_explorer": "#target-explorer?peptide=SCA-0012",
+      "prioritization": "#prioritization?highlight=SCA-0012"
+    },
+    "priority_rank": 40
+  },
+  {
+    "gap_id": "GAP-0072",
+    "peptide_canonical_id": "SCA-0013",
+    "peptide_name": "Hp1404",
+    "species": "Heterometrus petersii",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Chen et al., PLoS ONE 2014; 9(5):e97539 (Table 1)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 86.25,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 80.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0013",
+      "venomlab": "#venomlab?id=SCA-0013",
+      "agent": "#agent?query=SCA-0013",
+      "target_explorer": "#target-explorer?peptide=SCA-0013",
+      "prioritization": "#prioritization?highlight=SCA-0013"
+    },
+    "priority_rank": 41
+  },
+  {
+    "gap_id": "GAP-0075",
+    "peptide_canonical_id": "SCA-0016",
+    "peptide_name": "AcrAP1",
+    "species": "Androctonus crassicauda",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Almaaytah et al., Int J Biol Sci 2014; 10(9):982-995 (Table 2)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 86.25,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 80.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0016",
+      "venomlab": "#venomlab?id=SCA-0016",
+      "agent": "#agent?query=SCA-0016",
+      "target_explorer": "#target-explorer?peptide=SCA-0016",
+      "prioritization": "#prioritization?highlight=SCA-0016"
+    },
+    "priority_rank": 42
+  },
+  {
+    "gap_id": "GAP-0011",
+    "peptide_canonical_id": "SCA-0011",
+    "peptide_name": "Kn2-7",
+    "species": "Mesobuthus martensii",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 3.13 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Cao et al., PLoS ONE 2012; 7(7):e40135 (Table 1)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 86.0,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 90.0,
+      "lead_relevance": 80.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0011",
+      "venomlab": "#venomlab?id=SCA-0011",
+      "agent": "#agent?query=SCA-0011",
+      "target_explorer": "#target-explorer?peptide=SCA-0011",
+      "prioritization": "#prioritization?highlight=SCA-0011"
+    },
+    "priority_rank": 43
+  },
+  {
+    "gap_id": "GAP-0012",
+    "peptide_canonical_id": "SCA-0012",
+    "peptide_name": "IsCT1",
+    "species": "Opisthacanthus madagascariensis",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 9.39 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Dai et al., Biochem Biophys Res Commun 2001; 286(4):820-825 (Table 1, p. 822)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 86.0,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 90.0,
+      "lead_relevance": 80.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0012",
+      "venomlab": "#venomlab?id=SCA-0012",
+      "agent": "#agent?query=SCA-0012",
+      "target_explorer": "#target-explorer?peptide=SCA-0012",
+      "prioritization": "#prioritization?highlight=SCA-0012"
+    },
+    "priority_rank": 44
+  },
+  {
+    "gap_id": "GAP-0013",
+    "peptide_canonical_id": "SCA-0013",
+    "peptide_name": "Hp1404",
+    "species": "Heterometrus petersii",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 6.25 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Chen et al., PLoS ONE 2014; 9(5):e97539 (Table 1)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 86.0,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 90.0,
+      "lead_relevance": 80.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0013",
+      "venomlab": "#venomlab?id=SCA-0013",
+      "agent": "#agent?query=SCA-0013",
+      "target_explorer": "#target-explorer?peptide=SCA-0013",
+      "prioritization": "#prioritization?highlight=SCA-0013"
+    },
+    "priority_rank": 45
+  },
+  {
+    "gap_id": "GAP-0137",
+    "peptide_canonical_id": "SCA-0010",
+    "peptide_name": "BmKn2",
+    "species": "Mesobuthus martensii",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 86.0,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 85.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0010",
+      "venomlab": "#venomlab?id=SCA-0010",
+      "agent": "#agent?query=SCA-0010",
+      "target_explorer": "#target-explorer?peptide=SCA-0010",
+      "prioritization": "#prioritization?highlight=SCA-0010"
+    },
+    "priority_rank": 46
+  },
+  {
+    "gap_id": "GAP-0138",
+    "peptide_canonical_id": "SCA-0011",
+    "peptide_name": "Kn2-7",
+    "species": "Mesobuthus martensii",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 86.0,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 85.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0011",
+      "venomlab": "#venomlab?id=SCA-0011",
+      "agent": "#agent?query=SCA-0011",
+      "target_explorer": "#target-explorer?peptide=SCA-0011",
+      "prioritization": "#prioritization?highlight=SCA-0011"
+    },
+    "priority_rank": 47
+  },
+  {
+    "gap_id": "GAP-0139",
+    "peptide_canonical_id": "SCA-0012",
+    "peptide_name": "IsCT1",
+    "species": "Opisthacanthus madagascariensis",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 86.0,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 85.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0012",
+      "venomlab": "#venomlab?id=SCA-0012",
+      "agent": "#agent?query=SCA-0012",
+      "target_explorer": "#target-explorer?peptide=SCA-0012",
+      "prioritization": "#prioritization?highlight=SCA-0012"
+    },
+    "priority_rank": 48
+  },
+  {
+    "gap_id": "GAP-0140",
+    "peptide_canonical_id": "SCA-0013",
+    "peptide_name": "Hp1404",
+    "species": "Heterometrus petersii",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 86.0,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 85.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0013",
+      "venomlab": "#venomlab?id=SCA-0013",
+      "agent": "#agent?query=SCA-0013",
+      "target_explorer": "#target-explorer?peptide=SCA-0013",
+      "prioritization": "#prioritization?highlight=SCA-0013"
+    },
+    "priority_rank": 49
+  },
+  {
+    "gap_id": "GAP-0143",
+    "peptide_canonical_id": "SCA-0016",
+    "peptide_name": "AcrAP1",
+    "species": "Androctonus crassicauda",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 86.0,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 85.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0016",
+      "venomlab": "#venomlab?id=SCA-0016",
+      "agent": "#agent?query=SCA-0016",
+      "target_explorer": "#target-explorer?peptide=SCA-0016",
+      "prioritization": "#prioritization?highlight=SCA-0016"
+    },
+    "priority_rank": 50
+  },
+  {
+    "gap_id": "GAP-0151",
+    "peptide_canonical_id": "REF-CLTX",
+    "peptide_name": "Chlorotoxin",
+    "species": "Leiurus quinquestriatus",
+    "gap_category": "evidence_provenance",
+    "gap_category_name_en": "Evidence Provenance & Dispute Gaps",
+    "gap_category_name_ar": "فجوات أصل الأدلة والنزاعات العلمية",
+    "specific_missing_evidence": "Disputed direct molecular target: ClC-3 pore block vs MMP-2 / Annexin A2 / NRP-1 surface complex binding",
+    "specific_missing_evidence_ar": "الهدف الجزيئي المباشر محل نزاع علمي: غلق مسام ClC-3 مقابل الارتباط بمعقد سطحي خماسي (MMP-2/Annexin A2/NRP-1)",
+    "evidence_status": "disputed_evidence",
+    "evidence_status_label_en": "Disputed Scientific Evidence",
+    "evidence_status_label_ar": "دليل علمي محل نزاع",
+    "available_supporting_observations": "DeBin et al. 1993 reported low-conductance chloride channel inhibition in glioma, but modern studies show recombinant pure ClC-3 is an intracellular antiporter unaffected by chlorotoxin.",
+    "why_missing_evidence_matters": "Resolving the exact biophysical binding partner is critical for the clinical development of tumor-targeting chlorotoxin conjugates and radiopharmaceuticals (e.g., BLZ-100 tumor paint).",
+    "relevant_assay_context": "Recombinant pure human ClC-3 electrophysiology alongside MMP-2 / Annexin A2 / NRP-1 surface binding and co-immunoprecipitation assays.",
+    "evidence_provenance": "DeBin et al. 1993 (PMID: 8383429); modern consensus (PMID: 21876541, 16186806)",
+    "confidence_level": "High (Dispute is well-documented in peer-reviewed biophysical literature)",
+    "uncertainty_and_limitations": "Chlorotoxin binds glioma cells with high affinity, but direct pore block of ClC-3 is widely refuted; secondary endocytosis of surface complexes is the accepted mechanism.",
+    "proposed_experiment_en": "Proposed Experiment: Parallel comparative evaluation of chlorotoxin binding to recombinant ClC-3 in planar bilayers vs surface plasmon resonance (SPR) on immobilized purified MMP-2 and Annexin A2 proteins.",
+    "proposed_experiment_ar": "مقترح تجريبي: مقارنة مخبرية متوازية لارتباط الكلوروتوكسين بقناة ClC-3 النقية في أغشية BLM مقابل قياس رنين البلازمون السطحي (SPR) على بروتينات MMP-2 و Annexin A2 المنقاة.",
+    "priority_score": 86.0,
+    "scoring_components": {
+      "uncertainty_reduction": 95.0,
+      "activity_context": 90.0,
+      "lead_relevance": 80.0,
+      "experimental_feasibility": 75.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=REF-CLTX",
+      "venomlab": "#venomlab?id=REF-CLTX",
+      "agent": "#agent?query=REF-CLTX",
+      "target_explorer": "#target-explorer?peptide=REF-CLTX",
+      "prioritization": "#prioritization?highlight=REF-CLTX"
+    },
+    "priority_rank": 51
+  },
+  {
+    "gap_id": "GAP-0030",
+    "peptide_canonical_id": "SCA-0010",
+    "peptide_name": "BmKn2",
+    "species": "Mesobuthus martensii",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Zeng et al., Peptides 2004; 25(2):143-150 (Table 1, p. 146)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 83.0,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 75.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0010",
+      "venomlab": "#venomlab?id=SCA-0010",
+      "agent": "#agent?query=SCA-0010",
+      "target_explorer": "#target-explorer?peptide=SCA-0010",
+      "prioritization": "#prioritization?highlight=SCA-0010"
+    },
+    "priority_rank": 52
+  },
+  {
+    "gap_id": "GAP-0031",
+    "peptide_canonical_id": "SCA-0011",
+    "peptide_name": "Kn2-7",
+    "species": "Mesobuthus martensii",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Cao et al., PLoS ONE 2012; 7(7):e40135 (Table 1)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 83.0,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 75.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0011",
+      "venomlab": "#venomlab?id=SCA-0011",
+      "agent": "#agent?query=SCA-0011",
+      "target_explorer": "#target-explorer?peptide=SCA-0011",
+      "prioritization": "#prioritization?highlight=SCA-0011"
+    },
+    "priority_rank": 53
+  },
+  {
+    "gap_id": "GAP-0032",
+    "peptide_canonical_id": "SCA-0012",
+    "peptide_name": "IsCT1",
+    "species": "Opisthacanthus madagascariensis",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Dai et al., Biochem Biophys Res Commun 2001; 286(4):820-825 (Table 1, p. 822)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 83.0,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 75.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0012",
+      "venomlab": "#venomlab?id=SCA-0012",
+      "agent": "#agent?query=SCA-0012",
+      "target_explorer": "#target-explorer?peptide=SCA-0012",
+      "prioritization": "#prioritization?highlight=SCA-0012"
+    },
+    "priority_rank": 54
+  },
+  {
+    "gap_id": "GAP-0033",
+    "peptide_canonical_id": "SCA-0013",
+    "peptide_name": "Hp1404",
+    "species": "Heterometrus petersii",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Chen et al., PLoS ONE 2014; 9(5):e97539 (Table 1)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 83.0,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 75.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0013",
+      "venomlab": "#venomlab?id=SCA-0013",
+      "agent": "#agent?query=SCA-0013",
+      "target_explorer": "#target-explorer?peptide=SCA-0013",
+      "prioritization": "#prioritization?highlight=SCA-0013"
+    },
+    "priority_rank": 55
+  },
+  {
+    "gap_id": "GAP-0036",
+    "peptide_canonical_id": "SCA-0016",
+    "peptide_name": "AcrAP1",
+    "species": "Androctonus crassicauda",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Almaaytah et al., Int J Biol Sci 2014; 10(9):982-995 (Table 2)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 83.0,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 75.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0016",
+      "venomlab": "#venomlab?id=SCA-0016",
+      "agent": "#agent?query=SCA-0016",
+      "target_explorer": "#target-explorer?peptide=SCA-0016",
+      "prioritization": "#prioritization?highlight=SCA-0016"
+    },
+    "priority_rank": 56
+  },
+  {
+    "gap_id": "GAP-0104",
+    "peptide_canonical_id": "REF-AAH2",
+    "peptide_name": "AaH2",
+    "species": "Androctonus australis Hector",
+    "gap_category": "target_specificity",
+    "gap_category_name_en": "Target Specificity & Subtype Gaps",
+    "gap_category_name_ar": "فجوات نوعية الهدف والنمط الفرعي",
+    "specific_missing_evidence": "Quantitative Kd measured on native rat brain synaptosomes, not cloned recombinant human Nav1.2",
+    "specific_missing_evidence_ar": "الألفة الكمية (Kd) مقاسة على جسيمات مشبكية لدماغ الجرذ وليس على قناة Nav1.2 البشرية المؤتلفة المعزولة",
+    "evidence_status": "species_or_subtype_mismatch",
+    "evidence_status_label_en": "Species / Subtype Mismatch",
+    "evidence_status_label_ar": "عدم تطابق الكائن أو النمط الفرعي",
+    "available_supporting_observations": "Competitive binding of [125I]-AaH2 to rat brain synaptosomes yielded Kd ~ 0.4 nM on mixed native rat VGSCs.",
+    "why_missing_evidence_matters": "Extracellular loops in Domain IV S3-S4 of Nav1.2 differ between rodent and human channels; rat brain synaptosomes contain a mixture of Nav1.2, Nav1.1, and Nav1.6, preventing pure human subtype Kd attribution.",
+    "relevant_assay_context": "Whole-cell patch clamp electrophysiology on recombinant human Nav1.2 (SCN2A) stably expressed in HEK293 cells.",
+    "evidence_provenance": "Cestèle & Catterall, Biochimie 2000; 82(9-10):883-892 (PMID: 11086218)",
+    "confidence_level": "High (Peer-reviewed primary paper explicitly used rat brain preparation)",
+    "uncertainty_and_limitations": "AaH2 is definitively a potent Site-3 Alpha-toxin, but exact human Nav1.2 affinity vs human cardiac Nav1.5 or skeletal Nav1.4 remains uncalibrated.",
+    "proposed_experiment_en": "Proposed Experiment: Whole-cell patch clamp electrophysiology on HEK293 cells stably expressing recombinant human Nav1.2 (hSCN2A) to measure concentration-dependent slowing of fast inactivation and human subtype Kd.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص رقعة الجهد الكاملة (Whole-cell patch clamp) على خلايا HEK293 المعبرة عن قناة Nav1.2 البشرية المؤتلفة لقياس معدل تأخير التعطيل وثابت التفكك Kd البشري الدقيق.",
+    "priority_score": 82.75,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 90.0,
+      "lead_relevance": 75.0,
+      "experimental_feasibility": 80.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=REF-AAH2",
+      "venomlab": "#venomlab?id=REF-AAH2",
+      "agent": "#agent?query=REF-AAH2",
+      "target_explorer": "#target-explorer?peptide=REF-AAH2",
+      "prioritization": "#prioritization?highlight=REF-AAH2"
+    },
+    "priority_rank": 57
+  },
+  {
+    "gap_id": "GAP-0060",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "species": "Tityus stigmurus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 82.5,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0001",
+      "venomlab": "#venomlab?id=SCA-0001",
+      "agent": "#agent?query=SCA-0001",
+      "target_explorer": "#target-explorer?peptide=SCA-0001",
+      "prioritization": "#prioritization?highlight=SCA-0001"
+    },
+    "priority_rank": 58
+  },
+  {
+    "gap_id": "GAP-0063",
+    "peptide_canonical_id": "SCA-0004",
+    "peptide_name": "StigA6",
+    "species": "Tityus stigmurus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Tareau et al., Front Microbiol 2026; 15:1827386",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 82.5,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0004",
+      "venomlab": "#venomlab?id=SCA-0004",
+      "agent": "#agent?query=SCA-0004",
+      "target_explorer": "#target-explorer?peptide=SCA-0004",
+      "prioritization": "#prioritization?highlight=SCA-0004"
+    },
+    "priority_rank": 59
+  },
+  {
+    "gap_id": "GAP-0064",
+    "peptide_canonical_id": "SCA-0005",
+    "peptide_name": "StigA16",
+    "species": "Tityus stigmurus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Tareau et al., Front Microbiol 2026; 15:1827386",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 82.5,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0005",
+      "venomlab": "#venomlab?id=SCA-0005",
+      "agent": "#agent?query=SCA-0005",
+      "target_explorer": "#target-explorer?peptide=SCA-0005",
+      "prioritization": "#prioritization?highlight=SCA-0005"
+    },
+    "priority_rank": 60
+  },
+  {
+    "gap_id": "GAP-0065",
+    "peptide_canonical_id": "SCA-0006",
+    "peptide_name": "AaeAP1",
+    "species": "Androctonus aeneas",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 82.5,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0006",
+      "venomlab": "#venomlab?id=SCA-0006",
+      "agent": "#agent?query=SCA-0006",
+      "target_explorer": "#target-explorer?peptide=SCA-0006",
+      "prioritization": "#prioritization?highlight=SCA-0006"
+    },
+    "priority_rank": 61
+  },
+  {
+    "gap_id": "GAP-0067",
+    "peptide_canonical_id": "SCA-0008",
+    "peptide_name": "AaeAP2",
+    "species": "Androctonus aeneas",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 82.5,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0008",
+      "venomlab": "#venomlab?id=SCA-0008",
+      "agent": "#agent?query=SCA-0008",
+      "target_explorer": "#target-explorer?peptide=SCA-0008",
+      "prioritization": "#prioritization?highlight=SCA-0008"
+    },
+    "priority_rank": 62
+  },
+  {
+    "gap_id": "GAP-0073",
+    "peptide_canonical_id": "SCA-0014",
+    "peptide_name": "ToAP1",
+    "species": "Tityus obscurus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Guilhelmelli et al., Front Microbiol 2016; 7:1844 (Table 3)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 82.5,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0014",
+      "venomlab": "#venomlab?id=SCA-0014",
+      "agent": "#agent?query=SCA-0014",
+      "target_explorer": "#target-explorer?peptide=SCA-0014",
+      "prioritization": "#prioritization?highlight=SCA-0014"
+    },
+    "priority_rank": 63
+  },
+  {
+    "gap_id": "GAP-0074",
+    "peptide_canonical_id": "SCA-0015",
+    "peptide_name": "ToAP3",
+    "species": "Tityus obscurus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Guilhelmelli et al., Front Microbiol 2016; 7:1844 (Table 3)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 82.5,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0015",
+      "venomlab": "#venomlab?id=SCA-0015",
+      "agent": "#agent?query=SCA-0015",
+      "target_explorer": "#target-explorer?peptide=SCA-0015",
+      "prioritization": "#prioritization?highlight=SCA-0015"
+    },
+    "priority_rank": 64
+  },
+  {
+    "gap_id": "GAP-0077",
+    "peptide_canonical_id": "SCA-0018",
+    "peptide_name": "Hadrurin",
+    "species": "Hadrurus aztecus",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Torres-Larios et al., Eur J Biochem 2000; 267(16):5023-5031 (Table 2, p. 5026)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 82.5,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0018",
+      "venomlab": "#venomlab?id=SCA-0018",
+      "agent": "#agent?query=SCA-0018",
+      "target_explorer": "#target-explorer?peptide=SCA-0018",
+      "prioritization": "#prioritization?highlight=SCA-0018"
+    },
+    "priority_rank": 65
+  },
+  {
+    "gap_id": "GAP-0078",
+    "peptide_canonical_id": "SCA-0019",
+    "peptide_name": "Scorpine",
+    "species": "Pandinus imperator",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Conde et al., FEBS Lett 2000; 471(2-3):165-168 (Figure 3, p. 167)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 82.5,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0019",
+      "venomlab": "#venomlab?id=SCA-0019",
+      "agent": "#agent?query=SCA-0019",
+      "target_explorer": "#target-explorer?peptide=SCA-0019",
+      "prioritization": "#prioritization?highlight=SCA-0019"
+    },
+    "priority_rank": 66
+  },
+  {
+    "gap_id": "GAP-0079",
+    "peptide_canonical_id": "SCA-0020",
+    "peptide_name": "Parabutoporin",
+    "species": "Parabuthus schlechteri",
+    "gap_category": "hemolysis_and_safety",
+    "gap_category_name_en": "Hemolysis & Safety Gaps",
+    "gap_category_name_ar": "فجوات انحلال الدم والأمان الخلوي",
+    "specific_missing_evidence": "Absence of cytotoxicity evaluations against nucleated mammalian/human cell lines (HEK293, HepG2)",
+    "specific_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero nucleated human cell cytotoxicity records exist in the canonical literature for this peptide.",
+    "why_missing_evidence_matters": "Erythrocyte hemolysis tests only simple mechanical membrane rupture of non-nucleated cells lacking organelles, metabolic activity, and apoptosis pathways. Nucleated cell cytotoxicity (CC50 / IC50) is mandatory for therapeutic index evaluation.",
+    "relevant_assay_context": "MTT / CellTiter-Glo metabolic viability assay and LDH release on human embryonic kidney (HEK293) and human hepatoma (HepG2) cells (48h exposure).",
+    "evidence_provenance": "Moerman, Verdonck et al., Eur J Biochem 2002; 269(19):4799-4810 (Table 1)",
+    "confidence_level": "High (Canonical evidence records lack nucleated cell assays)",
+    "uncertainty_and_limitations": "Peptides with low erythrocyte hemolysis can still trigger mitochondrial apoptosis or metabolic shutdown in nucleated cells.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro cytotoxicity profiling via MTT metabolic viability and LDH membrane leakage assays against HEK293 and HepG2 cells across 0.5 to 200 µM (48h incubation).",
+    "proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة).",
+    "priority_score": 82.5,
+    "scoring_components": {
+      "uncertainty_reduction": 90.0,
+      "activity_context": 85.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0020",
+      "venomlab": "#venomlab?id=SCA-0020",
+      "agent": "#agent?query=SCA-0020",
+      "target_explorer": "#target-explorer?peptide=SCA-0020",
+      "prioritization": "#prioritization?highlight=SCA-0020"
+    },
+    "priority_rank": 67
+  },
+  {
+    "gap_id": "GAP-0010",
+    "peptide_canonical_id": "SCA-0010",
+    "peptide_name": "BmKn2",
+    "species": "Mesobuthus martensii",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 20.0 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Zeng et al., Peptides 2004; 25(2):143-150 (Table 1, p. 146)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 82.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 75.0,
+      "lead_relevance": 80.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0010",
+      "venomlab": "#venomlab?id=SCA-0010",
+      "agent": "#agent?query=SCA-0010",
+      "target_explorer": "#target-explorer?peptide=SCA-0010",
+      "prioritization": "#prioritization?highlight=SCA-0010"
+    },
+    "priority_rank": 68
+  },
+  {
+    "gap_id": "GAP-0016",
+    "peptide_canonical_id": "SCA-0016",
+    "peptide_name": "AcrAP1",
+    "species": "Androctonus crassicauda",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 15.68 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Almaaytah et al., Int J Biol Sci 2014; 10(9):982-995 (Table 2)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 82.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 75.0,
+      "lead_relevance": 80.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0016",
+      "venomlab": "#venomlab?id=SCA-0016",
+      "agent": "#agent?query=SCA-0016",
+      "target_explorer": "#target-explorer?peptide=SCA-0016",
+      "prioritization": "#prioritization?highlight=SCA-0016"
+    },
+    "priority_rank": 69
+  },
+  {
+    "gap_id": "GAP-0128",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "species": "Tityus stigmurus",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 82.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0001",
+      "venomlab": "#venomlab?id=SCA-0001",
+      "agent": "#agent?query=SCA-0001",
+      "target_explorer": "#target-explorer?peptide=SCA-0001",
+      "prioritization": "#prioritization?highlight=SCA-0001"
+    },
+    "priority_rank": 70
+  },
+  {
+    "gap_id": "GAP-0131",
+    "peptide_canonical_id": "SCA-0004",
+    "peptide_name": "StigA6",
+    "species": "Tityus stigmurus",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 82.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0004",
+      "venomlab": "#venomlab?id=SCA-0004",
+      "agent": "#agent?query=SCA-0004",
+      "target_explorer": "#target-explorer?peptide=SCA-0004",
+      "prioritization": "#prioritization?highlight=SCA-0004"
+    },
+    "priority_rank": 71
+  },
+  {
+    "gap_id": "GAP-0132",
+    "peptide_canonical_id": "SCA-0005",
+    "peptide_name": "StigA16",
+    "species": "Tityus stigmurus",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 82.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0005",
+      "venomlab": "#venomlab?id=SCA-0005",
+      "agent": "#agent?query=SCA-0005",
+      "target_explorer": "#target-explorer?peptide=SCA-0005",
+      "prioritization": "#prioritization?highlight=SCA-0005"
+    },
+    "priority_rank": 72
+  },
+  {
+    "gap_id": "GAP-0133",
+    "peptide_canonical_id": "SCA-0006",
+    "peptide_name": "AaeAP1",
+    "species": "Androctonus aeneas",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 82.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0006",
+      "venomlab": "#venomlab?id=SCA-0006",
+      "agent": "#agent?query=SCA-0006",
+      "target_explorer": "#target-explorer?peptide=SCA-0006",
+      "prioritization": "#prioritization?highlight=SCA-0006"
+    },
+    "priority_rank": 73
+  },
+  {
+    "gap_id": "GAP-0135",
+    "peptide_canonical_id": "SCA-0008",
+    "peptide_name": "AaeAP2",
+    "species": "Androctonus aeneas",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 82.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0008",
+      "venomlab": "#venomlab?id=SCA-0008",
+      "agent": "#agent?query=SCA-0008",
+      "target_explorer": "#target-explorer?peptide=SCA-0008",
+      "prioritization": "#prioritization?highlight=SCA-0008"
+    },
+    "priority_rank": 74
+  },
+  {
+    "gap_id": "GAP-0141",
+    "peptide_canonical_id": "SCA-0014",
+    "peptide_name": "ToAP1",
+    "species": "Tityus obscurus",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 82.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0014",
+      "venomlab": "#venomlab?id=SCA-0014",
+      "agent": "#agent?query=SCA-0014",
+      "target_explorer": "#target-explorer?peptide=SCA-0014",
+      "prioritization": "#prioritization?highlight=SCA-0014"
+    },
+    "priority_rank": 75
+  },
+  {
+    "gap_id": "GAP-0142",
+    "peptide_canonical_id": "SCA-0015",
+    "peptide_name": "ToAP3",
+    "species": "Tityus obscurus",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 82.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0015",
+      "venomlab": "#venomlab?id=SCA-0015",
+      "agent": "#agent?query=SCA-0015",
+      "target_explorer": "#target-explorer?peptide=SCA-0015",
+      "prioritization": "#prioritization?highlight=SCA-0015"
+    },
+    "priority_rank": 76
+  },
+  {
+    "gap_id": "GAP-0145",
+    "peptide_canonical_id": "SCA-0018",
+    "peptide_name": "Hadrurin",
+    "species": "Hadrurus aztecus",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 82.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0018",
+      "venomlab": "#venomlab?id=SCA-0018",
+      "agent": "#agent?query=SCA-0018",
+      "target_explorer": "#target-explorer?peptide=SCA-0018",
+      "prioritization": "#prioritization?highlight=SCA-0018"
+    },
+    "priority_rank": 77
+  },
+  {
+    "gap_id": "GAP-0146",
+    "peptide_canonical_id": "SCA-0019",
+    "peptide_name": "Scorpine",
+    "species": "Pandinus imperator",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 82.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0019",
+      "venomlab": "#venomlab?id=SCA-0019",
+      "agent": "#agent?query=SCA-0019",
+      "target_explorer": "#target-explorer?peptide=SCA-0019",
+      "prioritization": "#prioritization?highlight=SCA-0019"
+    },
+    "priority_rank": 78
+  },
+  {
+    "gap_id": "GAP-0147",
+    "peptide_canonical_id": "SCA-0020",
+    "peptide_name": "Parabutoporin",
+    "species": "Parabuthus schlechteri",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Absence of experimental human serum / plasma proteolytic half-life (t1/2) measurements",
+    "specific_missing_evidence_ar": "غياب القياسات المعملية لنصف عمر التحلل الإنزيمي في مصل وبلازما الدم البشري (t1/2)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Instability index is computed theoretically from amino acid sequence, but experimental serum incubation is absent.",
+    "why_missing_evidence_matters": "Linear L-amino acid cationic peptides are prone to rapid systemic proteolysis by circulating endopeptidases within minutes, rendering promising in vitro MIC values therapeutically inactive in vivo.",
+    "relevant_assay_context": "Incubation in 25% pooled human serum at 37°C for 0, 15, 30, 60, 120, 240, and 360 min with TFA precipitation and reverse-phase HPLC / LC-MS quantification.",
+    "evidence_provenance": "Atlas descriptor registry (Theoretical instability index only)",
+    "confidence_level": "High (No serum stability assays exist in canonical literature for candidate set)",
+    "uncertainty_and_limitations": "Theoretical instability index predicts stability, but does not identify specific protease cleavage sites or serum protein binding fractions.",
+    "proposed_experiment_en": "Proposed Experiment: In vitro human serum stability assay by incubating 10 µM peptide in 25% human serum at 37°C over 0-6 hours, followed by RP-HPLC/LC-MS/MS to quantify degradation kinetics and identify primary cleavage fragments.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الثبات في مصل الدم البشري بحضن 10 ميكرومولار من الببتيد في 25% مصل بشري عند 37 مئوية لمدة 0-6 ساعات، وتحليل نواتج التحلل عبر HPLC و LC-MS/MS لتحديد نصف العمر ونقاط الكسر.",
+    "priority_score": 82.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0020",
+      "venomlab": "#venomlab?id=SCA-0020",
+      "agent": "#agent?query=SCA-0020",
+      "target_explorer": "#target-explorer?peptide=SCA-0020",
+      "prioritization": "#prioritization?highlight=SCA-0020"
+    },
+    "priority_rank": 79
+  },
+  {
+    "gap_id": "GAP-0107",
+    "peptide_canonical_id": "SCA-0019",
+    "peptide_name": "Scorpine",
+    "species": "Pandinus imperator",
+    "gap_category": "target_specificity",
+    "gap_category_name_en": "Target Specificity & Subtype Gaps",
+    "gap_category_name_ar": "فجوات نوعية الهدف والنمط الفرعي",
+    "specific_missing_evidence": "Kv channel blockade demonstrated qualitatively in Xenopus oocytes; pure human Kv1.3 IC50 curve absent",
+    "specific_missing_evidence_ar": "تثبيط قنوات البوتاسيوم مثبت كيفياً في بويضات زينوبوس؛ غياب منحنى التركيز والاستجابة الكامل (IC50) لقناة Kv1.3 البشرية",
+    "evidence_status": "species_or_subtype_mismatch",
+    "evidence_status_label_en": "Species / Subtype Mismatch",
+    "evidence_status_label_ar": "عدم تطابق الكائن أو النمط الفرعي",
+    "available_supporting_observations": "Diego-García et al. 2008 demonstrated Kv current blockade by Scorpine defensin-like C-terminal domain, but numerical IC50 on human T-cell Kv1.3 was not established.",
+    "why_missing_evidence_matters": "Targeting human T-lymphocyte Kv1.3 for autoimmune immunosuppression requires high subtype selectivity over cardiac Kv1.5 and neuronal Kv1.1/Kv1.2.",
+    "relevant_assay_context": "Whole-cell patch clamp electrophysiology on human Jurkat T-cells or HEK293 expressing cloned human Kv1.3 (KCNA3).",
+    "evidence_provenance": "Diego-García et al., Cell Mol Life Sci 2008; 65(1):168-180 (PMID: 18030427)",
+    "confidence_level": "High (Primary paper lacks mammalian human Kv1.3 dose-response curve)",
+    "uncertainty_and_limitations": "Dual-activity chimeric architecture (cecropin + defensin) makes scorpine unique, but pharmacological potency on human T-cells is uncalibrated.",
+    "proposed_experiment_en": "Proposed Experiment: Whole-cell patch clamp electrophysiology on human Jurkat T-lymphocytes across 1 to 500 nM scorpine to determine human Kv1.3 IC50 and subtype selectivity over hKv1.1 and hKv1.5.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص رقعة الجهد الكاملة على خلايا T اللمفاوية البشرية (Jurkat) لتحديد تركيز التثبيط النصفي IC50 لقناة Kv1.3 البشرية والانتقائية مقارنة بقنوات Kv1.1 و Kv1.5.",
+    "priority_score": 81.5,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 85.0,
+      "lead_relevance": 75.0,
+      "experimental_feasibility": 80.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0019",
+      "venomlab": "#venomlab?id=SCA-0019",
+      "agent": "#agent?query=SCA-0019",
+      "target_explorer": "#target-explorer?peptide=SCA-0019",
+      "prioritization": "#prioritization?highlight=SCA-0019"
+    },
+    "priority_rank": 80
+  },
+  {
+    "gap_id": "GAP-0105",
+    "peptide_canonical_id": "REF-CTX",
+    "peptide_name": "Charybdotoxin",
+    "species": "Leiurus quinquestriatus",
+    "gap_category": "target_specificity",
+    "gap_category_name_en": "Target Specificity & Subtype Gaps",
+    "gap_category_name_ar": "فجوات نوعية الهدف والنمط الفرعي",
+    "specific_missing_evidence": "Single-channel Kd measured using native rat skeletal muscle vesicles, not cloned human KCa1.1 (KCNMA1)",
+    "specific_missing_evidence_ar": "ثابت التفكك (Kd) للمسام الفردية مقاس على حويصلات عضلية للجرذ وليس على قناة KCa1.1 البشرية المؤتلفة المستنسخة",
+    "evidence_status": "species_or_subtype_mismatch",
+    "evidence_status_label_en": "Species / Subtype Mismatch",
+    "evidence_status_label_ar": "عدم تطابق الكائن أو النمط الفرعي",
+    "available_supporting_observations": "Miller et al. 1985 reconstituted native rat skeletal muscle sarcolemmal vesicles into BLM, reporting apparent Kd ~ 1.7-2.1 nM.",
+    "why_missing_evidence_matters": "Human KCa1.1 (KCNMA1) co-assembles with distinct tissue-specific auxiliary beta subunits (beta1 in vascular smooth muscle, beta4 in brain) that dramatically alter charybdotoxin affinity.",
+    "relevant_assay_context": "Inside-out patch clamp on recombinant human KCa1.1 expressed in CHO cells with and without human beta subunits.",
+    "evidence_provenance": "Miller et al., Nature 1985; 313(6000):316-318 (PMID: 2578618)",
+    "confidence_level": "High (Native rat preparation confirmed from original Nature paper)",
+    "uncertainty_and_limitations": "Charybdotoxin is the gold-standard pore blocker for BK channels, but selectivity against human vascular smooth muscle BK complexes requires human subunit reconstitution.",
+    "proposed_experiment_en": "Proposed Experiment: Inside-out patch clamp electrophysiology on CHO cells expressing cloned human KCNMA1 (alpha alone vs alpha+beta1 and alpha+beta4) to determine human tissue-specific dissociation constants.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص رقعة الغشاء المعكوسة (Inside-out patch clamp) على خلايا CHO المستنسخ فيها جين KCNMA1 البشري بمفرده ومع الوحدات الفرعية بيتا1 وبيتا4 لتحديد ألفة الأنسجة البشرية.",
+    "priority_score": 80.0,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 90.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 80.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=REF-CTX",
+      "venomlab": "#venomlab?id=REF-CTX",
+      "agent": "#agent?query=REF-CTX",
+      "target_explorer": "#target-explorer?peptide=REF-CTX",
+      "prioritization": "#prioritization?highlight=REF-CTX"
+    },
+    "priority_rank": 81
+  },
+  {
+    "gap_id": "GAP-0106",
+    "peptide_canonical_id": "REF-TS1",
+    "peptide_name": "Ts1",
+    "species": "Tityus serrulatus",
+    "gap_category": "target_specificity",
+    "gap_category_name_en": "Target Specificity & Subtype Gaps",
+    "gap_category_name_ar": "فجوات نوعية الهدف والنمط الفرعي",
+    "specific_missing_evidence": "Activation shift EC50 measured on cloned rat Nav1.4 (rNav1.4), not recombinant human Nav1.4 (SCN4A)",
+    "specific_missing_evidence_ar": "تركيز التنشيط النصفي (EC50) مقاس على قناة Nav1.4 المستنسخة من الجرذ وليس على قناة Nav1.4 البشرية (SCN4A)",
+    "evidence_status": "species_or_subtype_mismatch",
+    "evidence_status_label_en": "Species / Subtype Mismatch",
+    "evidence_status_label_ar": "عدم تطابق الكائن أو النمط الفرعي",
+    "available_supporting_observations": "Peigneur et al. 2015 injected Xenopus oocytes with rat Nav1.4 cRNA, reporting EC50 = 12.4 nM for Site-4 activation shift.",
+    "why_missing_evidence_matters": "Amino acid variations in extracellular loops of human SCN4A vs rodent rSCN4A may shift the beta-toxin voltage-sensor trapping threshold.",
+    "relevant_assay_context": "Two-electrode voltage clamp in Xenopus oocytes expressing recombinant human Nav1.4 (hSCN4A).",
+    "evidence_provenance": "Peigneur et al., Neuropharmacology 2015; 95:319-329 (PMID: 25862296)",
+    "confidence_level": "High (Verified from Peigneur 2015 methods)",
+    "uncertainty_and_limitations": "Beta-toxin mechanism is well established, but exact human skeletal muscle sensitivity remains to be directly validated.",
+    "proposed_experiment_en": "Proposed Experiment: Two-electrode voltage clamp on Xenopus oocytes expressing human Nav1.4 (hSCN4A) co-expressed with human beta1 subunit to determine human subtype EC50.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص قياس الجهد ثنائي القطب على بويضات زينوبوس المعبرة عن قناة Nav1.4 البشرية (hSCN4A) مع الوحدة بيتا1 لحساب تركيز EC50 البشري الدقيق.",
+    "priority_score": 79.75,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 85.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=REF-TS1",
+      "venomlab": "#venomlab?id=REF-TS1",
+      "agent": "#agent?query=REF-TS1",
+      "target_explorer": "#target-explorer?peptide=REF-TS1",
+      "prioritization": "#prioritization?highlight=REF-TS1"
+    },
+    "priority_rank": 82
+  },
+  {
+    "gap_id": "GAP-0021",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "species": "Tityus stigmurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 79.25,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 60.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0001",
+      "venomlab": "#venomlab?id=SCA-0001",
+      "agent": "#agent?query=SCA-0001",
+      "target_explorer": "#target-explorer?peptide=SCA-0001",
+      "prioritization": "#prioritization?highlight=SCA-0001"
+    },
+    "priority_rank": 83
+  },
+  {
+    "gap_id": "GAP-0024",
+    "peptide_canonical_id": "SCA-0004",
+    "peptide_name": "StigA6",
+    "species": "Tityus stigmurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Tareau et al., Front Microbiol 2026; 15:1827386",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 79.25,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 60.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0004",
+      "venomlab": "#venomlab?id=SCA-0004",
+      "agent": "#agent?query=SCA-0004",
+      "target_explorer": "#target-explorer?peptide=SCA-0004",
+      "prioritization": "#prioritization?highlight=SCA-0004"
+    },
+    "priority_rank": 84
+  },
+  {
+    "gap_id": "GAP-0025",
+    "peptide_canonical_id": "SCA-0005",
+    "peptide_name": "StigA16",
+    "species": "Tityus stigmurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Tareau et al., Front Microbiol 2026; 15:1827386",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 79.25,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 60.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0005",
+      "venomlab": "#venomlab?id=SCA-0005",
+      "agent": "#agent?query=SCA-0005",
+      "target_explorer": "#target-explorer?peptide=SCA-0005",
+      "prioritization": "#prioritization?highlight=SCA-0005"
+    },
+    "priority_rank": 85
+  },
+  {
+    "gap_id": "GAP-0026",
+    "peptide_canonical_id": "SCA-0006",
+    "peptide_name": "AaeAP1",
+    "species": "Androctonus aeneas",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 79.25,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 60.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0006",
+      "venomlab": "#venomlab?id=SCA-0006",
+      "agent": "#agent?query=SCA-0006",
+      "target_explorer": "#target-explorer?peptide=SCA-0006",
+      "prioritization": "#prioritization?highlight=SCA-0006"
+    },
+    "priority_rank": 86
+  },
+  {
+    "gap_id": "GAP-0028",
+    "peptide_canonical_id": "SCA-0008",
+    "peptide_name": "AaeAP2",
+    "species": "Androctonus aeneas",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 79.25,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 60.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0008",
+      "venomlab": "#venomlab?id=SCA-0008",
+      "agent": "#agent?query=SCA-0008",
+      "target_explorer": "#target-explorer?peptide=SCA-0008",
+      "prioritization": "#prioritization?highlight=SCA-0008"
+    },
+    "priority_rank": 87
+  },
+  {
+    "gap_id": "GAP-0034",
+    "peptide_canonical_id": "SCA-0014",
+    "peptide_name": "ToAP1",
+    "species": "Tityus obscurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Guilhelmelli et al., Front Microbiol 2016; 7:1844 (Table 3)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 79.25,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 60.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0014",
+      "venomlab": "#venomlab?id=SCA-0014",
+      "agent": "#agent?query=SCA-0014",
+      "target_explorer": "#target-explorer?peptide=SCA-0014",
+      "prioritization": "#prioritization?highlight=SCA-0014"
+    },
+    "priority_rank": 88
+  },
+  {
+    "gap_id": "GAP-0035",
+    "peptide_canonical_id": "SCA-0015",
+    "peptide_name": "ToAP3",
+    "species": "Tityus obscurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Guilhelmelli et al., Front Microbiol 2016; 7:1844 (Table 3)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 79.25,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 60.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0015",
+      "venomlab": "#venomlab?id=SCA-0015",
+      "agent": "#agent?query=SCA-0015",
+      "target_explorer": "#target-explorer?peptide=SCA-0015",
+      "prioritization": "#prioritization?highlight=SCA-0015"
+    },
+    "priority_rank": 89
+  },
+  {
+    "gap_id": "GAP-0038",
+    "peptide_canonical_id": "SCA-0018",
+    "peptide_name": "Hadrurin",
+    "species": "Hadrurus aztecus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Torres-Larios et al., Eur J Biochem 2000; 267(16):5023-5031 (Table 2, p. 5026)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 79.25,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 60.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0018",
+      "venomlab": "#venomlab?id=SCA-0018",
+      "agent": "#agent?query=SCA-0018",
+      "target_explorer": "#target-explorer?peptide=SCA-0018",
+      "prioritization": "#prioritization?highlight=SCA-0018"
+    },
+    "priority_rank": 90
+  },
+  {
+    "gap_id": "GAP-0039",
+    "peptide_canonical_id": "SCA-0019",
+    "peptide_name": "Scorpine",
+    "species": "Pandinus imperator",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Conde et al., FEBS Lett 2000; 471(2-3):165-168 (Figure 3, p. 167)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 79.25,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 60.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0019",
+      "venomlab": "#venomlab?id=SCA-0019",
+      "agent": "#agent?query=SCA-0019",
+      "target_explorer": "#target-explorer?peptide=SCA-0019",
+      "prioritization": "#prioritization?highlight=SCA-0019"
+    },
+    "priority_rank": 91
+  },
+  {
+    "gap_id": "GAP-0040",
+    "peptide_canonical_id": "SCA-0020",
+    "peptide_name": "Parabutoporin",
+    "species": "Parabuthus schlechteri",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of Minimum Bactericidal Concentration (MBC) and bactericidal time-kill kinetics",
+    "specific_missing_evidence_ar": "غياب قياسات تركيز القتل الأدنى (MBC) وحركية القتل الزمني المباشر للبكتيريا",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Broth microdilution MIC reported, but secondary CFU plating from clear wells was not conducted.",
+    "why_missing_evidence_matters": "MIC measures phenotypic turbidity arrest but cannot differentiate between reversible bacteriostatic inhibition and rapid irreversible bactericidal lysis (MBC/MIC ratio <= 4).",
+    "relevant_assay_context": "CFU plating on nutrient agar following CLSI M26-A guidance to determine minimum concentration causing >=99.9% (3-log10) bacterial reduction after 24h.",
+    "evidence_provenance": "Moerman, Verdonck et al., Eur J Biochem 2002; 269(19):4799-4810 (Table 1)",
+    "confidence_level": "High (Verified absence of mbc_value_um across all atlas evidence records)",
+    "uncertainty_and_limitations": "Without time-kill curves, potential post-antibiotic effect (PAE) and resistance emergence rates remain unquantified.",
+    "proposed_experiment_en": "Proposed Experiment: Colony-forming unit (CFU) spot plating from clear 96-well MIC plates on Mueller-Hinton agar after 24h incubation, plus time-kill kinetics at 1x, 2x, and 4x MIC over 0-24h.",
+    "proposed_experiment_ar": "مقترح تجريبي: زرع عينات من الحفر الشفافة في أطباق MIC على آغار مولر-هنتون بعد 24 ساعة، مع فحص منحنيات القتل الزمني عند 1x و 2x و 4x من تركيز MIC خلال فترات من 0 إلى 24 ساعة.",
+    "priority_score": 79.25,
+    "scoring_components": {
+      "uncertainty_reduction": 80.0,
+      "activity_context": 85.0,
+      "lead_relevance": 60.0,
+      "experimental_feasibility": 95.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0020",
+      "venomlab": "#venomlab?id=SCA-0020",
+      "agent": "#agent?query=SCA-0020",
+      "target_explorer": "#target-explorer?peptide=SCA-0020",
+      "prioritization": "#prioritization?highlight=SCA-0020"
+    },
+    "priority_rank": 92
+  },
+  {
+    "gap_id": "GAP-0001",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "species": "Tityus stigmurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 16.87 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 78.5,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 75.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0001",
+      "venomlab": "#venomlab?id=SCA-0001",
+      "agent": "#agent?query=SCA-0001",
+      "target_explorer": "#target-explorer?peptide=SCA-0001",
+      "prioritization": "#prioritization?highlight=SCA-0001"
+    },
+    "priority_rank": 93
+  },
+  {
+    "gap_id": "GAP-0006",
+    "peptide_canonical_id": "SCA-0006",
+    "peptide_name": "AaeAP1",
+    "species": "Androctonus aeneas",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 16.0 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 78.5,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 75.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0006",
+      "venomlab": "#venomlab?id=SCA-0006",
+      "agent": "#agent?query=SCA-0006",
+      "target_explorer": "#target-explorer?peptide=SCA-0006",
+      "prioritization": "#prioritization?highlight=SCA-0006"
+    },
+    "priority_rank": 94
+  },
+  {
+    "gap_id": "GAP-0008",
+    "peptide_canonical_id": "SCA-0008",
+    "peptide_name": "AaeAP2",
+    "species": "Androctonus aeneas",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 16.0 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 78.5,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 75.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0008",
+      "venomlab": "#venomlab?id=SCA-0008",
+      "agent": "#agent?query=SCA-0008",
+      "target_explorer": "#target-explorer?peptide=SCA-0008",
+      "prioritization": "#prioritization?highlight=SCA-0008"
+    },
+    "priority_rank": 95
+  },
+  {
+    "gap_id": "GAP-0018",
+    "peptide_canonical_id": "SCA-0018",
+    "peptide_name": "Hadrurin",
+    "species": "Hadrurus aztecus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 19.8 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Torres-Larios et al., Eur J Biochem 2000; 267(16):5023-5031 (Table 2, p. 5026)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 78.5,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 75.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0018",
+      "venomlab": "#venomlab?id=SCA-0018",
+      "agent": "#agent?query=SCA-0018",
+      "target_explorer": "#target-explorer?peptide=SCA-0018",
+      "prioritization": "#prioritization?highlight=SCA-0018"
+    },
+    "priority_rank": 96
+  },
+  {
+    "gap_id": "GAP-0019",
+    "peptide_canonical_id": "SCA-0019",
+    "peptide_name": "Scorpine",
+    "species": "Pandinus imperator",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 10.03 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Conde et al., FEBS Lett 2000; 471(2-3):165-168 (Figure 3, p. 167)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 78.5,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 75.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0019",
+      "venomlab": "#venomlab?id=SCA-0019",
+      "agent": "#agent?query=SCA-0019",
+      "target_explorer": "#target-explorer?peptide=SCA-0019",
+      "prioritization": "#prioritization?highlight=SCA-0019"
+    },
+    "priority_rank": 97
+  },
+  {
+    "gap_id": "GAP-0020",
+    "peptide_canonical_id": "SCA-0020",
+    "peptide_name": "Parabutoporin",
+    "species": "Parabuthus schlechteri",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 17.48 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Moerman, Verdonck et al., Eur J Biochem 2002; 269(19):4799-4810 (Table 1)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 78.5,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 75.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0020",
+      "venomlab": "#venomlab?id=SCA-0020",
+      "agent": "#agent?query=SCA-0020",
+      "target_explorer": "#target-explorer?peptide=SCA-0020",
+      "prioritization": "#prioritization?highlight=SCA-0020"
+    },
+    "priority_rank": 98
+  },
+  {
+    "gap_id": "GAP-0109",
+    "peptide_canonical_id": "SCA-0002",
+    "peptide_name": "StigA25",
+    "species": "Tityus stigmurus",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class C: Illustrative Representation)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class C: Illustrative Representation)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class C: Illustrative Representation. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "No experimentally determined or validated predicted structure available",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 78.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0002",
+      "venomlab": "#venomlab?id=SCA-0002",
+      "agent": "#agent?query=SCA-0002",
+      "target_explorer": "#target-explorer?peptide=SCA-0002",
+      "prioritization": "#prioritization?highlight=SCA-0002"
+    },
+    "priority_rank": 99
+  },
+  {
+    "gap_id": "GAP-0110",
+    "peptide_canonical_id": "SCA-0003",
+    "peptide_name": "StigA31",
+    "species": "Tityus stigmurus",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class C: Illustrative Representation)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class C: Illustrative Representation)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class C: Illustrative Representation. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "No experimentally determined or validated predicted structure available",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 78.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0003",
+      "venomlab": "#venomlab?id=SCA-0003",
+      "agent": "#agent?query=SCA-0003",
+      "target_explorer": "#target-explorer?peptide=SCA-0003",
+      "prioritization": "#prioritization?highlight=SCA-0003"
+    },
+    "priority_rank": 100
+  },
+  {
+    "gap_id": "GAP-0114",
+    "peptide_canonical_id": "SCA-0007",
+    "peptide_name": "AaeAP1_K_analogue",
+    "species": "Androctonus aeneas",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class C: Illustrative Representation)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class C: Illustrative Representation)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class C: Illustrative Representation. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "No experimentally determined or validated predicted structure available",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 78.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0007",
+      "venomlab": "#venomlab?id=SCA-0007",
+      "agent": "#agent?query=SCA-0007",
+      "target_explorer": "#target-explorer?peptide=SCA-0007",
+      "prioritization": "#prioritization?highlight=SCA-0007"
+    },
+    "priority_rank": 101
+  },
+  {
+    "gap_id": "GAP-0116",
+    "peptide_canonical_id": "SCA-0009",
+    "peptide_name": "AaeAP2_K_analogue",
+    "species": "Androctonus aeneas",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class C: Illustrative Representation)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class C: Illustrative Representation)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class C: Illustrative Representation. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "No experimentally determined or validated predicted structure available",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 78.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0009",
+      "venomlab": "#venomlab?id=SCA-0009",
+      "agent": "#agent?query=SCA-0009",
+      "target_explorer": "#target-explorer?peptide=SCA-0009",
+      "prioritization": "#prioritization?highlight=SCA-0009"
+    },
+    "priority_rank": 102
+  },
+  {
+    "gap_id": "GAP-0124",
+    "peptide_canonical_id": "SCA-0017",
+    "peptide_name": "AcrAP1_K_analogue",
+    "species": "Androctonus crassicauda",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class C: Illustrative Representation)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class C: Illustrative Representation)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class C: Illustrative Representation. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "No experimentally determined or validated predicted structure available",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 78.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 90.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0017",
+      "venomlab": "#venomlab?id=SCA-0017",
+      "agent": "#agent?query=SCA-0017",
+      "target_explorer": "#target-explorer?peptide=SCA-0017",
+      "prioritization": "#prioritization?highlight=SCA-0017"
+    },
+    "priority_rank": 103
+  },
+  {
+    "gap_id": "GAP-0081",
+    "peptide_canonical_id": "SCA-0002",
+    "peptide_name": "StigA25",
+    "species": "Tityus stigmurus",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 77.75,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 85.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0002",
+      "venomlab": "#venomlab?id=SCA-0002",
+      "agent": "#agent?query=SCA-0002",
+      "target_explorer": "#target-explorer?peptide=SCA-0002",
+      "prioritization": "#prioritization?highlight=SCA-0002"
+    },
+    "priority_rank": 104
+  },
+  {
+    "gap_id": "GAP-0082",
+    "peptide_canonical_id": "SCA-0003",
+    "peptide_name": "StigA31",
+    "species": "Tityus stigmurus",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 77.75,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 85.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0003",
+      "venomlab": "#venomlab?id=SCA-0003",
+      "agent": "#agent?query=SCA-0003",
+      "target_explorer": "#target-explorer?peptide=SCA-0003",
+      "prioritization": "#prioritization?highlight=SCA-0003"
+    },
+    "priority_rank": 105
+  },
+  {
+    "gap_id": "GAP-0086",
+    "peptide_canonical_id": "SCA-0007",
+    "peptide_name": "AaeAP1_K_analogue",
+    "species": "Androctonus aeneas",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 77.75,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 85.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0007",
+      "venomlab": "#venomlab?id=SCA-0007",
+      "agent": "#agent?query=SCA-0007",
+      "target_explorer": "#target-explorer?peptide=SCA-0007",
+      "prioritization": "#prioritization?highlight=SCA-0007"
+    },
+    "priority_rank": 106
+  },
+  {
+    "gap_id": "GAP-0088",
+    "peptide_canonical_id": "SCA-0009",
+    "peptide_name": "AaeAP2_K_analogue",
+    "species": "Androctonus aeneas",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 77.75,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 85.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0009",
+      "venomlab": "#venomlab?id=SCA-0009",
+      "agent": "#agent?query=SCA-0009",
+      "target_explorer": "#target-explorer?peptide=SCA-0009",
+      "prioritization": "#prioritization?highlight=SCA-0009"
+    },
+    "priority_rank": 107
+  },
+  {
+    "gap_id": "GAP-0096",
+    "peptide_canonical_id": "SCA-0017",
+    "peptide_name": "AcrAP1_K_analogue",
+    "species": "Androctonus crassicauda",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Almaaytah et al., Int J Biol Sci 2014; 10(9):982-995 (Table 2)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 77.75,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 85.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0017",
+      "venomlab": "#venomlab?id=SCA-0017",
+      "agent": "#agent?query=SCA-0017",
+      "target_explorer": "#target-explorer?peptide=SCA-0017",
+      "prioritization": "#prioritization?highlight=SCA-0017"
+    },
+    "priority_rank": 108
+  },
+  {
+    "gap_id": "GAP-0099",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "species": "Tityus stigmurus",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of intracellular macromolecular binding / DNA intercalation assays (Unassayed)",
+    "specific_missing_evidence_ar": "غياب فحوص الارتباط بالأحماض النووية أو تثبيط التصنيع داخل الخلوي للبكتيريا (غير مفحوص)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero experimental macromolecular synthesis or gel retardation assays exist. Cationic charge could theoretically bind polyanionic DNA.",
+    "why_missing_evidence_matters": "Strict epistemic rule: Lack of intracellular testing must be categorized as 'not_assayed', NOT as a proven negative result.",
+    "relevant_assay_context": "Agarose gel electrophoretic mobility shift assay (EMSA) with plasmid pBR322 DNA, plus in vitro cell-free transcription/translation inhibition assays.",
+    "evidence_provenance": "Atlas Target Registry (TGT-INTRA-DNA)",
+    "confidence_level": "High (Target registry explicitly records TGT-INTRA-DNA as Unknown / unassayed)",
+    "uncertainty_and_limitations": "In vitro DNA binding in cell-free test tubes does not prove intracellular targeting unless peptide crosses intact membrane at sub-lytic concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Agarose gel retardation assay (EMSA) with bacterial genomic DNA, plus confocal fluorescence microscopy with FITC-labeled peptide to monitor intracellular translocation.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الترحيل الكهربائي على هلام الآغاروز (EMSA) مع الدنا البكتيري، ومجهر الفلورسنت البؤري لتتبع انتقال الببتيد داخل الخلية عند تراكيز دون التحلل.",
+    "priority_score": 74.25,
+    "scoring_components": {
+      "uncertainty_reduction": 70.0,
+      "activity_context": 75.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 85.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0001",
+      "venomlab": "#venomlab?id=SCA-0001",
+      "agent": "#agent?query=SCA-0001",
+      "target_explorer": "#target-explorer?peptide=SCA-0001",
+      "prioritization": "#prioritization?highlight=SCA-0001"
+    },
+    "priority_rank": 109
+  },
+  {
+    "gap_id": "GAP-0100",
+    "peptide_canonical_id": "SCA-0002",
+    "peptide_name": "StigA25",
+    "species": "Tityus stigmurus",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of intracellular macromolecular binding / DNA intercalation assays (Unassayed)",
+    "specific_missing_evidence_ar": "غياب فحوص الارتباط بالأحماض النووية أو تثبيط التصنيع داخل الخلوي للبكتيريا (غير مفحوص)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero experimental macromolecular synthesis or gel retardation assays exist. Cationic charge could theoretically bind polyanionic DNA.",
+    "why_missing_evidence_matters": "Strict epistemic rule: Lack of intracellular testing must be categorized as 'not_assayed', NOT as a proven negative result.",
+    "relevant_assay_context": "Agarose gel electrophoretic mobility shift assay (EMSA) with plasmid pBR322 DNA, plus in vitro cell-free transcription/translation inhibition assays.",
+    "evidence_provenance": "Atlas Target Registry (TGT-INTRA-DNA)",
+    "confidence_level": "High (Target registry explicitly records TGT-INTRA-DNA as Unknown / unassayed)",
+    "uncertainty_and_limitations": "In vitro DNA binding in cell-free test tubes does not prove intracellular targeting unless peptide crosses intact membrane at sub-lytic concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Agarose gel retardation assay (EMSA) with bacterial genomic DNA, plus confocal fluorescence microscopy with FITC-labeled peptide to monitor intracellular translocation.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الترحيل الكهربائي على هلام الآغاروز (EMSA) مع الدنا البكتيري، ومجهر الفلورسنت البؤري لتتبع انتقال الببتيد داخل الخلية عند تراكيز دون التحلل.",
+    "priority_score": 74.25,
+    "scoring_components": {
+      "uncertainty_reduction": 70.0,
+      "activity_context": 75.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 85.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0002",
+      "venomlab": "#venomlab?id=SCA-0002",
+      "agent": "#agent?query=SCA-0002",
+      "target_explorer": "#target-explorer?peptide=SCA-0002",
+      "prioritization": "#prioritization?highlight=SCA-0002"
+    },
+    "priority_rank": 110
+  },
+  {
+    "gap_id": "GAP-0101",
+    "peptide_canonical_id": "SCA-0003",
+    "peptide_name": "StigA31",
+    "species": "Tityus stigmurus",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of intracellular macromolecular binding / DNA intercalation assays (Unassayed)",
+    "specific_missing_evidence_ar": "غياب فحوص الارتباط بالأحماض النووية أو تثبيط التصنيع داخل الخلوي للبكتيريا (غير مفحوص)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero experimental macromolecular synthesis or gel retardation assays exist. Cationic charge could theoretically bind polyanionic DNA.",
+    "why_missing_evidence_matters": "Strict epistemic rule: Lack of intracellular testing must be categorized as 'not_assayed', NOT as a proven negative result.",
+    "relevant_assay_context": "Agarose gel electrophoretic mobility shift assay (EMSA) with plasmid pBR322 DNA, plus in vitro cell-free transcription/translation inhibition assays.",
+    "evidence_provenance": "Atlas Target Registry (TGT-INTRA-DNA)",
+    "confidence_level": "High (Target registry explicitly records TGT-INTRA-DNA as Unknown / unassayed)",
+    "uncertainty_and_limitations": "In vitro DNA binding in cell-free test tubes does not prove intracellular targeting unless peptide crosses intact membrane at sub-lytic concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Agarose gel retardation assay (EMSA) with bacterial genomic DNA, plus confocal fluorescence microscopy with FITC-labeled peptide to monitor intracellular translocation.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الترحيل الكهربائي على هلام الآغاروز (EMSA) مع الدنا البكتيري، ومجهر الفلورسنت البؤري لتتبع انتقال الببتيد داخل الخلية عند تراكيز دون التحلل.",
+    "priority_score": 74.25,
+    "scoring_components": {
+      "uncertainty_reduction": 70.0,
+      "activity_context": 75.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 85.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0003",
+      "venomlab": "#venomlab?id=SCA-0003",
+      "agent": "#agent?query=SCA-0003",
+      "target_explorer": "#target-explorer?peptide=SCA-0003",
+      "prioritization": "#prioritization?highlight=SCA-0003"
+    },
+    "priority_rank": 111
+  },
+  {
+    "gap_id": "GAP-0102",
+    "peptide_canonical_id": "SCA-0011",
+    "peptide_name": "Kn2-7",
+    "species": "Mesobuthus martensii",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of intracellular macromolecular binding / DNA intercalation assays (Unassayed)",
+    "specific_missing_evidence_ar": "غياب فحوص الارتباط بالأحماض النووية أو تثبيط التصنيع داخل الخلوي للبكتيريا (غير مفحوص)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero experimental macromolecular synthesis or gel retardation assays exist. Cationic charge could theoretically bind polyanionic DNA.",
+    "why_missing_evidence_matters": "Strict epistemic rule: Lack of intracellular testing must be categorized as 'not_assayed', NOT as a proven negative result.",
+    "relevant_assay_context": "Agarose gel electrophoretic mobility shift assay (EMSA) with plasmid pBR322 DNA, plus in vitro cell-free transcription/translation inhibition assays.",
+    "evidence_provenance": "Atlas Target Registry (TGT-INTRA-DNA)",
+    "confidence_level": "High (Target registry explicitly records TGT-INTRA-DNA as Unknown / unassayed)",
+    "uncertainty_and_limitations": "In vitro DNA binding in cell-free test tubes does not prove intracellular targeting unless peptide crosses intact membrane at sub-lytic concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Agarose gel retardation assay (EMSA) with bacterial genomic DNA, plus confocal fluorescence microscopy with FITC-labeled peptide to monitor intracellular translocation.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الترحيل الكهربائي على هلام الآغاروز (EMSA) مع الدنا البكتيري، ومجهر الفلورسنت البؤري لتتبع انتقال الببتيد داخل الخلية عند تراكيز دون التحلل.",
+    "priority_score": 74.25,
+    "scoring_components": {
+      "uncertainty_reduction": 70.0,
+      "activity_context": 75.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 85.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0011",
+      "venomlab": "#venomlab?id=SCA-0011",
+      "agent": "#agent?query=SCA-0011",
+      "target_explorer": "#target-explorer?peptide=SCA-0011",
+      "prioritization": "#prioritization?highlight=SCA-0011"
+    },
+    "priority_rank": 112
+  },
+  {
+    "gap_id": "GAP-0103",
+    "peptide_canonical_id": "SCA-0010",
+    "peptide_name": "BmKn2",
+    "species": "Mesobuthus martensii",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of intracellular macromolecular binding / DNA intercalation assays (Unassayed)",
+    "specific_missing_evidence_ar": "غياب فحوص الارتباط بالأحماض النووية أو تثبيط التصنيع داخل الخلوي للبكتيريا (غير مفحوص)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Zero experimental macromolecular synthesis or gel retardation assays exist. Cationic charge could theoretically bind polyanionic DNA.",
+    "why_missing_evidence_matters": "Strict epistemic rule: Lack of intracellular testing must be categorized as 'not_assayed', NOT as a proven negative result.",
+    "relevant_assay_context": "Agarose gel electrophoretic mobility shift assay (EMSA) with plasmid pBR322 DNA, plus in vitro cell-free transcription/translation inhibition assays.",
+    "evidence_provenance": "Atlas Target Registry (TGT-INTRA-DNA)",
+    "confidence_level": "High (Target registry explicitly records TGT-INTRA-DNA as Unknown / unassayed)",
+    "uncertainty_and_limitations": "In vitro DNA binding in cell-free test tubes does not prove intracellular targeting unless peptide crosses intact membrane at sub-lytic concentrations.",
+    "proposed_experiment_en": "Proposed Experiment: Agarose gel retardation assay (EMSA) with bacterial genomic DNA, plus confocal fluorescence microscopy with FITC-labeled peptide to monitor intracellular translocation.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الترحيل الكهربائي على هلام الآغاروز (EMSA) مع الدنا البكتيري، ومجهر الفلورسنت البؤري لتتبع انتقال الببتيد داخل الخلية عند تراكيز دون التحلل.",
+    "priority_score": 74.25,
+    "scoring_components": {
+      "uncertainty_reduction": 70.0,
+      "activity_context": 75.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 85.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0010",
+      "venomlab": "#venomlab?id=SCA-0010",
+      "agent": "#agent?query=SCA-0010",
+      "target_explorer": "#target-explorer?peptide=SCA-0010",
+      "prioritization": "#prioritization?highlight=SCA-0010"
+    },
+    "priority_rank": 113
+  },
+  {
+    "gap_id": "GAP-0089",
+    "peptide_canonical_id": "SCA-0010",
+    "peptide_name": "BmKn2",
+    "species": "Mesobuthus martensii",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Zeng et al., Peptides 2004; 25(2):143-150 (Table 1, p. 146)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 74.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0010",
+      "venomlab": "#venomlab?id=SCA-0010",
+      "agent": "#agent?query=SCA-0010",
+      "target_explorer": "#target-explorer?peptide=SCA-0010",
+      "prioritization": "#prioritization?highlight=SCA-0010"
+    },
+    "priority_rank": 114
+  },
+  {
+    "gap_id": "GAP-0090",
+    "peptide_canonical_id": "SCA-0011",
+    "peptide_name": "Kn2-7",
+    "species": "Mesobuthus martensii",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Cao et al., PLoS ONE 2012; 7(7):e40135 (Table 1)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 74.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0011",
+      "venomlab": "#venomlab?id=SCA-0011",
+      "agent": "#agent?query=SCA-0011",
+      "target_explorer": "#target-explorer?peptide=SCA-0011",
+      "prioritization": "#prioritization?highlight=SCA-0011"
+    },
+    "priority_rank": 115
+  },
+  {
+    "gap_id": "GAP-0091",
+    "peptide_canonical_id": "SCA-0012",
+    "peptide_name": "IsCT1",
+    "species": "Opisthacanthus madagascariensis",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Dai et al., Biochem Biophys Res Commun 2001; 286(4):820-825 (Table 1, p. 822)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 74.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0012",
+      "venomlab": "#venomlab?id=SCA-0012",
+      "agent": "#agent?query=SCA-0012",
+      "target_explorer": "#target-explorer?peptide=SCA-0012",
+      "prioritization": "#prioritization?highlight=SCA-0012"
+    },
+    "priority_rank": 116
+  },
+  {
+    "gap_id": "GAP-0092",
+    "peptide_canonical_id": "SCA-0013",
+    "peptide_name": "Hp1404",
+    "species": "Heterometrus petersii",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Chen et al., PLoS ONE 2014; 9(5):e97539 (Table 1)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 74.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0013",
+      "venomlab": "#venomlab?id=SCA-0013",
+      "agent": "#agent?query=SCA-0013",
+      "target_explorer": "#target-explorer?peptide=SCA-0013",
+      "prioritization": "#prioritization?highlight=SCA-0013"
+    },
+    "priority_rank": 117
+  },
+  {
+    "gap_id": "GAP-0095",
+    "peptide_canonical_id": "SCA-0016",
+    "peptide_name": "AcrAP1",
+    "species": "Androctonus crassicauda",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Almaaytah et al., Int J Biol Sci 2014; 10(9):982-995 (Table 2)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 74.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0016",
+      "venomlab": "#venomlab?id=SCA-0016",
+      "agent": "#agent?query=SCA-0016",
+      "target_explorer": "#target-explorer?peptide=SCA-0016",
+      "prioritization": "#prioritization?highlight=SCA-0016"
+    },
+    "priority_rank": 118
+  },
+  {
+    "gap_id": "GAP-0108",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "species": "Tityus stigmurus",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class B: Computationally Predicted)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class B: Computationally Predicted)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class B: Computationally Predicted. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "AlphaFold Protein Structure Database (AF-P0DQT1-F1)",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0001",
+      "venomlab": "#venomlab?id=SCA-0001",
+      "agent": "#agent?query=SCA-0001",
+      "target_explorer": "#target-explorer?peptide=SCA-0001",
+      "prioritization": "#prioritization?highlight=SCA-0001"
+    },
+    "priority_rank": 119
+  },
+  {
+    "gap_id": "GAP-0111",
+    "peptide_canonical_id": "SCA-0004",
+    "peptide_name": "StigA6",
+    "species": "Tityus stigmurus",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class C: Illustrative Representation)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class C: Illustrative Representation)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class C: Illustrative Representation. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "No experimentally determined or validated predicted structure available",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0004",
+      "venomlab": "#venomlab?id=SCA-0004",
+      "agent": "#agent?query=SCA-0004",
+      "target_explorer": "#target-explorer?peptide=SCA-0004",
+      "prioritization": "#prioritization?highlight=SCA-0004"
+    },
+    "priority_rank": 120
+  },
+  {
+    "gap_id": "GAP-0112",
+    "peptide_canonical_id": "SCA-0005",
+    "peptide_name": "StigA16",
+    "species": "Tityus stigmurus",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class C: Illustrative Representation)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class C: Illustrative Representation)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class C: Illustrative Representation. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "No experimentally determined or validated predicted structure available",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0005",
+      "venomlab": "#venomlab?id=SCA-0005",
+      "agent": "#agent?query=SCA-0005",
+      "target_explorer": "#target-explorer?peptide=SCA-0005",
+      "prioritization": "#prioritization?highlight=SCA-0005"
+    },
+    "priority_rank": 121
+  },
+  {
+    "gap_id": "GAP-0113",
+    "peptide_canonical_id": "SCA-0006",
+    "peptide_name": "AaeAP1",
+    "species": "Androctonus aeneas",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class C: Illustrative Representation)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class C: Illustrative Representation)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class C: Illustrative Representation. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "No experimentally determined or validated predicted structure available",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0006",
+      "venomlab": "#venomlab?id=SCA-0006",
+      "agent": "#agent?query=SCA-0006",
+      "target_explorer": "#target-explorer?peptide=SCA-0006",
+      "prioritization": "#prioritization?highlight=SCA-0006"
+    },
+    "priority_rank": 122
+  },
+  {
+    "gap_id": "GAP-0115",
+    "peptide_canonical_id": "SCA-0008",
+    "peptide_name": "AaeAP2",
+    "species": "Androctonus aeneas",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class C: Illustrative Representation)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class C: Illustrative Representation)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class C: Illustrative Representation. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "No experimentally determined or validated predicted structure available",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0008",
+      "venomlab": "#venomlab?id=SCA-0008",
+      "agent": "#agent?query=SCA-0008",
+      "target_explorer": "#target-explorer?peptide=SCA-0008",
+      "prioritization": "#prioritization?highlight=SCA-0008"
+    },
+    "priority_rank": 123
+  },
+  {
+    "gap_id": "GAP-0117",
+    "peptide_canonical_id": "SCA-0010",
+    "peptide_name": "BmKn2",
+    "species": "Mesobuthus martensii",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class C: Illustrative Representation)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class C: Illustrative Representation)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class C: Illustrative Representation. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "No experimentally determined or validated predicted structure available",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0010",
+      "venomlab": "#venomlab?id=SCA-0010",
+      "agent": "#agent?query=SCA-0010",
+      "target_explorer": "#target-explorer?peptide=SCA-0010",
+      "prioritization": "#prioritization?highlight=SCA-0010"
+    },
+    "priority_rank": 124
+  },
+  {
+    "gap_id": "GAP-0118",
+    "peptide_canonical_id": "SCA-0011",
+    "peptide_name": "Kn2-7",
+    "species": "Mesobuthus martensii",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class C: Illustrative Representation)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class C: Illustrative Representation)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class C: Illustrative Representation. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "No experimentally determined or validated predicted structure available",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0011",
+      "venomlab": "#venomlab?id=SCA-0011",
+      "agent": "#agent?query=SCA-0011",
+      "target_explorer": "#target-explorer?peptide=SCA-0011",
+      "prioritization": "#prioritization?highlight=SCA-0011"
+    },
+    "priority_rank": 125
+  },
+  {
+    "gap_id": "GAP-0119",
+    "peptide_canonical_id": "SCA-0012",
+    "peptide_name": "IsCT1",
+    "species": "Opisthacanthus madagascariensis",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class A: Experimentally Determined)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class A: Experimentally Determined)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class A: Experimentally Determined. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "RCSB Protein Data Bank (PDB ID: 1T51)",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0012",
+      "venomlab": "#venomlab?id=SCA-0012",
+      "agent": "#agent?query=SCA-0012",
+      "target_explorer": "#target-explorer?peptide=SCA-0012",
+      "prioritization": "#prioritization?highlight=SCA-0012"
+    },
+    "priority_rank": 126
+  },
+  {
+    "gap_id": "GAP-0120",
+    "peptide_canonical_id": "SCA-0013",
+    "peptide_name": "Hp1404",
+    "species": "Heterometrus petersii",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class B: Computationally Predicted)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class B: Computationally Predicted)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class B: Computationally Predicted. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "AlphaFold Protein Structure Database (AF-P0DX64-F1)",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0013",
+      "venomlab": "#venomlab?id=SCA-0013",
+      "agent": "#agent?query=SCA-0013",
+      "target_explorer": "#target-explorer?peptide=SCA-0013",
+      "prioritization": "#prioritization?highlight=SCA-0013"
+    },
+    "priority_rank": 127
+  },
+  {
+    "gap_id": "GAP-0121",
+    "peptide_canonical_id": "SCA-0014",
+    "peptide_name": "ToAP1",
+    "species": "Tityus obscurus",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class B: Computationally Predicted)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class B: Computationally Predicted)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class B: Computationally Predicted. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "AlphaFold Protein Structure Database (AF-A0A1D3IXR7-F1)",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0014",
+      "venomlab": "#venomlab?id=SCA-0014",
+      "agent": "#agent?query=SCA-0014",
+      "target_explorer": "#target-explorer?peptide=SCA-0014",
+      "prioritization": "#prioritization?highlight=SCA-0014"
+    },
+    "priority_rank": 128
+  },
+  {
+    "gap_id": "GAP-0122",
+    "peptide_canonical_id": "SCA-0015",
+    "peptide_name": "ToAP3",
+    "species": "Tityus obscurus",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class B: Computationally Predicted)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class B: Computationally Predicted)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class B: Computationally Predicted. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "AlphaFold Protein Structure Database (AF-P0DQT2-F1)",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0015",
+      "venomlab": "#venomlab?id=SCA-0015",
+      "agent": "#agent?query=SCA-0015",
+      "target_explorer": "#target-explorer?peptide=SCA-0015",
+      "prioritization": "#prioritization?highlight=SCA-0015"
+    },
+    "priority_rank": 129
+  },
+  {
+    "gap_id": "GAP-0123",
+    "peptide_canonical_id": "SCA-0016",
+    "peptide_name": "AcrAP1",
+    "species": "Androctonus crassicauda",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class B: Computationally Predicted)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class B: Computationally Predicted)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class B: Computationally Predicted. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "AlphaFold Protein Structure Database (AF-A0A0A1I6E7-F1)",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0016",
+      "venomlab": "#venomlab?id=SCA-0016",
+      "agent": "#agent?query=SCA-0016",
+      "target_explorer": "#target-explorer?peptide=SCA-0016",
+      "prioritization": "#prioritization?highlight=SCA-0016"
+    },
+    "priority_rank": 130
+  },
+  {
+    "gap_id": "GAP-0125",
+    "peptide_canonical_id": "SCA-0018",
+    "peptide_name": "Hadrurin",
+    "species": "Hadrurus aztecus",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class B: Computationally Predicted)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class B: Computationally Predicted)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class B: Computationally Predicted. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "AlphaFold Protein Structure Database (AF-P82656-F1)",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0018",
+      "venomlab": "#venomlab?id=SCA-0018",
+      "agent": "#agent?query=SCA-0018",
+      "target_explorer": "#target-explorer?peptide=SCA-0018",
+      "prioritization": "#prioritization?highlight=SCA-0018"
+    },
+    "priority_rank": 131
+  },
+  {
+    "gap_id": "GAP-0126",
+    "peptide_canonical_id": "SCA-0019",
+    "peptide_name": "Scorpine",
+    "species": "Pandinus imperator",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class B: Computationally Predicted)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class B: Computationally Predicted)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class B: Computationally Predicted. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "AlphaFold Protein Structure Database (AF-P56972-F1)",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0019",
+      "venomlab": "#venomlab?id=SCA-0019",
+      "agent": "#agent?query=SCA-0019",
+      "target_explorer": "#target-explorer?peptide=SCA-0019",
+      "prioritization": "#prioritization?highlight=SCA-0019"
+    },
+    "priority_rank": 132
+  },
+  {
+    "gap_id": "GAP-0127",
+    "peptide_canonical_id": "SCA-0020",
+    "peptide_name": "Parabutoporin",
+    "species": "Parabuthus schlechteri",
+    "gap_category": "structural_evidence",
+    "gap_category_name_en": "Structural Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة البنيوية ثلاثية الأبعاد",
+    "specific_missing_evidence": "Absence of experimentally determined 3D solution structure (Current: Class B: Computationally Predicted)",
+    "specific_missing_evidence_ar": "غياب البنية الفراغية التجريبية ثلاثية الأبعاد في المحاليل المائية (التصنيف الحالي: Class B: Computationally Predicted)",
+    "evidence_status": "data_not_available",
+    "evidence_status_label_en": "Data Not Available",
+    "evidence_status_label_ar": "بيانات غير متوفرة / نموذج تنبؤي فقط",
+    "available_supporting_observations": "Structure is represented as Class B: Computationally Predicted. No experimental PDB deposition exists for the mature peptide.",
+    "why_missing_evidence_matters": "Small linear antimicrobial peptides are highly flexible in aqueous solution (often random-coils) and fold into amphipathic helices only upon contact with membrane interfaces. AlphaFold static models do not represent the solution dynamic ensemble.",
+    "relevant_assay_context": "2D 1H-NMR (TOCSY/NOESY) and Circular Dichroism (CD) spectropolarimetry in aqueous buffer vs membrane-mimetic environments (30% TFE, DPC/SDS micelles).",
+    "evidence_provenance": "AlphaFold Protein Structure Database (AF-P83312-F1)",
+    "confidence_level": "High (Verified from MOD-03 VenomLab 3D registry)",
+    "uncertainty_and_limitations": "AlphaFold provides useful computational initial coordinates, but cannot simulate post-translational C-terminal amidation or membrane-induced folding equilibria.",
+    "proposed_experiment_en": "Proposed Experiment: Solution-state 2D 1H-NMR spectroscopy (TOCSY and NOESY at 600 MHz) in pure aqueous phosphate buffer and in 30% TFE/water to determine the conformational ensemble and membrane-induced folding transition.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص الرنين المغناطيسي النووي ثنائي الأبعاد في المحاليل (2D 1H-NMR: TOCSY & NOESY بتردد 600 ميغاهرتز) في محلول مائي نقي ومحلول TFE/الماء لدراسة التوازن البنيوي والانطواء الغشائي.",
+    "priority_score": 73.0,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 70.0,
+      "experimental_feasibility": 65.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0020",
+      "venomlab": "#venomlab?id=SCA-0020",
+      "agent": "#agent?query=SCA-0020",
+      "target_explorer": "#target-explorer?peptide=SCA-0020",
+      "prioritization": "#prioritization?highlight=SCA-0020"
+    },
+    "priority_rank": 133
+  },
+  {
+    "gap_id": "GAP-0004",
+    "peptide_canonical_id": "SCA-0004",
+    "peptide_name": "StigA6",
+    "species": "Tityus stigmurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 190.74 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Tareau et al., Front Microbiol 2026; 15:1827386",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 72.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 50.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0004",
+      "venomlab": "#venomlab?id=SCA-0004",
+      "agent": "#agent?query=SCA-0004",
+      "target_explorer": "#target-explorer?peptide=SCA-0004",
+      "prioritization": "#prioritization?highlight=SCA-0004"
+    },
+    "priority_rank": 134
+  },
+  {
+    "gap_id": "GAP-0005",
+    "peptide_canonical_id": "SCA-0005",
+    "peptide_name": "StigA16",
+    "species": "Tityus stigmurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 194.85 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Tareau et al., Front Microbiol 2026; 15:1827386",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 72.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 50.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0005",
+      "venomlab": "#venomlab?id=SCA-0005",
+      "agent": "#agent?query=SCA-0005",
+      "target_explorer": "#target-explorer?peptide=SCA-0005",
+      "prioritization": "#prioritization?highlight=SCA-0005"
+    },
+    "priority_rank": 135
+  },
+  {
+    "gap_id": "GAP-0014",
+    "peptide_canonical_id": "SCA-0014",
+    "peptide_name": "ToAP1",
+    "species": "Tityus obscurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 86.66 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Guilhelmelli et al., Front Microbiol 2016; 7:1844 (Table 3)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 72.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 50.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0014",
+      "venomlab": "#venomlab?id=SCA-0014",
+      "agent": "#agent?query=SCA-0014",
+      "target_explorer": "#target-explorer?peptide=SCA-0014",
+      "prioritization": "#prioritization?highlight=SCA-0014"
+    },
+    "priority_rank": 136
+  },
+  {
+    "gap_id": "GAP-0015",
+    "peptide_canonical_id": "SCA-0015",
+    "peptide_name": "ToAP3",
+    "species": "Tityus obscurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Absence of quantitative MIC against WHO Critical Priority Pathogens (CRAB, CRE, VRE)",
+    "specific_missing_evidence_ar": "غياب قياسات التركيز المثبط الأدنى (MIC) ضد مسببات منظمة الصحة العالمية ذات الأولوية الحرجة (CRAB, CRE, VRE)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Tested only against standard reference ATCC strains (e.g., S. aureus ATCC 29213, E. coli ATCC 25922); lowest MIC: 42.48 µg/mL.",
+    "why_missing_evidence_matters": "Clinical relevance of AMPs depends on activity against multidrug-resistant ESKAPE pathogens. Testing only sensitive laboratory strains leaves efficacy against carbapenem-resistant isolates unknown.",
+    "relevant_assay_context": "CLSI M07-A10 broth microdilution in cation-adjusted Mueller-Hinton broth against Acinetobacter baumannii (ATCC BAA-1605) and Klebsiella pneumoniae (ATCC BAA-1705).",
+    "evidence_provenance": "Guilhelmelli et al., Front Microbiol 2016; 7:1844 (Table 3)",
+    "confidence_level": "High (Verified from canonical evidence records)",
+    "uncertainty_and_limitations": "Absence of testing does not imply lack of activity; laboratory strains may have different outer-membrane lipid A acylation than clinical MDR strains.",
+    "proposed_experiment_en": "Proposed Experiment: Standardized CLSI broth microdilution against clinical multidrug-resistant Acinetobacter baumannii (CRAB) and carbapenem-resistant Klebsiella pneumoniae (CRE) reference panels.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التخفيف الدقيق في المرق المعياري (CLSI) ضد سلالات مرجعية معتمدة من الراكدة البومانية المقاومة للكاربابينيم (CRAB) والكلبسيلة الرئوية المقاومة للكاربابينيم (CRE).",
+    "priority_score": 72.25,
+    "scoring_components": {
+      "uncertainty_reduction": 85.0,
+      "activity_context": 50.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 90.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0015",
+      "venomlab": "#venomlab?id=SCA-0015",
+      "agent": "#agent?query=SCA-0015",
+      "target_explorer": "#target-explorer?peptide=SCA-0015",
+      "prioritization": "#prioritization?highlight=SCA-0015"
+    },
+    "priority_rank": 137
+  },
+  {
+    "gap_id": "GAP-0080",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "species": "Tityus stigmurus",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 70.25,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 55.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0001",
+      "venomlab": "#venomlab?id=SCA-0001",
+      "agent": "#agent?query=SCA-0001",
+      "target_explorer": "#target-explorer?peptide=SCA-0001",
+      "prioritization": "#prioritization?highlight=SCA-0001"
+    },
+    "priority_rank": 138
+  },
+  {
+    "gap_id": "GAP-0083",
+    "peptide_canonical_id": "SCA-0004",
+    "peptide_name": "StigA6",
+    "species": "Tityus stigmurus",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Tareau et al., Front Microbiol 2026; 15:1827386",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 70.25,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 55.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0004",
+      "venomlab": "#venomlab?id=SCA-0004",
+      "agent": "#agent?query=SCA-0004",
+      "target_explorer": "#target-explorer?peptide=SCA-0004",
+      "prioritization": "#prioritization?highlight=SCA-0004"
+    },
+    "priority_rank": 139
+  },
+  {
+    "gap_id": "GAP-0084",
+    "peptide_canonical_id": "SCA-0005",
+    "peptide_name": "StigA16",
+    "species": "Tityus stigmurus",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Tareau et al., Front Microbiol 2026; 15:1827386",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 70.25,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 55.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0005",
+      "venomlab": "#venomlab?id=SCA-0005",
+      "agent": "#agent?query=SCA-0005",
+      "target_explorer": "#target-explorer?peptide=SCA-0005",
+      "prioritization": "#prioritization?highlight=SCA-0005"
+    },
+    "priority_rank": 140
+  },
+  {
+    "gap_id": "GAP-0085",
+    "peptide_canonical_id": "SCA-0006",
+    "peptide_name": "AaeAP1",
+    "species": "Androctonus aeneas",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 70.25,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 55.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0006",
+      "venomlab": "#venomlab?id=SCA-0006",
+      "agent": "#agent?query=SCA-0006",
+      "target_explorer": "#target-explorer?peptide=SCA-0006",
+      "prioritization": "#prioritization?highlight=SCA-0006"
+    },
+    "priority_rank": 141
+  },
+  {
+    "gap_id": "GAP-0087",
+    "peptide_canonical_id": "SCA-0008",
+    "peptide_name": "AaeAP2",
+    "species": "Androctonus aeneas",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 70.25,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 55.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0008",
+      "venomlab": "#venomlab?id=SCA-0008",
+      "agent": "#agent?query=SCA-0008",
+      "target_explorer": "#target-explorer?peptide=SCA-0008",
+      "prioritization": "#prioritization?highlight=SCA-0008"
+    },
+    "priority_rank": 142
+  },
+  {
+    "gap_id": "GAP-0093",
+    "peptide_canonical_id": "SCA-0014",
+    "peptide_name": "ToAP1",
+    "species": "Tityus obscurus",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Guilhelmelli et al., Front Microbiol 2016; 7:1844 (Table 3)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 70.25,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 55.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0014",
+      "venomlab": "#venomlab?id=SCA-0014",
+      "agent": "#agent?query=SCA-0014",
+      "target_explorer": "#target-explorer?peptide=SCA-0014",
+      "prioritization": "#prioritization?highlight=SCA-0014"
+    },
+    "priority_rank": 143
+  },
+  {
+    "gap_id": "GAP-0094",
+    "peptide_canonical_id": "SCA-0015",
+    "peptide_name": "ToAP3",
+    "species": "Tityus obscurus",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Guilhelmelli et al., Front Microbiol 2016; 7:1844 (Table 3)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 70.25,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 55.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0015",
+      "venomlab": "#venomlab?id=SCA-0015",
+      "agent": "#agent?query=SCA-0015",
+      "target_explorer": "#target-explorer?peptide=SCA-0015",
+      "prioritization": "#prioritization?highlight=SCA-0015"
+    },
+    "priority_rank": 144
+  },
+  {
+    "gap_id": "GAP-0097",
+    "peptide_canonical_id": "SCA-0018",
+    "peptide_name": "Hadrurin",
+    "species": "Hadrurus aztecus",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Torres-Larios et al., Eur J Biochem 2000; 267(16):5023-5031 (Table 2, p. 5026)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 70.25,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 55.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0018",
+      "venomlab": "#venomlab?id=SCA-0018",
+      "agent": "#agent?query=SCA-0018",
+      "target_explorer": "#target-explorer?peptide=SCA-0018",
+      "prioritization": "#prioritization?highlight=SCA-0018"
+    },
+    "priority_rank": 145
+  },
+  {
+    "gap_id": "GAP-0098",
+    "peptide_canonical_id": "SCA-0019",
+    "peptide_name": "Scorpine",
+    "species": "Pandinus imperator",
+    "gap_category": "mechanism_of_action",
+    "gap_category_name_en": "Mechanism of Action Gaps",
+    "gap_category_name_ar": "فجوات آلية العمل الجزيئية",
+    "specific_missing_evidence": "Absence of direct single-channel pore conductance recordings in planar lipid bilayers (BLM)",
+    "specific_missing_evidence_ar": "غياب قياسات الموصلية الكهربائية للمسام الفردية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM)",
+    "evidence_status": "not_assayed",
+    "evidence_status_label_en": "Not Assayed",
+    "evidence_status_label_ar": "غير مفحوص مخبرياً",
+    "available_supporting_observations": "Membrane permeabilization supported only by indirect dye leakage (SYTOX Green uptake, Calcein release from liposomes).",
+    "why_missing_evidence_matters": "Indirect dye assays cannot determine whether membrane permeabilization occurs via discrete stable barrel-stave pores, transient toroidal pores, or non-specific detergent-like carpet micellization.",
+    "relevant_assay_context": "Reconstitution in planar lipid bilayer (DOPE/DOPG 7:3) under voltage-clamp conditions (1.0 M KCl, -100 to +100 mV) to record single-channel open/closed transitions and unitary conductance.",
+    "evidence_provenance": "Conde et al., FEBS Lett 2000; 471(2-3):165-168 (Figure 3, p. 167)",
+    "confidence_level": "High (Only Parabutoporin has BLM pore recording among 20 candidates)",
+    "uncertainty_and_limitations": "Indirect assays confirm membrane perturbation, but do not provide physical pore diameter or ion selectivity.",
+    "proposed_experiment_en": "Proposed Experiment: Planar lipid bilayer (BLM) electrophysiological reconstitution using synthetic DOPE/DOPG (7:3) bilayers to determine single-channel open-state conductance, lifetime, and voltage-dependence.",
+    "proposed_experiment_ar": "مقترح تجريبي: إعادة بناء كهرومغناطيسية في أغشية ثنائيات الطبقة الدهنية المستوية (BLM) باستخدام مصفوفة DOPE/DOPG لتسجيل موصلية المسام الفردية وزمن فتحها واعتمادها على الجهد.",
+    "priority_score": 70.25,
+    "scoring_components": {
+      "uncertainty_reduction": 75.0,
+      "activity_context": 80.0,
+      "lead_relevance": 55.0,
+      "experimental_feasibility": 70.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0019",
+      "venomlab": "#venomlab?id=SCA-0019",
+      "agent": "#agent?query=SCA-0019",
+      "target_explorer": "#target-explorer?peptide=SCA-0019",
+      "prioritization": "#prioritization?highlight=SCA-0019"
+    },
+    "priority_rank": 146
+  },
+  {
+    "gap_id": "GAP-0041",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "species": "Tityus stigmurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Inactive up to highest tested concentration (>150 µM) against Escherichia coli ATCC 25922",
+    "specific_missing_evidence_ar": "عدم ثبوت الفعالية حتى أعلى تركيز مفحوص (>150 ميكرومولار) ضد Escherichia coli ATCC 25922",
+    "evidence_status": "assayed_negative",
+    "evidence_status_label_en": "Assayed Negative / Inactive",
+    "evidence_status_label_ar": "مفحوص سلبياً / غير فعال",
+    "available_supporting_observations": "Broth microdilution tested up to 150 µM showed no growth inhibition (MIC > 150 µM).",
+    "why_missing_evidence_matters": "Strict epistemic distinction: This is an experimentally established negative threshold, NOT unassayed missing data. Demonstrates narrow Gram-positive selectivity of wild-type Stigmurin.",
+    "relevant_assay_context": "CLSI M07-A9 broth microdilution in Mueller-Hinton broth, testing 0.1 to 150 µM.",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9) (PMID: 30709056)",
+    "confidence_level": "High (Primary paper explicitly reports MIC > 150 µM)",
+    "uncertainty_and_limitations": "Negative result applies to tested strain and standard medium; synergism with conventional antibiotics or membrane permeabilizers not excluded.",
+    "proposed_experiment_en": "Proposed Experiment: Combination checkerboard synergy assay with sub-inhibitory colistin or EDTA to determine if outer membrane permeabilization unmasks Stigmurin activity.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التآزر برقعة الشطرنج المركبة (Checkerboard assay) مع الكوليستين أو EDTA لتحديد ما إذا كان اختراق الغشاء الخارجي يحرر فعالية ستيجمورين ضد السلالات السالبة لغرام.",
+    "priority_score": 69.25,
+    "scoring_components": {
+      "uncertainty_reduction": 70.0,
+      "activity_context": 60.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 85.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0001",
+      "venomlab": "#venomlab?id=SCA-0001",
+      "agent": "#agent?query=SCA-0001",
+      "target_explorer": "#target-explorer?peptide=SCA-0001",
+      "prioritization": "#prioritization?highlight=SCA-0001"
+    },
+    "priority_rank": 147
+  },
+  {
+    "gap_id": "GAP-0042",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "species": "Tityus stigmurus",
+    "gap_category": "antimicrobial_evidence",
+    "gap_category_name_en": "Antimicrobial Evidence Gaps",
+    "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
+    "specific_missing_evidence": "Inactive up to highest tested concentration (>150 µM) against Pseudomonas aeruginosa ATCC 27853",
+    "specific_missing_evidence_ar": "عدم ثبوت الفعالية حتى أعلى تركيز مفحوص (>150 ميكرومولار) ضد Pseudomonas aeruginosa ATCC 27853",
+    "evidence_status": "assayed_negative",
+    "evidence_status_label_en": "Assayed Negative / Inactive",
+    "evidence_status_label_ar": "مفحوص سلبياً / غير فعال",
+    "available_supporting_observations": "Broth microdilution tested up to 150 µM showed no growth inhibition (MIC > 150 µM).",
+    "why_missing_evidence_matters": "Strict epistemic distinction: This is an experimentally established negative threshold, NOT unassayed missing data. Demonstrates narrow Gram-positive selectivity of wild-type Stigmurin.",
+    "relevant_assay_context": "CLSI M07-A9 broth microdilution in Mueller-Hinton broth, testing 0.1 to 150 µM.",
+    "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9) (PMID: 30709056)",
+    "confidence_level": "High (Primary paper explicitly reports MIC > 150 µM)",
+    "uncertainty_and_limitations": "Negative result applies to tested strain and standard medium; synergism with conventional antibiotics or membrane permeabilizers not excluded.",
+    "proposed_experiment_en": "Proposed Experiment: Combination checkerboard synergy assay with sub-inhibitory colistin or EDTA to determine if outer membrane permeabilization unmasks Stigmurin activity.",
+    "proposed_experiment_ar": "مقترح تجريبي: فحص التآزر برقعة الشطرنج المركبة (Checkerboard assay) مع الكوليستين أو EDTA لتحديد ما إذا كان اختراق الغشاء الخارجي يحرر فعالية ستيجمورين ضد السلالات السالبة لغرام.",
+    "priority_score": 69.25,
+    "scoring_components": {
+      "uncertainty_reduction": 70.0,
+      "activity_context": 60.0,
+      "lead_relevance": 65.0,
+      "experimental_feasibility": 85.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0001",
+      "venomlab": "#venomlab?id=SCA-0001",
+      "agent": "#agent?query=SCA-0001",
+      "target_explorer": "#target-explorer?peptide=SCA-0001",
+      "prioritization": "#prioritization?highlight=SCA-0001"
+    },
+    "priority_rank": 148
+  },
+  {
+    "gap_id": "GAP-0148",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "species": "Tityus stigmurus",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Disulfide bond scrambling and redox reduction stability (Chemical Not Applicable)",
+    "specific_missing_evidence_ar": "استقرار الروابط ثنائية الكبريتيد وإعادة الترتيب التأكسدي (غير قابل للتطبيق كيميائياً)",
+    "evidence_status": "measurement_not_applicable",
+    "evidence_status_label_en": "Not Applicable",
+    "evidence_status_label_ar": "غير قابل للتطبيق كيميائياً",
+    "available_supporting_observations": "Peptide sequence contains zero cysteine residues (0 Cys, fully linear).",
+    "why_missing_evidence_matters": "Important epistemic safeguard: Disulfide reduction/isomerization assays are chemically inapplicable to non-cysteine linear peptides; categorizing as not_applicable prevents false missing-data penalties.",
+    "relevant_assay_context": "Chemical sequence verification (Cysteine count = 0).",
+    "evidence_provenance": "Canonical Master Dataset (data/atlas.json)",
+    "confidence_level": "Absolute (Verified sequence lacks cysteine residues)",
+    "uncertainty_and_limitations": "Not applicable to linear peptides; relevant only to disulfide-constrained toxins (e.g. AaH2, Scorpine, Charybdotoxin).",
+    "proposed_experiment_en": "Proposed Experiment: Measurement not applicable. Peptide lacks cysteine residues; focus resources on protease susceptibility and backbone terminal modification stability instead.",
+    "proposed_experiment_ar": "مقترح تجريبي: الفحص غير قابل للتطبيق كيميائياً لخلو التسلسل من السيستين؛ يجب توجيه الموارد نحو فحوص مقاومة البروتياز وثبات التعديلات الطرفية.",
+    "priority_score": 27.5,
+    "scoring_components": {
+      "uncertainty_reduction": 10.0,
+      "activity_context": 50.0,
+      "lead_relevance": 40.0,
+      "experimental_feasibility": 10.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0001",
+      "venomlab": "#venomlab?id=SCA-0001",
+      "agent": "#agent?query=SCA-0001",
+      "target_explorer": "#target-explorer?peptide=SCA-0001",
+      "prioritization": "#prioritization?highlight=SCA-0001"
+    },
+    "priority_rank": 149
+  },
+  {
+    "gap_id": "GAP-0149",
+    "peptide_canonical_id": "SCA-0010",
+    "peptide_name": "BmKn2",
+    "species": "Mesobuthus martensii",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Disulfide bond scrambling and redox reduction stability (Chemical Not Applicable)",
+    "specific_missing_evidence_ar": "استقرار الروابط ثنائية الكبريتيد وإعادة الترتيب التأكسدي (غير قابل للتطبيق كيميائياً)",
+    "evidence_status": "measurement_not_applicable",
+    "evidence_status_label_en": "Not Applicable",
+    "evidence_status_label_ar": "غير قابل للتطبيق كيميائياً",
+    "available_supporting_observations": "Peptide sequence contains zero cysteine residues (0 Cys, fully linear).",
+    "why_missing_evidence_matters": "Important epistemic safeguard: Disulfide reduction/isomerization assays are chemically inapplicable to non-cysteine linear peptides; categorizing as not_applicable prevents false missing-data penalties.",
+    "relevant_assay_context": "Chemical sequence verification (Cysteine count = 0).",
+    "evidence_provenance": "Canonical Master Dataset (data/atlas.json)",
+    "confidence_level": "Absolute (Verified sequence lacks cysteine residues)",
+    "uncertainty_and_limitations": "Not applicable to linear peptides; relevant only to disulfide-constrained toxins (e.g. AaH2, Scorpine, Charybdotoxin).",
+    "proposed_experiment_en": "Proposed Experiment: Measurement not applicable. Peptide lacks cysteine residues; focus resources on protease susceptibility and backbone terminal modification stability instead.",
+    "proposed_experiment_ar": "مقترح تجريبي: الفحص غير قابل للتطبيق كيميائياً لخلو التسلسل من السيستين؛ يجب توجيه الموارد نحو فحوص مقاومة البروتياز وثبات التعديلات الطرفية.",
+    "priority_score": 27.5,
+    "scoring_components": {
+      "uncertainty_reduction": 10.0,
+      "activity_context": 50.0,
+      "lead_relevance": 40.0,
+      "experimental_feasibility": 10.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0010",
+      "venomlab": "#venomlab?id=SCA-0010",
+      "agent": "#agent?query=SCA-0010",
+      "target_explorer": "#target-explorer?peptide=SCA-0010",
+      "prioritization": "#prioritization?highlight=SCA-0010"
+    },
+    "priority_rank": 150
+  },
+  {
+    "gap_id": "GAP-0150",
+    "peptide_canonical_id": "SCA-0012",
+    "peptide_name": "IsCT1",
+    "species": "Opisthacanthus madagascariensis",
+    "gap_category": "stability_and_developability",
+    "gap_category_name_en": "Stability & Developability Gaps",
+    "gap_category_name_ar": "فجوات الثبات الحركي وقابلية التطوير",
+    "specific_missing_evidence": "Disulfide bond scrambling and redox reduction stability (Chemical Not Applicable)",
+    "specific_missing_evidence_ar": "استقرار الروابط ثنائية الكبريتيد وإعادة الترتيب التأكسدي (غير قابل للتطبيق كيميائياً)",
+    "evidence_status": "measurement_not_applicable",
+    "evidence_status_label_en": "Not Applicable",
+    "evidence_status_label_ar": "غير قابل للتطبيق كيميائياً",
+    "available_supporting_observations": "Peptide sequence contains zero cysteine residues (0 Cys, fully linear).",
+    "why_missing_evidence_matters": "Important epistemic safeguard: Disulfide reduction/isomerization assays are chemically inapplicable to non-cysteine linear peptides; categorizing as not_applicable prevents false missing-data penalties.",
+    "relevant_assay_context": "Chemical sequence verification (Cysteine count = 0).",
+    "evidence_provenance": "Canonical Master Dataset (data/atlas.json)",
+    "confidence_level": "Absolute (Verified sequence lacks cysteine residues)",
+    "uncertainty_and_limitations": "Not applicable to linear peptides; relevant only to disulfide-constrained toxins (e.g. AaH2, Scorpine, Charybdotoxin).",
+    "proposed_experiment_en": "Proposed Experiment: Measurement not applicable. Peptide lacks cysteine residues; focus resources on protease susceptibility and backbone terminal modification stability instead.",
+    "proposed_experiment_ar": "مقترح تجريبي: الفحص غير قابل للتطبيق كيميائياً لخلو التسلسل من السيستين؛ يجب توجيه الموارد نحو فحوص مقاومة البروتياز وثبات التعديلات الطرفية.",
+    "priority_score": 27.5,
+    "scoring_components": {
+      "uncertainty_reduction": 10.0,
+      "activity_context": 50.0,
+      "lead_relevance": 40.0,
+      "experimental_feasibility": 10.0
+    },
+    "cross_module_links": {
+      "catalog": "#catalog?search=SCA-0012",
+      "venomlab": "#venomlab?id=SCA-0012",
+      "agent": "#agent?query=SCA-0012",
+      "target_explorer": "#target-explorer?peptide=SCA-0012",
+      "prioritization": "#prioritization?highlight=SCA-0012"
+    },
+    "priority_rank": 151
+  }
+];
+  const GAP_SUMMARY_METRICS_DATA = {
+  "total_gaps": 151,
+  "total_peptides_covered": 24,
+  "category_distribution": {
+    "hemolysis_and_safety": 37,
+    "antimicrobial_evidence": 42,
+    "stability_and_developability": 23,
+    "evidence_provenance": 1,
+    "target_specificity": 4,
+    "structural_evidence": 20,
+    "mechanism_of_action": 24
+  },
+  "status_distribution": {
+    "data_not_available": 37,
+    "not_assayed": 104,
+    "disputed_evidence": 1,
+    "species_or_subtype_mismatch": 4,
+    "assayed_negative": 2,
+    "measurement_not_applicable": 3
+  },
+  "priority_score_range": {
+    "max": 93.75,
+    "min": 27.5,
+    "mean": 79.95
+  },
+  "macro_atlas_gaps": {
+    "total_atlas_peptides": 1232,
+    "peptides_with_experimental_evidence": 20,
+    "unassayed_background_peptides": 1212,
+    "calibrated_hc50_peptides_count": 3,
+    "who_priority_pathogens_tested_count": 0
+  }
+};
+
+  function initResearchGapAnalyzer() {
+    const cardsContainer = $('gap-cards-grid');
+    const tableBody = $('gap-table-body');
+    const dialog = $('gap-detail-dialog');
+    const closeBtn = $('gap-modal-close');
+    const searchInput = $('gap-search-input');
+    const counterEl = $('gap-filter-results-count');
+
+    // View buttons & containers
+    const btnViewCards = $('gap-view-cards-btn');
+    const btnViewTable = $('gap-view-table-btn');
+    const btnViewSensitivity = $('gap-view-sensitivity-btn');
+    const btnViewMatrix = $('gap-view-matrix-btn');
+
+    const cardsView = $('gap-cards-view');
+    const tableView = $('gap-table-view');
+    const sensitivityView = $('gap-sensitivity-view');
+    const matrixView = $('gap-matrix-view');
+
+    // Subtabs for matrix view
+    const subtabPathogens = $('gap-subtab-pathogens');
+    const subtabTaxonomy = $('gap-subtab-taxonomy');
+    const matrixPathogenContainer = $('gap-pathogen-matrix-container');
+    const matrixTaxonomyContainer = $('gap-taxonomy-matrix-container');
+
+    if (!cardsContainer || !dialog) return;
+
+    let gaps = RESEARCH_GAPS_DATA;
+    let metrics = GAP_SUMMARY_METRICS_DATA;
+    let selectedCat = 'all';
+    let selectedStatus = 'all';
+    let searchQuery = '';
+    let currentView = 'cards';
+    let currentModel = 'balanced_default';
+
+    // Live fetch if available
+    (async () => {
+      try {
+        const [gRes, mRes] = await Promise.all([
+          fetch('data/research_gaps.json'),
+          fetch('data/gap_summary_metrics.json')
+        ]);
+        if (gRes.ok && mRes.ok) {
+          gaps = await gRes.json();
+          metrics = await mRes.json();
+          render();
+        }
+      } catch (e) {
+        // Fallback to embedded data
+      }
+    })();
+
+    function getStatusBadge(status) {
+      switch(status) {
+        case 'not_assayed':
+          return '<span class="gap-status-tag status-not-assayed">غير مفحوص مخبرياً (Not Assayed)</span>';
+        case 'data_not_available':
+          return '<span class="gap-status-tag status-data-not-available">بيانات غير متوفرة (Data Not Available)</span>';
+        case 'species_or_subtype_mismatch':
+          return '<span class="gap-status-tag status-species-mismatch">تفاوت الكائن / النمط الفرعي (Species Mismatch)</span>';
+        case 'disputed_evidence':
+          return '<span class="gap-status-tag status-disputed">دليل علمي محل نزاع (Disputed Evidence)</span>';
+        case 'assayed_negative':
+          return '<span class="gap-status-tag status-assayed-negative">مفحوص سلبياً / خامل (Assayed Negative)</span>';
+        case 'measurement_not_applicable':
+          return '<span class="gap-status-tag status-not-applicable">غير قابل للتطبيق كيميائياً (Not Applicable)</span>';
+        default:
+          return `<span class="gap-status-tag status-not-assayed">${esc(status)}</span>`;
+      }
+    }
+
+    function switchView(view) {
+      currentView = view;
+      if (btnViewCards) btnViewCards.classList.toggle('active', view === 'cards');
+      if (btnViewTable) btnViewTable.classList.toggle('active', view === 'table');
+      if (btnViewSensitivity) btnViewSensitivity.classList.toggle('active', view === 'sensitivity');
+      if (btnViewMatrix) btnViewMatrix.classList.toggle('active', view === 'matrix');
+
+      if (cardsView) cardsView.hidden = (view !== 'cards');
+      if (tableView) tableView.hidden = (view !== 'table');
+      if (sensitivityView) sensitivityView.hidden = (view !== 'sensitivity');
+      if (matrixView) matrixView.hidden = (view !== 'matrix');
+
+      if (view === 'matrix') {
+        renderMatrixView();
+      }
+      render();
+    }
+
+    if (btnViewCards) btnViewCards.addEventListener('click', () => switchView('cards'));
+    if (btnViewTable) btnViewTable.addEventListener('click', () => switchView('table'));
+    if (btnViewSensitivity) btnViewSensitivity.addEventListener('click', () => switchView('sensitivity'));
+    if (btnViewMatrix) btnViewMatrix.addEventListener('click', () => switchView('matrix'));
+
+    // Filter by Category
+    document.querySelectorAll('.gap-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.gap-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedCat = btn.dataset.cat || 'all';
+        render();
+      });
+    });
+
+    // Filter by Status
+    document.querySelectorAll('.gap-status-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.gap-status-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedStatus = btn.dataset.status || 'all';
+        render();
+      });
+    });
+
+    // Search Input
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.trim().toLowerCase();
+        render();
+      });
+    }
+
+    // Sensitivity model switcher
+    const modelBoxes = {
+      'model-balanced': 'balanced_default',
+      'model-safety': 'safety_first',
+      'model-mechanistic': 'mechanistic_first',
+      'model-lead': 'lead_focused'
+    };
+
+    Object.entries(modelBoxes).forEach(([elemId, modelKey]) => {
+      const el = $(elemId);
+      if (el) {
+        el.addEventListener('click', () => {
+          Object.keys(modelBoxes).forEach(id => $(id)?.classList.remove('active'));
+          el.classList.add('active');
+          currentModel = modelKey;
+          recalculatePriorityScores(modelKey);
+          render();
+        });
+      }
+    });
+
+    function recalculatePriorityScores(modelKey) {
+      const weightsConfig = {
+        balanced_default: { uncertainty: 0.30, activity: 0.25, lead: 0.25, feasibility: 0.20 },
+        safety_first: { uncertainty: 0.40, activity: 0.20, lead: 0.15, feasibility: 0.25 },
+        mechanistic_first: { uncertainty: 0.40, activity: 0.15, lead: 0.15, feasibility: 0.30 },
+        lead_focused: { uncertainty: 0.20, activity: 0.20, lead: 0.45, feasibility: 0.15 }
+      };
+
+      const w = weightsConfig[modelKey] || weightsConfig.balanced_default;
+      gaps.forEach(g => {
+        const c = g.scoring_components;
+        if (c) {
+          g.priority_score = +(c.uncertainty_reduction * w.uncertainty +
+                              c.activity_context * w.activity +
+                              c.lead_relevance * w.lead +
+                              c.experimental_feasibility * w.feasibility).toFixed(2);
+        }
+      });
+      gaps.sort((a, b) => b.priority_score - a.priority_score);
+      gaps.forEach((g, idx) => { g.priority_rank = idx + 1; });
+    }
+
+    // Matrix View Subtabs
+    if (subtabPathogens && subtabTaxonomy) {
+      subtabPathogens.addEventListener('click', () => {
+        subtabPathogens.classList.add('active');
+        subtabTaxonomy.classList.remove('active');
+        if (matrixPathogenContainer) matrixPathogenContainer.hidden = false;
+        if (matrixTaxonomyContainer) matrixTaxonomyContainer.hidden = true;
+      });
+      subtabTaxonomy.addEventListener('click', () => {
+        subtabTaxonomy.classList.add('active');
+        subtabPathogens.classList.remove('active');
+        if (matrixPathogenContainer) matrixPathogenContainer.hidden = true;
+        if (matrixTaxonomyContainer) matrixTaxonomyContainer.hidden = false;
+      });
+    }
+
+    function filterGaps() {
+      return gaps.filter(g => {
+        // Category filter
+        if (selectedCat !== 'all' && g.gap_category !== selectedCat) return false;
+        // Status filter
+        if (selectedStatus !== 'all' && g.evidence_status !== selectedStatus) return false;
+        // Search query
+        if (searchQuery) {
+          const txt = `${g.peptide_name} ${g.peptide_canonical_id} ${g.gap_id} ${g.specific_missing_evidence} ${g.specific_missing_evidence_ar} ${g.species}`.toLowerCase();
+          if (!txt.includes(searchQuery)) return false;
+        }
+        return true;
+      });
+    }
+
+    function renderCards(filtered) {
+      if (!cardsContainer) return;
+      if (filtered.length === 0) {
+        cardsContainer.innerHTML = `
+          <div class="col-span-full text-center py-12" style="grid-column: 1 / -1; padding: 40px 20px; text-align: center; color: #9caf8c;">
+            <p style="font-size: 16px; margin-bottom: 8px;">لا توجد فجوات تطابق معايير البحث الحالية.</p>
+            <small style="color: #64748b;">جرب اختيار فئة أخرى أو تفريغ حقل البحث.</small>
+          </div>
+        `;
+        return;
+      }
+
+      // Display up to 36 cards for fast rendering with pagination/view all
+      const displayGaps = filtered.slice(0, 36);
+
+      cardsContainer.innerHTML = displayGaps.map(g => `
+        <div class="gap-card" data-gid="${esc(g.gap_id)}">
+          <div class="gap-card-head">
+            <div class="flex items-center gap-2">
+              <span class="gap-peptide-tag">${esc(g.peptide_canonical_id)}</span>
+              <strong style="color: #e6ece6;">${esc(g.peptide_name)}</strong>
+            </div>
+            <span class="gap-priority-badge">#${g.priority_rank} | ${g.priority_score} pt</span>
+          </div>
+
+          <h4 class="gap-card-title">${esc(g.specific_missing_evidence_ar)}</h4>
+          ${getStatusBadge(g.evidence_status)}
+
+          <div class="gap-why-box">
+            <strong>أهمية الدليل المفقود:</strong>
+            <p>${esc(g.why_missing_evidence_matters)}</p>
+          </div>
+
+          <div class="gap-proposed-box">
+            <strong>مقترح تجريبي (Proposed Experiment):</strong>
+            <p>${esc(g.proposed_experiment_ar)}</p>
+          </div>
+
+          <div class="gap-card-foot">
+            <span style="font-size: 11px; color: #9caf8c;">${esc(g.gap_category_name_ar)}</span>
+            <span style="color: #8ec285; font-weight: 500;">استعراض التفاصيل 🔍</span>
+          </div>
+        </div>
+      `).join('');
+
+      // Add click listeners to cards
+      cardsContainer.querySelectorAll('.gap-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const gid = card.dataset.gid;
+          const gap = gaps.find(x => x.gap_id === gid);
+          if (gap) openDetailModal(gap);
+        });
+      });
+    }
+
+    function renderTable(filtered) {
+      if (!tableBody) return;
+      if (filtered.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="9" class="text-center py-6 text-muted">لا توجد بيانات مطابقة</td></tr>`;
+        return;
+      }
+
+      tableBody.innerHTML = filtered.map(g => `
+        <tr class="gap-row-click" data-gid="${esc(g.gap_id)}" style="cursor: pointer;">
+          <td class="mono font-bold" style="color: #8ec285;">#${g.priority_rank}</td>
+          <td class="mono">${esc(g.gap_id)}</td>
+          <td><strong>${esc(g.peptide_name)}</strong> <code class="text-xs text-muted">(${esc(g.peptide_canonical_id)})</code></td>
+          <td class="italic">${esc(g.species)}</td>
+          <td><span class="badge category">${esc(g.gap_category_name_ar)}</span></td>
+          <td>${getStatusBadge(g.evidence_status)}</td>
+          <td style="max-width: 280px; font-size: 12px;">${esc(g.specific_missing_evidence_ar)}</td>
+          <td class="mono font-bold" style="color: #a3e635;">${g.priority_score}</td>
+          <td><button class="button secondary small" style="padding: 2px 8px; font-size: 11px;">تفاصيل</button></td>
+        </tr>
+      `).join('');
+
+      tableBody.querySelectorAll('.gap-row-click').forEach(row => {
+        row.addEventListener('click', () => {
+          const gid = row.dataset.gid;
+          const gap = gaps.find(x => x.gap_id === gid);
+          if (gap) openDetailModal(gap);
+        });
+      });
+    }
+
+    function renderMatrixView() {
+      const pathogenMatrixEl = $('gap-pathogen-matrix');
+      const taxonomyMatrixEl = $('gap-taxonomy-matrix');
+      if (!pathogenMatrixEl || !taxonomyMatrixEl) return;
+
+      const testedPathogens = [
+        { name: 'Staphylococcus aureus', strain: 'ATCC 25923 / 29213', gram: 'Gram-positive', count: 14, status: 'tested' },
+        { name: 'Escherichia coli', strain: 'ATCC 25922 / UB1005', gram: 'Gram-negative', count: 10, status: 'tested' },
+        { name: 'Pseudomonas aeruginosa', strain: 'ATCC 27853 / PAO1', gram: 'Gram-negative', count: 5, status: 'tested' },
+        { name: 'Candida albicans', strain: 'ATCC 10231 / SC5314', gram: 'Fungal / Yeast', count: 2, status: 'tested' },
+        { name: 'Bacillus subtilis', strain: 'ATCC 6633', gram: 'Gram-positive', count: 1, status: 'tested' }
+      ];
+
+      const whoCriticalGaps = [
+        { name: 'Acinetobacter baumannii (CRAB)', priority: 'WHO Priority 1: Critical', gram: 'Gram-negative', count: 0, status: 'gap' },
+        { name: 'Klebsiella pneumoniae (CRE)', priority: 'WHO Priority 1: Critical', gram: 'Gram-negative', count: 0, status: 'gap' },
+        { name: 'Enterococcus faecium (VRE)', priority: 'WHO Priority 2: High', gram: 'Gram-positive', count: 0, status: 'gap' },
+        { name: 'Helicobacter pylori (Clarithromycin-R)', priority: 'WHO Priority 2: High', gram: 'Gram-negative', count: 0, status: 'gap' },
+        { name: 'Salmonella spp. (Fluoroquinolone-R)', priority: 'WHO Priority 2: High', gram: 'Gram-negative', count: 0, status: 'gap' }
+      ];
+
+      pathogenMatrixEl.innerHTML = `
+        <div class="gap-grid-container">
+          <div class="gap-subcol">
+            <h4 class="gap-col-title text-success">✓ المسببات المرضية المفحوصة مخبرياً (${testedPathogens.reduce((a,b)=>a+b.count,0)} قياساً)</h4>
+            <div class="gap-card-list">
+              ${testedPathogens.map(p => `
+                <div class="gap-item tested">
+                  <div class="gap-item-head">
+                    <strong dir="ltr"><em>${esc(p.name)}</em></strong>
+                    <span class="gap-badge tested">${p.count} قياسات</span>
+                  </div>
+                  <div class="gap-item-body">
+                    <span>السلالات: <code dir="ltr">${esc(p.strain)}</code></span>
+                    <span class="gap-gram">${esc(p.gram)}</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="gap-subcol">
+            <h4 class="gap-col-title text-danger">⚠️ مسببات منظمة الصحة العالمية ذات الأولوية القصوى (0 سجلات مؤهلة في الأطلس المنسق v1.5)</h4>
+            <div class="gap-card-list">
+              ${whoCriticalGaps.map(g => `
+                <div class="gap-item gap">
+                  <div class="gap-item-head">
+                    <strong dir="ltr"><em>${esc(g.name)}</em></strong>
+                    <span class="gap-badge gap">0 سجلات في الأطلس المنسق</span>
+                  </div>
+                  <div class="gap-item-body">
+                    <span>الأولوية السريرية: <strong class="text-danger">${esc(g.priority)}</strong></span>
+                    <span class="gap-gram">${esc(g.gram)}</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+
+      const taxonomyData = [
+        { family: 'Buthidae', total: 960, tested: 14, unassayed: 946, pct: '1.5%' },
+        { family: 'Scorpionidae', total: 89, tested: 2, unassayed: 87, pct: '2.2%' },
+        { family: 'Hemiscorpiidae', total: 58, tested: 0, unassayed: 58, pct: '0.0%' },
+        { family: 'Chactidae', total: 58, tested: 0, unassayed: 58, pct: '0.0%' },
+        { family: 'Euscorpiidae', total: 17, tested: 0, unassayed: 17, pct: '0.0%' },
+        { family: 'Chaerilidae', total: 17, tested: 0, unassayed: 17, pct: '0.0%' },
+        { family: 'Vaejovidae', total: 16, tested: 0, unassayed: 16, pct: '0.0%' },
+        { family: 'Hormuridae', total: 2, tested: 1, unassayed: 1, pct: '50.0%' },
+        { family: 'Caraboctonidae', total: 1, tested: 1, unassayed: 0, pct: '100.0%' }
+      ];
+
+      taxonomyMatrixEl.innerHTML = `
+        <div class="table-scroll">
+          <table class="gap-tax-table">
+            <thead>
+              <tr>
+                <th>الفصيلة التصنيفية (Family)</th>
+                <th>إجمالي الببتيدات</th>
+                <th>مفحوصة كمياً (MIC)</th>
+                <th>خلفية غير مفحوصة (Unassayed)</th>
+                <th>نسبة التغطية المخبرية</th>
+                <th>حالة الاستكشاف</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${taxonomyData.map(t => `
+                <tr>
+                  <td class="font-bold" dir="ltr"><strong>${esc(t.family)}</strong></td>
+                  <td class="mono">${t.total}</td>
+                  <td class="mono ${t.tested > 0 ? 'text-success font-bold' : 'text-muted'}">${t.tested}</td>
+                  <td class="mono text-muted">${t.unassayed}</td>
+                  <td class="mono">${t.pct}</td>
+                  <td>
+                    ${t.tested === 0
+                      ? '<span class="badge background">فصيلة غير مستكشفة مخبرياً</span>'
+                      : '<span class="badge measured">استكشاف جزئي محدود</span>'}
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function openDetailModal(g) {
+      const modalBadge = $('gap-modal-badge');
+      const modalTitle = $('gap-modal-title');
+      const modalBody = $('gap-modal-body');
+
+      if (modalBadge) modalBadge.className = 'badge';
+      if (modalTitle) modalTitle.textContent = `${g.gap_id}: ${g.peptide_name} (${g.peptide_canonical_id})`;
+
+      const comp = g.scoring_components || {};
+
+      modalBody.innerHTML = `
+        <div style="display: flex; flex-direction: column; gap: 16px; font-size: 13px; line-height: 1.6;">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; background: rgba(18,27,20,0.8); padding: 12px 16px; border-radius: 6px; border: 1px solid #2b3d2c;">
+            <div>
+              <span style="color: #9caf8c;">الفئة العلمية:</span>
+              <strong style="color: #8ec285; margin-right: 6px;">${esc(g.gap_category_name_ar)}</strong>
+              <small class="text-muted">(${esc(g.gap_category_name_en)})</small>
+            </div>
+            <div>
+              ${getStatusBadge(g.evidence_status)}
+            </div>
+          </div>
+
+          <div style="background: rgba(12,18,13,0.7); padding: 14px 16px; border-radius: 6px; border-right: 4px solid #8ec285;">
+            <strong style="color: #e6ece6; font-size: 14px; display: block; margin-bottom: 6px;">الدليل التجريبي المفقود:</strong>
+            <p style="color: #f0f4f0; margin-bottom: 6px;">${esc(g.specific_missing_evidence_ar)}</p>
+            <p style="color: #9caf8c; font-size: 12px;" dir="ltr">${esc(g.specific_missing_evidence)}</p>
+          </div>
+
+          <div>
+            <strong style="color: #8ec285; display: block; margin-bottom: 4px;">لماذا تمثل هذه الفجوة أهمية بحثية حرجة؟</strong>
+            <p style="color: #cbd5e1;">${esc(g.why_missing_evidence_matters)}</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+            <div style="background: rgba(18,27,20,0.6); padding: 10px 14px; border-radius: 6px; border: 1px solid #2b3d2c;">
+              <strong style="color: #9caf8c; font-size: 12px; display: block; margin-bottom: 4px;">الملاحظات والبيانات المساندة المتوفرة:</strong>
+              <p style="color: #e6ece6; font-size: 12px;">${esc(g.available_supporting_observations)}</p>
+            </div>
+            <div style="background: rgba(18,27,20,0.6); padding: 10px 14px; border-radius: 6px; border: 1px solid #2b3d2c;">
+              <strong style="color: #9caf8c; font-size: 12px; display: block; margin-bottom: 4px;">سياق الفحص والنظام الحيوي المناسب:</strong>
+              <p style="color: #e6ece6; font-size: 12px;">${esc(g.relevant_assay_context)}</p>
+            </div>
+          </div>
+
+          <!-- PROPOSED EXPERIMENT -->
+          <div style="background: rgba(22, 33, 24, 0.9); border: 1px dashed #8ec285; border-radius: 8px; padding: 16px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span style="font-size: 16px;">🧪</span>
+              <strong style="color: #bef264; font-size: 14px; text-transform: uppercase;">مقترح تجريبي موصى به (Proposed Experiment):</strong>
+              <span class="badge" style="background: #19271a; color: #a3e635; border: 1px solid #354a2a; font-size: 10px;">بروتوكول مستقبلي مقترح</span>
+            </div>
+            <p style="color: #f0fdf4; margin-bottom: 8px; font-weight: 500;">${esc(g.proposed_experiment_ar)}</p>
+            <p style="color: #a3e635; font-size: 12px;" dir="ltr">${esc(g.proposed_experiment_en)}</p>
+          </div>
+
+          <!-- SCORING COMPONENTS -->
+          <div style="background: rgba(18,27,20,0.7); padding: 12px 16px; border-radius: 6px; border: 1px solid #2b3d2c;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <strong style="color: #8ec285;">محددات درجة أولوية الفجوة:</strong>
+              <span class="mono font-bold" style="color: #a3e635; font-size: 14px;">الرتبة: #${g.priority_rank} | الدرجة: ${g.priority_score} / 100</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center; font-size: 11px;">
+              <div style="background: #0f1711; padding: 6px; border-radius: 4px; border: 1px solid #354a2a;">
+                <span class="text-muted" style="display: block;">خفض عدم اليقين (30%)</span>
+                <strong style="color: #8ec285;">${comp.uncertainty_reduction || 0}</strong>
+              </div>
+              <div style="background: #0f1711; padding: 6px; border-radius: 4px; border: 1px solid #354a2a;">
+                <span class="text-muted" style="display: block;">سياق الفعالية (25%)</span>
+                <strong style="color: #8ec285;">${comp.activity_context || 0}</strong>
+              </div>
+              <div style="background: #0f1711; padding: 6px; border-radius: 4px; border: 1px solid #354a2a;">
+                <span class="text-muted" style="display: block;">أهمية الصدارة (25%)</span>
+                <strong style="color: #8ec285;">${comp.lead_relevance || 0}</strong>
+              </div>
+              <div style="background: #0f1711; padding: 6px; border-radius: 4px; border: 1px solid #354a2a;">
+                <span class="text-muted" style="display: block;">الجدوى المعملية (20%)</span>
+                <strong style="color: #8ec285;">${comp.experimental_feasibility || 0}</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROVENANCE & UNCERTAINTY -->
+          <div style="font-size: 11px; color: #9caf8c; border-top: 1px solid #2b3d2c; padding-top: 10px;">
+            <p><strong>المصدر والأدبيات:</strong> ${esc(g.evidence_provenance)}</p>
+            <p><strong>مستوى الثقة في تصنيف الفجوة:</strong> ${esc(g.confidence_level)}</p>
+            <p><strong>حدود عدم اليقين:</strong> ${esc(g.uncertainty_and_limitations)}</p>
+          </div>
+
+          <!-- CROSS-MODULE DEEP LINKS -->
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; padding-top: 8px;">
+            <a href="${g.cross_module_links.target_explorer || '#target-explorer'}" class="button secondary small" style="font-size: 11px;">مستكشف الأهداف (MOD-05) 🎯</a>
+            <a href="${g.cross_module_links.venomlab || '#venomlab'}" class="button secondary small" style="font-size: 11px;">بنية VenomLab 3D (MOD-03) 🧬</a>
+            <a href="${g.cross_module_links.agent || '#research-agent'}" class="button secondary small" style="font-size: 11px;">الباحث العلمي (MOD-04) 🤖</a>
+            <a href="${g.cross_module_links.prioritization || '#prioritization'}" class="button secondary small" style="font-size: 11px;">فرز المرشحين (MOD-07) 🏆</a>
+            <a href="${g.cross_module_links.catalog || '#atlas'}" class="button secondary small" style="font-size: 11px;">بطاقة الببتيد في الأطلس 📜</a>
+          </div>
+        </div>
+      `;
+
+      dialog.showModal();
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => dialog.close());
+    }
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+
+    // Export CSV
+    const exportCsvBtn = $('gap-export-csv');
+    if (exportCsvBtn) {
+      exportCsvBtn.addEventListener('click', () => {
+        const filtered = filterGaps();
+        const headers = ["gap_id", "priority_rank", "priority_score", "peptide_canonical_id", "peptide_name", "species", "gap_category", "evidence_status", "specific_missing_evidence", "why_missing_evidence_matters", "proposed_experiment_en"];
+        const rows = filtered.map(g => [
+          g.gap_id, g.priority_rank, g.priority_score, g.peptide_canonical_id, g.peptide_name, g.species,
+          g.gap_category, g.evidence_status, `"${(g.specific_missing_evidence || '').replace(/"/g, '""')}"`,
+          `"${(g.why_missing_evidence_matters || '').replace(/"/g, '""')}"`,
+          `"${(g.proposed_experiment_en || '').replace(/"/g, '""')}"`
+        ]);
+        const csvContent = "data:text/csv;charset=utf-8,﻿" + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", `SCORPION_X_Research_Gaps_${selectedCat}_${selectedStatus}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
+
+    // Export JSON
+    const exportJsonBtn = $('gap-export-json');
+    if (exportJsonBtn) {
+      exportJsonBtn.addEventListener('click', () => {
+        const filtered = filterGaps();
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(filtered, null, 2));
+        const link = document.createElement("a");
+        link.setAttribute("href", dataStr);
+        link.setAttribute("download", `SCORPION_X_Research_Gaps_${selectedCat}_${selectedStatus}.json`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
+
+    function render() {
+      const filtered = filterGaps();
+      if (counterEl) {
+        counterEl.textContent = `عرض ${filtered.length} فجوة بحثية مرتبة حسب أولوية خفض عدم اليقين (من إجمالي ${gaps.length} فجوة)`;
+      }
+      if (currentView === 'cards') {
+        renderCards(filtered);
+      } else if (currentView === 'table') {
+        renderTable(filtered);
+      }
+    }
+
+    // Initial render
+    render();
+  }
+
+
   // MOD-07: Evidence-Based Lead Prioritization (Triage & Strict Safeguards)
   // ============================================================================
     // Ranking Presets Definition
@@ -3210,7 +9257,7 @@
       updateTruthModeUI();
 
       // Initialize Sprint 02 & Sprint 03 modules
-      renderGapAnalyzer();
+      initResearchGapAnalyzer();
       renderLeadPrioritization();
       renderXAIExplorer();
       initKnowledgeGraph();

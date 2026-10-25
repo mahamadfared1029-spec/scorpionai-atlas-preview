@@ -673,102 +673,205 @@
  </section>
 
    <!-- SECTION 03: MOD-06 RESEARCH GAP ANALYZER -->
+    <!-- SECTION 06: MOD-06 RESEARCH GAP ANALYZER -->
   <section class="gap-analyzer section-space" id="gap-analyzer" aria-labelledby="gap-title">
     <div class="section-heading reveal">
       <div>
-        <p class="eyebrow"><span class="section-index">03 /</span> فجوات البحث والاستكشاف</p>
-        <h2 id="gap-title">محلل فجوات البحث العلمي.<br><span>خريطة المسببات غير المختبرة والتصنيف.</span></h2>
+        <p class="eyebrow"><span class="section-index">06 /</span> محلل فجوات البحث العلمي (MOD-06)</p>
+        <h2 id="gap-title">محلل فجوات البحث العلمي والأولويات التجريبية.<br><span>تمييز صارم بين غياب الفحص (Not Assayed)، والنتائج السلبية، والنزاعات العلمية.</span></h2>
       </div>
-      <p>تحليل استكشافي للفجوات التجريبية مقارنةً بمسببات منظمة الصحة العالمية ذات الأولوية الحرجة (WHO Bacterial Priority Pathogens List 2024)، وفق حدود مجموعة بيانات SCORPION X v1.5 المنسقة (تاريخ التحديث: أكتوبر 2026، 1,232 ببتيداً فريداً (1,233 سطراً في CSV شاملاً سطر العناوين) عبر 147 نوعاً، بمعايير إدراج تشترط قياسات كمية محددة السلالة والوسط). توثق هذه اللوحة حدود التغطية الحالية للمجموعة والبحث المرجعي، ولا تدعي خلو كامل سموم العقارب عالمياً من الفعالية.</p>
+      <p>محرك استكشافي مبني على الأدلة لتحديد وتصنيف وترتيب الفجوات التجريبية المتبقية عبر أطلس SCORPION X. يلتزم المحرك بالتمييز المعرفي الصارم بين غياب البيانات (Not Assayed)، والنتائج السلبية المثبتة (Assayed Negative)، والنزاعات العلمية غير المحسومة (Disputed Evidence)، والقياسات غير المتطابقة مع الأنواع أو الأنماط الفرعية البشرية (Species/Subtype Mismatch).</p>
     </div>
 
-    <!-- Gap Analyzer Key Metrics -->
+    <!-- Epistemic Guardrail Banner -->
+    <div class="gap-epistemic-guardrail reveal">
+      <div class="guardrail-icon" aria-hidden="true">🛡️</div>
+      <div class="guardrail-body">
+        <strong>حاجز منهجي صارم: غياب الفحص لا يعني خمول الببتيد، وغياب قياس HC50 لا يثبت أمانه السريري</strong>
+        <p>يؤكد أطلس SCORPION X أن غياب الفحص المخبري (Not Assayed) لا يجوز تفسيره كدليل على انعدام الفعالية، كما أن غياب قياس انحلال كريات الدم (HC50) لا يثبت سلامة الببتيد تجاه الخلايا الثديية. كما تُحظر ترجمة قياسات التثبيط الميكروبي (MIC) إلى ألفة ارتباط جزيئي، ويُمنع إسقاط قياسات الأنسجة الحيوانية كبديل عن القنوات البشرية المؤتلفة المعزولة. المقترحات التجريبية هي بروتوكولات بحثية مستقبلية وليست نتائج منجزة.</p>
+      </div>
+    </div>
+
+    <!-- Gap Key Metrics -->
     <div class="gap-stats-grid reveal">
       <div class="stat-card">
-        <span class="stat-val text-success" dir="ltr">5</span>
-        <span class="stat-lbl">مسببات مفحوصة في الأطلس المنسق</span>
-        <small>سلالات مرجعية ATCC ضمن الأدبيات المنسقة</small>
+        <span class="stat-val text-accent" dir="ltr" id="gap-stat-total">151</span>
+        <span class="stat-lbl">إجمالي الفجوات المصنفة</span>
+        <small>عبر 7 فئات علمية مستقلة</small>
       </div>
       <div class="stat-card">
-        <span class="stat-val text-danger" dir="ltr">0</span>
-        <span class="stat-lbl">مسببات WHO الحرجة في الأطلس</span>
-        <small>CRAB, CRE, VRE: لا تتوفر قياسات كمية مؤهلة في v1.5</small>
+        <span class="stat-val text-warning" dir="ltr" id="gap-stat-hc50">17</span>
+        <span class="stat-lbl">غياب منحنى HC50 السيني</span>
+        <small>اقتصار الفحص على جرعة أحادية تقريبية</small>
       </div>
       <div class="stat-card">
-        <span class="stat-val" dir="ltr">85.0%</span>
-        <span class="stat-lbl">ببتيدات الأطلس غير مفحوصة</span>
-        <small>1,047 ببتيداً خلفية سموم طبيعية غير موسومة (s=0)</small>
+        <span class="stat-val text-danger" dir="ltr" id="gap-stat-who">0</span>
+        <span class="stat-lbl">مسببات WHO الحرجة المفحوصة</span>
+        <small>CRAB, CRE, VRE: فراغ كمي كامل</small>
       </div>
       <div class="stat-card">
-        <span class="stat-val text-danger" dir="ltr">100%</span>
-        <span class="stat-lbl">غياب قياسات MBC / HC50 المعيارية</span>
-        <small>فراغ تجريبي كامل في السمية والقتل المعياري</small>
+        <span class="stat-val text-info" dir="ltr" id="gap-stat-mismatch">5</span>
+        <span class="stat-lbl">أهداف محل نزاع أو عدم تطابق</span>
+        <small>تفاوت نوعي ونزاعات بيوفيزيائية محددة</small>
+      </div>
+      <div class="stat-card">
+        <span class="stat-val" dir="ltr" id="gap-stat-macro">1,212</span>
+        <span class="stat-lbl">ببتيدات الخلفية غير المفحوصة</span>
+        <small>سموم طبيعية غير موسومة (s=0)</small>
       </div>
     </div>
 
-    <!-- Epistemic Demarcation of Research Gaps -->
-    <div class="gap-demarcation reveal">
-      <div class="demarcation-card">
-        <strong>1. فجوة تغطية الأطلس (Dataset Coverage Gap):</strong>
-        <p>السجلات الحالية تمثل الببتيدات المنسقة المنشورة في قاعدة بيانات v1.5 وفق معايير الإدراج المحددة، وليست حصراً شاملاً لكل ما نُشر عالمياً في أبحاث السموم.</p>
+    <!-- Gap Filter & Control Bar -->
+    <div class="gap-filter-bar reveal">
+      <div class="gap-search-row">
+        <div class="gap-search-box">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#9caf8c" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input id="gap-search-input" type="search" placeholder="ابحث باسم الببتيد (Stigmurin, Kn2-7, AaH2, Chlorotoxin) أو الفئة أو المعرّف (GAP-0001)..." aria-label="البحث في فجوات البحث العلمي">
+        </div>
+        <div class="gap-view-toggle" role="group" aria-label="طريقة عرض فجوات البحث">
+          <button id="gap-view-cards-btn" class="gap-view-btn active" aria-pressed="true">بطاقات الأولويات 🗂️</button>
+          <button id="gap-view-table-btn" class="gap-view-btn" aria-pressed="false">جدول الفجوات الكامل 📊</button>
+          <button id="gap-view-sensitivity-btn" class="gap-view-btn" aria-pressed="false">تحليل الحساسية والأوزان ⚖️</button>
+          <button id="gap-view-matrix-btn" class="gap-view-btn" aria-pressed="false">مصفوفة المسببات والتصنيف 🦠</button>
+        </div>
       </div>
-      <div class="demarcation-card">
-        <strong>2. حدود البحث الأدبي (Literature-Search Boundaries):</strong>
-        <p>معايير التوثيق تشترط قياسات MIC كمية محددة السلالة ووسط النمو؛ الدراسات النوعية أو غير المعيارية مستبعدة عمداً من الأطلس لضمان إمكانية المقارنة.</p>
+
+      <!-- Category Filter Pills -->
+      <div class="gap-filter-group">
+        <span class="filter-label">فئة الفجوة:</span>
+        <div class="pill-group" id="gap-category-pills">
+          <button class="gap-pill active" data-cat="all" id="gap-cat-all">جميع الفئات (151)</button>
+          <button class="gap-pill" data-cat="antimicrobial_evidence" id="gap-cat-antimicrobial">الأدلة الميكروبية (42)</button>
+          <button class="gap-pill" data-cat="hemolysis_and_safety" id="gap-cat-safety">الأمان وانحلال الدم (37)</button>
+          <button class="gap-pill" data-cat="mechanism_of_action" id="gap-cat-mechanism">آلية العمل (24)</button>
+          <button class="gap-pill" data-cat="stability_and_developability" id="gap-cat-stability">الثبات وقابلية التطوير (23)</button>
+          <button class="gap-pill" data-cat="structural_evidence" id="gap-cat-structural">الأدلة البنيوية (20)</button>
+          <button class="gap-pill" data-cat="target_specificity" id="gap-cat-specificity">تطابق الأنماط الفرعية (4)</button>
+          <button class="gap-pill" data-cat="evidence_provenance" id="gap-cat-provenance">أصل الأدلة والنزاعات (1)</button>
+        </div>
       </div>
-      <div class="demarcation-card">
-        <strong>3. أولويات التحقق المخبري (Experimental Verification Opportunities):</strong>
-        <p>انعدام القياسات المؤهلة لمسببات WHO الحرجة يحدد أولوية بحثية ملحّة للفحص المخبري المعملي المباشر بدلاً من الجزم النظري بعدم الجدوى الحيوية.</p>
+
+      <!-- Status Filter Pills -->
+      <div class="gap-filter-group">
+        <span class="filter-label">حالة الدليل:</span>
+        <div class="pill-group" id="gap-status-pills">
+          <button class="gap-status-pill active" data-status="all" id="gap-stat-all-pill">جميع الحالات</button>
+          <button class="gap-status-pill" data-status="not_assayed" id="gap-stat-not-assayed">غير مفحوص مخبرياً (104)</button>
+          <button class="gap-status-pill" data-status="data_not_available" id="gap-stat-not-available">بيانات غير متوفرة (37)</button>
+          <button class="gap-status-pill" data-status="species_or_subtype_mismatch" id="gap-stat-mismatch-pill">عدم تطابق الكائن/النمط الفرعي (4)</button>
+          <button class="gap-status-pill" data-status="measurement_not_applicable" id="gap-stat-na-pill">غير قابل للتطبيق (3)</button>
+          <button class="gap-status-pill" data-status="assayed_negative" id="gap-stat-neg-pill">مفحوص سلبياً (2)</button>
+          <button class="gap-status-pill" data-status="disputed_evidence" id="gap-stat-disputed-pill">محل نزاع علمي (1)</button>
+        </div>
       </div>
     </div>
 
-    <!-- Gap Navigation Tabs -->
-    <div class="gap-tabs reveal">
-      <button id="gap-tab-pathogens" class="gap-tab-btn active">مصفوفة المسببات المرضية (Pathogen Matrix)</button>
-      <button id="gap-tab-taxonomy" class="gap-tab-btn">توزيع الفصائل التصنيفية (Taxonomic Gaps)</button>
-      <button id="gap-tab-priorities" class="gap-tab-btn">أهم 5 أولويات بحثية ملحّة (Top 5 Priorities)</button>
+    <!-- Active Filter Counter -->
+    <div class="gap-active-counter reveal">
+      <span id="gap-filter-results-count">عرض 151 فجوة بحثية مرتبة حسب أولوية خفض عدم اليقين</span>
     </div>
 
-    <!-- View 1: Pathogen Coverage Matrix -->
-    <div id="gap-pathogen-view" class="gap-view reveal">
-      <div id="gap-pathogen-matrix"></div>
-    </div>
-
-    <!-- View 2: Taxonomy Distribution Matrix -->
-    <div id="gap-taxonomy-view" class="gap-view reveal" hidden>
-      <div id="gap-taxonomy-matrix"></div>
-    </div>
-
-    <!-- View 3: Top 5 Urgent Priorities -->
-    <div id="gap-priorities-view" class="gap-view reveal" hidden>
-      <div class="priorities-grid">
-        <article class="priority-card">
-          <span class="p-num">01</span>
-          <h4>غياب قياسات كمية مؤهلة لمسببات منظمة الصحة العالمية الحرجة في الأطلس</h4>
-          <p>ضمن حدود مجموعة SCORPION X v1.5 ومعايير الإدراج المعتمدة، لم يُعثر على قياسات MIC كمية مؤهلة ضد سلالات <em>Acinetobacter baumannii</em> المقاومة للكاربابينيم (CRAB) أو <em>Klebsiella pneumoniae</em> المقاومة للكاربابينيم (CRE)، مما يحدد أولوية مخبرية وببليوجرافية ملحّة للتحقق التجريبي والتوسع التوثيقي المستقبلي.</p>
-        </article>
-        <article class="priority-card">
-          <span class="p-num">02</span>
-          <h4>فراغ قياسات السمية الخلوية المعيارية لتحلل كريات الدم (HC50)</h4>
-          <p>بنسبة 100% من السجلات التجريبية الـ 32 في الأطلس المنسق، اقتصرت تقارير الأدبيات على نسب تحلل أحادية التركيز أو حدود دنيا (مثل &gt;150 µM)، دون منحنى جرعة-استجابة معياري لحساب HC50 كمي تجاه كريات الدم البشرية (hRBC)، مما يبرر التمسك بدرع حجب مؤشر الانتقائية (Null SI).</p>
-        </article>
-        <article class="priority-card">
-          <span class="p-num">03</span>
-          <h4>غياب قياسات تركيز القتل الأدنى (MBC) ومنحنيات القتل الزمني</h4>
-          <p>كافة القياسات في الأطلس تقتصر على التثبيط الظاهري للنمو (MIC) دون التحقق مما إذا كان التأثير قاتلاً للبكتيريا (Bactericidal) أو كابحاً لنموها فقط (Bacteriostatic) عبر قياسات MBC موثقة.</p>
-        </article>
-        <article class="priority-card">
-          <span class="p-num">04</span>
-          <h4>انحياز توثيقي نحو فصيلة Buthidae</h4>
-          <p>أكثر من 95% من الببتيدات المفحوصة في المجموعة المنسقة تنتمي لفصيلة واحدة (Buthidae)، في حين أن فصائل كاملة مثل Hemiscorpiidae و Chactidae و Euscorpiidae تضم 148 ببتيداً مسجلاً دون فحص تجريبي كمي مؤهل واحد في قاعدة البيانات الحالية.</p>
-        </article>
-        <article class="priority-card">
-          <span class="p-num">05</span>
-          <h4>غياب التقييم المعياري لتراكيز القضاء على الأغشية الحيوية (MBEC)</h4>
-          <p>الدراسات التي أوردت نشاطاً ضد الأغشية الحيوية (مثل StigA6 و StigA16) اعتمدت نسب تشتت جزئية تقريبية عند تركيز ثابت دون تحديد التركيز المعياري القاتل للغشاء (MBEC)، مما يمنع المقارنة الكمية المباشرة.</p>
-        </article>
+    <!-- VIEW 1: Priority-Ranked Gap Cards View -->
+    <div id="gap-cards-view" class="gap-view-container reveal">
+      <div class="gap-cards-grid" id="gap-cards-grid">
+        <!-- Rendered via app.js -->
       </div>
     </div>
+
+    <!-- VIEW 2: Complete Gap Registry Table View -->
+    <div id="gap-table-view" class="gap-view-container reveal" hidden>
+      <div class="gap-table-actions">
+        <button id="gap-export-csv" class="button secondary small">تحميل كملف CSV 📥</button>
+        <button id="gap-export-json" class="button secondary small">تحميل كملف JSON 📋</button>
+      </div>
+      <div class="table-responsive">
+        <table class="data-table gap-table">
+          <thead>
+            <tr>
+              <th>الرتبة</th>
+              <th>معرّف الفجوة</th>
+              <th>الببتيد</th>
+              <th>النوع</th>
+              <th>فئة الفجوة</th>
+              <th>حالة الدليل</th>
+              <th>الدليل المفقود بدقة</th>
+              <th>درجة الأولوية (0-100)</th>
+              <th>التفاصيل والمقترح</th>
+            </tr>
+          </thead>
+          <tbody id="gap-table-body">
+            <!-- Rendered via app.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- VIEW 3: Sensitivity Analysis & Prioritization Models View -->
+    <div id="gap-sensitivity-view" class="gap-view-container reveal" hidden>
+      <div class="sensitivity-card">
+        <h3>تحليل حساسية ترتيب الأولويات البحثية (Prioritization Sensitivity Analysis)</h3>
+        <p>تعتمد أولوية الفجوة البحثية على معادلة رياضية متعددة المعايير تأخذ في الحسبان: خفض عدم اليقين (30%)، السياق الحيوي للببتيد (25%)، الأهمية ضمن قائمة المتصدرين (25%)، والجدوى المعملية للفحص المقترح (20%). تم اختبار 4 تكوينات مختلفة للأوزان لإثبات استقرار الترتيب وعدم انحيازه.</p>
+
+        <div class="sensitivity-models-grid">
+          <div class="model-box active" id="model-balanced">
+            <h4>1. المعيار المتوازن (الافتراضي)</h4>
+            <p>أوزان: عدم اليقين 30% | الفعالية 25% | الصدارة 25% | الجدوى 20%</p>
+            <span class="rho-tag">الارتباط المرجعي (Spearman ρ = 1.000)</span>
+          </div>
+          <div class="model-box" id="model-safety">
+            <h4>2. أولوية الأمان والسمية الخلوية</h4>
+            <p>أوزان: عدم اليقين 40% | الفعالية 20% | الصدارة 15% | الجدوى 25%</p>
+            <span class="rho-tag">تطابق وثيق (Spearman ρ = 0.980)</span>
+          </div>
+          <div class="model-box" id="model-mechanistic">
+            <h4>3. أولوية الآلية ونوعية الهدف</h4>
+            <p>أوزان: عدم اليقين 40% | الفعالية 15% | الصدارة 15% | الجدوى 30%</p>
+            <span class="rho-tag">تطابق وثيق (Spearman ρ = 0.976)</span>
+          </div>
+          <div class="model-box" id="model-lead">
+            <h4>4. أولوية قائمة المتصدرين</h4>
+            <p>أوزان: عدم اليقين 20% | الفعالية 20% | الصدارة 45% | الجدوى 15%</p>
+            <span class="rho-tag">تطابق وثيق (Spearman ρ = 0.942)</span>
+          </div>
+        </div>
+
+        <div class="sensitivity-summary-note">
+          <strong>خلاصة استقرار الترتيب:</strong> جميع معاملات ارتباط سبيرمان تفوق 0.94، مما يؤكد أن ترتيب الأولويات البحثية قوي ومستقر رياضياً ولا يعتمد على افتراضات تحكمية.
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 4: Pathogen & Taxonomic Coverage Matrix View -->
+    <div id="gap-matrix-view" class="gap-view-container reveal" hidden>
+      <div class="matrix-tabs-inner">
+        <button id="gap-subtab-pathogens" class="gap-tab-btn active">مصفوفة المسببات المرضية (Pathogen Matrix)</button>
+        <button id="gap-subtab-taxonomy" class="gap-tab-btn">توزيع الفصائل التصنيفية (Taxonomic Gaps)</button>
+      </div>
+
+      <div id="gap-pathogen-matrix-container" class="matrix-content">
+        <div id="gap-pathogen-matrix"></div>
+      </div>
+
+      <div id="gap-taxonomy-matrix-container" class="matrix-content" hidden>
+        <div id="gap-taxonomy-matrix"></div>
+      </div>
+    </div>
+
+    <!-- Interactive Gap Detail Modal Dialog -->
+    <dialog id="gap-detail-dialog" class="target-modal">
+      <div class="target-modal-content">
+        <div class="target-modal-header">
+          <div class="flex items-center gap-2">
+            <span id="gap-modal-badge" class="badge">حالة الفجوة</span>
+            <h3 id="gap-modal-title" class="target-modal-title">تفاصيل الفجوة البحثية</h3>
+          </div>
+          <button id="gap-modal-close" class="target-close-btn" aria-label="إغلاق نافذة الفجوة">✕</button>
+        </div>
+        <div id="gap-modal-body" class="target-modal-body">
+          <!-- Injected via app.js -->
+        </div>
+      </div>
+    </dialog>
   </section>
 
     <!-- SECTION 04: MOD-07 EVIDENCE-BASED LEAD PRIORITIZATION -->

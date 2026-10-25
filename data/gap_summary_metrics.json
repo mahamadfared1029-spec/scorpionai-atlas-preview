@@ -1,0 +1,33 @@
+{
+  "total_gaps": 151,
+  "total_peptides_covered": 24,
+  "category_distribution": {
+    "hemolysis_and_safety": 37,
+    "antimicrobial_evidence": 42,
+    "stability_and_developability": 23,
+    "evidence_provenance": 1,
+    "target_specificity": 4,
+    "structural_evidence": 20,
+    "mechanism_of_action": 24
+  },
+  "status_distribution": {
+    "data_not_available": 37,
+    "not_assayed": 104,
+    "disputed_evidence": 1,
+    "species_or_subtype_mismatch": 4,
+    "assayed_negative": 2,
+    "measurement_not_applicable": 3
+  },
+  "priority_score_range": {
+    "max": 93.75,
+    "min": 27.5,
+    "mean": 79.95
+  },
+  "macro_atlas_gaps": {
+    "total_atlas_peptides": 1232,
+    "peptides_with_experimental_evidence": 20,
+    "unassayed_background_peptides": 1212,
+    "calibrated_hc50_peptides_count": 3,
+    "who_priority_pathogens_tested_count": 0
+  }
+}

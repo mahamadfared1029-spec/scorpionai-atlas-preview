@@ -1144,43 +1144,43 @@
       <div class="readiness-governance-banner reveal">
         <div class="banner-icon">⚖️</div>
         <div class="banner-text">
-          <strong>تنبيه منهجي وفصل معرفي حاسم (Orthogonal Readiness Layer):</strong>
-          <p>مؤشر الجاهزية البحثية (Evidence Readiness Index - ERI) يقيس مدى اكتمال وموثوقية الفحوصات المعملية والأمان الحيوي عبر 5 نطاقات مستقلة، <strong>ولا يقيس القوة البيولوجية أو التفوق العلاجي</strong>. تصدر المرشح للرتبة الأولى في فعالية MIC لا يعني جاهزيته للتطوير ما لم تُثبت سلامته المعملية؛ كما أن غياب قياسات انحلال الدم والسمية الخلوية لا يجوز أبداً تفسيره كدليل على الأمان.</p>
+          <strong>تنبيه منهجي وفصل معرفي حاسم (Orthogonal Evidence Completeness Layer):</strong>
+          <p>مؤشر الجاهزية البحثية (Evidence Readiness Index - ERI) يقيس حصراً درجة اكتمال وموثوقية الفحوصات المعملية والأدلة المنشورة عبر 5 نطاقات مستقلة، <strong>ولا يمثل تقييماً للسلامة البيولوجية أو الفعالية العلاجية أو الجاهزية السريرية</strong>. تصدر المرشح للرتبة الأولى في فعالية MIC لا يعني اكتمال ملفه التجريبي؛ كما أن غياب فحوصات الأمان أو رصد تحلل دم حاد يستوجب التحقق المعملي الصارم قبل أي تطوير.</p>
         </div>
       </div>
 
       <!-- Readiness Summary Metrics Grid -->
       <div class="readiness-metrics-grid reveal">
         <div class="readiness-metric-card tier-1-border">
-          <span class="card-label">الفئة 1: جاهزية متقدمة (Tier 1)</span>
+          <span class="card-label">الفئة 1: ملف أدلة متكامل (Tier 1)</span>
           <span class="card-value text-success">3 <small style="font-size:14px; font-weight:normal; color:#94a3b8;">/ 20</small></span>
           <span class="card-subtext">منحنى HC<sub>50</sub> سيني كامل ومعاير على كريات دم بشرية (Hp1404, Kn2-7, BmKn2).</span>
         </div>
         <div class="readiness-metric-card tier-2-border">
-          <span class="card-label">الفئة 2: فحص أولي تقريبي (Tier 2)</span>
-          <span class="card-value text-warning">5 <small style="font-size:14px; font-weight:normal; color:#94a3b8;">/ 20</small></span>
-          <span class="card-subtext">فحص تحلل أحادي الجرعة (&lt;20%) دون منحنى قياسي كامل (مثل StigA31, StigA25).</span>
+          <span class="card-label">الفئة 2: ملف أدلة متوسط (Tier 2)</span>
+          <span class="card-value text-warning">6 <small style="font-size:14px; font-weight:normal; color:#94a3b8;">/ 20</small></span>
+          <span class="card-subtext">توصيف تجريبي جزئي مع فحص انحلال أولي أو بنية رنين مغناطيسي (IsCT1, StigA31, StigA25...).</span>
         </div>
         <div class="readiness-metric-card tier-3-border">
-          <span class="card-label">الفئة 3: استكشاف مبكر (Tier 3)</span>
-          <span class="card-value text-danger">12 <small style="font-size:14px; font-weight:normal; color:#94a3b8;">/ 20</small></span>
-          <span class="card-subtext">أمان غير مفحوص إطلاقاً؛ فعالية مرتفعة تقابلها مخاطر سمية مجهولة تستوجب الفحص.</span>
+          <span class="card-label">الفئة 3: ملف أدلة أولي (Tier 3)</span>
+          <span class="card-value text-danger">11 <small style="font-size:14px; font-weight:normal; color:#94a3b8;">/ 20</small></span>
+          <span class="card-subtext">نقص في الأدلة التجريبية؛ غياب تام لبيانات الأمان أو رصد تحلل دم حاد 100%.</span>
         </div>
         <div class="readiness-metric-card neutral-border">
-          <span class="card-label">إجمالي الفجوات القابلة للتنفيذ</span>
-          <span class="card-value" style="color:#38bdf8;">146 <small style="font-size:14px; font-weight:normal; color:#94a3b8;">فجوة</small></span>
-          <span class="card-subtext">متوسط 7.3 فجوات لكل مرشح، موثقة ومربوطة ببروتوكولات التحقق التجريبي (MOD-06).</span>
+          <span class="card-label">إجمالي فجوات المرشحين القابلة للتنفيذ</span>
+          <span class="card-value" style="color:#38bdf8;">142 <small style="font-size:14px; font-weight:normal; color:#94a3b8;">فجوة</small></span>
+          <span class="card-subtext">142 فجوة معلقة موزعة على المرشحين العشرين (من أصل 146 فجوة في الأطلس العام).</span>
         </div>
       </div>
 
       <!-- Readiness Controls: Filters & Sorters -->
       <div class="readiness-controls-bar reveal">
         <div class="readiness-filter-group">
-          <span class="filter-label">تصفية حسب فئة الجاهزية:</span>
+          <span class="filter-label">تصفية حسب فئة اكتمال الأدلة:</span>
           <button class="readiness-filter-btn active" data-tier="all" id="r-filter-all">كافة المرشحين (20)</button>
-          <button class="readiness-filter-btn" data-tier="1" id="r-filter-tier1">الفئة 1: جاهزية عالية (3)</button>
-          <button class="readiness-filter-btn" data-tier="2" id="r-filter-tier2">الفئة 2: فحص أولي (5)</button>
-          <button class="readiness-filter-btn" data-tier="3" id="r-filter-tier3">الفئة 3: استكشاف مبكر (12)</button>
+          <button class="readiness-filter-btn" data-tier="1" id="r-filter-tier1">الفئة 1: ملف متكامل (3)</button>
+          <button class="readiness-filter-btn" data-tier="2" id="r-filter-tier2">الفئة 2: ملف متوسط (6)</button>
+          <button class="readiness-filter-btn" data-tier="3" id="r-filter-tier3">الفئة 3: ملف أولي (11)</button>
         </div>
         <div class="readiness-sort-group">
           <span class="filter-label">ترتيب العرض حسب:</span>

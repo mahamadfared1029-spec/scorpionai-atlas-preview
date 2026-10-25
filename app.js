@@ -7385,9 +7385,11 @@
     "baseline_composite_score": 0.962,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 2.47,
@@ -7395,13 +7397,34 @@
     "net_charge_ph74": 6.99,
     "hydrophobic_moment": 0.795,
     "instability_index": -31.64,
-    "evidence_readiness_index": 35.0,
+    "evidence_readiness_index": 30.0,
     "readiness_tier": "Tier 2",
-    "readiness_tier_name_en": "Intermediate Evidence Readiness",
-    "readiness_tier_name_ar": "جاهزية أدلة متوسطة (فحص أمان أولي محدود)",
-    "readiness_classification_en": "Promising Lead (Safety Curve Needed)",
-    "readiness_classification_ar": "مرشح واعد (يتطلب منحنى أمان تفصيلي)",
+    "readiness_tier_number": 2,
+    "readiness_tier_name_en": "Tier 2: Intermediate Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 2: ملف أدلة متوسط التوثيق (توصيف تجريبي جزئي)",
+    "readiness_classification_en": "Partial Evidence Completeness (Single-Dose Screen)",
+    "readiness_classification_ar": "اكتمال أدلة جزئي (فحص أولي محدود دون منحنى كامل)",
     "readiness_badge_class": "tier-2",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "single_dose_screen",
+      "assay_outcome": "low_hemolysis_screen",
+      "outcome_label_en": "Single-Dose Screen (11.2% Lysis @ 9.4 µM, Human RBC)",
+      "outcome_label_ar": "فحص أحادي الجرعة (11.2% تحلل عند 9.4 µM على كريات دم بشرية)",
+      "reported_observation": "11.2% lysis @ 9.4 µM; non-hemolytic at antimicrobial MIC (Human RBC)",
+      "tested_concentration": "9.4 µM",
+      "erythrocyte_species": "Human",
+      "is_human_rbc": true,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 5.0,
+      "status_badge": "low_hemolysis_screen",
+      "warning_en": "WARNING: Single-dose screen does NOT establish therapeutic safety or valid Selectivity Index.",
+      "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان ولا يتيح اشتقاق مؤشر انتقائية صالح.",
+      "provenance_reference": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623",
+      "provenance_pmid": "30709056",
+      "provenance_doi": "10.3390/ijms20030623"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -7415,11 +7438,13 @@
         "score": 5.0,
         "max_score": 30.0,
         "coverage_pct": 16.7,
-        "status_en": "Single-Dose Screen Only",
-        "status_ar": "فحص أحادي الجرعة تقريبي (غياب منحنى HC50)",
-        "badge": "single_dose_screened",
-        "warning_en": "WARNING: Single-dose screen (<20% lysis) does NOT establish therapeutic safety or valid Selectivity Index.",
-        "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان السريري ولا يتيح اشتقاق مؤشر انتقائية صالح.",
+        "assay_availability": "assayed",
+        "assay_outcome": "low_hemolysis_screen",
+        "status_en": "Single-Dose Screen (11.2% Lysis @ 9.4 µM, Human RBC)",
+        "status_ar": "فحص أحادي الجرعة (11.2% تحلل عند 9.4 µM على كريات دم بشرية)",
+        "badge": "low_hemolysis_screen",
+        "warning_en": "WARNING: Single-dose screen does NOT establish therapeutic safety or valid Selectivity Index.",
+        "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان ولا يتيح اشتقاق مؤشر انتقائية صالح.",
         "hc50_calibrated": false,
         "nucleated_cytotoxicity_tested": false
       },
@@ -7431,11 +7456,13 @@
         "target_explored_mod05": true
       },
       "structural_evidence": {
-        "score": 5.0,
+        "score": 0.0,
         "max_score": 15.0,
-        "coverage_pct": 33.3,
+        "coverage_pct": 0.0,
+        "provenance_class": "Class C: Illustrative Representation (Unmodeled)",
+        "provenance_detail": "No validated prediction exists for this exact sequence",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": false
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -7456,10 +7483,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+      "primary_citation": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623",
       "pmid": "30709056",
       "doi": "10.3390/ijms20030623",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -7477,9 +7504,11 @@
     "baseline_composite_score": 0.9466,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 4.0,
@@ -7487,13 +7516,34 @@
     "net_charge_ph74": 6.99,
     "hydrophobic_moment": 0.733,
     "instability_index": -19.34,
-    "evidence_readiness_index": 25.0,
+    "evidence_readiness_index": 20.0,
     "readiness_tier": "Tier 3",
-    "readiness_tier_name_en": "Preliminary Discovery",
-    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
-    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
-    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_tier_number": 3,
+    "readiness_tier_name_en": "Tier 3: Sparse Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 3: ملف أدلة أولي أو محدود (نقص الأدلة التجريبية)",
+    "readiness_classification_en": "Preliminary Evidence Completeness (Unassayed or High Lysis)",
+    "readiness_classification_ar": "اكتمال أدلة أولي (غياب فحوصات الأمان أو رصد تحلل حاد)",
     "readiness_badge_class": "tier-3",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "single_dose_screen",
+      "assay_outcome": "high_complete_hemolysis",
+      "outcome_label_en": "Substantial/Complete Hemolysis (100% Lysis @ 32 mg/L, Horse RBC)",
+      "outcome_label_ar": "تحلل دم حاد / كامل (100% تحلل عند 32 mg/L على كريات دم الخيل)",
+      "reported_observation": "100% lysis @ 32 mg/L (14.5 µM) on Horse RBC",
+      "tested_concentration": "32 mg/L (14.5 µM)",
+      "erythrocyte_species": "Horse",
+      "is_human_rbc": false,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 0.0,
+      "status_badge": "high_hemolysis",
+      "warning_en": "CRITICAL ALERT: Underlying assay demonstrated complete erythrocyte lysis (100% hemolysis on horse RBC).",
+      "warning_ar": "تحذير حرج: الفحص أثبت تحللاً كاملاً لكريات الدم (100% انحلال على دم الخيل).",
+      "provenance_reference": "Du et al., Toxins 2015; 7(2):219-234",
+      "provenance_pmid": "25626077",
+      "provenance_doi": "10.3390/toxins7020219"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -7507,11 +7557,13 @@
         "score": 0.0,
         "max_score": 30.0,
         "coverage_pct": 0.0,
-        "status_en": "Unassayed / Missing Safety",
-        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
-        "badge": "unassayed",
-        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
-        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "assay_availability": "assayed",
+        "assay_outcome": "high_complete_hemolysis",
+        "status_en": "Substantial/Complete Hemolysis (100% Lysis @ 32 mg/L, Horse RBC)",
+        "status_ar": "تحلل دم حاد / كامل (100% تحلل عند 32 mg/L على كريات دم الخيل)",
+        "badge": "high_hemolysis",
+        "warning_en": "CRITICAL ALERT: Underlying assay demonstrated complete erythrocyte lysis (100% hemolysis on horse RBC).",
+        "warning_ar": "تحذير حرج: الفحص أثبت تحللاً كاملاً لكريات الدم (100% انحلال على دم الخيل).",
         "hc50_calibrated": false,
         "nucleated_cytotoxicity_tested": false
       },
@@ -7523,11 +7575,13 @@
         "target_explored_mod05": false
       },
       "structural_evidence": {
-        "score": 5.0,
+        "score": 0.0,
         "max_score": 15.0,
-        "coverage_pct": 33.3,
+        "coverage_pct": 0.0,
+        "provenance_class": "Class C: Illustrative Representation (Unmodeled)",
+        "provenance_detail": "No validated prediction exists for this exact sequence",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": false
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -7548,10 +7602,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+      "primary_citation": "Du et al., Toxins 2015; 7(2):219-234",
       "pmid": "25626077",
       "doi": "10.3390/toxins7020219",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -7569,9 +7623,11 @@
     "baseline_composite_score": 0.9445,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 4.0,
@@ -7579,13 +7635,34 @@
     "net_charge_ph74": 6.99,
     "hydrophobic_moment": 0.716,
     "instability_index": -14.87,
-    "evidence_readiness_index": 25.0,
+    "evidence_readiness_index": 20.0,
     "readiness_tier": "Tier 3",
-    "readiness_tier_name_en": "Preliminary Discovery",
-    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
-    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
-    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_tier_number": 3,
+    "readiness_tier_name_en": "Tier 3: Sparse Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 3: ملف أدلة أولي أو محدود (نقص الأدلة التجريبية)",
+    "readiness_classification_en": "Preliminary Evidence Completeness (Unassayed or High Lysis)",
+    "readiness_classification_ar": "اكتمال أدلة أولي (غياب فحوصات الأمان أو رصد تحلل حاد)",
     "readiness_badge_class": "tier-3",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "single_dose_screen",
+      "assay_outcome": "high_complete_hemolysis",
+      "outcome_label_en": "Substantial/Complete Hemolysis (100% Lysis @ 64 mg/L, Horse RBC)",
+      "outcome_label_ar": "تحلل دم حاد / كامل (100% تحلل عند 64 mg/L على كريات دم الخيل)",
+      "reported_observation": "100% lysis @ 64 mg/L (29.3 µM) on Horse RBC",
+      "tested_concentration": "64 mg/L (29.3 µM)",
+      "erythrocyte_species": "Horse",
+      "is_human_rbc": false,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 0.0,
+      "status_badge": "high_hemolysis",
+      "warning_en": "CRITICAL ALERT: Underlying assay demonstrated complete erythrocyte lysis (100% hemolysis on horse RBC).",
+      "warning_ar": "تحذير حرج: الفحص أثبت تحللاً كاملاً لكريات الدم (100% انحلال على دم الخيل).",
+      "provenance_reference": "Du et al., Toxins 2015; 7(2):219-234",
+      "provenance_pmid": "25626077",
+      "provenance_doi": "10.3390/toxins7020219"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -7599,11 +7676,13 @@
         "score": 0.0,
         "max_score": 30.0,
         "coverage_pct": 0.0,
-        "status_en": "Unassayed / Missing Safety",
-        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
-        "badge": "unassayed",
-        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
-        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "assay_availability": "assayed",
+        "assay_outcome": "high_complete_hemolysis",
+        "status_en": "Substantial/Complete Hemolysis (100% Lysis @ 64 mg/L, Horse RBC)",
+        "status_ar": "تحلل دم حاد / كامل (100% تحلل عند 64 mg/L على كريات دم الخيل)",
+        "badge": "high_hemolysis",
+        "warning_en": "CRITICAL ALERT: Underlying assay demonstrated complete erythrocyte lysis (100% hemolysis on horse RBC).",
+        "warning_ar": "تحذير حرج: الفحص أثبت تحللاً كاملاً لكريات الدم (100% انحلال على دم الخيل).",
         "hc50_calibrated": false,
         "nucleated_cytotoxicity_tested": false
       },
@@ -7615,11 +7694,13 @@
         "target_explored_mod05": false
       },
       "structural_evidence": {
-        "score": 5.0,
+        "score": 0.0,
         "max_score": 15.0,
-        "coverage_pct": 33.3,
+        "coverage_pct": 0.0,
+        "provenance_class": "Class C: Illustrative Representation (Unmodeled)",
+        "provenance_detail": "No validated prediction exists for this exact sequence",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": false
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -7640,10 +7721,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+      "primary_citation": "Du et al., Toxins 2015; 7(2):219-234",
       "pmid": "25626077",
       "doi": "10.3390/toxins7020219",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -7661,9 +7742,11 @@
     "baseline_composite_score": 0.9232,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 2.37,
@@ -7671,13 +7754,34 @@
     "net_charge_ph74": 4.99,
     "hydrophobic_moment": 0.649,
     "instability_index": -1.48,
-    "evidence_readiness_index": 35.0,
+    "evidence_readiness_index": 30.0,
     "readiness_tier": "Tier 2",
-    "readiness_tier_name_en": "Intermediate Evidence Readiness",
-    "readiness_tier_name_ar": "جاهزية أدلة متوسطة (فحص أمان أولي محدود)",
-    "readiness_classification_en": "Promising Lead (Safety Curve Needed)",
-    "readiness_classification_ar": "مرشح واعد (يتطلب منحنى أمان تفصيلي)",
+    "readiness_tier_number": 2,
+    "readiness_tier_name_en": "Tier 2: Intermediate Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 2: ملف أدلة متوسط التوثيق (توصيف تجريبي جزئي)",
+    "readiness_classification_en": "Partial Evidence Completeness (Single-Dose Screen)",
+    "readiness_classification_ar": "اكتمال أدلة جزئي (فحص أولي محدود دون منحنى كامل)",
     "readiness_badge_class": "tier-2",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "single_dose_screen",
+      "assay_outcome": "low_hemolysis_screen",
+      "outcome_label_en": "Single-Dose Screen (18.5% Lysis @ 9.4 µM, Human RBC)",
+      "outcome_label_ar": "فحص أحادي الجرعة (18.5% تحلل عند 9.4 µM على كريات دم بشرية)",
+      "reported_observation": "18.5% lysis @ 9.4 µM; non-hemolytic at antimicrobial MIC (Human RBC)",
+      "tested_concentration": "9.4 µM",
+      "erythrocyte_species": "Human",
+      "is_human_rbc": true,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 5.0,
+      "status_badge": "low_hemolysis_screen",
+      "warning_en": "WARNING: Single-dose screen does NOT establish therapeutic safety or valid Selectivity Index.",
+      "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان ولا يتيح اشتقاق مؤشر انتقائية صالح.",
+      "provenance_reference": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623",
+      "provenance_pmid": "30709056",
+      "provenance_doi": "10.3390/ijms20030623"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -7691,11 +7795,13 @@
         "score": 5.0,
         "max_score": 30.0,
         "coverage_pct": 16.7,
-        "status_en": "Single-Dose Screen Only",
-        "status_ar": "فحص أحادي الجرعة تقريبي (غياب منحنى HC50)",
-        "badge": "single_dose_screened",
-        "warning_en": "WARNING: Single-dose screen (<20% lysis) does NOT establish therapeutic safety or valid Selectivity Index.",
-        "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان السريري ولا يتيح اشتقاق مؤشر انتقائية صالح.",
+        "assay_availability": "assayed",
+        "assay_outcome": "low_hemolysis_screen",
+        "status_en": "Single-Dose Screen (18.5% Lysis @ 9.4 µM, Human RBC)",
+        "status_ar": "فحص أحادي الجرعة (18.5% تحلل عند 9.4 µM على كريات دم بشرية)",
+        "badge": "low_hemolysis_screen",
+        "warning_en": "WARNING: Single-dose screen does NOT establish therapeutic safety or valid Selectivity Index.",
+        "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان ولا يتيح اشتقاق مؤشر انتقائية صالح.",
         "hc50_calibrated": false,
         "nucleated_cytotoxicity_tested": false
       },
@@ -7707,11 +7813,13 @@
         "target_explored_mod05": true
       },
       "structural_evidence": {
-        "score": 5.0,
+        "score": 0.0,
         "max_score": 15.0,
-        "coverage_pct": 33.3,
+        "coverage_pct": 0.0,
+        "provenance_class": "Class C: Illustrative Representation (Unmodeled)",
+        "provenance_detail": "No validated prediction exists for this exact sequence",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": false
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -7732,10 +7840,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+      "primary_citation": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623",
       "pmid": "30709056",
       "doi": "10.3390/ijms20030623",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -7753,9 +7861,11 @@
     "baseline_composite_score": 0.9154,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 8.3,
@@ -7763,13 +7873,34 @@
     "net_charge_ph74": 5.99,
     "hydrophobic_moment": 0.657,
     "instability_index": -27.72,
-    "evidence_readiness_index": 25.0,
+    "evidence_readiness_index": 20.0,
     "readiness_tier": "Tier 3",
-    "readiness_tier_name_en": "Preliminary Discovery",
-    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
-    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
-    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_tier_number": 3,
+    "readiness_tier_name_en": "Tier 3: Sparse Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 3: ملف أدلة أولي أو محدود (نقص الأدلة التجريبية)",
+    "readiness_classification_en": "Preliminary Evidence Completeness (Unassayed or High Lysis)",
+    "readiness_classification_ar": "اكتمال أدلة أولي (غياب فحوصات الأمان أو رصد تحلل حاد)",
     "readiness_badge_class": "tier-3",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "single_dose_screen",
+      "assay_outcome": "high_complete_hemolysis",
+      "outcome_label_en": "Substantial/Complete Hemolysis (100% Lysis @ 32 µM, Horse RBC)",
+      "outcome_label_ar": "تحلل دم حاد / كامل (100% تحلل عند 32 µM على كريات دم الخيل)",
+      "reported_observation": "100% lysis @ 32 µM on Horse RBC",
+      "tested_concentration": "32 µM",
+      "erythrocyte_species": "Horse",
+      "is_human_rbc": false,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 0.0,
+      "status_badge": "high_hemolysis",
+      "warning_en": "CRITICAL ALERT: Underlying assay demonstrated complete erythrocyte lysis (100% hemolysis on horse RBC).",
+      "warning_ar": "تحذير حرج: الفحص أثبت تحللاً كاملاً لكريات الدم (100% انحلال على دم الخيل).",
+      "provenance_reference": "Almaaytah et al., Int J Biol Sci 2014; 10(9):9859",
+      "provenance_pmid": "25332684",
+      "provenance_doi": "10.7150/ijbs.9859"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -7783,11 +7914,13 @@
         "score": 0.0,
         "max_score": 30.0,
         "coverage_pct": 0.0,
-        "status_en": "Unassayed / Missing Safety",
-        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
-        "badge": "unassayed",
-        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
-        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "assay_availability": "assayed",
+        "assay_outcome": "high_complete_hemolysis",
+        "status_en": "Substantial/Complete Hemolysis (100% Lysis @ 32 µM, Horse RBC)",
+        "status_ar": "تحلل دم حاد / كامل (100% تحلل عند 32 µM على كريات دم الخيل)",
+        "badge": "high_hemolysis",
+        "warning_en": "CRITICAL ALERT: Underlying assay demonstrated complete erythrocyte lysis (100% hemolysis on horse RBC).",
+        "warning_ar": "تحذير حرج: الفحص أثبت تحللاً كاملاً لكريات الدم (100% انحلال على دم الخيل).",
         "hc50_calibrated": false,
         "nucleated_cytotoxicity_tested": false
       },
@@ -7799,11 +7932,13 @@
         "target_explored_mod05": false
       },
       "structural_evidence": {
-        "score": 5.0,
+        "score": 0.0,
         "max_score": 15.0,
-        "coverage_pct": 33.3,
+        "coverage_pct": 0.0,
+        "provenance_class": "Class C: Illustrative Representation (Unmodeled)",
+        "provenance_detail": "No validated prediction exists for this exact sequence",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": false
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -7824,10 +7959,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Almaaytah et al., Int J Biol Sci 2014; 10(9):982-995 (Table 2)",
+      "primary_citation": "Almaaytah et al., Int J Biol Sci 2014; 10(9):9859",
       "pmid": "25332684",
       "doi": "10.7150/ijbs.9859",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -7845,9 +7980,11 @@
     "baseline_composite_score": 0.8339,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 3.13,
@@ -7855,13 +7992,34 @@
     "net_charge_ph74": 5.99,
     "hydrophobic_moment": 1.02,
     "instability_index": 36.06,
-    "evidence_readiness_index": 50.0,
+    "evidence_readiness_index": 45.0,
     "readiness_tier": "Tier 1",
-    "readiness_tier_name_en": "High Evidence Readiness",
-    "readiness_tier_name_ar": "جاهزية أدلة متقدمة (سلامة مثبتة معملياً)",
-    "readiness_classification_en": "Well-Characterized Candidate",
-    "readiness_classification_ar": "مرشح موثق مخبرياً (خطر منخفض لعدم اليقين)",
+    "readiness_tier_number": 1,
+    "readiness_tier_name_en": "Tier 1: Comprehensive Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 1: ملف أدلة متكامل التوثيق (توصيف قياسي متقدم)",
+    "readiness_classification_en": "High Evidence Completeness (Sigmoidal HC50 Established)",
+    "readiness_classification_ar": "اكتمال أدلة متقدم (منحنى HC50 مقاس ومعاير)",
     "readiness_badge_class": "tier-1",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "sigmoidal_hc50_curve",
+      "assay_outcome": "quantified_sigmoidal_hc50",
+      "outcome_label_en": "Quantified Sigmoidal HC50 (Human RBC)",
+      "outcome_label_ar": "منحنى جرعة واستجابة سيني مقاس ومعاير (HC50)",
+      "reported_observation": "HC50 = 90.27 µg/mL (54.0 µM) on human erythrocytes; rabbit RBC 85.0 µM",
+      "tested_concentration": "0-200 µg/mL",
+      "erythrocyte_species": "Human",
+      "is_human_rbc": true,
+      "hc50_um": 53.96,
+      "hc50_ug_ml": 90.27,
+      "safety_evidence_score": 20.0,
+      "status_badge": "quantified_hc50",
+      "warning_en": "Mammalian nucleated cell cytotoxicity (HEK293/HepG2) remains unassayed.",
+      "warning_ar": "سمية الخلايا الثديية المنواة (HEK293/HepG2) لا تزال غير مفحوصة.",
+      "provenance_reference": "Cao et al., PLoS ONE 2012; 7(6):e40135",
+      "provenance_pmid": "22792229",
+      "provenance_doi": "10.1371/journal.pone.0040135"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -7875,7 +8033,9 @@
         "score": 20.0,
         "max_score": 30.0,
         "coverage_pct": 66.7,
-        "status_en": "Quantified Sigmoidal HC50",
+        "assay_availability": "assayed",
+        "assay_outcome": "quantified_sigmoidal_hc50",
+        "status_en": "Quantified Sigmoidal HC50 (Human RBC)",
         "status_ar": "منحنى جرعة واستجابة سيني مقاس ومعاير (HC50)",
         "badge": "quantified_hc50",
         "warning_en": "Mammalian nucleated cell cytotoxicity (HEK293/HepG2) remains unassayed.",
@@ -7891,11 +8051,13 @@
         "target_explored_mod05": true
       },
       "structural_evidence": {
-        "score": 5.0,
+        "score": 0.0,
         "max_score": 15.0,
-        "coverage_pct": 33.3,
+        "coverage_pct": 0.0,
+        "provenance_class": "Class C: Illustrative Representation (Unmodeled)",
+        "provenance_detail": "No validated prediction exists for this exact sequence",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": false
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -7916,10 +8078,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة)."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Cao et al., PLoS ONE 2012; 7(7):e40135 (Table 1)",
+      "primary_citation": "Cao et al., PLoS ONE 2012; 7(6):e40135",
       "pmid": "22792229",
       "doi": "10.1371/journal.pone.0040135",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -7937,9 +8099,11 @@
     "baseline_composite_score": 0.8191,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 9.39,
@@ -7947,13 +8111,34 @@
     "net_charge_ph74": 1.99,
     "hydrophobic_moment": 0.597,
     "instability_index": -2.08,
-    "evidence_readiness_index": 25.0,
-    "readiness_tier": "Tier 3",
-    "readiness_tier_name_en": "Preliminary Discovery",
-    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
-    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
-    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
-    "readiness_badge_class": "tier-3",
+    "evidence_readiness_index": 40.0,
+    "readiness_tier": "Tier 2",
+    "readiness_tier_number": 2,
+    "readiness_tier_name_en": "Tier 2: Intermediate Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 2: ملف أدلة متوسط التوثيق (توصيف تجريبي جزئي)",
+    "readiness_classification_en": "Partial Evidence Completeness (Single-Dose Screen)",
+    "readiness_classification_ar": "اكتمال أدلة جزئي (فحص أولي محدود دون منحنى كامل)",
+    "readiness_badge_class": "tier-2",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "single_dose_screen",
+      "assay_outcome": "non_human_rbc_screen",
+      "outcome_label_en": "Non-Human Screen (~10% Lysis @ 50 µM, Sheep RBC)",
+      "outcome_label_ar": "فحص محدود على كريات دم الأغنام (~10% تحلل عند 50 µM؛ كريات دم الإنسان غير مفحوصة)",
+      "reported_observation": "~10% lysis @ 50 µM on Sheep RBC",
+      "tested_concentration": "50 µM",
+      "erythrocyte_species": "Sheep",
+      "is_human_rbc": false,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 5.0,
+      "status_badge": "non_human_screen",
+      "warning_en": "WARNING: Screened on Sheep RBC; human erythrocyte hemolysis and nucleated cell cytotoxicity unassayed.",
+      "warning_ar": "تحذير: الفحص أُجري على كريات دم الأغنام؛ كريات دم الإنسان والخلايا المنواة غير مفحوصة.",
+      "provenance_reference": "Dai et al., Biochem Biophys Res Commun 2001; 286(4):820-825",
+      "provenance_pmid": "11520071",
+      "provenance_doi": "10.1006/bbrc.2001.5472"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -7964,14 +8149,16 @@
         "mbc_time_kill_tested": false
       },
       "safety_and_cytotoxicity": {
-        "score": 0.0,
+        "score": 5.0,
         "max_score": 30.0,
-        "coverage_pct": 0.0,
-        "status_en": "Unassayed / Missing Safety",
-        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
-        "badge": "unassayed",
-        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
-        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "coverage_pct": 16.7,
+        "assay_availability": "assayed",
+        "assay_outcome": "non_human_rbc_screen",
+        "status_en": "Non-Human Screen (~10% Lysis @ 50 µM, Sheep RBC)",
+        "status_ar": "فحص محدود على كريات دم الأغنام (~10% تحلل عند 50 µM؛ كريات دم الإنسان غير مفحوصة)",
+        "badge": "non_human_screen",
+        "warning_en": "WARNING: Screened on Sheep RBC; human erythrocyte hemolysis and nucleated cell cytotoxicity unassayed.",
+        "warning_ar": "تحذير: الفحص أُجري على كريات دم الأغنام؛ كريات دم الإنسان والخلايا المنواة غير مفحوصة.",
         "hc50_calibrated": false,
         "nucleated_cytotoxicity_tested": false
       },
@@ -7983,11 +8170,13 @@
         "target_explored_mod05": false
       },
       "structural_evidence": {
-        "score": 5.0,
+        "score": 15.0,
         "max_score": 15.0,
-        "coverage_pct": 33.3,
-        "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "coverage_pct": 100.0,
+        "provenance_class": "Class A: Experimentally Determined",
+        "provenance_detail": "RCSB Protein Data Bank (PDB ID: 1T51) - Solution NMR (20 conformers; Model 1 displayed)",
+        "experimental_nmr_xray": true,
+        "documented_prediction_exists": false
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -8008,10 +8197,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Dai et al., Biochem Biophys Res Commun 2001; 286(4):820-825 (Table 1, p. 822)",
+      "primary_citation": "Dai et al., Biochem Biophys Res Commun 2001; 286(4):820-825",
       "pmid": "11520071",
       "doi": "10.1006/bbrc.2001.5472",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -8029,9 +8218,11 @@
     "baseline_composite_score": 0.7987,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 20.0,
@@ -8039,13 +8230,34 @@
     "net_charge_ph74": 2.99,
     "hydrophobic_moment": 0.691,
     "instability_index": -3.83,
-    "evidence_readiness_index": 50.0,
+    "evidence_readiness_index": 45.0,
     "readiness_tier": "Tier 1",
-    "readiness_tier_name_en": "High Evidence Readiness",
-    "readiness_tier_name_ar": "جاهزية أدلة متقدمة (سلامة مثبتة معملياً)",
-    "readiness_classification_en": "Well-Characterized Candidate",
-    "readiness_classification_ar": "مرشح موثق مخبرياً (خطر منخفض لعدم اليقين)",
+    "readiness_tier_number": 1,
+    "readiness_tier_name_en": "Tier 1: Comprehensive Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 1: ملف أدلة متكامل التوثيق (توصيف قياسي متقدم)",
+    "readiness_classification_en": "High Evidence Completeness (Sigmoidal HC50 Established)",
+    "readiness_classification_ar": "اكتمال أدلة متقدم (منحنى HC50 مقاس ومعاير)",
     "readiness_badge_class": "tier-1",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "sigmoidal_hc50_curve",
+      "assay_outcome": "quantified_sigmoidal_hc50",
+      "outcome_label_en": "Quantified Sigmoidal HC50 (Human RBC)",
+      "outcome_label_ar": "منحنى جرعة واستجابة سيني مقاس ومعاير (HC50)",
+      "reported_observation": "HC50 = 17.13 µg/mL (11.8 µM) on human erythrocytes",
+      "tested_concentration": "0-100 µg/mL",
+      "erythrocyte_species": "Human",
+      "is_human_rbc": true,
+      "hc50_um": 11.83,
+      "hc50_ug_ml": 17.13,
+      "safety_evidence_score": 20.0,
+      "status_badge": "quantified_hc50",
+      "warning_en": "Narrow therapeutic window (HC50 close to antimicrobial MIC). Mammalian nucleated cell cytotoxicity unassayed.",
+      "warning_ar": "هامش أمان ضيق (HC50 قريب من تركيز التثبيط MIC). سمية الخلايا المنواة غير مفحوصة.",
+      "provenance_reference": "Zeng et al., Peptides 2004; 25(9):1437-1444 / Cao et al. 2012",
+      "provenance_pmid": "15062994",
+      "provenance_doi": "10.1016/j.peptides.2003.12.003"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -8059,11 +8271,13 @@
         "score": 20.0,
         "max_score": 30.0,
         "coverage_pct": 66.7,
-        "status_en": "Quantified Sigmoidal HC50",
+        "assay_availability": "assayed",
+        "assay_outcome": "quantified_sigmoidal_hc50",
+        "status_en": "Quantified Sigmoidal HC50 (Human RBC)",
         "status_ar": "منحنى جرعة واستجابة سيني مقاس ومعاير (HC50)",
         "badge": "quantified_hc50",
-        "warning_en": "Mammalian nucleated cell cytotoxicity (HEK293/HepG2) remains unassayed.",
-        "warning_ar": "سمية الخلايا الثديية المنواة (HEK293/HepG2) لا تزال غير مفحوصة.",
+        "warning_en": "Narrow therapeutic window (HC50 close to antimicrobial MIC). Mammalian nucleated cell cytotoxicity unassayed.",
+        "warning_ar": "هامش أمان ضيق (HC50 قريب من تركيز التثبيط MIC). سمية الخلايا المنواة غير مفحوصة.",
         "hc50_calibrated": true,
         "nucleated_cytotoxicity_tested": false
       },
@@ -8075,11 +8289,13 @@
         "target_explored_mod05": true
       },
       "structural_evidence": {
-        "score": 5.0,
+        "score": 0.0,
         "max_score": 15.0,
-        "coverage_pct": 33.3,
+        "coverage_pct": 0.0,
+        "provenance_class": "Class C: Illustrative Representation (Unmodeled)",
+        "provenance_detail": "No validated prediction exists for this exact sequence",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": false
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -8100,10 +8316,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة)."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Zeng et al., Peptides 2004; 25(2):143-150 (Table 1, p. 146)",
+      "primary_citation": "Zeng et al., Peptides 2004; 25(9):1437-1444 / Cao et al. 2012",
       "pmid": "15062994",
       "doi": "10.1016/j.peptides.2003.12.003",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -8121,9 +8337,11 @@
     "baseline_composite_score": 0.7635,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 15.68,
@@ -8133,11 +8351,32 @@
     "instability_index": -0.51,
     "evidence_readiness_index": 25.0,
     "readiness_tier": "Tier 3",
-    "readiness_tier_name_en": "Preliminary Discovery",
-    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
-    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
-    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_tier_number": 3,
+    "readiness_tier_name_en": "Tier 3: Sparse Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 3: ملف أدلة أولي أو محدود (نقص الأدلة التجريبية)",
+    "readiness_classification_en": "Preliminary Evidence Completeness (Unassayed or High Lysis)",
+    "readiness_classification_ar": "اكتمال أدلة أولي (غياب فحوصات الأمان أو رصد تحلل حاد)",
     "readiness_badge_class": "tier-3",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "single_dose_screen",
+      "assay_outcome": "high_complete_hemolysis",
+      "outcome_label_en": "Substantial/Complete Hemolysis (100% Lysis @ 64 µM, Horse RBC)",
+      "outcome_label_ar": "تحلل دم حاد / كامل (100% تحلل عند 64 µM على كريات دم الخيل)",
+      "reported_observation": "100% lysis @ 64 µM on Horse RBC",
+      "tested_concentration": "64 µM",
+      "erythrocyte_species": "Horse",
+      "is_human_rbc": false,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 0.0,
+      "status_badge": "high_hemolysis",
+      "warning_en": "CRITICAL ALERT: Underlying assay demonstrated complete erythrocyte lysis (100% hemolysis on horse RBC).",
+      "warning_ar": "تحذير حرج: الفحص أثبت تحللاً كاملاً لكريات الدم (100% انحلال على دم الخيل).",
+      "provenance_reference": "Almaaytah et al., Int J Biol Sci 2014; 10(9):9859",
+      "provenance_pmid": "25332684",
+      "provenance_doi": "10.7150/ijbs.9859"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -8151,11 +8390,13 @@
         "score": 0.0,
         "max_score": 30.0,
         "coverage_pct": 0.0,
-        "status_en": "Unassayed / Missing Safety",
-        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
-        "badge": "unassayed",
-        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
-        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "assay_availability": "assayed",
+        "assay_outcome": "high_complete_hemolysis",
+        "status_en": "Substantial/Complete Hemolysis (100% Lysis @ 64 µM, Horse RBC)",
+        "status_ar": "تحلل دم حاد / كامل (100% تحلل عند 64 µM على كريات دم الخيل)",
+        "badge": "high_hemolysis",
+        "warning_en": "CRITICAL ALERT: Underlying assay demonstrated complete erythrocyte lysis (100% hemolysis on horse RBC).",
+        "warning_ar": "تحذير حرج: الفحص أثبت تحللاً كاملاً لكريات الدم (100% انحلال على دم الخيل).",
         "hc50_calibrated": false,
         "nucleated_cytotoxicity_tested": false
       },
@@ -8170,8 +8411,10 @@
         "score": 5.0,
         "max_score": 15.0,
         "coverage_pct": 33.3,
+        "provenance_class": "Class B: Computationally Predicted",
+        "provenance_detail": "AlphaFold Protein Structure Database (AF-A0A0A1I6E7-F1) - AlphaFold v2.0 / v4 Computational Model (DeepMind / EMBL-EBI)",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": true
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -8192,10 +8435,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Almaaytah et al., Int J Biol Sci 2014; 10(9):982-995 (Table 2)",
+      "primary_citation": "Almaaytah et al., Int J Biol Sci 2014; 10(9):9859",
       "pmid": "25332684",
       "doi": "10.7150/ijbs.9859",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -8213,9 +8456,11 @@
     "baseline_composite_score": 0.7402,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 6.25,
@@ -8225,11 +8470,32 @@
     "instability_index": 19.71,
     "evidence_readiness_index": 50.0,
     "readiness_tier": "Tier 1",
-    "readiness_tier_name_en": "High Evidence Readiness",
-    "readiness_tier_name_ar": "جاهزية أدلة متقدمة (سلامة مثبتة معملياً)",
-    "readiness_classification_en": "Well-Characterized Candidate",
-    "readiness_classification_ar": "مرشح موثق مخبرياً (خطر منخفض لعدم اليقين)",
+    "readiness_tier_number": 1,
+    "readiness_tier_name_en": "Tier 1: Comprehensive Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 1: ملف أدلة متكامل التوثيق (توصيف قياسي متقدم)",
+    "readiness_classification_en": "High Evidence Completeness (Sigmoidal HC50 Established)",
+    "readiness_classification_ar": "اكتمال أدلة متقدم (منحنى HC50 مقاس ومعاير)",
     "readiness_badge_class": "tier-1",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "sigmoidal_hc50_curve",
+      "assay_outcome": "quantified_sigmoidal_hc50",
+      "outcome_label_en": "Quantified Sigmoidal HC50 (Human RBC)",
+      "outcome_label_ar": "منحنى جرعة واستجابة سيني مقاس ومعاير (HC50)",
+      "reported_observation": "HC50 = 226.6 µg/mL (146.5 µM) on human erythrocytes",
+      "tested_concentration": "0-500 µg/mL",
+      "erythrocyte_species": "Human",
+      "is_human_rbc": true,
+      "hc50_um": 146.5,
+      "hc50_ug_ml": 226.6,
+      "safety_evidence_score": 20.0,
+      "status_badge": "quantified_hc50",
+      "warning_en": "Mammalian nucleated cell cytotoxicity (HEK293/HepG2) remains unassayed.",
+      "warning_ar": "سمية الخلايا الثديية المنواة (HEK293/HepG2) لا تزال غير مفحوصة.",
+      "provenance_reference": "Chen et al., PLoS ONE 2014; 9(5):e97539",
+      "provenance_pmid": "24826994",
+      "provenance_doi": "10.1371/journal.pone.0097539"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -8243,7 +8509,9 @@
         "score": 20.0,
         "max_score": 30.0,
         "coverage_pct": 66.7,
-        "status_en": "Quantified Sigmoidal HC50",
+        "assay_availability": "assayed",
+        "assay_outcome": "quantified_sigmoidal_hc50",
+        "status_en": "Quantified Sigmoidal HC50 (Human RBC)",
         "status_ar": "منحنى جرعة واستجابة سيني مقاس ومعاير (HC50)",
         "badge": "quantified_hc50",
         "warning_en": "Mammalian nucleated cell cytotoxicity (HEK293/HepG2) remains unassayed.",
@@ -8262,8 +8530,10 @@
         "score": 5.0,
         "max_score": 15.0,
         "coverage_pct": 33.3,
+        "provenance_class": "Class B: Computationally Predicted",
+        "provenance_detail": "AlphaFold Protein Structure Database (AF-P0DX64-F1) - AlphaFold v2.0 / v4 Computational Model (DeepMind / EMBL-EBI)",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": true
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -8284,10 +8554,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة)."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Chen et al., PLoS ONE 2014; 9(5):e97539 (Table 1)",
+      "primary_citation": "Chen et al., PLoS ONE 2014; 9(5):e97539",
       "pmid": "24826994",
       "doi": "10.1371/journal.pone.0097539",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -8305,9 +8575,11 @@
     "baseline_composite_score": 0.7178,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 17.48,
@@ -8317,11 +8589,32 @@
     "instability_index": 19.43,
     "evidence_readiness_index": 25.0,
     "readiness_tier": "Tier 3",
-    "readiness_tier_name_en": "Preliminary Discovery",
-    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
-    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
-    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_tier_number": 3,
+    "readiness_tier_name_en": "Tier 3: Sparse Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 3: ملف أدلة أولي أو محدود (نقص الأدلة التجريبية)",
+    "readiness_classification_en": "Preliminary Evidence Completeness (Unassayed or High Lysis)",
+    "readiness_classification_ar": "اكتمال أدلة أولي (غياب فحوصات الأمان أو رصد تحلل حاد)",
     "readiness_badge_class": "tier-3",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "single_dose_screen",
+      "assay_outcome": "pore_forming_lysis",
+      "outcome_label_en": "Pore-forming Lysis (1-25 µM, Rabbit RBC)",
+      "outcome_label_ar": "انثقاب غشائي وتحلل تدريجي (1-25 µM على كريات دم الأرانب)",
+      "reported_observation": "Pore-forming lysis (1-25 µM on Rabbit RBC)",
+      "tested_concentration": "1-25 µM",
+      "erythrocyte_species": "Rabbit",
+      "is_human_rbc": false,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 0.0,
+      "status_badge": "high_hemolysis",
+      "warning_en": "CRITICAL ALERT: Documented pore-forming peptide with prominent hemolytic activity on rabbit RBC.",
+      "warning_ar": "تحذير حرج: ببتيد ثاقب للغشاء ذو نشاط انحلال دم مؤكد على كريات الأرانب.",
+      "provenance_reference": "Moerman et al., Eur J Biochem 2002; 269(19):4799-4810",
+      "provenance_pmid": "12354111",
+      "provenance_doi": "10.1046/j.1432-1033.2002.03177.x"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -8335,11 +8628,13 @@
         "score": 0.0,
         "max_score": 30.0,
         "coverage_pct": 0.0,
-        "status_en": "Unassayed / Missing Safety",
-        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
-        "badge": "unassayed",
-        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
-        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "assay_availability": "assayed",
+        "assay_outcome": "pore_forming_lysis",
+        "status_en": "Pore-forming Lysis (1-25 µM, Rabbit RBC)",
+        "status_ar": "انثقاب غشائي وتحلل تدريجي (1-25 µM على كريات دم الأرانب)",
+        "badge": "high_hemolysis",
+        "warning_en": "CRITICAL ALERT: Documented pore-forming peptide with prominent hemolytic activity on rabbit RBC.",
+        "warning_ar": "تحذير حرج: ببتيد ثاقب للغشاء ذو نشاط انحلال دم مؤكد على كريات الأرانب.",
         "hc50_calibrated": false,
         "nucleated_cytotoxicity_tested": false
       },
@@ -8354,8 +8649,10 @@
         "score": 5.0,
         "max_score": 15.0,
         "coverage_pct": 33.3,
+        "provenance_class": "Class B: Computationally Predicted",
+        "provenance_detail": "AlphaFold Protein Structure Database (AF-P83312-F1) - AlphaFold v2.0 / v4 Computational Model (DeepMind / EMBL-EBI)",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": true
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -8376,10 +8673,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Moerman, Verdonck et al., Eur J Biochem 2002; 269(19):4799-4810 (Table 1)",
+      "primary_citation": "Moerman et al., Eur J Biochem 2002; 269(19):4799-4810",
       "pmid": "12354111",
       "doi": "10.1046/j.1432-1033.2002.03177.x",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -8397,9 +8694,11 @@
     "baseline_composite_score": 0.7089,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 16.87,
@@ -8409,11 +8708,32 @@
     "instability_index": 12.47,
     "evidence_readiness_index": 35.0,
     "readiness_tier": "Tier 2",
-    "readiness_tier_name_en": "Intermediate Evidence Readiness",
-    "readiness_tier_name_ar": "جاهزية أدلة متوسطة (فحص أمان أولي محدود)",
-    "readiness_classification_en": "Promising Lead (Safety Curve Needed)",
-    "readiness_classification_ar": "مرشح واعد (يتطلب منحنى أمان تفصيلي)",
+    "readiness_tier_number": 2,
+    "readiness_tier_name_en": "Tier 2: Intermediate Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 2: ملف أدلة متوسط التوثيق (توصيف تجريبي جزئي)",
+    "readiness_classification_en": "Partial Evidence Completeness (Single-Dose Screen)",
+    "readiness_classification_ar": "اكتمال أدلة جزئي (فحص أولي محدود دون منحنى كامل)",
     "readiness_badge_class": "tier-2",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "single_dose_screen",
+      "assay_outcome": "low_hemolysis_screen",
+      "outcome_label_en": "Single-Dose Screen (5.8% Lysis @ 150 µM, Human RBC)",
+      "outcome_label_ar": "فحص أحادي الجرعة (5.8% تحلل عند 150 µM على كريات دم بشرية)",
+      "reported_observation": "5.8% lysis @ 150 µM (Human RBC)",
+      "tested_concentration": "150 µM",
+      "erythrocyte_species": "Human",
+      "is_human_rbc": true,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 5.0,
+      "status_badge": "low_hemolysis_screen",
+      "warning_en": "WARNING: Single-dose screen does NOT establish therapeutic safety or valid Selectivity Index.",
+      "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان ولا يتيح اشتقاق مؤشر انتقائية صالح.",
+      "provenance_reference": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623",
+      "provenance_pmid": "30709056",
+      "provenance_doi": "10.3390/ijms20030623"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -8427,11 +8747,13 @@
         "score": 5.0,
         "max_score": 30.0,
         "coverage_pct": 16.7,
-        "status_en": "Single-Dose Screen Only",
-        "status_ar": "فحص أحادي الجرعة تقريبي (غياب منحنى HC50)",
-        "badge": "single_dose_screened",
-        "warning_en": "WARNING: Single-dose screen (<20% lysis) does NOT establish therapeutic safety or valid Selectivity Index.",
-        "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان السريري ولا يتيح اشتقاق مؤشر انتقائية صالح.",
+        "assay_availability": "assayed",
+        "assay_outcome": "low_hemolysis_screen",
+        "status_en": "Single-Dose Screen (5.8% Lysis @ 150 µM, Human RBC)",
+        "status_ar": "فحص أحادي الجرعة (5.8% تحلل عند 150 µM على كريات دم بشرية)",
+        "badge": "low_hemolysis_screen",
+        "warning_en": "WARNING: Single-dose screen does NOT establish therapeutic safety or valid Selectivity Index.",
+        "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان ولا يتيح اشتقاق مؤشر انتقائية صالح.",
         "hc50_calibrated": false,
         "nucleated_cytotoxicity_tested": false
       },
@@ -8446,8 +8768,10 @@
         "score": 5.0,
         "max_score": 15.0,
         "coverage_pct": 33.3,
+        "provenance_class": "Class B: Computationally Predicted",
+        "provenance_detail": "AlphaFold Protein Structure Database (AF-P0DQT1-F1) - AlphaFold v2.0 / v4 Computational Model (DeepMind / EMBL-EBI)",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": true
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -8468,10 +8792,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+      "primary_citation": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623",
       "pmid": "30709056",
       "doi": "10.3390/ijms20030623",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -8489,9 +8813,11 @@
     "baseline_composite_score": 0.6613,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 16.0,
@@ -8499,13 +8825,34 @@
     "net_charge_ph74": 1.99,
     "hydrophobic_moment": 0.418,
     "instability_index": 24.59,
-    "evidence_readiness_index": 30.0,
-    "readiness_tier": "Tier 2",
-    "readiness_tier_name_en": "Intermediate Evidence Readiness",
-    "readiness_tier_name_ar": "جاهزية أدلة متوسطة (فحص أمان أولي محدود)",
-    "readiness_classification_en": "Promising Lead (Safety Curve Needed)",
-    "readiness_classification_ar": "مرشح واعد (يتطلب منحنى أمان تفصيلي)",
-    "readiness_badge_class": "tier-2",
+    "evidence_readiness_index": 20.0,
+    "readiness_tier": "Tier 3",
+    "readiness_tier_number": 3,
+    "readiness_tier_name_en": "Tier 3: Sparse Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 3: ملف أدلة أولي أو محدود (نقص الأدلة التجريبية)",
+    "readiness_classification_en": "Preliminary Evidence Completeness (Unassayed or High Lysis)",
+    "readiness_classification_ar": "اكتمال أدلة أولي (غياب فحوصات الأمان أو رصد تحلل حاد)",
+    "readiness_badge_class": "tier-3",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "single_dose_screen",
+      "assay_outcome": "high_complete_hemolysis",
+      "outcome_label_en": "Substantial/Complete Hemolysis (100% Lysis @ 16 mg/L, Horse RBC)",
+      "outcome_label_ar": "تحلل دم حاد / كامل (100% تحلل عند 16 mg/L على كريات دم الخيل)",
+      "reported_observation": "100% lysis @ 16 mg/L (7.9 µM) on Horse RBC",
+      "tested_concentration": "16 mg/L (7.9 µM)",
+      "erythrocyte_species": "Horse",
+      "is_human_rbc": false,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 0.0,
+      "status_badge": "high_hemolysis",
+      "warning_en": "CRITICAL ALERT: Underlying assay demonstrated complete erythrocyte lysis (100% hemolysis on horse RBC). Substantial hemolytic toxicity documented.",
+      "warning_ar": "تحذير حرج: الفحص أثبت تحللاً كاملاً لكريات الدم (100% انحلال على دم الخيل). سمية انحلال دم مثبتة مخبرياً.",
+      "provenance_reference": "Du et al., Toxins 2015; 7(2):219-234",
+      "provenance_pmid": "25626077",
+      "provenance_doi": "10.3390/toxins7020219"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -8516,14 +8863,16 @@
         "mbc_time_kill_tested": false
       },
       "safety_and_cytotoxicity": {
-        "score": 5.0,
+        "score": 0.0,
         "max_score": 30.0,
-        "coverage_pct": 16.7,
-        "status_en": "Single-Dose Screen Only",
-        "status_ar": "فحص أحادي الجرعة تقريبي (غياب منحنى HC50)",
-        "badge": "single_dose_screened",
-        "warning_en": "WARNING: Single-dose screen (<20% lysis) does NOT establish therapeutic safety or valid Selectivity Index.",
-        "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان السريري ولا يتيح اشتقاق مؤشر انتقائية صالح.",
+        "coverage_pct": 0.0,
+        "assay_availability": "assayed",
+        "assay_outcome": "high_complete_hemolysis",
+        "status_en": "Substantial/Complete Hemolysis (100% Lysis @ 16 mg/L, Horse RBC)",
+        "status_ar": "تحلل دم حاد / كامل (100% تحلل عند 16 mg/L على كريات دم الخيل)",
+        "badge": "high_hemolysis",
+        "warning_en": "CRITICAL ALERT: Underlying assay demonstrated complete erythrocyte lysis (100% hemolysis on horse RBC). Substantial hemolytic toxicity documented.",
+        "warning_ar": "تحذير حرج: الفحص أثبت تحللاً كاملاً لكريات الدم (100% انحلال على دم الخيل). سمية انحلال دم مثبتة مخبرياً.",
         "hc50_calibrated": false,
         "nucleated_cytotoxicity_tested": false
       },
@@ -8535,11 +8884,13 @@
         "target_explored_mod05": false
       },
       "structural_evidence": {
-        "score": 5.0,
+        "score": 0.0,
         "max_score": 15.0,
-        "coverage_pct": 33.3,
+        "coverage_pct": 0.0,
+        "provenance_class": "Class C: Illustrative Representation (Unmodeled)",
+        "provenance_detail": "No validated prediction exists for this exact sequence",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": false
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -8560,10 +8911,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+      "primary_citation": "Du et al., Toxins 2015; 7(2):219-234",
       "pmid": "25626077",
       "doi": "10.3390/toxins7020219",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -8581,9 +8932,11 @@
     "baseline_composite_score": 0.6611,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 10.03,
@@ -8591,13 +8944,34 @@
     "net_charge_ph74": 2.25,
     "hydrophobic_moment": 0.066,
     "instability_index": 22.53,
-    "evidence_readiness_index": 30.0,
+    "evidence_readiness_index": 35.0,
     "readiness_tier": "Tier 2",
-    "readiness_tier_name_en": "Intermediate Evidence Readiness",
-    "readiness_tier_name_ar": "جاهزية أدلة متوسطة (فحص أمان أولي محدود)",
-    "readiness_classification_en": "Promising Lead (Safety Curve Needed)",
-    "readiness_classification_ar": "مرشح واعد (يتطلب منحنى أمان تفصيلي)",
+    "readiness_tier_number": 2,
+    "readiness_tier_name_en": "Tier 2: Intermediate Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 2: ملف أدلة متوسط التوثيق (توصيف تجريبي جزئي)",
+    "readiness_classification_en": "Partial Evidence Completeness (Single-Dose Screen)",
+    "readiness_classification_ar": "اكتمال أدلة جزئي (فحص أولي محدود دون منحنى كامل)",
     "readiness_badge_class": "tier-2",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "single_dose_screen",
+      "assay_outcome": "low_hemolysis_screen",
+      "outcome_label_en": "Single-Dose Screen (<2% Lysis @ 10 µM, Human RBC)",
+      "outcome_label_ar": "فحص أحادي الجرعة (<2% تحلل عند 10 µM على كريات دم بشرية)",
+      "reported_observation": "<2% lysis @ 10 µM (Human RBC)",
+      "tested_concentration": "10 µM",
+      "erythrocyte_species": "Human",
+      "is_human_rbc": true,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 5.0,
+      "status_badge": "low_hemolysis_screen",
+      "warning_en": "WARNING: Single-dose screen does NOT establish therapeutic safety or valid Selectivity Index.",
+      "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان ولا يتيح اشتقاق مؤشر انتقائية صالح.",
+      "provenance_reference": "Conde et al., FEBS Lett 2000; 471(2-3):165-168",
+      "provenance_pmid": "10767415",
+      "provenance_doi": "10.1016/s0014-5793(00)01384-3"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -8608,14 +8982,16 @@
         "mbc_time_kill_tested": false
       },
       "safety_and_cytotoxicity": {
-        "score": 0.0,
+        "score": 5.0,
         "max_score": 30.0,
-        "coverage_pct": 0.0,
-        "status_en": "Unassayed / Missing Safety",
-        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
-        "badge": "unassayed",
-        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
-        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "coverage_pct": 16.7,
+        "assay_availability": "assayed",
+        "assay_outcome": "low_hemolysis_screen",
+        "status_en": "Single-Dose Screen (<2% Lysis @ 10 µM, Human RBC)",
+        "status_ar": "فحص أحادي الجرعة (<2% تحلل عند 10 µM على كريات دم بشرية)",
+        "badge": "low_hemolysis_screen",
+        "warning_en": "WARNING: Single-dose screen does NOT establish therapeutic safety or valid Selectivity Index.",
+        "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان ولا يتيح اشتقاق مؤشر انتقائية صالح.",
         "hc50_calibrated": false,
         "nucleated_cytotoxicity_tested": false
       },
@@ -8630,8 +9006,10 @@
         "score": 5.0,
         "max_score": 15.0,
         "coverage_pct": 33.3,
+        "provenance_class": "Class B: Computationally Predicted",
+        "provenance_detail": "AlphaFold Protein Structure Database (AF-P56972-F1) - AlphaFold v2.0 / v4 Computational Model (DeepMind / EMBL-EBI)",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": true
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -8652,10 +9030,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Conde et al., FEBS Lett 2000; 471(2-3):165-168 (Figure 3, p. 167)",
+      "primary_citation": "Conde et al., FEBS Lett 2000; 471(2-3):165-168",
       "pmid": "10767415",
       "doi": "10.1016/s0014-5793(00)01384-3",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -8673,9 +9051,11 @@
     "baseline_composite_score": 0.659,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 16.0,
@@ -8683,13 +9063,34 @@
     "net_charge_ph74": 1.99,
     "hydrophobic_moment": 0.4,
     "instability_index": 24.59,
-    "evidence_readiness_index": 25.0,
+    "evidence_readiness_index": 20.0,
     "readiness_tier": "Tier 3",
-    "readiness_tier_name_en": "Preliminary Discovery",
-    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
-    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
-    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_tier_number": 3,
+    "readiness_tier_name_en": "Tier 3: Sparse Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 3: ملف أدلة أولي أو محدود (نقص الأدلة التجريبية)",
+    "readiness_classification_en": "Preliminary Evidence Completeness (Unassayed or High Lysis)",
+    "readiness_classification_ar": "اكتمال أدلة أولي (غياب فحوصات الأمان أو رصد تحلل حاد)",
     "readiness_badge_class": "tier-3",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "single_dose_screen",
+      "assay_outcome": "high_complete_hemolysis",
+      "outcome_label_en": "Substantial/Complete Hemolysis (100% Lysis @ 64 mg/L, Horse RBC)",
+      "outcome_label_ar": "تحلل دم حاد / كامل (100% تحلل عند 64 mg/L على كريات دم الخيل)",
+      "reported_observation": "100% lysis @ 64 mg/L (32.2 µM) on Horse RBC",
+      "tested_concentration": "64 mg/L (32.2 µM)",
+      "erythrocyte_species": "Horse",
+      "is_human_rbc": false,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 0.0,
+      "status_badge": "high_hemolysis",
+      "warning_en": "CRITICAL ALERT: Underlying assay demonstrated complete erythrocyte lysis (100% hemolysis on horse RBC).",
+      "warning_ar": "تحذير حرج: الفحص أثبت تحللاً كاملاً لكريات الدم (100% انحلال على دم الخيل).",
+      "provenance_reference": "Du et al., Toxins 2015; 7(2):219-234",
+      "provenance_pmid": "25626077",
+      "provenance_doi": "10.3390/toxins7020219"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -8703,11 +9104,13 @@
         "score": 0.0,
         "max_score": 30.0,
         "coverage_pct": 0.0,
-        "status_en": "Unassayed / Missing Safety",
-        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
-        "badge": "unassayed",
-        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
-        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "assay_availability": "assayed",
+        "assay_outcome": "high_complete_hemolysis",
+        "status_en": "Substantial/Complete Hemolysis (100% Lysis @ 64 mg/L, Horse RBC)",
+        "status_ar": "تحلل دم حاد / كامل (100% تحلل عند 64 mg/L على كريات دم الخيل)",
+        "badge": "high_hemolysis",
+        "warning_en": "CRITICAL ALERT: Underlying assay demonstrated complete erythrocyte lysis (100% hemolysis on horse RBC).",
+        "warning_ar": "تحذير حرج: الفحص أثبت تحللاً كاملاً لكريات الدم (100% انحلال على دم الخيل).",
         "hc50_calibrated": false,
         "nucleated_cytotoxicity_tested": false
       },
@@ -8719,11 +9122,13 @@
         "target_explored_mod05": false
       },
       "structural_evidence": {
-        "score": 5.0,
+        "score": 0.0,
         "max_score": 15.0,
-        "coverage_pct": 33.3,
+        "coverage_pct": 0.0,
+        "provenance_class": "Class C: Illustrative Representation (Unmodeled)",
+        "provenance_detail": "No validated prediction exists for this exact sequence",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": false
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -8744,10 +9149,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+      "primary_citation": "Du et al., Toxins 2015; 7(2):219-234",
       "pmid": "25626077",
       "doi": "10.3390/toxins7020219",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -8765,9 +9170,11 @@
     "baseline_composite_score": 0.6558,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 19.8,
@@ -8777,11 +9184,32 @@
     "instability_index": 28.54,
     "evidence_readiness_index": 25.0,
     "readiness_tier": "Tier 3",
-    "readiness_tier_name_en": "Preliminary Discovery",
-    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
-    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
-    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_tier_number": 3,
+    "readiness_tier_name_en": "Tier 3: Sparse Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 3: ملف أدلة أولي أو محدود (نقص الأدلة التجريبية)",
+    "readiness_classification_en": "Preliminary Evidence Completeness (Unassayed or High Lysis)",
+    "readiness_classification_ar": "اكتمال أدلة أولي (غياب فحوصات الأمان أو رصد تحلل حاد)",
     "readiness_badge_class": "tier-3",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "single_dose_screen",
+      "assay_outcome": "active_cytolysis",
+      "outcome_label_en": "Active Cytolysis (~100% Lysis @ 20-50 µM, Human RBC)",
+      "outcome_label_ar": "تحلل خلوي نشط (~100% تحلل عند 20-50 µM على كريات دم بشرية)",
+      "reported_observation": "Active cytolysis (~100% @ 20-50 µM on Human RBC)",
+      "tested_concentration": "20-50 µM",
+      "erythrocyte_species": "Human",
+      "is_human_rbc": true,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 0.0,
+      "status_badge": "high_hemolysis",
+      "warning_en": "CRITICAL ALERT: Potent cytolytic peptide inducing full erythrocyte lysis at antibacterial concentrations.",
+      "warning_ar": "تحذير حرج: ببتيد حال للغشاء يسبب انحلالاً كاملاً للكريات عند تراكيز قريبة من تركيز التثبيط.",
+      "provenance_reference": "Torres-Larios et al., Eur J Biochem 2000; 267(16):5023-5031",
+      "provenance_pmid": "10931184",
+      "provenance_doi": "10.1046/j.1432-1327.2000.01556.x"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -8795,11 +9223,13 @@
         "score": 0.0,
         "max_score": 30.0,
         "coverage_pct": 0.0,
-        "status_en": "Unassayed / Missing Safety",
-        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
-        "badge": "unassayed",
-        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
-        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "assay_availability": "assayed",
+        "assay_outcome": "active_cytolysis",
+        "status_en": "Active Cytolysis (~100% Lysis @ 20-50 µM, Human RBC)",
+        "status_ar": "تحلل خلوي نشط (~100% تحلل عند 20-50 µM على كريات دم بشرية)",
+        "badge": "high_hemolysis",
+        "warning_en": "CRITICAL ALERT: Potent cytolytic peptide inducing full erythrocyte lysis at antibacterial concentrations.",
+        "warning_ar": "تحذير حرج: ببتيد حال للغشاء يسبب انحلالاً كاملاً للكريات عند تراكيز قريبة من تركيز التثبيط.",
         "hc50_calibrated": false,
         "nucleated_cytotoxicity_tested": false
       },
@@ -8814,8 +9244,10 @@
         "score": 5.0,
         "max_score": 15.0,
         "coverage_pct": 33.3,
+        "provenance_class": "Class B: Computationally Predicted",
+        "provenance_detail": "AlphaFold Protein Structure Database (AF-P82656-F1) - AlphaFold v2.0 / v4 Computational Model (DeepMind / EMBL-EBI)",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": true
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -8836,10 +9268,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Torres-Larios et al., Eur J Biochem 2000; 267(16):5023-5031 (Table 2, p. 5026)",
+      "primary_citation": "Torres-Larios et al., Eur J Biochem 2000; 267(16):5023-5031",
       "pmid": "10931184",
       "doi": "10.1046/j.1432-1327.2000.01556.x",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -8857,9 +9289,11 @@
     "baseline_composite_score": 0.5855,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 42.48,
@@ -8869,11 +9303,32 @@
     "instability_index": 9.98,
     "evidence_readiness_index": 25.0,
     "readiness_tier": "Tier 3",
-    "readiness_tier_name_en": "Preliminary Discovery",
-    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
-    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
-    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_tier_number": 3,
+    "readiness_tier_name_en": "Tier 3: Sparse Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 3: ملف أدلة أولي أو محدود (نقص الأدلة التجريبية)",
+    "readiness_classification_en": "Preliminary Evidence Completeness (Unassayed or High Lysis)",
+    "readiness_classification_ar": "اكتمال أدلة أولي (غياب فحوصات الأمان أو رصد تحلل حاد)",
     "readiness_badge_class": "tier-3",
+    "hemolysis_characterization": {
+      "assay_availability": "unassayed",
+      "assay_type": "unassayed",
+      "assay_outcome": "unassayed",
+      "outcome_label_en": "Unassayed / Missing Toxicity Evidence",
+      "outcome_label_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات السمية)",
+      "reported_observation": "Unassayed in primary antimicrobial paper (Guilhelmelli 2016)",
+      "tested_concentration": null,
+      "erythrocyte_species": null,
+      "is_human_rbc": false,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 0.0,
+      "status_badge": "unassayed",
+      "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+      "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+      "provenance_reference": "Guilhelmelli et al., Front Microbiol 2016; 7:1844",
+      "provenance_pmid": "27917162",
+      "provenance_doi": "10.3389/fmicb.2016.01844"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -8887,8 +9342,10 @@
         "score": 0.0,
         "max_score": 30.0,
         "coverage_pct": 0.0,
-        "status_en": "Unassayed / Missing Safety",
-        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "assay_availability": "unassayed",
+        "assay_outcome": "unassayed",
+        "status_en": "Unassayed / Missing Toxicity Evidence",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات السمية)",
         "badge": "unassayed",
         "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
         "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
@@ -8906,8 +9363,10 @@
         "score": 5.0,
         "max_score": 15.0,
         "coverage_pct": 33.3,
+        "provenance_class": "Class B: Computationally Predicted",
+        "provenance_detail": "AlphaFold Protein Structure Database (AF-P0DQT2-F1) - AlphaFold v2.0 / v4 Computational Model (DeepMind / EMBL-EBI)",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": true
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -8928,10 +9387,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Guilhelmelli et al., Front Microbiol 2016; 7:1844 (Table 3)",
+      "primary_citation": "Guilhelmelli et al., Front Microbiol 2016; 7:1844",
       "pmid": "27917162",
       "doi": "10.3389/fmicb.2016.01844",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -8949,9 +9408,11 @@
     "baseline_composite_score": 0.4385,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 194.85,
@@ -8959,13 +9420,34 @@
     "net_charge_ph74": 4.99,
     "hydrophobic_moment": 0.676,
     "instability_index": -26.64,
-    "evidence_readiness_index": 25.0,
+    "evidence_readiness_index": 20.0,
     "readiness_tier": "Tier 3",
-    "readiness_tier_name_en": "Preliminary Discovery",
-    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
-    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
-    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_tier_number": 3,
+    "readiness_tier_name_en": "Tier 3: Sparse Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 3: ملف أدلة أولي أو محدود (نقص الأدلة التجريبية)",
+    "readiness_classification_en": "Preliminary Evidence Completeness (Unassayed or High Lysis)",
+    "readiness_classification_ar": "اكتمال أدلة أولي (غياب فحوصات الأمان أو رصد تحلل حاد)",
     "readiness_badge_class": "tier-3",
+    "hemolysis_characterization": {
+      "assay_availability": "unassayed",
+      "assay_type": "unassayed",
+      "assay_outcome": "unassayed",
+      "outcome_label_en": "Unassayed / Missing Toxicity Evidence",
+      "outcome_label_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات السمية)",
+      "reported_observation": "Unassayed in primary biofilm study (Tareau 2026)",
+      "tested_concentration": null,
+      "erythrocyte_species": null,
+      "is_human_rbc": false,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 0.0,
+      "status_badge": "unassayed",
+      "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+      "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+      "provenance_reference": "Tareau et al., Front Microbiol 2026; 15:1827386",
+      "provenance_pmid": "30709056",
+      "provenance_doi": "10.3389/fmicb.2026.1827386"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -8979,8 +9461,10 @@
         "score": 0.0,
         "max_score": 30.0,
         "coverage_pct": 0.0,
-        "status_en": "Unassayed / Missing Safety",
-        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "assay_availability": "unassayed",
+        "assay_outcome": "unassayed",
+        "status_en": "Unassayed / Missing Toxicity Evidence",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات السمية)",
         "badge": "unassayed",
         "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
         "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
@@ -8995,11 +9479,13 @@
         "target_explored_mod05": false
       },
       "structural_evidence": {
-        "score": 5.0,
+        "score": 0.0,
         "max_score": 15.0,
-        "coverage_pct": 33.3,
+        "coverage_pct": 0.0,
+        "provenance_class": "Class C: Illustrative Representation (Unmodeled)",
+        "provenance_detail": "No validated prediction exists for this exact sequence",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": false
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -9023,7 +9509,7 @@
       "primary_citation": "Tareau et al., Front Microbiol 2026; 15:1827386",
       "pmid": "30709056",
       "doi": "10.3389/fmicb.2026.1827386",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -9041,9 +9527,11 @@
     "baseline_composite_score": 0.408,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 190.74,
@@ -9051,13 +9539,34 @@
     "net_charge_ph74": 3.99,
     "hydrophobic_moment": 0.599,
     "instability_index": -12.81,
-    "evidence_readiness_index": 25.0,
+    "evidence_readiness_index": 20.0,
     "readiness_tier": "Tier 3",
-    "readiness_tier_name_en": "Preliminary Discovery",
-    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
-    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
-    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_tier_number": 3,
+    "readiness_tier_name_en": "Tier 3: Sparse Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 3: ملف أدلة أولي أو محدود (نقص الأدلة التجريبية)",
+    "readiness_classification_en": "Preliminary Evidence Completeness (Unassayed or High Lysis)",
+    "readiness_classification_ar": "اكتمال أدلة أولي (غياب فحوصات الأمان أو رصد تحلل حاد)",
     "readiness_badge_class": "tier-3",
+    "hemolysis_characterization": {
+      "assay_availability": "unassayed",
+      "assay_type": "unassayed",
+      "assay_outcome": "unassayed",
+      "outcome_label_en": "Unassayed / Missing Toxicity Evidence",
+      "outcome_label_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات السمية)",
+      "reported_observation": "Unassayed in primary biofilm study (Tareau 2026)",
+      "tested_concentration": null,
+      "erythrocyte_species": null,
+      "is_human_rbc": false,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 0.0,
+      "status_badge": "unassayed",
+      "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+      "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+      "provenance_reference": "Tareau et al., Front Microbiol 2026; 15:1827386",
+      "provenance_pmid": "30709056",
+      "provenance_doi": "10.3389/fmicb.2026.1827386"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -9071,8 +9580,10 @@
         "score": 0.0,
         "max_score": 30.0,
         "coverage_pct": 0.0,
-        "status_en": "Unassayed / Missing Safety",
-        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "assay_availability": "unassayed",
+        "assay_outcome": "unassayed",
+        "status_en": "Unassayed / Missing Toxicity Evidence",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات السمية)",
         "badge": "unassayed",
         "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
         "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
@@ -9087,11 +9598,13 @@
         "target_explored_mod05": false
       },
       "structural_evidence": {
-        "score": 5.0,
+        "score": 0.0,
         "max_score": 15.0,
-        "coverage_pct": 33.3,
+        "coverage_pct": 0.0,
+        "provenance_class": "Class C: Illustrative Representation (Unmodeled)",
+        "provenance_detail": "No validated prediction exists for this exact sequence",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": false
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -9115,7 +9628,7 @@
       "primary_citation": "Tareau et al., Front Microbiol 2026; 15:1827386",
       "pmid": "30709056",
       "doi": "10.3389/fmicb.2026.1827386",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   },
   {
@@ -9133,9 +9646,11 @@
     "baseline_composite_score": 0.3793,
     "baseline_weights": {
       "mic": 0.5,
+      "mic_potency": 0.5,
       "stability": 0.25,
       "hydrophobic_moment": 0.125,
       "charge": 0.125,
+      "net_charge": 0.125,
       "hemolysis": 0.0
     },
     "lowest_mic_ug_ml": 86.66,
@@ -9143,13 +9658,34 @@
     "net_charge_ph74": 1.99,
     "hydrophobic_moment": 0.374,
     "instability_index": 6.14,
-    "evidence_readiness_index": 25.0,
-    "readiness_tier": "Tier 3",
-    "readiness_tier_name_en": "Preliminary Discovery",
-    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
-    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
-    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
-    "readiness_badge_class": "tier-3",
+    "evidence_readiness_index": 30.0,
+    "readiness_tier": "Tier 2",
+    "readiness_tier_number": 2,
+    "readiness_tier_name_en": "Tier 2: Intermediate Evidence Profile",
+    "readiness_tier_name_ar": "الفئة 2: ملف أدلة متوسط التوثيق (توصيف تجريبي جزئي)",
+    "readiness_classification_en": "Partial Evidence Completeness (Single-Dose Screen)",
+    "readiness_classification_ar": "اكتمال أدلة جزئي (فحص أولي محدود دون منحنى كامل)",
+    "readiness_badge_class": "tier-2",
+    "hemolysis_characterization": {
+      "assay_availability": "assayed",
+      "assay_type": "single_dose_screen",
+      "assay_outcome": "low_hemolysis_screen",
+      "outcome_label_en": "Single-Dose Screen (<5% Lysis @ 50 µM, Human RBC)",
+      "outcome_label_ar": "فحص أحادي الجرعة (<5% تحلل عند 50 µM على كريات دم بشرية)",
+      "reported_observation": "<5% lysis @ 50 µM (Human RBC)",
+      "tested_concentration": "50 µM",
+      "erythrocyte_species": "Human",
+      "is_human_rbc": true,
+      "hc50_um": null,
+      "hc50_ug_ml": null,
+      "safety_evidence_score": 5.0,
+      "status_badge": "low_hemolysis_screen",
+      "warning_en": "WARNING: Single-dose screen does NOT establish therapeutic safety or valid Selectivity Index.",
+      "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان ولا يتيح اشتقاق مؤشر انتقائية صالح.",
+      "provenance_reference": "Guilhelmelli et al., Front Microbiol 2016; 7:1844",
+      "provenance_pmid": "27917162",
+      "provenance_doi": "10.3389/fmicb.2016.01844"
+    },
     "domain_subscores": {
       "antimicrobial_characterization": {
         "score": 15.0,
@@ -9160,14 +9696,16 @@
         "mbc_time_kill_tested": false
       },
       "safety_and_cytotoxicity": {
-        "score": 0.0,
+        "score": 5.0,
         "max_score": 30.0,
-        "coverage_pct": 0.0,
-        "status_en": "Unassayed / Missing Safety",
-        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
-        "badge": "unassayed",
-        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
-        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "coverage_pct": 16.7,
+        "assay_availability": "assayed",
+        "assay_outcome": "low_hemolysis_screen",
+        "status_en": "Single-Dose Screen (<5% Lysis @ 50 µM, Human RBC)",
+        "status_ar": "فحص أحادي الجرعة (<5% تحلل عند 50 µM على كريات دم بشرية)",
+        "badge": "low_hemolysis_screen",
+        "warning_en": "WARNING: Single-dose screen does NOT establish therapeutic safety or valid Selectivity Index.",
+        "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان ولا يتيح اشتقاق مؤشر انتقائية صالح.",
         "hc50_calibrated": false,
         "nucleated_cytotoxicity_tested": false
       },
@@ -9182,8 +9720,10 @@
         "score": 5.0,
         "max_score": 15.0,
         "coverage_pct": 33.3,
+        "provenance_class": "Class B: Computationally Predicted",
+        "provenance_detail": "AlphaFold Protein Structure Database (AF-A0A1D3IXR7-F1) - AlphaFold v2.0 / v4 Computational Model (DeepMind / EMBL-EBI)",
         "experimental_nmr_xray": false,
-        "alphafold_model_available": true
+        "documented_prediction_exists": true
       },
       "in_vitro_stability": {
         "score": 5.0,
@@ -9204,10 +9744,10 @@
       "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
     },
     "provenance_and_warnings": {
-      "primary_citation": "Guilhelmelli et al., Front Microbiol 2016; 7:1844 (Table 3)",
+      "primary_citation": "Guilhelmelli et al., Front Microbiol 2016; 7:1844",
       "pmid": "27917162",
       "doi": "10.3389/fmicb.2016.01844",
-      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+      "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
     }
   }
 ];
@@ -9304,8 +9844,13 @@
         const sub = c.domain_subscores;
         const gaps = c.research_gaps_summary;
         const prov = c.provenance_and_warnings;
+        const hemo = c.hemolysis_characterization;
         const tierNum = String(c.readiness_tier).includes('1') ? 1 : (String(c.readiness_tier).includes('2') ? 2 : 3);
         const tierIcon = tierNum === 1 ? '🟢' : (tierNum === 2 ? '🟡' : '🔴');
+
+        // Structural Badge Class
+        const structClass = sub.structural_evidence.score >= 10.0 ? 'struct-class-a' : (sub.structural_evidence.score >= 5.0 ? 'struct-class-b' : 'struct-class-c');
+        const structLabel = sub.structural_evidence.score >= 10.0 ? 'رنين مغناطيسي PDB: 1T51 (+15)' : (sub.structural_evidence.score >= 5.0 ? 'نموذج AlphaFold (+5)' : 'غير مصمم فراغياً (0)');
 
         return `
           <tr>
@@ -9334,10 +9879,10 @@
               <small class="block text-muted text-2xs" dir="ltr">${c.lowest_mic_ug_ml.toFixed(2)} µg/mL (${c.lowest_mic_um.toFixed(2)} µM)</small>
             </td>
             <td>
-              <span class="safety-pill ${sub.safety_and_cytotoxicity.badge}">
-                ${esc(sub.safety_and_cytotoxicity.status_ar)}
+              <span class="safety-pill ${hemo.status_badge}">
+                ${esc(hemo.outcome_label_ar)}
               </span>
-              <small class="block text-muted text-2xs">${sub.safety_and_cytotoxicity.score}/30 نقطة</small>
+              <small class="block text-muted text-2xs">${hemo.safety_evidence_score}/30 نقطة (${hemo.erythrocyte_species ? esc(hemo.erythrocyte_species) + ' RBC' : 'غير مفحوص'})</small>
             </td>
             <td>
               <span class="badge ${sub.biophysical_mechanism.target_explored_mod05 ? 'measured' : 'conditional'}">
@@ -9345,7 +9890,8 @@
               </span>
             </td>
             <td>
-              <span class="badge conditional">AlphaFold + مؤشر (${sub.structural_evidence.score + sub.in_vitro_stability.score}/30)</span>
+              <span class="struct-badge ${structClass}">${structLabel}</span>
+              <small class="block text-muted text-2xs">الاستقرار: ${sub.in_vitro_stability.score}/15 (Guruprasad)</small>
             </td>
             <td>
               <span class="gap-count-tag">${gaps.total_actionable_gaps} فجوة</span>
@@ -9383,7 +9929,7 @@
       if (badgesContainer) {
         badgesContainer.innerHTML = `
           <span class="tier-badge ${c.readiness_badge_class}">${c.readiness_tier_name_ar}</span>
-          <span class="badge measured">مؤشر الجاهزية ERI: ${c.evidence_readiness_index.toFixed(1)} / 100</span>
+          <span class="badge measured">مؤشر اكتمال الأدلة ERI: ${c.evidence_readiness_index.toFixed(1)} / 100</span>
           <span class="badge conditional">رتبة الأساس: #${c.baseline_rank}</span>
         `;
       }
@@ -9399,6 +9945,7 @@
 
       // 5-Domain Evidence Breakdown
       const sub = c.domain_subscores;
+      const hemo = c.hemolysis_characterization;
       const tierNum = String(c.readiness_tier).includes('1') ? 1 : (String(c.readiness_tier).includes('2') ? 2 : 3);
       const domainsContainer = $('modal-domains-breakdown');
       if (domainsContainer) {
@@ -9411,20 +9958,25 @@
             <div class="domain-breakdown-bar">
               <div class="domain-breakdown-fill" style="width: ${sub.antimicrobial_characterization.coverage_pct}%;"></div>
             </div>
-            <small class="text-muted text-xs block" style="margin-top:2px;">تم فحص MIC القياسي؛ غياب اختبارات عزلات WHO الحرجة وسرعة القتل الزمني (MBC).</small>
+            <small class="text-muted text-xs block" style="margin-top:2px;">فحص قياسي معتمد لـ MIC؛ غياب اختبارات عزلات منظمة الصحة العالمية الحرجة (CRAB/CRE/VRE) وزمن الإبادة (MBC).</small>
           </div>
 
           <div class="domain-breakdown-item">
             <div class="domain-breakdown-header">
-              <strong>2. الأمان وتحلل الخلايا (Safety & Cytotoxicity)</strong>
-              <span class="mono">${sub.safety_and_cytotoxicity.score} / ${sub.safety_and_cytotoxicity.max_score} (${sub.safety_and_cytotoxicity.coverage_pct}%)</span>
+              <strong>2. توثيق الأمان والسمية الثديية المنفصل (Mammalian Toxicity & Hemolysis)</strong>
+              <span class="mono">${hemo.safety_evidence_score} / ${sub.safety_and_cytotoxicity.max_score} (${sub.safety_and_cytotoxicity.coverage_pct}%)</span>
             </div>
             <div class="domain-breakdown-bar">
-              <div class="domain-breakdown-fill" style="width: ${sub.safety_and_cytotoxicity.coverage_pct}%; background: ${tierNum === 1 ? '#10b981' : (tierNum === 2 ? '#f59e0b' : '#ef4444')};"></div>
+              <div class="domain-breakdown-fill" style="width: ${sub.safety_and_cytotoxicity.coverage_pct}%; background: ${hemo.status_badge === 'quantified_hc50' ? '#10b981' : (hemo.status_badge === 'low_hemolysis_screen' ? '#f59e0b' : '#ef4444')};"></div>
             </div>
-            <small class="text-muted text-xs block" style="margin-top:2px; color: ${tierNum === 3 ? '#fca5a5' : '#cbd5e1'};">
-              ${esc(sub.safety_and_cytotoxicity.warning_ar)}
-            </small>
+            <div style="margin-top:4px; font-size:11.5px; background:rgba(0,0,0,0.25); padding:6px 10px; border-radius:6px;">
+              <div><strong>توفر الفحص:</strong> ${hemo.assay_availability === 'assayed' ? 'محقق معملياً' : 'غير مفحوص إطلاقاً'}</div>
+              <div><strong>الملاحظة المخبرية:</strong> ${esc(hemo.reported_observation)}</div>
+              <div><strong>نوع العينة:</strong> ${hemo.erythrocyte_species ? esc(hemo.erythrocyte_species) + ' RBC' : 'غير محدد'} (${hemo.tested_concentration ? 'التركيز: ' + esc(hemo.tested_concentration) : 'لا يوجد تركيز'})</div>
+              <div style="color:${hemo.status_badge === 'high_hemolysis' ? '#fca5a5' : '#cbd5e1'}; margin-top:3px;">
+                ⚠️ ${esc(hemo.warning_ar)}
+              </div>
+            </div>
           </div>
 
           <div class="domain-breakdown-item">
@@ -9440,13 +9992,13 @@
 
           <div class="domain-breakdown-item">
             <div class="domain-breakdown-header">
-              <strong>4. البنية ثلاثية الأبعاد (Structural Evidence)</strong>
+              <strong>4. الأدلة البنيوية الفراغية (Structural Evidence)</strong>
               <span class="mono">${sub.structural_evidence.score} / ${sub.structural_evidence.max_score} (${sub.structural_evidence.coverage_pct}%)</span>
             </div>
             <div class="domain-breakdown-bar">
               <div class="domain-breakdown-fill" style="width: ${sub.structural_evidence.coverage_pct}%;"></div>
             </div>
-            <small class="text-muted text-xs block" style="margin-top:2px;">نموذج AlphaFold تنبؤي معتمد؛ غياب بنية رنين مغناطيسي نووي (NMR) تجريبية في محلول مائي.</small>
+            <small class="text-muted text-xs block" style="margin-top:2px;">${esc(sub.structural_evidence.provenance_class)}: ${esc(sub.structural_evidence.provenance_detail)}.</small>
           </div>
 
           <div class="domain-breakdown-item">
@@ -9457,7 +10009,7 @@
             <div class="domain-breakdown-bar">
               <div class="domain-breakdown-fill" style="width: ${sub.in_vitro_stability.coverage_pct}%;"></div>
             </div>
-            <small class="text-muted text-xs block" style="margin-top:2px;">مؤشر Guruprasad المحسوب متاح؛ قياسات نصف العمر في مصل الدم (Serum t1/2) وتحلل الإنزيمات غير مفحوصة.</small>
+            <small class="text-muted text-xs block" style="margin-top:2px;">مؤشر الاستقرار الفيزيوكيميائي (Guruprasad) متاح؛ نصف العمر في مصل الدم وتحلل الإنزيمات غير مفحوصة معملياً.</small>
           </div>
         `;
       }
@@ -9522,6 +10074,7 @@
       if (e.target === detailDialog) detailDialog.close();
     });
   }
+
 
   // Preset switching click listeners
   $('preset-btn-balanced')?.addEventListener('click', () => setRankingPreset('balanced_default'));

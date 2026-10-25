@@ -12292,6 +12292,7 @@
       renderXAIExplorer();
       initKnowledgeGraph();
       initTargetExplorer();
+      initBiogeographyExplorer();
     } catch (err) {
       console.error(err);
       $('result-count').textContent = 'البيانات غير متاحة حالياً';
@@ -12320,4 +12321,567 @@
       io.observe(e);
     });
   }
+
+  /* ==========================================================================
+     MOD-08: EVIDENCE-GROUNDED BIOGEOGRAPHY & TAXONOMY EXPLORER LOGIC
+     ========================================================================== */
+  let biogeoSpeciesRegistry = [];
+  let biogeoSummaryMetrics = null;
+  let biogeoLeafletMap = null;
+  let biogeoMarkersLayer = null;
+  let biogeoCurrentView = 'map'; // 'map' or 'table'
+  let biogeoCurrentPage = 1;
+  const BIOGEO_PAGE_SIZE = 15;
+
+  async function initBiogeographyExplorer() {
+    const mapContainer = $('biogeo-leaflet-map');
+    const tableBody = $('biogeo-table-body');
+    if (!mapContainer && !tableBody) return;
+
+    try {
+      const [resTax, resMet] = await Promise.all([
+        fetch('data/species_taxonomy_registry.json'),
+        fetch('data/geographic_summary_metrics.json')
+      ]);
+
+      if (resTax.ok) {
+        biogeoSpeciesRegistry = await resTax.json();
+      }
+      if (resMet.ok) {
+        biogeoSummaryMetrics = await resMet.json();
+      }
+    } catch (err) {
+      console.warn('Biogeography fetch fallback triggered:', err);
+    }
+
+    if (!biogeoSpeciesRegistry || biogeoSpeciesRegistry.length === 0) {
+      console.warn('No biogeography species records available.');
+      return;
+    }
+
+    // Update metric cards
+    if ($('metric-total-taxa')) $('metric-total-taxa').textContent = biogeoSpeciesRegistry.length;
+    const cExact = biogeoSpeciesRegistry.filter(s => s.geographic_evidence_class === 'georeferenced_specimen').length;
+    const cReg = biogeoSpeciesRegistry.filter(s => s.geographic_evidence_class === 'published_regional_occurrence').length;
+    const cNull = biogeoSpeciesRegistry.filter(s => s.latitude === null || s.longitude === null).length;
+    const cLeads = biogeoSpeciesRegistry.filter(s => s.has_antimicrobial_leads).length;
+
+    if ($('metric-exact-specimens')) $('metric-exact-specimens').textContent = cExact;
+    if ($('metric-regional-occurrences')) $('metric-regional-occurrences').textContent = cReg;
+    if ($('metric-null-coordinates')) $('metric-null-coordinates').textContent = cNull;
+    if ($('metric-lead-species')) $('metric-lead-species').textContent = cLeads;
+
+    // Initialize Map
+    initBiogeographyMap();
+
+    // Render initial table view
+    renderBiogeographyTable(biogeoSpeciesRegistry, 1);
+
+    // Bind event listeners
+    bindBiogeographyControls();
+
+    // Check URL parameters for direct deep-linking (e.g. #biogeography-explorer?species=SCA-SP-001)
+    handleBiogeographyDeepLink();
+  }
+
+  function initBiogeographyMap() {
+    const mapEl = $('biogeo-leaflet-map');
+    const fallbackEl = $('biogeo-vector-fallback');
+    if (!mapEl) return;
+
+    if (typeof window.L !== 'undefined') {
+      try {
+        if (!biogeoLeafletMap) {
+          biogeoLeafletMap = L.map('biogeo-leaflet-map', {
+            center: [20, 15],
+            zoom: 2.2,
+            minZoom: 1.5,
+            maxZoom: 14,
+            attributionControl: true
+          });
+
+          // CartoDB Dark Matter tiles
+          L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+          }).addTo(biogeoLeafletMap);
+
+          biogeoMarkersLayer = L.layerGroup().addTo(biogeoLeafletMap);
+        }
+        renderLeafletMarkers(biogeoSpeciesRegistry);
+        return;
+      } catch (e) {
+        console.warn('Leaflet initialization failed, falling back to vector map:', e);
+      }
+    }
+
+    // Vector Fallback if Leaflet CDN unavailable
+    if (fallbackEl) {
+      mapEl.style.display = 'none';
+      fallbackEl.style.display = 'block';
+      renderVectorFallbackMap(biogeoSpeciesRegistry);
+    }
+  }
+
+  function renderLeafletMarkers(speciesList) {
+    if (!biogeoLeafletMap || !biogeoMarkersLayer) return;
+    biogeoMarkersLayer.clearLayers();
+
+    const mappable = speciesList.filter(s => s.latitude !== null && s.longitude !== null);
+
+    mappable.forEach(s => {
+      const isLead = s.has_antimicrobial_leads;
+      const isExact = s.is_exact_point;
+
+      let radius = 7;
+      let fillColor = isExact ? '#10b981' : '#f59e0b';
+      let strokeColor = '#ffffff';
+      let weight = 2;
+      let fillOpacity = 0.85;
+
+      if (isLead) {
+        radius = 10;
+        fillColor = '#ec4899';
+        strokeColor = '#ffffff';
+        weight = 3;
+        fillOpacity = 0.95;
+      } else if (!isExact) {
+        strokeColor = '#fbbf24';
+        weight = 1.5;
+        fillOpacity = 0.75;
+      }
+
+      const marker = L.circleMarker([s.latitude, s.longitude], {
+        radius: radius,
+        fillColor: fillColor,
+        color: strokeColor,
+        weight: weight,
+        opacity: 1,
+        fillOpacity: fillOpacity
+      });
+
+      // Build bilingual popup
+      const evLabel = isExact ? 'عينات موثقة بإحداثيات GPS دقيقة (Exact Point)' : 'تسجيلات إقليمية مشتقة (Regional Centroid)';
+      const popupHtml = `
+        <div style="direction: rtl; text-align: right; font-family: system-ui, sans-serif; font-size: 12px; line-height: 1.5; color: #0f172a; min-width: 240px;">
+          <div style="font-weight: 700; font-size: 14px; margin-bottom: 2px;">
+            <span style="color: #0284c7; font-family: monospace;">${s.species_id}</span>: 
+            <em>${s.scientific_name}</em>
+          </div>
+          <div style="color: #64748b; font-size: 11px; margin-bottom: 6px;">
+            ${s.common_name_ar} | ${s.common_name_en}
+          </div>
+          <div style="margin-bottom: 6px;">
+            <span style="display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; background: ${isExact ? '#d1fae5' : '#fef3c7'}; color: ${isExact ? '#065f46' : '#92400e'};">
+              ${evLabel}
+            </span>
+            ${isLead ? '<span style="display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; background: #fce7f3; color: #9d174d; margin-right: 4px;">مرشحات MOD-07</span>' : ''}
+          </div>
+          <div style="font-size: 11px; color: #334155; margin-bottom: 4px;">
+            <strong>الإحداثيات:</strong> ${s.latitude.toFixed(4)}, ${s.longitude.toFixed(4)} 
+            <small style="color: #64748b;">(&plusmn;${(s.coordinate_uncertainty_meters / 1000).toFixed(1)} كم)</small>
+          </div>
+          <div style="font-size: 11px; color: #334155; margin-bottom: 4px;">
+            <strong>الموقع:</strong> ${s.locality_description_ar}
+          </div>
+          <div style="font-size: 11px; color: #334155; margin-bottom: 8px;">
+            <strong>العينة المرجعية:</strong> ${s.voucher_or_collector || 'سجل إقليمي منشور'}
+          </div>
+          <button onclick="window.openBiogeographyModal('${s.species_id}')" 
+                  style="width: 100%; padding: 6px 10px; background: #0284c7; color: white; border: none; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer;">
+            عرض السجل العلمي الكامل
+          </button>
+        </div>
+      `;
+
+      marker.bindPopup(popupHtml);
+      biogeoMarkersLayer.addLayer(marker);
+    });
+  }
+
+  function renderVectorFallbackMap(speciesList) {
+    const fallbackEl = $('biogeo-vector-fallback');
+    if (!fallbackEl) return;
+
+    const mappable = speciesList.filter(s => s.latitude !== null && s.longitude !== null);
+
+    // SVG Equirectangular Projection
+    let circlesHtml = '';
+    mappable.forEach(s => {
+      const isLead = s.has_antimicrobial_leads;
+      const isExact = s.is_exact_point;
+      // Convert lat/lon to 1000x500 SVG coordinates
+      const x = ((s.longitude + 180) * (1000 / 360)).toFixed(1);
+      const y = (((90 - s.latitude)) * (500 / 180)).toFixed(1);
+
+      const color = isLead ? '#ec4899' : (isExact ? '#10b981' : '#f59e0b');
+      const r = isLead ? '8' : '5';
+
+      circlesHtml += `
+        <circle cx="${x}" cy="${y}" r="${r}" fill="${color}" stroke="#ffffff" stroke-width="1.5" opacity="0.9" style="cursor: pointer;"
+                onclick="window.openBiogeographyModal('${s.species_id}')">
+          <title>${s.species_id}: ${s.scientific_name} (${s.common_name_ar})\n${s.locality_description_en}</title>
+        </circle>
+      `;
+    });
+
+    fallbackEl.innerHTML = `
+      <svg viewBox="0 0 1000 500" style="width: 100%; height: 100%; background: #090d16;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Simplified world grid lines -->
+        <line x1="0" y1="250" x2="1000" y2="250" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4 4" />
+        <line x1="500" y1="0" x2="500" y2="500" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4 4" />
+        <text x="505" y="245" fill="rgba(255,255,255,0.2)" font-size="10">خط الاستواء (Equator)</text>
+        <text x="505" y="15" fill="rgba(255,255,255,0.2)" font-size="10">خط غرينتش</text>
+        ${circlesHtml}
+      </svg>
+    `;
+  }
+
+  function renderBiogeographyTable(speciesList, page = 1) {
+    const tableBody = $('biogeo-table-body');
+    const paginationEl = $('biogeo-table-pagination');
+    if (!tableBody) return;
+
+    biogeoCurrentPage = page;
+    const startIdx = (page - 1) * BIOGEO_PAGE_SIZE;
+    const endIdx = startIdx + BIOGEO_PAGE_SIZE;
+    const pagedSpecies = speciesList.slice(startIdx, endIdx);
+
+    if (pagedSpecies.length === 0) {
+      tableBody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 32px; color: #94a3b8;">لا توجد أنواع مطابقة لمعايير البحث الحالية.</td></tr>`;
+      if (paginationEl) paginationEl.innerHTML = '';
+      return;
+    }
+
+    let rowsHtml = '';
+    pagedSpecies.forEach(s => {
+      let evBadgeClass = 'ev-broad';
+      let evText = 'نطاق عام';
+      if (s.geographic_evidence_class === 'georeferenced_specimen') {
+        evBadgeClass = 'ev-exact';
+        evText = 'GPS دقيق (فئة 1)';
+      } else if (s.geographic_evidence_class === 'published_regional_occurrence') {
+        evBadgeClass = 'ev-regional';
+        evText = 'إقليمي مشتق (فئة 2)';
+      } else if (s.geographic_evidence_class === 'disputed_record') {
+        evBadgeClass = 'ev-disputed';
+        evText = 'متنازع عليه (فئة 4)';
+      } else if (s.geographic_evidence_class === 'unavailable_geographic_data') {
+        evBadgeClass = 'ev-unavailable';
+        evText = 'أسر/غير متوفر (فئة 5)';
+      }
+
+      let precText = 'قائمة دولة';
+      if (s.coordinate_precision === 'exact_point') precText = `نقطي دقيق (${s.latitude.toFixed(2)}, ${s.longitude.toFixed(2)})`;
+      else if (s.coordinate_precision === 'regional_centroid_derived') precText = `مركز إقليمي (${s.latitude.toFixed(2)}, ${s.longitude.toFixed(2)})`;
+      else if (s.coordinate_precision === 'disputed_locality') precText = 'موقع متنازع عليه (Null)';
+      else if (s.coordinate_precision === 'unavailable_commercial_captive') precText = 'عينات أسر وتجارة (Null)';
+
+      let leadsHtml = '—';
+      if (s.has_antimicrobial_leads && s.lead_candidates.length > 0) {
+        const leadNames = s.lead_candidates.map(l => l.peptide_name).join(', ');
+        leadsHtml = `<span style="color: #f472b6; font-weight: 600;">${s.lead_candidates.length} (${leadNames})</span>`;
+      }
+
+      rowsHtml += `
+        <tr>
+          <td style="font-family: monospace; font-weight: 700; color: #38bdf8;">${s.species_id}</td>
+          <td>
+            <strong><em>${s.scientific_name}</em></strong>
+            <small style="color: #94a3b8; display: block;">${s.taxonomic_authority}</small>
+          </td>
+          <td>
+            <span>${s.common_name_ar}</span>
+            <small style="color: #94a3b8; display: block;">${s.common_name_en}</small>
+          </td>
+          <td>${s.family}</td>
+          <td>${s.biogeographic_realm}</td>
+          <td><span class="badge-ev ${evBadgeClass}">${evText}</span></td>
+          <td style="font-size: 11px; color: #94a3b8;">${precText}</td>
+          <td>${s.total_peptides_count} <small style="color: #10b981;">(${s.antimicrobial_peptides_count} مضادة)</small></td>
+          <td>${leadsHtml}</td>
+          <td>
+            <button class="btn-detail" onclick="window.openBiogeographyModal('${s.species_id}')">التفاصيل</button>
+          </td>
+        </tr>
+      `;
+    });
+
+    tableBody.innerHTML = rowsHtml;
+
+    // Render pagination controls
+    if (paginationEl) {
+      const totalPages = Math.ceil(speciesList.length / BIOGEO_PAGE_SIZE);
+      let pagHtml = `<span style="font-size: 12px; color: #94a3b8; margin-left: 12px;">عرض ${startIdx + 1} إلى ${Math.min(endIdx, speciesList.length)} من أصل ${speciesList.length} نوعاً</span>`;
+      pagHtml += `<div style="display: inline-flex; gap: 4px;">`;
+      for (let p = 1; p <= totalPages; p++) {
+        const isActive = p === page;
+        pagHtml += `
+          <button style="padding: 4px 8px; border-radius: 4px; border: 1px solid ${isActive ? '#38bdf8' : 'rgba(255,255,255,0.1)'}; background: ${isActive ? '#0284c7' : 'rgba(30,41,59,0.7)'}; color: ${isActive ? '#ffffff' : '#cbd5e1'}; font-size: 11px; cursor: pointer;"
+                  onclick="window.biogeoGoToPage(${p})">${p}</button>
+        `;
+      }
+      pagHtml += `</div>`;
+      paginationEl.innerHTML = pagHtml;
+    }
+  }
+
+  window.biogeoGoToPage = function(page) {
+    const filtered = getFilteredBiogeographyList();
+    renderBiogeographyTable(filtered, page);
+  };
+
+  function getFilteredBiogeographyList() {
+    const searchVal = ($('biogeo-search-input')?.value || '').toLowerCase().trim();
+    const realmVal = $('filter-realm')?.value || 'all';
+    const classVal = $('filter-evidence-class')?.value || 'all';
+    const familyVal = $('filter-family')?.value || 'all';
+    const leadsOnly = $('filter-leads-only')?.checked || false;
+
+    return biogeoSpeciesRegistry.filter(s => {
+      // Search text
+      if (searchVal) {
+        const matchText = (
+          s.species_id + ' ' +
+          s.scientific_name + ' ' +
+          s.common_name_en + ' ' +
+          s.common_name_ar + ' ' +
+          s.family + ' ' +
+          s.genus + ' ' +
+          (s.native_countries || []).join(' ') + ' ' +
+          s.primary_eco_region + ' ' +
+          s.locality_description_en + ' ' +
+          s.locality_description_ar + ' ' +
+          (s.synonyms || []).join(' ')
+        ).toLowerCase();
+        if (!matchText.includes(searchVal)) return false;
+      }
+
+      // Realm
+      if (realmVal !== 'all' && s.biogeographic_realm !== realmVal) return false;
+
+      // Class
+      if (classVal !== 'all' && s.geographic_evidence_class !== classVal) return false;
+
+      // Family
+      if (familyVal !== 'all' && s.family !== familyVal) return false;
+
+      // Leads only
+      if (leadsOnly && !s.has_antimicrobial_leads) return false;
+
+      return true;
+    });
+  }
+
+  function applyBiogeographyFilters() {
+    const filtered = getFilteredBiogeographyList();
+
+    // Update map markers
+    if (biogeoLeafletMap && typeof window.L !== 'undefined') {
+      renderLeafletMarkers(filtered);
+    } else {
+      renderVectorFallbackMap(filtered);
+    }
+
+    // Update table
+    renderBiogeographyTable(filtered, 1);
+  }
+
+  function bindBiogeographyControls() {
+    // Filter controls
+    $('biogeo-search-input')?.addEventListener('input', applyBiogeographyFilters);
+    $('filter-realm')?.addEventListener('change', applyBiogeographyFilters);
+    $('filter-evidence-class')?.addEventListener('change', applyBiogeographyFilters);
+    $('filter-family')?.addEventListener('change', applyBiogeographyFilters);
+    $('filter-leads-only')?.addEventListener('change', applyBiogeographyFilters);
+
+    // View toggles
+    $('btn-view-map')?.addEventListener('click', () => {
+      $('btn-view-map').classList.add('active');
+      $('btn-view-table').classList.remove('active');
+      $('biogeo-map-view').style.display = 'block';
+      $('biogeo-table-view').style.display = 'none';
+      biogeoCurrentView = 'map';
+      if (biogeoLeafletMap) biogeoLeafletMap.invalidateSize();
+    });
+
+    $('btn-view-table')?.addEventListener('click', () => {
+      $('btn-view-table').classList.add('active');
+      $('btn-view-map').classList.remove('active');
+      $('biogeo-map-view').style.display = 'none';
+      $('biogeo-table-view').style.display = 'block';
+      biogeoCurrentView = 'table';
+    });
+
+    // Export buttons
+    $('btn-export-geojson')?.addEventListener('click', () => {
+      window.location.href = 'data/species_occurrences.geojson';
+    });
+    $('btn-export-csv')?.addEventListener('click', () => {
+      window.location.href = 'data/species_taxonomy_registry.csv';
+    });
+    $('btn-export-json')?.addEventListener('click', () => {
+      window.location.href = 'data/species_taxonomy_registry.json';
+    });
+
+    // Modal close
+    const modal = $('biogeo-detail-modal');
+    $('btn-close-modal')?.addEventListener('click', () => {
+      if (modal && modal.close) modal.close();
+      else if (modal) modal.style.display = 'none';
+    });
+
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          if (modal.close) modal.close();
+          else modal.style.display = 'none';
+        }
+      });
+    }
+  }
+
+  window.openBiogeographyModal = function(speciesId) {
+    const s = biogeoSpeciesRegistry.find(item => item.species_id === speciesId || item.scientific_name === speciesId);
+    if (!s) {
+      console.warn('Species not found:', speciesId);
+      return;
+    }
+
+    const modal = $('biogeo-detail-modal');
+    if (!modal) return;
+
+    // Header
+    if ($('modal-species-id')) $('modal-species-id').textContent = s.species_id;
+    if ($('modal-species-title')) $('modal-species-title').innerHTML = `<em>${s.scientific_name}</em> <small>${s.taxonomic_authority}</small>`;
+    if ($('modal-common-name')) $('modal-common-name').textContent = `${s.common_name_ar} / ${s.common_name_en}`;
+
+    // Body
+    const body = $('modal-species-body');
+    if (!body) return;
+
+    let coordsStr = 'غير محددة نقطياً (Null Coordinates)';
+    if (s.latitude !== null && s.longitude !== null) {
+      coordsStr = `${s.latitude.toFixed(4)}&deg;, ${s.longitude.toFixed(4)}&deg; (ارتياب الدقة: &plusmn;${(s.coordinate_uncertainty_meters / 1000).toFixed(1)} كم)`;
+    }
+
+    let pmidLink = s.provenance_pmid ? `<a href="https://pubmed.ncbi.nlm.nih.gov/${s.provenance_pmid}/" target="_blank" rel="noopener" style="color: #38bdf8;">PMID: ${s.provenance_pmid} ↗</a>` : '—';
+    let doiLink = s.provenance_doi ? `<a href="https://doi.org/${s.provenance_doi}" target="_blank" rel="noopener" style="color: #38bdf8;">DOI: ${s.provenance_doi} ↗</a>` : '—';
+
+    // Lead candidates HTML
+    let leadsHtml = '';
+    if (s.lead_candidates && s.lead_candidates.length > 0) {
+      leadsHtml = `
+        <div class="modal-peptides-section">
+          <h4>المرشحات القيادية المنحدرة من هذا النوع (MOD-07 Prioritized Leads):</h4>
+      `;
+      s.lead_candidates.forEach(l => {
+        const isEng = l.origin === 'engineered';
+        leadsHtml += `
+          <div class="modal-lead-card">
+            <div>
+              <span class="modal-lead-name">${l.peptide_name}</span>
+              <span style="font-size: 11px; color: #94a3b8; margin-right: 8px;">(الرتبة: #${l.baseline_rank} | ERI: ${l.evidence_readiness_index})</span>
+              <span class="modal-lead-badge">${l.evidence_tier}</span>
+            </div>
+            <a href="#prioritization" onclick="$('biogeo-detail-modal').close();" style="font-size: 11px; color: #38bdf8; text-decoration: underline;">
+              عرض في MOD-07 ↗
+            </a>
+          </div>
+        `;
+        if (isEng) {
+          leadsHtml += `
+            <div class="analogue-warning">
+              ⚠️ <strong>مشتق مصنع مخبرياً (Origin: Engineered):</strong> ببتيد تم تعديله هندسياً في المختبر؛ لا يملك أي تواجد في البيئة البرية (has_wild_occurrence: false) ولم يُمنح أي إحداثيات انتشار جغرافية مستقلة.
+            </div>
+          `;
+        }
+      });
+      leadsHtml += `</div>`;
+    }
+
+    // Atlas peptides HTML
+    let peptidesHtml = '';
+    if (s.atlas_peptides && s.atlas_peptides.length > 0) {
+      peptidesHtml = `
+        <div class="modal-peptides-section">
+          <h4>ببتيدات السم الموثقة في الأطلس (${s.atlas_peptides.length} ببتيد):</h4>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+      `;
+      s.atlas_peptides.forEach(p => {
+        peptidesHtml += `
+          <a href="#target-explorer" onclick="$('biogeo-detail-modal').close();" 
+             style="display: inline-block; padding: 3px 8px; border-radius: 4px; background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.08); color: ${p.is_antimicrobial ? '#34d399' : '#cbd5e1'}; font-size: 11px; font-family: monospace; text-decoration: none;">
+            ${p.peptide_name} ${p.is_antimicrobial ? '★' : ''}
+          </a>
+        `;
+      });
+      peptidesHtml += `</div></div>`;
+    }
+
+    // Dispute alert if disputed
+    let disputeHtml = '';
+    if (s.is_disputed) {
+      disputeHtml = `
+        <div class="modal-dispute-alert">
+          <strong>⚠️ بيان النزاع التصنيفي والتوثيقي (Taxonomic & Locality Dispute Notice):</strong>
+          <p style="margin-bottom: 6px;"><strong>العربية:</strong> ${s.dispute_summary_ar}</p>
+          <p style="margin: 0; color: #cbd5e1; font-size: 11px;"><strong>English:</strong> ${s.dispute_summary_en}</p>
+        </div>
+      `;
+    }
+
+    body.innerHTML = `
+      ${disputeHtml}
+      <div class="modal-grid-2">
+        <div class="modal-info-box">
+          <h5>الموقع والتصنيف الجغرافي</h5>
+          <p><strong>النطاق الجغرافي:</strong> ${s.biogeographic_realm}</p>
+          <p><strong>الإقليم البيئي:</strong> ${s.primary_eco_region}</p>
+          <p><strong>الدول الأصلية:</strong> ${(s.native_countries || []).join(', ')}</p>
+          <p><strong>الارتفاع عن سطح البحر:</strong> ${s.elevation_meters ? s.elevation_meters + ' متر' : 'غير مسجل'}</p>
+        </div>
+
+        <div class="modal-info-box">
+          <h5>دقة التوثيق والإحداثيات</h5>
+          <p><strong>فئة الدليل:</strong> ${s.geographic_evidence_class}</p>
+          <p><strong>درجة الدقة:</strong> ${s.coordinate_precision}</p>
+          <p><strong>الإحداثيات الجغرافية:</strong> ${coordsStr}</p>
+          <p><strong>العينة المرجعية/المجمع:</strong> ${s.voucher_or_collector || 'سجل إقليمي'}</p>
+        </div>
+      </div>
+
+      <div class="modal-info-box" style="margin-bottom: 16px;">
+        <h5>وصف الموقع الميداني</h5>
+        <p style="margin-bottom: 4px;"><strong>العربية:</strong> ${s.locality_description_ar}</p>
+        <p style="color: #94a3b8; font-size: 11px;"><strong>English:</strong> ${s.locality_description_en}</p>
+      </div>
+
+      <div class="modal-info-box" style="margin-bottom: 16px;">
+        <h5>التوثيق والأدبيات المنشورة</h5>
+        <p><strong>المرجع الأولي:</strong> ${s.primary_literature_citation}</p>
+        <p><strong>معرفات النشر:</strong> ${pmidLink} &nbsp;|&nbsp; ${doiLink}</p>
+      </div>
+
+      ${leadsHtml}
+      ${peptidesHtml}
+    `;
+
+    if (modal.showModal) modal.showModal();
+    else modal.style.display = 'block';
+  };
+
+  function handleBiogeographyDeepLink() {
+    const hash = window.location.hash;
+    if (hash && hash.includes('species=')) {
+      const match = hash.match(/species=([^&]+)/);
+      if (match && match[1]) {
+        setTimeout(() => {
+          window.openBiogeographyModal(decodeURIComponent(match[1]));
+        }, 500);
+      }
+    }
+  }
+
 })();

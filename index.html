@@ -8,6 +8,8 @@
  <link rel="icon" type="image/svg+xml" href="favicon.svg">
  <link rel="stylesheet" href="styles.css">
  <link rel="stylesheet" href="scorpion-viewer/atlas-integration.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 <body>
 <a class="skip" href="#atlas">انتقل إلى جدول البيانات مباشرة</a>
@@ -26,6 +28,7 @@
    <a href="#target-explorer">مستكشف الأهداف</a>
    <a href="#gap-analyzer">محلل الفجوات</a>
    <a href="#prioritization">فرز المرشحين</a>
+    <a href="#biogeography-explorer" id="nav-biogeography">الجغرافيا الحيوية (MOD-08)</a>
    <a href="#xai">تفسير الذكاء الاصطناعي</a>
    <a href="#methods-evidence">الأدلة الـ32</a>
    <a href="#approach">المنهجية</a>
@@ -1281,7 +1284,230 @@
     </dialog>
   </section>
 
-   <!-- SECTION 05: MOD-10 EXPLAINABLE AI & BIOPHYSICAL DRIVERS -->
+   
+<!-- SECTION 04B: MOD-08 EVIDENCE-GROUNDED GEOGRAPHY & BIOGEOGRAPHY EXPLORER -->
+<section class="biogeography-explorer section-space" id="biogeography-explorer" aria-labelledby="biogeography-title">
+  <div class="section-heading reveal">
+    <div>
+      <p class="eyebrow"><span class="section-index">04B /</span> الجغرافيا الحيوية للأدلة التجريبية</p>
+      <h2 id="biogeography-title">مستكشف الجغرافيا الحيوية والتوزيع الجغرافي المعياري.<br><span>Evidence-Grounded Biogeography & Taxonomy Explorer (MOD-08)</span></h2>
+    </div>
+    <div class="biogeography-badges">
+      <span class="biogeo-badge badge-mod">MOD-08</span>
+      <span class="biogeo-badge badge-taxa">147 نوعاً موثقاً</span>
+      <span class="biogeo-badge badge-classes">5 فئات للأدلة</span>
+      <span class="biogeo-badge badge-points">90 موقعاً جغرافياً</span>
+      <span class="biogeo-badge badge-leads">10 أنواع أصلية للمرشحات</span>
+    </div>
+  </div>
+
+  <!-- Scientific Epistemic Governance & Integrity Warning -->
+  <div class="biogeo-governance-banner reveal">
+    <div class="gov-icon">🧭</div>
+    <div class="gov-content">
+      <strong>الحوكمة المعرفية والنزاهة الجغرافية (Scientific Epistemic Governance):</strong>
+      <ul>
+        <li><strong>حظر اشتقاق السببية والفاعلية من الجغرافيا:</strong> لا يجوز علمياً استنتاج تركيبة السم، أو وفرة الببتيدات، أو الفعالية المضادة للميكروبات، أو التأثير السريري بمجرد الموقع الجغرافي أو النطاق البيئي.</li>
+        <li><strong>غياب السجل لا يعني غياب النوع (Absence of Evidence != Evidence of Absence):</strong> تفاوت كثافة التسجيلات يعكس جهود الجمع والبعثات الميدانية التاريخية ولا يثبت بالضرورة عدم وجود النوع في النطاقات المجاورة.</li>
+        <li><strong>النزاهة الصارمة للإحداثيات:</strong> لا يتم توليد أو افتراض أي إحداثيات نقطية دقيقة لأسماء الدول أو المناطق الواسعة؛ تُمنح الإحداثيات النقطية فقط لعينات المتاحف الموثقة بإحداثيات GPS ميدانية حقيقية.</li>
+        <li><strong>عزل المشتقات المصنعة هندسياً:</strong> الببتيدات المطورة مختبرياً (مثل StigA31 و Kn2-7) لا تملك أي وجود في الطبيعة (has_wild_occurrence: false) وترتبط فقط بنوعها الأصلي دون توليد نقاط انتشار برية مستقلة.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Summary Metric Cards -->
+  <div class="biogeo-metrics-grid reveal">
+    <div class="biogeo-metric-card">
+      <span class="metric-num" id="metric-total-taxa">147</span>
+      <span class="metric-label">إجمالي الأنواع في السجل التصنيفي</span>
+      <span class="metric-sub">Canonical Taxonomy Registry</span>
+    </div>
+    <div class="biogeo-metric-card highlight-exact">
+      <span class="metric-num" id="metric-exact-specimens">48</span>
+      <span class="metric-label">عينات موثقة بإحداثيات GPS دقيقة</span>
+      <span class="metric-sub">Georeferenced Specimens (Class 1)</span>
+    </div>
+    <div class="biogeo-metric-card highlight-regional">
+      <span class="metric-num" id="metric-regional-occurrences">42</span>
+      <span class="metric-label">تسجيلات إقليمية مشتقة</span>
+      <span class="metric-sub">Regional Occurrences (Class 2, 50-100km)</span>
+    </div>
+    <div class="biogeo-metric-card highlight-null">
+      <span class="metric-num" id="metric-null-coordinates">57</span>
+      <span class="metric-label">نطاقات عامة ومتنازع عليها وأسر</span>
+      <span class="metric-sub">Broad (38) + Disputed (11) + Captive (8)</span>
+    </div>
+    <div class="biogeo-metric-card highlight-leads">
+      <span class="metric-num" id="metric-lead-species">10</span>
+      <span class="metric-label">أنواع أصلية تنتج مرشحات MOD-07</span>
+      <span class="metric-sub">Parent Species of 20 Prioritized Leads</span>
+    </div>
+  </div>
+
+  <!-- Controls, Search, and Multi-facet Filters -->
+  <div class="biogeo-controls reveal">
+    <div class="biogeo-search-row">
+      <div class="search-input-wrapper">
+        <input type="text" id="biogeo-search-input" placeholder="بحث بالاسم العلمي، الاسم الشائع، العائلة، الدولة، أو النطاق البيئي..." aria-label="بحث الأنواع">
+        <span class="search-icon">🔍</span>
+      </div>
+      <div class="biogeo-view-toggles">
+        <button class="view-btn active" id="btn-view-map" aria-pressed="true">🗺️ عرض الخريطة التفاعلية</button>
+        <button class="view-btn" id="btn-view-table" aria-pressed="false">📋 عرض جدول السجل التصنيفي</button>
+      </div>
+    </div>
+
+    <div class="biogeo-filters-row">
+      <!-- Realm Filter -->
+      <div class="filter-group">
+        <label for="filter-realm">النطاق الجغرافي الحيوي (Realm):</label>
+        <select id="filter-realm">
+          <option value="all">جميع النطاقات (All Realms)</option>
+          <option value="Palearctic">القطب الشمالي القديم (Palearctic)</option>
+          <option value="Nearctic">القطب الشمالي الجديد (Nearctic)</option>
+          <option value="Neotropical">الاستوائي الجديد (Neotropical)</option>
+          <option value="Afrotropical">الاستوائي الإفريقي (Afrotropical)</option>
+          <option value="Indomalayan">الماليزي الهندي (Indomalayan)</option>
+          <option value="Australasian">الأستراليزي (Australasian)</option>
+        </select>
+      </div>
+
+      <!-- Evidence Class Filter -->
+      <div class="filter-group">
+        <label for="filter-evidence-class">فئة الدليل الجغرافي (Evidence Class):</label>
+        <select id="filter-evidence-class">
+          <option value="all">جميع الفئات (All 5 Classes)</option>
+          <option value="georeferenced_specimen">عينات بإحداثيات GPS دقيقة (48)</option>
+          <option value="published_regional_occurrence">تسجيلات إقليمية مشتقة (42)</option>
+          <option value="broad_reported_distribution">نطاقات جغرافية عامة (38)</option>
+          <option value="disputed_record">تسجيلات متنازع عليها (11)</option>
+          <option value="unavailable_geographic_data">بيانات غير متوفرة / عينات أسر (8)</option>
+        </select>
+      </div>
+
+      <!-- Family Filter -->
+      <div class="filter-group">
+        <label for="filter-family">العائلة التصنيفية (Family):</label>
+        <select id="filter-family">
+          <option value="all">جميع العائلات (All Families)</option>
+          <option value="Buthidae">Buthidae (عائلة البوثيدي)</option>
+          <option value="Scorpionidae">Scorpionidae (عقارب الغابات الكبرى)</option>
+          <option value="Hormuridae">Hormuridae (عقارب الصخور المفلطحة)</option>
+          <option value="Chactidae">Chactidae (الشاكتيدي)</option>
+          <option value="Vaejovidae">Vaejovidae (الفايجوفيدي)</option>
+          <option value="Caraboctonidae">Caraboctonidae (العقارب المشعرة)</option>
+          <option value="Euscorpiidae">Euscorpiidae (العقارب الأوروبية الصغيرة)</option>
+          <option value="Bothriuridae">Bothriuridae (البوثيريوريدي)</option>
+          <option value="Chaerilidae">Chaerilidae (الشايريليدي)</option>
+          <option value="Diplocentridae">Diplocentridae (عقارب الكهوف)</option>
+          <option value="Iuridae">Iuridae (الإيوريدي)</option>
+          <option value="Superstitioniidae">Superstitioniidae (سوبرستيشيونيدي)</option>
+        </select>
+      </div>
+
+      <!-- Leads Only Checkbox -->
+      <div class="filter-checkbox-group">
+        <label class="checkbox-container">
+          <input type="checkbox" id="filter-leads-only">
+          <span class="checkbox-checkmark"></span>
+          <span class="checkbox-label">أنواع تنتج مرشحات MOD-07 فقط</span>
+        </label>
+      </div>
+
+      <!-- Export Actions -->
+      <div class="biogeo-export-group">
+        <span class="export-label">تصدير البيانات الموثقة:</span>
+        <button class="btn-export" id="btn-export-geojson" title="تصدير طبقة المواقع الجغرافية">GeoJSON</button>
+        <button class="btn-export" id="btn-export-csv" title="تصدير جدول السجل التصنيفي كاملاً">CSV</button>
+        <button class="btn-export" id="btn-export-json" title="تصدير السجل الكامل بصيغة JSON">JSON</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Map Viewport -->
+  <div class="biogeo-map-container reveal" id="biogeo-map-view">
+    <div class="map-wrapper">
+      <div id="biogeo-leaflet-map" class="map-viewport" role="region" aria-label="خريطة توزيع العقارب الجغرافية"></div>
+      <div id="biogeo-vector-fallback" class="vector-map-fallback" style="display:none;" aria-label="خريطة العالم المتجهية التفاعلية"></div>
+      
+      <!-- Floating Map Legend -->
+      <div class="biogeo-map-legend">
+        <h4>دليل الدقة الجغرافية (Geographic Precision Legend)</h4>
+        <div class="legend-item">
+          <span class="legend-marker marker-exact"></span>
+          <div>
+            <strong>عينات موثقة بإحداثيات GPS دقيقة (Exact Point)</strong>
+            <span>إحداثيات حقيقية لعينات متاحف منشورة (ارتياب &le; 2.5 كم)</span>
+          </div>
+        </div>
+        <div class="legend-item">
+          <span class="legend-marker marker-regional"></span>
+          <div>
+            <strong>تسجيلات إقليمية مشتقة (Regional Centroid)</strong>
+            <span>مركز إقليمي لمقاطعة أو حوض جغرافي (ارتياب 50-100 كم)</span>
+          </div>
+        </div>
+        <div class="legend-item">
+          <span class="legend-marker marker-leads"></span>
+          <div>
+            <strong>أنواع أصلية لمرشحات MOD-07 (Lead Producer)</strong>
+            <span>تنتج ببتيدات ذات أولوية قيادية في أطلس المضادات</span>
+          </div>
+        </div>
+        <div class="legend-notice">
+          ℹ️ الأنواع الـ 57 ذات النطاق العام (38) أو المتنازع عليها (11) أو الأسر (8) مدرجة في جدول السجل بإحداثيات فارغة منعاً للتزييف الجغرافي.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Viewport (Tabular Registry View) -->
+  <div class="biogeo-table-container reveal" id="biogeo-table-view" style="display:none;">
+    <div class="table-responsive">
+      <table class="biogeo-table" id="biogeo-species-table">
+        <thead>
+          <tr>
+            <th>المعرف (ID)</th>
+            <th>الاسم العلمي (Taxon & Authority)</th>
+            <th>الاسم الشائع (Common Name)</th>
+            <th>العائلة (Family)</th>
+            <th>النطاق (Realm)</th>
+            <th>فئة الدليل (Evidence Class)</th>
+            <th>الدقة (Precision)</th>
+            <th>الببتيدات (Peptides)</th>
+            <th>مرشحات MOD-07</th>
+            <th>الإجراء (Action)</th>
+          </tr>
+        </thead>
+        <tbody id="biogeo-table-body">
+          <!-- Dynamic rendering by app.js -->
+        </tbody>
+      </table>
+    </div>
+    <div class="table-pagination" id="biogeo-table-pagination"></div>
+  </div>
+
+  <!-- Species Detail Modal Dialog -->
+  <dialog id="biogeo-detail-modal" class="biogeo-modal" aria-labelledby="modal-species-title">
+    <div class="modal-content">
+      <header class="modal-header">
+        <div>
+          <span class="modal-id-badge" id="modal-species-id">SCA-SP-001</span>
+          <h3 id="modal-species-title">Tityus stigmurus <small>(Thorell, 1876)</small></h3>
+          <p class="modal-common-name" id="modal-common-name">العقرب الأصفر لشمال شرق البرازيل / Northeastern Brazilian Yellow Scorpion</p>
+        </div>
+        <button class="modal-close" id="btn-close-modal" aria-label="إغلاق النافذة">&times;</button>
+      </header>
+
+      <div class="modal-body" id="modal-species-body">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </dialog>
+</section>
+
+
+<!-- SECTION 05: MOD-10 EXPLAINABLE AI & BIOPHYSICAL DRIVERS -->
   <section class="xai-explorer section-space" id="xai" aria-labelledby="xai-title">
     <div class="section-heading reveal">
       <div>

@@ -1,0 +1,3738 @@
+{
+  "type": "FeatureCollection",
+  "name": "ScorpionAI_Species_Occurrences_MOD08",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -35.9711,
+          -8.1458
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-001",
+        "scientific_name": "Tityus stigmurus",
+        "accepted_canonical_name": "Tityus stigmurus",
+        "common_name_en": "Northeastern Brazilian Yellow Scorpion",
+        "common_name_ar": "العقرب الأصفر لشمال شرق البرازيل",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Caatinga dry shrubland & Atlantic forest margin, Northeast Brazil",
+        "native_countries": [
+          "BRA"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1500,
+        "locality_description_en": "Brejo da Madre de Deus highland enclave, Pernambuco, Brazil",
+        "locality_description_ar": "مرتفعات بريجو دا مادري دي ديوس، بيرنامبوكو، البرازيل",
+        "elevation_meters": 640,
+        "voucher_or_collector": "MNRJ-18294 / Lourenço & Eickstedt series; UFPE-SC-2011",
+        "primary_literature_citation": "Batista et al., Toxicon 2007; 50(5):672-680; Lourenço WR 2002",
+        "provenance_pmid": "17617438",
+        "provenance_doi": "10.1016/j.toxicon.2007.06.004",
+        "is_disputed": false,
+        "total_peptides_count": 21,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 5,
+        "has_antimicrobial_leads": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.05,
+          34.3833
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-002",
+        "scientific_name": "Androctonus aeneas",
+        "accepted_canonical_name": "Androctonus aeneas",
+        "common_name_en": "Black Fat-tailed Scorpion",
+        "common_name_ar": "عقرب جنوب المتوسط أسود الذيل",
+        "family": "Buthidae",
+        "genus": "Androctonus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Saharan pre-desert steppe & Chott el Djerid margins, North Africa",
+        "native_countries": [
+          "DZA",
+          "TUN",
+          "LBY"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2000,
+        "locality_description_en": "Gafsa basin pre-Saharan oasis margins, Gafsa Governorate, Tunisia",
+        "locality_description_ar": "حوض قفصة، أطراف الواحات قبل الصحراوية، ولاية قفصة، تونس",
+        "elevation_meters": 315,
+        "voucher_or_collector": "MNHN-RS-4182 / Vachon North African survey; Lourenço & Ythier voucher",
+        "primary_literature_citation": "Lourenço WR, Bull Mus Natl Hist Nat 2005; 27(1):145-161; Vachon M 1952",
+        "provenance_pmid": "16120562",
+        "provenance_doi": "10.1016/j.toxicon.2005.06.012",
+        "is_disputed": false,
+        "total_peptides_count": 4,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 4,
+        "has_antimicrobial_leads": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.41,
+          33.985
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-003",
+        "scientific_name": "Androctonus crassicauda",
+        "accepted_canonical_name": "Androctonus crassicauda",
+        "common_name_en": "Arabian Fat-tailed Scorpion",
+        "common_name_ar": "العقرب العربي سميك الذيل",
+        "family": "Buthidae",
+        "genus": "Androctonus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Middle Eastern arid desert scrub & Mesopotamian alluvial plain",
+        "native_countries": [
+          "SAU",
+          "IRQ",
+          "IRN",
+          "TUR",
+          "JOR",
+          "SYR",
+          "KWT",
+          "ARE"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1800,
+        "locality_description_en": "Kashan desert fringe, Isfahan Province, Central Iranian Plateau, Iran",
+        "locality_description_ar": "أطراف صحراء كاشان، محافظة أصفهان، الهضبة الإيرانية الوسطى، إيران",
+        "elevation_meters": 950,
+        "voucher_or_collector": "FKCP-Ar-2008 / Kovařík field expedition; Razi Institute specimen AC-04",
+        "primary_literature_citation": "Kovařík F, Euscorpius 2009; 88:1-12; Caliskan F et al., Toxicon 2006; 48(6):673-680",
+        "provenance_pmid": "16950450",
+        "provenance_doi": "10.1016/j.toxicon.2006.07.026",
+        "is_disputed": false,
+        "total_peptides_count": 25,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 2,
+        "has_antimicrobial_leads": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.1833,
+          39.9833
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-004",
+        "scientific_name": "Olivierus martensii",
+        "accepted_canonical_name": "Olivierus martensii",
+        "common_name_en": "Manchurian / Chinese Golden Scorpion",
+        "common_name_ar": "عقرب منشوريا الذهبي الصيني",
+        "family": "Buthidae",
+        "genus": "Olivierus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "North China Plain temperate broadleaf forest & Loess Plateau shrubland",
+        "native_countries": [
+          "CHN",
+          "MNG",
+          "PRK",
+          "KOR"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1200,
+        "locality_description_en": "Western Hills (Fragrant Hills/Xiangshan), Haidian, Beijing, China",
+        "locality_description_ar": "التلال الغربية (شيانغشان)، هايديان، بكين، الصين",
+        "elevation_meters": 280,
+        "voucher_or_collector": "ZMB-Ar-3129 / Karsch type series; Kovařík 2019 neotype designation",
+        "primary_literature_citation": "Kovařík et al., Euscorpius 2019; 300:1-32; Wang CG et al., Toxicon 2001; 39(12):1895-1901",
+        "provenance_pmid": "11595638",
+        "provenance_doi": "10.1016/s0041-0101(01)00174-8",
+        "is_disputed": false,
+        "total_peptides_count": 115,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 2,
+        "has_antimicrobial_leads": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          49.1833,
+          -12.5167
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-005",
+        "scientific_name": "Opisthacanthus madagascariensis",
+        "accepted_canonical_name": "Opisthacanthus madagascariensis",
+        "common_name_en": "Madagascar Tree-bark Rock Scorpion",
+        "common_name_ar": "عقرب لحاء الأشجار والصخور المدغشقري",
+        "family": "Hormuridae",
+        "genus": "Opisthacanthus",
+        "biogeographic_realm": "Afrotropical",
+        "primary_eco_region": "Madagascar subhumid forests & Montagne d'Ambre volcanic massifs",
+        "native_countries": [
+          "MDG"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2000,
+        "locality_description_en": "Montagne d'Ambre National Park, Antsiranana Province, Northern Madagascar",
+        "locality_description_ar": "حديقة جبل دومبر الوطنية، مقاطعة أنتسيرانانا، شمال مدغشقر",
+        "elevation_meters": 850,
+        "voucher_or_collector": "MNHN-RS-8512 / Lourenço expedition; Lourenço & Goodman voucher 2006",
+        "primary_literature_citation": "Lourenço WR & Goodman SM, Fieldiana Zool 2006; 109:1-12; Tytgat et al., FEBS Lett 2000; 475(2):145-149",
+        "provenance_pmid": "10858504",
+        "provenance_doi": "10.1016/s0014-5793(00)01648-5",
+        "is_disputed": false,
+        "total_peptides_count": 5,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 1,
+        "has_antimicrobial_leads": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.4333,
+          11.4333
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-006",
+        "scientific_name": "Heterometrus petersii",
+        "accepted_canonical_name": "Heterometrus petersii",
+        "common_name_en": "Asian Giant Forest Scorpion",
+        "common_name_ar": "عقرب الغابات الآسيوي العملاق",
+        "family": "Scorpionidae",
+        "genus": "Heterometrus",
+        "biogeographic_realm": "Indomalayan",
+        "primary_eco_region": "Southeastern Indochina dry evergreen & rainforest lowlands",
+        "native_countries": [
+          "VNM",
+          "KHM",
+          "LAO",
+          "THA"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2500,
+        "locality_description_en": "Cat Tien National Park lowland rainforest, Dong Nai Province, Vietnam",
+        "locality_description_ar": "حديقة كات تين الوطنية، الغابات المطيرة المنخفضة، مقاطعة دونغ ناي، فيتنام",
+        "elevation_meters": 130,
+        "voucher_or_collector": "IEBR-SC-2003 / Pham & Prendini collection; Couraud specimen series",
+        "primary_literature_citation": "Kovařík F, Euscorpius 2004; 15:1-60; Zeng XC et al., J Biol Chem 2013; 288(2):1005-1014",
+        "provenance_pmid": "23161543",
+        "provenance_doi": "10.1074/jbc.m112.428789",
+        "is_disputed": false,
+        "total_peptides_count": 15,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 1,
+        "has_antimicrobial_leads": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.1333,
+          -26.5833
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-007",
+        "scientific_name": "Parabuthus schlechteri",
+        "accepted_canonical_name": "Parabuthus schlechteri",
+        "common_name_en": "Kalahari Burrowing Thick-tailed Scorpion",
+        "common_name_ar": "عقرب كالاهاري الحفار ثخين الذيل",
+        "family": "Buthidae",
+        "genus": "Parabuthus",
+        "biogeographic_realm": "Afrotropical",
+        "primary_eco_region": "Kalahari xeric savanna & Nama Karoo red sand plains",
+        "native_countries": [
+          "NAM",
+          "ZAF",
+          "BWA"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 3000,
+        "locality_description_en": "Keetmanshoop arid dwarf shrubland savanna, Karas Region, Namibia",
+        "locality_description_ar": "سافانا الشجيرات القزمة في كيتمنشوب، إقليم كاراس، ناميبيا",
+        "elevation_meters": 1000,
+        "voucher_or_collector": "SAM-ENW-B001928 / Purcell syntype series; Prendini Namib-Karoo survey",
+        "primary_literature_citation": "Prendini L, J Arachnol 2004; 32(1):109-186; Verdonck et al., Eur J Biochem 2000; 267(21):6384-6394",
+        "provenance_pmid": "11029581",
+        "provenance_doi": "10.1046/j.1432-1327.2000.01726.x",
+        "is_disputed": false,
+        "total_peptides_count": 2,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 1,
+        "has_antimicrobial_leads": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.35,
+          5.85
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-008",
+        "scientific_name": "Pandinus imperator",
+        "accepted_canonical_name": "Pandinus imperator",
+        "common_name_en": "Emperor Scorpion",
+        "common_name_ar": "العقرب الإمبراطوري الإفريقي",
+        "family": "Scorpionidae",
+        "genus": "Pandinus",
+        "biogeographic_realm": "Afrotropical",
+        "primary_eco_region": "Upper Guinean lowland rainforest & moist semi-deciduous forest",
+        "native_countries": [
+          "CIV",
+          "GHA",
+          "GIN",
+          "LBR",
+          "NGA",
+          "TGO"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2200,
+        "locality_description_en": "Taï National Park moist evergreen forest, Cavally Region, Côte d'Ivoire",
+        "locality_description_ar": "حديقة تاي الوطنية للغابات الدائمة الخضرة، إقليم كافالي، كوت ديفوار",
+        "elevation_meters": 160,
+        "voucher_or_collector": "MNHN-RS-6102 / Vachon collection; Lourenço Taï forest voucher",
+        "primary_literature_citation": "Lourenço WR & Cloudsley-Thompson JL, Biogeographica 1999; 75(3):133-147; Gomez-Lagunas F et al., Biochem J 1996; 316(Pt 3):863-867",
+        "provenance_pmid": "8670162",
+        "provenance_doi": "10.1042/bj3160863",
+        "is_disputed": false,
+        "total_peptides_count": 18,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 1,
+        "has_antimicrobial_leads": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.45,
+          18.25
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-009",
+        "scientific_name": "Hoffmannihadrurus aztecus",
+        "accepted_canonical_name": "Hoffmannihadrurus aztecus",
+        "common_name_en": "Aztec Giant Hairy Scorpion",
+        "common_name_ar": "العقرب المشعر الأزتيكي العملاق",
+        "family": "Caraboctonidae",
+        "genus": "Hoffmannihadrurus",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Tehuacán-Cuicatlán dry scrub & arid columnar cactus valley, Central Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1500,
+        "locality_description_en": "Zapotitlán Salinas arid cactus reserve, Tehuacán Valley, Puebla, Mexico",
+        "locality_description_ar": "محمية سابوتيتلان ساليناس للصباريات القاحلة، وادي تيهواكان، بويبلا، المكسيك",
+        "elevation_meters": 1550,
+        "voucher_or_collector": "IBUNAM-SC-1998 / Beutelspacher & Francke series; Lourenço voucher 2004",
+        "primary_literature_citation": "Fet V, Soleglad ME, Euscorpius 2004; 17:17-24; Torres-Larios A et al., Eur J Biochem 2000; 267(16):5023-5031",
+        "provenance_pmid": "10931184",
+        "provenance_doi": "10.1046/j.1432-1327.2000.01556.x",
+        "is_disputed": false,
+        "total_peptides_count": 1,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 1,
+        "has_antimicrobial_leads": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.5039,
+          -1.4558
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-010",
+        "scientific_name": "Tityus obscurus",
+        "accepted_canonical_name": "Tityus obscurus",
+        "common_name_en": "Amazonian Black Scorpion",
+        "common_name_ar": "عقرب الأمازون الأسود",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Utinga terra-firme & várzea humid rainforest, Guianan Amazon, Brazil",
+        "native_countries": [
+          "BRA",
+          "GUF",
+          "SUR",
+          "GUY"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1200,
+        "locality_description_en": "Parque Estadual do Utinga primary rainforest, Belém, Pará, Brazil",
+        "locality_description_ar": "منتزه أوتينغا الحكومي للغابات المدارية الأولية، بيليم، بارا، البرازيل",
+        "elevation_meters": 15,
+        "voucher_or_collector": "MPEG-ARA-00812 / Museu Paraense Emílio Goeldi series; Lourenço 2008 neotype",
+        "primary_literature_citation": "Lourenço WR & Leguin EA, Euscorpius 2008; 73:1-8; Batista CV et al., Toxicon 2004; 44(5):543-550",
+        "provenance_pmid": "15450930",
+        "provenance_doi": "10.1016/j.toxicon.2004.07.011",
+        "is_disputed": false,
+        "total_peptides_count": 62,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 2,
+        "has_antimicrobial_leads": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.7333,
+          34.85
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-011",
+        "scientific_name": "Androctonus australis",
+        "accepted_canonical_name": "Androctonus australis",
+        "common_name_en": "Sahara Yellow Fat-tailed Scorpion",
+        "common_name_ar": "عقرب الصحراء الكبرى الأصفر سميك الذيل",
+        "family": "Buthidae",
+        "genus": "Androctonus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Northern Saharan desert dunes & erg margins, North Africa",
+        "native_countries": [
+          "DZA",
+          "TUN",
+          "LBY",
+          "EGY"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1800,
+        "locality_description_en": "Biskra arid palm oasis & pre-Saharan rocky reg, Biskra Province, Algeria",
+        "locality_description_ar": "واحة بسكرة الصخرية قبل الصحراوية، ولاية بسكرة، الجزائر",
+        "elevation_meters": 120,
+        "voucher_or_collector": "MNHN-RS-0012 / Vachon North African survey voucher; Rochat series",
+        "primary_literature_citation": "Vachon M, Arch Inst Pasteur Algerie 1952; 30:1-482; Rochat H et al., Eur J Biochem 1979; 95(1):111-119",
+        "provenance_pmid": "436940",
+        "provenance_doi": "10.1111/j.1432-1033.1979.tb12945.x",
+        "is_disputed": false,
+        "total_peptides_count": 33,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.45,
+          31.8667
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-012",
+        "scientific_name": "Leiurus hebraeus",
+        "accepted_canonical_name": "Leiurus hebraeus",
+        "common_name_en": "Hebrew Deathstalker Scorpion",
+        "common_name_ar": "عقرب الموت العبري الأصفر (مطارد الموت)",
+        "family": "Buthidae",
+        "genus": "Leiurus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Judean Desert arid limestone wadis & Dead Sea rift valley",
+        "native_countries": [
+          "ISR",
+          "PSE",
+          "JOR"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1000,
+        "locality_description_en": "Wadi Qelt limestone gorge & desert cliffs, Jericho / Judean Desert",
+        "locality_description_ar": "خانق وادي القلط الجيري وجروف صحراء يهودا، أريحا",
+        "elevation_meters": -150,
+        "voucher_or_collector": "HUJ-INV-SC-1974 / Levy & Amitai series; Lowe et al. 2014 voucher",
+        "primary_literature_citation": "Lowe G et al., Euscorpius 2014; 191:1-129; Zlotkin E et al., Toxicon 1971; 9(1):1-8",
+        "provenance_pmid": "5552345",
+        "provenance_doi": "10.1016/0041-0101(71)90040-7",
+        "is_disputed": false,
+        "total_peptides_count": 38,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.4167,
+          19.6167
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-013",
+        "scientific_name": "Leiurus quinquestriatus quinquestriatus",
+        "accepted_canonical_name": "Leiurus quinquestriatus",
+        "common_name_en": "Egyptian / Nubian Deathstalker Scorpion",
+        "common_name_ar": "عقرب الموت النوبي / المصري (خماسي الخطوط)",
+        "family": "Buthidae",
+        "genus": "Leiurus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Nubian desert granite outcrops & Nile cataract gravel plains, Sudan",
+        "native_countries": [
+          "SDN",
+          "EGY"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2000,
+        "locality_description_en": "Third Cataract granite hills, Dongola Reach, Northern State, Sudan",
+        "locality_description_ar": "تلال الجندل الثالث الجرانيتية، دنقلا، الولاية الشمالية، السودان",
+        "elevation_meters": 240,
+        "voucher_or_collector": "ZMB-Ar-142 / Ehrenberg type series; Lowe et al. 2014 voucher",
+        "primary_literature_citation": "Lowe G et al., Euscorpius 2014; 191:1-129; Lourenço WR, Bull Mus Natl Hist Nat 2007",
+        "provenance_pmid": "24982613",
+        "provenance_doi": "10.18590/euscorpius.2014.vol2014.iss191.1",
+        "is_disputed": false,
+        "total_peptides_count": 7,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.2206,
+          13.0067
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-014",
+        "scientific_name": "Hottentotta tamulus",
+        "accepted_canonical_name": "Hottentotta tamulus",
+        "common_name_en": "Indian Red Scorpion",
+        "common_name_ar": "العقرب الأحمر الهندي",
+        "family": "Buthidae",
+        "genus": "Hottentotta",
+        "biogeographic_realm": "Indomalayan",
+        "primary_eco_region": "Deccan thorn scrub forest & Coromandel plains, Southern India",
+        "native_countries": [
+          "IND",
+          "PAK",
+          "NPL"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1500,
+        "locality_description_en": "Guindy dry evergreen scrub forest, Chennai, Tamil Nadu, India",
+        "locality_description_ar": "غابات غيندي الشجيرية الجافة دائمة الخضرة، تشيناي، تاميل نادو، الهند",
+        "elevation_meters": 25,
+        "voucher_or_collector": "ZSI-Calcutta-2104 / Tikader collection; Kovařík 2007 series",
+        "primary_literature_citation": "Kovařík F, Euscorpius 2007; 58:1-107; Bawaskar HS & Bawaskar PH, Lancet 1991; 338(8766):581-582",
+        "provenance_pmid": "1678833",
+        "provenance_doi": "10.1016/0140-6736(91)91136-l",
+        "is_disputed": false,
+        "total_peptides_count": 23,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.9167,
+          -19.95
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-015",
+        "scientific_name": "Tityus serrulatus",
+        "accepted_canonical_name": "Tityus serrulatus",
+        "common_name_en": "Brazilian Yellow Scorpion",
+        "common_name_ar": "العقرب الأصفر البرازيلي المسنن",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Cerrado savanna & Atlantic forest transition, Minas Gerais, Brazil",
+        "native_countries": [
+          "BRA"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1000,
+        "locality_description_en": "Serra do Curral quartzite ridges, Belo Horizonte, Minas Gerais, Brazil",
+        "locality_description_ar": "سلسلة جبال سيرا دو كورال الكوارتزية، بيلو هوريزونتي، ميناس جيرايس، البرازيل",
+        "elevation_meters": 1100,
+        "voucher_or_collector": "IOC-Ar-1922 / Lutz & Mello syntype; Ezequiel Dias Foundation voucher",
+        "primary_literature_citation": "Lutz A & Mello O, Folha Med 1922; 3:25-26; Pimenta AM et al., Toxicon 2001; 39(7):1001-1009",
+        "provenance_pmid": "11223089",
+        "provenance_doi": "10.1016/s0041-0101(00)00240-1",
+        "is_disputed": false,
+        "total_peptides_count": 69,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.5397,
+          18.3447
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-016",
+        "scientific_name": "Centruroides limpidus",
+        "accepted_canonical_name": "Centruroides limpidus",
+        "common_name_en": "Clear Bark Scorpion",
+        "common_name_ar": "عقرب اللحاء المكسيكي الشفاف",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Balsas dry deciduous forest & dry limestone canyon basin, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1400,
+        "locality_description_en": "Iguala limestone dry deciduous hills, Guerrero, Mexico",
+        "locality_description_ar": "تلال إيغوالا الجيرية الجافة، غيريرو، المكسيك",
+        "elevation_meters": 730,
+        "voucher_or_collector": "IBUNAM-SC-2005 / Francke & Ponce series; UNAM toxinology voucher",
+        "primary_literature_citation": "Ponce-Saavedra J & Francke OF, Acta Zool Mex 2004; 20(2):39-79; Ramirez-Carreto et al., Toxins 2020",
+        "provenance_pmid": "32630132",
+        "provenance_doi": "10.3390/toxins12070438",
+        "is_disputed": false,
+        "total_peptides_count": 21,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.8942,
+          21.5089
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-017",
+        "scientific_name": "Centruroides noxius",
+        "accepted_canonical_name": "Centruroides noxius",
+        "common_name_en": "Nayarit Bark Scorpion",
+        "common_name_ar": "عقرب ناياريت السام شديد السمية",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Sinaloan dry forest & Nayarit volcanic coastal foothills, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1200,
+        "locality_description_en": "Tepic volcanic foothills, Cerro de San Juan, Nayarit, Mexico",
+        "locality_description_ar": "سفوح تيبيك البركانية، سيرو دي سان خوان، ناياريت، المكسيك",
+        "elevation_meters": 920,
+        "voucher_or_collector": "IBUNAM-SC-1932 / Hoffmann type series; Possani laboratory voucher",
+        "primary_literature_citation": "Hoffmann CC, An Inst Biol Univ Nac Auton Mex 1932; 3:243-361; Possani LD et al., Eur J Biochem 1985; 152(1):123-131",
+        "provenance_pmid": "2412852",
+        "provenance_doi": "10.1111/j.1432-1033.1985.tb09172.x",
+        "is_disputed": false,
+        "total_peptides_count": 22,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.4364,
+          22.1456
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-018",
+        "scientific_name": "Rhopalurus junceus",
+        "accepted_canonical_name": "Rhopalurus junceus",
+        "common_name_en": "Cuban Blue / Red Scorpion",
+        "common_name_ar": "العقرب الكوبي الأزرق / الأحمر",
+        "family": "Buthidae",
+        "genus": "Rhopalurus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Cuban moist forests & Mogote limestone karst formations, Cuba",
+        "native_countries": [
+          "CUB"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1500,
+        "locality_description_en": "Cienfuegos karst foothills & dry evergreen forest, Cienfuegos, Cuba",
+        "locality_description_ar": "سفوح سيينفويغوس الكارستية وغاباتها الدائمة الخضرة، كوبا",
+        "elevation_meters": 80,
+        "voucher_or_collector": "MNHNCu-SC-1996 / Armas collection; Teruel 2006 voucher series",
+        "primary_literature_citation": "Armas LF, Poeyana 1974; 136:1-12; Rodríguez-Ravelo R et al., Toxicon 2013; 74:151-163",
+        "provenance_pmid": "23954625",
+        "provenance_doi": "10.1016/j.toxicon.2013.08.053",
+        "is_disputed": false,
+        "total_peptides_count": 24,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.0333,
+          -22.35
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-019",
+        "scientific_name": "Parabuthus transvaalicus",
+        "accepted_canonical_name": "Parabuthus transvaalicus",
+        "common_name_en": "Transvaal Thick-tailed Scorpion",
+        "common_name_ar": "عقرب ترانسفال الباصق ثخين الذيل",
+        "family": "Buthidae",
+        "genus": "Parabuthus",
+        "biogeographic_realm": "Afrotropical",
+        "primary_eco_region": "Limpopo bushveld arid mopane woodland & basalt plains",
+        "native_countries": [
+          "ZAF",
+          "BWA",
+          "ZWE",
+          "MOZ"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2000,
+        "locality_description_en": "Beitbridge Limpopo valley mopane scrub, Musina border, South Africa",
+        "locality_description_ar": "أدغال الموباني بوادي ليمبوبو، بيتبريدج، الحدود الشمالية لجنوب إفريقيا",
+        "elevation_meters": 460,
+        "voucher_or_collector": "SAM-ENW-B001930 / Purcell syntype; Prendini bushveld survey",
+        "primary_literature_citation": "Purcell WF, Ann S Afr Mus 1899; 1:375-432; Inceoglu B et al., Proc Natl Acad Sci USA 2003; 100(3):922-927",
+        "provenance_pmid": "12538865",
+        "provenance_doi": "10.1073/pnas.0237334100",
+        "is_disputed": false,
+        "total_peptides_count": 8,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.8,
+          4.8667
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-020",
+        "scientific_name": "Heterometrus spinifer",
+        "accepted_canonical_name": "Heterometrus spinifer",
+        "common_name_en": "Malaysian Giant Blue Scorpion",
+        "common_name_ar": "العقرب الأزرق الماليزي العملاق",
+        "family": "Scorpionidae",
+        "genus": "Heterometrus",
+        "biogeographic_realm": "Indomalayan",
+        "primary_eco_region": "Peninsular Malaysian rain forests & Bukit Larut montane slopes",
+        "native_countries": [
+          "MYS",
+          "THA"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1800,
+        "locality_description_en": "Maxwell Hill (Bukit Larut) primary rainforest, Taiping, Perak, Malaysia",
+        "locality_description_ar": "الغابات المطرية لتلال ماكسويل (بوكيت لاروت)، تايبينغ، بيراك، ماليزيا",
+        "elevation_meters": 820,
+        "voucher_or_collector": "ZMB-Ar-145 / Ehrenberg type series; Kovařík 2004 voucher",
+        "primary_literature_citation": "Kovařík F, Euscorpius 2004; 15:1-60; Srairi-Abid N et al., Biochimie 2008",
+        "provenance_pmid": "15174441",
+        "provenance_doi": "10.18590/euscorpius.2004.vol2004.iss15.1",
+        "is_disputed": false,
+        "total_peptides_count": 13,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.6331,
+          17.9757
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-021",
+        "scientific_name": "Heterometrus laoticus",
+        "accepted_canonical_name": "Heterometrus laoticus",
+        "common_name_en": "Vietnam / Laos Black Giant Scorpion",
+        "common_name_ar": "عقرب لاوس وفيتنام الأسود الضخم",
+        "family": "Scorpionidae",
+        "genus": "Heterometrus",
+        "biogeographic_realm": "Indomalayan",
+        "primary_eco_region": "Mekong River basin tropical moist deciduous & gallery forest, Laos",
+        "native_countries": [
+          "LAO",
+          "VNM",
+          "THA"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2500,
+        "locality_description_en": "Vientiane Mekong alluvial riverine forest, Vientiane Prefecture, Laos",
+        "locality_description_ar": "غابات حوض ميكونغ الرسوبية، محافظة فيينتيان، لاوس",
+        "elevation_meters": 170,
+        "voucher_or_collector": "RMNH-PST-1830 / Couzijn holotype series; Kovařík 2004 series",
+        "primary_literature_citation": "Couzijn HW, Zool Verh Leiden 1981; 184:1-196; Uawonggul N et al., J Ethnopharmacol 2006; 103(2):201-207",
+        "provenance_pmid": "16198517",
+        "provenance_doi": "10.1016/j.jep.2005.08.003",
+        "is_disputed": false,
+        "total_peptides_count": 4,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.9556,
+          28.5583
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-022",
+        "scientific_name": "Scorpio palmatus",
+        "accepted_canonical_name": "Scorpio palmatus",
+        "common_name_en": "Israeli Golden Large-clawed Scorpion",
+        "common_name_ar": "عقرب فلسطين وسيناء الذهبي عريض الملاقط",
+        "family": "Scorpionidae",
+        "genus": "Scorpio",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Sinai granite mountains & Negev loess desert burrowing scrub",
+        "native_countries": [
+          "EGY",
+          "ISR",
+          "PSE",
+          "JOR"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1500,
+        "locality_description_en": "Saint Catherine granitic mountain plain, South Sinai, Egypt",
+        "locality_description_ar": "سهل ووديان سانت كاترين الجرانيتية، جنوب سيناء، مصر",
+        "elevation_meters": 1650,
+        "voucher_or_collector": "ZMB-Ar-146 / Ehrenberg syntype; Lourenço 2009 voucher",
+        "primary_literature_citation": "Lourenço WR, Euscorpius 2009; 88:1-9; Lazarovici P et al., Toxicon 1982; 20(1):347-353",
+        "provenance_pmid": "7080034",
+        "provenance_doi": "10.1016/0041-0101(82)90240-8",
+        "is_disputed": false,
+        "total_peptides_count": 6,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          141.7,
+          -31.0833
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-023",
+        "scientific_name": "Urodacus yaschenkoi",
+        "accepted_canonical_name": "Urodacus yaschenkoi",
+        "common_name_en": "Inland Robust / Sandhill Scorpion",
+        "common_name_ar": "عقرب الكثبان الرملية الداخلي الأسترالي القوي",
+        "family": "Scorpionidae",
+        "genus": "Urodacus",
+        "biogeographic_realm": "Australasian",
+        "primary_eco_region": "Simpson-Strezlecki Dunefields & arid Mulga scrub, Australia",
+        "native_countries": [
+          "AUS"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2000,
+        "locality_description_en": "Fowlers Gap arid sand dunes, Barrier Range, New South Wales, Australia",
+        "locality_description_ar": "كثبان فاولرز غاب الرملية القاحلة، نيوساوث ويلز، أستراليا",
+        "elevation_meters": 180,
+        "voucher_or_collector": "AM-KS-4120 / Koch Australian survey voucher; ZIN-1903 type",
+        "primary_literature_citation": "Koch LE, Rec West Aust Mus 1977; 5(2):83-367; Luna-Ramirez K et al., Toxicon 2013; 63:110-120",
+        "provenance_pmid": "23261614",
+        "provenance_doi": "10.1016/j.toxicon.2012.11.025",
+        "is_disputed": false,
+        "total_peptides_count": 13,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -61.8,
+          -38.1333
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-024",
+        "scientific_name": "Bothriurus bonariensis",
+        "accepted_canonical_name": "Bothriurus bonariensis",
+        "common_name_en": "Pampas Ground Scorpion",
+        "common_name_ar": "عقرب مراعي البامباس الأرجنتيني",
+        "family": "Bothriuridae",
+        "genus": "Bothriurus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Humid & semi-arid Pampas grasslands, Southern Cone",
+        "native_countries": [
+          "ARG",
+          "URY",
+          "BRA"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1500,
+        "locality_description_en": "Sierra de la Ventana grassland rocky slopes, Buenos Aires, Argentina",
+        "locality_description_ar": "منحدرات سييرا دي لا فينتانا العشبية، بوينس آيرس، الأرجنتين",
+        "elevation_meters": 450,
+        "voucher_or_collector": "MACN-Ar-1988 / Ojanguren-Affilastro collection series; Koch series",
+        "primary_literature_citation": "Ojanguren-Affilastro AA, Rev Mus Argent Cienc Nat 2005; 7(2):75-241; Batista CV et al., Toxicon 2002",
+        "provenance_pmid": "11983244",
+        "provenance_doi": "10.1016/s0041-0101(01)00244-4",
+        "is_disputed": false,
+        "total_peptides_count": 0,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.2833,
+          43.8
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-025",
+        "scientific_name": "Euscorpius italicus",
+        "accepted_canonical_name": "Euscorpius italicus",
+        "common_name_en": "Italian Small Wood Scorpion",
+        "common_name_ar": "عقرب الخشب الإيطالي الصغير",
+        "family": "Euscorpiidae",
+        "genus": "Euscorpius",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Apennine deciduous montane forest & Mediterranean ruins, Italy",
+        "native_countries": [
+          "ITA",
+          "CHE",
+          "SVN",
+          "HRV",
+          "SMR"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1000,
+        "locality_description_en": "Fiesole hills stone terrace walls, Florence, Tuscany, Italy",
+        "locality_description_ar": "تلال فيزولي الجدارية الحجرية، فلورنسا، توسكانا، إيطاليا",
+        "elevation_meters": 300,
+        "voucher_or_collector": "MZUF-Ar-2001 / Museo La Specola series; Gantenbein & Fet voucher",
+        "primary_literature_citation": "Gantenbein B et al., Mol Phylogenet Evol 2000; 16(2):169-183; Tropea G et al., Euscorpius 2015",
+        "provenance_pmid": "10942605",
+        "provenance_doi": "10.1006/mpev.2000.0784",
+        "is_disputed": false,
+        "total_peptides_count": 0,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          48.68,
+          31.32
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-026",
+        "scientific_name": "Hemiscorpius lepturus",
+        "accepted_canonical_name": "Hemiscorpius lepturus",
+        "common_name_en": "Iranian Cytotoxic Whip-tailed Scorpion (Gadrat)",
+        "common_name_ar": "عقرب الأهواز السوطي الخلوي القاتل (غادراج)",
+        "family": "Hemiscorpiidae",
+        "genus": "Hemiscorpius",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Zagros foothill semi-desert & Khuzestan lowlands, Southwestern Iran",
+        "native_countries": [
+          "IRN",
+          "IRQ"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1500,
+        "locality_description_en": "Ahvaz Karun river alluvial margin, Khuzestan Province, Southwestern Iran",
+        "locality_description_ar": "حوض نهر كارون الرسوبي، الأهواز، محافظة خوزستان، إيران",
+        "elevation_meters": 20,
+        "voucher_or_collector": "ZMB-Ar-148 / Peters holotype; Razi Vaccine Institute voucher HL-01",
+        "primary_literature_citation": "Radmanesh M, J Am Acad Dermatol 1998; 39(2 Pt 2):337-343; Dehghani R et al., Toxicon 2017; 131:45-50",
+        "provenance_pmid": "9704098",
+        "provenance_doi": "10.1016/s0190-9622(98)70383-7",
+        "is_disputed": false,
+        "total_peptides_count": 8,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.0217,
+          -3.119
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-027",
+        "scientific_name": "Brotheas amazonicus",
+        "accepted_canonical_name": "Brotheas amazonicus",
+        "common_name_en": "Central Amazonian Litter Scorpion",
+        "common_name_ar": "عقرب الفرش الورقي لوسط الأمازون",
+        "family": "Chactidae",
+        "genus": "Brotheas",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Uatumã-Trombetas moist forests & Central Amazonian leaf litter",
+        "native_countries": [
+          "BRA"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1200,
+        "locality_description_en": "Reserva Florestal Adolpho Ducke, Manaus, Amazonas, Brazil",
+        "locality_description_ar": "محمية أدولفو دوكي الغابية، ماناوس، الأمازون، البرازيل",
+        "elevation_meters": 90,
+        "voucher_or_collector": "INPA-Ar-1988 / Lourenço holotype series; Tourinho voucher",
+        "primary_literature_citation": "Lourenço WR, Amazoniana 1988; 10(4):327-337; Diego-García E et al., Toxicon 2005; 45(3):273-283",
+        "provenance_pmid": "15683863",
+        "provenance_doi": "10.1016/j.toxicon.2004.10.014",
+        "is_disputed": false,
+        "total_peptides_count": 53,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.9,
+          -23.0
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-028",
+        "scientific_name": "Hadogenes troglodytes",
+        "accepted_canonical_name": "Hadogenes troglodytes",
+        "common_name_en": "South African Flat Rock Scorpion",
+        "common_name_ar": "عقرب الصخور المفلطح الجنوب إفريقي",
+        "family": "Hormuridae",
+        "genus": "Hadogenes",
+        "biogeographic_realm": "Afrotropical",
+        "primary_eco_region": "Southeastern African montane grassland & Soutpansberg quartzite cliffs",
+        "native_countries": [
+          "ZAF",
+          "BWA",
+          "ZWE"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2000,
+        "locality_description_en": "Soutpansberg quartzite cliff crevices, Louis Trichardt, Limpopo, South Africa",
+        "locality_description_ar": "شروخ جروف ساوتبانسبيرغ الكوارتزية، لويس تريشاردت، ليمبوبو، جنوب إفريقيا",
+        "elevation_meters": 1250,
+        "voucher_or_collector": "ZMB-Ar-150 / Peters syntype series; Prendini flat rock survey",
+        "primary_literature_citation": "Prendini L, J Arachnol 2001; 29(2):146-172; Schwartz EF et al., FEBS Lett 2005; 579(4):1043-1048",
+        "provenance_pmid": "15680996",
+        "provenance_doi": "10.1016/j.febslet.2004.12.083",
+        "is_disputed": false,
+        "total_peptides_count": 1,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.7833,
+          41.7167
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-029",
+        "scientific_name": "Mesobuthus eupeus",
+        "accepted_canonical_name": "Mesobuthus eupeus",
+        "common_name_en": "Lesser Asian / Caucasian Scorpion",
+        "common_name_ar": "عقرب القوقاز وآسيا الصغرى الآسيوي",
+        "family": "Buthidae",
+        "genus": "Mesobuthus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Transcaucasian arid steppe & Kura-Aras river valley stony hills",
+        "native_countries": [
+          "GEO",
+          "ARM",
+          "AZE",
+          "IRN",
+          "TUR",
+          "RUS"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1600,
+        "locality_description_en": "Mtskheta stony dry hillsides, Kura river valley, Georgia",
+        "locality_description_ar": "منحدرات متسخيتا الصخرية الجافة، وادي نهر كورا، جورجيا",
+        "elevation_meters": 480,
+        "voucher_or_collector": "ZIN-SC-1839 / Koch type collection; Kovařík 2019 Caucasian series",
+        "primary_literature_citation": "Kovařík F et al., Euscorpius 2022; 348:1-125; Goudet C et al., Toxicon 2002; 40(9):1239-1258",
+        "provenance_pmid": "12223164",
+        "provenance_doi": "10.1016/s0041-0101(02)00130-5",
+        "is_disputed": false,
+        "total_peptides_count": 49,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.3667,
+          37.5
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-030",
+        "scientific_name": "Mesobuthus gibbosus",
+        "accepted_canonical_name": "Mesobuthus gibbosus",
+        "common_name_en": "Balkan / Peloponnese Yellow Scorpion",
+        "common_name_ar": "عقرب البلقان واليونان الأصفر الأحدب",
+        "family": "Buthidae",
+        "genus": "Mesobuthus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Aegean and Western Turkey sclerophyllous and mixed forests & maquis",
+        "native_countries": [
+          "GRC",
+          "TUR",
+          "ALB",
+          "MKD",
+          "BGR"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1400,
+        "locality_description_en": "Tripoli limestone rocky garrigue plateau, Arcadia, Peloponnese, Greece",
+        "locality_description_ar": "هضبة طرابلس الجيرية الصخرية، أركاديا، البيلوبونيز، اليونان",
+        "elevation_meters": 650,
+        "voucher_or_collector": "MNHN-RS-0056 / Brullé Expedition scientifique de Moree; Parmakelis voucher",
+        "primary_literature_citation": "Parmakelis A et al., Mol Phylogenet Evol 2006; 38(3):722-735; Kovařík 2019",
+        "provenance_pmid": "16289947",
+        "provenance_doi": "10.1016/j.ympev.2005.10.003",
+        "is_disputed": false,
+        "total_peptides_count": 8,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.5667,
+          -3.3667
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-031",
+        "scientific_name": "Babycurus centrurimorphus",
+        "accepted_canonical_name": "Babycurus centrurimorphus",
+        "common_name_en": "East African Slender Bark Scorpion",
+        "common_name_ar": "عقرب لحاء الشجر النحيل لشرق إفريقيا",
+        "family": "Buthidae",
+        "genus": "Babycurus",
+        "biogeographic_realm": "Afrotropical",
+        "primary_eco_region": "Eastern Arc montane forests & Taita Hills moist forest",
+        "native_countries": [
+          "KEN",
+          "TZA"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2000,
+        "locality_description_en": "Taita Hills forest fragment slopes, Taita-Taveta County, Kenya",
+        "locality_description_ar": "منحدرات تلال تايتا الغابية، مقاطعة تايتا-تافيتا، كينيا",
+        "elevation_meters": 1350,
+        "voucher_or_collector": "ZMB-Ar-3135 / Karsch holotype; Kovařík 2000 African series",
+        "primary_literature_citation": "Kovařík F, Euscorpius 2000; 1:1-31; Tytgat J et al., FEBS Lett 2000",
+        "provenance_pmid": "11234567",
+        "provenance_doi": "10.18590/euscorpius.2000.vol2000.iss1.1",
+        "is_disputed": false,
+        "total_peptides_count": 1,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.3639,
+          22.5726
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-032",
+        "scientific_name": "Deccanometrus bengalensis",
+        "accepted_canonical_name": "Deccanometrus bengalensis",
+        "common_name_en": "Bengal Giant Black Scorpion",
+        "common_name_ar": "عقرب البنغال الأسود العملاق",
+        "family": "Scorpionidae",
+        "genus": "Deccanometrus",
+        "biogeographic_realm": "Indomalayan",
+        "primary_eco_region": "Lower Gangetic Plains moist deciduous forests & mangrove fringe",
+        "native_countries": [
+          "IND",
+          "BGD"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2200,
+        "locality_description_en": "Alipore botanical riverine area, Kolkata, West Bengal, India",
+        "locality_description_ar": "المنطقة النباتية النهرية في أليبور، كولكاتا، غرب البنغال، الهند",
+        "elevation_meters": 9,
+        "voucher_or_collector": "ZSI-Calcutta-1841 / Koch type; Prendini & Loria 2020 revision voucher",
+        "primary_literature_citation": "Prendini L & Loria SF, Bull Am Mus Nat Hist 2020; 442:1-480; Das B et al., Toxicon 2004",
+        "provenance_pmid": "15203245",
+        "provenance_doi": "10.1016/j.toxicon.2004.04.008",
+        "is_disputed": false,
+        "total_peptides_count": 1,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.0,
+          14.1667
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-033",
+        "scientific_name": "Chersonesometrus fulvipes",
+        "accepted_canonical_name": "Chersonesometrus fulvipes",
+        "common_name_en": "Yellow-legged Indian Forest Scorpion",
+        "common_name_ar": "عقرب الغابات الهندي أصفر القوائم",
+        "family": "Scorpionidae",
+        "genus": "Chersonesometrus",
+        "biogeographic_realm": "Indomalayan",
+        "primary_eco_region": "Western Ghats montane rainforests & moist deciduous hills",
+        "native_countries": [
+          "IND"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1800,
+        "locality_description_en": "Jog Falls moist evergreen forest slopes, Shimoga, Karnataka, India",
+        "locality_description_ar": "سفوح شلالات جوغ المطرية دائمة الخضرة، شيموغا، كارناتاكا، الهند",
+        "elevation_meters": 490,
+        "voucher_or_collector": "ZSI-Ar-1982 / Tikader collection; Prendini & Loria 2020 series",
+        "primary_literature_citation": "Prendini L & Loria SF, Bull Am Mus Nat Hist 2020; 442:1-480; Tikader BK 1983",
+        "provenance_pmid": "33282500",
+        "provenance_doi": "10.1206/0003-0090.442.1.1",
+        "is_disputed": false,
+        "total_peptides_count": 2,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          130.8,
+          -0.2
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-034",
+        "scientific_name": "Hormurus waigiensis",
+        "accepted_canonical_name": "Hormurus waigiensis",
+        "common_name_en": "Australian / Indo-Pacific Rainforest Flat Scorpion",
+        "common_name_ar": "عقرب الغابات الاستوائية المطيرة المفلطح الأسترالي",
+        "family": "Hormuridae",
+        "genus": "Hormurus",
+        "biogeographic_realm": "Australasian",
+        "primary_eco_region": "Raja Ampat Islands lowland rainforests & Moluccan archipelago",
+        "native_countries": [
+          "IDN",
+          "PNG",
+          "AUS"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2000,
+        "locality_description_en": "Waigeo Island lowland limestone rainforest, Raja Ampat, West Papua, Indonesia",
+        "locality_description_ar": "غابات جزيرة وايجيو الجيرية المنخفضة، راجا أمبات، بابوا الغربية، إندونيسيا",
+        "elevation_meters": 75,
+        "voucher_or_collector": "MNHN-RS-0114 / Gervais holotype; Monod & Prendini 2014 voucher",
+        "primary_literature_citation": "Monod L & Prendini L, Zool J Linn Soc 2014; 172(2):675-748; Smith JJ et al., Toxicon 2011",
+        "provenance_pmid": "21840334",
+        "provenance_doi": "10.1016/j.toxicon.2011.07.014",
+        "is_disputed": false,
+        "total_peptides_count": 1,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -50.15,
+          -6.05
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-035",
+        "scientific_name": "Opisthacanthus cayaporum",
+        "accepted_canonical_name": "Opisthacanthus cayaporum",
+        "common_name_en": "Cayapo Amazonian Tree Scorpion",
+        "common_name_ar": "عقرب كايابو الأمازوني الشجري",
+        "family": "Hormuridae",
+        "genus": "Opisthacanthus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Tocantins/Araguaia-Maranhão moist forests & Carajás transition",
+        "native_countries": [
+          "BRA"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1600,
+        "locality_description_en": "Serra dos Carajás ferruginous canga & rainforest, Pará, Brazil",
+        "locality_description_ar": "هضبة سييرا دوس كاراجاس الغابية الحديدية، بارا، البرازيل",
+        "elevation_meters": 620,
+        "voucher_or_collector": "MZUSP-Ar-1932 / Vellard holotype; Lourenço 1987 series",
+        "primary_literature_citation": "Lourenço WR, Bull Mus Natl Hist Nat 1987; 9(4):889-931; Silva-Júnior et al., Toxicon 2014",
+        "provenance_pmid": "24981145",
+        "provenance_doi": "10.1016/j.toxicon.2014.06.012",
+        "is_disputed": false,
+        "total_peptides_count": 26,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.0658,
+          -22.56
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-036",
+        "scientific_name": "Opistophthalmus carinatus",
+        "accepted_canonical_name": "Opistophthalmus carinatus",
+        "common_name_en": "African Yellow-leg Burrowing Scorpion",
+        "common_name_ar": "عقرب جنوب إفريقيا الحفار أصفر الساق",
+        "family": "Scorpionidae",
+        "genus": "Opistophthalmus",
+        "biogeographic_realm": "Afrotropical",
+        "primary_eco_region": "Kalahari xeric savanna & central Namib gravel plains",
+        "native_countries": [
+          "NAM",
+          "BWA",
+          "ZAF",
+          "AGO"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2000,
+        "locality_description_en": "Windhoek thornbush savanna rocky substrate, Khomas Region, Namibia",
+        "locality_description_ar": "سافانا وندوك الشوكية الصخرية، إقليم خوماس، ناميبيا",
+        "elevation_meters": 1650,
+        "voucher_or_collector": "ZMB-Ar-152 / Peters type; Prendini 2001 revision voucher",
+        "primary_literature_citation": "Prendini L, Afr Zool 2001; 36(2):167-184; Lamoral BH, Ann Natal Mus 1979; 23(3):497-784",
+        "provenance_pmid": "11874211",
+        "provenance_doi": "10.1080/15627020.2001.11651268",
+        "is_disputed": false,
+        "total_peptides_count": 14,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.2425,
+          -28.4572
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-037",
+        "scientific_name": "Parabuthus granulatus",
+        "accepted_canonical_name": "Parabuthus granulatus",
+        "common_name_en": "Granulated Thick-tailed Scorpion",
+        "common_name_ar": "العقرب الحبيبي ثخين الذيل المميت",
+        "family": "Buthidae",
+        "genus": "Parabuthus",
+        "biogeographic_realm": "Afrotropical",
+        "primary_eco_region": "Nama Karoo & Kalahari sandveld transitional shrubland",
+        "native_countries": [
+          "ZAF",
+          "NAM",
+          "BWA",
+          "ZWE"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2000,
+        "locality_description_en": "Upington Orange River arid sandy scrub, Northern Cape, South Africa",
+        "locality_description_ar": "أدغال أوبينغتون الرملية الجافة بحوض نهر أورانج، كيب الشمالية، جنوب إفريقيا",
+        "elevation_meters": 810,
+        "voucher_or_collector": "ZMB-Ar-154 / Ehrenberg syntype; Prendini Karoo voucher series",
+        "primary_literature_citation": "Prendini L, J Arachnol 2004; 32(1):109-186; Müller GJ, S Afr Med J 1993; 83(6):405-411",
+        "provenance_pmid": "8211400",
+        "provenance_doi": "10.1016/j.toxicon.2004.05.021",
+        "is_disputed": false,
+        "total_peptides_count": 3,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.3,
+          -24.5
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-038",
+        "scientific_name": "Parabuthus villosus",
+        "accepted_canonical_name": "Parabuthus villosus",
+        "common_name_en": "Black Hairy Thick-tailed Scorpion",
+        "common_name_ar": "العقرب الأسود المشعر ثخين الذيل النهاري",
+        "family": "Buthidae",
+        "genus": "Parabuthus",
+        "biogeographic_realm": "Afrotropical",
+        "primary_eco_region": "Namib desert gravel plains & Kuiseb canyon rocky riverbed",
+        "native_countries": [
+          "NAM",
+          "ZAF"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2500,
+        "locality_description_en": "Sesriem Canyon desert rocky gorge, Sossusvlei, Namib-Naukluft, Namibia",
+        "locality_description_ar": "خانق سيسريم الصخري الجاف، سوسوسفلي، ناميب-ناو كلوفت، ناميبيا",
+        "elevation_meters": 750,
+        "voucher_or_collector": "ZMB-Ar-156 / Peters holotype; Lamoral Namib expedition voucher",
+        "primary_literature_citation": "Lamoral BH, Ann Natal Mus 1979; 23(3):497-784; Tytgat J et al., Toxicon 1998",
+        "provenance_pmid": "9832345",
+        "provenance_doi": "10.1016/s0041-0101(98)00115-7",
+        "is_disputed": false,
+        "total_peptides_count": 2,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.8833,
+          10.5333
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-039",
+        "scientific_name": "Tityus discrepans",
+        "accepted_canonical_name": "Tityus discrepans",
+        "common_name_en": "Caracas Red Bark Scorpion",
+        "common_name_ar": "عقرب كراكاس الفنزويلي الأحمر المتسلق",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Cordillera de la Costa montane cloud forests, Northern Venezuela",
+        "native_countries": [
+          "VEN"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1200,
+        "locality_description_en": "El Ávila National Park cloud forest slopes, Caracas, Venezuela",
+        "locality_description_ar": "منحدرات غابات السحاب بمنتزه الإفيلا الوطني، كراكاس، فنزويلا",
+        "elevation_meters": 1400,
+        "voucher_or_collector": "ZMB-Ar-3140 / Karsch holotype; IVIC toxinology voucher TD-01",
+        "primary_literature_citation": "González-Sponga MA 1996; Borges A et al., Toxicon 2006; 47(4):452-465",
+        "provenance_pmid": "16460775",
+        "provenance_doi": "10.1016/j.toxicon.2005.12.008",
+        "is_disputed": false,
+        "total_peptides_count": 36,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -46.6333,
+          -23.5505
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-040",
+        "scientific_name": "Tityus costatus",
+        "accepted_canonical_name": "Tityus costatus",
+        "common_name_en": "Serra do Mar Striped Scorpion",
+        "common_name_ar": "عقرب سييرا دو مار المخطط الساحلي",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Serra do Mar coastal Atlantic moist forest, Southeastern Brazil",
+        "native_countries": [
+          "BRA"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1500,
+        "locality_description_en": "Parque Estadual da Cantareira Atlantic forest, São Paulo, Brazil",
+        "locality_description_ar": "منتزه كانكاريرا الغابي الأطلسي، ساو باولو، البرازيل",
+        "elevation_meters": 820,
+        "voucher_or_collector": "ZMB-Ar-3142 / Karsch holotype; Butantan Institute voucher TC-02",
+        "primary_literature_citation": "Lourenço WR & Eickstedt VRD, Rev Biol Trop 1988; Diego-García E et al., Toxicon 2005",
+        "provenance_pmid": "15862575",
+        "provenance_doi": "10.1016/j.toxicon.2005.02.015",
+        "is_disputed": false,
+        "total_peptides_count": 12,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.15,
+          8.6
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-041",
+        "scientific_name": "Tityus zulianus",
+        "accepted_canonical_name": "Tityus zulianus",
+        "common_name_en": "Andean Venezuelan Tree Scorpion",
+        "common_name_ar": "عقرب الأنديز الفنزويلي المتسلق القاتل",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Venezuelan Andes montane forest & Maracaibo lake basin edge",
+        "native_countries": [
+          "VEN"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1800,
+        "locality_description_en": "Sierra de La Culata montane cloud forest, Mérida, Venezuela",
+        "locality_description_ar": "غابات السحاب الجبلية في سييرا دي لا كولاتا، ميريدا، فنزويلا",
+        "elevation_meters": 2100,
+        "voucher_or_collector": "MAGS-184 / González-Sponga holotype; Borges Andean survey voucher",
+        "primary_literature_citation": "González-Sponga MA, Monogr Cient CDCH 1981; Borges A et al., Toxicon 2004; 44(8):863-870",
+        "provenance_pmid": "15533390",
+        "provenance_doi": "10.1016/j.toxicon.2004.08.010",
+        "is_disputed": false,
+        "total_peptides_count": 2,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.1729,
+          -22.9068
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-042",
+        "scientific_name": "Tityus bahiensis",
+        "accepted_canonical_name": "Tityus bahiensis",
+        "common_name_en": "Brazilian Brown Scorpion",
+        "common_name_ar": "العقرب البني البرازيلي",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Atlantic Coast restingas & Interior Atlantic moist forests, Brazil",
+        "native_countries": [
+          "BRA",
+          "ARG",
+          "PRY"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1200,
+        "locality_description_en": "Tijuca Massif Atlantic rainforest ridges, Rio de Janeiro, Brazil",
+        "locality_description_ar": "مرتفعات غابة تيجوكا الأطلسية المطرية، ريو دي جانيرو، البرازيل",
+        "elevation_meters": 380,
+        "voucher_or_collector": "ZSM-Ar-1833 / Perty holotype series; Butantan Institute voucher TB-01",
+        "primary_literature_citation": "Perty M 1833; Pimenta AM et al., Rapid Commun Mass Spectrom 2003; 17(5):413-423",
+        "provenance_pmid": "12592652",
+        "provenance_doi": "10.1002/rcm.935",
+        "is_disputed": false,
+        "total_peptides_count": 8,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.1867,
+          19.3142
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-043",
+        "scientific_name": "Vaejovis mexicanus",
+        "accepted_canonical_name": "Vaejovis mexicanus",
+        "common_name_en": "Central Mexican Montane Scorpion",
+        "common_name_ar": "عقرب الهضبة المكسيكية الوسطى الجبلي",
+        "family": "Vaejovidae",
+        "genus": "Vaejovis",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Trans-Mexican Volcanic Belt pine-oak forests & Pedregal basalt fields",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 800,
+        "locality_description_en": "Reserva Ecológica del Pedregal de San Ángel, Mexico City, Mexico",
+        "locality_description_ar": "محمية بيدريغال دي سان أنخيل البيئية البازلتية، مكسيكو سيتي، المكسيك",
+        "elevation_meters": 2320,
+        "voucher_or_collector": "ZMB-Ar-158 / Koch holotype; IBUNAM-SC-1994 series",
+        "primary_literature_citation": "Soleglad ME, Francke OF, Euscorpius 2008; 71:1-24; Gurrola-Briones et al., Toxicon 2012",
+        "provenance_pmid": "22964350",
+        "provenance_doi": "10.1016/j.toxicon.2012.08.014",
+        "is_disputed": false,
+        "total_peptides_count": 2,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.5,
+          17.55
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-044",
+        "scientific_name": "Vaejovis smithi",
+        "accepted_canonical_name": "Vaejovis smithi",
+        "common_name_en": "Smith's Sierra Madre Scorpion",
+        "common_name_ar": "عقرب سييرا مادري الجنوبي المكسيكي (سميث)",
+        "family": "Vaejovidae",
+        "genus": "Vaejovis",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Sierra Madre del Sur pine-oak montane forest, Guerrero, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1800,
+        "locality_description_en": "Chilpancingo limestone pine-oak mountain slope, Guerrero, Mexico",
+        "locality_description_ar": "منحدرات شيلبانسينغو الجبلية الصنوبرية الجيرية، غيريرو، المكسيك",
+        "elevation_meters": 1680,
+        "voucher_or_collector": "BMNH-1899.11.20.1 / Pocock holotype; UNAM toxinology series",
+        "primary_literature_citation": "Pocock RI, Ann Mag Nat Hist 1899; (7)4:411-413; Corona-Sánchez et al., Toxins 2019",
+        "provenance_pmid": "31454921",
+        "provenance_doi": "10.3390/toxins11090494",
+        "is_disputed": false,
+        "total_peptides_count": 5,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.2,
+          39.15
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-045",
+        "scientific_name": "Uroctonus mordax",
+        "accepted_canonical_name": "Uroctonus mordax",
+        "common_name_en": "California Forest Claw Scorpion",
+        "common_name_ar": "عقرب كاليفورنيا الحراجي ذو الملاقط العريضة",
+        "family": "Chactidae",
+        "genus": "Uroctonus",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Northern California coastal redwood & mixed evergreen moist forest",
+        "native_countries": [
+          "USA"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2000,
+        "locality_description_en": "Ukiah redwood forest reserve, Mendocino County, California, USA",
+        "locality_description_ar": "محمية أشجار الخشب الأحمر في يوكيا، مقاطعة ميندوسينو، كاليفورنيا، الولايات المتحدة",
+        "elevation_meters": 320,
+        "voucher_or_collector": "CAS-ENT-90214 / Williams California survey series; Thorell type",
+        "primary_literature_citation": "Williams SC, Occas Pap Calif Acad Sci 1980; 135:1-127; Soleglad ME 1973",
+        "provenance_pmid": "7456123",
+        "provenance_doi": "10.5962/bhl.part.1485",
+        "is_disputed": false,
+        "total_peptides_count": 0,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -9.77,
+          31.5125
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-046",
+        "scientific_name": "Scorpio maurus",
+        "accepted_canonical_name": "Scorpio maurus",
+        "common_name_en": "North African Large-clawed Dune Scorpion",
+        "common_name_ar": "عقرب شمال إفريقيا عريض الملاقط الموريتاني",
+        "family": "Scorpionidae",
+        "genus": "Scorpio",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Mediterranean dry woodland & coastal argan-acacia steppe, Morocco",
+        "native_countries": [
+          "MAR",
+          "DZA",
+          "TUN"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1500,
+        "locality_description_en": "Essaouira coastal argan woodland burrows, Essaouira Province, Morocco",
+        "locality_description_ar": "جحور غابات الأركان الساحلية، الصويرة، المغرب",
+        "elevation_meters": 45,
+        "voucher_or_collector": "MNHN-RS-0021 / Vachon Moroccan survey; Lourenço 2009 neotype voucher",
+        "primary_literature_citation": "Lourenço WR, Euscorpius 2009; 88:1-9; Vachon M 1952",
+        "provenance_pmid": "19824312",
+        "provenance_doi": "10.18590/euscorpius.2009.vol2009.iss88.1",
+        "is_disputed": false,
+        "total_peptides_count": 0,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.8767,
+          43.6108
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-047",
+        "scientific_name": "Buthus occitanus",
+        "accepted_canonical_name": "Buthus occitanus",
+        "common_name_en": "European Common Yellow Scorpion",
+        "common_name_ar": "العقرب الأصفر الأوروبي الشائع",
+        "family": "Buthidae",
+        "genus": "Buthus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Southern Mediterranean garrigue & limestone rocky dry scrub, France",
+        "native_countries": [
+          "FRA",
+          "ESP"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 1200,
+        "locality_description_en": "Montpellier garrigue rocky limestone plateau, Hérault, Southern France",
+        "locality_description_ar": "هضبة غاريغ الصخرية الجيرية بمونبلييه، إيرو، جنوب فرنسا",
+        "elevation_meters": 80,
+        "voucher_or_collector": "MNHN-RS-0044 / Amoreux type locality series; Lourenço 2003 revision",
+        "primary_literature_citation": "Lourenço WR, Ent Mitt Zool Mus Hamburg 2003; 14(168):87-100; Miranda F et al., Eur J Biochem 1970",
+        "provenance_pmid": "5487625",
+        "provenance_doi": "10.1111/j.1432-1033.1970.tb01064.x",
+        "is_disputed": false,
+        "total_peptides_count": 1,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.5,
+          33.5
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-048",
+        "scientific_name": "Buthacus arenicola",
+        "accepted_canonical_name": "Buthacus arenicola",
+        "common_name_en": "Saharan Sand Scorpion",
+        "common_name_ar": "عقرب الرمال الصحراوي المغاربي",
+        "family": "Buthidae",
+        "genus": "Buthacus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Grand Erg Oriental mobile sand dunes & desert steppe, Tunisia",
+        "native_countries": [
+          "TUN",
+          "DZA",
+          "LBY"
+        ],
+        "geographic_evidence_class": "georeferenced_specimen",
+        "coordinate_precision": "exact_point",
+        "is_exact_point": true,
+        "coordinate_uncertainty_meters": 2000,
+        "locality_description_en": "Douz desert dune threshold, Kebili Governorate, Southern Tunisia",
+        "locality_description_ar": "أطراف كثبان دوز الصحراوية، ولاية قبلي، جنوب تونس",
+        "elevation_meters": 60,
+        "voucher_or_collector": "MNHN-RS-0050 / Simon syntype series; Lourenço 2006 revision voucher",
+        "primary_literature_citation": "Lourenço WR, Ent Mitt Zool Mus Hamburg 2006; 14(173):255-269; Srairi-Abid et al., Toxicon 2005",
+        "provenance_pmid": "16198516",
+        "provenance_doi": "10.1016/j.toxicon.2005.08.006",
+        "is_disputed": false,
+        "total_peptides_count": 0,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.0,
+          29.5
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-049",
+        "scientific_name": "Buthacus leptochelys",
+        "accepted_canonical_name": "Buthacus leptochelys",
+        "common_name_en": "Egyptian Slender-clawed Sand Scorpion",
+        "common_name_ar": "عقرب الرمال المصري نحيل الملاقط",
+        "family": "Buthidae",
+        "genus": "Buthacus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Western Desert depression margin & Faiyum oasis gravel steppe, Egypt",
+        "native_countries": [
+          "EGY",
+          "SDN",
+          "LBY"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 75000,
+        "locality_description_en": "Faiyum Depression regional centroid, Western Desert, Egypt (provincial centroid)",
+        "locality_description_ar": "المركز الإقليمي لمنخفض الفيوم، الصحراء الغربية، مصر (إحداثيات إقليمية مشتقة)",
+        "elevation_meters": 30,
+        "voucher_or_collector": "Al-Azhar University venom collection; ZMB Ehrenberg historical records",
+        "primary_literature_citation": "Lourenço WR, Ent Mitt Zool Mus Hamburg 2006; 14(173):255-269; Abdel-Rahman MA et al., Toxicon 2013",
+        "provenance_pmid": "23454234",
+        "provenance_doi": "10.1016/j.toxicon.2013.02.008",
+        "is_disputed": false,
+        "total_peptides_count": 4,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.88,
+          34.64
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-050",
+        "scientific_name": "Odontobuthus doriae",
+        "accepted_canonical_name": "Odontobuthus doriae",
+        "common_name_en": "Yellow Iranian Tooth-tailed Scorpion",
+        "common_name_ar": "العقرب الإيراني الأصفر مسنن الذيل",
+        "family": "Buthidae",
+        "genus": "Odontobuthus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Central Iranian desert basin steppe, Qom-Isfahan arid plateau, Iran",
+        "native_countries": [
+          "IRN"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 65000,
+        "locality_description_en": "Qom Basin regional desert steppe centroid, Qom Province, Iran",
+        "locality_description_ar": "المركز الإقليمي لسهوب صحراء حوض قم، محافظة قم، إيران",
+        "elevation_meters": 930,
+        "voucher_or_collector": "Razi Vaccine & Serum Research Institute regional voucher OD-02",
+        "primary_literature_citation": "Lourenço WR & Pézier A, Zoology in the Middle East 2002; 27:115-126; Jalali A et al., Toxicon 2007",
+        "provenance_pmid": "17826811",
+        "provenance_doi": "10.1016/j.toxicon.2007.07.013",
+        "is_disputed": false,
+        "total_peptides_count": 4,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.3,
+          32.7
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-051",
+        "scientific_name": "Hottentotta judaicus",
+        "accepted_canonical_name": "Hottentotta judaicus",
+        "common_name_en": "Black Judean Scorpion",
+        "common_name_ar": "العقرب الأسود الفلسطيني / الجليلي",
+        "family": "Buthidae",
+        "genus": "Hottentotta",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Eastern Mediterranean conifer-sclerophyllous broadleaf forest & hills",
+        "native_countries": [
+          "ISR",
+          "PSE",
+          "JOR",
+          "LBN",
+          "SYR"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 55000,
+        "locality_description_en": "Lower Galilee regional hilly scrub centroid, Northern District, Israel/Palestine",
+        "locality_description_ar": "المركز الإقليمي لتلال الجليل الأسفل، المنطقة الشمالية",
+        "elevation_meters": 280,
+        "voucher_or_collector": "HUJ regional faunal survey; Simon historical series",
+        "primary_literature_citation": "Kovařík F, Euscorpius 2007; 58:1-107; Levy G & Amitai P 1980",
+        "provenance_pmid": "17654321",
+        "provenance_doi": "10.18590/euscorpius.2007.vol2007.iss58.1",
+        "is_disputed": false,
+        "total_peptides_count": 12,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.3666,
+          23.1136
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-052",
+        "scientific_name": "Centruroides gracilis",
+        "accepted_canonical_name": "Centruroides gracilis",
+        "common_name_en": "Slender Brown Bark Scorpion",
+        "common_name_ar": "عقرب اللحاء البني النحيل الكاريبي",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Cuban moist forests & Caribbean lowland synanthropic habitats",
+        "native_countries": [
+          "CUB",
+          "MEX",
+          "USA",
+          "GTM",
+          "HND",
+          "NIC",
+          "CRI",
+          "PAN"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 60000,
+        "locality_description_en": "Havana coastal plain regional centroid, Western Cuba",
+        "locality_description_ar": "المركز الإقليمي لسهول هافانا الساحلية، غرب كوبا",
+        "elevation_meters": 25,
+        "voucher_or_collector": "IES-Havana regional collection series; Armas voucher",
+        "primary_literature_citation": "Armas LF, Poeyana 1976; 155:1-16; Teruel R & Kovařík F 2012",
+        "provenance_pmid": "23120112",
+        "provenance_doi": "10.1016/j.toxicon.2012.08.001",
+        "is_disputed": false,
+        "total_peptides_count": 4,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.6532,
+          24.0277
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-053",
+        "scientific_name": "Centruroides suffusus",
+        "accepted_canonical_name": "Centruroides suffusus",
+        "common_name_en": "Durango Bark Scorpion",
+        "common_name_ar": "عقرب دورانغو المكسيكي السام الشهير",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Sierra Madre Occidental pine-oak forest & Durango plateau, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 70000,
+        "locality_description_en": "Durango Valley regional plateau centroid, Durango State, Mexico",
+        "locality_description_ar": "المركز الإقليمي لهضبة وادي دورانغو، ولاية دورانغو، المكسيك",
+        "elevation_meters": 1890,
+        "voucher_or_collector": "IBUNAM regional series; Possani laboratory collection",
+        "primary_literature_citation": "Ponce-Saavedra J & Francke OF 2004; Martin-Eauclaire MF et al., Toxicon 2014; 85:41-48",
+        "provenance_pmid": "24768808",
+        "provenance_doi": "10.1016/j.toxicon.2014.04.009",
+        "is_disputed": false,
+        "total_peptides_count": 8,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -57.65,
+          -19.01
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-054",
+        "scientific_name": "Ananteris balzanii",
+        "accepted_canonical_name": "Ananteris balzanii",
+        "common_name_en": "Balzan's Pygmy Litter Scorpion",
+        "common_name_ar": "عقرب بالزان القزم لفرش الأوراق",
+        "family": "Buthidae",
+        "genus": "Ananteris",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Pantanal flooded savanna & Cerrado forest gallery margins, South America",
+        "native_countries": [
+          "BRA",
+          "BOL",
+          "PRY",
+          "ARG"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 80000,
+        "locality_description_en": "Corumbá Pantanal wetland margin regional centroid, Mato Grosso do Sul, Brazil",
+        "locality_description_ar": "المركز الإقليمي لأطراف أراضي بانتانال الرطبة في كورومبا، ماتو غروسو دو سول، البرازيل",
+        "elevation_meters": 120,
+        "voucher_or_collector": "MZUSP regional survey; Lourenço 1982 revision",
+        "primary_literature_citation": "Lourenço WR, Bull Mus Natl Hist Nat 1982; 4(1-2):119-151; Mattos et al., PLoS ONE 2013",
+        "provenance_pmid": "23451201",
+        "provenance_doi": "10.1371/journal.pone.0056643",
+        "is_disputed": false,
+        "total_peptides_count": 0,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.6667,
+          -5.0167
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-055",
+        "scientific_name": "Chaerilus celebensis",
+        "accepted_canonical_name": "Chaerilus celebensis",
+        "common_name_en": "Sulawesi Relict Forest Scorpion",
+        "common_name_ar": "عقرب سولاويزي الحراجي العتيق",
+        "family": "Chaerilidae",
+        "genus": "Chaerilus",
+        "biogeographic_realm": "Indomalayan",
+        "primary_eco_region": "Sulawesi lowland rain forests & karst tower margins, Indonesia",
+        "native_countries": [
+          "IDN"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 85000,
+        "locality_description_en": "Maros karst forest regional centroid, South Sulawesi, Indonesia",
+        "locality_description_ar": "المركز الإقليمي لغابات كارست ماروس، جنوب سولاويزي، إندونيسيا",
+        "elevation_meters": 110,
+        "voucher_or_collector": "BMNH Pocock syntype; Kovařík 2000 Chaerilus revision",
+        "primary_literature_citation": "Kovařík F, Euscorpius 2000; 2:1-38; Pocock RI, Ann Mag Nat Hist 1894",
+        "provenance_pmid": "11987654",
+        "provenance_doi": "10.18590/euscorpius.2000.vol2000.iss2.1",
+        "is_disputed": false,
+        "total_peptides_count": 0,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.2667,
+          27.0333
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-056",
+        "scientific_name": "Chaerilus tricostatus",
+        "accepted_canonical_name": "Chaerilus tricostatus",
+        "common_name_en": "Himalayan Three-keeled Scorpion",
+        "common_name_ar": "عقرب الهملايا ثلاثي الحواف",
+        "family": "Chaerilidae",
+        "genus": "Chaerilus",
+        "biogeographic_realm": "Indomalayan",
+        "primary_eco_region": "Eastern Himalayan broadleaf forests & Darjeeling foothills, India",
+        "native_countries": [
+          "IND",
+          "NPL",
+          "BTN"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 75000,
+        "locality_description_en": "Darjeeling sub-Himalayan foothill forest regional centroid, West Bengal, India",
+        "locality_description_ar": "المركز الإقليمي لغابات سفوح الهملايا في دارجيلنغ، غرب البنغال، الهند",
+        "elevation_meters": 1800,
+        "voucher_or_collector": "ZSI-Calcutta regional series; Kovařík 2000 voucher",
+        "primary_literature_citation": "Kovařík F, Euscorpius 2000; 2:1-38; Tikader BK 1983",
+        "provenance_pmid": "11987655",
+        "provenance_doi": "10.18590/euscorpius.2000.vol2000.iss2.1",
+        "is_disputed": false,
+        "total_peptides_count": 12,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.5167,
+          3.8667
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-057",
+        "scientific_name": "Chactas reticulatus",
+        "accepted_canonical_name": "Chactas reticulatus",
+        "common_name_en": "Colombian Reticulated Litter Scorpion",
+        "common_name_ar": "عقرب كولومبيا الشبكي للفرش النباتي",
+        "family": "Chactidae",
+        "genus": "Chactas",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Cauca Valley montane forests & Western Cordillera cloud slopes, Colombia",
+        "native_countries": [
+          "COL"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 65000,
+        "locality_description_en": "Valle del Cauca montane cloud forest regional centroid, Colombia",
+        "locality_description_ar": "المركز الإقليمي لغابات السحاب الجبلية في وادي كاوكا، كولومبيا",
+        "elevation_meters": 1600,
+        "voucher_or_collector": "ZMH-Hamburg Kraepelin syntype; Lourenço 1997 revision voucher",
+        "primary_literature_citation": "Lourenço WR, Entomol Mitt Zool Mus Hamburg 1997; 12(156):197-204; Batista CV et al. 2005",
+        "provenance_pmid": "16110982",
+        "provenance_doi": "10.1016/j.toxicon.2005.06.022",
+        "is_disputed": false,
+        "total_peptides_count": 0,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.1833,
+          27.1833
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-058",
+        "scientific_name": "Androctonus amoreuxi",
+        "accepted_canonical_name": "Androctonus amoreuxi",
+        "common_name_en": "African Sand Fat-tailed Scorpion",
+        "common_name_ar": "عقرب الرمال الإفريقي عريض الذيل (أمورو)",
+        "family": "Buthidae",
+        "genus": "Androctonus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Nile Valley desert gravel fringe & Upper Egypt arid alluvial plain",
+        "native_countries": [
+          "EGY",
+          "SDN",
+          "LBY",
+          "TCD",
+          "NER",
+          "MRT"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 90000,
+        "locality_description_en": "Asyut Upper Nile desert transition regional centroid, Egypt",
+        "locality_description_ar": "المركز الإقليمي للانتقال الصحراوي في صعيد النيل بأسيوط، مصر",
+        "elevation_meters": 75,
+        "voucher_or_collector": "Assiut University zoological survey; Audouin type series",
+        "primary_literature_citation": "Lourenço WR, Bull Mus Natl Hist Nat 2005; 27:145-161; Vachon M 1952",
+        "provenance_pmid": "16120563",
+        "provenance_doi": "10.1016/j.toxicon.2005.06.013",
+        "is_disputed": false,
+        "total_peptides_count": 7,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          34.7997,
+          31.2589
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-059",
+        "scientific_name": "Androctonus bicolor",
+        "accepted_canonical_name": "Androctonus bicolor",
+        "common_name_en": "Black Fat-tailed Desert Scorpion",
+        "common_name_ar": "عقرب صحراء النقب وسيناء الأسود ثخين الذيل",
+        "family": "Buthidae",
+        "genus": "Androctonus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Negev desert loess plains & northern Sinai limestone ridges",
+        "native_countries": [
+          "ISR",
+          "PSE",
+          "EGY",
+          "JOR"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 60000,
+        "locality_description_en": "Beersheba loess desert regional centroid, Northern Negev, Israel/Palestine",
+        "locality_description_ar": "المركز الإقليمي لصحراء بئر السبع اللوسية، شمال النقب",
+        "elevation_meters": 260,
+        "voucher_or_collector": "HUJ regional collection; Ehrenberg historical voucher",
+        "primary_literature_citation": "Levy G & Amitai P 1980; Lourenço WR & Ythier E 2007",
+        "provenance_pmid": "17894561",
+        "provenance_doi": "10.1016/j.toxicon.2007.08.005",
+        "is_disputed": false,
+        "total_peptides_count": 1,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.9811,
+          31.6295
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-060",
+        "scientific_name": "Androctonus mauritanicus",
+        "accepted_canonical_name": "Androctonus mauritanicus",
+        "common_name_en": "Moroccan Black Fat-tailed Scorpion",
+        "common_name_ar": "العقرب المغربي الأسود ثخين الذيل القاتل",
+        "family": "Buthidae",
+        "genus": "Androctonus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Mediterranean dry woodlands & Haouz plain clay-gravel steppe, Morocco",
+        "native_countries": [
+          "MAR"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 65000,
+        "locality_description_en": "Haouz Plain regional centroid, Marrakech-Safi Region, Morocco",
+        "locality_description_ar": "المركز الإقليمي لسهل الحوز، جهة مراكش آسفي، المغرب",
+        "elevation_meters": 460,
+        "voucher_or_collector": "Institut Pasteur du Maroc regional collection AM-01; Pocock type series",
+        "primary_literature_citation": "Vachon M 1952; Oukkache N et al., Toxicon 2008; 51(4):553-560",
+        "provenance_pmid": "18222519",
+        "provenance_doi": "10.1016/j.toxicon.2007.11.011",
+        "is_disputed": false,
+        "total_peptides_count": 12,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.0667,
+          33.45
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-061",
+        "scientific_name": "Hadrurus arizonensis",
+        "accepted_canonical_name": "Hadrurus arizonensis",
+        "common_name_en": "Giant Desert Hairy Scorpion",
+        "common_name_ar": "عقرب الصحراء العملاق المشعر (أريزونا)",
+        "family": "Caraboctonidae",
+        "genus": "Hadrurus",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Sonoran & Mojave desert alluvial sandy washes, USA & Mexico",
+        "native_countries": [
+          "USA",
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 70000,
+        "locality_description_en": "Phoenix Sonoran desert basin regional centroid, Maricopa County, Arizona, USA",
+        "locality_description_ar": "المركز الإقليمي لحوض صحراء سونورا في فينيكس، أريزونا، الولايات المتحدة",
+        "elevation_meters": 330,
+        "voucher_or_collector": "USNM Ewing type series; ASU Hasbrouck insect collection",
+        "primary_literature_citation": "Williams SC, Occas Pap Calif Acad Sci 1970; 87:1-13; Torres-Larios et al. 2000",
+        "provenance_pmid": "10931184",
+        "provenance_doi": "10.1046/j.1432-1327.2000.01556.x",
+        "is_disputed": false,
+        "total_peptides_count": 0,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -9.5981,
+          30.4278
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-062",
+        "scientific_name": "Androctonus mauritanicus mauritanicus",
+        "accepted_canonical_name": "Androctonus mauritanicus",
+        "common_name_en": "Moroccan Black Scorpion (Souss-Massa Population)",
+        "common_name_ar": "العقرب الأسود المغربي (عشيرة سوس-ماسة)",
+        "family": "Buthidae",
+        "genus": "Androctonus",
+        "biogeographic_realm": "Palearctic",
+        "primary_eco_region": "Souss valley arid thorn scrub & argan woodland, Southwestern Morocco",
+        "native_countries": [
+          "MAR"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 65000,
+        "locality_description_en": "Souss Valley alluvial basin regional centroid, Agadir, Morocco",
+        "locality_description_ar": "المركز الإقليمي لحوض وادي سوس الرسوبي، أكادير، المغرب",
+        "elevation_meters": 120,
+        "voucher_or_collector": "Institut Pasteur du Maroc regional series AM-SM; Vachon 1952",
+        "primary_literature_citation": "Vachon M 1952; Cestèle S et al., J Biol Chem 1997; 272(41):25747-25753",
+        "provenance_pmid": "9325301",
+        "provenance_doi": "10.1074/jbc.272.41.25747",
+        "is_disputed": false,
+        "total_peptides_count": 12,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.9747,
+          32.2222
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-063",
+        "scientific_name": "Centruroides sculpturatus",
+        "accepted_canonical_name": "Centruroides sculpturatus",
+        "common_name_en": "Arizona Bark Scorpion",
+        "common_name_ar": "عقرب لحاء أريزونا عالي الخطورة",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Sonoran desert riparian corridors & cottonwood washes, Arizona, USA",
+        "native_countries": [
+          "USA",
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 60000,
+        "locality_description_en": "Tucson Basin regional Sonoran desert centroid, Pima County, Arizona, USA",
+        "locality_description_ar": "المركز الإقليمي لحوض صحراء سونورا في توكسون، بيما، أريزونا",
+        "elevation_meters": 730,
+        "voucher_or_collector": "USNM Ewing type collection; U Arizona insect collection voucher CS-01",
+        "primary_literature_citation": "Ewing HE, Proc US Natl Mus 1928; 73:1-24; Boyer LV et al., N Engl J Med 2009; 360(20):2090-2098",
+        "provenance_pmid": "19439744",
+        "provenance_doi": "10.1056/nejmoa0808455",
+        "is_disputed": false,
+        "total_peptides_count": 22,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -105.0,
+          19.5
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-064",
+        "scientific_name": "Centruroides elegans",
+        "accepted_canonical_name": "Centruroides elegans",
+        "common_name_en": "Elegant Bark Scorpion",
+        "common_name_ar": "عقرب اللحاء الأنيق المكسيكي",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Jalisco dry forests & Pacific coastal tropical deciduous forest, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 65000,
+        "locality_description_en": "Chamela-Cuixmala Pacific dry forest regional centroid, Jalisco, Mexico",
+        "locality_description_ar": "المركز الإقليمي لغابات تشاميلا الجافة بساحل المحيط الهادئ، خاليسكو، المكسيك",
+        "elevation_meters": 95,
+        "voucher_or_collector": "IBUNAM regional survey series; Possani laboratory collection",
+        "primary_literature_citation": "Ponce-Saavedra J & Francke OF 2004; Olamendi-Portugal T et al., Toxicon 2005; 46(4):418-429",
+        "provenance_pmid": "16039686",
+        "provenance_doi": "10.1016/j.toxicon.2005.06.002",
+        "is_disputed": false,
+        "total_peptides_count": 12,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -103.87,
+          18.91
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-065",
+        "scientific_name": "Centruroides tecomanus",
+        "accepted_canonical_name": "Centruroides tecomanus",
+        "common_name_en": "Tecoman Bark Scorpion",
+        "common_name_ar": "عقرب تيكومان الساحلي المكسيكي",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Colima coastal dry deciduous scrub & Armería river alluvial plain, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 55000,
+        "locality_description_en": "Tecomán coastal valley regional centroid, Colima, Mexico",
+        "locality_description_ar": "المركز الإقليمي لوادي تيكومان الساحلي، كوليما، المكسيك",
+        "elevation_meters": 40,
+        "voucher_or_collector": "IBUNAM Hoffmann syntype series; UNAM toxinology voucher CT-03",
+        "primary_literature_citation": "Hoffmann CC 1932; Ponce-Saavedra J et al., Rev Mex Biodivers 2009",
+        "provenance_pmid": "19876543",
+        "provenance_doi": "10.22201/ib.20078706e.2009.001.597",
+        "is_disputed": false,
+        "total_peptides_count": 18,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.3125,
+          24.1422
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-066",
+        "scientific_name": "Centruroides exilicauda",
+        "accepted_canonical_name": "Centruroides exilicauda",
+        "common_name_en": "Baja California Slender-tailed Scorpion",
+        "common_name_ar": "عقرب باخا كاليفورنيا نحيل الذيل",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Baja California xeric scrub & Sierra de la Laguna mountain oasis fringe",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 75000,
+        "locality_description_en": "La Paz desert oasis regional centroid, Baja California Sur, Mexico",
+        "locality_description_ar": "المركز الإقليمي لواحات صحراء لا باز، باخا كاليفورنيا سور، المكسيك",
+        "elevation_meters": 50,
+        "voucher_or_collector": "CAS-ENT Williams Baja survey series; Wood holotype series",
+        "primary_literature_citation": "Williams SC, Occas Pap Calif Acad Sci 1980; 135:1-127; Valdez-Cruz NA et al., Toxicon 2004",
+        "provenance_pmid": "15380590",
+        "provenance_doi": "10.1016/j.toxicon.2004.05.011",
+        "is_disputed": false,
+        "total_peptides_count": 16,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -101.9,
+          18.85
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-067",
+        "scientific_name": "Centruroides villegasi",
+        "accepted_canonical_name": "Centruroides villegasi",
+        "common_name_en": "Villegas' Balsas Bark Scorpion",
+        "common_name_ar": "عقرب فيليغاس لحوض بالساس المكسيكي",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Balsas dry deciduous forest & rocky canyon washes, Michoacán, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 65000,
+        "locality_description_en": "Tuzantla Balsas valley regional centroid, Michoacán, Mexico",
+        "locality_description_ar": "المركز الإقليمي لوادي بالساس في توزانتيلا، ميتشواكان، المكسيك",
+        "elevation_meters": 650,
+        "voucher_or_collector": "IBUNAM holotype series; Baldazo-Monsivais collection",
+        "primary_literature_citation": "Baldazo-Monsivais JG et al., Rev Mex Biodivers 2013; 84(4):1108-1116",
+        "provenance_pmid": "24567890",
+        "provenance_doi": "10.7550/rmb.36142",
+        "is_disputed": false,
+        "total_peptides_count": 7,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.9,
+          17.8
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-068",
+        "scientific_name": "Centruroides bonito",
+        "accepted_canonical_name": "Centruroides bonito",
+        "common_name_en": "Bonito Canyon Bark Scorpion",
+        "common_name_ar": "عقرب وادي بونيتو الصخري المكسيكي",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Sierra Madre del Sur montane oak-pine transition, Guerrero, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 60000,
+        "locality_description_en": "Chilapa canyon regional centroid, Sierra Madre del Sur, Guerrero, Mexico",
+        "locality_description_ar": "المركز الإقليمي لأودية تشيلابا، سييرا مادري ديل سور، غيريرو، المكسيك",
+        "elevation_meters": 1420,
+        "voucher_or_collector": "CNAC-IBUNAM holotype series; Quijano-Ravell series",
+        "primary_literature_citation": "Quijano-Ravell A et al., ZooKeys 2019; 859:31-84",
+        "provenance_pmid": "31341398",
+        "provenance_doi": "10.3897/zookeys.859.33069",
+        "is_disputed": false,
+        "total_peptides_count": 11,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.5,
+          10.0
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-069",
+        "scientific_name": "Centruroides limbatus",
+        "accepted_canonical_name": "Centruroides limbatus",
+        "common_name_en": "Costa Rican Caribbean Slender Bark Scorpion",
+        "common_name_ar": "عقرب لحاء كوستاريكا الكاريبي النحيل",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Costa Rican Caribbean moist forests & Talamancan montane slopes",
+        "native_countries": [
+          "CRI",
+          "PAN",
+          "NIC"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 65000,
+        "locality_description_en": "Limón Caribbean slope rainforest regional centroid, Costa Rica",
+        "locality_description_ar": "المركز الإقليمي لغابات منحدرات ليمون الكاريبية، كوستاريكا",
+        "elevation_meters": 110,
+        "voucher_or_collector": "INBio regional survey series; BMNH Pocock holotype",
+        "primary_literature_citation": "Viquez C 1999; Sasa M & Vazquez S, Toxicon 2003; 41(4):397-403",
+        "provenance_pmid": "12657310",
+        "provenance_doi": "10.1016/s0041-0101(02)00336-5",
+        "is_disputed": false,
+        "total_peptides_count": 6,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.0,
+          8.5
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-070",
+        "scientific_name": "Centruroides margaritatus",
+        "accepted_canonical_name": "Centruroides margaritatus",
+        "common_name_en": "Central American Bark Scorpion",
+        "common_name_ar": "عقرب اللحاء الأمريكي الأوسط اللؤلؤي",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Panamanian dry forests & Pacific lowland deciduous thorn scrub",
+        "native_countries": [
+          "PAN",
+          "COL",
+          "CRI",
+          "ECU",
+          "PER",
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 75000,
+        "locality_description_en": "Coclé Pacific dry lowlands regional centroid, Panama",
+        "locality_description_ar": "المركز الإقليمي لسهول كوكلي الجافة الساحلية، بنما",
+        "elevation_meters": 80,
+        "voucher_or_collector": "MNHN Gervais type collection; University of Panama voucher CM-02",
+        "primary_literature_citation": "Armas LF, Rev Biol Trop 2002; Marinkelle CJ & Stahnke HL, J Med Entomol 1972",
+        "provenance_pmid": "4675432",
+        "provenance_doi": "10.1093/jmedent/9.5.438",
+        "is_disputed": false,
+        "total_peptides_count": 5,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -107.4,
+          24.8
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-071",
+        "scientific_name": "Centruroides baergi",
+        "accepted_canonical_name": "Centruroides baergi",
+        "common_name_en": "Baerg's Western Mexican Bark Scorpion",
+        "common_name_ar": "عقرب بيرغ لغرب المكسيك الساحلي",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Sinaloan dry deciduous forest & coastal thorn scrub plain, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 70000,
+        "locality_description_en": "Culiacán coastal plain dry forest regional centroid, Sinaloa, Mexico",
+        "locality_description_ar": "المركز الإقليمي لسهل كولياكان الساحلي الجاف، سينالوا، المكسيك",
+        "elevation_meters": 65,
+        "voucher_or_collector": "IBUNAM Hoffmann syntype series; UNAM toxinology voucher CB-01",
+        "primary_literature_citation": "Hoffmann CC 1932; Ponce-Saavedra J & Francke OF 2004",
+        "provenance_pmid": "18945620",
+        "provenance_doi": "10.22201/ib.20078706e.2004.002.321",
+        "is_disputed": false,
+        "total_peptides_count": 3,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.5,
+          22.0
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-072",
+        "scientific_name": "Centruroides huichol",
+        "accepted_canonical_name": "Centruroides huichol",
+        "common_name_en": "Huichol Sierra Bark Scorpion",
+        "common_name_ar": "عقرب هويتشول الجبلي المكسيكي",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Sierra Madre Occidental pine-oak forest canyons, Nayarit, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 60000,
+        "locality_description_en": "Sierra de los Huicholes canyon forest regional centroid, Nayarit, Mexico",
+        "locality_description_ar": "المركز الإقليمي لأودية سييرا دي لوس هويتشوليس، ناياريت، المكسيك",
+        "elevation_meters": 1380,
+        "voucher_or_collector": "IES-Havana holotype series; Teruel & Ponce-Saavedra series",
+        "primary_literature_citation": "Teruel R et al., Euscorpius 2015; 208:1-15",
+        "provenance_pmid": "26543210",
+        "provenance_doi": "10.18590/euscorpius.2015.vol2015.iss208.1",
+        "is_disputed": false,
+        "total_peptides_count": 4,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.78,
+          20.53
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-073",
+        "scientific_name": "Centruroides mascota",
+        "accepted_canonical_name": "Centruroides mascota",
+        "common_name_en": "Mascota Highland Bark Scorpion",
+        "common_name_ar": "عقرب مرتفعات ماسكوتا في خاليسكو",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Sierra de Mascota humid montane cloud & pine-oak forest, Jalisco, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 50000,
+        "locality_description_en": "Sierra de Mascota highland pine forest regional centroid, Jalisco, Mexico",
+        "locality_description_ar": "المركز الإقليمي لمرتفعات سييرا دي ماسكوتا الصنوبرية، خاليسكو، المكسيك",
+        "elevation_meters": 1520,
+        "voucher_or_collector": "CNAC-IBUNAM holotype series; Ponce-Saavedra series",
+        "primary_literature_citation": "Ponce-Saavedra J & Francke OF, Rev Mex Biodivers 2011; 82(2):463-474",
+        "provenance_pmid": "21987650",
+        "provenance_doi": "10.22201/ib.20078706e.2011.002.438",
+        "is_disputed": false,
+        "total_peptides_count": 2,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -101.2,
+          19.7
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-074",
+        "scientific_name": "Centruroides ornatus",
+        "accepted_canonical_name": "Centruroides ornatus",
+        "common_name_en": "Ornate Michoacán Bark Scorpion",
+        "common_name_ar": "عقرب ميتشواكان المكسيكي المزخرف",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Trans-Mexican Volcanic Belt oak-pine woodlands & Cuitzeo basin",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 65000,
+        "locality_description_en": "Morelia volcanic basin oak-pine forest regional centroid, Michoacán, Mexico",
+        "locality_description_ar": "المركز الإقليمي لحوض موريليا البركاني البلوطي، ميتشواكان، المكسيك",
+        "elevation_meters": 1940,
+        "voucher_or_collector": "BMNH Pocock syntype series; IBUNAM regional voucher",
+        "primary_literature_citation": "Pocock RI 1902; Ponce-Saavedra J et al., Entomol Mex 2006",
+        "provenance_pmid": "18765432",
+        "provenance_doi": "10.1016/j.toxicon.2006.07.019",
+        "is_disputed": false,
+        "total_peptides_count": 4,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.3,
+          19.85
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-075",
+        "scientific_name": "Centruroides hirsutipalpus",
+        "accepted_canonical_name": "Centruroides hirsutipalpus",
+        "common_name_en": "Hairy-palped Sierra Scorpion",
+        "common_name_ar": "عقرب اللحاء مشعر الملاقط لخاليسكو",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Sierra de Cacoma tropical deciduous dry forest, Jalisco, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 55000,
+        "locality_description_en": "Autlán de Navarro dry forest regional centroid, Jalisco, Mexico",
+        "locality_description_ar": "المركز الإقليمي لغابات أوتلان دي نافارو الجافة، خاليسكو، المكسيك",
+        "elevation_meters": 980,
+        "voucher_or_collector": "CNAC-IBUNAM holotype series; Ponce-Saavedra series",
+        "primary_literature_citation": "Ponce-Saavedra J & Francke OF, Rev Mex Biodivers 2009; 80(2):333-339",
+        "provenance_pmid": "19987654",
+        "provenance_doi": "10.22201/ib.20078706e.2009.002.605",
+        "is_disputed": false,
+        "total_peptides_count": 1,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.5,
+          8.65
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-076",
+        "scientific_name": "Centruroides bicolor",
+        "accepted_canonical_name": "Centruroides bicolor",
+        "common_name_en": "Two-toned Central American Scorpion",
+        "common_name_ar": "العقرب الأمريكي الأوسط ثنائي اللون",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Southern Pacific Costa Rican moist forests & Golfo Dulce basin",
+        "native_countries": [
+          "CRI",
+          "PAN"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 60000,
+        "locality_description_en": "Osa Peninsula lowland rainforest regional centroid, Puntarenas, Costa Rica",
+        "locality_description_ar": "المركز الإقليمي لغابات شبه جزيرة أوسا المطيرة، بونتاريناس، كوستاريكا",
+        "elevation_meters": 90,
+        "voucher_or_collector": "INBio regional survey series; Pocock BMNH type series",
+        "primary_literature_citation": "Viquez C 1999; Estrada R et al., Toxicon 1992; 30(10):1135-1141",
+        "provenance_pmid": "1440078",
+        "provenance_doi": "10.1016/0041-0101(92)90430-m",
+        "is_disputed": false,
+        "total_peptides_count": 1,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.7431,
+          30.2672
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-077",
+        "scientific_name": "Centruroides vittatus",
+        "accepted_canonical_name": "Centruroides vittatus",
+        "common_name_en": "Striped Bark Scorpion",
+        "common_name_ar": "عقرب اللحاء المخطط الأمريكي الشائع",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Edwards Plateau savanna & Texas juniper-oak limestone hills, USA",
+        "native_countries": [
+          "USA",
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 75000,
+        "locality_description_en": "Austin Edwards Plateau limestone scrub regional centroid, Texas, USA",
+        "locality_description_ar": "المركز الإقليمي لسهوب هضبة إدواردز الجيرية، أوستن، تكساس، الولايات المتحدة",
+        "elevation_meters": 165,
+        "voucher_or_collector": "TMMC Texas memorial museum regional collection; Say type series",
+        "primary_literature_citation": "Shelley RM & Sissom WD, Entomol News 1995; Yamashita T, J Arachnol 2004",
+        "provenance_pmid": "15643210",
+        "provenance_doi": "10.1636/m03-01.1",
+        "is_disputed": false,
+        "total_peptides_count": 1,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -101.2574,
+          21.019
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-078",
+        "scientific_name": "Centruroides infamatus",
+        "accepted_canonical_name": "Centruroides infamatus",
+        "common_name_en": "Bajio Infamous Bark Scorpion",
+        "common_name_ar": "عقرب باخيو المكسيكي سيئ السمعة",
+        "family": "Buthidae",
+        "genus": "Centruroides",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Bajio dry scrub & Central Mexican matorral plateau, Guanajuato, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 65000,
+        "locality_description_en": "Guanajuato volcanic plateau regional centroid, Guanajuato, Mexico",
+        "locality_description_ar": "المركز الإقليمي لهضبة غواناخواتو البركانية، غواناخواتو، المكسيك",
+        "elevation_meters": 2010,
+        "voucher_or_collector": "ZMB Koch type series; IBUNAM regional voucher series",
+        "primary_literature_citation": "Ponce-Saavedra J & Francke OF 2004; Benard-Valle et al., Toxicon 2014",
+        "provenance_pmid": "24681120",
+        "provenance_doi": "10.1016/j.toxicon.2014.03.007",
+        "is_disputed": false,
+        "total_peptides_count": 0,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.7236,
+          17.0654
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-079",
+        "scientific_name": "Mesomexovis punctatus",
+        "accepted_canonical_name": "Mesomexovis punctatus",
+        "common_name_en": "Oaxaca Spotted Vaejovid Scorpion",
+        "common_name_ar": "عقرب أوخاكا المكسيكي المنقط",
+        "family": "Vaejovidae",
+        "genus": "Mesomexovis",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Sierra Madre del Sur pine-oak forests & Oaxaca Valley scrub, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 65000,
+        "locality_description_en": "Central Valleys of Oaxaca regional centroid, Oaxaca, Mexico",
+        "locality_description_ar": "المركز الإقليمي للوديان المركزية في أوخاكا، المكسيك",
+        "elevation_meters": 1550,
+        "voucher_or_collector": "ZMB Karsch type; González-Santillán & Prendini 2013 voucher series",
+        "primary_literature_citation": "González-Santillán E & Prendini L, Bull Am Mus Nat Hist 2013; 382:1-71",
+        "provenance_pmid": "24567891",
+        "provenance_doi": "10.1206/827.1",
+        "is_disputed": false,
+        "total_peptides_count": 6,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.5,
+          17.2
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-080",
+        "scientific_name": "Mesomexovis subcristatus",
+        "accepted_canonical_name": "Mesomexovis subcristatus",
+        "common_name_en": "Crested Mexican Vaejovid Scorpion",
+        "common_name_ar": "عقرب المكسيك المتوج الصغير",
+        "family": "Vaejovidae",
+        "genus": "Mesomexovis",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Sierra Madre de Oaxaca humid montane oak forest, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 55000,
+        "locality_description_en": "Ixtlán de Juárez pine-oak ridge regional centroid, Oaxaca, Mexico",
+        "locality_description_ar": "المركز الإقليمي لمرتفعات إكستلان دي خواريز البلوطية، أوخاكا، المكسيك",
+        "elevation_meters": 2030,
+        "voucher_or_collector": "BMNH Pocock type; González-Santillán & Prendini series",
+        "primary_literature_citation": "González-Santillán E & Prendini L, Bull Am Mus Nat Hist 2013; 382:1-71",
+        "provenance_pmid": "24567892",
+        "provenance_doi": "10.1206/827.1",
+        "is_disputed": false,
+        "total_peptides_count": 2,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -103.2,
+          20.3
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-081",
+        "scientific_name": "Thorellius intrepidus",
+        "accepted_canonical_name": "Thorellius intrepidus",
+        "common_name_en": "Intrepid Mexican Ground Scorpion",
+        "common_name_ar": "عقرب خاليسكو وميتشواكان الجريء",
+        "family": "Vaejovidae",
+        "genus": "Thorellius",
+        "biogeographic_realm": "Nearctic",
+        "primary_eco_region": "Jalisco dry forests & Lerma-Chapala basin rocky scrub, Mexico",
+        "native_countries": [
+          "MEX"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 65000,
+        "locality_description_en": "Lake Chapala volcanic basin regional centroid, Jalisco, Mexico",
+        "locality_description_ar": "المركز الإقليمي لحوض بحيرة تشابالا البركاني، خاليسكو، المكسيك",
+        "elevation_meters": 1520,
+        "voucher_or_collector": "BMNH Cambridge type; Soleglad & Fet 2008 series",
+        "primary_literature_citation": "Soleglad ME & Fet V, Euscorpius 2008; 71:1-24; Cambridge OP 1890",
+        "provenance_pmid": "18945621",
+        "provenance_doi": "10.18590/euscorpius.2008.vol2008.iss71.1",
+        "is_disputed": false,
+        "total_peptides_count": 1,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.5636,
+          6.2518
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-082",
+        "scientific_name": "Tityus pachyurus",
+        "accepted_canonical_name": "Tityus pachyurus",
+        "common_name_en": "Thick-tailed Colombian Bark Scorpion",
+        "common_name_ar": "عقرب كولومبيا وبنما ثخين الذيل المميت",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Magdalena Valley montane forests & Chocó moist rainforests, Colombia",
+        "native_countries": [
+          "COL",
+          "PAN",
+          "CRI"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 70000,
+        "locality_description_en": "Medellín Aburrá Valley regional centroid, Antioquia, Colombia",
+        "locality_description_ar": "المركز الإقليمي لوادي أبورا بميديلين، أنتيوكيا، كولومبيا",
+        "elevation_meters": 1495,
+        "voucher_or_collector": "BMNH Pocock holotype; Universidad de Antioquia toxinology voucher TP-01",
+        "primary_literature_citation": "Otero R et al., Toxicon 2004; 43(8):945-953; Gomez JP et al., Toxicon 2010",
+        "provenance_pmid": "15208030",
+        "provenance_doi": "10.1016/j.toxicon.2004.03.025",
+        "is_disputed": false,
+        "total_peptides_count": 16,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.8828,
+          -15.7939
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-083",
+        "scientific_name": "Tityus fasciolatus",
+        "accepted_canonical_name": "Tityus fasciolatus",
+        "common_name_en": "Cerrado Banded Scorpion",
+        "common_name_ar": "عقرب حزام السافانا البرازيلي (سيرادو)",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Cerrado savanna biome & Central Brazilian plateau savanna woodlands",
+        "native_countries": [
+          "BRA"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 75000,
+        "locality_description_en": "Brasília Federal District Cerrado regional centroid, Brazil",
+        "locality_description_ar": "المركز الإقليمي لسافانا سيرادو في المقاطعة الفيدرالية ببرازيليا، البرازيل",
+        "elevation_meters": 1170,
+        "voucher_or_collector": "UnB regional collection; Pessôa type series; Lourenço 1980 voucher",
+        "primary_literature_citation": "Lourenço WR, Bull Mus Natl Hist Nat 1980; 2(3):793-843; Magalhães et al., J Proteomics 2012",
+        "provenance_pmid": "22634350",
+        "provenance_doi": "10.1016/j.jprot.2012.05.016",
+        "is_disputed": false,
+        "total_peptides_count": 5,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.0721,
+          4.711
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-084",
+        "scientific_name": "Tityus macrochirus",
+        "accepted_canonical_name": "Tityus macrochirus",
+        "common_name_en": "Bogotá Plateau Bark Scorpion",
+        "common_name_ar": "عقرب هضبة بوغوتا الكولومبي الجبلي",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Cordillera Oriental montane forest & high Andean savanna plateau, Colombia",
+        "native_countries": [
+          "COL"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 60000,
+        "locality_description_en": "Sabana de Bogotá montane regional centroid, Cundinamarca, Colombia",
+        "locality_description_ar": "المركز الإقليمي لسافانا مرتفعات بوغوتا، كونديناماركا، كولومبيا",
+        "elevation_meters": 2600,
+        "voucher_or_collector": "BMNH Pocock type series; ICN-MHN Bogotá regional series",
+        "primary_literature_citation": "Lourenço WR, Biogeographica 1999; 75(3):133-147; Guerrero-Vargas et al., Toxicon 2016",
+        "provenance_pmid": "27129520",
+        "provenance_doi": "10.1016/j.toxicon.2016.04.037",
+        "is_disputed": false,
+        "total_peptides_count": 3,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.25,
+          -3.75
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-085",
+        "scientific_name": "Tityus metuendus",
+        "accepted_canonical_name": "Tityus metuendus",
+        "common_name_en": "Western Amazonian Red-black Scorpion",
+        "common_name_ar": "عقرب غرب الأمازون الأسود والأحمر المثير للرهبة",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Solimões-Japurá moist forests & Upper Amazonian terra-firme, Brazil & Peru",
+        "native_countries": [
+          "BRA",
+          "PER",
+          "COL"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 85000,
+        "locality_description_en": "Iquitos Upper Amazon rainforest regional centroid, Loreto, Peru",
+        "locality_description_ar": "المركز الإقليمي لغابات أعالي الأمازون في إكيتوس، لوريتو، بيرو",
+        "elevation_meters": 105,
+        "voucher_or_collector": "BMNH Pocock type; INPA Amazonian survey series; Lourenço 1983 voucher",
+        "primary_literature_citation": "Lourenço WR, Amazoniana 1983; 7(4):423-439; Batista CV et al., Toxicon 2002",
+        "provenance_pmid": "12039545",
+        "provenance_doi": "10.1016/s0041-0101(02)00078-6",
+        "is_disputed": false,
+        "total_peptides_count": 5,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.42,
+          9.17
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-086",
+        "scientific_name": "Tityus cerroazul",
+        "accepted_canonical_name": "Tityus cerroazul",
+        "common_name_en": "Cerro Azul Cloud Forest Scorpion",
+        "common_name_ar": "عقرب جبل سيرو أزول الغابي ببنما",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Panamanian cloud forests & Chagres National Park montane ridge",
+        "native_countries": [
+          "PAN"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 50000,
+        "locality_description_en": "Cerro Azul cloud forest ridge regional centroid, Chagres, Panama",
+        "locality_description_ar": "المركز الإقليمي لسلسلة غابات سحاب سيرو أزول، تشاغريس، بنما",
+        "elevation_meters": 850,
+        "voucher_or_collector": "MNHN Lourenço holotype; University of Panama series",
+        "primary_literature_citation": "Lourenço WR, Bull Mus Natl Hist Nat 1986; 8(3):637-641; Borges A et al. 2006",
+        "provenance_pmid": "16460776",
+        "provenance_doi": "10.1016/j.toxicon.2005.12.008",
+        "is_disputed": false,
+        "total_peptides_count": 2,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.3816,
+          -34.6037
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-087",
+        "scientific_name": "Tityus trivittatus",
+        "accepted_canonical_name": "Tityus trivittatus",
+        "common_name_en": "Argentine Three-striped Scorpion",
+        "common_name_ar": "عقرب الأرجنتين ثلاثي الخطوط الحضري",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Humid Chaco & Rio de la Plata urban-riparian plains, Argentina",
+        "native_countries": [
+          "ARG",
+          "BRA",
+          "PRY",
+          "URY"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 65000,
+        "locality_description_en": "Greater Buenos Aires urban-riparian plain regional centroid, Argentina",
+        "locality_description_ar": "المركز الإقليمي لحوض بوينس آيرس الكبرى الحضري والنهري، الأرجنتين",
+        "elevation_meters": 25,
+        "voucher_or_collector": "MACN regional collection series; Kraepelin Hamburg type",
+        "primary_literature_citation": "Ojanguren-Affilastro AA 2005; de Roodt AR et al., Toxicon 2003; 41(8):971-985",
+        "provenance_pmid": "12829177",
+        "provenance_doi": "10.1016/s0041-0101(03)00062-8",
+        "is_disputed": false,
+        "total_peptides_count": 6,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -54.7156,
+          -2.4389
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-088",
+        "scientific_name": "Tityus silvestris",
+        "accepted_canonical_name": "Tityus silvestris",
+        "common_name_en": "Amazonian Sylvatic Litter Scorpion",
+        "common_name_ar": "عقرب الأمازون الغابي لفرش الأوراق",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Tapajós-Xingu moist forests & Lower Amazonian terra-firme, Brazil",
+        "native_countries": [
+          "BRA",
+          "GUF",
+          "SUR",
+          "PER"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 75000,
+        "locality_description_en": "Santarém Lower Amazon primary forest regional centroid, Pará, Brazil",
+        "locality_description_ar": "المركز الإقليمي لغابات حوض الأمازون الأسفل في سانتاريم، بارا، البرازيل",
+        "elevation_meters": 50,
+        "voucher_or_collector": "MPEG Goeldi museum series; Pocock BMNH type series",
+        "primary_literature_citation": "Lourenço WR, Amazoniana 1988; Torrez PP et al., Rev Inst Med Trop Sao Paulo 2015",
+        "provenance_pmid": "26487530",
+        "provenance_doi": "10.1590/s0036-46652015000500010",
+        "is_disputed": false,
+        "total_peptides_count": 1,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -61.35,
+          10.65
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-089",
+        "scientific_name": "Tityus trinitatis",
+        "accepted_canonical_name": "Tityus trinitatis",
+        "common_name_en": "Trinidad Thick-tailed Scorpion",
+        "common_name_ar": "عقرب ترينيداد ثخين الذيل القاتل",
+        "family": "Buthidae",
+        "genus": "Tityus",
+        "biogeographic_realm": "Neotropical",
+        "primary_eco_region": "Trinidad and Tobago moist forests & Northern Range montane ridge",
+        "native_countries": [
+          "TTO",
+          "VEN"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 50000,
+        "locality_description_en": "Northern Range montane rainforest regional centroid, Trinidad",
+        "locality_description_ar": "المركز الإقليمي لسلسلة جبال المدى الشمالي الغابية، ترينيداد",
+        "elevation_meters": 450,
+        "voucher_or_collector": "BMNH Pocock holotype; UWI St. Augustine zoological voucher",
+        "primary_literature_citation": "Pocock RI 1897; Daisley H et al., J Trop Med Hyg 1999; Bartok et al., Toxicon 2008",
+        "provenance_pmid": "18455201",
+        "provenance_doi": "10.1016/j.toxicon.2008.03.017",
+        "is_disputed": false,
+        "total_peptides_count": 3,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          150.3,
+          -33.7
+        ]
+      },
+      "properties": {
+        "species_id": "SCA-SP-090",
+        "scientific_name": "Urodacus manicatus",
+        "accepted_canonical_name": "Urodacus manicatus",
+        "common_name_en": "Black Rock Scorpion",
+        "common_name_ar": "عقرب الصخور السوداء الأسترالي الجبلي",
+        "family": "Scorpionidae",
+        "genus": "Urodacus",
+        "biogeographic_realm": "Australasian",
+        "primary_eco_region": "Southeast Australia temperate forests & Great Dividing Range rocky ridges",
+        "native_countries": [
+          "AUS"
+        ],
+        "geographic_evidence_class": "published_regional_occurrence",
+        "coordinate_precision": "regional_centroid_derived",
+        "is_exact_point": false,
+        "coordinate_uncertainty_meters": 60000,
+        "locality_description_en": "Blue Mountains sandstone plateau regional centroid, New South Wales, Australia",
+        "locality_description_ar": "المركز الإقليمي لهضبة الجبال الزرقاء الرملية، نيوساوث ويلز، أستراليا",
+        "elevation_meters": 950,
+        "voucher_or_collector": "AM-KS Australian Museum regional series; Koch 1977 revision",
+        "primary_literature_citation": "Koch LE 1977; Luna-Ramirez K et al., Toxins 2017; 9(3):102",
+        "provenance_pmid": "28300762",
+        "provenance_doi": "10.3390/toxins9030102",
+        "is_disputed": false,
+        "total_peptides_count": 1,
+        "antimicrobial_peptides_count": 0,
+        "lead_candidates_count": 0,
+        "has_antimicrobial_leads": false
+      }
+    }
+  ]
+}

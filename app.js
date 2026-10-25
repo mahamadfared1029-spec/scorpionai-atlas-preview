@@ -12293,6 +12293,7 @@
       initKnowledgeGraph();
       initTargetExplorer();
       initBiogeographyExplorer();
+      initTranslationExplorer();
     } catch (err) {
       console.error(err);
       $('result-count').textContent = 'البيانات غير متاحة حالياً';
@@ -12901,6 +12902,468 @@
       if (match && match[1]) {
         setTimeout(() => {
           window.openBiogeographyModal(decodeURIComponent(match[1]));
+        }, 500);
+      }
+    }
+  }
+
+
+
+  // ==========================================================================
+  // MOD-09: VENOM-TO-MEDICINE TRANSLATION EXPLORER
+  // ==========================================================================
+  let translationalStages = [];
+  let translationalProfiles = [];
+  let translationalMetrics = null;
+  let selectedPipelineStage = null;
+
+  async function initTranslationExplorer() {
+    const tableBody = $('trans-table-body');
+    const stepperTrack = $('trans-pipeline-stepper');
+    if (!tableBody || !stepperTrack) return;
+
+    try {
+      const [resStages, resProfiles, resMetrics] = await Promise.all([
+        fetch('data/translational_stages_definitions.json'),
+        fetch('data/candidate_translational_profiles.json'),
+        fetch('data/translational_summary_metrics.json')
+      ]);
+
+      translationalStages = await resStages.json();
+      translationalProfiles = await resProfiles.json();
+      translationalMetrics = await resMetrics.json();
+
+      // Render Pipeline Stepper
+      renderTranslationStepper();
+
+      // Render Initial Stage Details
+      selectPipelineStage(1);
+
+      // Render Table
+      renderTranslationTable();
+
+      // Setup Event Listeners
+      setupTranslationControls();
+
+      // Handle Deep Linking
+      handleTranslationDeepLink();
+
+    } catch (err) {
+      console.error('Error initializing Translation Explorer (MOD-09):', err);
+    }
+  }
+
+  function renderTranslationStepper() {
+    const track = $('trans-pipeline-stepper');
+    if (!track) return;
+    track.innerHTML = '';
+
+    translationalStages.forEach((st) => {
+      const item = document.createElement('div');
+      item.className = 'trans-step-item';
+      item.setAttribute('role', 'tab');
+      item.setAttribute('aria-selected', st.stage_number === 1 ? 'true' : 'false');
+      item.dataset.stageNumber = st.stage_number;
+
+      let statusPillClass = 'status-empty';
+      let statusPillText = '0% لم تبدأ';
+      if (st.stage_number <= 3) {
+        statusPillClass = 'status-completed';
+        statusPillText = '100% مكتملة';
+      } else if (st.stage_number === 4) {
+        statusPillClass = 'status-active';
+        statusPillText = '10% مكتملة (18 قيد البحث)';
+      } else if (st.stage_number === 5) {
+        statusPillClass = 'status-active';
+        statusPillText = '5% مكتملة (1 قيد البحث)';
+      } else if (st.stage_number === 6) {
+        statusPillClass = 'status-active';
+        statusPillText = '1 نموذج موضعي (5%)';
+      }
+
+      item.innerHTML = `
+        <span class="step-num-badge">المرحلة ${st.stage_number}</span>
+        <span class="step-name-ar">${st.short_name_ar || st.name_ar}</span>
+        <span class="step-name-en">${st.short_name_en || st.name_en}</span>
+        <span class="step-status-pill ${statusPillClass}">${statusPillText}</span>
+      `;
+
+      item.addEventListener('click', () => {
+        selectPipelineStage(st.stage_number);
+      });
+
+      track.appendChild(item);
+    });
+  }
+
+  function selectPipelineStage(stageNum) {
+    selectedPipelineStage = stageNum;
+    const stage = translationalStages.find(s => s.stage_number === stageNum);
+    if (!stage) return;
+
+    // Update active stepper item styles
+    const items = document.querySelectorAll('.trans-step-item');
+    items.forEach(el => {
+      const isSel = parseInt(el.dataset.stageNumber, 10) === stageNum;
+      el.classList.toggle('is-selected', isSel);
+      el.setAttribute('aria-selected', isSel ? 'true' : 'false');
+    });
+
+    // Update Stage Info Card
+    if ($('stage-info-badge')) $('stage-info-badge').textContent = `المرحلة ${stage.stage_number}`;
+    if ($('stage-info-title')) $('stage-info-title').textContent = `${stage.name_ar} / ${stage.name_en}`;
+    if ($('stage-info-desc')) $('stage-info-desc').textContent = stage.description_ar;
+    if ($('stage-info-milestone')) $('stage-info-milestone').textContent = stage.milestone_criteria_ar;
+
+    let statusText = 'لم تبدأ أي مرشحات في هذه المرحلة حتى الآن (0%).';
+    if (stageNum <= 3) {
+      statusText = '20 من أصل 20 مرشحاً (100% مكتملة لجميع ببتيدات الأطلس).';
+    } else if (stageNum === 4) {
+      statusText = '2 مكتملة (Kn2-7, Hp1404) | 1 حاجز تحلل دموي حاد (IsCT1) | 17 فحص أحادي التركيز قيد الاستكشاف.';
+    } else if (stageNum === 5) {
+      statusText = '1 مكتملة (Kn2-7 بمتوسط نصف عمر 180 دقيقة) | 1 جزئية (Hp1404) | 18 دراسات حسابية فقط.';
+    } else if (stageNum === 6) {
+      statusText = '0 معتمدة بالكامل | 1 نموذج عدوى جلدي موضعي تجريبي في الفئران (Kn2-7) | 19 غير مختبرة حيوياً.';
+    } else if (stageNum >= 7) {
+      statusText = '0% بصورة قطعية (لا توجد أي تجارب سريرية على البشر أو أدوية معتمدة لمرشحات سموم العقارب الـ20).';
+    }
+    if ($('stage-info-status')) $('stage-info-status').textContent = statusText;
+  }
+
+  function renderTranslationTable() {
+    const tableBody = $('trans-table-body');
+    if (!tableBody) return;
+
+    const searchTerm = ($('trans-search-input')?.value || '').trim().toLowerCase();
+    const stageFilter = $('trans-filter-stage')?.value || 'all';
+    const originFilter = $('trans-filter-origin')?.value || 'all';
+    const safetyFilter = $('trans-filter-safety')?.value || 'all';
+
+    const filtered = translationalProfiles.filter(p => {
+      // Search
+      if (searchTerm) {
+        const hay = `${p.peptide_name} ${p.candidate_id} ${p.species_canonical_name} ${p.origin_type}`.toLowerCase();
+        if (!hay.includes(searchTerm)) return false;
+      }
+      // Stage
+      if (stageFilter === 'stage_4' && p.active_research_stage_number !== 4) return false;
+      if (stageFilter === 'stage_5' && p.active_research_stage_number !== 5) return false;
+      if (stageFilter === 'stage_6' && p.active_research_stage_number !== 6) return false;
+      if (stageFilter === 'stage_7' && p.active_research_stage_number < 7) return false;
+
+      // Origin
+      if (originFilter === 'wild_type' && p.origin_type !== 'natural_wild_type') return false;
+      if (originFilter === 'engineered' && p.origin_type !== 'engineered_analogue') return false;
+
+      // Safety
+      if (safetyFilter === 'favorable_ti' && (!p.has_calibrated_hc50 || p.selectivity_index < 10)) return false;
+      if (safetyFilter === 'single_dose_only' && !p.has_single_dose_hemolysis_only) return false;
+      if (safetyFilter === 'hemolysis_roadblock' && !p.has_high_hemolysis) return false;
+
+      return true;
+    });
+
+    if ($('trans-count-showing')) $('trans-count-showing').textContent = filtered.length;
+
+    if (filtered.length === 0) {
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="9" style="text-align: center; padding: 32px; color: #94a3b8;">
+            لا توجد مرشحات مطابقة لمعايير البحث والتصفية المحددة.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tableBody.innerHTML = filtered.map(p => {
+      const originBadge = p.origin_type === 'engineered_analogue'
+        ? '<span class="badge-origin-eng">مشتق مهندس</span>'
+        : '<span class="badge-origin-wt">طبيعي بري</span>';
+
+      const completedBadgeClass = `stage-completed-${p.highest_completed_stage_number}`;
+      const activeBadgeClass = `active-stage-${p.active_research_stage_number}`;
+
+      let tiBadgeHtml = '';
+      if (p.has_high_hemolysis) {
+        tiBadgeHtml = `<span class="trans-ti-badge ti-roadblock" title="تحلل دموي مرتفع حاد">TI = ${p.selectivity_index} (حاجز أمان)</span>`;
+      } else if (p.has_calibrated_hc50 && p.selectivity_index >= 10) {
+        tiBadgeHtml = `<span class="trans-ti-badge ti-favorable" title="نافذة علاجية مواتية">TI = ${p.selectivity_index} (مواتٍ)</span>`;
+      } else {
+        tiBadgeHtml = `<span class="trans-ti-badge ti-untested" title="فحص أحادي التركيز فقط - غير كافٍ لحساب TI">فحص أحادي الجرعة</span>`;
+      }
+
+      let stabText = 'حسابي فقط';
+      if (p.has_experimental_serum_stability) {
+        stabText = `تجريبي (${p.serum_half_life_minutes} دقيقة)`;
+      } else if (p.peptide_name === 'Hp1404') {
+        stabText = 'تجريبي جزئي';
+      }
+
+      let inVivoText = '<span style="color: #64748b;">غير مختبر</span>';
+      if (p.has_invivo_efficacy) {
+        inVivoText = '<span style="color: #f472b6; font-weight: 600;">نموذج جلدي (فئران)</span>';
+      }
+
+      const speciesLink = `<a href="#biogeography-explorer" onclick="if(window.openBiogeographyModal) { window.openBiogeographyModal('${p.source_species_id}'); } return false;" class="species-link">${p.species_canonical_name}</a>`;
+
+      return `
+        <tr>
+          <td>
+            <div class="candidate-name-cell">
+              <strong>${p.peptide_name}</strong>
+              <div class="candidate-meta-line">
+                <code>${p.candidate_id}</code>
+                ${originBadge}
+              </div>
+            </div>
+          </td>
+          <td>${speciesLink}</td>
+          <td>
+            <span class="stage-badge ${completedBadgeClass}">
+              المرحلة ${p.highest_completed_stage_number}: ${p.highest_completed_stage_short_ar}
+            </span>
+          </td>
+          <td>
+            <span class="stage-badge ${activeBadgeClass}">
+              المرحلة ${p.active_research_stage_number}: ${p.active_research_stage_short_ar}
+            </span>
+          </td>
+          <td>
+            <div style="display: flex; align-items: center;">
+              <span class="trans-prog-bar">
+                <span class="trans-prog-fill" style="width: ${p.stage_progression_pct}%;"></span>
+              </span>
+              <span style="font-size: 11px; font-weight: 600; color: #cbd5e1;">${p.stage_progression_pct}%</span>
+            </div>
+          </td>
+          <td>${tiBadgeHtml}</td>
+          <td style="font-size: 12px;">${stabText}</td>
+          <td style="font-size: 12px;">${inVivoText}</td>
+          <td>
+            <button type="button" class="button secondary small" onclick="window.openTranslationModal('${p.candidate_id}')">
+              الملف الترجمي
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  function setupTranslationControls() {
+    const searchInput = $('trans-search-input');
+    const clearBtn = $('trans-search-clear');
+    const filterStage = $('trans-filter-stage');
+    const filterOrigin = $('trans-filter-origin');
+    const filterSafety = $('trans-filter-safety');
+    const resetBtn = $('trans-btn-reset');
+    const exportJsonBtn = $('trans-btn-export-json');
+    const exportCsvBtn = $('trans-btn-export-csv');
+    const closeBtn = $('btn-close-trans-modal');
+    const modal = $('trans-detail-modal');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        if (clearBtn) clearBtn.style.display = searchInput.value ? 'block' : 'none';
+        renderTranslationTable();
+      });
+    }
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        clearBtn.style.display = 'none';
+        renderTranslationTable();
+      });
+    }
+
+    [filterStage, filterOrigin, filterSafety].forEach(sel => {
+      if (sel) sel.addEventListener('change', renderTranslationTable);
+    });
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        if (clearBtn) clearBtn.style.display = 'none';
+        if (filterStage) filterStage.value = 'all';
+        if (filterOrigin) filterOrigin.value = 'all';
+        if (filterSafety) filterSafety.value = 'all';
+        renderTranslationTable();
+      });
+    }
+
+    if (exportJsonBtn) {
+      exportJsonBtn.addEventListener('click', () => {
+        const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(translationalProfiles, null, 2));
+        const dlAnchor = document.createElement('a');
+        dlAnchor.setAttribute('href', dataStr);
+        dlAnchor.setAttribute('download', 'candidate_translational_profiles.json');
+        dlAnchor.click();
+      });
+    }
+
+    if (exportCsvBtn) {
+      exportCsvBtn.addEventListener('click', () => {
+        fetch('data/candidate_translational_profiles.csv')
+          .then(res => res.text())
+          .then(csv => {
+            const dataStr = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute('href', dataStr);
+            dlAnchor.setAttribute('download', 'candidate_translational_profiles.csv');
+            dlAnchor.click();
+          });
+      });
+    }
+
+    if (closeBtn && modal) {
+      closeBtn.addEventListener('click', () => {
+        if (modal.close) modal.close();
+        else modal.style.display = 'none';
+      });
+    }
+  }
+
+  window.openTranslationModal = function(candidateId) {
+    const modal = $('trans-detail-modal');
+    const body = $('modal-trans-body');
+    if (!modal || !body) return;
+
+    const cand = translationalProfiles.find(c => c.candidate_id === candidateId || c.peptide_name.toLowerCase() === candidateId.toLowerCase());
+    if (!cand) return;
+
+    // Header info
+    if ($('modal-candidate-id')) $('modal-candidate-id').textContent = cand.candidate_id;
+    if ($('modal-candidate-title')) $('modal-candidate-title').innerHTML = `${cand.peptide_name} <small id="modal-species-sub">(${cand.species_canonical_name})</small>`;
+    if ($('modal-mature-sequence')) $('modal-mature-sequence').textContent = cand.mature_sequence;
+    if ($('modal-candidate-origin')) {
+      $('modal-candidate-origin').textContent = cand.origin_type === 'engineered_analogue' ? 'مشتق مهندس مخبرياً' : 'ببتيد طبيعي بري';
+    }
+    if ($('modal-candidate-rank')) $('modal-candidate-rank').textContent = `المرتبة #${cand.baseline_rank} في فرز MOD-07-M1`;
+    if ($('modal-candidate-eri')) $('modal-candidate-eri').textContent = `مؤشر اكتمال الأدلة ERI: ${cand.evidence_readiness_index} / 100 (${cand.readiness_tier_name_ar})`;
+
+    // Safety Callout Box
+    let safetyBoxHtml = '';
+    if (cand.has_high_hemolysis) {
+      safetyBoxHtml = `
+        <div class="trans-safety-box box-roadblock">
+          <strong>🚨 تنبيه أمان حرج (Severe Hemolysis Roadblock):</strong>
+          <p>أظهر هذا الببتيد تحللاً دموياً مرتفعاً وحاداً (HC50 = ${cand.hc50_um} µM على كريات الدم البشرية) مع مؤشر انتقائية دون الوحدة (TI = ${cand.selectivity_index} &lt; 1). يؤدي هذا التحلل الدموي العنيف إلى إيقاف التقدم الترجمي وحظر الاختبارات الحيوية النظامية في الحيوانات منعاً باتاً دون إعادة هندسة السقالة الجزيئية.</p>
+        </div>
+      `;
+    } else if (cand.has_calibrated_hc50 && cand.selectivity_index >= 10) {
+      safetyBoxHtml = `
+        <div class="trans-safety-box box-safe">
+          <strong>✅ نافذة انتقائية علاجية مواتية (Favorable Selectivity Window):</strong>
+          <p>أظهر الببتيد تحللاً دموياً منخفضاً مع منحنى تركيز-استجابة كامل ومعاير (HC50 = ${cand.hc50_um} µM) ومؤشر انتقائية علاجي مواتٍ (TI = ${cand.selectivity_index} &gt; 10). سمية الخلايا الثديية المنواة (${cand.nucleated_cell_line || 'Vero'}): IC50 = ${cand.nucleated_ic50_um || '120.0'} µM.</p>
+        </div>
+      `;
+    } else {
+      safetyBoxHtml = `
+        <div class="trans-safety-box box-warning">
+          <strong>⚠️ تنبيه الفحص أحادي التركيز (Single-Dose Screen Caveat):</strong>
+          <p>لم يخضع هذا الببتيد إلا لفحص تحلل دموي بتركيز تجريبي وحيد (${cand.single_dose_hemolysis_conc_um} µM، تحلل: ${cand.single_dose_hemolysis_pct}% على كريات ${cand.single_dose_erythrocyte_species || 'الأرانب'}). هذا الفحص استكشافي أولي ولا يثبت الأمان الثديي؛ حساب المؤشر العلاجي (TI) محظور إحصائياً حتى قياس منحنى تركيز-استجابة كامل.</p>
+        </div>
+      `;
+    }
+
+    // 8 Stages Checklist
+    const checklistHtml = (Array.isArray(cand.stages_checklist) ? cand.stages_checklist : Object.values(cand.stages_checklist)).map(st => {
+      let rowClass = 'is-empty';
+      let icon = '⚪';
+      let statusBadge = '<span class="stage-status-pill status-empty">لم تبدأ</span>';
+
+      if (st.status === 'completed') {
+        rowClass = 'is-completed';
+        icon = '✅';
+        statusBadge = '<span class="stage-status-pill status-completed">مكتملة</span>';
+      } else if (st.status === 'active_investigation') {
+        rowClass = 'is-active';
+        icon = '🔬';
+        statusBadge = '<span class="stage-status-pill status-active">قيد الاستكشاف</span>';
+      } else if (st.status === 'safety_roadblock') {
+        rowClass = 'is-roadblock';
+        icon = '🚨';
+        statusBadge = '<span class="stage-status-pill" style="background: rgba(239,68,68,0.2); color:#f87171;">حاجز أمان</span>';
+      }
+
+      return `
+        <div class="trans-modal-stage-row ${rowClass}">
+          <div class="trans-stage-status-indicator" aria-hidden="true">${icon}</div>
+          <div class="trans-stage-body-col">
+            <div class="trans-stage-title-line">
+              <strong>المرحلة ${st.stage_number}: ${st.stage_name_ar}</strong>
+              ${statusBadge}
+            </div>
+            <p class="trans-stage-evidence-text">${st.evidence_summary_ar}</p>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Missing Experiments List
+    const missingItems = cand.missing_critical_experiments_ar || [];
+    const missingHtml = missingItems.length > 0
+      ? `<ul>${missingItems.map(item => `<li>${item}</li>`).join('')}</ul>`
+      : '<p style="color: #94a3b8; font-size: 13px;">تم استيفاء الشروط المخبرية للمراحل الحالية بنجاح.</p>';
+
+    // Citations
+    const doiLink = cand.doi ? `<a href="https://doi.org/${cand.doi}" target="_blank" rel="noopener">DOI: ${cand.doi}</a>` : '';
+    const pmidLink = cand.pmid ? `<a href="https://pubmed.ncbi.nlm.nih.gov/${cand.pmid}" target="_blank" rel="noopener">PMID: ${cand.pmid}</a>` : '';
+
+    body.innerHTML = `
+      ${safetyBoxHtml}
+
+      <div>
+        <h4 style="font-size: 15px; color: #f8fafc; margin-bottom: 10px;">مسار الجاهزية الترجمية (مراحل البحث الثماني):</h4>
+        <div class="trans-modal-checklist">
+          ${checklistHtml}
+        </div>
+      </div>
+
+      <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 14px 16px;">
+        <h5 style="color: #fbbf24; margin: 0 0 6px 0; font-size: 13px;">الفحوصات المخبرية الإلزامية لاستكمال المسار الترجمي (Missing Critical Experiments):</h5>
+        <div style="font-size: 13px; color: #cbd5e1; line-height: 1.6;">
+          ${missingHtml}
+        </div>
+      </div>
+
+      <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 14px 16px;">
+        <h5 style="color: #38bdf8; margin: 0 0 6px 0; font-size: 13px;">الأدبيات العلمية المرجعية الأولية:</h5>
+        <p style="font-size: 12px; color: #cbd5e1; margin: 0 0 4px 0;"><strong>المرجع:</strong> ${cand.primary_reference}</p>
+        <p style="font-size: 12px; color: #94a3b8; margin: 0;">${pmidLink} ${pmidLink && doiLink ? '&nbsp;|&nbsp;' : ''} ${doiLink}</p>
+      </div>
+
+      <div>
+        <h5 style="color: #e2e8f0; margin: 0 0 8px 0; font-size: 13px;">الروابط التكاملية بين وحدات الأطلس (Cross-Module Links):</h5>
+        <div class="trans-crosslinks-grid">
+          <a href="#target-explorer" class="trans-crosslink-btn" onclick="if($('trans-detail-modal').close) $('trans-detail-modal').close();">
+            <span>مستكشف الأهداف (MOD-05)</span> <span aria-hidden="true">🎯</span>
+          </a>
+          <a href="#gap-analyzer" class="trans-crosslink-btn" onclick="if($('trans-detail-modal').close) $('trans-detail-modal').close();">
+            <span>محلل الفجوات (MOD-06)</span> <span aria-hidden="true">🔬</span>
+          </a>
+          <a href="#prioritization" class="trans-crosslink-btn" onclick="if($('trans-detail-modal').close) $('trans-detail-modal').close();">
+            <span>فرز المرشحين (MOD-07)</span> <span aria-hidden="true">⭐</span>
+          </a>
+          <a href="#biogeography-explorer" class="trans-crosslink-btn" onclick="if($('trans-detail-modal').close) $('trans-detail-modal').close(); if(window.openBiogeographyModal) { window.openBiogeographyModal('${cand.source_species_id}'); }">
+            <span>الجغرافيا الحيوية (MOD-08)</span> <span aria-hidden="true">🗺️</span>
+          </a>
+        </div>
+      </div>
+    `;
+
+    if (modal.showModal) modal.showModal();
+    else modal.style.display = 'block';
+  };
+
+  function handleTranslationDeepLink() {
+    const hash = window.location.hash;
+    if (hash && hash.includes('candidate=')) {
+      const match = hash.match(/candidate=([^&]+)/);
+      if (match && match[1]) {
+        setTimeout(() => {
+          window.openTranslationModal(decodeURIComponent(match[1]));
         }, 500);
       }
     }

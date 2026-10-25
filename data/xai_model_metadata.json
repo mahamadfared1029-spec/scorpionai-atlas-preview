@@ -1,0 +1,157 @@
+{
+  "model_name": "ScorpionAI Atlas v1.3 - Research Grade",
+  "model_version": "1.3.0-MOD10-XAI",
+  "primary_architecture": "Regularized Logistic Regression with Balanced Class Weighting (PU Framing)",
+  "baseline_comparison_model": "Biophysical Rule-Based Heuristic (Net Charge >= 1.5 & Cys <= 1)",
+  "majority_baseline_model": "Majority Class Predictor (Always Background Negative)",
+  "training_framing": "Positive-Unlabeled (PU) Learning",
+  "training_dataset_size": 940,
+  "cv_folds_count": 4,
+  "cv_protocol": "4-Fold Group K-Fold Clustered by Sequence Identity (>=70% Identity via CD-HIT)",
+  "cross_fold_sequence_leakage_pct": 0.0,
+  "independent_holdout_size": 292,
+  "independent_holdout_clusters_count": 114,
+  "total_atlas_sequences": 1232,
+  "evaluation_holdout_metrics": {
+    "roc_auc": 0.742,
+    "roc_auc_95_ci_sample": [
+      0.619,
+      0.862
+    ],
+    "roc_auc_95_ci_cluster": [
+      0.477,
+      0.948
+    ],
+    "pr_auc": 0.5605,
+    "pr_auc_95_ci_sample": [
+      0.402,
+      0.735
+    ],
+    "pr_auc_95_ci_cluster": [
+      0.3,
+      0.795
+    ],
+    "balanced_accuracy": 0.7507,
+    "sensitivity": 0.5833,
+    "specificity": 0.918,
+    "precision": 0.5,
+    "f1_score": 0.5385,
+    "matthews_correlation_coefficient": 0.4697
+  },
+  "heuristic_holdout_metrics": {
+    "roc_auc": 0.7383,
+    "pr_auc": 0.4366,
+    "balanced_accuracy": 0.7383,
+    "sensitivity": 0.5,
+    "specificity": 0.9766
+  },
+  "model_intercept_bias": -0.6219,
+  "learned_feature_coefficients": {
+    "net_charge_ph74_physiological": 0.7048,
+    "hydrophobic_fraction": 0.4992,
+    "mean_hydrophobicity_eisenberg": 0.0188,
+    "hydrophobic_moment_alpha": 0.2613,
+    "aliphatic_index": 0.3049,
+    "boman_index": 0.0677,
+    "instability_index": 0.0846,
+    "cysteine_count": -0.515,
+    "length_aa": -0.0044,
+    "aromatic_fraction": 0.2092
+  },
+  "training_feature_means": {
+    "net_charge_ph74_physiological": 1.2987,
+    "hydrophobic_fraction": 0.2729,
+    "mean_hydrophobicity_eisenberg": -0.0356,
+    "hydrophobic_moment_alpha": 0.1819,
+    "aliphatic_index": 60.4827,
+    "boman_index": 1.5165,
+    "instability_index": 35.9132,
+    "cysteine_count": 5.2181,
+    "length_aa": 49.5074,
+    "aromatic_fraction": 0.1054
+  },
+  "training_feature_stds": {
+    "net_charge_ph74_physiological": 3.8832,
+    "hydrophobic_fraction": 0.134,
+    "mean_hydrophobicity_eisenberg": 0.2424,
+    "hydrophobic_moment_alpha": 0.1471,
+    "aliphatic_index": 37.019,
+    "boman_index": 1.2081,
+    "instability_index": 22.3903,
+    "cysteine_count": 3.2543,
+    "length_aa": 49.3998,
+    "aromatic_fraction": 0.0612
+  },
+  "feature_metadata": {
+    "net_charge_ph74_physiological": {
+      "name_en": "Physiological Net Charge (pH 7.4)",
+      "name_ar": "الشحنة الكهربائية الصافية الفسيولوجية (pH 7.4)",
+      "unit": "e",
+      "role_en": "Major positive driver (+0.7048). Favors cationic peptides capable of electrostatic attraction to bacterial anionic outer membranes (PG/CL/LPS).",
+      "role_ar": "المحرك الإيجابي الأكبر (+0.7048). يرجح الببتيدات الموجبة القادرة على الانجذاب الكهروستاتيكي للأغشية البكتيرية السالبة."
+    },
+    "hydrophobic_fraction": {
+      "name_en": "Hydrophobic Amino Acid Fraction",
+      "name_ar": "نسبة الأحماض الأمينية الكارهة للماء",
+      "unit": "ratio",
+      "role_en": "Key positive driver (+0.4992). Promotes peptide insertion and partition into lipid bilayers.",
+      "role_ar": "محرك إيجابي رئيسي (+0.4992). يدعم انغراس الببتيد وذوبانه في الطبقة الدهنية الثنائية."
+    },
+    "aliphatic_index": {
+      "name_en": "Aliphatic Index (Ikai 1980)",
+      "name_ar": "مؤشر السلسلة الأليفاتية (Ikai)",
+      "unit": "index",
+      "role_en": "Positive contributor (+0.3049). Reflects thermal stability and abundance of Ala, Val, Ile, and Leu side-chains.",
+      "role_ar": "مساهم إيجابي (+0.3049). يعكس الاستقرار الحراري ووفرة السلاسل الجانبية الأليفاتية المتفرعة."
+    },
+    "hydrophobic_moment_alpha": {
+      "name_en": "Alpha-Helical Hydrophobic Moment (100°)",
+      "name_ar": "العزم الحلزوني الكاره للماء (α-100°)",
+      "unit": "moment",
+      "role_en": "Positive amphipathicity driver (+0.2613). Measures amphipathic segregation between polar and hydrophobic helical faces.",
+      "role_ar": "محرك الازدواجية الأليفة (+0.2613). يقيس تمايز الوجه الكاره للماء عن الوجه القطبي على الحلزون."
+    },
+    "aromatic_fraction": {
+      "name_en": "Aromatic Amino Acid Fraction (Phe/Trp/Tyr)",
+      "name_ar": "نسبة الأحماض الأمينية العطرية",
+      "unit": "ratio",
+      "role_en": "Positive membrane interfacial driver (+0.2092). Trp and Phe residues anchor into the membrane-water interface.",
+      "role_ar": "محرك وسطي إيجابي (+0.2092). تثبّت البقايا العطرية (خاصة Trp و Phe) الببتيد في الواجهة المائية الدهنية."
+    },
+    "instability_index": {
+      "name_en": "Guruprasad Instability Index (1990)",
+      "name_ar": "مؤشر عدم الاستقرار (Guruprasad)",
+      "unit": "index",
+      "role_en": "Slight positive weight (+0.0846). Captures dipeptide stability tendencies in the training pool.",
+      "role_ar": "وزن إيجابي طفيف (+0.0846). يلتقط ميل ثنائيات الببتيد للاستقرار داخل مصفوفة التدريب."
+    },
+    "boman_index": {
+      "name_en": "Boman Protein-Interaction Index",
+      "name_ar": "مؤشر بومان للتفاعل البروتيني",
+      "unit": "kcal/mol",
+      "role_en": "Minor positive weight (+0.0677). Estimates potential for non-specific protein and receptor interactions.",
+      "role_ar": "وزن إيجابي منخفض (+0.0677). يقدر قابلية التفاعل غير النوعي مع البروتينات والمستقبلات."
+    },
+    "mean_hydrophobicity_eisenberg": {
+      "name_en": "Mean Eisenberg Consensus Hydrophobicity",
+      "name_ar": "متوسط كراهية الماء (مقياس آيزنبرغ التوافقي)",
+      "unit": "scale",
+      "role_en": "Residual positive weight (+0.0188). Most hydrophobic variance is already captured by hydrophobic fraction.",
+      "role_ar": "وزن إيجابي متبقٍ (+0.0188). تم امتصاص معظم التباين الكاره للماء بواسطة نسبة الأحماض الكارهة."
+    },
+    "length_aa": {
+      "name_en": "Peptide Sequence Length",
+      "name_ar": "طول التسلسل الببتيدي",
+      "unit": "residues",
+      "role_en": "Near-neutral penalty (-0.0044). Imposes a minor statistical regularization against excessive sequence lengths.",
+      "role_ar": "عقوبة شبه محايدة (-0.0044). تفرض تقييداً إحصائياً طفيفاً ضد الأطوال المتزايدة."
+    },
+    "cysteine_count": {
+      "name_en": "Cysteine Residue Count",
+      "name_ar": "عدد بقايا السيستين (Cys)",
+      "unit": "residues",
+      "role_en": "Strong negative inhibitor (-0.5150). Penalizes homology to classic disulfide-rich scorpion neurotoxins (6–8 Cys). Cysteine-free linear AMPs receive a strong positive offset (+0.8257 log-odds).",
+      "role_ar": "مثبط إحصائي قوي (-0.5150). يعاقب التشابه البنيوي مع السموم العصبية الكلاسيكية كثيفة الجسور الكبريتية (6-8 سيستين)، مما يمنح الببتيدات الخطية الخالية من السيستين دفعة إيجابية (+0.8257)."
+    }
+  }
+}

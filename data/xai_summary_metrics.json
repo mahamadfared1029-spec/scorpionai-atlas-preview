@@ -1,0 +1,25 @@
+{
+  "title": "SCORPION X — MOD-10 Explainable AI Summary Metrics",
+  "model_version": "1.3.0-MOD10-XAI",
+  "total_prioritized_candidates": 20,
+  "holdout_roc_auc": 0.742,
+  "holdout_roc_auc_ci": [
+    0.619,
+    0.862
+  ],
+  "holdout_pr_auc": 0.5605,
+  "holdout_pr_auc_ci": [
+    0.402,
+    0.735
+  ],
+  "cross_fold_leakage_pct": 0.0,
+  "training_sequences_count": 940,
+  "independent_holdout_sequences_count": 292,
+  "in_domain_count": 14,
+  "high_charge_extrapolation_count": 5,
+  "multi_domain_structural_atypical_count": 1,
+  "predicted_amp_count": 19,
+  "mean_predicted_probability": 0.9035,
+  "highest_positive_feature": "net_charge_ph74_physiological (+0.7048)",
+  "highest_negative_feature": "cysteine_count (-0.5150)"
+}

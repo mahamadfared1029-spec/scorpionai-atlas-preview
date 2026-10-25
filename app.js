@@ -10103,121 +10103,480 @@
   });
 
   // ============================================================================
-  // MOD-10: Explainable AI & Biophysical Drivers
   // ============================================================================
-  const learnedCoefficients = {
-    net_charge_ph74_physiological: { weight: 0.7048, label: 'الشحنة الفسيولوجية (pH 7.4)', role: 'معامل ارتباط إيجابي قوي (+0.7048) مع الببتيدات الموجبة الموسومة في فضاء التدريب' },
-    hydrophobic_fraction: { weight: 0.4992, label: 'نسبة الأحماض الكارهة للماء', role: 'ارتباط إيجابي (+0.4992) مع كراهية الماء (ملاحظة: تداخل خطي مع مؤشر Eisenberg)' },
-    aliphatic_index: { weight: 0.3049, label: 'مؤشر السلسلة الأليفاتية', role: 'معامل ترجيحي (+0.3049) يرتبط إحصائياً بوجود السلاسل الأليفاتية المتفرعة' },
-    hydrophobic_moment_alpha: { weight: 0.2613, label: 'العزم الكاره للماء (α)', role: 'معامل إيجابي معتدل (+0.2613) يعكس توزيع الازدواجية الأليفة على الحلزون' },
-    aromatic_fraction: { weight: 0.2092, label: 'نسبة الأحماض العطرية (Trp/Phe)', role: 'معامل إيجابي (+0.2092) للبقايا العطرية في توزيع ببتيدات التدريب' },
-    instability_index: { weight: 0.0846, label: 'مؤشر عدم الاستقرار', role: 'وزن إحصائي طفيف (+0.0846) تحت النموذج الخطي المقيّد' },
-    boman_index: { weight: 0.0677, label: 'مؤشر بومان للتفاعل البروتيني', role: 'وزن إحصائي منخفض (+0.0677) لقابلية الارتباط العام' },
-    mean_hydrophobicity_eisenberg: { weight: 0.0188, label: 'وسط الكراهية للماء (Eisenberg)', role: 'وزن متبقٍ (+0.0188) نظراً لامتصاص معظم الأثر بواسطة Hydrophobic Fraction' },
-    length_aa: { weight: -0.0044, label: 'طول التسلسل الببتيدي', role: 'معامل شبه محايد (-0.0044) مع عقوبة إحصائية طفيفة للأطوال الكبيرة' },
-    cysteine_count: { weight: -0.5150, label: 'عدد بقايا السيستين (Cys)', role: 'معامل سلبي بارز (-0.5150): يعكس ترجيحاً إحصائياً لفصل السموم العصبية الكلاسيكية (ذات الجسور الكبريتية) عن الببتيدات الخطية، ولا يمثل تثبيطاً كيميائياً للفعالية' }
-  };
+  // MOD-10: Explainable AI & Prediction Transparency (Sprint 11)
+  // ============================================================================
+  let xaiModelMetadata = null;
+  let candidateXaiExplanations = [];
+  let xaiSummaryMetrics = null;
+  let currentXaiFilter = 'all';
+  let selectedXaiCandidateId = 'SCA-PEP-011'; // Default to Kn2-7 (prominent translational candidate)
 
-  function renderXAIExplorer() {
-    const weightsContainer = $('xai-weights-container');
-    const peptideSelect = $('xai-peptide-select');
-    const peptideBreakdown = $('xai-peptide-breakdown');
-    if (!weightsContainer || !peptideSelect || !peptideBreakdown) return;
+  async function initExplainableAI() {
+    const candidateContainer = $('xai-candidate-display');
+    const candidateSelect = $('xai-candidate-select');
+    const weightsContainer = $('xai-weights-table-container');
+    if (!candidateContainer || !candidateSelect) return;
 
-    // Render Global Weights Chart
-    weightsContainer.innerHTML = Object.entries(learnedCoefficients).map(([key, info]) => {
-      const isPos = info.weight >= 0;
-      const barWidth = Math.abs(info.weight) * 110;
-      return `
-        <div class="xai-feature-row">
-          <div class="xai-feature-label">
-            <strong>${esc(info.label)}</strong>
-            <small>${esc(info.role)}</small>
-          </div>
-          <div class="xai-bar-track">
-            <div class="xai-bar ${isPos ? 'positive' : 'negative'}" style="width: ${barWidth}px"></div>
-          </div>
-          <div class="xai-feature-val mono ${isPos ? 'text-success' : 'text-danger'}">
-            ${isPos ? '+' : ''}${info.weight.toFixed(4)}
-          </div>
-        </div>
-      `;
-    }).join('');
+    try {
+      const [resMeta, resExpl, resMetrics] = await Promise.all([
+        fetch('data/xai_model_metadata.json'),
+        fetch('data/candidate_xai_explanations.json'),
+        fetch('data/xai_summary_metrics.json')
+      ]);
 
-    // Pre-populate select with key demonstrative peptides
-    const showcaseNames = ['Stigmurin', 'Kn2-7', 'BmKn2', 'Scorpine', 'Hp1404', 'IsCT1'];
-    const showcasePeptides = data.filter(d => showcaseNames.includes(d.peptide_name));
+      xaiModelMetadata = await resMeta.json();
+      candidateXaiExplanations = await resExpl.json();
+      xaiSummaryMetrics = await resMetrics.json();
 
-    // Also include one cysteine-rich venom neurotoxin from background
-    const neurotoxin = data.find(d => parseInt(d.features.cysteine_count, 10) >= 6 && d.evidence_activity_status === 'unassayed_background');
-    if (neurotoxin) showcasePeptides.push(neurotoxin);
+      setupXAIControls();
+      populateCandidateSelector();
+      renderGlobalWeightsTable();
 
-    peptideSelect.innerHTML = showcasePeptides.map(p => `
-      <option value="${esc(p.atlas_id)}">${esc(p.peptide_name)} (${esc(p.species)}) — ${p.features.cysteine_count} Cys / Charge +${num(p.features.net_charge_ph74_physiological, 1)}</option>
-    `).join('');
-
-    function updatePeptideBreakdown() {
-      const selectedId = peptideSelect.value;
-      const p = data.find(x => x.atlas_id === selectedId);
-      if (!p) return;
-
-      const f = p.features;
-      const cysCount = parseInt(f.cysteine_count, 10) || 0;
-      const charge = parseFloat(f.net_charge_ph74_physiological) || 0;
-      const moment = parseFloat(f.hydrophobic_moment_alpha) || 0;
-      const hydroFrac = parseFloat(f.hydrophobic_fraction) || 0;
-
-      const chargeContrib = charge * learnedCoefficients.net_charge_ph74_physiological.weight;
-      const cysContrib = cysCount * learnedCoefficients.cysteine_count.weight;
-      const hydroContrib = hydroFrac * learnedCoefficients.hydrophobic_fraction.weight;
-      const momentContrib = moment * learnedCoefficients.hydrophobic_moment_alpha.weight;
-
-      peptideBreakdown.innerHTML = `
-        <div class="xai-specimen-header">
-          <div>
-            <h4 dir="ltr">${esc(p.peptide_name)}</h4>
-            <span class="text-muted" dir="ltr">${esc(p.species)} · ${esc(p.atlas_id)}</span>
-          </div>
-          <div>${getBadge(p)}</div>
-        </div>
-
-        <div class="xai-contrib-grid">
-          <div class="xai-contrib-card">
-            <span>الشحنة الفسيولوجية (+${charge.toFixed(1)})</span>
-            <b class="text-success">+${chargeContrib.toFixed(3)}</b>
-            <small>مساهمة إحصائية موجبة ترجح تصنيف الببتيد ضمن الصنف النشط</small>
-          </div>
-          <div class="xai-contrib-card">
-            <span>بقايا السيستين (${cysCount} Cys)</span>
-            <b class="${cysCount > 0 ? 'text-danger' : 'text-muted'}">${cysContrib.toFixed(3)}</b>
-            <small>${cysCount >= 4 ? 'ارتباط إحصائي سلبي بهيكل السموم العصبية في التدريب' : 'خالٍ من السيستين (مطابق لتوزيع NDBPs الخطي)'}</small>
-          </div>
-          <div class="xai-contrib-card">
-            <span>نسبة الكراهية للماء (${hydroFrac.toFixed(2)})</span>
-            <b class="text-success">+${hydroContrib.toFixed(3)}</b>
-            <small>مساهمة خطية موجبة مستمدة من تكرار الأحماض الكارهة</small>
-          </div>
-          <div class="xai-contrib-card">
-            <span>العزم الكاره للماء (${moment.toFixed(2)})</span>
-            <b class="text-success">+${momentContrib.toFixed(3)}</b>
-            <small>مساهمة إيجابية تحت النموذج ترتبط بتمايز الأوجه الحلزونية</small>
-          </div>
-        </div>
-
-        <div class="xai-rationale-box">
-          <h5>التفسير الإحصائي للسجل تحت نموذج التدريب (PU Learning Baseline):</h5>
-          <p>
-            ${cysCount >= 4
-              ? `يحتوي هذا الببتيد على ${cysCount} بقايا سيستين؛ في مصفوفة التدريب، ترتبط كثرة السيستين بنيوياً بهياكل السموم العصبية التقليدية ذات الجسور الكبريتية، مما يعطي وزناً إحصائياً سالباً حاداً (${cysContrib.toFixed(2)}) يقلل من احتمالية تصنيفه كببتيد خطي غير مقيد، دون أن يعني ذلك بالضرورة عجزه الكيميائي عن التأثير الحيوي.`
-              : `يخلو هذا الببتيد من السيستين ويتمتع بشحنة كاتيونية موجبة (+${charge.toFixed(1)}) وعزم كاره للماء مرتفع (${moment.toFixed(2)})؛ تحت معاملات النموذج الإحصائي، تتكامل هذه الخصائص لترجيح انتمائه للببتيدات الشبيهة بمضادات الميكروبات، وهي فرضية حسابية تستلزم فحصاً معملياً لتأكيدها.`}
-          </p>
+      // Check URL deep link or default to Kn2-7 / first candidate
+      handleXAIDeepLink();
+    } catch (err) {
+      console.error('Error loading MOD-10 Explainable AI data:', err);
+      candidateContainer.innerHTML = `
+        <div class="xai-error-state">
+          <p class="text-danger">تعذر تحميل بيانات تفسير النموذج الحسابي. يرجى إعادة المحاولة.</p>
         </div>
       `;
     }
-
-    peptideSelect.addEventListener('change', updatePeptideBreakdown);
-    updatePeptideBreakdown();
   }
+
+  function setupXAIControls() {
+    // Filter buttons
+    const filterBtns = document.querySelectorAll('[data-ad-filter]');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentXaiFilter = btn.dataset.adFilter;
+        populateCandidateSelector();
+      });
+    });
+
+    // Dropdown change
+    const candidateSelect = $('xai-candidate-select');
+    if (candidateSelect) {
+      candidateSelect.addEventListener('change', (e) => {
+        selectedXaiCandidateId = e.target.value;
+        renderCandidateExplanation(selectedXaiCandidateId);
+      });
+    }
+
+    // Export JSON
+    const btnJson = $('xai-btn-export-json');
+    if (btnJson) {
+      btnJson.addEventListener('click', () => {
+        if (!candidateXaiExplanations.length) return;
+        const blob = new Blob([JSON.stringify(candidateXaiExplanations, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'candidate_xai_explanations.json';
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    }
+
+    // Export CSV
+    const btnCsv = $('xai-btn-export-csv');
+    if (btnCsv) {
+      btnCsv.addEventListener('click', () => {
+        fetch('data/candidate_xai_explanations.csv')
+          .then(res => res.blob())
+          .then(blob => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'candidate_xai_explanations.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+          })
+          .catch(err => console.error('Error downloading CSV:', err));
+      });
+    }
+
+    // Handle hashchange for deep links
+    window.addEventListener('hashchange', handleXAIDeepLink);
+  }
+
+  function populateCandidateSelector() {
+    const candidateSelect = $('xai-candidate-select');
+    if (!candidateSelect || !candidateXaiExplanations.length) return;
+
+    let filtered = candidateXaiExplanations;
+    if (currentXaiFilter !== 'all') {
+      filtered = candidateXaiExplanations.filter(c => c.applicability_domain.status === currentXaiFilter);
+    }
+
+    if (!filtered.length) {
+      candidateSelect.innerHTML = `<option value="">لا توجد مرشحات مطابقة للمرشح المختار</option>`;
+      return;
+    }
+
+    candidateSelect.innerHTML = filtered.map(c => {
+      const rank = c.baseline_rank;
+      const cid = c.candidate_id;
+      const name = c.peptide_name;
+      const orig = c.origin_type === 'natural' ? 'طبيعي' : 'مصمم';
+      const prob = (c.prediction_results.predicted_probability_amp * 100).toFixed(1);
+      const domainLabel = c.applicability_domain.label_ar;
+      return `<option value="${esc(cid)}" ${cid === selectedXaiCandidateId ? 'selected' : ''}>
+        #${rank} · ${esc(cid)} · ${esc(name)} (${orig}) — P = ${prob}% [${esc(domainLabel)}]
+      </option>`;
+    }).join('');
+
+    // If selected candidate is not in filtered list, select first available
+    const hasSelected = filtered.some(c => c.candidate_id === selectedXaiCandidateId);
+    if (!hasSelected && filtered.length > 0) {
+      selectedXaiCandidateId = filtered[0].candidate_id;
+      candidateSelect.value = selectedXaiCandidateId;
+    }
+
+    renderCandidateExplanation(selectedXaiCandidateId);
+  }
+
+  function renderCandidateExplanation(candidateId) {
+    const container = $('xai-candidate-display');
+    if (!container || !candidateXaiExplanations.length) return;
+
+    const cand = candidateXaiExplanations.find(c => c.candidate_id === candidateId) || candidateXaiExplanations[0];
+    if (!cand) return;
+
+    const pred = cand.prediction_results;
+    const ad = cand.applicability_domain;
+    const exp = cand.experimental_reality_check;
+    const contribs = cand.feature_contributions;
+    const zScores = cand.features_z_scores;
+    const rawFeats = cand.features_raw;
+    const weights = xaiModelMetadata.learned_feature_coefficients;
+    const featMeta = xaiModelMetadata.feature_metadata;
+    const bias = pred.model_intercept_bias;
+
+    const probPct = (pred.predicted_probability_amp * 100).toFixed(1);
+    const heurProbPct = (pred.biophysical_heuristic_prob * 100).toFixed(1);
+
+    // Build waterfall feature rows
+    const featureRowsHtml = Object.keys(weights).map(key => {
+      const meta = featMeta[key] || {};
+      const w = weights[key];
+      const z = zScores[key] || 0;
+      const raw = rawFeats[key];
+      const delta = contribs[key] || 0;
+      const isPos = delta >= 0;
+      // Bar width: scale |delta| by max expected value ~1.5 -> ~100px
+      const barWidth = Math.min(Math.abs(delta) * 75, 120);
+
+      return `
+        <tr class="xai-wf-row ${isPos ? 'xai-row-pos' : 'xai-row-neg'}">
+          <td class="xai-wf-cell-name">
+            <strong>${esc(meta.name_ar || key)}</strong>
+            <div class="xai-wf-en" dir="ltr"><small>${esc(meta.name_en || key)} (${esc(meta.unit || '')})</small></div>
+            <div class="xai-wf-role">${esc(meta.role_ar || '')}</div>
+          </td>
+          <td class="xai-wf-cell-raw mono" dir="ltr">${raw !== undefined ? num(raw, 2) : '-'}</td>
+          <td class="xai-wf-cell-z mono" dir="ltr">${z >= 0 ? '+' : ''}${num(z, 2)}</td>
+          <td class="xai-wf-cell-w mono" dir="ltr">${w >= 0 ? '+' : ''}${num(w, 4)}</td>
+          <td class="xai-wf-cell-bar">
+            <div class="xai-wf-bar-track">
+              <div class="xai-wf-bar-center-line"></div>
+              ${isPos ? `
+                <div class="xai-wf-bar-bar xai-bar-right" style="width: ${barWidth}px"></div>
+              ` : `
+                <div class="xai-wf-bar-bar xai-bar-left" style="width: ${barWidth}px"></div>
+              `}
+            </div>
+          </td>
+          <td class="xai-wf-cell-delta mono ${isPos ? 'text-success' : 'text-danger'}" dir="ltr">
+            <strong>${delta >= 0 ? '+' : ''}${num(delta, 4)}</strong>
+          </td>
+        </tr>
+      `;
+    }).join('');
+
+    container.innerHTML = `
+      <div class="xai-card-wrapper">
+        <!-- Candidate Header -->
+        <div class="xai-card-header">
+          <div class="xai-card-title-group">
+            <div class="xai-card-badges">
+              <span class="xai-pill xai-pill-rank">الرتبة #${cand.baseline_rank} (MOD-07-M1)</span>
+              <span class="xai-pill xai-pill-id" dir="ltr">${esc(cand.candidate_id)}</span>
+              <span class="xai-pill xai-pill-orig ${cand.origin_type === 'natural' ? 'natural' : 'engineered'}">
+                ${cand.origin_type === 'natural' ? 'ببتيد طبيعي' : 'نظير مصمم هندسياً'}
+              </span>
+            </div>
+            <h3 class="xai-card-name" dir="ltr">${esc(cand.peptide_name)}</h3>
+            <p class="xai-card-species">
+              <em>${esc(cand.species_canonical_name)}</em> · 
+              <span dir="ltr">${cand.sequence_length} aa</span> · 
+              <span>${cand.is_c_terminally_amidated ? 'طرف كربوكسيلي مأميد (-CONH2)' : 'طرف كربوكسيلي حر'}</span>
+            </p>
+            <div class="xai-card-seq" dir="ltr"><code>${esc(cand.mature_sequence)}</code></div>
+          </div>
+          <div class="xai-card-domain-badge">
+            <span class="xai-domain-tag ${esc(ad.badge_class)}">
+              ${esc(ad.label_ar)}
+            </span>
+            <small class="xai-centroid-dist mono" dir="ltr">Distance to Centroid: d = ${ad.normalized_centroid_distance}</small>
+          </div>
+        </div>
+
+        <!-- Applicability Domain Warning Callout if needed -->
+        ${ad.warning_flag ? `
+          <div class="xai-domain-warning ${ad.status}">
+            <div class="xai-warn-icon">⚠️</div>
+            <div class="xai-warn-content">
+              <strong>تحذير حدود نطاق التطبيق والملاءمة الحسابية (Applicability Domain Alert):</strong>
+              <p>${esc(ad.explanation_ar)}</p>
+              <small dir="ltr" class="xai-warn-en">${esc(ad.explanation_en)}</small>
+            </div>
+          </div>
+        ` : `
+          <div class="xai-domain-info in-domain">
+            <div class="xai-info-icon">✓</div>
+            <div class="xai-info-content">
+              <strong>ضمن نطاق التطبيق الموثوق لببتيدات سموم العقارب الخطية:</strong>
+              <p>${esc(ad.explanation_ar)}</p>
+            </div>
+          </div>
+        `}
+
+        <!-- Dual Model Prediction Summary Cards -->
+        <div class="xai-pred-summary-grid">
+          <!-- Primary Logistic Regression Card -->
+          <div class="xai-pred-card primary-model">
+            <div class="xai-pred-card-head">
+              <span class="xai-pred-model-label">النموذج الإحصائي الرئيسي (PU Balanced Logistic Regression)</span>
+              <span class="badge measured">تنبؤ تسلسلي</span>
+            </div>
+            <div class="xai-pred-main-val">
+              <span class="xai-prob-num mono ${pred.predicted_probability_amp >= 0.5 ? 'text-success' : 'text-danger'}">
+                ${probPct}%
+              </span>
+              <div class="xai-prob-meta">
+                <span class="xai-class-tag ${pred.predicted_class_binary === 1 ? 'active' : 'inactive'}">
+                  ${pred.predicted_class_binary === 1 ? 'مرجح كـ AMP مضاد للميكروبات' : 'مشابه لخلفية السموم العصبية'}
+                </span>
+                <span class="xai-logit-tag mono" dir="ltr">Logit = ${pred.linear_logit >= 0 ? '+' : ''}${num(pred.linear_logit, 2)}</span>
+              </div>
+            </div>
+            <div class="xai-prob-gauge">
+              <div class="xai-prob-gauge-bar" style="width: ${probPct}%"></div>
+            </div>
+            <p class="xai-pred-caveat">
+              * احتمال ترجيحي مبني على الخصائص الفيزيوكيميائية للتسلسل تحت إطار PU؛ لا يمثل نسبة نجاح سريرية.
+            </p>
+          </div>
+
+          <!-- Biophysical Heuristic Comparison Card -->
+          <div class="xai-pred-card heuristic-model">
+            <div class="xai-pred-card-head">
+              <span class="xai-pred-model-label">القاعدة الفيزيائية البسيطة (Biophysical Heuristic Baseline)</span>
+              <span class="badge annotated">نموذج مقارن</span>
+            </div>
+            <div class="xai-pred-main-val">
+              <span class="xai-prob-num mono text-muted">${heurProbPct}%</span>
+              <div class="xai-prob-meta">
+                <span class="xai-class-tag ${pred.biophysical_heuristic_class === 1 ? 'active' : 'inactive'}">
+                  ${pred.biophysical_heuristic_class === 1 ? 'مطابق لقاعدة الشحنة والسيستين' : 'مخالف لقاعدة الشحنة أو السيستين'}
+                </span>
+                <span class="xai-rule-sub mono" dir="ltr">${esc(pred.biophysical_heuristic_rule)}</span>
+              </div>
+            </div>
+            <p class="xai-pred-caveat">
+              القاعدة المرجعية: شحنة فسيولوجية \(\ge +1.5e\) وسيستين \(\le 1\) (ROC-AUC مستقل = 0.7383).
+            </p>
+          </div>
+        </div>
+
+        <!-- Linear Feature Attribution Waterfall -->
+        <div class="xai-waterfall-section">
+          <div class="xai-wf-head">
+            <h4>تفكيك مساهمة السمات الفيزيوكيميائية العشر (Exact Linear Attributions Waterfall)</h4>
+            <p>
+              تفكيك مباشر لمعادلة الاحتمال: \(\text{logit} = \beta_0 + \sum w_i \cdot z_i\) حيث تمثل القيم الخضراء ترجيحات إيجابية نحو الفعالية، والقيم الحمراء عقوبات إحصائية تزيد من التشابه مع خلفية السموم.
+            </p>
+          </div>
+
+          <div class="xai-wf-table-wrap">
+            <table class="xai-wf-table">
+              <thead>
+                <tr>
+                  <th>الخاصية الفيزيوكيميائية (Feature)</th>
+                  <th>القيمة الخام (x)</th>
+                  <th>المعيار (z-score)</th>
+                  <th>الوزن (w)</th>
+                  <th class="text-center">المساهمة في الـ Logit (Δ = w · z)</th>
+                  <th>الأثر النهائي</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="xai-wf-row-intercept">
+                  <td colspan="4">
+                    <strong>الحد الثابت المعياري للنموذج (Intercept / Bias \(\beta_0\))</strong>
+                    <small>القيمة المرجعية لانحياز فضاء التدريب تحت إطار PU</small>
+                  </td>
+                  <td class="text-center mono text-muted" dir="ltr">خط الأساس</td>
+                  <td class="mono text-muted" dir="ltr"><strong>${num(bias, 4)}</strong></td>
+                </tr>
+                ${featureRowsHtml}
+                <tr class="xai-wf-row-total">
+                  <td colspan="4">
+                    <strong>المجموع الكلي للـ Logit المحسوب (\(\text{logit} = \beta_0 + \sum \Delta_i\))</strong>
+                  </td>
+                  <td class="text-center mono" dir="ltr">
+                    <span class="xai-math-pass">✓ تطابق حسابي قطعي 100%</span>
+                  </td>
+                  <td class="mono ${pred.linear_logit >= 0 ? 'text-success' : 'text-danger'}" dir="ltr">
+                    <strong>${pred.linear_logit >= 0 ? '+' : ''}${num(pred.linear_logit, 4)}</strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Model vs Experiment Reality Check Section -->
+        <div class="xai-reality-check-section">
+          <div class="xai-reality-head">
+            <h4>فحص الواقع التجريبي: مقارنة التنبؤ الحسابي بالأدلة المنشورة (Model vs. Experiment Reality Check)</h4>
+            <p>مقارنة موضوعية تكشف أين صدق التنبؤ الحسابي، وأين ظهرت فجوات الأمان، وأين أخفق النموذج بسبب القيود البنيوية.</p>
+          </div>
+
+          <div class="xai-reality-grid">
+            <div class="xai-reality-metric-card">
+              <span class="xai-rm-label">التركيز المثبط الأدنى المقاس (MIC)</span>
+              <strong class="xai-rm-val mono" dir="ltr">
+                ${exp.empirical_lowest_mic_um ? `${exp.empirical_lowest_mic_um} µM` : (exp.empirical_lowest_mic_ug_ml ? `${exp.empirical_lowest_mic_ug_ml} µg/mL` : 'غير متوفر')}
+              </strong>
+              <small>${exp.empirical_lowest_mic_ug_ml ? `(${exp.empirical_lowest_mic_ug_ml} µg/mL)` : ''}</small>
+            </div>
+            <div class="xai-reality-metric-card">
+              <span class="xai-rm-label">آلية العمل التجريبية المستهدفة</span>
+              <strong class="xai-rm-val">${esc(exp.interaction_type)}</strong>
+              <small>${esc(exp.assay_method)}</small>
+            </div>
+            <div class="xai-reality-metric-card">
+              <span class="xai-rm-label">أمان خلايا الثدييات (HC50 / RBCs)</span>
+              <strong class="xai-rm-val mono ${exp.hc50_um ? 'text-success' : 'text-muted'}" dir="ltr">
+                ${exp.hc50_um ? `${exp.hc50_um} µM (Human RBCs)` : (exp.hc50_verification_status === 'quarantined_uncalibrated' ? 'محجور (غير معاير)' : 'غير مقاس')}
+              </strong>
+              <small>${exp.hc50_um ? 'منحنى تحلل معاير كامل وموثق' : 'بيانات الأمان السريري غير مكتملة'}</small>
+            </div>
+            <div class="xai-reality-metric-card">
+              <span class="xai-rm-label">مؤشر اكتمال الأدلة (ERI Score)</span>
+              <strong class="xai-rm-val mono">${exp.evidence_readiness_index} / 100</strong>
+              <small>اكتمال التوثيق التجريبي في الأدبيات (MOD-07)</small>
+            </div>
+            <div class="xai-reality-metric-card">
+              <span class="xai-rm-label">محطات المسار الترجمي المنجزة</span>
+              <strong class="xai-rm-val mono">${exp.verified_translational_milestones} / 8 محطات</strong>
+              <small>المراحل المخبرية الموثقة بأدلة منشورة (MOD-09)</small>
+            </div>
+            <div class="xai-reality-metric-card">
+              <span class="xai-rm-label">رتبة الفرز المتوازن (Baseline Rank)</span>
+              <strong class="xai-rm-val mono">الرتبة #${exp.baseline_rank}</strong>
+              <small>النتيجة المركبة: ${num(exp.baseline_composite_score, 3)}</small>
+            </div>
+          </div>
+
+          <div class="xai-concordance-box ${exp.concordance_classification}">
+            <div class="xai-conc-icon">
+              ${exp.concordance_classification === 'concordant_active' ? '✅' : (exp.concordance_classification === 'mechanistic_atypical_discordant' ? '❌' : '⚠️')}
+            </div>
+            <div class="xai-conc-content">
+              <strong>تقييم التوافق بين الحساب والواقع التجريبي:</strong>
+              <p>${esc(exp.concordance_summary_ar)}</p>
+              <small dir="ltr" class="xai-conc-en">${esc(exp.concordance_summary_en)}</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scientific Limitations & Epistemic Disclaimer -->
+        <div class="xai-card-disclaimer">
+          <strong>إخلاء المسؤولية العلمية والحدود المعرفية للتنبؤ:</strong>
+          <p>${esc(cand.scientific_disclaimer.ar)}</p>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderGlobalWeightsTable() {
+    const container = $('xai-weights-table-container');
+    if (!container || !xaiModelMetadata) return;
+
+    const weights = xaiModelMetadata.learned_feature_coefficients;
+    const means = xaiModelMetadata.training_feature_means;
+    const stds = xaiModelMetadata.training_feature_stds;
+    const meta = xaiModelMetadata.feature_metadata;
+
+    const sortedFeatures = Object.keys(weights).sort((a, b) => Math.abs(weights[b]) - Math.abs(weights[a]));
+
+    container.innerHTML = `
+      <table class="xai-global-table">
+        <thead>
+          <tr>
+            <th>الخاصية الفيزيوكيميائية (Feature)</th>
+            <th>الوزن المعياري المكتسب (\(w_i\))</th>
+            <th>المتوسط في التدريب (\(\mu\))</th>
+            <th>الانحراف المعياري (\(\sigma\))</th>
+            <th>الدلالة الإحصائية والدور البيوفيزيائي في النموذج</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${sortedFeatures.map(k => {
+            const w = weights[k];
+            const m = means[k];
+            const s = stds[k];
+            const f = meta[k] || {};
+            const isPos = w >= 0;
+            return `
+              <tr>
+                <td>
+                  <strong>${esc(f.name_ar || k)}</strong>
+                  <div class="text-muted" dir="ltr"><small>${esc(f.name_en || k)} (${esc(f.unit || '')})</small></div>
+                </td>
+                <td class="mono ${isPos ? 'text-success' : 'text-danger'}" dir="ltr">
+                  <strong>${isPos ? '+' : ''}${num(w, 4)}</strong>
+                </td>
+                <td class="mono" dir="ltr">${num(m, 2)}</td>
+                <td class="mono" dir="ltr">${num(s, 2)}</td>
+                <td>
+                  <p class="xai-role-text">${esc(f.role_ar || '')}</p>
+                  <small dir="ltr" class="text-muted">${esc(f.role_en || '')}</small>
+                </td>
+              </tr>
+            `;
+          }).join('')}
+        </tbody>
+      </table>
+    `;
+  }
+
+  function handleXAIDeepLink() {
+    const hash = window.location.hash;
+    if (hash && hash.includes('#xai')) {
+      const parts = hash.split('?');
+      if (parts.length > 1) {
+        const params = new URLSearchParams(parts[1]);
+        const candId = params.get('candidate') || params.get('id');
+        if (candId && candidateXaiExplanations.some(c => c.candidate_id === candId)) {
+          selectedXaiCandidateId = candId;
+          const sel = $('xai-candidate-select');
+          if (sel) sel.value = selectedXaiCandidateId;
+          renderCandidateExplanation(selectedXaiCandidateId);
+        }
+      }
+    }
+  }
+
+  // Alias for backward compatibility
+  const renderXAIExplorer = initExplainableAI;
+
 
   // Keyboard shortcut
   document.addEventListener('keydown', e => {

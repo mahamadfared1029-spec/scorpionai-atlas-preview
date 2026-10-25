@@ -1739,53 +1739,122 @@
 
 
 
-<!-- SECTION 05: MOD-10 EXPLAINABLE AI & BIOPHYSICAL DRIVERS -->
+<!-- SECTION 05: MOD-10 EXPLAINABLE AI & PREDICTION TRANSPARENCY -->
   <section class="xai-explorer section-space" id="xai" aria-labelledby="xai-title">
     <div class="section-heading reveal">
       <div>
-        <p class="eyebrow"><span class="section-index">05 /</span> تفسير النموذج الإحصائي</p>
-        <h2 id="xai-title">المعاملات الإحصائية المعيارية للنموذج.<br><span>تفكيك معاملات الانحدار اللوجستي المقيّد (Group-K-Fold).</span></h2>
+        <p class="eyebrow"><span class="section-index">05 /</span> تفسير الذكاء الاصطناعي والشفافية التنبؤية (MOD-10)</p>
+        <h2 id="xai-title">مستكشف تفسير الذكاء الاصطناعي وتفكيك الأوزان الفيزيوكيميائية.<br><span>Explainable AI, Biophysical Feature Attributions & Prediction Transparency (MOD-10)</span></h2>
       </div>
-      <p>استكشاف مباشر للمعاملات الإحصائية المعيارية لنموذج خط الأساس (Group-K-Fold Logistic Regression) بعد التوحيد الإحصائي للمتغيرات (Z-score Standardization: z = (x - &mu;) / &sigma;)، مع بيان دلالاتها الإحصائية والترجيحية وحدود تأويلها الحسابي.</p>
-    </div>
-
-    <!-- Scientific Governance & Epistemic Disclaimer -->
-    <div class="xai-disclaimer reveal">
-      <div class="disc-icon">⚠️</div>
-      <div class="disc-content">
-        <strong>حدود المعرفة والتحذير من إسناد السببية البيولوجية المباشرة (Epistemic Governance):</strong>
-        <p>1. <strong>ارتباطات إحصائية وليست سببية جزيئية:</strong> تعكس هذه المعاملات ترجيحات إحصائية تحت النموذج الخطي المقيّد لتمييز الببتيدات الموسومة ضد خلفية السموم غير الموسومة (PU Learning). لا تمثل هذه القيم دليلاً مخبرياً على آلية انثقاب الغشاء أو سبباً ميكانيكياً لقتل البكتيريا.<br>
-        2. <strong>دلالة معامل السيستين (Cysteine Count = &minus;0.5150):</strong> المعامل السالب لبقايا السيستين يعكس سمة بنيوية في بيانات التدريب (حيث تحتوي السموم العصبية الكلاسيكية على 6 إلى 8 بقايا سيستين تشكل جسور ثنائية الكبريتيد معقدة)، ولا يعني أن السيستين بحد ذاته يمنع كيميائياً نشاط مضادات الميكروبات.<br>
-        3. <strong>التداخل الخطي للخواص (Collinearity):</strong> تشترك خواص الكراهية للماء (مثل Hydrophobic Fraction و Eisenberg Hydrophobicity) في ارتباطات متبادلة قد تؤثر على تباين الأوزان الفردية عبر الطيات التدريبية.<br>
-        4. <strong>إلزامية التحقق التجريبي:</strong> التفكيك المعروض هنا يمثل مساهمة السمات في النموذج الخطي (Linear Model Feature Contribution) المستمدة من معاملات الانحدار المعيارية المباشرة، ويظل فرضية حسابية تستوجب الإثبات المخبري.</p>
+      <div class="xai-header-badges">
+        <span class="trans-badge badge-mod">MOD-10</span>
+        <span class="trans-badge badge-stages">Logistic Regression (Balanced PU)</span>
+        <span class="trans-badge badge-candidates">ROC-AUC 0.7420 (95% CI 0.619–0.862)</span>
+        <span class="trans-badge badge-stages">PR-AUC 0.5605</span>
+        <span class="trans-badge badge-clinical-zero">0.00% Leakage (CD-HIT ≥70%)</span>
+        <span class="trans-badge badge-approval-zero">20 مرشحاً استراتيجياً</span>
       </div>
     </div>
 
-    <div class="xai-grid reveal">
-     <!-- Left Col: Global Feature Importances -->
-     <div class="xai-col-global">
-       <div class="col-head">
-         <h3>الأوزان الفيزيوكيميائية المعيارية للنموذج</h3>
-         <p>مستخرجة مباشرة من تقرير التقييم <code>model_evaluation_report.json</code> (الأوزان الموجبة تدعم الفعالية، والأوزان السالبة تعاقب التشابه مع السموم العصبية).</p>
-       </div>
-       <div id="xai-weights-container" class="xai-weights-list"></div>
-     </div>
+    <!-- Scientific Epistemic Governance & Regulatory Disclaimer Banner -->
+    <div class="trans-governance-banner reveal">
+      <div class="trans-gov-icon" aria-hidden="true">⚖️</div>
+      <div class="trans-gov-content">
+        <strong>الحوكمة المعرفية وتفسير مخرجات النماذج الحسابية (Scientific Epistemic Governance & Prediction Limits):</strong>
+        <ul>
+          <li><strong>أداة استكشافية وتفسيرية للبحث الأكاديمي فقط:</strong> صُممت هذه الوحدة لتفكيك وشرح تنبؤات النماذج الحسابية المعتمدة في الأطلس وتوضيح مساهمة السمات الفيزيوكيميائية، وليس لتقديم توصيات علاجية سريرية أو ادعاء فاعلية دوائية في غياب التحقق التجريبي.</li>
+          <li><strong>دلالة إطار التعلم الإيجابي غير الموسوم (PU Learning Semantics):</strong> تدرب النموذج على التمييز بين الببتيدات الموسومة مخبرياً بنشاط مضاد للميكروبات (Positives) وخلفية سموم العقارب غير الموسومة (Unlabeled Background Toxins). عدم وجود وسم لا يعني بالضرورة غياب النشاط الحيوي؛ حيث تمثل الخلفية سموماً عصبية وإنزيمات غير مختبرة مخبرياً ضد البكتيريا وليست سلبيات مؤكدة. قيمة ROC-AUC (~0.7420) تقيس قدرة النموذج على فصل الخصائص البنيوية للببتيدات الخطية عن السموم العصبية كثيفة الجسور الكبريتية.</li>
+          <li><strong>تفكيك خطي إحصائي معتمد (Exact Linear Attributions):</strong> تُحسب مساهمة كل سمة بدقة رياضية مطلقة عبر المعادلة: \(\Delta_i = w_i \cdot z_i\) حيث \(z_i = (x_i - \mu_i) / \sigma_i\) مستمدة من بيانات تدريب حوض الـ 940 تسلسلاً. مجموع المساهمات مع الحد الثابت (\(\beta_0 = -0.6219\)) يطابق تماماً قيمة الـ logit المحسوبة، دون أي تقريب أو رسوم توضيحية مصطنعة.</li>
+          <li><strong>حدود النطاق البنيوي وفشل النمذجة على الببتيدات الهجينة (Scorpine Case Study):</strong> يعاقب النموذج الخطي بقايا السيستين بقوة (\(-0.5150\)) لأن سموم العقارب الكلاسيكية تحتوي على 6–8 سيستين. هذا يؤدي إلى تصنيف سلبي كاذب لببتيد السكوربين (Scorpine: P = 0.2553) رغم فاعليته التجريبية المثبتة (MIC = 10 µg/mL)، لأن السكوربين بروتين هجين يتكون من نطاق سيكروبين خطي فعال مدمج مع نطاق ديفنسين كبريتي؛ النماذج الخطية أحادية النطاق تعجز عن التقاط هذا التركيب المعياري.</li>
+          <li><strong>مخاطر استقراء الشحنة المفرطة في النظائر المصممة (Cationic Extrapolation Risk):</strong> تمنح النماذج الحسابية احتمالات عالية جداً (\(>0.97\)) للنظائر المصممة باستبدالات ليزين متعددة (مثل StigA31 بشحنة \(+7.0e\)) نظراً للوزن الموجب للشحنة (\(+0.7048\)). يقع هذا خارج التوزيع الطبيعي لببتيدات العقارب؛ الشحنة المفرطة قد تؤدي مخبرياً إلى تحلل دموي غير نوعي وسمية خلوية، ولا يعني الاحتمال الحسابي سلامة سريرية.</li>
+          <li><strong>استقلالية المقاييس الصارمة (Strict Separation of Indices):</strong> لا يجوز دمج احتمال النموذج (Model Probability) مع رتبة الفرز المتوازن (MOD-07-M1 Baseline Rank) أو مؤشر اكتمال الأدلة (ERI) أو مراحل المسار الترجمي (Translational Milestones). كل مقياس يجيب عن سؤال علمي مستقل.</li>
+        </ul>
+      </div>
+    </div>
 
-     <!-- Right Col: Individual Peptide Biophysical Breakdown -->
-     <div class="xai-col-specimen">
-       <div class="col-head">
-         <h3>محلل السجل الببتيدي التفاعلي (Feature Attribution)</h3>
-         <p>اختر ببتيداً لمعاينة تفكيك مساهماته الفيزيوكيميائية وفق أوزان النموذج:</p>
-       </div>
-       <div class="select-wrapper">
-         <select id="xai-peptide-select" aria-label="اختر ببتيداً لمعاينة تفسيره"></select>
-       </div>
-       <div id="xai-peptide-breakdown" class="xai-breakdown-box"></div>
-     </div>
-   </div>
- </section>
+    <!-- Summary KPI Metric Cards -->
+    <div class="trans-metrics-grid reveal">
+      <div class="trans-metric-card">
+        <span class="metric-num">0.7420</span>
+        <span class="metric-label">ROC-AUC للاختبار المحجوز</span>
+        <span class="metric-sub">95% CI: 0.619–0.862 (عينات) · 0.477–0.948 (عناقيد)</span>
+      </div>
+      <div class="trans-metric-card">
+        <span class="metric-num">0.5605</span>
+        <span class="metric-label">PR-AUC للمنحنى الدقيق</span>
+        <span class="metric-sub">95% CI: 0.402–0.735 · خط الأساس العشوائي: 0.1233</span>
+      </div>
+      <div class="trans-metric-card">
+        <span class="metric-num">0.00%</span>
+        <span class="metric-label">تسريب بين الطيات (Leakage)</span>
+        <span class="metric-sub">4-Fold Group K-Fold بمستوى تماثل CD-HIT ≥ 70%</span>
+      </div>
+      <div class="trans-metric-card">
+        <span class="metric-num">1,232</span>
+        <span class="metric-label">إجمالي تسلسلات الأطلس</span>
+        <span class="metric-sub">940 تدريب وتقييم متقاطع · 292 محجوز مستقل (114 عنقوداً)</span>
+      </div>
+      <div class="trans-metric-card">
+        <span class="metric-num">20 / 20</span>
+        <span class="metric-label">مرشحات مفككة بالكامل</span>
+        <span class="metric-sub">14 ضمن النطاق · 5 استقراء شحنة · 1 هجين غير نمطي</span>
+      </div>
+    </div>
 
- <!-- SECTION 06: APPROACH & METHODOLOGY -->
+    <!-- Interactive Candidate Selector & Filters -->
+    <div class="xai-controls-wrapper reveal">
+      <div class="xai-filters-row">
+        <span class="filter-label">نطاق التطبيق (Applicability Domain):</span>
+        <div class="xai-filter-group" role="group" aria-label="مرشحات نطاق التطبيق">
+          <button type="button" class="xai-filter-btn active" data-ad-filter="all">الكل (20)</button>
+          <button type="button" class="xai-filter-btn" data-ad-filter="in_domain">ضمن النطاق الموثوق (14)</button>
+          <button type="button" class="xai-filter-btn" data-ad-filter="high_charge_extrapolation">استقراء شحنة مفرطة (5)</button>
+          <button type="button" class="xai-filter-btn" data-ad-filter="multi_domain_structural_atypical">بنية هجينة غير نمطية (1)</button>
+        </div>
+      </div>
+
+      <div class="xai-selector-row">
+        <div class="xai-select-box">
+          <label for="xai-candidate-select"><strong>اختر المرشح الببتيدي لمعاينة التفكيك التنبؤي ومساهمة السمات:</strong></label>
+          <div class="select-wrapper">
+            <select id="xai-candidate-select" aria-label="اختر مرشحاً ببتيدياً لمعاينة تفكيكه الحسابي"></select>
+          </div>
+        </div>
+        <div class="xai-export-actions">
+          <button type="button" class="button secondary xai-export-btn" id="xai-btn-export-json">
+            <span aria-hidden="true">📥</span> تصدير التفسير (JSON)
+          </button>
+          <button type="button" class="button secondary xai-export-btn" id="xai-btn-export-csv">
+            <span aria-hidden="true">📊</span> تصدير السمات (CSV)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Candidate Explanation Dashboard -->
+    <div class="xai-candidate-container reveal" id="xai-candidate-display">
+      <!-- Injected via app.js: initExplainableAI() -->
+      <div class="xai-loading-state">
+        <div class="spinner"></div>
+        <p>جاري تحميل تفكيك التنبؤات والسمات الفيزيوكيميائية للمرشحات...</p>
+      </div>
+    </div>
+
+    <!-- Global Model Coefficients Reference Card -->
+    <div class="xai-global-reference reveal">
+      <div class="xai-global-header">
+        <div>
+          <h3>الأوزان الفيزيوكيميائية المعيارية لنموذج خط الأساس (ScorpionAI Atlas v1.3 - Research Grade)</h3>
+          <p>معاملات الانحدار اللوجستي المقيّد بعد التوحيد الإحصائي للمتغيرات (\(z_i = (x_i - \mu_i)/\sigma_i\)) على حوض التدريب (N = 940). الحد الثابت للنموذج: \(\beta_0 = -0.6219\).</p>
+        </div>
+        <span class="badge measured">معاملات رسمية معتمدة</span>
+      </div>
+      <div id="xai-weights-table-container" class="xai-weights-table-wrap"></div>
+    </div>
+  </section>
+
+
+  <!-- SECTION 06: APPROACH & METHODOLOGY -->
  <section class="approach section-space" id="approach" aria-labelledby="approach-title">
   <div class="approach-intro reveal">
     <p class="eyebrow"><span class="section-index">06 /</span> وراء الأطلس</p>

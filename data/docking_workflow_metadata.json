@@ -47,5 +47,36 @@
     "An isolated peptide PDB structure (e.g. 1AHO, 6OFA) must never be conflated with a receptor-bound complex.",
     "Class A complexes (6NT4, 4JTA, 6MRQ) represent empirical ground truth; Class B models represent computational hypotheses.",
     "Docking cannot replace biological assays: MIC assays measure membrane lysis, not single-receptor affinity."
-  ]
+  ],
+  "scientific_provenance_audit": {
+    "gate_decision": "Scientific integrity correction applied under Sprint 12 Gate review",
+    "pose_classification": "Constructed structural demonstration poses designed for educational contrast in the digital twin",
+    "execution_logging_status": "No unarchived ab-initio AutoDock Vina execution log is claimed; numerical docking scores are educational scoring contrast values",
+    "recalculated_heavy_atom_rmsds": {
+      "near_native_pose": 1.78,
+      "decoy_pose": 8.14,
+      "rmsd_reference": "Cryo-EM 6NT4 empirical coordinates"
+    },
+    "verified_structural_entities": {
+      "6NT4": "AaH2 (Chains B, C) bound to PaFPC1 / human Nav1.7 VSD4 chimeric channel (Chain A), Cryo-EM 3.50 A",
+      "4JTA": "Charybdotoxin / ChTX (Chain Y) bound to Kv1.2-2.1 paddle chimera channel (Chains B, Q), X-ray 2.50 A",
+      "6OFA": "Wasabi Receptor Toxin / WaTx alone (Chain A, 50 NMR conformers); TRPA1 receptor not present in coordinates",
+      "6MRQ": "TOPI1 (Chain I) bound to Bovine Cationic Trypsin (Chain A), X-ray 1.29 A",
+      "1AHO": "AaH2 toxin alone (Chain A), X-ray 0.96 A"
+    },
+    "contact_distance_recalculation": {
+      "AaH2_Nav_6NT4": {
+        "Thr13_N_to_Asp219_OD2": "2.95 A (empirical H-bond)",
+        "Ser40_O_to_Tyr166_OH": "2.75 A (empirical polar contact)",
+        "Ala39_O_to_Tyr166_OH": "2.86 A (empirical polar contact)",
+        "Arg62_NH1_to_Asp669_OD2": "3.96 A (empirical extended electrostatic contact; coordinate uncertainty at 3.5 A cryo-EM resolution)"
+      },
+      "ChTX_Kv_4JTA": {
+        "Lys27_NZ_to_Tyr373_O": "2.78 A (empirical pore occlusion)"
+      },
+      "TOPI1_Trypsin_6MRQ": {
+        "Lys32_HZ2_to_Asp189_OD1": "2.85 A (empirical S1 specificity pocket salt bridge)"
+      }
+    }
+  }
 }

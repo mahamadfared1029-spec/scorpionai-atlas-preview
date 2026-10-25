@@ -332,7 +332,7 @@ class DockingTwinManager {
       const badge = document.getElementById('docking-pose-badge');
       if (badge && poseObj) {
         const rmsdStr = poseObj.rmsd_angstrom !== null ? ` | RMSD: ${poseObj.rmsd_angstrom.toFixed(2)} Å` : '';
-        const scoreStr = poseObj.vina_score_kcal_mol !== null ? ` | طاقة الإرساء: ${poseObj.vina_score_kcal_mol} kcal/mol` : '';
+        const scoreStr = poseObj.vina_score_kcal_mol !== null ? ` | طاقة استعراضية: ${poseObj.vina_score_kcal_mol} kcal/mol (تعليمية)` : '';
         badge.textContent = `${poseObj.label_ar}${rmsdStr}${scoreStr}`;
       }
     } catch (e) {

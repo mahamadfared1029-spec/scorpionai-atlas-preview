@@ -225,9 +225,9 @@
     "venom_collection_context": "wild_field_milking",
     "engineered_laboratory_origin": "Not applicable — natural peptide discovered via cDNA library and LC-MS purification.",
     "structure_status": "Class B: Computationally Predicted (AlphaFold DB AF-P0DX64-F1, score: 5.0 / 15.0); secondary structure observed by CD spectroscopy in 50% TFE.",
-    "evidence_reference": "Zeng et al., J Biol Chem 2013; 288(2):1005-1014",
-    "pmid": "23161543",
-    "doi": "10.1074/jbc.m112.428789"
+    "evidence_reference": "Chen et al., PLoS ONE 2014; 9(5):e97539",
+    "pmid": "24826994",
+    "doi": "10.1371/journal.pone.0097539"
   },
   {
     "candidate_id": "SCA-PEP-020",
@@ -286,8 +286,8 @@
     "historical_synonyms": "Androctonus aeneas aeneas",
     "origin_type": "natural",
     "parent_template_peptide": "Self (natural wild isolate)",
-    "mature_sequence": "FLFSLIPHAIGGLISAFK",
-    "sequence_length": 18,
+    "mature_sequence": "FLFSLIPSVIAGLVSAIRN",
+    "sequence_length": 19,
     "has_wild_occurrence": true,
     "biogeographic_occurrence": "Pre-Saharan arid steppes and rocky hills in North Africa (Tunisia, Algeria, Libya). Gafsa oasis margin (34.3833, 9.0500). Voucher: MNHN-RS-4182.",
     "venom_collection_locality": "Wild specimens captured in pre-Saharan oasis margins of Gafsa / Tozeur, Central Tunisia; venom milked by electrical stimulation.",

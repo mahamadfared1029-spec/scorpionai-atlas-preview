@@ -679,6 +679,8 @@
   const RESEARCH_GAPS_DATA = [
   {
     "gap_id": "GAP-0044",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0002",
     "peptide_name": "StigA25",
     "species": "Tityus stigmurus",
@@ -716,6 +718,8 @@
   },
   {
     "gap_id": "GAP-0045",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0003",
     "peptide_name": "StigA31",
     "species": "Tityus stigmurus",
@@ -753,6 +757,8 @@
   },
   {
     "gap_id": "GAP-0049",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0007",
     "peptide_name": "AaeAP1_K_analogue",
     "species": "Androctonus aeneas",
@@ -790,6 +796,8 @@
   },
   {
     "gap_id": "GAP-0051",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0009",
     "peptide_name": "AaeAP2_K_analogue",
     "species": "Androctonus aeneas",
@@ -827,6 +835,8 @@
   },
   {
     "gap_id": "GAP-0056",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0017",
     "peptide_name": "AcrAP1_K_analogue",
     "species": "Androctonus crassicauda",
@@ -864,6 +874,8 @@
   },
   {
     "gap_id": "GAP-0052",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0012",
     "peptide_name": "IsCT1",
     "species": "Opisthacanthus madagascariensis",
@@ -901,6 +913,8 @@
   },
   {
     "gap_id": "GAP-0055",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0016",
     "peptide_name": "AcrAP1",
     "species": "Androctonus crassicauda",
@@ -938,6 +952,8 @@
   },
   {
     "gap_id": "GAP-0002",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0002",
     "peptide_name": "StigA25",
     "species": "Tityus stigmurus",
@@ -975,6 +991,8 @@
   },
   {
     "gap_id": "GAP-0003",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0003",
     "peptide_name": "StigA31",
     "species": "Tityus stigmurus",
@@ -1012,6 +1030,8 @@
   },
   {
     "gap_id": "GAP-0007",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0007",
     "peptide_name": "AaeAP1_K_analogue",
     "species": "Androctonus aeneas",
@@ -1049,6 +1069,8 @@
   },
   {
     "gap_id": "GAP-0009",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0009",
     "peptide_name": "AaeAP2_K_analogue",
     "species": "Androctonus aeneas",
@@ -1086,6 +1108,8 @@
   },
   {
     "gap_id": "GAP-0017",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0017",
     "peptide_name": "AcrAP1_K_analogue",
     "species": "Androctonus crassicauda",
@@ -1123,6 +1147,8 @@
   },
   {
     "gap_id": "GAP-0061",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0002",
     "peptide_name": "StigA25",
     "species": "Tityus stigmurus",
@@ -1160,6 +1186,8 @@
   },
   {
     "gap_id": "GAP-0062",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0003",
     "peptide_name": "StigA31",
     "species": "Tityus stigmurus",
@@ -1197,6 +1225,8 @@
   },
   {
     "gap_id": "GAP-0066",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0007",
     "peptide_name": "AaeAP1_K_analogue",
     "species": "Androctonus aeneas",
@@ -1234,6 +1264,8 @@
   },
   {
     "gap_id": "GAP-0068",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0009",
     "peptide_name": "AaeAP2_K_analogue",
     "species": "Androctonus aeneas",
@@ -1271,6 +1303,8 @@
   },
   {
     "gap_id": "GAP-0076",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0017",
     "peptide_name": "AcrAP1_K_analogue",
     "species": "Androctonus crassicauda",
@@ -1308,6 +1342,8 @@
   },
   {
     "gap_id": "GAP-0129",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0002",
     "peptide_name": "StigA25",
     "species": "Tityus stigmurus",
@@ -1345,6 +1381,8 @@
   },
   {
     "gap_id": "GAP-0130",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0003",
     "peptide_name": "StigA31",
     "species": "Tityus stigmurus",
@@ -1382,6 +1420,8 @@
   },
   {
     "gap_id": "GAP-0134",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0007",
     "peptide_name": "AaeAP1_K_analogue",
     "species": "Androctonus aeneas",
@@ -1419,6 +1459,8 @@
   },
   {
     "gap_id": "GAP-0136",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0009",
     "peptide_name": "AaeAP2_K_analogue",
     "species": "Androctonus aeneas",
@@ -1456,6 +1498,8 @@
   },
   {
     "gap_id": "GAP-0144",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0017",
     "peptide_name": "AcrAP1_K_analogue",
     "species": "Androctonus crassicauda",
@@ -1493,6 +1537,8 @@
   },
   {
     "gap_id": "GAP-0043",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0001",
     "peptide_name": "Stigmurin",
     "species": "Tityus stigmurus",
@@ -1530,6 +1576,8 @@
   },
   {
     "gap_id": "GAP-0046",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0004",
     "peptide_name": "StigA6",
     "species": "Tityus stigmurus",
@@ -1567,6 +1615,8 @@
   },
   {
     "gap_id": "GAP-0047",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0005",
     "peptide_name": "StigA16",
     "species": "Tityus stigmurus",
@@ -1604,6 +1654,8 @@
   },
   {
     "gap_id": "GAP-0048",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0006",
     "peptide_name": "AaeAP1",
     "species": "Androctonus aeneas",
@@ -1641,6 +1693,8 @@
   },
   {
     "gap_id": "GAP-0050",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0008",
     "peptide_name": "AaeAP2",
     "species": "Androctonus aeneas",
@@ -1678,6 +1732,8 @@
   },
   {
     "gap_id": "GAP-0053",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0014",
     "peptide_name": "ToAP1",
     "species": "Tityus obscurus",
@@ -1715,6 +1771,8 @@
   },
   {
     "gap_id": "GAP-0054",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0015",
     "peptide_name": "ToAP3",
     "species": "Tityus obscurus",
@@ -1752,6 +1810,8 @@
   },
   {
     "gap_id": "GAP-0057",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0018",
     "peptide_name": "Hadrurin",
     "species": "Hadrurus aztecus",
@@ -1789,6 +1849,8 @@
   },
   {
     "gap_id": "GAP-0058",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0019",
     "peptide_name": "Scorpine",
     "species": "Pandinus imperator",
@@ -1826,6 +1888,8 @@
   },
   {
     "gap_id": "GAP-0059",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0020",
     "peptide_name": "Parabutoporin",
     "species": "Parabuthus schlechteri",
@@ -1863,6 +1927,8 @@
   },
   {
     "gap_id": "GAP-0022",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0002",
     "peptide_name": "StigA25",
     "species": "Tityus stigmurus",
@@ -1900,6 +1966,8 @@
   },
   {
     "gap_id": "GAP-0023",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0003",
     "peptide_name": "StigA31",
     "species": "Tityus stigmurus",
@@ -1937,6 +2005,8 @@
   },
   {
     "gap_id": "GAP-0027",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0007",
     "peptide_name": "AaeAP1_K_analogue",
     "species": "Androctonus aeneas",
@@ -1974,6 +2044,8 @@
   },
   {
     "gap_id": "GAP-0029",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0009",
     "peptide_name": "AaeAP2_K_analogue",
     "species": "Androctonus aeneas",
@@ -2011,6 +2083,8 @@
   },
   {
     "gap_id": "GAP-0037",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0017",
     "peptide_name": "AcrAP1_K_analogue",
     "species": "Androctonus crassicauda",
@@ -2048,6 +2122,8 @@
   },
   {
     "gap_id": "GAP-0069",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0010",
     "peptide_name": "BmKn2",
     "species": "Mesobuthus martensii",
@@ -2085,6 +2161,8 @@
   },
   {
     "gap_id": "GAP-0070",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0011",
     "peptide_name": "Kn2-7",
     "species": "Mesobuthus martensii",
@@ -2122,6 +2200,8 @@
   },
   {
     "gap_id": "GAP-0071",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0012",
     "peptide_name": "IsCT1",
     "species": "Opisthacanthus madagascariensis",
@@ -2159,6 +2239,8 @@
   },
   {
     "gap_id": "GAP-0072",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0013",
     "peptide_name": "Hp1404",
     "species": "Heterometrus petersii",
@@ -2196,6 +2278,8 @@
   },
   {
     "gap_id": "GAP-0075",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0016",
     "peptide_name": "AcrAP1",
     "species": "Androctonus crassicauda",
@@ -2233,6 +2317,8 @@
   },
   {
     "gap_id": "GAP-0011",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0011",
     "peptide_name": "Kn2-7",
     "species": "Mesobuthus martensii",
@@ -2270,6 +2356,8 @@
   },
   {
     "gap_id": "GAP-0012",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0012",
     "peptide_name": "IsCT1",
     "species": "Opisthacanthus madagascariensis",
@@ -2307,6 +2395,8 @@
   },
   {
     "gap_id": "GAP-0013",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0013",
     "peptide_name": "Hp1404",
     "species": "Heterometrus petersii",
@@ -2344,6 +2434,8 @@
   },
   {
     "gap_id": "GAP-0137",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0010",
     "peptide_name": "BmKn2",
     "species": "Mesobuthus martensii",
@@ -2381,6 +2473,8 @@
   },
   {
     "gap_id": "GAP-0138",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0011",
     "peptide_name": "Kn2-7",
     "species": "Mesobuthus martensii",
@@ -2418,6 +2512,8 @@
   },
   {
     "gap_id": "GAP-0139",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0012",
     "peptide_name": "IsCT1",
     "species": "Opisthacanthus madagascariensis",
@@ -2455,6 +2551,8 @@
   },
   {
     "gap_id": "GAP-0140",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0013",
     "peptide_name": "Hp1404",
     "species": "Heterometrus petersii",
@@ -2492,6 +2590,8 @@
   },
   {
     "gap_id": "GAP-0143",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0016",
     "peptide_name": "AcrAP1",
     "species": "Androctonus crassicauda",
@@ -2529,6 +2629,8 @@
   },
   {
     "gap_id": "GAP-0151",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "REF-CLTX",
     "peptide_name": "Chlorotoxin",
     "species": "Leiurus quinquestriatus",
@@ -2566,6 +2668,8 @@
   },
   {
     "gap_id": "GAP-0030",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0010",
     "peptide_name": "BmKn2",
     "species": "Mesobuthus martensii",
@@ -2603,6 +2707,8 @@
   },
   {
     "gap_id": "GAP-0031",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0011",
     "peptide_name": "Kn2-7",
     "species": "Mesobuthus martensii",
@@ -2640,6 +2746,8 @@
   },
   {
     "gap_id": "GAP-0032",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0012",
     "peptide_name": "IsCT1",
     "species": "Opisthacanthus madagascariensis",
@@ -2677,6 +2785,8 @@
   },
   {
     "gap_id": "GAP-0033",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0013",
     "peptide_name": "Hp1404",
     "species": "Heterometrus petersii",
@@ -2714,6 +2824,8 @@
   },
   {
     "gap_id": "GAP-0036",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0016",
     "peptide_name": "AcrAP1",
     "species": "Androctonus crassicauda",
@@ -2751,6 +2863,8 @@
   },
   {
     "gap_id": "GAP-0104",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "REF-AAH2",
     "peptide_name": "AaH2",
     "species": "Androctonus australis Hector",
@@ -2788,6 +2902,8 @@
   },
   {
     "gap_id": "GAP-0060",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0001",
     "peptide_name": "Stigmurin",
     "species": "Tityus stigmurus",
@@ -2825,6 +2941,8 @@
   },
   {
     "gap_id": "GAP-0063",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0004",
     "peptide_name": "StigA6",
     "species": "Tityus stigmurus",
@@ -2862,6 +2980,8 @@
   },
   {
     "gap_id": "GAP-0064",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0005",
     "peptide_name": "StigA16",
     "species": "Tityus stigmurus",
@@ -2899,6 +3019,8 @@
   },
   {
     "gap_id": "GAP-0065",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0006",
     "peptide_name": "AaeAP1",
     "species": "Androctonus aeneas",
@@ -2936,6 +3058,8 @@
   },
   {
     "gap_id": "GAP-0067",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0008",
     "peptide_name": "AaeAP2",
     "species": "Androctonus aeneas",
@@ -2973,6 +3097,8 @@
   },
   {
     "gap_id": "GAP-0073",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0014",
     "peptide_name": "ToAP1",
     "species": "Tityus obscurus",
@@ -3010,6 +3136,8 @@
   },
   {
     "gap_id": "GAP-0074",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0015",
     "peptide_name": "ToAP3",
     "species": "Tityus obscurus",
@@ -3047,6 +3175,8 @@
   },
   {
     "gap_id": "GAP-0077",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0018",
     "peptide_name": "Hadrurin",
     "species": "Hadrurus aztecus",
@@ -3084,6 +3214,8 @@
   },
   {
     "gap_id": "GAP-0078",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0019",
     "peptide_name": "Scorpine",
     "species": "Pandinus imperator",
@@ -3121,6 +3253,8 @@
   },
   {
     "gap_id": "GAP-0079",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0020",
     "peptide_name": "Parabutoporin",
     "species": "Parabuthus schlechteri",
@@ -3158,6 +3292,8 @@
   },
   {
     "gap_id": "GAP-0010",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0010",
     "peptide_name": "BmKn2",
     "species": "Mesobuthus martensii",
@@ -3195,6 +3331,8 @@
   },
   {
     "gap_id": "GAP-0016",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0016",
     "peptide_name": "AcrAP1",
     "species": "Androctonus crassicauda",
@@ -3232,6 +3370,8 @@
   },
   {
     "gap_id": "GAP-0128",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0001",
     "peptide_name": "Stigmurin",
     "species": "Tityus stigmurus",
@@ -3269,6 +3409,8 @@
   },
   {
     "gap_id": "GAP-0131",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0004",
     "peptide_name": "StigA6",
     "species": "Tityus stigmurus",
@@ -3306,6 +3448,8 @@
   },
   {
     "gap_id": "GAP-0132",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0005",
     "peptide_name": "StigA16",
     "species": "Tityus stigmurus",
@@ -3343,6 +3487,8 @@
   },
   {
     "gap_id": "GAP-0133",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0006",
     "peptide_name": "AaeAP1",
     "species": "Androctonus aeneas",
@@ -3380,6 +3526,8 @@
   },
   {
     "gap_id": "GAP-0135",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0008",
     "peptide_name": "AaeAP2",
     "species": "Androctonus aeneas",
@@ -3417,6 +3565,8 @@
   },
   {
     "gap_id": "GAP-0141",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0014",
     "peptide_name": "ToAP1",
     "species": "Tityus obscurus",
@@ -3454,6 +3604,8 @@
   },
   {
     "gap_id": "GAP-0142",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0015",
     "peptide_name": "ToAP3",
     "species": "Tityus obscurus",
@@ -3491,6 +3643,8 @@
   },
   {
     "gap_id": "GAP-0145",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0018",
     "peptide_name": "Hadrurin",
     "species": "Hadrurus aztecus",
@@ -3528,6 +3682,8 @@
   },
   {
     "gap_id": "GAP-0146",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0019",
     "peptide_name": "Scorpine",
     "species": "Pandinus imperator",
@@ -3565,6 +3721,8 @@
   },
   {
     "gap_id": "GAP-0147",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0020",
     "peptide_name": "Parabutoporin",
     "species": "Parabuthus schlechteri",
@@ -3602,6 +3760,8 @@
   },
   {
     "gap_id": "GAP-0107",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0019",
     "peptide_name": "Scorpine",
     "species": "Pandinus imperator",
@@ -3639,6 +3799,8 @@
   },
   {
     "gap_id": "GAP-0105",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "REF-CTX",
     "peptide_name": "Charybdotoxin",
     "species": "Leiurus quinquestriatus",
@@ -3676,6 +3838,8 @@
   },
   {
     "gap_id": "GAP-0106",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "REF-TS1",
     "peptide_name": "Ts1",
     "species": "Tityus serrulatus",
@@ -3713,6 +3877,8 @@
   },
   {
     "gap_id": "GAP-0021",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0001",
     "peptide_name": "Stigmurin",
     "species": "Tityus stigmurus",
@@ -3750,6 +3916,8 @@
   },
   {
     "gap_id": "GAP-0024",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0004",
     "peptide_name": "StigA6",
     "species": "Tityus stigmurus",
@@ -3787,6 +3955,8 @@
   },
   {
     "gap_id": "GAP-0025",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0005",
     "peptide_name": "StigA16",
     "species": "Tityus stigmurus",
@@ -3824,6 +3994,8 @@
   },
   {
     "gap_id": "GAP-0026",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0006",
     "peptide_name": "AaeAP1",
     "species": "Androctonus aeneas",
@@ -3861,6 +4033,8 @@
   },
   {
     "gap_id": "GAP-0028",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0008",
     "peptide_name": "AaeAP2",
     "species": "Androctonus aeneas",
@@ -3898,6 +4072,8 @@
   },
   {
     "gap_id": "GAP-0034",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0014",
     "peptide_name": "ToAP1",
     "species": "Tityus obscurus",
@@ -3935,6 +4111,8 @@
   },
   {
     "gap_id": "GAP-0035",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0015",
     "peptide_name": "ToAP3",
     "species": "Tityus obscurus",
@@ -3972,6 +4150,8 @@
   },
   {
     "gap_id": "GAP-0038",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0018",
     "peptide_name": "Hadrurin",
     "species": "Hadrurus aztecus",
@@ -4009,6 +4189,8 @@
   },
   {
     "gap_id": "GAP-0039",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0019",
     "peptide_name": "Scorpine",
     "species": "Pandinus imperator",
@@ -4046,6 +4228,8 @@
   },
   {
     "gap_id": "GAP-0040",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0020",
     "peptide_name": "Parabutoporin",
     "species": "Parabuthus schlechteri",
@@ -4083,6 +4267,8 @@
   },
   {
     "gap_id": "GAP-0001",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0001",
     "peptide_name": "Stigmurin",
     "species": "Tityus stigmurus",
@@ -4120,6 +4306,8 @@
   },
   {
     "gap_id": "GAP-0006",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0006",
     "peptide_name": "AaeAP1",
     "species": "Androctonus aeneas",
@@ -4157,6 +4345,8 @@
   },
   {
     "gap_id": "GAP-0008",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0008",
     "peptide_name": "AaeAP2",
     "species": "Androctonus aeneas",
@@ -4194,6 +4384,8 @@
   },
   {
     "gap_id": "GAP-0018",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0018",
     "peptide_name": "Hadrurin",
     "species": "Hadrurus aztecus",
@@ -4231,6 +4423,8 @@
   },
   {
     "gap_id": "GAP-0019",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0019",
     "peptide_name": "Scorpine",
     "species": "Pandinus imperator",
@@ -4268,6 +4462,8 @@
   },
   {
     "gap_id": "GAP-0020",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0020",
     "peptide_name": "Parabutoporin",
     "species": "Parabuthus schlechteri",
@@ -4305,6 +4501,8 @@
   },
   {
     "gap_id": "GAP-0109",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0002",
     "peptide_name": "StigA25",
     "species": "Tityus stigmurus",
@@ -4342,6 +4540,8 @@
   },
   {
     "gap_id": "GAP-0110",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0003",
     "peptide_name": "StigA31",
     "species": "Tityus stigmurus",
@@ -4379,6 +4579,8 @@
   },
   {
     "gap_id": "GAP-0114",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0007",
     "peptide_name": "AaeAP1_K_analogue",
     "species": "Androctonus aeneas",
@@ -4416,6 +4618,8 @@
   },
   {
     "gap_id": "GAP-0116",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0009",
     "peptide_name": "AaeAP2_K_analogue",
     "species": "Androctonus aeneas",
@@ -4453,6 +4657,8 @@
   },
   {
     "gap_id": "GAP-0124",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0017",
     "peptide_name": "AcrAP1_K_analogue",
     "species": "Androctonus crassicauda",
@@ -4490,6 +4696,8 @@
   },
   {
     "gap_id": "GAP-0081",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0002",
     "peptide_name": "StigA25",
     "species": "Tityus stigmurus",
@@ -4527,6 +4735,8 @@
   },
   {
     "gap_id": "GAP-0082",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0003",
     "peptide_name": "StigA31",
     "species": "Tityus stigmurus",
@@ -4564,6 +4774,8 @@
   },
   {
     "gap_id": "GAP-0086",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0007",
     "peptide_name": "AaeAP1_K_analogue",
     "species": "Androctonus aeneas",
@@ -4601,6 +4813,8 @@
   },
   {
     "gap_id": "GAP-0088",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0009",
     "peptide_name": "AaeAP2_K_analogue",
     "species": "Androctonus aeneas",
@@ -4638,6 +4852,8 @@
   },
   {
     "gap_id": "GAP-0096",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0017",
     "peptide_name": "AcrAP1_K_analogue",
     "species": "Androctonus crassicauda",
@@ -4675,6 +4891,8 @@
   },
   {
     "gap_id": "GAP-0099",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0001",
     "peptide_name": "Stigmurin",
     "species": "Tityus stigmurus",
@@ -4712,6 +4930,8 @@
   },
   {
     "gap_id": "GAP-0100",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0002",
     "peptide_name": "StigA25",
     "species": "Tityus stigmurus",
@@ -4749,6 +4969,8 @@
   },
   {
     "gap_id": "GAP-0101",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0003",
     "peptide_name": "StigA31",
     "species": "Tityus stigmurus",
@@ -4786,6 +5008,8 @@
   },
   {
     "gap_id": "GAP-0102",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0011",
     "peptide_name": "Kn2-7",
     "species": "Mesobuthus martensii",
@@ -4823,6 +5047,8 @@
   },
   {
     "gap_id": "GAP-0103",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0010",
     "peptide_name": "BmKn2",
     "species": "Mesobuthus martensii",
@@ -4860,6 +5086,8 @@
   },
   {
     "gap_id": "GAP-0089",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0010",
     "peptide_name": "BmKn2",
     "species": "Mesobuthus martensii",
@@ -4897,6 +5125,8 @@
   },
   {
     "gap_id": "GAP-0090",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0011",
     "peptide_name": "Kn2-7",
     "species": "Mesobuthus martensii",
@@ -4934,6 +5164,8 @@
   },
   {
     "gap_id": "GAP-0091",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0012",
     "peptide_name": "IsCT1",
     "species": "Opisthacanthus madagascariensis",
@@ -4971,6 +5203,8 @@
   },
   {
     "gap_id": "GAP-0092",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0013",
     "peptide_name": "Hp1404",
     "species": "Heterometrus petersii",
@@ -5008,6 +5242,8 @@
   },
   {
     "gap_id": "GAP-0095",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0016",
     "peptide_name": "AcrAP1",
     "species": "Androctonus crassicauda",
@@ -5045,6 +5281,8 @@
   },
   {
     "gap_id": "GAP-0108",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0001",
     "peptide_name": "Stigmurin",
     "species": "Tityus stigmurus",
@@ -5082,6 +5320,8 @@
   },
   {
     "gap_id": "GAP-0111",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0004",
     "peptide_name": "StigA6",
     "species": "Tityus stigmurus",
@@ -5119,6 +5359,8 @@
   },
   {
     "gap_id": "GAP-0112",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0005",
     "peptide_name": "StigA16",
     "species": "Tityus stigmurus",
@@ -5156,6 +5398,8 @@
   },
   {
     "gap_id": "GAP-0113",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0006",
     "peptide_name": "AaeAP1",
     "species": "Androctonus aeneas",
@@ -5193,6 +5437,8 @@
   },
   {
     "gap_id": "GAP-0115",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0008",
     "peptide_name": "AaeAP2",
     "species": "Androctonus aeneas",
@@ -5230,6 +5476,8 @@
   },
   {
     "gap_id": "GAP-0117",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0010",
     "peptide_name": "BmKn2",
     "species": "Mesobuthus martensii",
@@ -5267,6 +5515,8 @@
   },
   {
     "gap_id": "GAP-0118",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0011",
     "peptide_name": "Kn2-7",
     "species": "Mesobuthus martensii",
@@ -5304,6 +5554,8 @@
   },
   {
     "gap_id": "GAP-0119",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0012",
     "peptide_name": "IsCT1",
     "species": "Opisthacanthus madagascariensis",
@@ -5341,6 +5593,8 @@
   },
   {
     "gap_id": "GAP-0120",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0013",
     "peptide_name": "Hp1404",
     "species": "Heterometrus petersii",
@@ -5378,6 +5632,8 @@
   },
   {
     "gap_id": "GAP-0121",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0014",
     "peptide_name": "ToAP1",
     "species": "Tityus obscurus",
@@ -5415,6 +5671,8 @@
   },
   {
     "gap_id": "GAP-0122",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0015",
     "peptide_name": "ToAP3",
     "species": "Tityus obscurus",
@@ -5452,6 +5710,8 @@
   },
   {
     "gap_id": "GAP-0123",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0016",
     "peptide_name": "AcrAP1",
     "species": "Androctonus crassicauda",
@@ -5489,6 +5749,8 @@
   },
   {
     "gap_id": "GAP-0125",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0018",
     "peptide_name": "Hadrurin",
     "species": "Hadrurus aztecus",
@@ -5526,6 +5788,8 @@
   },
   {
     "gap_id": "GAP-0126",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0019",
     "peptide_name": "Scorpine",
     "species": "Pandinus imperator",
@@ -5563,6 +5827,8 @@
   },
   {
     "gap_id": "GAP-0127",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0020",
     "peptide_name": "Parabutoporin",
     "species": "Parabuthus schlechteri",
@@ -5600,6 +5866,8 @@
   },
   {
     "gap_id": "GAP-0004",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0004",
     "peptide_name": "StigA6",
     "species": "Tityus stigmurus",
@@ -5637,6 +5905,8 @@
   },
   {
     "gap_id": "GAP-0005",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0005",
     "peptide_name": "StigA16",
     "species": "Tityus stigmurus",
@@ -5674,6 +5944,8 @@
   },
   {
     "gap_id": "GAP-0014",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0014",
     "peptide_name": "ToAP1",
     "species": "Tityus obscurus",
@@ -5711,6 +5983,8 @@
   },
   {
     "gap_id": "GAP-0015",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0015",
     "peptide_name": "ToAP3",
     "species": "Tityus obscurus",
@@ -5748,6 +6022,8 @@
   },
   {
     "gap_id": "GAP-0080",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0001",
     "peptide_name": "Stigmurin",
     "species": "Tityus stigmurus",
@@ -5785,6 +6061,8 @@
   },
   {
     "gap_id": "GAP-0083",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0004",
     "peptide_name": "StigA6",
     "species": "Tityus stigmurus",
@@ -5822,6 +6100,8 @@
   },
   {
     "gap_id": "GAP-0084",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0005",
     "peptide_name": "StigA16",
     "species": "Tityus stigmurus",
@@ -5859,6 +6139,8 @@
   },
   {
     "gap_id": "GAP-0085",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0006",
     "peptide_name": "AaeAP1",
     "species": "Androctonus aeneas",
@@ -5896,6 +6178,8 @@
   },
   {
     "gap_id": "GAP-0087",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0008",
     "peptide_name": "AaeAP2",
     "species": "Androctonus aeneas",
@@ -5933,6 +6217,8 @@
   },
   {
     "gap_id": "GAP-0093",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0014",
     "peptide_name": "ToAP1",
     "species": "Tityus obscurus",
@@ -5970,6 +6256,8 @@
   },
   {
     "gap_id": "GAP-0094",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0015",
     "peptide_name": "ToAP3",
     "species": "Tityus obscurus",
@@ -6007,6 +6295,8 @@
   },
   {
     "gap_id": "GAP-0097",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0018",
     "peptide_name": "Hadrurin",
     "species": "Hadrurus aztecus",
@@ -6044,6 +6334,8 @@
   },
   {
     "gap_id": "GAP-0098",
+    "is_actionable_gap": true,
+    "record_type": "actionable_research_gap",
     "peptide_canonical_id": "SCA-0019",
     "peptide_name": "Scorpine",
     "species": "Pandinus imperator",
@@ -6081,23 +6373,25 @@
   },
   {
     "gap_id": "GAP-0041",
+    "is_actionable_gap": false,
+    "record_type": "evaluated_evidence_observation",
     "peptide_canonical_id": "SCA-0001",
     "peptide_name": "Stigmurin",
     "species": "Tityus stigmurus",
     "gap_category": "antimicrobial_evidence",
     "gap_category_name_en": "Antimicrobial Evidence Gaps",
     "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
-    "specific_missing_evidence": "Inactive up to highest tested concentration (>150 µM) against Escherichia coli ATCC 25922",
-    "specific_missing_evidence_ar": "عدم ثبوت الفعالية حتى أعلى تركيز مفحوص (>150 ميكرومولار) ضد Escherichia coli ATCC 25922",
+    "specific_missing_evidence": "No growth inhibition observed within tested concentration range (MIC > 150 µM, tested 0.1–150 µM) against Escherichia coli ATCC 25922; censored experimental bound, not absolute biological inactivity.",
+    "specific_missing_evidence_ar": "لم يُرصد أي تثبيط للنمو ضمن نطاق التركيزات المفحوصة مخبرياً (MIC > 150 ميكرومولار، النطاق المفحوص: 0.1–150 ميكرومولار) ضد Escherichia coli ATCC 25922؛ حد قياس تجريبي مقطوع (Censored Bound) ولا يعني الخمول البيولوجي المطلق.",
     "evidence_status": "assayed_negative",
-    "evidence_status_label_en": "Assayed Negative / Inactive",
-    "evidence_status_label_ar": "مفحوص سلبياً / غير فعال",
-    "available_supporting_observations": "Broth microdilution tested up to 150 µM showed no growth inhibition (MIC > 150 µM).",
-    "why_missing_evidence_matters": "Strict epistemic distinction: This is an experimentally established negative threshold, NOT unassayed missing data. Demonstrates narrow Gram-positive selectivity of wild-type Stigmurin.",
+    "evidence_status_label_en": "Assayed Negative (Censored Bound)",
+    "evidence_status_label_ar": "مفحوص سلبياً (حد مقطوع)",
+    "available_supporting_observations": "Broth microdilution tested across 0.1–150 µM showed no turbidity arrest (MIC > 150 µM). This is an experimentally established censored boundary, not unassayed missing data.",
+    "why_missing_evidence_matters": "Strict epistemic distinction: This is an experimentally established negative concentration threshold (MIC > 150 µM), NOT unassayed missing data. Demonstrates narrow Gram-positive selectivity of wild-type Stigmurin under standard CLSI conditions.",
     "relevant_assay_context": "CLSI M07-A9 broth microdilution in Mueller-Hinton broth, testing 0.1 to 150 µM.",
     "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9) (PMID: 30709056)",
     "confidence_level": "High (Primary paper explicitly reports MIC > 150 µM)",
-    "uncertainty_and_limitations": "Negative result applies to tested strain and standard medium; synergism with conventional antibiotics or membrane permeabilizers not excluded.",
+    "uncertainty_and_limitations": "Negative observation applies only to tested strain and standard medium within 0.1–150 µM range; synergism with conventional antibiotics or outer-membrane permeabilizers not excluded.",
     "proposed_experiment_en": "Proposed Experiment: Combination checkerboard synergy assay with sub-inhibitory colistin or EDTA to determine if outer membrane permeabilization unmasks Stigmurin activity.",
     "proposed_experiment_ar": "مقترح تجريبي: فحص التآزر برقعة الشطرنج المركبة (Checkerboard assay) مع الكوليستين أو EDTA لتحديد ما إذا كان اختراق الغشاء الخارجي يحرر فعالية ستيجمورين ضد السلالات السالبة لغرام.",
     "priority_score": 69.25,
@@ -6118,23 +6412,25 @@
   },
   {
     "gap_id": "GAP-0042",
+    "is_actionable_gap": false,
+    "record_type": "evaluated_evidence_observation",
     "peptide_canonical_id": "SCA-0001",
     "peptide_name": "Stigmurin",
     "species": "Tityus stigmurus",
     "gap_category": "antimicrobial_evidence",
     "gap_category_name_en": "Antimicrobial Evidence Gaps",
     "gap_category_name_ar": "فجوات الأدلة المضادة للميكروبات",
-    "specific_missing_evidence": "Inactive up to highest tested concentration (>150 µM) against Pseudomonas aeruginosa ATCC 27853",
-    "specific_missing_evidence_ar": "عدم ثبوت الفعالية حتى أعلى تركيز مفحوص (>150 ميكرومولار) ضد Pseudomonas aeruginosa ATCC 27853",
+    "specific_missing_evidence": "No growth inhibition observed within tested concentration range (MIC > 150 µM, tested 0.1–150 µM) against Pseudomonas aeruginosa ATCC 27853; censored experimental bound, not absolute biological inactivity.",
+    "specific_missing_evidence_ar": "لم يُرصد أي تثبيط للنمو ضمن نطاق التركيزات المفحوصة مخبرياً (MIC > 150 ميكرومولار، النطاق المفحوص: 0.1–150 ميكرومولار) ضد Pseudomonas aeruginosa ATCC 27853؛ حد قياس تجريبي مقطوع (Censored Bound) ولا يعني الخمول البيولوجي المطلق.",
     "evidence_status": "assayed_negative",
-    "evidence_status_label_en": "Assayed Negative / Inactive",
-    "evidence_status_label_ar": "مفحوص سلبياً / غير فعال",
-    "available_supporting_observations": "Broth microdilution tested up to 150 µM showed no growth inhibition (MIC > 150 µM).",
-    "why_missing_evidence_matters": "Strict epistemic distinction: This is an experimentally established negative threshold, NOT unassayed missing data. Demonstrates narrow Gram-positive selectivity of wild-type Stigmurin.",
+    "evidence_status_label_en": "Assayed Negative (Censored Bound)",
+    "evidence_status_label_ar": "مفحوص سلبياً (حد مقطوع)",
+    "available_supporting_observations": "Broth microdilution tested across 0.1–150 µM showed no turbidity arrest (MIC > 150 µM). This is an experimentally established censored boundary, not unassayed missing data.",
+    "why_missing_evidence_matters": "Strict epistemic distinction: This is an experimentally established negative concentration threshold (MIC > 150 µM), NOT unassayed missing data. Demonstrates narrow Gram-positive selectivity of wild-type Stigmurin under standard CLSI conditions.",
     "relevant_assay_context": "CLSI M07-A9 broth microdilution in Mueller-Hinton broth, testing 0.1 to 150 µM.",
     "evidence_provenance": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9) (PMID: 30709056)",
     "confidence_level": "High (Primary paper explicitly reports MIC > 150 µM)",
-    "uncertainty_and_limitations": "Negative result applies to tested strain and standard medium; synergism with conventional antibiotics or membrane permeabilizers not excluded.",
+    "uncertainty_and_limitations": "Negative observation applies only to tested strain and standard medium within 0.1–150 µM range; synergism with conventional antibiotics or outer-membrane permeabilizers not excluded.",
     "proposed_experiment_en": "Proposed Experiment: Combination checkerboard synergy assay with sub-inhibitory colistin or EDTA to determine if outer membrane permeabilization unmasks Stigmurin activity.",
     "proposed_experiment_ar": "مقترح تجريبي: فحص التآزر برقعة الشطرنج المركبة (Checkerboard assay) مع الكوليستين أو EDTA لتحديد ما إذا كان اختراق الغشاء الخارجي يحرر فعالية ستيجمورين ضد السلالات السالبة لغرام.",
     "priority_score": 69.25,
@@ -6155,6 +6451,8 @@
   },
   {
     "gap_id": "GAP-0148",
+    "is_actionable_gap": false,
+    "record_type": "evaluated_evidence_observation",
     "peptide_canonical_id": "SCA-0001",
     "peptide_name": "Stigmurin",
     "species": "Tityus stigmurus",
@@ -6192,6 +6490,8 @@
   },
   {
     "gap_id": "GAP-0149",
+    "is_actionable_gap": false,
+    "record_type": "evaluated_evidence_observation",
     "peptide_canonical_id": "SCA-0010",
     "peptide_name": "BmKn2",
     "species": "Mesobuthus martensii",
@@ -6229,6 +6529,8 @@
   },
   {
     "gap_id": "GAP-0150",
+    "is_actionable_gap": false,
+    "record_type": "evaluated_evidence_observation",
     "peptide_canonical_id": "SCA-0012",
     "peptide_name": "IsCT1",
     "species": "Opisthacanthus madagascariensis",
@@ -6266,6 +6568,9 @@
   }
 ];
   const GAP_SUMMARY_METRICS_DATA = {
+  "total_evaluated_records": 151,
+  "total_actionable_gaps": 146,
+  "total_non_gap_records": 5,
   "total_gaps": 151,
   "total_peptides_covered": 24,
   "category_distribution": {
@@ -6282,6 +6587,16 @@
     "not_assayed": 104,
     "disputed_evidence": 1,
     "species_or_subtype_mismatch": 4,
+    "assayed_negative": 2,
+    "measurement_not_applicable": 3
+  },
+  "actionable_by_status": {
+    "not_assayed": 104,
+    "data_not_available": 37,
+    "species_or_subtype_mismatch": 4,
+    "disputed_evidence": 1
+  },
+  "non_gap_by_status": {
     "assayed_negative": 2,
     "measurement_not_applicable": 3
   },
@@ -6484,8 +6799,11 @@
       return gaps.filter(g => {
         // Category filter
         if (selectedCat !== 'all' && g.gap_category !== selectedCat) return false;
-        // Status filter
-        if (selectedStatus !== 'all' && g.evidence_status !== selectedStatus) return false;
+        // Actionable vs Non-gap filter
+        if (selectedStatus === 'actionable_only' && !g.is_actionable_gap) return false;
+        if (selectedStatus === 'non_gap_only' && g.is_actionable_gap) return false;
+        // Specific Status filter
+        if (selectedStatus !== 'all' && selectedStatus !== 'actionable_only' && selectedStatus !== 'non_gap_only' && g.evidence_status !== selectedStatus) return false;
         // Search query
         if (searchQuery) {
           const txt = `${g.peptide_name} ${g.peptide_canonical_id} ${g.gap_id} ${g.specific_missing_evidence} ${g.specific_missing_evidence_ar} ${g.species}`.toLowerCase();

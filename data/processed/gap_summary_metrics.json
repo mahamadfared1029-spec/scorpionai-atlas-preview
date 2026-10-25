@@ -1,4 +1,7 @@
 {
+  "total_evaluated_records": 151,
+  "total_actionable_gaps": 146,
+  "total_non_gap_records": 5,
   "total_gaps": 151,
   "total_peptides_covered": 24,
   "category_distribution": {
@@ -15,6 +18,16 @@
     "not_assayed": 104,
     "disputed_evidence": 1,
     "species_or_subtype_mismatch": 4,
+    "assayed_negative": 2,
+    "measurement_not_applicable": 3
+  },
+  "actionable_by_status": {
+    "not_assayed": 104,
+    "data_not_available": 37,
+    "species_or_subtype_mismatch": 4,
+    "disputed_evidence": 1
+  },
+  "non_gap_by_status": {
     "assayed_negative": 2,
     "measurement_not_applicable": 3
   },

@@ -10104,7 +10104,7 @@
 
   // ============================================================================
   // ============================================================================
-  // MOD-10: Explainable AI & Prediction Transparency (Sprint 11)
+  // MOD-10: Explainable AI & Prediction Transparency (Sprint 11 - Gated Revision)
   // ============================================================================
   let xaiModelMetadata = null;
   let candidateXaiExplanations = [];
@@ -10213,7 +10213,7 @@
     }
 
     if (!filtered.length) {
-      candidateSelect.innerHTML = `<option value="">لا توجد مرشحات مطابقة للمرشح المختار</option>`;
+      candidateSelect.innerHTML = `<option value="">لا توجد مرشحات مطابقة للتصنيف المختار</option>`;
       return;
     }
 
@@ -10222,10 +10222,10 @@
       const cid = c.candidate_id;
       const name = c.peptide_name;
       const orig = c.origin_type === 'natural' ? 'طبيعي' : 'مصمم';
-      const prob = (c.prediction_results.predicted_probability_amp * 100).toFixed(1);
+      const score = (c.prediction_results.pu_model_score * 100).toFixed(1);
       const domainLabel = c.applicability_domain.label_ar;
       return `<option value="${esc(cid)}" ${cid === selectedXaiCandidateId ? 'selected' : ''}>
-        #${rank} · ${esc(cid)} · ${esc(name)} (${orig}) — P = ${prob}% [${esc(domainLabel)}]
+        #${rank} · ${esc(cid)} · ${esc(name)} (${orig}) — درجة PU = ${score}% [${esc(domainLabel)}]
       </option>`;
     }).join('');
 
@@ -10255,9 +10255,10 @@
     const weights = xaiModelMetadata.learned_feature_coefficients;
     const featMeta = xaiModelMetadata.feature_metadata;
     const bias = pred.model_intercept_bias;
+    const addCheck = cand.attribution_additivity_check || {};
 
-    const probPct = (pred.predicted_probability_amp * 100).toFixed(1);
-    const heurProbPct = (pred.biophysical_heuristic_prob * 100).toFixed(1);
+    const scorePct = (pred.pu_model_score * 100).toFixed(1);
+    const heurProbPct = (pred.biophysical_heuristic_score * 100).toFixed(1);
 
     // Build waterfall feature rows
     const featureRowsHtml = Object.keys(weights).map(key => {
@@ -10267,7 +10268,6 @@
       const raw = rawFeats[key];
       const delta = contribs[key] || 0;
       const isPos = delta >= 0;
-      // Bar width: scale |delta| by max expected value ~1.5 -> ~100px
       const barWidth = Math.min(Math.abs(delta) * 75, 120);
 
       return `
@@ -10325,22 +10325,23 @@
           </div>
         </div>
 
-        <!-- Applicability Domain Warning Callout if needed -->
+        <!-- Applicability Domain Warning Callout -->
         ${ad.warning_flag ? `
           <div class="xai-domain-warning ${ad.status}">
             <div class="xai-warn-icon">⚠️</div>
             <div class="xai-warn-content">
-              <strong>تحذير حدود نطاق التطبيق والملاءمة الحسابية (Applicability Domain Alert):</strong>
+              <strong>تحذير نطاق استدلالي (Heuristic Domain Guidance):</strong>
               <p>${esc(ad.explanation_ar)}</p>
               <small dir="ltr" class="xai-warn-en">${esc(ad.explanation_en)}</small>
             </div>
           </div>
         ` : `
           <div class="xai-domain-info in-domain">
-            <div class="xai-info-icon">✓</div>
+            <div class="xai-info-icon">ℹ️</div>
             <div class="xai-info-content">
-              <strong>ضمن نطاق التطبيق الموثوق لببتيدات سموم العقارب الخطية:</strong>
+              <strong>توجيه استدلالي لنطاق التوزيع المرجعي (Heuristic Descriptor Range):</strong>
               <p>${esc(ad.explanation_ar)}</p>
+              <small dir="ltr" class="xai-warn-en">${esc(ad.explanation_en)}</small>
             </div>
           </div>
         `}
@@ -10350,33 +10351,33 @@
           <!-- Primary Logistic Regression Card -->
           <div class="xai-pred-card primary-model">
             <div class="xai-pred-card-head">
-              <span class="xai-pred-model-label">النموذج الإحصائي الرئيسي (PU Balanced Logistic Regression)</span>
-              <span class="badge measured">تنبؤ تسلسلي</span>
+              <span class="xai-pred-model-label">درجة نموذج التعلم الإيجابي غير الموسوم (PU Model Score)</span>
+              <span class="badge measured">دالة سيجمويد غير معايرة</span>
             </div>
             <div class="xai-pred-main-val">
-              <span class="xai-prob-num mono ${pred.predicted_probability_amp >= 0.5 ? 'text-success' : 'text-danger'}">
-                ${probPct}%
+              <span class="xai-prob-num mono ${pred.pu_model_score >= 0.5 ? 'text-success' : 'text-danger'}">
+                ${pred.pu_model_score.toFixed(4)}
               </span>
               <div class="xai-prob-meta">
                 <span class="xai-class-tag ${pred.predicted_class_binary === 1 ? 'active' : 'inactive'}">
-                  ${pred.predicted_class_binary === 1 ? 'مرجح كـ AMP مضاد للميكروبات' : 'مشابه لخلفية السموم العصبية'}
+                  ${pred.predicted_class_binary === 1 ? 'درجة تميل لخصائص AMP الإيجابية' : 'درجة تشابه خلفية سموم العقارب'}
                 </span>
-                <span class="xai-logit-tag mono" dir="ltr">Logit = ${pred.linear_logit >= 0 ? '+' : ''}${num(pred.linear_logit, 2)}</span>
+                <span class="xai-logit-tag mono" dir="ltr">Logit = ${pred.linear_logit >= 0 ? '+' : ''}${num(pred.linear_logit, 2)} (${scorePct}%)</span>
               </div>
             </div>
             <div class="xai-prob-gauge">
-              <div class="xai-prob-gauge-bar" style="width: ${probPct}%"></div>
+              <div class="xai-prob-gauge-bar" style="width: ${scorePct}%"></div>
             </div>
             <p class="xai-pred-caveat">
-              * احتمال ترجيحي مبني على الخصائص الفيزيوكيميائية للتسلسل تحت إطار PU؛ لا يمثل نسبة نجاح سريرية.
+              * مخرج دالة سيجمويد غير معاير (\(P_{\text{PU}}\)) لتمييز الببتيدات الخطية عن السموم الكلاسيكية؛ لا يمثل احتمالاً بيولوجياً معايراً أو دليلاً على الأمان السريري.
             </p>
           </div>
 
           <!-- Biophysical Heuristic Comparison Card -->
           <div class="xai-pred-card heuristic-model">
             <div class="xai-pred-card-head">
-              <span class="xai-pred-model-label">القاعدة الفيزيائية البسيطة (Biophysical Heuristic Baseline)</span>
-              <span class="badge annotated">نموذج مقارن</span>
+              <span class="xai-pred-model-label">القاعدة الفيزيائية البسيطة المقارنة (Biophysical Baseline)</span>
+              <span class="badge annotated">قاعدة ثنائية</span>
             </div>
             <div class="xai-pred-main-val">
               <span class="xai-prob-num mono text-muted">${heurProbPct}%</span>
@@ -10398,7 +10399,7 @@
           <div class="xai-wf-head">
             <h4>تفكيك مساهمة السمات الفيزيوكيميائية العشر (Exact Linear Attributions Waterfall)</h4>
             <p>
-              تفكيك مباشر لمعادلة الاحتمال: \(\text{logit} = \beta_0 + \sum w_i \cdot z_i\) حيث تمثل القيم الخضراء ترجيحات إيجابية نحو الفعالية، والقيم الحمراء عقوبات إحصائية تزيد من التشابه مع خلفية السموم.
+              تفكيك خطي إحصائي مباشر للمعادلة: \(\text{logit} = \beta_0 + \sum w_i \cdot z_i\). تمثل المساهمات ارتباطات إحصائية ضمن نموذج التدريب ولا تمثل سببية بيولوجية ميكانيكية.
             </p>
           </div>
 
@@ -10429,7 +10430,7 @@
                     <strong>المجموع الكلي للـ Logit المحسوب (\(\text{logit} = \beta_0 + \sum \Delta_i\))</strong>
                   </td>
                   <td class="text-center mono" dir="ltr">
-                    <span class="xai-math-pass">✓ تطابق حسابي قطعي 100%</span>
+                    <span class="xai-math-pass">✓ تطابق حسابي محقق ضمن حدود التسامح (\(${addCheck.difference || '0.0000'}\))</span>
                   </td>
                   <td class="mono ${pred.linear_logit >= 0 ? 'text-success' : 'text-danger'}" dir="ltr">
                     <strong>${pred.linear_logit >= 0 ? '+' : ''}${num(pred.linear_logit, 4)}</strong>
@@ -10443,39 +10444,39 @@
         <!-- Model vs Experiment Reality Check Section -->
         <div class="xai-reality-check-section">
           <div class="xai-reality-head">
-            <h4>فحص الواقع التجريبي: مقارنة التنبؤ الحسابي بالأدلة المنشورة (Model vs. Experiment Reality Check)</h4>
-            <p>مقارنة موضوعية تكشف أين صدق التنبؤ الحسابي، وأين ظهرت فجوات الأمان، وأين أخفق النموذج بسبب القيود البنيوية.</p>
+            <h4>فحص الواقع التجريبي: مقارنة درجة النموذج بالأدلة المنشورة (Model vs. Experiment Reality Check)</h4>
+            <p>مقارنة موضوعية تفصل بوضوح بين القياسات البكتيرية والفطرية والأغشية الحيوية، وتبرز الفروق الجوهرية بين التنبؤ والواقع المخبري.</p>
           </div>
 
           <div class="xai-reality-grid">
             <div class="xai-reality-metric-card">
               <span class="xai-rm-label">التركيز المثبط الأدنى المقاس (MIC)</span>
               <strong class="xai-rm-val mono" dir="ltr">
-                ${exp.empirical_lowest_mic_um ? `${exp.empirical_lowest_mic_um} µM` : (exp.empirical_lowest_mic_ug_ml ? `${exp.empirical_lowest_mic_ug_ml} µg/mL` : 'غير متوفر')}
+                ${exp.mic_relation || '='} ${exp.canonical_mic_um ? `${exp.canonical_mic_um} µM` : (exp.canonical_mic_ug_ml ? `${exp.canonical_mic_ug_ml} µg/mL` : 'غير متوفر')}
               </strong>
-              <small>${exp.empirical_lowest_mic_ug_ml ? `(${exp.empirical_lowest_mic_ug_ml} µg/mL)` : ''}</small>
+              <small>${exp.canonical_mic_ug_ml ? `(${exp.canonical_mic_ug_ml} µg/mL)` : ''} · <span class="badge ${exp.is_antifungal ? 'annotated' : (exp.is_biofilm_endpoint ? 'background' : 'measured')}">${esc(exp.target_type_label_ar)}</span></small>
             </div>
             <div class="xai-reality-metric-card">
-              <span class="xai-rm-label">آلية العمل التجريبية المستهدفة</span>
-              <strong class="xai-rm-val">${esc(exp.interaction_type)}</strong>
-              <small>${esc(exp.assay_method)}</small>
+              <span class="xai-rm-label">الكائن والسلالة المستهدفة في التجربة</span>
+              <strong class="xai-rm-val" dir="ltr">${esc(exp.target_organism)}</strong>
+              <small dir="ltr">${exp.target_strain ? `Strain: ${esc(exp.target_strain)}` : ''} · ${esc(exp.assay_method)}</small>
             </div>
             <div class="xai-reality-metric-card">
               <span class="xai-rm-label">أمان خلايا الثدييات (HC50 / RBCs)</span>
               <strong class="xai-rm-val mono ${exp.hc50_um ? 'text-success' : 'text-muted'}" dir="ltr">
-                ${exp.hc50_um ? `${exp.hc50_um} µM (Human RBCs)` : (exp.hc50_verification_status === 'quarantined_uncalibrated' ? 'محجور (غير معاير)' : 'غير مقاس')}
+                ${exp.hc50_um ? `${exp.hc50_um} µM (Human RBCs)` : (exp.hc50_verification_status === 'not_verified_or_unassayed' ? 'محجور / غير معاير' : 'غير مقاس')}
               </strong>
-              <small>${exp.hc50_um ? 'منحنى تحلل معاير كامل وموثق' : 'بيانات الأمان السريري غير مكتملة'}</small>
+              <small>${exp.hc50_um ? 'منحنى تحلل دموي بشري معاير كامل وموثق' : 'بيانات الأمان السريري غير مكتملة أو محجورة'}</small>
             </div>
             <div class="xai-reality-metric-card">
               <span class="xai-rm-label">مؤشر اكتمال الأدلة (ERI Score)</span>
               <strong class="xai-rm-val mono">${exp.evidence_readiness_index} / 100</strong>
-              <small>اكتمال التوثيق التجريبي في الأدبيات (MOD-07)</small>
+              <small>اكتمال التوثيق التجريبي في الأدبيات المنشورة (MOD-07)</small>
             </div>
             <div class="xai-reality-metric-card">
-              <span class="xai-rm-label">محطات المسار الترجمي المنجزة</span>
+              <span class="xai-rm-label">محطات المسار الترجمي الموثقة</span>
               <strong class="xai-rm-val mono">${exp.verified_translational_milestones} / 8 محطات</strong>
-              <small>المراحل المخبرية الموثقة بأدلة منشورة (MOD-09)</small>
+              <small>${exp.stage_2_evidence_status === 'partial_evidence' ? 'المرحلة 2 جزئية (أدلة أغشية حيوية فقط)' : 'مراحل بأدلة منشورة'} · (${exp.partial_translational_milestones} جزئية)</small>
             </div>
             <div class="xai-reality-metric-card">
               <span class="xai-rm-label">رتبة الفرز المتوازن (Baseline Rank)</span>
@@ -10486,7 +10487,7 @@
 
           <div class="xai-concordance-box ${exp.concordance_classification}">
             <div class="xai-conc-icon">
-              ${exp.concordance_classification === 'concordant_active' ? '✅' : (exp.concordance_classification === 'mechanistic_atypical_discordant' ? '❌' : '⚠️')}
+              ${exp.concordance_classification === 'concordant_with_literature' ? '✅' : (exp.concordance_classification === 'modular_chimera_linear_discordance' ? '❌' : '⚠️')}
             </div>
             <div class="xai-conc-content">
               <strong>تقييم التوافق بين الحساب والواقع التجريبي:</strong>

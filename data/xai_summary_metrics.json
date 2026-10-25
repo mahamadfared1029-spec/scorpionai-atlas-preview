@@ -1,7 +1,8 @@
 {
   "title": "SCORPION X — MOD-10 Explainable AI Summary Metrics",
-  "model_version": "1.3.0-MOD10-XAI",
+  "model_version": "1.3.1-MOD10-XAI-Gated",
   "total_prioritized_candidates": 20,
+  "score_interpretation": "Uncalibrated PU model score (sigmoid output; not a calibrated probability of biological activity)",
   "holdout_roc_auc": 0.742,
   "holdout_roc_auc_ci": [
     0.619,
@@ -12,14 +13,14 @@
     0.402,
     0.735
   ],
-  "cross_fold_leakage_pct": 0.0,
+  "cross_fold_leakage_claim": "Zero cross-fold sequence pairs with >= 70% sequence identity (CD-HIT cluster partitioning; background evolutionary homology < 70% remains in venom dataset)",
   "training_sequences_count": 940,
   "independent_holdout_sequences_count": 292,
-  "in_domain_count": 14,
-  "high_charge_extrapolation_count": 5,
-  "multi_domain_structural_atypical_count": 1,
-  "predicted_amp_count": 19,
-  "mean_predicted_probability": 0.9035,
+  "heuristic_linear_reference_count": 14,
+  "heuristic_high_charge_extrapolation_count": 5,
+  "heuristic_atypical_modular_count": 1,
+  "high_score_count": 19,
+  "mean_pu_model_score": 0.9035,
   "highest_positive_feature": "net_charge_ph74_physiological (+0.7048)",
   "highest_negative_feature": "cysteine_count (-0.5150)"
 }

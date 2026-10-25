@@ -1,19 +1,24 @@
 {
   "model_name": "ScorpionAI Atlas v1.3 - Research Grade",
-  "model_version": "1.3.0-MOD10-XAI",
+  "model_version": "1.3.1-MOD10-XAI-Gated",
   "primary_architecture": "Regularized Logistic Regression with Balanced Class Weighting (PU Framing)",
   "baseline_comparison_model": "Biophysical Rule-Based Heuristic (Net Charge >= 1.5 & Cys <= 1)",
   "majority_baseline_model": "Majority Class Predictor (Always Background Negative)",
-  "training_framing": "Positive-Unlabeled (PU) Learning",
+  "training_framing": "Positive-Unlabeled (PU) Learning (curated linear AMPs vs. unassayed background venom peptides)",
+  "score_interpretation": "Uncalibrated PU model score (sigmoid output; not a calibrated probability of biological activity)",
+  "score_interpretation_ar": "درجة نموذج التعلم الإيجابي غير الموسوم (PU Score؛ مخرج دالة سيجمويد غير معاير لاحتمالية الفاعلية البيولوجية)",
   "training_dataset_size": 940,
   "cv_folds_count": 4,
   "cv_protocol": "4-Fold Group K-Fold Clustered by Sequence Identity (>=70% Identity via CD-HIT)",
   "cross_fold_sequence_leakage_pct": 0.0,
+  "cross_fold_sequence_leakage_claim": "Zero cross-fold sequence pairs with >= 70% sequence identity (CD-HIT cluster partitioning; background evolutionary homology < 70% remains in venom dataset)",
+  "cross_fold_sequence_leakage_claim_ar": "انعدام الأزواج المتماثلة بنسبة ≥70% عبر طيات التدريب (تقسيم عنقودي ببرنامج CD-HIT؛ التماثل التطوري الطبيعي <70% يظل قائماً في سموم العقارب)",
   "independent_holdout_size": 292,
   "independent_holdout_clusters_count": 114,
   "total_atlas_sequences": 1232,
   "evaluation_holdout_metrics": {
     "roc_auc": 0.742,
+    "roc_auc_evaluation_note": "Evaluated against unassayed venom background peptides (neurotoxins/enzymes), NOT confirmed inactive negatives.",
     "roc_auc_95_ci_sample": [
       0.619,
       0.862
@@ -87,71 +92,71 @@
       "name_en": "Physiological Net Charge (pH 7.4)",
       "name_ar": "الشحنة الكهربائية الصافية الفسيولوجية (pH 7.4)",
       "unit": "e",
-      "role_en": "Major positive driver (+0.7048). Favors cationic peptides capable of electrostatic attraction to bacterial anionic outer membranes (PG/CL/LPS).",
-      "role_ar": "المحرك الإيجابي الأكبر (+0.7048). يرجح الببتيدات الموجبة القادرة على الانجذاب الكهروستاتيكي للأغشية البكتيرية السالبة."
+      "role_en": "Major positive driver (+0.7048). Statistically favors cationic peptides under the training set; not proof of physical membrane attraction.",
+      "role_ar": "المحرك الإيجابي الأكبر (+0.7048) إحصائياً في فضاء التدريب؛ ارتباط إحصائي ولا يمثل إثباتاً فيزيائياً لآلية الجذب."
     },
     "hydrophobic_fraction": {
       "name_en": "Hydrophobic Amino Acid Fraction",
       "name_ar": "نسبة الأحماض الأمينية الكارهة للماء",
       "unit": "ratio",
-      "role_en": "Key positive driver (+0.4992). Promotes peptide insertion and partition into lipid bilayers.",
-      "role_ar": "محرك إيجابي رئيسي (+0.4992). يدعم انغراس الببتيد وذوبانه في الطبقة الدهنية الثنائية."
+      "role_en": "Positive linear contributor (+0.4992). Correlates with hydrophobic residue density in training AMPs.",
+      "role_ar": "مساهم إيجابي خطي (+0.4992) يرتبط إحصائياً بكثافة الأحماض الكارهة في ببتيدات التدريب."
     },
     "aliphatic_index": {
       "name_en": "Aliphatic Index (Ikai 1980)",
       "name_ar": "مؤشر السلسلة الأليفاتية (Ikai)",
       "unit": "index",
-      "role_en": "Positive contributor (+0.3049). Reflects thermal stability and abundance of Ala, Val, Ile, and Leu side-chains.",
-      "role_ar": "مساهم إيجابي (+0.3049). يعكس الاستقرار الحراري ووفرة السلاسل الجانبية الأليفاتية المتفرعة."
+      "role_en": "Positive contributor (+0.3049). Statistical weighting for Ala, Val, Ile, and Leu frequency.",
+      "role_ar": "مساهم إيجابي (+0.3049) يعكس التكرار الإحصائي لأحماض Ala, Val, Ile, Leu."
     },
     "hydrophobic_moment_alpha": {
       "name_en": "Alpha-Helical Hydrophobic Moment (100°)",
       "name_ar": "العزم الحلزوني الكاره للماء (α-100°)",
       "unit": "moment",
-      "role_en": "Positive amphipathicity driver (+0.2613). Measures amphipathic segregation between polar and hydrophobic helical faces.",
-      "role_ar": "محرك الازدواجية الأليفة (+0.2613). يقيس تمايز الوجه الكاره للماء عن الوجه القطبي على الحلزون."
+      "role_en": "Positive amphipathicity contributor (+0.2613). Reflects periodicity of hydrophobic/polar faces along an idealized helix.",
+      "role_ar": "مساهم إيجابي للازدواجية الأليفة (+0.2613) يعكس الدورية الرياضية للأوجه القطبية والكارهة على حلزون مثالي."
     },
     "aromatic_fraction": {
       "name_en": "Aromatic Amino Acid Fraction (Phe/Trp/Tyr)",
       "name_ar": "نسبة الأحماض الأمينية العطرية",
       "unit": "ratio",
-      "role_en": "Positive membrane interfacial driver (+0.2092). Trp and Phe residues anchor into the membrane-water interface.",
-      "role_ar": "محرك وسطي إيجابي (+0.2092). تثبّت البقايا العطرية (خاصة Trp و Phe) الببتيد في الواجهة المائية الدهنية."
+      "role_en": "Positive linear weight (+0.2092) for aromatic residue frequency.",
+      "role_ar": "وزن إيجابي خطي (+0.2092) لتردد الأحماض العطرية في التسلسل."
     },
     "instability_index": {
       "name_en": "Guruprasad Instability Index (1990)",
       "name_ar": "مؤشر عدم الاستقرار (Guruprasad)",
       "unit": "index",
-      "role_en": "Slight positive weight (+0.0846). Captures dipeptide stability tendencies in the training pool.",
-      "role_ar": "وزن إيجابي طفيف (+0.0846). يلتقط ميل ثنائيات الببتيد للاستقرار داخل مصفوفة التدريب."
+      "role_en": "Slight positive weight (+0.0846). Linear model parameter reflecting dipeptide tendencies in training pool.",
+      "role_ar": "وزن إيجابي طفيف (+0.0846) يعكس النمط الإحصائي لثنائيات الببتيد في بيانات التدريب."
     },
     "boman_index": {
       "name_en": "Boman Protein-Interaction Index",
       "name_ar": "مؤشر بومان للتفاعل البروتيني",
       "unit": "kcal/mol",
-      "role_en": "Minor positive weight (+0.0677). Estimates potential for non-specific protein and receptor interactions.",
-      "role_ar": "وزن إيجابي منخفض (+0.0677). يقدر قابلية التفاعل غير النوعي مع البروتينات والمستقبلات."
+      "role_en": "Minor positive weight (+0.0677) for calculated solubility transfer energies.",
+      "role_ar": "وزن إيجابي منخفض (+0.0677) لقيم طاقة انتقال الذوبانية المحسوبة."
     },
     "mean_hydrophobicity_eisenberg": {
       "name_en": "Mean Eisenberg Consensus Hydrophobicity",
       "name_ar": "متوسط كراهية الماء (مقياس آيزنبرغ التوافقي)",
       "unit": "scale",
-      "role_en": "Residual positive weight (+0.0188). Most hydrophobic variance is already captured by hydrophobic fraction.",
-      "role_ar": "وزن إيجابي متبقٍ (+0.0188). تم امتصاص معظم التباين الكاره للماء بواسطة نسبة الأحماض الكارهة."
+      "role_en": "Residual positive weight (+0.0188). Most hydrophobic variance is absorbed by hydrophobic fraction.",
+      "role_ar": "وزن إيجابي متبقٍ (+0.0188) نظراً لامتصاص معظم التباين الكاره للماء عبر نسبة الأحماض الكارهة."
     },
     "length_aa": {
       "name_en": "Peptide Sequence Length",
       "name_ar": "طول التسلسل الببتيدي",
       "unit": "residues",
       "role_en": "Near-neutral penalty (-0.0044). Imposes a minor statistical regularization against excessive sequence lengths.",
-      "role_ar": "عقوبة شبه محايدة (-0.0044). تفرض تقييداً إحصائياً طفيفاً ضد الأطوال المتزايدة."
+      "role_ar": "عقوبة إحصائية شبه محايدة (-0.0044) تفرض تقييداً طفيفاً ضد الأطوال المتزايدة."
     },
     "cysteine_count": {
       "name_en": "Cysteine Residue Count",
       "name_ar": "عدد بقايا السيستين (Cys)",
       "unit": "residues",
-      "role_en": "Strong negative inhibitor (-0.5150). Penalizes homology to classic disulfide-rich scorpion neurotoxins (6–8 Cys). Cysteine-free linear AMPs receive a strong positive offset (+0.8257 log-odds).",
-      "role_ar": "مثبط إحصائي قوي (-0.5150). يعاقب التشابه البنيوي مع السموم العصبية الكلاسيكية كثيفة الجسور الكبريتية (6-8 سيستين)، مما يمنح الببتيدات الخطية الخالية من السيستين دفعة إيجابية (+0.8257)."
+      "role_en": "Strong negative statistical coefficient (-0.5150). Penalizes homology to classic disulfide-rich scorpion neurotoxins (6–8 Cys). Does NOT establish chemical inhibition of bioactivity.",
+      "role_ar": "معامل إحصائي سلبي بارز (-0.5150) يعكس الفصل الإحصائي عن السموم العصبية الكلاسيكية (6-8 سيستين)، ولا يمثل تثبيطاً كيميائياً للفاعلية."
     }
   }
 }

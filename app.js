@@ -12910,7 +12910,7 @@
 
 
   // ==========================================================================
-  // MOD-09: VENOM-TO-MEDICINE TRANSLATION EXPLORER
+  // MOD-09: VENOM-TO-MEDICINE TRANSLATION EXPLORER (SCIENTIFIC INTEGRITY GATE)
   // ==========================================================================
   let translationalStages = [];
   let translationalProfiles = [];
@@ -12933,6 +12933,9 @@
       translationalProfiles = await resProfiles.json();
       translationalMetrics = await resMetrics.json();
 
+      // Update Summary Metrics
+      updateTranslationMetrics();
+
       // Render Pipeline Stepper
       renderTranslationStepper();
 
@@ -12953,6 +12956,23 @@
     }
   }
 
+  function updateTranslationMetrics() {
+    if (!translationalMetrics) return;
+    const m = translationalMetrics;
+    const stagesCounts = m.stages_verified_completion_counts || {};
+    const safetyAudit = m.safety_and_selectivity_audit || {};
+    const invivoAudit = m.in_vivo_and_clinical_audit || {};
+
+    if ($('trans-metric-total')) $('trans-metric-total').textContent = m.total_prioritized_candidates || 20;
+    if ($('trans-metric-stage1')) $('trans-metric-stage1').textContent = stagesCounts.stage_1_sequence_characterization || 20;
+    if ($('trans-metric-stage2')) $('trans-metric-stage2').textContent = stagesCounts.stage_2_antimicrobial_activity_mic || 18;
+    if ($('trans-metric-stage3')) $('trans-metric-stage3').textContent = stagesCounts.stage_3_mechanism_of_action || 15;
+    if ($('trans-metric-calibrated-hc50')) $('trans-metric-calibrated-hc50').textContent = safetyAudit.verified_calibrated_hc50_curve_count || 3;
+    if ($('trans-metric-selectivity')) $('trans-metric-selectivity').textContent = safetyAudit.calculable_selectivity_ratios_count || 3;
+    if ($('trans-metric-quarantined')) $('trans-metric-quarantined').textContent = safetyAudit.quarantined_unsupported_hc50_count || 3;
+    if ($('trans-metric-clinical-zero')) $('trans-metric-clinical-zero').textContent = invivoAudit.human_clinical_trials_count || 0;
+  }
+
   function renderTranslationStepper() {
     const track = $('trans-pipeline-stepper');
     if (!track) return;
@@ -12966,19 +12986,29 @@
       item.dataset.stageNumber = st.stage_number;
 
       let statusPillClass = 'status-empty';
-      let statusPillText = '0% لم تبدأ';
-      if (st.stage_number <= 3) {
+      let statusPillText = '0 موثقة';
+
+      if (st.stage_number === 1) {
         statusPillClass = 'status-completed';
-        statusPillText = '100% مكتملة';
+        statusPillText = '20 موثقة (100%)';
+      } else if (st.stage_number === 2) {
+        statusPillClass = 'status-completed';
+        statusPillText = '18 موثقة (90%)';
+      } else if (st.stage_number === 3) {
+        statusPillClass = 'status-active';
+        statusPillText = '15 موثقة (75%)';
       } else if (st.stage_number === 4) {
         statusPillClass = 'status-active';
-        statusPillText = '10% مكتملة (18 قيد البحث)';
+        statusPillText = '3 منحنيات معايرة';
       } else if (st.stage_number === 5) {
         statusPillClass = 'status-active';
-        statusPillText = '5% مكتملة (1 قيد البحث)';
+        statusPillText = 'حسابي فقط (0 تجريبي)';
       } else if (st.stage_number === 6) {
         statusPillClass = 'status-active';
-        statusPillText = '1 نموذج موضعي (5%)';
+        statusPillText = '1 نموذج موضعي (Kn2-7)';
+      } else {
+        statusPillClass = 'status-empty';
+        statusPillText = '0 مسجلة (0%)';
       }
 
       item.innerHTML = `
@@ -13015,17 +13045,21 @@
     if ($('stage-info-desc')) $('stage-info-desc').textContent = stage.description_ar;
     if ($('stage-info-milestone')) $('stage-info-milestone').textContent = stage.milestone_criteria_ar;
 
-    let statusText = 'لم تبدأ أي مرشحات في هذه المرحلة حتى الآن (0%).';
-    if (stageNum <= 3) {
-      statusText = '20 من أصل 20 مرشحاً (100% مكتملة لجميع ببتيدات الأطلس).';
+    let statusText = '';
+    if (stageNum === 1) {
+      statusText = '20 من أصل 20 مرشحاً (100% موثقة بأدلة منشورة وتسلسلات ناضجة مؤكدة).';
+    } else if (stageNum === 2) {
+      statusText = '18 مرشحاً بنشاط MIC موثق (≤ 64 µM) | 2 ببتيدان (StigA6, StigA16) بنشاط عوالق غير فعال (> 100 µM) وتشتيت أغشية حيوية جزئي.';
+    } else if (stageNum === 3) {
+      statusText = '15 مرشحاً بآلية نفاذية غشائية مثبتة | 1 جزئي (Scorpine) | 4 غير مفحوصة لآلية النفاذية المباشرة (StigA6, StigA16, ToAP1, ToAP3).';
     } else if (stageNum === 4) {
-      statusText = '2 مكتملة (Kn2-7, Hp1404) | 1 حاجز تحلل دموي حاد (IsCT1) | 17 فحص أحادي التركيز قيد الاستكشاف.';
+      statusText = '0 مكتملة تماماً (غياب سمية الخلايا المنواة) | 3 بمنحنى تحلل دموي بشري معاير (Kn2-7, Hp1404, BmKn2) | 14 بفحص أحادي الجرعة | 3 غير مفحوصة.';
     } else if (stageNum === 5) {
-      statusText = '1 مكتملة (Kn2-7 بمتوسط نصف عمر 180 دقيقة) | 1 جزئية (Hp1404) | 18 دراسات حسابية فقط.';
+      statusText = '0 تجريبي في مصل الدم | 20 دراسات حسابية بمؤشر عدم الاستقرار فقط (فجوة بحثية مخبرية إلزامية).';
     } else if (stageNum === 6) {
-      statusText = '0 معتمدة بالكامل | 1 نموذج عدوى جلدي موضعي تجريبي في الفئران (Kn2-7) | 19 غير مختبرة حيوياً.';
+      statusText = '0 نماذج جهازية أو سمية حيوية | 1 نموذج عدوى جلدي موضعي تجريبي في الفئران (Kn2-7) | 19 غير مختبرة حيوياً.';
     } else if (stageNum >= 7) {
-      statusText = '0% بصورة قطعية (لا توجد أي تجارب سريرية على البشر أو أدوية معتمدة لمرشحات سموم العقارب الـ20).';
+      statusText = '0% بصورة قطعية: لم يُسجل أي مرشح من مرشحات سموم العقارب الـ20 في تجارب سريرية بشرية أو ينل اعتماداً دوائياً.';
     }
     if ($('stage-info-status')) $('stage-info-status').textContent = statusText;
   }
@@ -13035,9 +13069,9 @@
     if (!tableBody) return;
 
     const searchTerm = ($('trans-search-input')?.value || '').trim().toLowerCase();
-    const stageFilter = $('trans-filter-stage')?.value || 'all';
-    const originFilter = $('trans-filter-origin')?.value || 'all';
-    const safetyFilter = $('trans-filter-safety')?.value || 'all';
+    const filterSelectivity = $('trans-filter-selectivity')?.value || 'all';
+    const filterOrigin = $('trans-filter-origin')?.value || 'all';
+    const filterMilestone = $('trans-filter-milestone')?.value || 'all';
 
     const filtered = translationalProfiles.filter(p => {
       // Search
@@ -13045,20 +13079,19 @@
         const hay = `${p.peptide_name} ${p.candidate_id} ${p.species_canonical_name} ${p.origin_type}`.toLowerCase();
         if (!hay.includes(searchTerm)) return false;
       }
-      // Stage
-      if (stageFilter === 'stage_4' && p.active_research_stage_number !== 4) return false;
-      if (stageFilter === 'stage_5' && p.active_research_stage_number !== 5) return false;
-      if (stageFilter === 'stage_6' && p.active_research_stage_number !== 6) return false;
-      if (stageFilter === 'stage_7' && p.active_research_stage_number < 7) return false;
 
       // Origin
-      if (originFilter === 'wild_type' && p.origin_type !== 'natural_wild_type') return false;
-      if (originFilter === 'engineered' && p.origin_type !== 'engineered_analogue') return false;
+      if (filterOrigin === 'wild_type' && p.origin_type !== 'natural') return false;
+      if (filterOrigin === 'engineered' && p.origin_type !== 'engineered') return false;
 
-      // Safety
-      if (safetyFilter === 'favorable_ti' && (!p.has_calibrated_hc50 || p.selectivity_index < 10)) return false;
-      if (safetyFilter === 'single_dose_only' && !p.has_single_dose_hemolysis_only) return false;
-      if (safetyFilter === 'hemolysis_roadblock' && !p.has_high_hemolysis) return false;
+      // Selectivity Filter
+      if (filterSelectivity === 'calculable' && p.selectivity_ratio_hc50_mic === null) return false;
+      if (filterSelectivity === 'uncalculable' && p.selectivity_ratio_hc50_mic !== null) return false;
+      if (filterSelectivity === 'calibrated_hc50' && !p.has_calibrated_hc50) return false;
+
+      // Milestone Filter
+      if (filterMilestone === 'milestone_3' && p.verified_milestones_count < 3) return false;
+      if (filterMilestone === 'milestone_2' && p.verified_milestones_count < 2) return false;
 
       return true;
     });
@@ -13068,7 +13101,7 @@
     if (filtered.length === 0) {
       tableBody.innerHTML = `
         <tr>
-          <td colspan="9" style="text-align: center; padding: 32px; color: #94a3b8;">
+          <td colspan="10" style="text-align: center; padding: 32px; color: #94a3b8;">
             لا توجد مرشحات مطابقة لمعايير البحث والتصفية المحددة.
           </td>
         </tr>
@@ -13077,32 +13110,41 @@
     }
 
     tableBody.innerHTML = filtered.map(p => {
-      const originBadge = p.origin_type === 'engineered_analogue'
+      const originBadge = p.origin_type === 'engineered'
         ? '<span class="badge-origin-eng">مشتق مهندس</span>'
         : '<span class="badge-origin-wt">طبيعي بري</span>';
 
-      const completedBadgeClass = `stage-completed-${p.highest_completed_stage_number}`;
-      const activeBadgeClass = `active-stage-${p.active_research_stage_number}`;
+      const st1 = p.stages_checklist.stage_1;
+      const st2 = p.stages_checklist.stage_2;
+      const st3 = p.stages_checklist.stage_3;
 
-      let tiBadgeHtml = '';
-      if (p.has_high_hemolysis) {
-        tiBadgeHtml = `<span class="trans-ti-badge ti-roadblock" title="تحلل دموي مرتفع حاد">TI = ${p.selectivity_index} (حاجز أمان)</span>`;
-      } else if (p.has_calibrated_hc50 && p.selectivity_index >= 10) {
-        tiBadgeHtml = `<span class="trans-ti-badge ti-favorable" title="نافذة علاجية مواتية">TI = ${p.selectivity_index} (مواتٍ)</span>`;
+      const st1Icon = st1.evidence_status === 'completed_with_verified_evidence' ? '✅' : '⚠️';
+      const st2Icon = st2.evidence_status === 'completed_with_verified_evidence' ? '✅' : '⚠️';
+      const st3Icon = st3.evidence_status === 'completed_with_verified_evidence' ? '✅' : (st3.evidence_status === 'partial_evidence' ? '⚠️' : '⚪');
+
+      let selectivityHtml = '';
+      if (p.selectivity_ratio_hc50_mic !== null) {
+        if (p.selectivity_ratio_hc50_mic >= 10) {
+          selectivityHtml = `<span class="trans-ti-badge ti-favorable" title="${p.selectivity_interpretation_en}">النسبة: ${p.selectivity_ratio_hc50_mic} (مواتٍ)</span>`;
+        } else {
+          selectivityHtml = `<span class="trans-ti-badge ti-roadblock" title="${p.selectivity_interpretation_en}">النسبة: ${p.selectivity_ratio_hc50_mic} (غير مواتٍ)</span>`;
+        }
       } else {
-        tiBadgeHtml = `<span class="trans-ti-badge ti-untested" title="فحص أحادي التركيز فقط - غير كافٍ لحساب TI">فحص أحادي الجرعة</span>`;
+        selectivityHtml = `<span class="trans-ti-badge ti-untested" title="غير محسوبة لغياب منحنى HC50 معاير">غير محسوبة</span>`;
       }
 
-      let stabText = 'حسابي فقط';
-      if (p.has_experimental_serum_stability) {
-        stabText = `تجريبي (${p.serum_half_life_minutes} دقيقة)`;
-      } else if (p.peptide_name === 'Hp1404') {
-        stabText = 'تجريبي جزئي';
+      let hemolysisSummary = '';
+      if (p.has_calibrated_hc50) {
+        hemolysisSummary = `<span style="color: #38bdf8; font-weight: 600;">HC50: ${p.hc50_um} µM</span> <small style="color: #94a3b8;">(${p.hc50_erythrocyte_species})</small>`;
+      } else if (p.single_dose_hemolysis_observation && p.single_dose_hemolysis_observation !== 'Unassayed in primary literature') {
+        hemolysisSummary = `<span style="font-size: 11px; color: #cbd5e1;">${p.single_dose_hemolysis_observation.substring(0, 32)}...</span>`;
+      } else {
+        hemolysisSummary = `<span style="font-size: 11px; color: #64748b;">غير مفحوص</span>`;
       }
 
-      let inVivoText = '<span style="color: #64748b;">غير مختبر</span>';
-      if (p.has_invivo_efficacy) {
-        inVivoText = '<span style="color: #f472b6; font-weight: 600;">نموذج جلدي (فئران)</span>';
+      let inVivoSummary = '<span style="color: #64748b;">غير مختبر</span>';
+      if (p.candidate_id === 'SCA-PEP-011') {
+        inVivoSummary = '<span style="color: #f472b6; font-weight: 600;">موضعي جلدي (فئران)</span>';
       }
 
       const speciesLink = `<a href="#biogeography-explorer" onclick="if(window.openBiogeographyModal) { window.openBiogeographyModal('${p.source_species_id}'); } return false;" class="species-link">${p.species_canonical_name}</a>`;
@@ -13115,31 +13157,23 @@
               <div class="candidate-meta-line">
                 <code>${p.candidate_id}</code>
                 ${originBadge}
+                <span style="font-size: 10px; color: #94a3b8;">رتبة #${p.baseline_rank}</span>
               </div>
             </div>
           </td>
           <td>${speciesLink}</td>
           <td>
-            <span class="stage-badge ${completedBadgeClass}">
-              المرحلة ${p.highest_completed_stage_number}: ${p.highest_completed_stage_short_ar}
-            </span>
-          </td>
-          <td>
-            <span class="stage-badge ${activeBadgeClass}">
-              المرحلة ${p.active_research_stage_number}: ${p.active_research_stage_short_ar}
-            </span>
-          </td>
-          <td>
-            <div style="display: flex; align-items: center;">
-              <span class="trans-prog-bar">
-                <span class="trans-prog-fill" style="width: ${p.stage_progression_pct}%;"></span>
-              </span>
-              <span style="font-size: 11px; font-weight: 600; color: #cbd5e1;">${p.stage_progression_pct}%</span>
+            <div style="font-size: 12px; font-weight: 600; color: #38bdf8;">
+              ${p.verified_milestones_count} / 8 معالم موثقة
             </div>
+            <div style="font-size: 10px; color: #94a3b8;">(أدلة تجريبية مثبتة)</div>
           </td>
-          <td>${tiBadgeHtml}</td>
-          <td style="font-size: 12px;">${stabText}</td>
-          <td style="font-size: 12px;">${inVivoText}</td>
+          <td style="text-align: center;">${st1Icon}</td>
+          <td style="text-align: center;">${st2Icon}</td>
+          <td style="text-align: center;">${st3Icon}</td>
+          <td>${selectivityHtml}</td>
+          <td style="font-size: 12px;">${hemolysisSummary}</td>
+          <td style="font-size: 12px;">${inVivoSummary}</td>
           <td>
             <button type="button" class="button secondary small" onclick="window.openTranslationModal('${p.candidate_id}')">
               الملف الترجمي
@@ -13153,9 +13187,9 @@
   function setupTranslationControls() {
     const searchInput = $('trans-search-input');
     const clearBtn = $('trans-search-clear');
-    const filterStage = $('trans-filter-stage');
+    const filterSelectivity = $('trans-filter-selectivity');
     const filterOrigin = $('trans-filter-origin');
-    const filterSafety = $('trans-filter-safety');
+    const filterMilestone = $('trans-filter-milestone');
     const resetBtn = $('trans-btn-reset');
     const exportJsonBtn = $('trans-btn-export-json');
     const exportCsvBtn = $('trans-btn-export-csv');
@@ -13177,7 +13211,7 @@
       });
     }
 
-    [filterStage, filterOrigin, filterSafety].forEach(sel => {
+    [filterSelectivity, filterOrigin, filterMilestone].forEach(sel => {
       if (sel) sel.addEventListener('change', renderTranslationTable);
     });
 
@@ -13185,9 +13219,9 @@
       resetBtn.addEventListener('click', () => {
         if (searchInput) searchInput.value = '';
         if (clearBtn) clearBtn.style.display = 'none';
-        if (filterStage) filterStage.value = 'all';
+        if (filterSelectivity) filterSelectivity.value = 'all';
         if (filterOrigin) filterOrigin.value = 'all';
-        if (filterSafety) filterSafety.value = 'all';
+        if (filterMilestone) filterMilestone.value = 'all';
         renderTranslationTable();
       });
     }
@@ -13237,54 +13271,73 @@
     if ($('modal-candidate-title')) $('modal-candidate-title').innerHTML = `${cand.peptide_name} <small id="modal-species-sub">(${cand.species_canonical_name})</small>`;
     if ($('modal-mature-sequence')) $('modal-mature-sequence').textContent = cand.mature_sequence;
     if ($('modal-candidate-origin')) {
-      $('modal-candidate-origin').textContent = cand.origin_type === 'engineered_analogue' ? 'مشتق مهندس مخبرياً' : 'ببتيد طبيعي بري';
+      $('modal-candidate-origin').textContent = cand.origin_type === 'engineered' ? 'مشتق مهندس مخبرياً' : 'ببتيد طبيعي بري';
     }
     if ($('modal-candidate-rank')) $('modal-candidate-rank').textContent = `المرتبة #${cand.baseline_rank} في فرز MOD-07-M1`;
     if ($('modal-candidate-eri')) $('modal-candidate-eri').textContent = `مؤشر اكتمال الأدلة ERI: ${cand.evidence_readiness_index} / 100 (${cand.readiness_tier_name_ar})`;
 
-    // Safety Callout Box
-    let safetyBoxHtml = '';
-    if (cand.has_high_hemolysis) {
-      safetyBoxHtml = `
-        <div class="trans-safety-box box-roadblock">
-          <strong>🚨 تنبيه أمان حرج (Severe Hemolysis Roadblock):</strong>
-          <p>أظهر هذا الببتيد تحللاً دموياً مرتفعاً وحاداً (HC50 = ${cand.hc50_um} µM على كريات الدم البشرية) مع مؤشر انتقائية دون الوحدة (TI = ${cand.selectivity_index} &lt; 1). يؤدي هذا التحلل الدموي العنيف إلى إيقاف التقدم الترجمي وحظر الاختبارات الحيوية النظامية في الحيوانات منعاً باتاً دون إعادة هندسة السقالة الجزيئية.</p>
-        </div>
-      `;
-    } else if (cand.has_calibrated_hc50 && cand.selectivity_index >= 10) {
-      safetyBoxHtml = `
-        <div class="trans-safety-box box-safe">
-          <strong>✅ نافذة انتقائية علاجية مواتية (Favorable Selectivity Window):</strong>
-          <p>أظهر الببتيد تحللاً دموياً منخفضاً مع منحنى تركيز-استجابة كامل ومعاير (HC50 = ${cand.hc50_um} µM) ومؤشر انتقائية علاجي مواتٍ (TI = ${cand.selectivity_index} &gt; 10). سمية الخلايا الثديية المنواة (${cand.nucleated_cell_line || 'Vero'}): IC50 = ${cand.nucleated_ic50_um || '120.0'} µM.</p>
-        </div>
-      `;
+    // Selectivity Ratio Box (Directive 4)
+    let selectivityBoxHtml = '';
+    if (cand.selectivity_ratio_hc50_mic !== null) {
+      if (cand.selectivity_ratio_hc50_mic >= 10) {
+        selectivityBoxHtml = `
+          <div class="trans-safety-box box-safe">
+            <strong>✅ نسبة الانتقائية التجريبية (التحلل الدموي إلى التركيز المثبط HC50/MIC): ${cand.selectivity_ratio_hc50_mic}</strong>
+            <p><strong>البسط:</strong> ${cand.selectivity_ratio_numerator} &nbsp;|&nbsp; <strong>المقام:</strong> ${cand.selectivity_ratio_denominator}</p>
+            <p><strong>شروط الفحص:</strong> ${cand.selectivity_conditions_ar}</p>
+            <p><strong>التفسير العلمي:</strong> ${cand.selectivity_interpretation_ar}</p>
+            <p style="font-size: 11px; color: #94a3b8; margin: 4px 0 0 0;">تنبيه منهجي: النسبة ≥ 10 هي معيار توجيهي واستكشافي للمشروع، وليست معيار أمان تنظيمي أو سريري معتمداً.</p>
+          </div>
+        `;
+      } else {
+        selectivityBoxHtml = `
+          <div class="trans-safety-box box-roadblock">
+            <strong>⚠️ نسبة الانتقائية التجريبية (التحلل الدموي إلى التركيز المثبط HC50/MIC): ${cand.selectivity_ratio_hc50_mic} (دون الوحدة)</strong>
+            <p><strong>البسط:</strong> ${cand.selectivity_ratio_numerator} &nbsp;|&nbsp; <strong>المقام:</strong> ${cand.selectivity_ratio_denominator}</p>
+            <p><strong>شروط الفحص:</strong> ${cand.selectivity_conditions_ar}</p>
+            <p><strong>التفسير العلمي:</strong> ${cand.selectivity_interpretation_ar}</p>
+          </div>
+        `;
+      }
     } else {
-      safetyBoxHtml = `
+      let quarantineNotice = '';
+      if (cand.candidate_id === 'SCA-PEP-012') {
+        quarantinedNotice = '<p style="color: #fbbf24; font-size: 12px; margin-top: 4px;"><strong>إشعار حجر النزاهة العلمية:</strong> تم إلغاء وحجر القيمة المذكورة سابقاً (HC50 = 2.8 µM) لعدم ثبوتها في الورقة الأولية؛ حيث أجرى Dai et al. 2001 فحصاً أحادي الجرعة فقط (~10% تحلل عند 50 µM على كريات غنم) دون رسم منحنى استجابة للتركيز.</p>';
+      } else if (cand.candidate_id === 'SCA-PEP-020') {
+        quarantinedNotice = '<p style="color: #fbbf24; font-size: 12px; margin-top: 4px;"><strong>إشعار حجر النزاهة العلمية:</strong> تم إلغاء وحجر القيمة المذكورة سابقاً (HC50 = 32.0 µM)؛ حيث لم تتضمن الورقة الأولية (Moerman 2002) قياساً كمياً لـ HC50 بل رصدت تحللاً مسامياً أولياً على كريات الأرانب.</p>';
+      } else if (cand.candidate_id === 'SCA-PEP-018') {
+        quarantinedNotice = '<p style="color: #fbbf24; font-size: 12px; margin-top: 4px;"><strong>إشعار حجر النزاهة العلمية:</strong> تم إلغاء وحجر القيمة المذكورة سابقاً (HC50 = 24.5 µM)؛ حيث رصد Torres-Larios 2000 تحللاً عند 20-50 µM دون تحديد رقمي دقيق لـ HC50.</p>';
+      }
+
+      selectivityBoxHtml = `
         <div class="trans-safety-box box-warning">
-          <strong>⚠️ تنبيه الفحص أحادي التركيز (Single-Dose Screen Caveat):</strong>
-          <p>لم يخضع هذا الببتيد إلا لفحص تحلل دموي بتركيز تجريبي وحيد (${cand.single_dose_hemolysis_conc_um} µM، تحلل: ${cand.single_dose_hemolysis_pct}% على كريات ${cand.single_dose_erythrocyte_species || 'الأرانب'}). هذا الفحص استكشافي أولي ولا يثبت الأمان الثديي؛ حساب المؤشر العلاجي (TI) محظور إحصائياً حتى قياس منحنى تركيز-استجابة كامل.</p>
+          <strong>ℹ️ نسبة الانتقائية التجريبية (HC50 / MIC): غير محسوبة</strong>
+          <p>لا يمكن حساب نسبة الانتقائية لعدم توفر منحنى تركيز-استجابة كامل ومعاير لـ HC50 على كريات دم في الأدبيات العلمية المراجعة. الفحوصات أحادية الجرعة لا تتيح اشتقاق نسبة أمان موثوقة.</p>
+          <p><strong>الملاحظة التجريبية الموثقة:</strong> ${cand.single_dose_hemolysis_observation}</p>
+          ${quarantineNotice}
         </div>
       `;
     }
 
-    // 8 Stages Checklist
-    const checklistHtml = (Array.isArray(cand.stages_checklist) ? cand.stages_checklist : Object.values(cand.stages_checklist)).map(st => {
+    // 8-Stage Milestone Checklist
+    const checklistItems = Object.values(cand.stages_checklist);
+    const checklistHtml = checklistItems.map(st => {
       let rowClass = 'is-empty';
       let icon = '⚪';
-      let statusBadge = '<span class="stage-status-pill status-empty">لم تبدأ</span>';
+      let statusBadge = '<span class="stage-status-pill status-empty">غير مفحوص</span>';
 
-      if (st.status === 'completed') {
+      if (st.evidence_status === 'completed_with_verified_evidence') {
         rowClass = 'is-completed';
         icon = '✅';
-        statusBadge = '<span class="stage-status-pill status-completed">مكتملة</span>';
-      } else if (st.status === 'active_investigation') {
+        statusBadge = '<span class="stage-status-pill status-completed">أدلة مكتملة وموثقة</span>';
+      } else if (st.evidence_status === 'partial_evidence') {
         rowClass = 'is-active';
         icon = '🔬';
-        statusBadge = '<span class="stage-status-pill status-active">قيد الاستكشاف</span>';
-      } else if (st.status === 'safety_roadblock') {
-        rowClass = 'is-roadblock';
-        icon = '🚨';
-        statusBadge = '<span class="stage-status-pill" style="background: rgba(239,68,68,0.2); color:#f87171;">حاجز أمان</span>';
+        statusBadge = '<span class="stage-status-pill status-active">أدلة جزئية / أولية</span>';
+      } else if (st.evidence_status === 'not_assessed') {
+        rowClass = 'is-empty';
+        icon = '⚪';
+        statusBadge = '<span class="stage-status-pill status-empty">غير مفحوص (فجوة بحثية)</span>';
       }
 
       return `
@@ -13301,32 +13354,52 @@
       `;
     }).join('');
 
-    // Missing Experiments List
-    const missingItems = cand.missing_critical_experiments_ar || [];
-    const missingHtml = missingItems.length > 0
-      ? `<ul>${missingItems.map(item => `<li>${item}</li>`).join('')}</ul>`
-      : '<p style="color: #94a3b8; font-size: 13px;">تم استيفاء الشروط المخبرية للمراحل الحالية بنجاح.</p>';
+    // Preclinical & In Vivo Breakdown (Directive 6)
+    const invivo = cand.invivo_characterization || {};
+    let invivoSectionHtml = '';
+    if (cand.candidate_id === 'SCA-PEP-011') {
+      invivoSectionHtml = `
+        <div style="background: rgba(15,23,42,0.7); border: 1px solid rgba(244,114,182,0.3); border-radius: 6px; padding: 14px 16px;">
+          <h5 style="color: #f472b6; margin: 0 0 8px 0; font-size: 13px;">تفصيل الأدلة قبل السريرية الحية (Preclinical Endpoints Breakdown):</h5>
+          <ul style="margin: 0; padding-right: 18px; font-size: 12px; color: #cbd5e1; line-height: 1.6;">
+            <li><strong>الفاعلية الموضعية على الحيوان:</strong> أثبت Cao et al. (2012) انخفاضاً معنوياً في الحمل البكتيري لجروح جلدية مصابة بالمكورات العنقودية الذهبية في الفئران عند التطبيق الموضعي.</li>
+            <li><strong>التحمل الموضعي للجلد:</strong> تم تقييم التحمل الموضعي ظاهرياً؛ لم يُلاحظ احمرار أو تهيج جلدي في الفئران.</li>
+            <li><strong>السمية الجهازية النظامية:</strong> غير مفحوصة (not_assessed؛ لم تُقس الجرعة القاتلة الوريدية أو البريتونية LD50).</li>
+            <li><strong>الحركية الدوائية الجهازية:</strong> غير مفحوصة (not_assessed؛ غياب قياسات التصفية وتوزيع الأنسجة ونصف العمر الداخلي).</li>
+            <li><strong>الدراسات السريرية على البشر:</strong> غير مفحوصة (not_assessed؛ صفر تجارب سريرية).</li>
+          </ul>
+          <div style="margin-top: 8px; padding: 8px 12px; background: rgba(239,68,68,0.1); border-right: 3px solid #ef4444; border-radius: 4px; font-size: 11px; color: #fecaca;">
+            <strong>تحذير علمي صريح:</strong> الفاعلية في نموذج جلدي موضعي في الفئران لا تثبت إطلاقاً الأمان الجهازي، أو التحمل الوريدي، أو الجاهزية السريرية للدواء.
+          </div>
+        </div>
+      `;
+    } else {
+      invivoSectionHtml = `
+        <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 14px 16px;">
+          <h5 style="color: #94a3b8; margin: 0 0 6px 0; font-size: 13px;">الأدلة قبل السريرية في النماذج الحيوانية:</h5>
+          <p style="font-size: 12px; color: #cbd5e1; margin: 0;">لم يتم إجراء أي اختبارات على نماذج حيوانية حية في الأدبيات العلمية المنشورة لهذا الببتيد (فجوة بحثية غير مفحوصة).</p>
+        </div>
+      `;
+    }
 
     // Citations
     const doiLink = cand.doi ? `<a href="https://doi.org/${cand.doi}" target="_blank" rel="noopener">DOI: ${cand.doi}</a>` : '';
     const pmidLink = cand.pmid ? `<a href="https://pubmed.ncbi.nlm.nih.gov/${cand.pmid}" target="_blank" rel="noopener">PMID: ${cand.pmid}</a>` : '';
 
     body.innerHTML = `
-      ${safetyBoxHtml}
+      ${selectivityBoxHtml}
 
       <div>
-        <h4 style="font-size: 15px; color: #f8fafc; margin-bottom: 10px;">مسار الجاهزية الترجمية (مراحل البحث الثماني):</h4>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <h4 style="font-size: 15px; color: #f8fafc; margin: 0;">مصفوفة الأدلة الترجمية (مراحل البحث الثماني):</h4>
+          <span style="font-size: 12px; font-weight: 600; color: #38bdf8;">${cand.milestone_progress_display_ar}</span>
+        </div>
         <div class="trans-modal-checklist">
           ${checklistHtml}
         </div>
       </div>
 
-      <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 14px 16px;">
-        <h5 style="color: #fbbf24; margin: 0 0 6px 0; font-size: 13px;">الفحوصات المخبرية الإلزامية لاستكمال المسار الترجمي (Missing Critical Experiments):</h5>
-        <div style="font-size: 13px; color: #cbd5e1; line-height: 1.6;">
-          ${missingHtml}
-        </div>
-      </div>
+      ${invivoSectionHtml}
 
       <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 14px 16px;">
         <h5 style="color: #38bdf8; margin: 0 0 6px 0; font-size: 13px;">الأدبيات العلمية المرجعية الأولية:</h5>

@@ -3,192 +3,112 @@
     "stage_number": 1,
     "stage_id": "STAGE-1-ID-SEQ",
     "name_en": "Peptide Identification & Sequence Characterization",
-    "name_ar": "تحديد الهوية الببتيدية وتوصيف التسلسل",
-    "short_name_en": "Discovery & Seq",
-    "short_name_ar": "الاكتشاف والتسلسل",
-    "description_en": "Confirmation of unambiguous mature primary sequence, molecular mass, C-terminal amidation status, and biological species or synthetic origin.",
-    "description_ar": "تأكيد التسلسل الأولي الناضج بشكل لا لبس فيه، والكتلة الجزيئية، وحالة الأميدة الطرفية، وتحديد النوع البيولوجي أو الأصل الاصطناعي.",
-    "milestone_criteria_en": [
-      "Mature primary amino acid sequence unequivocally determined",
-      "Molecular weight confirmed by mass spectrometry (MALDI-TOF / ESI-MS) or exact calculation",
-      "Origin classified (natural wild isolate vs synthetic engineered analogue)",
-      "Parent template peptide and source species taxonomy mapped"
-    ],
-    "milestone_criteria_ar": [
-      "تحديد تسلسل الأحماض الأمينية الناضجة بشكل قاطع",
-      "تأكيد الوزن الجزيئي بمطيافية الكتلة (MALDI-TOF / ESI-MS) أو الحساب الدقيق",
-      "تصنيف الأصل (معزول طبيعي بري مقابل مشتق اصطناعي مهندس)",
-      "ربط الببتيد بالقالب الأصل والنوع العقربي الموثق تصنيفياً"
-    ],
-    "evidence_type_required": "experimental_or_synthetic_characterization",
-    "regulatory_relevance": "Drug Substance Chemical Identity"
+    "name_ar": "تحديد الببتيد والتوصيف التسلسلي",
+    "short_name_en": "Sequence Characterization",
+    "short_name_ar": "التوصيف التسلسلي",
+    "description_en": "Isolation from native venom or cDNA deduction, mature amino acid sequence elucidation, chemical synthesis confirmation, and physicochemical parameter calculation.",
+    "description_ar": "عزل الببتيد من السم الطبيعي أو استنتاجه من cDNA، توثيق تسلسل الأحماض الأمينية الناضجة، تأكيد التخليق الكيميائي، وحساب الخواص الفيزيوكيميائية.",
+    "milestone_criteria_en": "Documented mature sequence, confirmed taxonomy, verified terminal amidation status, and computed molecular weight, net charge, and hydrophobic moment.",
+    "milestone_criteria_ar": "توثيق التسلسل الناضج، تأكيد تصنيف النوع المصدر، التحقق من حالة الأميدة الطرفية، وحساب الوزن الجزيئي والشحنة والعزم الكاره للماء.",
+    "evidence_type_required": "Peer-reviewed primary publication with sequence deposition (UniProtKB).",
+    "regulatory_relevance": "Prerequisite chemical identification (CMC) for any downstream preclinical lead exploration."
   },
   {
     "stage_number": 2,
     "stage_id": "STAGE-2-INVITRO-MIC",
-    "name_en": "In Vitro Biological Activity",
-    "name_ar": "النشاط الحيوي المخبري (MIC)",
-    "short_name_en": "In Vitro Activity",
-    "short_name_ar": "النشاط المخبري",
-    "description_en": "Standardized experimental measurement of antimicrobial minimum inhibitory concentrations (MIC) across defined bacterial or fungal panels.",
-    "description_ar": "القياس التجريبي المعياري للتركيز التثبيطي الأدنى (MIC) ضد لوحات بكتيرية أو فطرية محددة.",
-    "milestone_criteria_en": [
-      "Replicated broth microdilution or agar dilution assay (CLSI / EUCAST guidelines)",
-      "Quantified MIC endpoint (in µg/mL and converted µM)",
-      "Spectrum characterization (Gram-positive, Gram-negative, or fungal)",
-      "Activity threshold satisfied (MIC <= 64 µg/mL against target pathogen)"
-    ],
-    "milestone_criteria_ar": [
-      "فحص التخفيف الميكروي القياسي المكرر وفق معايير CLSI أو EUCAST",
-      "تحديد رقمي لنقطة نهاية MIC (بوحدة ميكروغرام/مل وميكرومولار)",
-      "توصيف طيف النشاط (إيجابي الجرام، سلبي الجرام، أو فطريات)",
-      "تحقيق عتبة النشاط الأساسية (MIC <= 64 ميكروغرام/مل ضد الميكروب المستهدف)"
-    ],
-    "evidence_type_required": "experimental_broth_microdilution",
-    "regulatory_relevance": "Primary In Vitro Pharmacodynamics (PD)"
+    "name_en": "In Vitro Antimicrobial Biological Activity (MIC)",
+    "name_ar": "النشاط الحيوي المضاد للميكروبات في المختبر (MIC)",
+    "short_name_en": "In Vitro MIC Activity",
+    "short_name_ar": "النشاط الحيوي (MIC)",
+    "description_en": "Standardized in vitro microdilution assay determining Minimum Inhibitory Concentration (MIC) against reference Gram-positive and Gram-negative bacterial strains.",
+    "description_ar": "قياس مخبري موحد بأسلوب التخفيف الدقيق لتحديد التركيز المثبط الأدنى (MIC) ضد سلالات مرجعية موجبة وسالبة الغرام.",
+    "milestone_criteria_en": "Replicated broth microdilution MIC measurement (≤ 64 µM) reported in standard media (MHB or specified broth).",
+    "milestone_criteria_ar": "قياس مكرر لـ MIC في وسط نمو محدد يثبت فاعلية مثبطة ذات مغزى (≤ 64 ميكرومولار) ضد سلالة ميكروبية موثقة.",
+    "evidence_type_required": "Broth microdilution according to CLSI/EUCAST standards or documented equivalent protocol.",
+    "regulatory_relevance": "Primary pharmacodynamic activity proof-of-concept in vitro."
   },
   {
     "stage_number": 3,
     "stage_id": "STAGE-3-MOA-MECH",
     "name_en": "Mechanism-of-Action Evidence",
-    "name_ar": "أدلة آلية العمل الجزيئية (MoA)",
+    "name_ar": "أدلة آلية التأثير الغشائي والخلوي",
     "short_name_en": "Mechanism of Action",
-    "short_name_ar": "آلية العمل",
-    "description_en": "Experimental demonstration of the biophysical or biochemical mode of action causing pathogen death or growth inhibition.",
-    "description_ar": "الإثبات التجريبي لآلية العمل الفيزيائية الحيوية أو الكيميائية الحيوية المسببة لموت الممرض أو تثبيط نموه.",
-    "milestone_criteria_en": [
-      "Demonstrated membrane permeabilization (SYTOX green, propidium iodide, or calcein leakage)",
-      "Membrane potential depolarization assay (DiSC3(5) or equivalent fluorophore)",
-      "Biophysical channel recording (planar lipid bilayers) or morphological visualization (SEM / TEM / AFM)",
-      "Separation of direct lytic action from non-membrane or intracellular targets"
-    ],
-    "milestone_criteria_ar": [
-      "إثبات نفاذية الغشاء الخلوي (صبغة SYTOX green أو PI أو تسرب الكالسين)",
-      "فحص زوال استقطاب الغشاء الخلوي (DiSC3(5) أو كواشف فلورية مماثلة)",
-      "تسجيل قنوات الغشاء ثنائي الطبقة (BLM) أو التصوير المجهري (SEM/TEM/AFM)",
-      "التمييز بين التحلل الغشائي المباشر والأهداف غير الغشائية أو داخل الخلوية"
-    ],
-    "evidence_type_required": "experimental_biophysical_assays",
-    "regulatory_relevance": "Mechanism of Action Justification"
+    "short_name_ar": "آلية التأثير الحيوي",
+    "description_en": "Biophysical and cellular investigation establishing whether antimicrobial activity operates via membrane permeabilization, pore formation, depolarization, or intracellular target disruption.",
+    "description_ar": "استقصاء فيزيوحيوي وخلوي يثبت ما إذا كان التأثير ناتجاً عن نفاذية الغشاء الخلوي، أو تكوين ثقوب، أو زوال الاستقطاب، أو استهداف عضيات داخلية.",
+    "milestone_criteria_en": "Demonstrated membrane permeability (e.g. SYTOX green, calcein dye leakage, NPN uptake) or confirmed specific target interaction.",
+    "milestone_criteria_ar": "إثبات تجريبي لنفاذية الغشاء (مثل امتصاص SYTOX green أو تسرب صبغات الكلسين) أو تأكيد تفاعل نوعي مع قنوات مستهدفة.",
+    "evidence_type_required": "Fluorometric dye leakage, flow cytometry, or planar lipid bilayer electrophysiology.",
+    "regulatory_relevance": "Mechanistic understanding required for target safety profiling and off-target risk assessment."
   },
   {
     "stage_number": 4,
     "stage_id": "STAGE-4-SAFETY-SELECTIVITY",
     "name_en": "Selectivity & Mammalian Safety Characterization",
-    "name_ar": "توصيف الأمان والانتقائية على الخلايا الثديية",
-    "short_name_en": "Safety & Selectivity",
-    "short_name_ar": "الأمان والانتقائية",
-    "description_en": "Full concentration-response determination of hemolytic toxicity against mammalian erythrocytes and cytotoxicity against nucleated mammalian cell lines.",
-    "description_ar": "تحديد منحنى الاستجابة للتركيز الكامل للسمية الانحلالية على كريات الدم الحمراء والسمية على خلايا ثديية منواة.",
-    "milestone_criteria_en": [
-      "Calibrated concentration-response curve with calculated HC50 on mammalian RBCs",
-      "In vitro cytotoxicity assay against nucleated mammalian cells (e.g. Vero, HepG2, HEK293 IC50)",
-      "Scientifically compatible Therapeutic Selectivity Index calculated (TI = HC50 / MIC >= 10)",
-      "Absence of severe uncontrolled hemolysis at sub-MIC or therapeutic concentrations"
-    ],
-    "milestone_criteria_ar": [
-      "منحنى استجابة للتركيز كامل مع حساب دقيق لقيمة HC50 على كريات دم ثديية",
-      "فحص سمية خلوية مخبري على خلايا ثديية منواة (مثل Vero أو HepG2 أو HEK293 IC50)",
-      "حساب مؤشر انتقائية علاجي متوافق علمياً (TI = HC50 / MIC >= 10)",
-      "خلو الببتيد من التحلل الانحلالي الشديد عند التركيزات العلاجية"
-    ],
-    "evidence_type_required": "experimental_toxicology_in_vitro",
-    "regulatory_relevance": "Preliminary Safety Pharmacology & Therapeutic Index"
+    "name_ar": "الانتقائية والسلامة الخلوية الثديية",
+    "short_name_en": "Selectivity & Safety",
+    "short_name_ar": "الانتقائية والسلامة",
+    "description_en": "Quantitative concentration-response determination of erythrocyte lysis (HC50) and nucleated mammalian cell cytotoxicity (IC50) to evaluate selectivity.",
+    "description_ar": "تحديد كمي لمنحنى التركيز والاستجابة للتحلل الدموي (HC50) والسمية الخلوية لخلايا ثديية منواة (IC50) لتقييم هامش الأمان.",
+    "milestone_criteria_en": "Calibrated concentration-response sigmoidal curve determining human RBC HC50 AND nucleated mammalian cell IC50.",
+    "milestone_criteria_ar": "منحنى سيجمويدي معاير يحدد بدقة تركيز HC50 على كريات دم بشرية بالإضافة إلى IC50 على خط خلايا ثديية منواة.",
+    "evidence_type_required": "Concentration-response hemolytic assay + MTT/cell viability assay on nucleated mammalian cell lines.",
+    "regulatory_relevance": "Non-clinical in vitro safety pharmacology safety window (selectivity index)."
   },
   {
     "stage_number": 5,
     "stage_id": "STAGE-5-STABILITY-PK-READINESS",
     "name_en": "Stability & Pharmacokinetic Readiness",
-    "name_ar": "جاهزية الاستقرارية والحركية الدوائية المخبرية",
+    "name_ar": "الاستقرار والجاهزية الدوائية الحركية",
     "short_name_en": "Stability & PK",
-    "short_name_ar": "الاستقرارية والـ PK",
-    "description_en": "Experimental assessment of peptide degradation kinetics in human serum, resistance to proteolytic enzymes, and formulation developability.",
-    "description_ar": "التقييم التجريبي لحركية تحلل الببتيد في مصل الدم البشري، ومقاومته للإنزيمات الهاضمة، وقابلية صياغته دوائياً.",
-    "milestone_criteria_en": [
-      "Experimental serum degradation half-life (t1/2) measured in vitro",
-      "Proteolytic susceptibility assessed against trypsin, chymotrypsin, or elastase",
-      "Solubility and aggregation propensity evaluated across physiological pH range (pH 6.0 - 7.4)",
-      "Formulation or stabilization strategy defined (e.g. D-amino acids, cyclization, nanoparticles)"
-    ],
-    "milestone_criteria_ar": [
-      "قياس عمر النصف التجريبي للتحلل في مصل الدم (t1/2) مخبرياً",
-      "تقييم الحساسية للإنزيمات الهاضمة (التربسين، الكيموتربسين، الإيلاستاز)",
-      "تقييم الذائبية والميل للتجمع عبر نطاق الأس الهيدروجيني الفسيولوجي (6.0 - 7.4)",
-      "تحديد استراتيجية الصياغة أو التثبيت (مثل الأحماض الأمينية D، الحلقية، التغليف النانوي)"
-    ],
-    "evidence_type_required": "experimental_serum_and_protease_assays",
-    "regulatory_relevance": "Preclinical ADME / In Vitro Stability Profile"
+    "short_name_ar": "الاستقرار والحركية",
+    "description_en": "Evaluation of peptide half-life in human/mammalian serum, resistance to circulating proteases (trypsin, chymotrypsin), and chemical degradation profile.",
+    "description_ar": "تقييم نصف عمر الببتيد في مصل الدم البشري أو الثديي، ومقاومته للبروتياز الدائر، وتحديد مواضع التحلل الإنزيمي.",
+    "milestone_criteria_en": "Experimentally measured serum degradation half-life (t1/2) and protease degradation profiling.",
+    "milestone_criteria_ar": "قياس تجريبي لنصف العمر في مصل الدم ومخطط تحلل إنزيمي في المختبر يثبت بقاء الببتيد لفترة كافية.",
+    "evidence_type_required": "RP-HPLC or LC-MS quantitative degradation profiling in mammalian serum over time.",
+    "regulatory_relevance": "ADME characterization (metabolic stability) required prior to systemic animal exposure."
   },
   {
     "stage_number": 6,
     "stage_id": "STAGE-6-INVIVO-PRECLINICAL",
-    "name_en": "In Vivo Preclinical Evidence",
-    "name_ar": "الأدلة قبل السريرية الحية على الحيوانات (In Vivo)",
+    "name_en": "In Vivo Preclinical Animal Models",
+    "name_ar": "الأدلة قبل السريرية الحية في النماذج الحيوانية",
     "short_name_en": "In Vivo Preclinical",
-    "short_name_ar": "نماذج حيوانية حية",
-    "description_en": "Experimental proof-of-concept demonstration of therapeutic efficacy, in vivo tolerability, and pharmacokinetics in established animal disease models.",
-    "description_ar": "إثبات المفهوم التجريبي للفاعلية العلاجية والتحمل الحركي في نماذج عدوى أو أمراض حيوانية حية معتمدة.",
-    "milestone_criteria_en": [
-      "Statistically significant efficacy in rodent infection model (e.g. skin wound, sepsis, or thigh infection)",
-      "Maximum tolerated dose (MTD) and in vivo organ toxicity established in rodents",
-      "In vivo systemic pharmacokinetic parameters quantified (clearance, volume of distribution, AUC)",
-      "Formulation delivery validated in vivo without fatal systemic shock"
-    ],
-    "milestone_criteria_ar": [
-      "فاعلية ذات دلالة إحصائية في نموذج عدوى حيواني (عدوى جلدية، تعفن دم، أو فخذ القوارض)",
-      "تحديد الجرعة القصوى المسموح بها (MTD) والسمية العضوية الحية في القوارض",
-      "تحديد معايير الحركية الدوائية الحية (معدل التصفية، حجم التوزيع، المساحة تحت المنحنى AUC)",
-      "التحقق من إعطاء الصيغة حيوياً دون إحداث صدمة جهازية مميتة"
-    ],
-    "evidence_type_required": "in_vivo_animal_models",
-    "regulatory_relevance": "Investigational New Drug (IND) Enabling Studies"
+    "short_name_ar": "النماذج الحيوانية الحية",
+    "description_en": "Evaluation of therapeutic efficacy and in vivo tolerability in verified animal infection models (topical wound, pulmonary, or systemic infection).",
+    "description_ar": "تقييم الفاعلية العلاجية والتحمل الحيوي في نماذج عدوى حيوانية موثقة (عدوى جلدية موضعية، رئوية، أو جهازية).",
+    "milestone_criteria_en": "Statistically significant reduction of microbial bioburden in an animal infection model with monitoring of systemic and local toxicity.",
+    "milestone_criteria_ar": "انخفاض ذو دلالة إحصائية في الحمل الميكروبي في نموذج عدوى حيواني مع مراقبة مؤشرات السمية الجهازية والموضعية.",
+    "evidence_type_required": "Controlled animal efficacy study with ethical committee approval and toxicity monitoring.",
+    "regulatory_relevance": "Proof-of-concept animal efficacy required for Investigational New Drug (IND) consideration."
   },
   {
     "stage_number": 7,
     "stage_id": "STAGE-7-CLINICAL-TRIALS",
-    "name_en": "Clinical Investigation (Human Trials)",
-    "name_ar": "التجارب السريرية على البشر (المراحل 1 - 3)",
-    "short_name_en": "Clinical Trials",
+    "name_en": "Human Clinical Trials (Phases 1–3)",
+    "name_ar": "الدراسات السريرية على البشر (Phase 1–3)",
+    "short_name_en": "Human Clinical Trials",
     "short_name_ar": "التجارب السريرية",
-    "description_en": "Systematic human clinical trials evaluating safety, tolerability, pharmacokinetics, and therapeutic efficacy under institutional review board (IRB) oversight.",
-    "description_ar": "تجارب سريرية منهجية على البشر لتقييم الأمان والتحمل والحركية والفاعلية العلاجية تحت إشراف لجان أخلاقيات البحث.",
-    "milestone_criteria_en": [
-      "Formal IND authorization granted by national regulatory agency",
-      "Phase 1 healthy volunteer safety and pharmacokinetics completed",
-      "Phase 2 proof-of-concept and dose-ranging in target patient population completed",
-      "Phase 3 pivotal randomized controlled trials (RCTs) demonstrating superior or non-inferior efficacy"
-    ],
-    "milestone_criteria_ar": [
-      "حصول المركب على ترخيص دواء استقصائي جديد (IND) من الهيئة التنظيمية",
-      "اكتمال المرحلة السريرية الأولى للأمان على متطوعين أصحاء",
-      "اكتمال المرحلة السريرية الثانية لإثبات الفاعلية وتحديد الجرعات على المرضى",
-      "اكتمال دراسات المرحلة الثالثة العشوائية المحكومة بالشواهد (RCTs) لإثبات التفوق أو عدم النقصان"
-    ],
-    "evidence_type_required": "human_clinical_trials_phases_1_to_3",
-    "regulatory_relevance": "New Drug Application (NDA) Pivotal Evidence"
+    "description_en": "Formal clinical evaluation in humans: Phase 1 (healthy volunteers, pharmacokinetics & safety), Phase 2 (dose-ranging efficacy), Phase 3 (pivotal randomized trials).",
+    "description_ar": "تقييم سريري رسمي على البشر: المرحلة 1 (متطوعون أصحاء لتقييم الأمان والحركية)، المرحلة 2 (الجرعات والفاعلية الأولية)، المرحلة 3 (تجارب محورية عشوائية).",
+    "milestone_criteria_en": "Registered clinical trial protocol under regulatory oversight (FDA IND, EMA CTA) with Phase 1 initiation.",
+    "milestone_criteria_ar": "بروتوكول تجربة سريرية مسجل تحت إشراف هيئة تنظيمية معتمدة مع بدء المرحلة الأولى رسمياً.",
+    "evidence_type_required": "Clinical trial registration (ClinicalTrials.gov, WHO ICTRP) and IRB-approved clinical reports.",
+    "regulatory_relevance": "Human safety and efficacy data required for marketing authorization."
   },
   {
     "stage_number": 8,
     "stage_id": "STAGE-8-REGULATORY-APPROVAL",
-    "name_en": "Regulatory Approval & Clinical Medicine",
-    "name_ar": "الاعتماد التنظيمي والدواء السريري المعتمد",
+    "name_en": "Regulatory Marketing Approval",
+    "name_ar": "الاعتماد التنظيمي والتسويق كدواء",
     "short_name_en": "Approved Medicine",
-    "short_name_ar": "دواء معتمد",
-    "description_en": "Full regulatory review and formal marketing authorization as an approved therapeutic medicine by the FDA, EMA, or national health authorities.",
-    "description_ar": "المراجعة التنظيمية الكاملة والترخيص الرسمي لتسويق الببتيد كدواء علاجي معتمد من إدارة الغذاء والدواء FDA أو وكالة الأدوية الأوروبية EMA أو الهيئات الوطنية.",
-    "milestone_criteria_en": [
-      "Approved New Drug Application (NDA / BLA) or international equivalent",
-      "Established package insert with indicated therapeutic label and contraindications",
-      "Post-marketing pharmacovigilance (Phase 4 monitoring) active",
-      "Commercial pharmaceutical manufacturing under cGMP compliance"
-    ],
-    "milestone_criteria_ar": [
-      "اعتماد ملف الدواء الجديد (NDA/BLA) أو ما يعادله دولياً",
-      "إصدار النشرة الدوائية الرسمية بدواعي الاستعمال وموانعه",
-      "بدء مرحلة التيقظ الدوائي ومراقبة ما بعد التسويق (المرحلة 4)",
-      "التصنيع الصيدلاني التجاري بموجب ممارسات التصنيع الجيد cGMP"
-    ],
-    "evidence_type_required": "regulatory_agency_approval",
-    "regulatory_relevance": "Marketed Pharmaceutical Product"
+    "short_name_ar": "الدواء المعتمد",
+    "description_en": "Formal approval by regulatory health authorities (e.g. FDA NDA/BLA, EMA MAA) for a clinical therapeutic indication.",
+    "description_ar": "موافقة تنظيمية رسمية من السلطات الصحية (مثل FDA أو EMA) كدواء مرخص للاستخدام البشري.",
+    "milestone_criteria_en": "Granted New Drug Application (NDA) or Biologics License Application (BLA) marketing authorization.",
+    "milestone_criteria_ar": "منح ترخيص تسويقي رسمي لدواء بشري معتمد ذي وصفة طبية.",
+    "evidence_type_required": "Official regulatory approval documentation / FDA Orange Book or EMA registry listing.",
+    "regulatory_relevance": "Marketed pharmaceutical product."
   }
 ]

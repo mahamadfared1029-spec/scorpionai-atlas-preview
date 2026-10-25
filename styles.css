@@ -5728,3 +5728,27 @@
     align-items: stretch;
   }
 }
+
+/* Added for MOD-09 Scientific Integrity Gate */
+.stage-status-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.stage-status-pill.status-completed {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+.stage-status-pill.status-active {
+  background: rgba(14, 165, 233, 0.2);
+  color: #38bdf8;
+  border: 1px solid rgba(14, 165, 233, 0.4);
+}
+.stage-status-pill.status-empty {
+  background: rgba(71, 85, 105, 0.3);
+  color: #94a3b8;
+  border: 1px solid rgba(71, 85, 105, 0.4);
+}

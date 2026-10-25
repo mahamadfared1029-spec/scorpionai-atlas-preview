@@ -2,51 +2,45 @@
   "metadata": {
     "module_id": "MOD-09",
     "module_name": "Venom-to-Medicine Translation Explorer",
-    "module_version": "1.0.0",
-    "authoritative_baseline": "Sprint 10 Implementation Order",
-    "generated_timestamp": "2026-10-25T20:10:00Z",
+    "module_version": "1.1.0-scientific-integrity-gate",
+    "authoritative_baseline": "Sprint 10 Scientific Integrity Correction Gate",
+    "generated_timestamp": "2026-10-25T20:55:00Z",
     "disclaimer_en": "EDUCATIONAL AND RESEARCH-PRIORITIZATION MODULE ONLY. NOT FOR CLINICAL USE, TREATMENT RECOMMENDATION, OR PREDICTION OF DRUG APPROVAL.",
-    "disclaimer_ar": "وحدة تعليمية ولتحديد أولويات البحث فقط. ليست للاستخدام السريري أو التوصيات العلاجية أو التنبؤ باعتماد الأدوية."
+    "disclaimer_ar": "وحدة تعليمية ولتوجيه أولويات البحث المخبري فقط. ليست للاستخدام السريري أو التوصيات العلاجية أو التنبؤ باعتماد الأدوية."
   },
   "total_prioritized_candidates": 20,
   "total_translational_stages": 8,
-  "stage_distribution_highest_completed": {
-    "stage_1_discovery_and_sequence": 20,
-    "stage_2_in_vitro_activity": 20,
-    "stage_3_mechanism_of_action": 20,
-    "stage_4_safety_and_selectivity": 2,
-    "stage_5_stability_and_pk_readiness": 1,
-    "stage_6_in_vivo_preclinical": 0,
+  "stages_verified_completion_counts": {
+    "stage_1_sequence_characterization": 20,
+    "stage_2_antimicrobial_activity_mic": 18,
+    "stage_3_mechanism_of_action": 15,
+    "stage_4_selectivity_and_safety": 0,
+    "stage_5_stability_and_pk": 0,
+    "stage_6_invivo_preclinical": 0,
     "stage_7_human_clinical_trials": 0,
-    "stage_8_approved_medicine": 0
+    "stage_8_regulatory_approval": 0
   },
-  "stage_distribution_current_active": {
-    "active_stage_4_safety_exploration": 18,
-    "active_stage_5_stability_optimization": 1,
-    "active_stage_6_in_vivo_development": 1
+  "safety_and_selectivity_audit": {
+    "verified_calibrated_hc50_curve_count": 3,
+    "quarantined_unsupported_hc50_count": 3,
+    "single_dose_hemolysis_screen_count": 0,
+    "nucleated_mammalian_cytotoxicity_tested_count": 0,
+    "calculable_selectivity_ratios_count": 3,
+    "uncalculable_selectivity_ratios_count": 17
   },
-  "safety_characterization_coverage": {
-    "calibrated_full_hc50_curve_count": 6,
-    "single_dose_hemolysis_only_count": 14,
-    "severe_hemolytic_roadblock_count": 4,
-    "nucleated_mammalian_cytotoxicity_tested_count": 6,
-    "traceable_selectivity_index_count": 2,
-    "uncalculable_selectivity_index_count": 14
-  },
-  "stability_and_pk_coverage": {
-    "experimental_serum_stability_tested_count": 2,
-    "computational_stability_only_count": 18
-  },
-  "preclinical_and_clinical_coverage": {
-    "in_vivo_animal_model_tested_count": 1,
-    "in_vivo_topical_infection_models": 1,
-    "in_vivo_systemic_infection_models": 0,
+  "in_vivo_and_clinical_audit": {
+    "topical_animal_infection_models_count": 1,
+    "systemic_animal_toxicity_models_count": 0,
     "human_clinical_trials_count": 0,
-    "regulatory_approved_drugs_count": 0
+    "regulatory_approved_drugs_count": 0,
+    "clinical_trials_registry_search_statement_en": "Searches of ClinicalTrials.gov and WHO ICTRP for the 20 prioritized atlas candidates yielded 0 documented clinical trials.",
+    "clinical_trials_registry_search_statement_ar": "أسفرت عمليات البحث في سجلات التجارب السريرية الدولية لمنظمة الصحة العالمية عن صفر تجارب سريرية للمرشحات الـ20."
   },
   "sprint09_quality_carryover": {
     "class1_georeferenced_specimens_audited": 36,
     "coordinate_uncertainty_meters_cap": 2500,
-    "inferred_coordinates_allowed": false
+    "directly_published_gps_count": 16,
+    "retrospectively_georeferenced_count": 20,
+    "inferred_coordinates_count": 0
   }
 }

@@ -1560,39 +1560,45 @@
     </div>
 
     <div class="trans-metric-card">
-      <span class="metric-num highlight-blue" id="trans-metric-stages1-3">20</span>
-      <span class="metric-label">أنجزت المراحل 1–3 (التسلسل، الفاعلية، الآلية)</span>
-      <span class="metric-sub">100% Sequence, MIC & MoA Complete</span>
+      <span class="metric-num highlight-blue" id="trans-metric-stage1">20</span>
+      <span class="metric-label">التوصيف التسلسلي المؤكد (المرحلة 1)</span>
+      <span class="metric-sub">100% Sequence &amp; Species Complete</span>
     </div>
 
     <div class="trans-metric-card">
-      <span class="metric-num highlight-cyan" id="trans-metric-stage4">2</span>
-      <span class="metric-label">أنجزت الأمان والانتقائية المعايرة (المرحلة 4)</span>
-      <span class="metric-sub">Calibrated HC50 Curve (Kn2-7, Hp1404)</span>
+      <span class="metric-num highlight-cyan" id="trans-metric-stage2">18</span>
+      <span class="metric-label">فاعلية مضادة للبكتيريا MIC (المرحلة 2)</span>
+      <span class="metric-sub">Planktonic MIC ≤ 64 µM Confirmed</span>
     </div>
 
     <div class="trans-metric-card">
-      <span class="metric-num highlight-amber" id="trans-metric-stage5">1</span>
-      <span class="metric-label">أنجزت الاستقرار التجريبي (المرحلة 5)</span>
-      <span class="metric-sub">Experimental Serum Half-Life (Kn2-7)</span>
+      <span class="metric-num highlight-purple" id="trans-metric-stage3">15</span>
+      <span class="metric-label">آلية النفاذية الغشائية (المرحلة 3)</span>
+      <span class="metric-sub">Direct Membrane Disruption Verified</span>
     </div>
 
     <div class="trans-metric-card">
-      <span class="metric-num highlight-purple" id="trans-metric-stage6">1</span>
-      <span class="metric-label">أجري عليها نموذج عدوى موضعي حيوي (المرحلة 6)</span>
-      <span class="metric-sub">Active Stage 6 (Kn2-7 Mice Cutaneous MRSA)</span>
+      <span class="metric-num highlight-emerald" id="trans-metric-calibrated-hc50">3</span>
+      <span class="metric-label">منحنيات تحلل دموي بشري معايرة</span>
+      <span class="metric-sub">Calibrated HC50 (Kn2-7, Hp1404, BmKn2)</span>
     </div>
 
     <div class="trans-metric-card">
-      <span class="metric-num highlight-neutral" id="trans-metric-stages7-8">0</span>
-      <span class="metric-label">تجارب سريرية أو أدوية معتمدة (المراحل 7–8)</span>
-      <span class="metric-sub">0 Clinical Trials / 0 Marketed Drugs (0%)</span>
+      <span class="metric-num highlight-cyan" id="trans-metric-selectivity">3</span>
+      <span class="metric-label">نسب انتقائية تجريبية قابلة للحساب</span>
+      <span class="metric-sub">Experimental HC50/MIC Ratios</span>
     </div>
 
     <div class="trans-metric-card alert-card">
-      <span class="metric-num highlight-red" id="trans-metric-roadblock">1</span>
-      <span class="metric-label">حواجز تحلل دموي مرتفع حادة (TI &lt; 1)</span>
-      <span class="metric-sub">IsCT1 (HC50 2.8 µM, TI 0.45)</span>
+      <span class="metric-num highlight-amber" id="trans-metric-quarantined">3</span>
+      <span class="metric-label">قيم محجورة لنزاهة الأدلة</span>
+      <span class="metric-sub">Quarantined HC50 (IsCT1, Parabutoporin, Hadrurin)</span>
+    </div>
+
+    <div class="trans-metric-card">
+      <span class="metric-num highlight-neutral" id="trans-metric-clinical-zero">0</span>
+      <span class="metric-label">تجارب سريرية بشرية (المرحلة 7)</span>
+      <span class="metric-sub">0% Clinical Trials across 20 Leads</span>
     </div>
   </div>
 
@@ -1628,7 +1634,7 @@
     </div>
   </div>
 
-  <!-- Filter & Search Controls Panel -->
+    <!-- Filter & Search Controls Panel -->
   <div class="trans-controls-panel reveal">
     <div class="trans-search-box">
       <input type="text" id="trans-search-input" placeholder="ابحث باسم الببتيد، الكود (SCA-PEP)، أو النوع الأصلي..." aria-label="بحث في المرشحات الترجمية">
@@ -1636,17 +1642,6 @@
     </div>
 
     <div class="trans-filters-group">
-      <div class="filter-item">
-        <label for="trans-filter-stage">المرحلة النشطة:</label>
-        <select id="trans-filter-stage">
-          <option value="all">جميع المراحل النشطة (20)</option>
-          <option value="stage_4">المرحلة 4: استكشاف الأمان الثديي (18)</option>
-          <option value="stage_5">المرحلة 5: تحسين الاستقرار (1)</option>
-          <option value="stage_6">المرحلة 6: التطوير الحيوي الموضعي (1)</option>
-          <option value="stage_7">المراحل 7–8: تجارب سريرية أو اعتماد (0)</option>
-        </select>
-      </div>
-
       <div class="filter-item">
         <label for="trans-filter-origin">الأصل التركيبي:</label>
         <select id="trans-filter-origin">
@@ -1657,12 +1652,21 @@
       </div>
 
       <div class="filter-item">
-        <label for="trans-filter-safety">حالة تقييم الأمان:</label>
-        <select id="trans-filter-safety">
-          <option value="all">جميع حالات الأمان</option>
-          <option value="favorable_ti">نافذة أمان معايرة مواتية (TI ≥ 10)</option>
-          <option value="single_dose_only">فحص أحادي التركيز فقط (غير معاير)</option>
-          <option value="hemolysis_roadblock">حاجز تحلل دموي مرتفع حاد (TI &lt; 1)</option>
+        <label for="trans-filter-selectivity">حساب الانتقائية:</label>
+        <select id="trans-filter-selectivity">
+          <option value="all">جميع الحالات (20)</option>
+          <option value="calculable">نسبة انتقائية محسوبة (3)</option>
+          <option value="calibrated_hc50">منحنى HC50 معاير (3)</option>
+          <option value="uncalculable">غير محسوبة (فحص أحادي أو غير مفحوص) (17)</option>
+        </select>
+      </div>
+
+      <div class="filter-item">
+        <label for="trans-filter-milestone">اكتمال المعالم:</label>
+        <select id="trans-filter-milestone">
+          <option value="all">جميع مستويات المعالم</option>
+          <option value="milestone_3">3 معالم موثقة فأكثر</option>
+          <option value="milestone_2">معلمان موثقان فأكثر</option>
         </select>
       </div>
 
@@ -1688,16 +1692,17 @@
 
     <div class="table-responsive">
       <table class="trans-table" id="trans-candidates-table">
-        <thead>
+                <thead>
           <tr>
             <th scope="col">المرشح والكود</th>
             <th scope="col">النوع الأصلي</th>
-            <th scope="col">أعلى مرحلة مكتملة</th>
-            <th scope="col">المرحلة النشطة</th>
-            <th scope="col">نسبة التقدم</th>
-            <th scope="col">الانتقائية (TI)</th>
-            <th scope="col">الاستقرار التجريبي</th>
-            <th scope="col">النماذج الحية</th>
+            <th scope="col">المعالم الموثقة / 8 <br><small style="font-weight: normal; color: #94a3b8;">(أدلة تجريبية مثبتة)</small></th>
+            <th scope="col" style="text-align: center;">م1: التوصيف</th>
+            <th scope="col" style="text-align: center;">م2: الفاعلية</th>
+            <th scope="col" style="text-align: center;">م3: الآلية</th>
+            <th scope="col">نسبة الانتقائية (HC50/MIC)</th>
+            <th scope="col">بيانات التحلل الدموي</th>
+            <th scope="col">النماذج قبل السريرية</th>
             <th scope="col">الملف الترجمي</th>
           </tr>
         </thead>

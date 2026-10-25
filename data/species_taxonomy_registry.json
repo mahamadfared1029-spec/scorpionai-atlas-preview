@@ -205,7 +205,7 @@
         "has_wild_occurrence": false,
         "parent_template_peptide": "Stigmurin",
         "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
-        "engineered_laboratory_origin": "Department of Biochemistry, Federal University of Rio Grande do Norte (UFRN), Natal, RN, Brazil; Fmoc solid-phase peptide synthesis (SPPS).",
+        "engineered_laboratory_origin": "CASLO ApS, Lyngby, Denmark (Fmoc-SPPS; certified purity >95% by HPLC and MALDI-TOF MS; Amorim-Carmo et al. 2019).",
         "mature_sequence": "FFKLIPKLVKKLIKAFK",
         "evidence_readiness_index": 30.0
       },
@@ -218,7 +218,7 @@
         "has_wild_occurrence": false,
         "parent_template_peptide": "Stigmurin",
         "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
-        "engineered_laboratory_origin": "Department of Biochemistry, Federal University of Rio Grande do Norte (UFRN), Natal, RN, Brazil; Fmoc solid-phase peptide synthesis (SPPS).",
+        "engineered_laboratory_origin": "CASLO ApS, Lyngby, Denmark (Fmoc-SPPS; certified purity >95% by HPLC and MALDI-TOF MS; Amorim-Carmo et al. 2019).",
         "mature_sequence": "FFSLIPSLVKKLIKAFK",
         "evidence_readiness_index": 30.0
       },
@@ -244,7 +244,7 @@
         "has_wild_occurrence": false,
         "parent_template_peptide": "Stigmurin",
         "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
-        "engineered_laboratory_origin": "Department of Biochemistry, Federal University of Rio Grande do Norte (UFRN), Natal, RN, Brazil; Fmoc solid-phase peptide synthesis (SPPS).",
+        "engineered_laboratory_origin": "not_reported (Fmoc solid-phase peptide synthesis; vendor or synthesis facility unstated in primary study; Tareau et al. 2026).",
         "mature_sequence": "FFKLIPKLVKGLISAFK",
         "evidence_readiness_index": 20.0
       },
@@ -257,7 +257,7 @@
         "has_wild_occurrence": false,
         "parent_template_peptide": "Stigmurin",
         "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
-        "engineered_laboratory_origin": "Department of Biochemistry, Federal University of Rio Grande do Norte (UFRN), Natal, RN, Brazil; Fmoc solid-phase peptide synthesis (SPPS).",
+        "engineered_laboratory_origin": "not_reported (Fmoc solid-phase peptide synthesis; vendor or synthesis facility unstated in primary study; Tareau et al. 2026).",
         "mature_sequence": "FFSLIPKLVKGLISAFK",
         "evidence_readiness_index": 20.0
       }
@@ -352,7 +352,7 @@
         "has_wild_occurrence": false,
         "parent_template_peptide": "AaeAP1",
         "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
-        "engineered_laboratory_origin": "School of Life Sciences, University of Science and Technology of China (USTC), Hefei, Anhui, China; Fmoc solid-phase peptide synthesis (SPPS).",
+        "engineered_laboratory_origin": "GL Biochem Ltd., Shanghai, China (Fmoc-SPPS; certified purity >95% by RP-HPLC and ESI-MS; Du et al. 2015).",
         "mature_sequence": "FLFKLIPKVIKGLVKAIRK",
         "evidence_readiness_index": 25.0
       },
@@ -365,7 +365,7 @@
         "has_wild_occurrence": false,
         "parent_template_peptide": "AaeAP2",
         "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
-        "engineered_laboratory_origin": "School of Life Sciences, University of Science and Technology of China (USTC), Hefei, Anhui, China; Fmoc solid-phase peptide synthesis (SPPS).",
+        "engineered_laboratory_origin": "GL Biochem Ltd., Shanghai, China (Fmoc-SPPS; certified purity >95% by RP-HPLC and ESI-MS; Du et al. 2015).",
         "mature_sequence": "FLFKLIPKAIKGLVKAIRK",
         "evidence_readiness_index": 25.0
       },
@@ -639,7 +639,7 @@
         "has_wild_occurrence": false,
         "parent_template_peptide": "AcrAP1",
         "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
-        "engineered_laboratory_origin": "Faculty of Pharmacy, Jordan University of Science and Technology (JUST), Irbid, Jordan; Fmoc solid-phase peptide synthesis (SPPS).",
+        "engineered_laboratory_origin": "GL Biochem Ltd., Shanghai, China (Fmoc-SPPS; certified purity >95% by RP-HPLC and MS; Almaaytah et al. 2014).",
         "mature_sequence": "FLFKLIPKAIKGLIKAFK",
         "evidence_readiness_index": 25.0
       },
@@ -1526,7 +1526,7 @@
         "has_wild_occurrence": false,
         "parent_template_peptide": "BmKn2",
         "venom_collection_locality": "Not applicable — synthetic peptide analogue engineered by rational substitution from cDNA sequence of BmKn2.",
-        "engineered_laboratory_origin": "State Key Laboratory of Virology, College of Life Sciences, Wuhan University, Wuhan, Hubei, China; solid-phase chemical synthesis.",
+        "engineered_laboratory_origin": "GL Biochem Ltd., Shanghai, China (Fmoc-SPPS; certified purity >95% by RP-HPLC and MALDI-TOF MS; Cao et al. 2012).",
         "mature_sequence": "FIKRIARLLRKIF",
         "evidence_readiness_index": 45.0
       },
@@ -1538,7 +1538,7 @@
         "origin": "natural",
         "has_wild_occurrence": true,
         "parent_template_peptide": "Self (natural wild isolate)",
-        "venom_collection_locality": "Commercial and academic breeding colonies / wild-collected batches from Shandong and Beijing, China; milked by electrical stimulation.",
+        "venom_collection_locality": "not_reported (commercial supplier batch, Henan/Shandong, China; specific wild milking locality not reported in primary study; Zeng et al. 2004).",
         "engineered_laboratory_origin": "Not applicable — natural peptide identified via venom gland cDNA library and confirmed in crude venom.",
         "mature_sequence": "FIGAIARLLSKIF",
         "evidence_readiness_index": 45.0

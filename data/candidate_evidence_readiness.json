@@ -123,9 +123,9 @@
     "has_wild_occurrence": false,
     "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
     "venom_collection_context": "not_applicable_synthetic",
-    "engineered_laboratory_origin": "Department of Biochemistry, Federal University of Rio Grande do Norte (UFRN), Natal, RN, Brazil; Fmoc solid-phase peptide synthesis (SPPS).",
+    "engineered_laboratory_origin": "CASLO ApS, Lyngby, Denmark (Fmoc-SPPS; certified purity >95% by HPLC and MALDI-TOF MS; Amorim-Carmo et al. 2019).",
     "biogeographic_occurrence": "Template species endemic to Northeastern Brazil (Caatinga shrubland & Atlantic forest margin; Pernambuco, Ceará, Bahia). Field voucher: MNRJ-18294.",
-    "structure_status": "CD spectroscopy confirmed amphipathic alpha-helix; AlphaFold-Multimer model validated."
+    "structure_status": "Class C: Illustrative Representation (Unmodeled in PDB/AlphaFold DB; ERI structural score: 0.0 / 15.0); secondary structure observed by CD spectroscopy in SDS micelles."
   },
   {
     "candidate_id": "SCA-PEP-007",
@@ -251,9 +251,9 @@
     "has_wild_occurrence": false,
     "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
     "venom_collection_context": "not_applicable_synthetic",
-    "engineered_laboratory_origin": "School of Life Sciences, University of Science and Technology of China (USTC), Hefei, Anhui, China; Fmoc solid-phase peptide synthesis (SPPS).",
+    "engineered_laboratory_origin": "GL Biochem Ltd., Shanghai, China (Fmoc-SPPS; certified purity >95% by RP-HPLC and ESI-MS; Du et al. 2015).",
     "biogeographic_occurrence": "Template species native to North Africa (pre-Saharan steppes of Tunisia, Algeria, Libya). Field voucher: MNHN-RS-4182.",
-    "structure_status": "CD spectra in SDS micelles indicate 68% alpha-helical content; de novo AlphaFold prediction."
+    "structure_status": "Class C: Illustrative Representation (Unmodeled in PDB/AlphaFold DB; ERI structural score: 0.0 / 15.0); secondary structure observed by CD spectroscopy in SDS micelles (68% alpha-helix)."
   },
   {
     "candidate_id": "SCA-PEP-009",
@@ -379,9 +379,9 @@
     "has_wild_occurrence": false,
     "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
     "venom_collection_context": "not_applicable_synthetic",
-    "engineered_laboratory_origin": "School of Life Sciences, University of Science and Technology of China (USTC), Hefei, Anhui, China; Fmoc solid-phase peptide synthesis (SPPS).",
+    "engineered_laboratory_origin": "GL Biochem Ltd., Shanghai, China (Fmoc-SPPS; certified purity >95% by RP-HPLC and ESI-MS; Du et al. 2015).",
     "biogeographic_occurrence": "Template species native to North Africa (pre-Saharan steppes of Tunisia, Algeria, Libya). Field voucher: MNHN-RS-4182.",
-    "structure_status": "CD spectra in 50% TFE confirmed amphipathic alpha-helix; de novo AlphaFold prediction."
+    "structure_status": "Class C: Illustrative Representation (Unmodeled in PDB/AlphaFold DB; ERI structural score: 0.0 / 15.0); secondary structure observed by CD spectroscopy in 50% TFE."
   },
   {
     "candidate_id": "SCA-PEP-002",
@@ -507,9 +507,9 @@
     "has_wild_occurrence": false,
     "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
     "venom_collection_context": "not_applicable_synthetic",
-    "engineered_laboratory_origin": "Department of Biochemistry, Federal University of Rio Grande do Norte (UFRN), Natal, RN, Brazil; Fmoc solid-phase peptide synthesis (SPPS).",
+    "engineered_laboratory_origin": "CASLO ApS, Lyngby, Denmark (Fmoc-SPPS; certified purity >95% by HPLC and MALDI-TOF MS; Amorim-Carmo et al. 2019).",
     "biogeographic_occurrence": "Template species endemic to Northeastern Brazil (Caatinga shrubland & Atlantic forest margin; Pernambuco, Ceará, Bahia). Field voucher: MNRJ-18294.",
-    "structure_status": "Circular dichroism confirmed amphipathic alpha-helical conformation; AlphaFold model."
+    "structure_status": "Class C: Illustrative Representation (Unmodeled in PDB/AlphaFold DB; ERI structural score: 0.0 / 15.0); secondary structure observed by CD spectroscopy in SDS micelles."
   },
   {
     "candidate_id": "SCA-PEP-017",
@@ -635,9 +635,9 @@
     "has_wild_occurrence": false,
     "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
     "venom_collection_context": "not_applicable_synthetic",
-    "engineered_laboratory_origin": "Faculty of Pharmacy, Jordan University of Science and Technology (JUST), Irbid, Jordan; Fmoc solid-phase peptide synthesis (SPPS).",
+    "engineered_laboratory_origin": "GL Biochem Ltd., Shanghai, China (Fmoc-SPPS; certified purity >95% by RP-HPLC and MS; Almaaytah et al. 2014).",
     "biogeographic_occurrence": "Template species widespread across Middle East and Irano-Turanian plateaus (Iran, Iraq, Jordan, Turkey, Saudi Arabia). Field voucher: FKCP-Ar-2008 / Razi AC-04.",
-    "structure_status": "CD spectroscopy confirmed helical induction in micellar environment; AlphaFold structural model."
+    "structure_status": "Class C: Illustrative Representation (Unmodeled in PDB/AlphaFold DB; ERI structural score: 0.0 / 15.0); secondary structure observed by CD spectroscopy in SDS micelles."
   },
   {
     "candidate_id": "SCA-PEP-011",
@@ -763,9 +763,9 @@
     "has_wild_occurrence": false,
     "venom_collection_locality": "Not applicable — synthetic peptide analogue engineered by rational substitution from cDNA sequence of BmKn2.",
     "venom_collection_context": "not_applicable_synthetic",
-    "engineered_laboratory_origin": "State Key Laboratory of Virology, College of Life Sciences, Wuhan University, Wuhan, Hubei, China; solid-phase chemical synthesis.",
+    "engineered_laboratory_origin": "GL Biochem Ltd., Shanghai, China (Fmoc-SPPS; certified purity >95% by RP-HPLC and MALDI-TOF MS; Cao et al. 2012).",
     "biogeographic_occurrence": "Template species native to North and Northeastern China, Mongolia, and Korea. Neotype designated from Western Hills (Fragrant Hills/Xiangshan), Beijing. Voucher: ZMB-Ar-3129.",
-    "structure_status": "CD spectroscopy in TFE and DPC micelles; validated amphipathic alpha-helical conformation."
+    "structure_status": "Class C: Illustrative Representation (Unmodeled in PDB/AlphaFold DB; ERI structural score: 0.0 / 15.0); secondary structure observed by CD spectroscopy in TFE and DPC micelles."
   },
   {
     "candidate_id": "SCA-PEP-012",
@@ -893,7 +893,7 @@
     "venom_collection_context": "wild_field_milking",
     "engineered_laboratory_origin": "Not applicable — natural wild peptide isolated directly from milked venom.",
     "biogeographic_occurrence": "Endemic to Madagascar; subhumid forests, rock fissures, and tree bark in Montagne d'Ambre National Park (-12.5167, 49.1833) and Isalo Massif. Voucher: MNHN-RS-8512.",
-    "structure_status": "PDB ID: 1T51 (experimentally determined NMR solution structure in DPC micelles; Lee et al. 2004)."
+    "structure_status": "Class A: Experimentally Determined (PDB ID: 1T51, Solution NMR in DPC micelles, Lee et al. 2004; ERI structural score: 15.0 / 15.0)."
   },
   {
     "candidate_id": "SCA-PEP-010",
@@ -1017,11 +1017,11 @@
     "species_canonical_name": "Olivierus martensii",
     "parent_template_peptide": "Self (natural wild isolate)",
     "has_wild_occurrence": true,
-    "venom_collection_locality": "Commercial and academic breeding colonies / wild-collected batches from Shandong and Beijing, China; milked by electrical stimulation.",
+    "venom_collection_locality": "not_reported (commercial supplier batch, Henan/Shandong, China; specific wild milking locality not reported in primary study; Zeng et al. 2004).",
     "venom_collection_context": "commercial_pooled_batch",
     "engineered_laboratory_origin": "Not applicable — natural peptide identified via venom gland cDNA library and confirmed in crude venom.",
     "biogeographic_occurrence": "Native across Northern and Northeastern China, Korean Peninsula, and Mongolia. Western Hills (Fragrant Hills/Xiangshan), Beijing (39.9833, 116.1833). Voucher: ZMB-Ar-3129.",
-    "structure_status": "CD spectroscopy demonstrates alpha-helical conformation in hydrophobic/micellar environment."
+    "structure_status": "Class C: Illustrative Representation (Unmodeled in PDB/AlphaFold DB; ERI structural score: 0.0 / 15.0); secondary structure observed by CD spectroscopy in hydrophobic/micellar environment."
   },
   {
     "candidate_id": "SCA-PEP-016",
@@ -1149,7 +1149,7 @@
     "venom_collection_context": "wild_field_milking",
     "engineered_laboratory_origin": "Not applicable — natural peptide identified by venom gland cDNA screening.",
     "biogeographic_occurrence": "Widespread across arid zones of Iran, Iraq, Jordan, Turkey, Syria, and Arabian Peninsula. Field locality: Kashan desert fringe, Iran (33.9850, 51.4100). Voucher: FKCP-Ar-2008 / Razi AC-04.",
-    "structure_status": "CD spectroscopy verified alpha-helix formation in membrane-mimicking trifluoroethanol."
+    "structure_status": "Class B: Computationally Predicted (AlphaFold DB AF-A0A0A1I6E7-F1, score: 5.0 / 15.0); secondary structure observed by CD spectroscopy in trifluoroethanol."
   },
   {
     "candidate_id": "SCA-PEP-013",
@@ -1277,7 +1277,7 @@
     "venom_collection_context": "wild_field_milking",
     "engineered_laboratory_origin": "Not applicable — natural peptide discovered via cDNA library and LC-MS purification.",
     "biogeographic_occurrence": "Lowland tropical rainforests and secondary growth in Southeast Asia (Vietnam, Laos, Cambodia, Thailand). Cat Tien National Park (11.4333, 107.4333). Voucher: IEBR-SC-2003.",
-    "structure_status": "CD spectroscopy demonstrates random coil in water transitioning to amphipathic alpha-helix in 50% TFE."
+    "structure_status": "Class B: Computationally Predicted (AlphaFold DB AF-P0DX64-F1, score: 5.0 / 15.0); secondary structure observed by CD spectroscopy in 50% TFE."
   },
   {
     "candidate_id": "SCA-PEP-020",
@@ -1404,8 +1404,8 @@
     "venom_collection_locality": "Wild-captured specimens in Karasburg / Keetmanshoop arid terrain, Southern Namibia; milked by electrostimulation.",
     "venom_collection_context": "wild_field_milking",
     "engineered_laboratory_origin": "Not applicable — natural pore-forming peptide isolated directly from venom fraction.",
-    "biogeographic_occurrence": "Arid dwarf shrubland savanna of Namaqualand, Karoo, and Kalahari (Namibia and Northern Cape, South Africa). Keetmanshoop (-26.5833, 18.1333). Voucher: SAM-ENW-B001928.",
-    "structure_status": "CD spectroscopy and lipid monolayer insertion; pore-forming amphipathic structure."
+    "biogeographic_occurrence": "Endemic to arid dwarf shrubland, sandy flats, and consolidated dunes of Karoo and Kalahari systems in Namibia and Western South Africa. Keetmanshoop (-26.5833, 18.1333). Voucher: SAM-ENW-B001928.",
+    "structure_status": "Class B: Computationally Predicted (AlphaFold DB AF-P83312-F1, score: 5.0 / 15.0); pore-forming secondary structure characterized by CD spectroscopy."
   },
   {
     "candidate_id": "SCA-PEP-001",
@@ -1530,10 +1530,10 @@
     "parent_template_peptide": "Self (natural wild isolate)",
     "has_wild_occurrence": true,
     "venom_collection_locality": "Wild-captured specimens from Pernambuco maintained in vivarium of UFPE, Recife, Brazil; milked by electrical stimulation.",
-    "venom_collection_context": "captive_vivarium_culture",
+    "venom_collection_context": "vivarium_captive_colony",
     "engineered_laboratory_origin": "Not applicable — natural linear peptide purified from crude venom by reverse-phase HPLC.",
-    "biogeographic_occurrence": "Northeastern Brazil (Caatinga shrubland & Atlantic forest transition). Brejo da Madre de Deus highland enclave, Pernambuco (-8.1458, -35.9711). Voucher: MNRJ-18294.",
-    "structure_status": "CD spectroscopy confirmed amphipathic alpha-helix in SDS micelles and membrane bilayers."
+    "biogeographic_occurrence": "Endemic to Northeastern Brazil (Caatinga and Atlantic forest borders in Pernambuco, Paraíba, Ceará, Bahia). Brejo da Madre de Deus (-8.1458, -35.9711). Voucher: MNRJ-18294.",
+    "structure_status": "Class B: Computationally Predicted (AlphaFold DB AF-P0DQT1-F1, score: 5.0 / 15.0); secondary structure observed by CD spectroscopy in SDS micelles."
   },
   {
     "candidate_id": "SCA-PEP-006",
@@ -1660,8 +1660,8 @@
     "venom_collection_locality": "Wild specimens captured in pre-Saharan oasis margins of Gafsa / Tozeur, Central Tunisia; venom milked by electrical stimulation.",
     "venom_collection_context": "wild_field_milking",
     "engineered_laboratory_origin": "Not applicable — natural peptide identified via venom gland cDNA library screening.",
-    "biogeographic_occurrence": "Pre-Saharan arid steppes, rocky hills, and oasis margins in North Africa (Tunisia, Algeria, Libya). Gafsa oasis margin (34.3833, 9.0500). Voucher: MNHN-RS-4182.",
-    "structure_status": "CD spectroscopy in 30 mM SDS demonstrated 52% alpha-helical content."
+    "biogeographic_occurrence": "Pre-Saharan arid steppes and rocky hills in North Africa (Tunisia, Algeria, Libya). Gafsa oasis margin (34.3833, 9.0500). Voucher: MNHN-RS-4182.",
+    "structure_status": "Class C: Illustrative Representation (Unmodeled in PDB/AlphaFold DB; ERI structural score: 0.0 / 15.0); secondary structure observed by CD spectroscopy in SDS micelles (52% alpha-helix)."
   },
   {
     "candidate_id": "SCA-PEP-019",
@@ -1789,7 +1789,7 @@
     "venom_collection_context": "wild_field_milking",
     "engineered_laboratory_origin": "Not applicable — natural chimeric peptide purified from crude venom.",
     "biogeographic_occurrence": "Guinean moist evergreen forest and secondary forest floor in West Africa (Côte d'Ivoire, Ghana, Guinea, Liberia). Taï National Park (5.8500, -7.3500). Voucher: MNHN-RS-6102.",
-    "structure_status": "PDB ID: 1P8J (X-ray crystal structure / solution NMR of scorpion defensin-cecropin chimeric fold)."
+    "structure_status": "Class B: Computationally Predicted (AlphaFold DB AF-P56972-F1, pLDDT: 82.4, score: 5.0 / 15.0); no experimental PDB structure ."
   },
   {
     "candidate_id": "SCA-PEP-008",
@@ -1917,7 +1917,7 @@
     "venom_collection_context": "wild_field_milking",
     "engineered_laboratory_origin": "Not applicable — natural peptide identified via venom gland cDNA library screening.",
     "biogeographic_occurrence": "Pre-Saharan arid steppes and rocky hills in North Africa (Tunisia, Algeria, Libya). Gafsa oasis margin (34.3833, 9.0500). Voucher: MNHN-RS-4182.",
-    "structure_status": "CD spectroscopy in SDS micelles demonstrated amphipathic alpha-helix."
+    "structure_status": "Class C: Illustrative Representation (Unmodeled in PDB/AlphaFold DB; ERI structural score: 0.0 / 15.0); secondary structure observed by CD spectroscopy in SDS micelles."
   },
   {
     "candidate_id": "SCA-PEP-018",
@@ -2045,7 +2045,7 @@
     "venom_collection_context": "wild_field_milking",
     "engineered_laboratory_origin": "Not applicable — natural 41-aa peptide isolated directly from crude venom by gel filtration and HPLC.",
     "biogeographic_occurrence": "Tehuacán-Cuicatlán Biosphere Reserve arid thornscrub and columnar cactus forests, Puebla and Oaxaca, Mexico. Zapotitlán Salinas (18.2500, -97.4500). Voucher: IBUNAM-SC-1998.",
-    "structure_status": "Circular dichroism confirmed two amphipathic alpha-helices joined by flexible hinge; AlphaFold model."
+    "structure_status": "Class B: Computationally Predicted (AlphaFold DB AF-P82656-F1, score: 5.0 / 15.0); secondary structure observed by CD spectroscopy."
   },
   {
     "candidate_id": "SCA-PEP-015",
@@ -2173,7 +2173,7 @@
     "venom_collection_context": "wild_field_milking",
     "engineered_laboratory_origin": "Not applicable — natural peptide discovered through transcriptome sequencing of venom glands.",
     "biogeographic_occurrence": "Eastern Amazonian terra firme and igapó rainforests in Pará and Amapá, Brazil, and French Guiana. Parque Estadual do Utinga, Belém (-1.4558, -48.5039). Voucher: MPEG-ARA-00812.",
-    "structure_status": "CD spectroscopy demonstrated alpha-helical conformation in 50% trifluoroethanol."
+    "structure_status": "Class B: Computationally Predicted (AlphaFold DB AF-P0DQT2-F1, score: 5.0 / 15.0); secondary structure observed by CD spectroscopy in 50% TFE."
   },
   {
     "candidate_id": "SCA-PEP-005",
@@ -2299,9 +2299,9 @@
     "has_wild_occurrence": false,
     "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
     "venom_collection_context": "not_applicable_synthetic",
-    "engineered_laboratory_origin": "Department of Biochemistry, Federal University of Rio Grande do Norte (UFRN), Natal, RN, Brazil; Fmoc solid-phase peptide synthesis (SPPS).",
+    "engineered_laboratory_origin": "not_reported (Fmoc solid-phase peptide synthesis; vendor or synthesis facility unstated in primary study; Tareau et al. 2026).",
     "biogeographic_occurrence": "Template species endemic to Northeastern Brazil (Caatinga shrubland & Atlantic forest margin; Pernambuco, Ceará, Bahia). Field voucher: MNRJ-18294.",
-    "structure_status": "Circular dichroism confirmed helical content; AlphaFold model."
+    "structure_status": "Class C: Illustrative Representation (Unmodeled in PDB/AlphaFold DB; ERI structural score: 0.0 / 15.0); secondary structure observed by CD spectroscopy."
   },
   {
     "candidate_id": "SCA-PEP-004",
@@ -2427,9 +2427,9 @@
     "has_wild_occurrence": false,
     "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
     "venom_collection_context": "not_applicable_synthetic",
-    "engineered_laboratory_origin": "Department of Biochemistry, Federal University of Rio Grande do Norte (UFRN), Natal, RN, Brazil; Fmoc solid-phase peptide synthesis (SPPS).",
+    "engineered_laboratory_origin": "not_reported (Fmoc solid-phase peptide synthesis; vendor or synthesis facility unstated in primary study; Tareau et al. 2026).",
     "biogeographic_occurrence": "Template species endemic to Northeastern Brazil (Caatinga shrubland & Atlantic forest margin; Pernambuco, Ceará, Bahia). Field voucher: MNRJ-18294.",
-    "structure_status": "Circular dichroism confirmed helical content; AlphaFold model."
+    "structure_status": "Class C: Illustrative Representation (Unmodeled in PDB/AlphaFold DB; ERI structural score: 0.0 / 15.0); secondary structure observed by CD spectroscopy."
   },
   {
     "candidate_id": "SCA-PEP-014",
@@ -2557,6 +2557,6 @@
     "venom_collection_context": "wild_field_milking",
     "engineered_laboratory_origin": "Not applicable — natural peptide discovered through transcriptome sequencing of venom glands.",
     "biogeographic_occurrence": "Eastern Amazonian terra firme and igapó rainforests in Pará and Amapá, Brazil, and French Guiana. Parque Estadual do Utinga, Belém (-1.4558, -48.5039). Voucher: MPEG-ARA-00812.",
-    "structure_status": "CD spectroscopy in 50% TFE demonstrated amphipathic alpha-helical conformation."
+    "structure_status": "Class B: Computationally Predicted (AlphaFold DB AF-A0A1D3IXR7-F1, score: 5.0 / 15.0); secondary structure observed by CD spectroscopy in 50% TFE."
   }
 ]

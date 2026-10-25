@@ -13802,4 +13802,16 @@
     }
   }
 
+
+  // SCORPION X — Multilingual Dynamic Refresh Listener (MOD-13)
+  window.addEventListener('scorpionai:languageChanged', function(e) {
+    try {
+      if (typeof renderCatalog === 'function') renderCatalog();
+      if (typeof renderLeadPrioritization === 'function') renderLeadPrioritization();
+      if (typeof renderLeadReadinessTable === 'function') renderLeadReadinessTable();
+    } catch (err) {
+      console.debug('[app.js] Lang refresh:', err);
+    }
+  });
+
 })();

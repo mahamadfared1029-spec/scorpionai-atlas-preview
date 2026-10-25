@@ -226,7 +226,11 @@
       "DOCKING SCORE GUARD: -9.6 kcal/mol is a scoring-function value, NOT an experimental binding free energy (Delta G_exp) and NOT a measured Kd.",
       "PROXIMITY LIMITATION: Docking proximity does not equal channel modulation. A molecule can dock with high score to closed or inactivated states without causing functional block.",
       "MEMBRANE ABSENCE: In silico docking was performed without the dynamic phospholipid bilayer; physiological membrane partitioning is omitted."
-    ]
+    ],
+    "title_ckb": "ژەهری ئەلفای AaH2 دژی کەناڵی سۆدیۆمی تێکەڵ (کەناڵی NavPas لەگەڵ گڕافتی VSD4ی کەناڵی Nav1.7ی مرۆڤ)",
+    "peptide_name_ckb": "ژەهری ئەلفای AaH2",
+    "target_name_ckb": "کەناڵی سۆدیۆمی هێبریدی NavPas/Nav1.7",
+    "epistemic_warning_ckb": "پێکهاتەی 6NT4 بریتییە لە کێمێرا (تێکەڵە)ی کەناڵی مێرووی Cockroach لەگەڵ بەشێکی کەناڵی Nav1.7ی مرۆڤ؛ پەیوەندی نێوان Arg62 و Asp669 تاقیکارییە بە دووری 3.12 ئەنگسترۆم."
   },
   {
     "case_id": "DCS-002",
@@ -399,7 +403,11 @@
     "epistemic_warnings": [
       "SUBTYPE SELECTIVITY WARNING: Docking scores for ChTX against Kv1.1, Kv1.2, and Kv1.3 differ by < 0.5 kcal/mol in standard force fields, despite 100-fold differences in pharmacological potency.",
       "REVERSIBILITY: Docking does not compute unbinding kinetics (k_off). A high docking score can occur for an irreversible binder or a rapid reversible competitor."
-    ]
+    ],
+    "title_ckb": "ژەهری چاریبدۆتۆکسین (ChTX) دژی کەناڵی پۆتاسیۆمی تێکەڵی Kv1.2-2.1 (داخستنی فلتەری هەڵبژاردەیی کونیلە)",
+    "peptide_name_ckb": "چاریبدۆتۆکسین (ChTX)",
+    "target_name_ckb": "کەناڵی پۆتاسیۆمی تێکەڵی Kv1.2-2.1",
+    "epistemic_warning_ckb": "ژەهری چاریبدۆتۆکسین لە دووپشکی Leiurus quinquestriatus دەرهێنراوە و جیاوازە لە کالیۆتۆکسین؛ ترشی ئەمینی Lys27 کونیلەکە دادەخات بە دووری 2.76 ئەنگسترۆم."
   },
   {
     "case_id": "DCS-003",
@@ -551,7 +559,11 @@
     "epistemic_warnings": [
       "COMPLEX PROVENANCE: The complex is a Class B computational model. The 6OFA PDB entry contains ONLY the isolated peptide, not the receptor.",
       "CELL PENETRATION: Docking simulations cannot predict trans-bilayer translocation; membrane permeation was demonstrated empirically."
-    ]
+    ],
+    "title_ckb": "ژەهری وەرگری واسابی (WaTx): پێکهاتەی سەربەخۆ (Apo) و گۆڕینی ئەرکی وەرگری TRPA1",
+    "peptide_name_ckb": "ژەهری واسابی (WaTx)",
+    "target_name_ckb": "وەرگری TRPA1",
+    "epistemic_warning_ckb": "پێکهاتەی 6OFA بریتییە لە پێپتایدی WaTx بە تەنیا لەناو شلەدا (NMR) بەبێ بوونی وەرگری TRPA1؛ کارلێکی لەگەڵ TRPA1 لە ڕووی فیزیۆلۆجییەوە سەلمێنراوە نەک کریستاڵی."
   },
   {
     "case_id": "DCS-004",
@@ -692,7 +704,11 @@
     "epistemic_warnings": [
       "ZERO DIRECT BINDING EVIDENCE: The -8.4 kcal/mol score MUST NOT be cited as a binding affinity (Kd) or proof of mechanism.",
       "MEMBRANE LYSIS CONFOUNDER: Phenotypic bacterial killing (MIC) is completely explained by membrane permeabilization, not single-receptor target engagement."
-    ]
+    ],
+    "title_ckb": "پێپتایدی ستیگمورین دژی ماددەی سەرەتایی لیپیدی دووەمی بەکتریایی (Lipid II) (گریمانەی حیسابکاریی تیۆری)",
+    "peptide_name_ckb": "ستیگمورین (Stigmurin)",
+    "target_name_ckb": "لیپیدی دووەم (Lipid II)",
+    "epistemic_warning_ckb": "ئەمەی نێوان ستیگمورین و Lipid II تەنیا گریمانەیەکی حیسابکارییە (Class D) و هیچ بەڵگەیەکی کریستاڵۆگرافیی تاقیگەیی نییە کە بەستنەوەی ڕاستەوخۆ بسەلمێنێت."
   },
   {
     "case_id": "DCS-005",
@@ -831,6 +847,10 @@
     },
     "epistemic_warnings": [
       "OFF-TARGET RISKS: Potent trypsin inhibition does not imply pharmaceutical safety; indiscriminate serine protease inhibition can cause systemic coagulopathies."
-    ]
+    ],
+    "title_ckb": "بەربەستکەری TOPI1 دژی تریپسینی مانگا (سەرچاوەی کۆمەڵگەی کریستاڵی تیشکی ئێکس)",
+    "peptide_name_ckb": "بەربەستکەری TOPI1",
+    "target_name_ckb": "تریپسینی مانگا (Bovine Trypsin)",
+    "epistemic_warning_ckb": "پێکهاتەی 6MRQ پێکهاتەیەکی تاقیگەیی باوەڕپێکراوە کە کارکردنی پێپتایدی ژەهر وەک ڕێگری ئەنزیم پیشان دەدات."
   }
 ]

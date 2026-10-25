@@ -15,6 +15,7 @@ class ReproducibilityCenterManager {
     this.versionManifest = null;
     this.modelMethods = null;
     this.rankingMethodology = null;
+    this.currentLang = (window.i18n ? window.i18n.getLanguage() : 'ar');
 
     this.init();
   }
@@ -88,6 +89,13 @@ class ReproducibilityCenterManager {
   }
 
   setupEventListeners() {
+    // Language change listener (MOD-13)
+    window.addEventListener('scorpionai:languageChanged', (e) => {
+      this.currentLang = e.detail.lang;
+      this.renderSummaryCounters();
+      this.renderCurrentTab();
+    });
+
     const tabButtons = document.querySelectorAll('.repro-tab-btn');
     tabButtons.forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -710,9 +718,9 @@ class ReproducibilityCenterManager {
           <span class="mono font-bold text-rose-400">${lim.id}</span>
           <span class="badge ${lim.severity.includes('Critical') ? 'badge-rose' : (lim.severity.includes('High') ? 'badge-amber' : 'badge-slate')}">${lim.severity}</span>
         </div>
-        <h4>${lim.title_ar} (${lim.title_en})</h4>
+        <h4>${this.currentLang === "ckb" ? (lim.title_ckb || lim.title_en) : (this.currentLang === "en" ? lim.title_en : lim.title_ar)}</h4>
         <p class="text-xs text-muted mb-2"><strong>الموديولات المتأثرة:</strong> ${lim.affected_modules.join(', ')}</p>
-        <p class="text-sm mb-2">${lim.description_en}</p>
+        <p class="text-sm mb-2">${this.currentLang === "ckb" ? (lim.description_ckb || lim.description_en) : (this.currentLang === "en" ? lim.description_en : (lim.description_ar || lim.description_en))}</p>
         <div class="repro-mitigation-box">
           <small><strong>إجراء التخفيف المعتمد:</strong> ${lim.mitigation_en}</small>
         </div>

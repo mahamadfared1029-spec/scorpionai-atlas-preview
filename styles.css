@@ -7046,3 +7046,198 @@
     font-size: 0.8rem;
   }
 }
+
+
+/* ==========================================================================
+   SCORPION X — MULTILINGUAL TRANSLATION LAYER STYLES (MOD-13)
+   ========================================================================== */
+
+.lang-selector-container {
+  position: relative;
+  display: inline-block;
+  z-index: 1000;
+}
+
+.lang-selector-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(18, 24, 38, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(215, 187, 128, 0.35);
+  border-radius: 20px;
+  padding: 6px 13px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.lang-selector-btn:hover,
+.lang-selector-btn:focus-visible {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: #d7bb80;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(215, 187, 128, 0.25);
+}
+
+.lang-icon {
+  width: 14px;
+  height: 14px;
+  stroke: #d7bb80;
+}
+
+.current-lang-code {
+  background: rgba(215, 187, 128, 0.18);
+  color: #f59e0b;
+  font-family: monospace;
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.current-lang-name {
+  font-size: 11px;
+}
+
+.lang-chevron {
+  width: 10px;
+  height: 10px;
+  stroke: #94a3b8;
+  transition: transform 0.2s ease;
+}
+
+.lang-selector-btn[aria-expanded="true"] .lang-chevron {
+  transform: rotate(180deg);
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  inset-inline-end: 0;
+  min-width: 170px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(215, 187, 128, 0.3);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(215, 187, 128, 0.15);
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1001;
+  animation: langDropdownIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lang-dropdown.open {
+  display: flex;
+}
+
+@keyframes langDropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.lang-opt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  color: #cbd5e1;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: inherit;
+  transition: all 0.18s ease;
+  width: 100%;
+}
+
+.lang-opt:hover,
+.lang-opt:focus-visible {
+  background: rgba(215, 187, 128, 0.12);
+  color: #ffffff;
+  outline: none;
+}
+
+.lang-opt.active {
+  background: rgba(215, 187, 128, 0.2);
+  color: #fbbf24;
+  font-weight: 700;
+  border: 1px solid rgba(215, 187, 128, 0.35);
+}
+
+.lang-opt-code {
+  font-family: monospace;
+  font-size: 10px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+}
+
+.lang-opt.active .lang-opt-code {
+  background: rgba(251, 191, 36, 0.25);
+  color: #fbbf24;
+}
+
+.lang-opt-title {
+  flex-grow: 1;
+  font-size: 11px;
+}
+
+.lang-opt-native {
+  font-size: 9px;
+  color: #64748b;
+}
+
+.lang-opt.active .lang-opt-native {
+  color: #d7bb80;
+}
+
+/* ==========================================================================
+   LTR & FONT ADJUSTMENTS
+   ========================================================================== */
+
+html[dir="ltr"] body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  text-align: left;
+}
+
+html[dir="ltr"] .hero-title,
+html[dir="ltr"] .hero-subtitle,
+html[dir="ltr"] .section-head,
+html[dir="ltr"] .section-desc,
+html[dir="ltr"] .methods-tab-desc {
+  text-align: left;
+}
+
+html[dir="ltr"] .lang-dropdown {
+  inset-inline-end: 0;
+}
+
+html[lang="ckb"] body {
+  font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Arial, sans-serif;
+  text-align: right;
+}
+
+/* Protected Scientific Terminology isolation */
+.scientific-id,
+[data-protected="true"] {
+  direction: ltr !important;
+  unicode-bidi: isolate;
+  display: inline-block;
+  font-family: Consolas, 'SF Mono', Menlo, Monaco, monospace;
+}

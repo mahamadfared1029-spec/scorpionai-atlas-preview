@@ -7,6 +7,7 @@
  <meta name="description" content="أطلس بحثي متكامل لببتيدات سموم العقارب يجمع بين دقة الأدلة التجريبية ونماذج التعلّم الإحصائي والشفافية المنهجية.">
  <link rel="icon" type="image/svg+xml" href="favicon.svg">
  <link rel="stylesheet" href="styles.css">
+ <script src="i18n.js"></script>
  <link rel="stylesheet" href="scorpion-viewer/atlas-integration.css">
  <link rel="stylesheet" href="scorpion-viewer/intro.css?v=1">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -30,30 +31,57 @@
    <span dir="ltr">SCORPION<span class="brand-accent">AI</span><small>PEPTIDE ATLAS</small></span>
  </a>
  <nav aria-label="القائمة الرئيسية">
-   <a href="#atlas">الأطلس</a>
-   <a href="#venomlab">مختبر البنى 3D</a>
-   <a href="#scorpion-anatomy">تشريح العقرب 3D</a>
-   <a href="#research-agent" id="nav-research-agent">المساعد العلمي (MOD-04)</a>
-   <a href="#knowledge-graph">شبكة المعرفة</a>
+   <a href="#atlas" data-i18n="nav.atlas">الأطلس</a>
+   <a href="#venomlab" data-i18n="nav.venomlab">مختبر البنى 3D</a>
+   <a href="#scorpion-anatomy" data-i18n="nav.anatomy">تشريح العقرب 3D</a>
+   <a href="#research-agent" id="nav-research-agent" data-i18n="nav.research_agent">المساعد العلمي (MOD-04)</a>
+   <a href="#knowledge-graph" data-i18n="nav.knowledge_graph">شبكة المعرفة</a>
    
-   <a href="#target-explorer">مستكشف الأهداف</a>
-   <a href="#gap-analyzer">محلل الفجوات</a>
-   <a href="#prioritization">فرز المرشحين</a>
-    <a href="#biogeography-explorer" id="nav-biogeography">الجغرافيا الحيوية (MOD-08)</a>
-    <a href="#translation-explorer" id="nav-translation">المسار الترجمي (MOD-09)</a>
-   <a href="#xai">تفسير الذكاء الاصطناعي</a>
-    <a href="#docking-twin" id="nav-docking-twin">التوأم الرقمي والإرساء (MOD-11)</a>
-    <a href="#methods-center" id="nav-methods-center">مركز المنهجية والأدلة (MOD-12)</a>
-   <a href="#methods-evidence">الأدلة الـ32</a>
-   <a href="#approach">المنهجية</a>
-   <a href="#contact">تواصل</a>
+   <a href="#target-explorer" data-i18n="nav.target_explorer">مستكشف الأهداف</a>
+   <a href="#gap-analyzer" data-i18n="nav.gap_analyzer">محلل الفجوات</a>
+   <a href="#prioritization" data-i18n="nav.prioritization">فرز المرشحين</a>
+    <a href="#biogeography-explorer" id="nav-biogeography" data-i18n="nav.biogeography">الجغرافيا الحيوية (MOD-08)</a>
+    <a href="#translation-explorer" id="nav-translation" data-i18n="nav.translation">المسار الترجمي (MOD-09)</a>
+   <a href="#xai" data-i18n="nav.xai">تفسير الذكاء الاصطناعي (MOD-10)</a>
+    <a href="#docking-twin" id="nav-docking-twin" data-i18n="nav.docking_twin">التوأم الرقمي والإرساء (MOD-11)</a>
+    <a href="#methods-center" id="nav-methods-center" data-i18n="nav.methods_center">مركز المنهجية والأدلة (MOD-12)</a>
+   <a href="#methods-evidence" data-i18n="nav.methods_evidence">الأدلة الـ32</a>
+   <a href="#approach" data-i18n="nav.approach">المنهجية</a>
+   <a href="#contact" data-i18n="nav.contact">تواصل</a>
  </nav>
  <div class="nav-actions">
+   <!-- SCORPION X Multilingual Selector (MOD-13) -->
+   <div class="lang-selector-container" id="lang-selector-container">
+     <button id="lang-selector-btn" class="lang-selector-btn" aria-haspopup="true" aria-expanded="false" aria-label="Select Language / اختر اللغة / زمان هەڵبژێرە" title="Select Language / اختر اللغة / زمان هەڵبژێرە">
+       <svg class="lang-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+       <span id="current-lang-code" class="current-lang-code">AR</span>
+       <span id="current-lang-name" class="current-lang-name">العربية</span>
+       <svg class="lang-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+     </button>
+     <div id="lang-dropdown" class="lang-dropdown" role="menu" aria-label="Available Languages">
+       <button role="menuitem" class="lang-opt active" data-lang="ar" id="lang-opt-ar">
+         <span class="lang-opt-code">AR</span>
+         <span class="lang-opt-title">العربية</span>
+         <span class="lang-opt-native">العربية (RTL)</span>
+       </button>
+       <button role="menuitem" class="lang-opt" data-lang="en" id="lang-opt-en">
+         <span class="lang-opt-code">EN</span>
+         <span class="lang-opt-title">English</span>
+         <span class="lang-opt-native">English (LTR)</span>
+       </button>
+       <button role="menuitem" class="lang-opt" data-lang="ckb" id="lang-opt-ckb">
+         <span class="lang-opt-code">CKB</span>
+         <span class="lang-opt-title">کوردی</span>
+         <span class="lang-opt-native">کوردی سۆرانی (RTL)</span>
+       </button>
+     </div>
+   </div>
+
    <!-- MOD-01: Scientific Truth Mode Switch in Navigation -->
-   <button id="truth-mode-toggle" class="truth-toggle active" aria-pressed="true" title="تبديل نمط الحقيقة العلمية الصارم">
+   <button id="truth-mode-toggle" class="truth-toggle active" aria-pressed="true" title="تبديل نمط الحقيقة العلمية الصارم" data-i18n-title="truth_mode.title">
      <span class="truth-indicator active"></span>
-     <span class="truth-label">الحقيقة العلمية</span>
-     <span class="truth-state-badge">مفعّل</span>
+     <span class="truth-label" data-i18n="truth_mode.label">الحقيقة العلمية</span>
+     <span class="truth-state-badge" data-i18n="truth_mode.active">مفعّل</span>
    </button>
    <a class="nav-download" href="#downloads">البيانات المفتوحة <span aria-hidden="true">↙</span></a>
  </div>
@@ -1980,9 +2008,9 @@
     <div class="sequence-art" dir="ltr" aria-label="مثال تسلسل Stigmurin">FFSLIPSLV<span>GGLISAFK</span><small>STIGMURIN / 17 AMINO ACIDS</small></div>
   </div>
   <ol class="method-steps">
-    <li class="reveal"><span>01</span><div><h3>نجمع ونوثّق</h3><p>تسلسلات UniProt وأدلة الأدبيات، مع ربط القياس بالكائن والسلالة والمصدر بـ DOI / PMID موثق.</p></div></li>
-    <li class="reveal"><span>02</span><div><h3>ننظّم ونحسب</h3><p>تحديد التسلسل الناضج، إزالة التكرار، وحساب الخصائص مع فصل الوحدات المنشورة عن المحوّلة.</p></div></li>
-    <li class="reveal"><span>03</span><div><h3>نقارن بمسؤولية</h3><p>تجميع المتشابهات (CD-HIT 70%) وفصل المجموعات بين التدريب والاختبار، ثم عرض النتائج مع حدود عدم اليقين.</p></div></li>
+    <li class="reveal"><span>01</span><div><h3 data-i18n="approach.card1_title">نجمع ونوثّق</h3><p>تسلسلات UniProt وأدلة الأدبيات، مع ربط القياس بالكائن والسلالة والمصدر بـ DOI / PMID موثق.</p></div></li>
+    <li class="reveal"><span>02</span><div><h3 data-i18n="approach.card2_title">ننظّم ونحسب</h3><p>تحديد التسلسل الناضج، إزالة التكرار، وحساب الخصائص مع فصل الوحدات المنشورة عن المحوّلة.</p></div></li>
+    <li class="reveal"><span>03</span><div><h3 data-i18n="approach.card3_title">نقارن بمسؤولية</h3><p>تجميع المتشابهات (CD-HIT 70%) وفصل المجموعات بين التدريب والاختبار، ثم عرض النتائج مع حدود عدم اليقين.</p></div></li>
   </ol>
  </section>
 
@@ -1999,19 +2027,19 @@
     <article class="reveal">
       <span class="evidence-count">18</span>
       <span class="badge measured">MIC مقاس</span>
-      <h3>المستوى 1: قياس منشور</h3>
+      <h3 data-i18n="evidence_tiers.tier1_title">المستوى 1: قياس مخبري منشور</h3>
       <p>ببتيدات ذات قياس كمي مباشر في جدول الأدلة التجريبية. النتيجة صالحة تحديداً لظروف التجربة والكائن المستهدف.</p>
     </article>
     <article class="reveal">
       <span class="evidence-count">165</span>
       <span class="badge annotated">تعليق UniProt</span>
-      <h3>المستوى 2: توثيق مكتبي</h3>
+      <h3 data-i18n="evidence_tiers.tier2_title">المستوى 2: توثيق في قواعد البيانات الدولية</h3>
       <p>سجلات موسومة بالنشاط في UniProt دون قياس MIC كمي مباشر في جدول الأدلة الحالي. لا تعتبر إثباتاً رقمياً كافياً.</p>
     </article>
     <article class="reveal">
       <span class="evidence-count">1,047</span>
       <span class="badge background">خلفية غير مختبرة</span>
-      <h3>المستوى 4: سؤال مفتوح</h3>
+      <h3 data-i18n="evidence_tiers.tier4_title">المستوى 4: سؤال علمي مفتوح</h3>
       <p>غياب القياس لا يعني غياب النشاط. هذه الخلفية ليست سلبيات مخبرية مؤكدة (PU Learning).</p>
     </article>
   </div>
@@ -2161,7 +2189,7 @@
   <div class="creator-card">
     <span class="creator-monogram" aria-hidden="true">م</span>
     <p class="eyebrow">إعداد وتطوير</p>
-    <h3>مصطفى فريد يحيى</h3>
+    <h3 data-i18n="contact.author_name">مصطفى فريد يحيى</h3>
     <div class="supervisor">
       <span>بإشراف</span>
       <strong>دكتورة تريفة فاروق</strong>

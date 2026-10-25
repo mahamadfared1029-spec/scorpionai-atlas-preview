@@ -54,6 +54,7 @@ class DockingTwinManager {
 
     // Reduced motion preference
     this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.currentLang = (window.i18n ? window.i18n.getLanguage() : 'ar');
   }
 
   async init() {
@@ -117,6 +118,18 @@ class DockingTwinManager {
   }
 
   bindControls() {
+    // Language change listener (MOD-13)
+    window.addEventListener('scorpionai:languageChanged', (e) => {
+      this.currentLang = e.detail.lang;
+      this.populateCaseDropdown();
+      if (this.activeCase) {
+        this.renderCaseHeader();
+        this.renderPoseSelector();
+        this.renderContactsTable();
+        this.renderWorkflowStepper();
+      }
+    });
+
     // Mouse rotate & pan
     this.canvas.addEventListener('mousedown', (e) => {
       if (e.button === 0) this.isDragging = true;
@@ -258,7 +271,8 @@ class DockingTwinManager {
       const opt = document.createElement('option');
       opt.value = c.case_id;
       const flagPrefix = c.is_flagship ? '⭐ ' : '';
-      opt.textContent = `${flagPrefix}${c.case_id}: ${c.title_ar} (${c.peptide.peptide_name})`;
+      const cTitle = this.currentLang === "ckb" ? (c.title_ckb || c.title_en) : (this.currentLang === "en" ? c.title_en : c.title_ar);
+      opt.textContent = `${flagPrefix}${c.case_id}: ${cTitle} (${c.peptide.peptide_name})`;
       select.appendChild(opt);
     });
   }
@@ -295,7 +309,8 @@ class DockingTwinManager {
 
     const legendTarget = document.getElementById('legend-target-label');
     const legendPeptide = document.getElementById('legend-peptide-label');
-    if (legendTarget) legendTarget.textContent = `${this.activeCase.target.target_name_ar}`;
+    const tName = this.currentLang === "ckb" ? (this.activeCase.target_name_ckb || this.activeCase.target.target_name_en) : (this.currentLang === "en" ? this.activeCase.target.target_name_en : this.activeCase.target.target_name_ar);
+    if (legendTarget) legendTarget.textContent = tName;
     if (legendPeptide) legendPeptide.textContent = `${this.activeCase.peptide.peptide_name}`;
   }
 

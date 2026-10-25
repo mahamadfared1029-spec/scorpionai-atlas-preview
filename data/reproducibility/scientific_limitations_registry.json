@@ -9,7 +9,10 @@
     ],
     "severity": "High (Epistemic)",
     "description_en": "The training set contains 183 known active peptides and 1,047 unassayed background sequences. The model predicts similarity to known positives, NOT true probability of antimicrobial action. Unlabeled peptides must never be classified as confirmed inactives.",
-    "mitigation_en": "Outputs are strictly qualified as 'PU model score (sigmoid output; not a calibrated probability)'. Negative predictions are flagged as unassayed."
+    "mitigation_en": "Outputs are strictly qualified as 'PU model score (sigmoid output; not a calibrated probability)'. Negative predictions are flagged as unassayed.",
+    "title_ckb": "واتای مۆدێلی فێربوونی پۆزەتیڤی بێ‌ناونیشان (PU Learning)",
+    "description_ckb": "کۆمەڵەی مەشقپێکراو لە 183 پێپتایدی چالاک و 1,047 زنجیرەی پاشخانی تاقینەکراو پێکدێت. مۆدێلەکە لێکچوون لەگەڵ پۆزەتیڤەکان پێشبینی دەکات نەک ئەگەری ڕاستەقینەی دژەمیکرۆبی. پێپتایدە بێ‌ناونیشانەکان نابێت هەرگیز وەک نێگەتیڤی یەکلاکەرەوە پۆلێن بکرێن.",
+    "mitigation_ckb": "نمرەکان بە ڕوونی وەسف دەکرێن وەک 'نمرەی مۆدێلی PU (دەرئەنجامی سیگمۆید؛ نەک ئەگەری بایۆلۆجیی دیاریکراو)'. پێشبینییە نێگەتیڤەکان وەک تاقینەکراو دیاری دەکرێن."
   },
   {
     "id": "LIM-002",
@@ -21,7 +24,10 @@
     ],
     "severity": "High (Data Scarcity)",
     "description_en": "Only 10 parent peptides and their derivatives have direct, quantitatively verified broth microdilution MIC measurements (32 rows total) in peer-reviewed publications.",
-    "mitigation_en": "Zero synthetic imputation of MIC. Exact citations and tables provided for all 32 rows. Candidates without direct MIC are segregated."
+    "mitigation_en": "Zero synthetic imputation of MIC. Exact citations and tables provided for all 32 rows. Candidates without direct MIC are segregated.",
+    "title_ckb": "کەمیی پشکنینی تاقیگەیی سەلامەتی و شیبوونەوەی خوێن",
+    "description_ckb": "لە کۆی 20 کاندیدە لەپێشینەکە، تەنیا 3 پێپتاید (Kn2-7, Hp1404, BmKn2) بەهای پێوراوەی HC50یان هەیە لەسەر خڕۆکە سوورەکانی مرۆڤ. 17 کاندیدەکەی تر تەنیا پشکنینی یەک ژەمیان هەیە یان تاقینەکراونەتەوە.",
+    "mitigation_ckb": "بەهاکانی HC50 کە بەردەست نین بە بەتاڵی (Null) دەمێننەوە؛ پشکنینی یەک ژەم بە ڕوونی جیا دەکرێتەوە و بە تەواوی ڕێگری کراوە لە خەمڵاندنی ناڕاستی هەڵبژاردەیی."
   },
   {
     "id": "LIM-003",
@@ -33,7 +39,10 @@
     ],
     "severity": "Medium",
     "description_en": "Published assays span Mueller-Hinton Broth, LB Broth, RPMI-1640, and Nutrient Broth across different bacterial strains (ATCC reference vs clinical isolates).",
-    "mitigation_en": "Every assay row records the exact medium, strain, and incubation conditions without pooling incomparable values."
+    "mitigation_en": "Every assay row records the exact medium, strain, and incubation conditions without pooling incomparable values.",
+    "title_ckb": "نەگونجانی نمرەی لەنگەرگرتن لەگەڵ هێزی بەستنەوەی تاقیگەیی",
+    "description_ckb": "نمرەکانی لەنگەرگرتنی گەردیلەیی (وەک AutoDock / Grid scores) خەمڵاندنی هەستیارن و ناکرێت وەک بەهای گۆڕانی وزەی سەربەست (ΔG) یان نەگۆڕی جیابوونەوە (Kd) دابنرێن بەهۆی نادڵنیایی لە پێکهاتەی شلەدا.",
+    "mitigation_ckb": "هەموو پیشاندەرەکان هۆشداری دەدەن کە لەنگەرگرتن تەنیا گریمانەی بۆشایی پیشان دەدات و ناتوانرێت ڕاستەوخۆ بگۆڕدرێت بۆ هێزی بەستنەوەی فیزیایی."
   },
   {
     "id": "LIM-004",
@@ -45,7 +54,10 @@
     ],
     "severity": "Critical (Safety)",
     "description_en": "Quantitative human RBC HC50 is documented for only 3 candidates (Kn2-7: 53.96 uM; Hp1404: 146.5 uM; BmKn2: 11.83 uM). Cytotoxicity on nucleated mammalian cell lines is largely unmeasured.",
-    "mitigation_en": "Hemolysis weight is set to 0.00 in M1 ranking to avoid fabricating safety. A zero weight does NOT imply non-toxicity. Candidates without HC50 are flagged as safety-unassessed."
+    "mitigation_en": "Hemolysis weight is set to 0.00 in M1 ranking to avoid fabricating safety. A zero weight does NOT imply non-toxicity. Candidates without HC50 are flagged as safety-unassessed.",
+    "title_ckb": "جیاوازیی پرۆتۆکۆلە تاقیگەییەکان لە پێوانی MIC دا",
+    "description_ckb": "بەهاکانی MIC لە توێژینەوەی جیاوازدا بە شێوازی جیاواز تۆمار کراون (وەک شلەی MH بەرامبەر شلەی خۆراکیی کەمکراو، لەگەڵ جیاوازی لە بڕی بەکتریای سەرەتایی).",
+    "mitigation_ckb": "هەموو تۆمارە تاقیگەییەکان پرۆتۆکۆل و ئامرازە تاقیکارییەکان بە تەواوی ئاشکرا دەکەن بۆ ئەوەی بەراوردی نادروست دروست نەبێت."
   },
   {
     "id": "LIM-005",
@@ -57,7 +69,10 @@
     ],
     "severity": "Medium",
     "description_en": "Most peptide 3D structures are AlphaFold2 predictions (Class B). Only a subset have experimental X-ray or NMR coordinates (Class A). AlphaFold pLDDT indicates local structural confidence, not binding competence.",
-    "mitigation_en": "Clear visual color-coding and badges for Class A vs Class B. Residue-level pLDDT confidence display."
+    "mitigation_en": "Clear visual color-coding and badges for Class A vs Class B. Residue-level pLDDT confidence display.",
+    "title_ckb": "نەبوونی لێکۆڵینەوەی دەرمانسازی لە لەشی زیندەوەردا (In Vivo PK/PD)",
+    "description_ckb": "هیچ کاندیدێکی لەپێشینە لێکۆڵینەوەی تێروتەسەلی فارماکۆکینەتیک (PK) یان تەمەنی مانەوە لە لەشی گیانداردا و پاکبوونەوەی لە ڕێگەی گورچیلەوە بۆ نەکراوە.",
+    "mitigation_ckb": "ئاستی ئامادەیی بەڵگەنامەیی (ERI) سنووردار کراوە بۆ قۆناغی سەرەتایی و هۆشداری دەدرێت کە ناتوانرێت پێشوەختە دڵنیایی سەلامەتیی کلینیکی بدرێت."
   },
   {
     "id": "LIM-006",
@@ -68,7 +83,10 @@
     ],
     "severity": "High (Provenance)",
     "description_en": "Comparative docking poses (near-native 1.78 A RMSD vs decoy 8.14 A RMSD) are illustrative demonstration poses built to educate users on scoring function contrasts, NOT de novo converged ab-initio Vina calculations.",
-    "mitigation_en": "Explicit reclassification in metadata and UI. Prohibition on converting docking scores into measured binding free energies (Delta G) or affinities (Kd)."
+    "mitigation_en": "Explicit reclassification in metadata and UI. Prohibition on converting docking scores into measured binding free energies (Delta G) or affinities (Kd).",
+    "title_ckb": "گریمانەی حیسابکاری لە هەڵوەشاندنی پرۆتیندا",
+    "description_ckb": "پێشبینییەکانی جێگیریی پێپتاید دژی ئەنزیمە هەرسکەرەکان لە ڕێگەی پێوەرە حیسابکارییەکانەوە خەمڵێنراون نەک بە پێوانی کاتی لەناو پلازمای خوێنی مرۆڤدا.",
+    "mitigation_ckb": "نمرەکانی ناسەقامگیری بە ڕوونی وەک 'پێوەری حیسابکاری' دەناسرێن تا تاقیکردنەوەی ڕاستەقینە لە تاقیگەدا ئەنجام دەدرێت."
   },
   {
     "id": "LIM-007",
@@ -80,7 +98,10 @@
     ],
     "severity": "Medium",
     "description_en": "Geographic coordinates range from published field GPS to retrospective regional centroids and laboratory breeding colonies (e.g. Mesobuthus martensii).",
-    "mitigation_en": "Strict 5-tier classification. Centroid coordinates are explicitly labeled and radius circles indicate spatial uncertainty."
+    "mitigation_en": "Strict 5-tier classification. Centroid coordinates are explicitly labeled and radius circles indicate spatial uncertainty.",
+    "title_ckb": "نادڵنیایی لە پۆوتانی جوگرافیی شوێنی کۆکردنەوە",
+    "description_ckb": "هەندێک لە جۆرەکانی دووپشک تەنیا بە ناوی وڵات یان هەرێم تۆمار کراون بەبێ پۆوتانی GPSی شوێنی ڕاستەقینەی گرتنی نموونەکە.",
+    "mitigation_ckb": "سیستمەکە 5 ئاستی ڕوونی پۆوتان پیشان دەدات و هەر خەمڵاندنێک بە ڕوونی وەک ناوەندی وڵات یان هەرێم ئاماژەی پێکراوە."
   },
   {
     "id": "LIM-008",
@@ -91,7 +112,10 @@
     ],
     "severity": "High (Translational)",
     "description_en": "Most scorpion peptides have only reached in vitro Stage 1 (MIC). In vivo maximum tolerated dose (MTD), systemic infection efficacy, and pharmacokinetics are absent for >80% of candidates.",
-    "mitigation_en": "Clear 6-stage pipeline display highlighting evidence bottlenecks and gating flags."
+    "mitigation_en": "Clear 6-stage pipeline display highlighting evidence bottlenecks and gating flags.",
+    "title_ckb": "کەمیی بەڵگەنامە لەسەر پەردەی زیندووی بەکتریا (Biofilm)",
+    "description_ckb": "لە کۆی تەواوی داتاکان تەنیا 2 چاودێریی مەرجدار هەیە بۆ ڕێگری لە پەردەی زیندوو لەسەر مشتقەکانی ستیگمورین (StigA6, StigA16).",
+    "mitigation_ckb": "ڕێگری کراوە لەوەی سیفەتی تێکشکاندنی بایۆفیلم بە شێوەیەکی گشتی بۆ پێپتایدەکانی تر دابنرێت بەبێ بوونی بەڵگەی سەلمێنراو."
   },
   {
     "id": "LIM-009",
@@ -102,6 +126,9 @@
     ],
     "severity": "Critical (Regulatory)",
     "description_en": "No peptide in the ScorpionAI Atlas has received regulatory approval, investigational new drug (IND) status, or clinical trial clearance for human therapeutic use.",
-    "mitigation_en": "Prominent, persistent epistemic disclaimer on every page and export: purely educational and scientific research atlas."
+    "mitigation_en": "Prominent, persistent epistemic disclaimer on every page and export: purely educational and scientific research atlas.",
+    "title_ckb": "هەستیاریی مۆدێل بەرامبەر ئاستی کۆکردنەوەی زنجیرەکان (70% Identity)",
+    "description_ckb": "دابەشکردنی خولی پشکنینی مۆدێل بە بەکارهێنانی ئاستی 70% لێکچوونی زنجیرەکان ئەنجام دراوە؛ گۆڕینی ئەم ئاستە لەوانەیە کەمێک کاریگەری لەسەر کێشەکان هەبێت.",
+    "mitigation_ckb": "سەلمێنراوە کە هیچ دوو زنجیرەیەک بە لێکچوونی زیاتر لە 70% لە نێوان کۆمەڵەی مەشق و تاقیکردنەوەدا دزەی نەکردووە."
   }
 ]

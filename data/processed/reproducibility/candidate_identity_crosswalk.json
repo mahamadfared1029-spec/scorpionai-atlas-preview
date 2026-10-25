@@ -13,11 +13,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 1795.2,
     "mod07_m1_baseline_rank": 12,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.7089,
     "pu_model_score": 0.9319,
     "linear_logit": 2.6156,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 2",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-002",
@@ -33,11 +33,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 1978.54,
     "mod07_m1_baseline_rank": 4,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.9232,
     "pu_model_score": 0.9713,
     "linear_logit": 3.5222,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 2",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-003",
@@ -53,11 +53,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 2060.73,
     "mod07_m1_baseline_rank": 1,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.962,
     "pu_model_score": 0.9826,
     "linear_logit": 4.0326,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 2",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-004",
@@ -73,11 +73,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 1907.42,
     "mod07_m1_baseline_rank": 19,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.408,
     "pu_model_score": 0.9607,
     "linear_logit": 3.1968,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 3",
+    "highest_translational_stage": "1 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-005",
@@ -93,11 +93,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 1948.51,
     "mod07_m1_baseline_rank": 18,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.4385,
     "pu_model_score": 0.9696,
     "linear_logit": 3.4635,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 3",
+    "highest_translational_stage": "1 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-006",
@@ -113,11 +113,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 2016.46,
     "mod07_m1_baseline_rank": 13,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.6613,
     "pu_model_score": 0.9432,
     "linear_logit": 2.8092,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 3",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-007",
@@ -133,11 +133,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 2210.91,
     "mod07_m1_baseline_rank": 2,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.9466,
     "pu_model_score": 0.9798,
     "linear_logit": 3.8793,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 3",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-008",
@@ -153,11 +153,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 1988.4,
     "mod07_m1_baseline_rank": 15,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.659,
     "pu_model_score": 0.937,
     "linear_logit": 2.6997,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 3",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-009",
@@ -173,11 +173,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 2182.86,
     "mod07_m1_baseline_rank": 3,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.9445,
     "pu_model_score": 0.9779,
     "linear_logit": 3.7884,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 3",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-010",
@@ -193,11 +193,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 1447.83,
     "mod07_m1_baseline_rank": 8,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.7987,
     "pu_model_score": 0.9774,
     "linear_logit": 3.7654,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 1",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-011",
@@ -213,11 +213,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 1673.17,
     "mod07_m1_baseline_rank": 6,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.8339,
     "pu_model_score": 0.9918,
     "linear_logit": 4.8004,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 1",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-012",
@@ -233,11 +233,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 1502.86,
     "mod07_m1_baseline_rank": 7,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.8191,
     "pu_model_score": 0.9383,
     "linear_logit": 2.7215,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 2",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-013",
@@ -253,11 +253,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 1545.89,
     "mod07_m1_baseline_rank": 10,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.7402,
     "pu_model_score": 0.909,
     "linear_logit": 2.3018,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 1",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-014",
@@ -273,11 +273,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 1733.19,
     "mod07_m1_baseline_rank": 20,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.3793,
     "pu_model_score": 0.9104,
     "linear_logit": 2.3191,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 2",
+    "highest_translational_stage": "2 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-015",
@@ -293,11 +293,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 1699.17,
     "mod07_m1_baseline_rank": 17,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.5855,
     "pu_model_score": 0.9116,
     "linear_logit": 2.3333,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 3",
+    "highest_translational_stage": "2 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-016",
@@ -313,11 +313,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 1960.39,
     "mod07_m1_baseline_rank": 9,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.7635,
     "pu_model_score": 0.9315,
     "linear_logit": 2.6096,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 2",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-017",
@@ -333,11 +333,11 @@
     "is_c_terminally_amidated": true,
     "molecular_weight_da": 2074.71,
     "mod07_m1_baseline_rank": 5,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.9154,
     "pu_model_score": 0.9756,
     "linear_logit": 3.6886,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 3",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-018",
@@ -353,11 +353,11 @@
     "is_c_terminally_amidated": false,
     "molecular_weight_da": 4436.18,
     "mod07_m1_baseline_rank": 16,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.6558,
     "pu_model_score": 0.8163,
     "linear_logit": 1.4916,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 2",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-019",
@@ -373,11 +373,11 @@
     "is_c_terminally_amidated": false,
     "molecular_weight_da": 8356.74,
     "mod07_m1_baseline_rank": 14,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.6611,
     "pu_model_score": 0.2553,
     "linear_logit": -1.0705,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 2",
+    "highest_translational_stage": "2 / 8 documented milestones (not clinical probability)"
   },
   {
     "canonical_id": "SCA-PEP-020",
@@ -393,10 +393,10 @@
     "is_c_terminally_amidated": false,
     "molecular_weight_da": 4994.96,
     "mod07_m1_baseline_rank": 11,
-    "mod07_m1_composite_score": null,
+    "mod07_m1_composite_score": 0.7178,
     "pu_model_score": 0.799,
     "linear_logit": 1.3802,
-    "eri_evidence_level": null,
-    "highest_translational_stage": null
+    "eri_evidence_level": "Tier 2",
+    "highest_translational_stage": "3 / 8 documented milestones (not clinical probability)"
   }
 ]

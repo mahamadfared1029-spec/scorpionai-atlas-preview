@@ -12434,37 +12434,49 @@
       const isLead = s.has_antimicrobial_leads;
       const isExact = s.is_exact_point;
 
-      let radius = 7;
-      let fillColor = isExact ? '#10b981' : '#f59e0b';
-      let strokeColor = '#ffffff';
-      let weight = 2;
-      let fillOpacity = 0.85;
+      let radius = isExact ? 7 : 11;
+      let fillColor = isExact ? '#06b6d4' : '#f59e0b';
+      let strokeColor = isExact ? '#ffffff' : '#f59e0b';
+      let weight = isExact ? 2 : 2.5;
+      let fillOpacity = isExact ? 0.90 : 0.25;
+      let dashArray = isExact ? null : '4, 4';
 
       if (isLead) {
-        radius = 10;
+        radius = 11;
         fillColor = '#ec4899';
         strokeColor = '#ffffff';
         weight = 3;
         fillOpacity = 0.95;
-      } else if (!isExact) {
-        strokeColor = '#fbbf24';
-        weight = 1.5;
-        fillOpacity = 0.75;
+        dashArray = null;
       }
 
-      const marker = L.circleMarker([s.latitude, s.longitude], {
+      const markerOptions = {
         radius: radius,
         fillColor: fillColor,
         color: strokeColor,
         weight: weight,
         opacity: 1,
         fillOpacity: fillOpacity
-      });
+      };
+      if (dashArray) {
+        markerOptions.dashArray = dashArray;
+      }
 
-      // Build bilingual popup
-      const evLabel = isExact ? 'عينات موثقة بإحداثيات GPS دقيقة (Exact Point)' : 'تسجيلات إقليمية مشتقة (Regional Centroid)';
+      const marker = L.circleMarker([s.latitude, s.longitude], markerOptions);
+
+      // Build bilingual popup with distinct provenance separation
+      const uncDisplay = s.coordinate_uncertainty_meters ? (s.coordinate_uncertainty_meters < 1000 ? `&plusmn;${s.coordinate_uncertainty_meters} م` : `&plusmn;${(s.coordinate_uncertainty_meters / 1000).toFixed(1)} كم`) : 'غير محدد';
+      const evLabel = isExact ? `🔬 عينة موثقة بدقة GPS (${uncDisplay})` : `📍 مركز إقليمي تمثيلي (${uncDisplay})`;
+      
+      const centroidWarningHtml = (!isExact) ? `
+        <div style="background: rgba(245, 158, 11, 0.15); border: 1px dashed #f59e0b; border-radius: 4px; padding: 6px; font-size: 10px; color: #b45309; margin-bottom: 6px; line-height: 1.4;">
+          <strong>⚠️ تنبيه المركز الإقليمي:</strong> تمثل هذه النقطة المركز الجغرافي التقريبي للإقليم المنشور وليست موقع عينة ميدانية محددة بدقة.
+          ${s.downgraded_from_class1 ? '<br><span style="color: #92400e; font-weight: 600;">(تم خفض التصنيف إلى إقليمي بعد تدقيق المنشأ العلمي لعدم ثبوت دقة النقطة)</span>' : ''}
+        </div>
+      ` : '';
+
       const popupHtml = `
-        <div style="direction: rtl; text-align: right; font-family: system-ui, sans-serif; font-size: 12px; line-height: 1.5; color: #0f172a; min-width: 240px;">
+        <div style="direction: rtl; text-align: right; font-family: system-ui, sans-serif; font-size: 12px; line-height: 1.5; color: #0f172a; min-width: 260px;">
           <div style="font-weight: 700; font-size: 14px; margin-bottom: 2px;">
             <span style="color: #0284c7; font-family: monospace;">${s.species_id}</span>: 
             <em>${s.scientific_name}</em>
@@ -12473,14 +12485,15 @@
             ${s.common_name_ar} | ${s.common_name_en}
           </div>
           <div style="margin-bottom: 6px;">
-            <span style="display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; background: ${isExact ? '#d1fae5' : '#fef3c7'}; color: ${isExact ? '#065f46' : '#92400e'};">
+            <span style="display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; background: ${isExact ? '#cffafe' : '#fef3c7'}; color: ${isExact ? '#0e7490' : '#92400e'}; border: 1px solid ${isExact ? '#06b6d4' : '#f59e0b'};">
               ${evLabel}
             </span>
             ${isLead ? '<span style="display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; background: #fce7f3; color: #9d174d; margin-right: 4px;">مرشحات MOD-07</span>' : ''}
           </div>
+          ${centroidWarningHtml}
           <div style="font-size: 11px; color: #334155; margin-bottom: 4px;">
             <strong>الإحداثيات:</strong> ${s.latitude.toFixed(4)}, ${s.longitude.toFixed(4)} 
-            <small style="color: #64748b;">(&plusmn;${(s.coordinate_uncertainty_meters / 1000).toFixed(1)} كم)</small>
+            <small style="color: #64748b;">(${uncDisplay})</small>
           </div>
           <div style="font-size: 11px; color: #334155; margin-bottom: 4px;">
             <strong>الموقع:</strong> ${s.locality_description_ar}
@@ -12763,7 +12776,8 @@
 
     let coordsStr = 'غير محددة نقطياً (Null Coordinates)';
     if (s.latitude !== null && s.longitude !== null) {
-      coordsStr = `${s.latitude.toFixed(4)}&deg;, ${s.longitude.toFixed(4)}&deg; (ارتياب الدقة: &plusmn;${(s.coordinate_uncertainty_meters / 1000).toFixed(1)} كم)`;
+      const uncText = s.coordinate_uncertainty_meters < 1000 ? `&plusmn;${s.coordinate_uncertainty_meters} م` : `&plusmn;${(s.coordinate_uncertainty_meters / 1000).toFixed(1)} كم`;
+      coordsStr = `${s.latitude.toFixed(4)}&deg;, ${s.longitude.toFixed(4)}&deg; (ارتياب الدقة: ${uncText})`;
     }
 
     let pmidLink = s.provenance_pmid ? `<a href="https://pubmed.ncbi.nlm.nih.gov/${s.provenance_pmid}/" target="_blank" rel="noopener" style="color: #38bdf8;">PMID: ${s.provenance_pmid} ↗</a>` : '—';
@@ -12834,9 +12848,17 @@
 
     body.innerHTML = `
       ${disputeHtml}
+      ${s.is_regional_centroid ? `
+        <div style="background: rgba(245, 158, 11, 0.12); border: 1px dashed #f59e0b; border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+          <h5 style="color: #d97706; margin-bottom: 4px; font-size: 13px;">📍 تنبيه المركز الإقليمي التمثيلي (Representative Regional Centroid):</h5>
+          <p style="font-size: 12px; color: #b45309; line-height: 1.5; margin: 0;">${s.centroid_disclaimer_ar || 'هذه الإحداثيات تمثل المركز التقريبي للإقليم المنشور وليست موقع عينة مرصودة ميدانياً بدقة GPS.'}</p>
+          ${s.downgraded_from_class1 ? `<p style="font-size: 11px; color: #92400e; margin-top: 6px; font-weight: 600;">(ملاحظة التدقيق العلمي: تم خفض تصنيف هذا السجل من الفئة 1 إلى الفئة 2 لعدم ثبوت إحداثيات GPS حقلية دقيقة وموثقة في الأدبيات الأولية).</p>` : ''}
+        </div>
+      ` : ''}
+
       <div class="modal-grid-2">
         <div class="modal-info-box">
-          <h5>الموقع والتصنيف الجغرافي</h5>
+          <h5>1. الانتشار الجغرافي الطبيعي (Biogeographic Occurrence)</h5>
           <p><strong>النطاق الجغرافي:</strong> ${s.biogeographic_realm}</p>
           <p><strong>الإقليم البيئي:</strong> ${s.primary_eco_region}</p>
           <p><strong>الدول الأصلية:</strong> ${(s.native_countries || []).join(', ')}</p>
@@ -12844,11 +12866,11 @@
         </div>
 
         <div class="modal-info-box">
-          <h5>دقة التوثيق والإحداثيات</h5>
-          <p><strong>فئة الدليل:</strong> ${s.geographic_evidence_class}</p>
-          <p><strong>درجة الدقة:</strong> ${s.coordinate_precision}</p>
+          <h5>2. دقة التوثيق والتحقق الميداني (Field Provenance)</h5>
+          <p><strong>فئة الدليل:</strong> ${s.geographic_evidence_class === 'georeferenced_specimen' ? 'عينات موثقة بإحداثيات GPS مدققة (فئة 1)' : (s.geographic_evidence_class === 'published_regional_occurrence' ? 'تسجيلات إقليمية تمثيلية (فئة 2)' : s.geographic_evidence_class)}</p>
+          <p><strong>درجة الدقة والتحقق:</strong> ${s.is_exact_point ? 'نقطة ميدانية دقيقة (&le;2.5 كم)' : 'مركز إقليمي (25-100 كم)'}</p>
           <p><strong>الإحداثيات الجغرافية:</strong> ${coordsStr}</p>
-          <p><strong>العينة المرجعية/المجمع:</strong> ${s.voucher_or_collector || 'سجل إقليمي'}</p>
+          <p><strong>العينة المرجعية/المجمع:</strong> ${s.voucher_or_collector || 'سجل إقليمي منشور'}</p>
         </div>
       </div>
 

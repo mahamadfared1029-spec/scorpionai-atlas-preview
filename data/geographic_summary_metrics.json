@@ -1,12 +1,13 @@
 {
   "total_species_in_registry": 147,
-  "species_with_georeferenced_specimen": 48,
-  "species_with_published_regional_occurrence": 42,
+  "species_with_georeferenced_specimen": 36,
+  "species_with_published_regional_occurrence": 54,
   "species_with_broad_reported_distribution": 38,
   "species_with_disputed_records": 11,
   "species_with_unavailable_geographic_data": 8,
   "total_species_with_coordinates": 90,
-  "total_species_with_exact_gps": 48,
+  "total_species_with_exact_gps": 36,
+  "total_species_downgraded_after_audit": 12,
   "total_species_with_null_coordinates": 57,
   "species_with_atlas_peptides": 106,
   "species_with_lead_candidates": 10,
@@ -25,12 +26,12 @@
     "Hormuridae": 5,
     "Scorpionidae": 13,
     "Caraboctonidae": 3,
-    "Bothriuridae": 3,
-    "Euscorpiidae": 10,
     "Hemiscorpiidae": 2,
     "Chactidae": 5,
     "Vaejovidae": 8,
     "Chaerilidae": 4,
+    "Bothriuridae": 3,
+    "Euscorpiidae": 10,
     "Diplocentridae": 1,
     "Iuridae": 2,
     "Superstitioniidae": 1
@@ -40,6 +41,8 @@
     "no_inferred_potency_from_geography": true,
     "missing_records_not_proof_of_absence": true,
     "engineered_derivatives_isolated": true,
-    "coordinate_fabrication_strictly_prohibited": true
+    "coordinate_fabrication_strictly_prohibited": true,
+    "point_level_provenance_verified": true,
+    "regional_centroids_distinctly_labeled": true
   }
 }

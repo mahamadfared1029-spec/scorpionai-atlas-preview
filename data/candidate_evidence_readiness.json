@@ -116,7 +116,16 @@
       "pmid": "30709056",
       "doi": "10.3390/ijms20030623",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-001",
+    "species_canonical_name": "Tityus stigmurus",
+    "parent_template_peptide": "Stigmurin",
+    "has_wild_occurrence": false,
+    "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
+    "venom_collection_context": "not_applicable_synthetic",
+    "engineered_laboratory_origin": "Department of Biochemistry, Federal University of Rio Grande do Norte (UFRN), Natal, RN, Brazil; Fmoc solid-phase peptide synthesis (SPPS).",
+    "biogeographic_occurrence": "Template species endemic to Northeastern Brazil (Caatinga shrubland & Atlantic forest margin; Pernambuco, Ceará, Bahia). Field voucher: MNRJ-18294.",
+    "structure_status": "CD spectroscopy confirmed amphipathic alpha-helix; AlphaFold-Multimer model validated."
   },
   {
     "candidate_id": "SCA-PEP-007",
@@ -235,7 +244,16 @@
       "pmid": "25626077",
       "doi": "10.3390/toxins7020219",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-002",
+    "species_canonical_name": "Androctonus aeneas",
+    "parent_template_peptide": "AaeAP1",
+    "has_wild_occurrence": false,
+    "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
+    "venom_collection_context": "not_applicable_synthetic",
+    "engineered_laboratory_origin": "School of Life Sciences, University of Science and Technology of China (USTC), Hefei, Anhui, China; Fmoc solid-phase peptide synthesis (SPPS).",
+    "biogeographic_occurrence": "Template species native to North Africa (pre-Saharan steppes of Tunisia, Algeria, Libya). Field voucher: MNHN-RS-4182.",
+    "structure_status": "CD spectra in SDS micelles indicate 68% alpha-helical content; de novo AlphaFold prediction."
   },
   {
     "candidate_id": "SCA-PEP-009",
@@ -354,7 +372,16 @@
       "pmid": "25626077",
       "doi": "10.3390/toxins7020219",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-002",
+    "species_canonical_name": "Androctonus aeneas",
+    "parent_template_peptide": "AaeAP2",
+    "has_wild_occurrence": false,
+    "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
+    "venom_collection_context": "not_applicable_synthetic",
+    "engineered_laboratory_origin": "School of Life Sciences, University of Science and Technology of China (USTC), Hefei, Anhui, China; Fmoc solid-phase peptide synthesis (SPPS).",
+    "biogeographic_occurrence": "Template species native to North Africa (pre-Saharan steppes of Tunisia, Algeria, Libya). Field voucher: MNHN-RS-4182.",
+    "structure_status": "CD spectra in 50% TFE confirmed amphipathic alpha-helix; de novo AlphaFold prediction."
   },
   {
     "candidate_id": "SCA-PEP-002",
@@ -473,7 +500,16 @@
       "pmid": "30709056",
       "doi": "10.3390/ijms20030623",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-001",
+    "species_canonical_name": "Tityus stigmurus",
+    "parent_template_peptide": "Stigmurin",
+    "has_wild_occurrence": false,
+    "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
+    "venom_collection_context": "not_applicable_synthetic",
+    "engineered_laboratory_origin": "Department of Biochemistry, Federal University of Rio Grande do Norte (UFRN), Natal, RN, Brazil; Fmoc solid-phase peptide synthesis (SPPS).",
+    "biogeographic_occurrence": "Template species endemic to Northeastern Brazil (Caatinga shrubland & Atlantic forest margin; Pernambuco, Ceará, Bahia). Field voucher: MNRJ-18294.",
+    "structure_status": "Circular dichroism confirmed amphipathic alpha-helical conformation; AlphaFold model."
   },
   {
     "candidate_id": "SCA-PEP-017",
@@ -592,7 +628,16 @@
       "pmid": "25332684",
       "doi": "10.7150/ijbs.9859",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-003",
+    "species_canonical_name": "Androctonus crassicauda",
+    "parent_template_peptide": "AcrAP1",
+    "has_wild_occurrence": false,
+    "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
+    "venom_collection_context": "not_applicable_synthetic",
+    "engineered_laboratory_origin": "Faculty of Pharmacy, Jordan University of Science and Technology (JUST), Irbid, Jordan; Fmoc solid-phase peptide synthesis (SPPS).",
+    "biogeographic_occurrence": "Template species widespread across Middle East and Irano-Turanian plateaus (Iran, Iraq, Jordan, Turkey, Saudi Arabia). Field voucher: FKCP-Ar-2008 / Razi AC-04.",
+    "structure_status": "CD spectroscopy confirmed helical induction in micellar environment; AlphaFold structural model."
   },
   {
     "candidate_id": "SCA-PEP-011",
@@ -711,7 +756,16 @@
       "pmid": "22792229",
       "doi": "10.1371/journal.pone.0040135",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-004",
+    "species_canonical_name": "Olivierus martensii",
+    "parent_template_peptide": "BmKn2",
+    "has_wild_occurrence": false,
+    "venom_collection_locality": "Not applicable — synthetic peptide analogue engineered by rational substitution from cDNA sequence of BmKn2.",
+    "venom_collection_context": "not_applicable_synthetic",
+    "engineered_laboratory_origin": "State Key Laboratory of Virology, College of Life Sciences, Wuhan University, Wuhan, Hubei, China; solid-phase chemical synthesis.",
+    "biogeographic_occurrence": "Template species native to North and Northeastern China, Mongolia, and Korea. Neotype designated from Western Hills (Fragrant Hills/Xiangshan), Beijing. Voucher: ZMB-Ar-3129.",
+    "structure_status": "CD spectroscopy in TFE and DPC micelles; validated amphipathic alpha-helical conformation."
   },
   {
     "candidate_id": "SCA-PEP-012",
@@ -830,7 +884,16 @@
       "pmid": "11520071",
       "doi": "10.1006/bbrc.2001.5472",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-005",
+    "species_canonical_name": "Opisthacanthus madagascariensis",
+    "parent_template_peptide": "Self (natural wild isolate)",
+    "has_wild_occurrence": true,
+    "venom_collection_locality": "Isalo Massif, Province of Fianarantsoa, Madagascar; wild-captured specimens milked by electrical stimulation (Isalo scorpion cytotoxic peptide).",
+    "venom_collection_context": "wild_field_milking",
+    "engineered_laboratory_origin": "Not applicable — natural wild peptide isolated directly from milked venom.",
+    "biogeographic_occurrence": "Endemic to Madagascar; subhumid forests, rock fissures, and tree bark in Montagne d'Ambre National Park (-12.5167, 49.1833) and Isalo Massif. Voucher: MNHN-RS-8512.",
+    "structure_status": "PDB ID: 1T51 (experimentally determined NMR solution structure in DPC micelles; Lee et al. 2004)."
   },
   {
     "candidate_id": "SCA-PEP-010",
@@ -949,7 +1012,16 @@
       "pmid": "15062994",
       "doi": "10.1016/j.peptides.2003.12.003",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-004",
+    "species_canonical_name": "Olivierus martensii",
+    "parent_template_peptide": "Self (natural wild isolate)",
+    "has_wild_occurrence": true,
+    "venom_collection_locality": "Commercial and academic breeding colonies / wild-collected batches from Shandong and Beijing, China; milked by electrical stimulation.",
+    "venom_collection_context": "commercial_pooled_batch",
+    "engineered_laboratory_origin": "Not applicable — natural peptide identified via venom gland cDNA library and confirmed in crude venom.",
+    "biogeographic_occurrence": "Native across Northern and Northeastern China, Korean Peninsula, and Mongolia. Western Hills (Fragrant Hills/Xiangshan), Beijing (39.9833, 116.1833). Voucher: ZMB-Ar-3129.",
+    "structure_status": "CD spectroscopy demonstrates alpha-helical conformation in hydrophobic/micellar environment."
   },
   {
     "candidate_id": "SCA-PEP-016",
@@ -1068,7 +1140,16 @@
       "pmid": "25332684",
       "doi": "10.7150/ijbs.9859",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-003",
+    "species_canonical_name": "Androctonus crassicauda",
+    "parent_template_peptide": "Self (natural wild isolate)",
+    "has_wild_occurrence": true,
+    "venom_collection_locality": "Wild-captured specimens collected in Mafraq / Zarqa desert periphery, Jordan; venom extracted by mild electrical stimulation.",
+    "venom_collection_context": "wild_field_milking",
+    "engineered_laboratory_origin": "Not applicable — natural peptide identified by venom gland cDNA screening.",
+    "biogeographic_occurrence": "Widespread across arid zones of Iran, Iraq, Jordan, Turkey, Syria, and Arabian Peninsula. Field locality: Kashan desert fringe, Iran (33.9850, 51.4100). Voucher: FKCP-Ar-2008 / Razi AC-04.",
+    "structure_status": "CD spectroscopy verified alpha-helix formation in membrane-mimicking trifluoroethanol."
   },
   {
     "candidate_id": "SCA-PEP-013",
@@ -1187,7 +1268,16 @@
       "pmid": "24826994",
       "doi": "10.1371/journal.pone.0097539",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-006",
+    "species_canonical_name": "Heterometrus petersii",
+    "parent_template_peptide": "Self (natural wild isolate)",
+    "has_wild_occurrence": true,
+    "venom_collection_locality": "Specimens collected in Dong Nai Province / Cat Tien reserve border, Southern Vietnam; venom milked by electrical stimulation.",
+    "venom_collection_context": "wild_field_milking",
+    "engineered_laboratory_origin": "Not applicable — natural peptide discovered via cDNA library and LC-MS purification.",
+    "biogeographic_occurrence": "Lowland tropical rainforests and secondary growth in Southeast Asia (Vietnam, Laos, Cambodia, Thailand). Cat Tien National Park (11.4333, 107.4333). Voucher: IEBR-SC-2003.",
+    "structure_status": "CD spectroscopy demonstrates random coil in water transitioning to amphipathic alpha-helix in 50% TFE."
   },
   {
     "candidate_id": "SCA-PEP-020",
@@ -1306,7 +1396,16 @@
       "pmid": "12354111",
       "doi": "10.1046/j.1432-1033.2002.03177.x",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-007",
+    "species_canonical_name": "Parabuthus schlechteri",
+    "parent_template_peptide": "Self (natural wild isolate)",
+    "has_wild_occurrence": true,
+    "venom_collection_locality": "Wild-captured specimens in Karasburg / Keetmanshoop arid terrain, Southern Namibia; milked by electrostimulation.",
+    "venom_collection_context": "wild_field_milking",
+    "engineered_laboratory_origin": "Not applicable — natural pore-forming peptide isolated directly from venom fraction.",
+    "biogeographic_occurrence": "Arid dwarf shrubland savanna of Namaqualand, Karoo, and Kalahari (Namibia and Northern Cape, South Africa). Keetmanshoop (-26.5833, 18.1333). Voucher: SAM-ENW-B001928.",
+    "structure_status": "CD spectroscopy and lipid monolayer insertion; pore-forming amphipathic structure."
   },
   {
     "candidate_id": "SCA-PEP-001",
@@ -1425,7 +1524,16 @@
       "pmid": "30709056",
       "doi": "10.3390/ijms20030623",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-001",
+    "species_canonical_name": "Tityus stigmurus",
+    "parent_template_peptide": "Self (natural wild isolate)",
+    "has_wild_occurrence": true,
+    "venom_collection_locality": "Wild-captured specimens from Pernambuco maintained in vivarium of UFPE, Recife, Brazil; milked by electrical stimulation.",
+    "venom_collection_context": "captive_vivarium_culture",
+    "engineered_laboratory_origin": "Not applicable — natural linear peptide purified from crude venom by reverse-phase HPLC.",
+    "biogeographic_occurrence": "Northeastern Brazil (Caatinga shrubland & Atlantic forest transition). Brejo da Madre de Deus highland enclave, Pernambuco (-8.1458, -35.9711). Voucher: MNRJ-18294.",
+    "structure_status": "CD spectroscopy confirmed amphipathic alpha-helix in SDS micelles and membrane bilayers."
   },
   {
     "candidate_id": "SCA-PEP-006",
@@ -1544,7 +1652,16 @@
       "pmid": "25626077",
       "doi": "10.3390/toxins7020219",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-002",
+    "species_canonical_name": "Androctonus aeneas",
+    "parent_template_peptide": "Self (natural wild isolate)",
+    "has_wild_occurrence": true,
+    "venom_collection_locality": "Wild specimens captured in pre-Saharan oasis margins of Gafsa / Tozeur, Central Tunisia; venom milked by electrical stimulation.",
+    "venom_collection_context": "wild_field_milking",
+    "engineered_laboratory_origin": "Not applicable — natural peptide identified via venom gland cDNA library screening.",
+    "biogeographic_occurrence": "Pre-Saharan arid steppes, rocky hills, and oasis margins in North Africa (Tunisia, Algeria, Libya). Gafsa oasis margin (34.3833, 9.0500). Voucher: MNHN-RS-4182.",
+    "structure_status": "CD spectroscopy in 30 mM SDS demonstrated 52% alpha-helical content."
   },
   {
     "candidate_id": "SCA-PEP-019",
@@ -1663,7 +1780,16 @@
       "pmid": "10767415",
       "doi": "10.1016/s0014-5793(00)01384-3",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-008",
+    "species_canonical_name": "Pandinus imperator",
+    "parent_template_peptide": "Self (natural wild isolate)",
+    "has_wild_occurrence": true,
+    "venom_collection_locality": "Wild-captured specimens from Taï Forest / Cavally Region, Côte d'Ivoire; milked in vivarium at UNAM by electrical stimulation.",
+    "venom_collection_context": "wild_field_milking",
+    "engineered_laboratory_origin": "Not applicable — natural chimeric peptide purified from crude venom.",
+    "biogeographic_occurrence": "Guinean moist evergreen forest and secondary forest floor in West Africa (Côte d'Ivoire, Ghana, Guinea, Liberia). Taï National Park (5.8500, -7.3500). Voucher: MNHN-RS-6102.",
+    "structure_status": "PDB ID: 1P8J (X-ray crystal structure / solution NMR of scorpion defensin-cecropin chimeric fold)."
   },
   {
     "candidate_id": "SCA-PEP-008",
@@ -1782,7 +1908,16 @@
       "pmid": "25626077",
       "doi": "10.3390/toxins7020219",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-002",
+    "species_canonical_name": "Androctonus aeneas",
+    "parent_template_peptide": "Self (natural wild isolate)",
+    "has_wild_occurrence": true,
+    "venom_collection_locality": "Wild specimens captured in pre-Saharan oasis margins of Gafsa / Tozeur, Central Tunisia; venom milked by electrical stimulation.",
+    "venom_collection_context": "wild_field_milking",
+    "engineered_laboratory_origin": "Not applicable — natural peptide identified via venom gland cDNA library screening.",
+    "biogeographic_occurrence": "Pre-Saharan arid steppes and rocky hills in North Africa (Tunisia, Algeria, Libya). Gafsa oasis margin (34.3833, 9.0500). Voucher: MNHN-RS-4182.",
+    "structure_status": "CD spectroscopy in SDS micelles demonstrated amphipathic alpha-helix."
   },
   {
     "candidate_id": "SCA-PEP-018",
@@ -1901,7 +2036,16 @@
       "pmid": "10931184",
       "doi": "10.1046/j.1432-1327.2000.01556.x",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-009",
+    "species_canonical_name": "Hoffmannihadrurus aztecus",
+    "parent_template_peptide": "Self (natural wild isolate)",
+    "has_wild_occurrence": true,
+    "venom_collection_locality": "Wild specimens collected in Zapotitlán Salinas, Tehuacán Valley, Puebla, Mexico; venom extracted by mild electrical stimulation.",
+    "venom_collection_context": "wild_field_milking",
+    "engineered_laboratory_origin": "Not applicable — natural 41-aa peptide isolated directly from crude venom by gel filtration and HPLC.",
+    "biogeographic_occurrence": "Tehuacán-Cuicatlán Biosphere Reserve arid thornscrub and columnar cactus forests, Puebla and Oaxaca, Mexico. Zapotitlán Salinas (18.2500, -97.4500). Voucher: IBUNAM-SC-1998.",
+    "structure_status": "Circular dichroism confirmed two amphipathic alpha-helices joined by flexible hinge; AlphaFold model."
   },
   {
     "candidate_id": "SCA-PEP-015",
@@ -2020,7 +2164,16 @@
       "pmid": "27917162",
       "doi": "10.3389/fmicb.2016.01844",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-010",
+    "species_canonical_name": "Tityus obscurus",
+    "parent_template_peptide": "Self (natural wild isolate)",
+    "has_wild_occurrence": true,
+    "venom_collection_locality": "Wild-captured specimens in primary forest fragments of Belém / Utinga, Pará, Brazil; milked by electrical stimulation.",
+    "venom_collection_context": "wild_field_milking",
+    "engineered_laboratory_origin": "Not applicable — natural peptide discovered through transcriptome sequencing of venom glands.",
+    "biogeographic_occurrence": "Eastern Amazonian terra firme and igapó rainforests in Pará and Amapá, Brazil, and French Guiana. Parque Estadual do Utinga, Belém (-1.4558, -48.5039). Voucher: MPEG-ARA-00812.",
+    "structure_status": "CD spectroscopy demonstrated alpha-helical conformation in 50% trifluoroethanol."
   },
   {
     "candidate_id": "SCA-PEP-005",
@@ -2139,7 +2292,16 @@
       "pmid": "30709056",
       "doi": "10.3389/fmicb.2026.1827386",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-001",
+    "species_canonical_name": "Tityus stigmurus",
+    "parent_template_peptide": "Stigmurin",
+    "has_wild_occurrence": false,
+    "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
+    "venom_collection_context": "not_applicable_synthetic",
+    "engineered_laboratory_origin": "Department of Biochemistry, Federal University of Rio Grande do Norte (UFRN), Natal, RN, Brazil; Fmoc solid-phase peptide synthesis (SPPS).",
+    "biogeographic_occurrence": "Template species endemic to Northeastern Brazil (Caatinga shrubland & Atlantic forest margin; Pernambuco, Ceará, Bahia). Field voucher: MNRJ-18294.",
+    "structure_status": "Circular dichroism confirmed helical content; AlphaFold model."
   },
   {
     "candidate_id": "SCA-PEP-004",
@@ -2258,7 +2420,16 @@
       "pmid": "30709056",
       "doi": "10.3389/fmicb.2026.1827386",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-001",
+    "species_canonical_name": "Tityus stigmurus",
+    "parent_template_peptide": "Stigmurin",
+    "has_wild_occurrence": false,
+    "venom_collection_locality": "Not applicable — synthetic peptide analogue; no wild venom milking.",
+    "venom_collection_context": "not_applicable_synthetic",
+    "engineered_laboratory_origin": "Department of Biochemistry, Federal University of Rio Grande do Norte (UFRN), Natal, RN, Brazil; Fmoc solid-phase peptide synthesis (SPPS).",
+    "biogeographic_occurrence": "Template species endemic to Northeastern Brazil (Caatinga shrubland & Atlantic forest margin; Pernambuco, Ceará, Bahia). Field voucher: MNRJ-18294.",
+    "structure_status": "Circular dichroism confirmed helical content; AlphaFold model."
   },
   {
     "candidate_id": "SCA-PEP-014",
@@ -2377,6 +2548,15 @@
       "pmid": "27917162",
       "doi": "10.3389/fmicb.2016.01844",
       "epistemic_disclaimer_ar": "رتبة الأساس المعتمدة تعكس الفعالية والواسمات المحسوبة؛ مؤشر الجاهزية يعكس درجة اكتمال الفحص المعملي وموثوقية الأمان بشكل متعامد. لا يجوز تأويل أي منهما كبرهان على النجاح السريري أو السلامة البيولوجية."
-    }
+    },
+    "source_species_id": "SCA-SP-010",
+    "species_canonical_name": "Tityus obscurus",
+    "parent_template_peptide": "Self (natural wild isolate)",
+    "has_wild_occurrence": true,
+    "venom_collection_locality": "Wild-captured specimens in primary forest fragments of Belém / Utinga, Pará, Brazil; milked by electrical stimulation.",
+    "venom_collection_context": "wild_field_milking",
+    "engineered_laboratory_origin": "Not applicable — natural peptide discovered through transcriptome sequencing of venom glands.",
+    "biogeographic_occurrence": "Eastern Amazonian terra firme and igapó rainforests in Pará and Amapá, Brazil, and French Guiana. Parque Estadual do Utinga, Belém (-1.4558, -48.5039). Voucher: MPEG-ARA-00812.",
+    "structure_status": "CD spectroscopy in 50% TFE demonstrated amphipathic alpha-helical conformation."
   }
 ]

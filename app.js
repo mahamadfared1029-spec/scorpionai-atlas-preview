@@ -7365,6 +7365,2164 @@
     }).join('');
   }
 
+
+  // ============================================================================
+  // SPRINT 08: MOD-07 EVIDENCE-AWARE LEAD PRIORITIZATION & READINESS VIEW
+  // ============================================================================
+  const CANDIDATE_EVIDENCE_READINESS_DATA = [
+  {
+    "candidate_id": "SCA-PEP-003",
+    "master_atlas_id": "SCA-0003",
+    "peptide_name": "StigA31",
+    "species": "Tityus stigmurus",
+    "family": "Buthidae",
+    "origin": "engineered",
+    "mature_sequence": "FFKLIPKLVKKLIKAFK",
+    "sequence_length": 17,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 2060.73,
+    "baseline_rank": 1,
+    "baseline_composite_score": 0.962,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 2.47,
+    "lowest_mic_um": 1.2,
+    "net_charge_ph74": 6.99,
+    "hydrophobic_moment": 0.795,
+    "instability_index": -31.64,
+    "evidence_readiness_index": 35.0,
+    "readiness_tier": "Tier 2",
+    "readiness_tier_name_en": "Intermediate Evidence Readiness",
+    "readiness_tier_name_ar": "جاهزية أدلة متوسطة (فحص أمان أولي محدود)",
+    "readiness_classification_en": "Promising Lead (Safety Curve Needed)",
+    "readiness_classification_ar": "مرشح واعد (يتطلب منحنى أمان تفصيلي)",
+    "readiness_badge_class": "tier-2",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 5.0,
+        "max_score": 30.0,
+        "coverage_pct": 16.7,
+        "status_en": "Single-Dose Screen Only",
+        "status_ar": "فحص أحادي الجرعة تقريبي (غياب منحنى HC50)",
+        "badge": "single_dose_screened",
+        "warning_en": "WARNING: Single-dose screen (<20% lysis) does NOT establish therapeutic safety or valid Selectivity Index.",
+        "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان السريري ولا يتيح اشتقاق مؤشر انتقائية صالح.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "blm_channel_recording": false,
+        "target_explored_mod05": true
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 8,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0045",
+      "top_priority_gap_score": 93.75,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+      "pmid": "30709056",
+      "doi": "10.3390/ijms20030623",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-007",
+    "master_atlas_id": "SCA-0007",
+    "peptide_name": "AaeAP1_K_analogue",
+    "species": "Androctonus aeneas",
+    "family": "Buthidae",
+    "origin": "engineered",
+    "mature_sequence": "FLFKLIPKVIKGLVKAIRK",
+    "sequence_length": 19,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 2210.91,
+    "baseline_rank": 2,
+    "baseline_composite_score": 0.9466,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 4.0,
+    "lowest_mic_um": 1.81,
+    "net_charge_ph74": 6.99,
+    "hydrophobic_moment": 0.733,
+    "instability_index": -19.34,
+    "evidence_readiness_index": 25.0,
+    "readiness_tier": "Tier 3",
+    "readiness_tier_name_en": "Preliminary Discovery",
+    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
+    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
+    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_badge_class": "tier-3",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 0.0,
+        "max_score": 30.0,
+        "coverage_pct": 0.0,
+        "status_en": "Unassayed / Missing Safety",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "badge": "unassayed",
+        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 0.0,
+        "max_score": 15.0,
+        "coverage_pct": 0.0,
+        "blm_channel_recording": false,
+        "target_explored_mod05": false
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 7,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0049",
+      "top_priority_gap_score": 93.75,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+      "pmid": "25626077",
+      "doi": "10.3390/toxins7020219",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-009",
+    "master_atlas_id": "SCA-0009",
+    "peptide_name": "AaeAP2_K_analogue",
+    "species": "Androctonus aeneas",
+    "family": "Buthidae",
+    "origin": "engineered",
+    "mature_sequence": "FLFKLIPKAIKGLVKAIRK",
+    "sequence_length": 19,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 2182.86,
+    "baseline_rank": 3,
+    "baseline_composite_score": 0.9445,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 4.0,
+    "lowest_mic_um": 1.83,
+    "net_charge_ph74": 6.99,
+    "hydrophobic_moment": 0.716,
+    "instability_index": -14.87,
+    "evidence_readiness_index": 25.0,
+    "readiness_tier": "Tier 3",
+    "readiness_tier_name_en": "Preliminary Discovery",
+    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
+    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
+    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_badge_class": "tier-3",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 0.0,
+        "max_score": 30.0,
+        "coverage_pct": 0.0,
+        "status_en": "Unassayed / Missing Safety",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "badge": "unassayed",
+        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 0.0,
+        "max_score": 15.0,
+        "coverage_pct": 0.0,
+        "blm_channel_recording": false,
+        "target_explored_mod05": false
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 7,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0051",
+      "top_priority_gap_score": 93.75,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+      "pmid": "25626077",
+      "doi": "10.3390/toxins7020219",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-002",
+    "master_atlas_id": "SCA-0002",
+    "peptide_name": "StigA25",
+    "species": "Tityus stigmurus",
+    "family": "Buthidae",
+    "origin": "engineered",
+    "mature_sequence": "FFSLIPSLVKKLIKAFK",
+    "sequence_length": 17,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1978.54,
+    "baseline_rank": 4,
+    "baseline_composite_score": 0.9232,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 2.37,
+    "lowest_mic_um": 1.2,
+    "net_charge_ph74": 4.99,
+    "hydrophobic_moment": 0.649,
+    "instability_index": -1.48,
+    "evidence_readiness_index": 35.0,
+    "readiness_tier": "Tier 2",
+    "readiness_tier_name_en": "Intermediate Evidence Readiness",
+    "readiness_tier_name_ar": "جاهزية أدلة متوسطة (فحص أمان أولي محدود)",
+    "readiness_classification_en": "Promising Lead (Safety Curve Needed)",
+    "readiness_classification_ar": "مرشح واعد (يتطلب منحنى أمان تفصيلي)",
+    "readiness_badge_class": "tier-2",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 5.0,
+        "max_score": 30.0,
+        "coverage_pct": 16.7,
+        "status_en": "Single-Dose Screen Only",
+        "status_ar": "فحص أحادي الجرعة تقريبي (غياب منحنى HC50)",
+        "badge": "single_dose_screened",
+        "warning_en": "WARNING: Single-dose screen (<20% lysis) does NOT establish therapeutic safety or valid Selectivity Index.",
+        "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان السريري ولا يتيح اشتقاق مؤشر انتقائية صالح.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "blm_channel_recording": false,
+        "target_explored_mod05": true
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 8,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0044",
+      "top_priority_gap_score": 93.75,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+      "pmid": "30709056",
+      "doi": "10.3390/ijms20030623",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-017",
+    "master_atlas_id": "SCA-0017",
+    "peptide_name": "AcrAP1_K_analogue",
+    "species": "Androctonus crassicauda",
+    "family": "Buthidae",
+    "origin": "engineered",
+    "mature_sequence": "FLFKLIPKAIKGLIKAFK",
+    "sequence_length": 18,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 2074.71,
+    "baseline_rank": 5,
+    "baseline_composite_score": 0.9154,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 8.3,
+    "lowest_mic_um": 4.0,
+    "net_charge_ph74": 5.99,
+    "hydrophobic_moment": 0.657,
+    "instability_index": -27.72,
+    "evidence_readiness_index": 25.0,
+    "readiness_tier": "Tier 3",
+    "readiness_tier_name_en": "Preliminary Discovery",
+    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
+    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
+    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_badge_class": "tier-3",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 0.0,
+        "max_score": 30.0,
+        "coverage_pct": 0.0,
+        "status_en": "Unassayed / Missing Safety",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "badge": "unassayed",
+        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 0.0,
+        "max_score": 15.0,
+        "coverage_pct": 0.0,
+        "blm_channel_recording": false,
+        "target_explored_mod05": false
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 7,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0056",
+      "top_priority_gap_score": 93.75,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Almaaytah et al., Int J Biol Sci 2014; 10(9):982-995 (Table 2)",
+      "pmid": "25332684",
+      "doi": "10.7150/ijbs.9859",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-011",
+    "master_atlas_id": "SCA-0011",
+    "peptide_name": "Kn2-7",
+    "species": "Mesobuthus martensii",
+    "family": "Buthidae",
+    "origin": "engineered",
+    "mature_sequence": "FIKRIARLLRKIF",
+    "sequence_length": 13,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1673.17,
+    "baseline_rank": 6,
+    "baseline_composite_score": 0.8339,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 3.13,
+    "lowest_mic_um": 1.87,
+    "net_charge_ph74": 5.99,
+    "hydrophobic_moment": 1.02,
+    "instability_index": 36.06,
+    "evidence_readiness_index": 50.0,
+    "readiness_tier": "Tier 1",
+    "readiness_tier_name_en": "High Evidence Readiness",
+    "readiness_tier_name_ar": "جاهزية أدلة متقدمة (سلامة مثبتة معملياً)",
+    "readiness_classification_en": "Well-Characterized Candidate",
+    "readiness_classification_ar": "مرشح موثق مخبرياً (خطر منخفض لعدم اليقين)",
+    "readiness_badge_class": "tier-1",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 20.0,
+        "max_score": 30.0,
+        "coverage_pct": 66.7,
+        "status_en": "Quantified Sigmoidal HC50",
+        "status_ar": "منحنى جرعة واستجابة سيني مقاس ومعاير (HC50)",
+        "badge": "quantified_hc50",
+        "warning_en": "Mammalian nucleated cell cytotoxicity (HEK293/HepG2) remains unassayed.",
+        "warning_ar": "سمية الخلايا الثديية المنواة (HEK293/HepG2) لا تزال غير مفحوصة.",
+        "hc50_calibrated": true,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "blm_channel_recording": false,
+        "target_explored_mod05": true
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 7,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0070",
+      "top_priority_gap_score": 86.25,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة)."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Cao et al., PLoS ONE 2012; 7(7):e40135 (Table 1)",
+      "pmid": "22792229",
+      "doi": "10.1371/journal.pone.0040135",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-012",
+    "master_atlas_id": "SCA-0012",
+    "peptide_name": "IsCT1",
+    "species": "Opisthacanthus madagascariensis",
+    "family": "Hormuridae",
+    "origin": "natural",
+    "mature_sequence": "ILGKIWEGIKSLF",
+    "sequence_length": 13,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1502.86,
+    "baseline_rank": 7,
+    "baseline_composite_score": 0.8191,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 9.39,
+    "lowest_mic_um": 6.25,
+    "net_charge_ph74": 1.99,
+    "hydrophobic_moment": 0.597,
+    "instability_index": -2.08,
+    "evidence_readiness_index": 25.0,
+    "readiness_tier": "Tier 3",
+    "readiness_tier_name_en": "Preliminary Discovery",
+    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
+    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
+    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_badge_class": "tier-3",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 0.0,
+        "max_score": 30.0,
+        "coverage_pct": 0.0,
+        "status_en": "Unassayed / Missing Safety",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "badge": "unassayed",
+        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 0.0,
+        "max_score": 15.0,
+        "coverage_pct": 0.0,
+        "blm_channel_recording": false,
+        "target_explored_mod05": false
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 7,
+      "total_non_gap_records": 1,
+      "top_priority_gap_id": "GAP-0052",
+      "top_priority_gap_score": 91.25,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Dai et al., Biochem Biophys Res Commun 2001; 286(4):820-825 (Table 1, p. 822)",
+      "pmid": "11520071",
+      "doi": "10.1006/bbrc.2001.5472",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-010",
+    "master_atlas_id": "SCA-0010",
+    "peptide_name": "BmKn2",
+    "species": "Mesobuthus martensii",
+    "family": "Buthidae",
+    "origin": "natural",
+    "mature_sequence": "FIGAIARLLSKIF",
+    "sequence_length": 13,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1447.83,
+    "baseline_rank": 8,
+    "baseline_composite_score": 0.7987,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 20.0,
+    "lowest_mic_um": 13.81,
+    "net_charge_ph74": 2.99,
+    "hydrophobic_moment": 0.691,
+    "instability_index": -3.83,
+    "evidence_readiness_index": 50.0,
+    "readiness_tier": "Tier 1",
+    "readiness_tier_name_en": "High Evidence Readiness",
+    "readiness_tier_name_ar": "جاهزية أدلة متقدمة (سلامة مثبتة معملياً)",
+    "readiness_classification_en": "Well-Characterized Candidate",
+    "readiness_classification_ar": "مرشح موثق مخبرياً (خطر منخفض لعدم اليقين)",
+    "readiness_badge_class": "tier-1",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 20.0,
+        "max_score": 30.0,
+        "coverage_pct": 66.7,
+        "status_en": "Quantified Sigmoidal HC50",
+        "status_ar": "منحنى جرعة واستجابة سيني مقاس ومعاير (HC50)",
+        "badge": "quantified_hc50",
+        "warning_en": "Mammalian nucleated cell cytotoxicity (HEK293/HepG2) remains unassayed.",
+        "warning_ar": "سمية الخلايا الثديية المنواة (HEK293/HepG2) لا تزال غير مفحوصة.",
+        "hc50_calibrated": true,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "blm_channel_recording": false,
+        "target_explored_mod05": true
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 7,
+      "total_non_gap_records": 1,
+      "top_priority_gap_id": "GAP-0069",
+      "top_priority_gap_score": 86.25,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة)."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Zeng et al., Peptides 2004; 25(2):143-150 (Table 1, p. 146)",
+      "pmid": "15062994",
+      "doi": "10.1016/j.peptides.2003.12.003",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-016",
+    "master_atlas_id": "SCA-0016",
+    "peptide_name": "AcrAP1",
+    "species": "Androctonus crassicauda",
+    "family": "Buthidae",
+    "origin": "natural",
+    "mature_sequence": "FLFSLIPHAISGLISAFK",
+    "sequence_length": 18,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1960.39,
+    "baseline_rank": 9,
+    "baseline_composite_score": 0.7635,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 15.68,
+    "lowest_mic_um": 8.0,
+    "net_charge_ph74": 2.03,
+    "hydrophobic_moment": 0.397,
+    "instability_index": -0.51,
+    "evidence_readiness_index": 25.0,
+    "readiness_tier": "Tier 3",
+    "readiness_tier_name_en": "Preliminary Discovery",
+    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
+    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
+    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_badge_class": "tier-3",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 0.0,
+        "max_score": 30.0,
+        "coverage_pct": 0.0,
+        "status_en": "Unassayed / Missing Safety",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "badge": "unassayed",
+        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 0.0,
+        "max_score": 15.0,
+        "coverage_pct": 0.0,
+        "blm_channel_recording": false,
+        "target_explored_mod05": false
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 7,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0055",
+      "top_priority_gap_score": 91.25,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Almaaytah et al., Int J Biol Sci 2014; 10(9):982-995 (Table 2)",
+      "pmid": "25332684",
+      "doi": "10.7150/ijbs.9859",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-013",
+    "master_atlas_id": "SCA-0013",
+    "peptide_name": "Hp1404",
+    "species": "Heterometrus petersii",
+    "family": "Scorpionidae",
+    "origin": "natural",
+    "mature_sequence": "GILGKLWEGVKSIF",
+    "sequence_length": 14,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1545.89,
+    "baseline_rank": 10,
+    "baseline_composite_score": 0.7402,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 6.25,
+    "lowest_mic_um": 4.04,
+    "net_charge_ph74": 1.99,
+    "hydrophobic_moment": 0.497,
+    "instability_index": 19.71,
+    "evidence_readiness_index": 50.0,
+    "readiness_tier": "Tier 1",
+    "readiness_tier_name_en": "High Evidence Readiness",
+    "readiness_tier_name_ar": "جاهزية أدلة متقدمة (سلامة مثبتة معملياً)",
+    "readiness_classification_en": "Well-Characterized Candidate",
+    "readiness_classification_ar": "مرشح موثق مخبرياً (خطر منخفض لعدم اليقين)",
+    "readiness_badge_class": "tier-1",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 20.0,
+        "max_score": 30.0,
+        "coverage_pct": 66.7,
+        "status_en": "Quantified Sigmoidal HC50",
+        "status_ar": "منحنى جرعة واستجابة سيني مقاس ومعاير (HC50)",
+        "badge": "quantified_hc50",
+        "warning_en": "Mammalian nucleated cell cytotoxicity (HEK293/HepG2) remains unassayed.",
+        "warning_ar": "سمية الخلايا الثديية المنواة (HEK293/HepG2) لا تزال غير مفحوصة.",
+        "hc50_calibrated": true,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "blm_channel_recording": false,
+        "target_explored_mod05": true
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 6,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0072",
+      "top_priority_gap_score": 86.25,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب تقييمات السمية الخلوية ضد خطوط الخلايا الثديية والبشرية ذات النواة (HEK293, HepG2)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: توصيف السمية الخلوية المعملية عبر فحوص الحيوية الأيضية (MTT) وتسرب إنزيم LDH ضد خلايا الكلى الجنينية HEK293 وخلايا الكبد HepG2 بمدى تراكيز 0.5 إلى 200 ميكرومولار (حضن 48 ساعة)."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Chen et al., PLoS ONE 2014; 9(5):e97539 (Table 1)",
+      "pmid": "24826994",
+      "doi": "10.1371/journal.pone.0097539",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-020",
+    "master_atlas_id": "SCA-0020",
+    "peptide_name": "Parabutoporin",
+    "species": "Parabuthus schlechteri",
+    "family": "Buthidae",
+    "origin": "natural",
+    "mature_sequence": "FKLGSFLKKAWKSKLAKKLRAKGKEMLKDYAKGLLEGGSEEVPGQ",
+    "sequence_length": 45,
+    "is_c_terminally_amidated": false,
+    "molecular_weight_da": 4994.96,
+    "baseline_rank": 11,
+    "baseline_composite_score": 0.7178,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 17.48,
+    "lowest_mic_um": 3.5,
+    "net_charge_ph74": 6.99,
+    "hydrophobic_moment": 0.089,
+    "instability_index": 19.43,
+    "evidence_readiness_index": 25.0,
+    "readiness_tier": "Tier 3",
+    "readiness_tier_name_en": "Preliminary Discovery",
+    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
+    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
+    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_badge_class": "tier-3",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 0.0,
+        "max_score": 30.0,
+        "coverage_pct": 0.0,
+        "status_en": "Unassayed / Missing Safety",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "badge": "unassayed",
+        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 0.0,
+        "max_score": 15.0,
+        "coverage_pct": 0.0,
+        "blm_channel_recording": false,
+        "target_explored_mod05": false
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 6,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0059",
+      "top_priority_gap_score": 87.5,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Moerman, Verdonck et al., Eur J Biochem 2002; 269(19):4799-4810 (Table 1)",
+      "pmid": "12354111",
+      "doi": "10.1046/j.1432-1033.2002.03177.x",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-001",
+    "master_atlas_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "species": "Tityus stigmurus",
+    "family": "Buthidae",
+    "origin": "natural",
+    "mature_sequence": "FFSLIPSLVGGLISAFK",
+    "sequence_length": 17,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1795.2,
+    "baseline_rank": 12,
+    "baseline_composite_score": 0.7089,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 16.87,
+    "lowest_mic_um": 9.4,
+    "net_charge_ph74": 1.99,
+    "hydrophobic_moment": 0.43,
+    "instability_index": 12.47,
+    "evidence_readiness_index": 35.0,
+    "readiness_tier": "Tier 2",
+    "readiness_tier_name_en": "Intermediate Evidence Readiness",
+    "readiness_tier_name_ar": "جاهزية أدلة متوسطة (فحص أمان أولي محدود)",
+    "readiness_classification_en": "Promising Lead (Safety Curve Needed)",
+    "readiness_classification_ar": "مرشح واعد (يتطلب منحنى أمان تفصيلي)",
+    "readiness_badge_class": "tier-2",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 5.0,
+        "max_score": 30.0,
+        "coverage_pct": 16.7,
+        "status_en": "Single-Dose Screen Only",
+        "status_ar": "فحص أحادي الجرعة تقريبي (غياب منحنى HC50)",
+        "badge": "single_dose_screened",
+        "warning_en": "WARNING: Single-dose screen (<20% lysis) does NOT establish therapeutic safety or valid Selectivity Index.",
+        "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان السريري ولا يتيح اشتقاق مؤشر انتقائية صالح.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "blm_channel_recording": false,
+        "target_explored_mod05": true
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 8,
+      "total_non_gap_records": 3,
+      "top_priority_gap_id": "GAP-0043",
+      "top_priority_gap_score": 87.5,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623 (Table 4, p. 9)",
+      "pmid": "30709056",
+      "doi": "10.3390/ijms20030623",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-006",
+    "master_atlas_id": "SCA-0006",
+    "peptide_name": "AaeAP1",
+    "species": "Androctonus aeneas",
+    "family": "Buthidae",
+    "origin": "natural",
+    "mature_sequence": "FLFSLIPSVIAGLVSAIRN",
+    "sequence_length": 19,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 2016.46,
+    "baseline_rank": 13,
+    "baseline_composite_score": 0.6613,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 16.0,
+    "lowest_mic_um": 7.93,
+    "net_charge_ph74": 1.99,
+    "hydrophobic_moment": 0.418,
+    "instability_index": 24.59,
+    "evidence_readiness_index": 30.0,
+    "readiness_tier": "Tier 2",
+    "readiness_tier_name_en": "Intermediate Evidence Readiness",
+    "readiness_tier_name_ar": "جاهزية أدلة متوسطة (فحص أمان أولي محدود)",
+    "readiness_classification_en": "Promising Lead (Safety Curve Needed)",
+    "readiness_classification_ar": "مرشح واعد (يتطلب منحنى أمان تفصيلي)",
+    "readiness_badge_class": "tier-2",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 5.0,
+        "max_score": 30.0,
+        "coverage_pct": 16.7,
+        "status_en": "Single-Dose Screen Only",
+        "status_ar": "فحص أحادي الجرعة تقريبي (غياب منحنى HC50)",
+        "badge": "single_dose_screened",
+        "warning_en": "WARNING: Single-dose screen (<20% lysis) does NOT establish therapeutic safety or valid Selectivity Index.",
+        "warning_ar": "تحذير: الفحص أحادي الجرعة لا يثبت الأمان السريري ولا يتيح اشتقاق مؤشر انتقائية صالح.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 0.0,
+        "max_score": 15.0,
+        "coverage_pct": 0.0,
+        "blm_channel_recording": false,
+        "target_explored_mod05": false
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 7,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0048",
+      "top_priority_gap_score": 87.5,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+      "pmid": "25626077",
+      "doi": "10.3390/toxins7020219",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-019",
+    "master_atlas_id": "SCA-0019",
+    "peptide_name": "Scorpine",
+    "species": "Pandinus imperator",
+    "family": "Scorpionidae",
+    "origin": "natural",
+    "mature_sequence": "GWINEEKIQKKIDERMGNTVLGGMAKAIVHKMAKNEFQCMANMDMLGNCEKHCQTSGEKGYCHGTKCKCGTPLSY",
+    "sequence_length": 75,
+    "is_c_terminally_amidated": false,
+    "molecular_weight_da": 8356.74,
+    "baseline_rank": 14,
+    "baseline_composite_score": 0.6611,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 10.03,
+    "lowest_mic_um": 1.2,
+    "net_charge_ph74": 2.25,
+    "hydrophobic_moment": 0.066,
+    "instability_index": 22.53,
+    "evidence_readiness_index": 30.0,
+    "readiness_tier": "Tier 2",
+    "readiness_tier_name_en": "Intermediate Evidence Readiness",
+    "readiness_tier_name_ar": "جاهزية أدلة متوسطة (فحص أمان أولي محدود)",
+    "readiness_classification_en": "Promising Lead (Safety Curve Needed)",
+    "readiness_classification_ar": "مرشح واعد (يتطلب منحنى أمان تفصيلي)",
+    "readiness_badge_class": "tier-2",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 0.0,
+        "max_score": 30.0,
+        "coverage_pct": 0.0,
+        "status_en": "Unassayed / Missing Safety",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "badge": "unassayed",
+        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "blm_channel_recording": false,
+        "target_explored_mod05": true
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 8,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0058",
+      "top_priority_gap_score": 87.5,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Conde et al., FEBS Lett 2000; 471(2-3):165-168 (Figure 3, p. 167)",
+      "pmid": "10767415",
+      "doi": "10.1016/s0014-5793(00)01384-3",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-008",
+    "master_atlas_id": "SCA-0008",
+    "peptide_name": "AaeAP2",
+    "species": "Androctonus aeneas",
+    "family": "Buthidae",
+    "origin": "natural",
+    "mature_sequence": "FLFSLIPSAIAGLVSAIRN",
+    "sequence_length": 19,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1988.4,
+    "baseline_rank": 15,
+    "baseline_composite_score": 0.659,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 16.0,
+    "lowest_mic_um": 8.05,
+    "net_charge_ph74": 1.99,
+    "hydrophobic_moment": 0.4,
+    "instability_index": 24.59,
+    "evidence_readiness_index": 25.0,
+    "readiness_tier": "Tier 3",
+    "readiness_tier_name_en": "Preliminary Discovery",
+    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
+    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
+    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_badge_class": "tier-3",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 0.0,
+        "max_score": 30.0,
+        "coverage_pct": 0.0,
+        "status_en": "Unassayed / Missing Safety",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "badge": "unassayed",
+        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 0.0,
+        "max_score": 15.0,
+        "coverage_pct": 0.0,
+        "blm_channel_recording": false,
+        "target_explored_mod05": false
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 7,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0050",
+      "top_priority_gap_score": 87.5,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Du et al., Toxins 2015; 7(2):219-234 (Table 5)",
+      "pmid": "25626077",
+      "doi": "10.3390/toxins7020219",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-018",
+    "master_atlas_id": "SCA-0018",
+    "peptide_name": "Hadrurin",
+    "species": "Hadrurus aztecus",
+    "family": "Caraboctonidae",
+    "origin": "natural",
+    "mature_sequence": "GILDTIKSIASKVWNSKTVQDLKRKGINWVANKLGVSPQAA",
+    "sequence_length": 41,
+    "is_c_terminally_amidated": false,
+    "molecular_weight_da": 4436.18,
+    "baseline_rank": 16,
+    "baseline_composite_score": 0.6558,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 19.8,
+    "lowest_mic_um": 4.46,
+    "net_charge_ph74": 4.99,
+    "hydrophobic_moment": 0.158,
+    "instability_index": 28.54,
+    "evidence_readiness_index": 25.0,
+    "readiness_tier": "Tier 3",
+    "readiness_tier_name_en": "Preliminary Discovery",
+    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
+    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
+    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_badge_class": "tier-3",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 0.0,
+        "max_score": 30.0,
+        "coverage_pct": 0.0,
+        "status_en": "Unassayed / Missing Safety",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "badge": "unassayed",
+        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 0.0,
+        "max_score": 15.0,
+        "coverage_pct": 0.0,
+        "blm_channel_recording": false,
+        "target_explored_mod05": false
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 7,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0057",
+      "top_priority_gap_score": 87.5,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Torres-Larios et al., Eur J Biochem 2000; 267(16):5023-5031 (Table 2, p. 5026)",
+      "pmid": "10931184",
+      "doi": "10.1046/j.1432-1327.2000.01556.x",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-015",
+    "master_atlas_id": "SCA-0015",
+    "peptide_name": "ToAP3",
+    "species": "Tityus obscurus",
+    "family": "Scorpiones_incertae",
+    "origin": "natural",
+    "mature_sequence": "FIGMIPGLIGGLISAIK",
+    "sequence_length": 17,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1699.17,
+    "baseline_rank": 17,
+    "baseline_composite_score": 0.5855,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 42.48,
+    "lowest_mic_um": 25.0,
+    "net_charge_ph74": 1.99,
+    "hydrophobic_moment": 0.384,
+    "instability_index": 9.98,
+    "evidence_readiness_index": 25.0,
+    "readiness_tier": "Tier 3",
+    "readiness_tier_name_en": "Preliminary Discovery",
+    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
+    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
+    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_badge_class": "tier-3",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 0.0,
+        "max_score": 30.0,
+        "coverage_pct": 0.0,
+        "status_en": "Unassayed / Missing Safety",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "badge": "unassayed",
+        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 0.0,
+        "max_score": 15.0,
+        "coverage_pct": 0.0,
+        "blm_channel_recording": false,
+        "target_explored_mod05": false
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 7,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0054",
+      "top_priority_gap_score": 87.5,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Guilhelmelli et al., Front Microbiol 2016; 7:1844 (Table 3)",
+      "pmid": "27917162",
+      "doi": "10.3389/fmicb.2016.01844",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-005",
+    "master_atlas_id": "SCA-0005",
+    "peptide_name": "StigA16",
+    "species": "Tityus stigmurus",
+    "family": "Buthidae",
+    "origin": "engineered",
+    "mature_sequence": "FFKLIPKLVKGLISAFK",
+    "sequence_length": 17,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1948.51,
+    "baseline_rank": 18,
+    "baseline_composite_score": 0.4385,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 194.85,
+    "lowest_mic_um": 100.0,
+    "net_charge_ph74": 4.99,
+    "hydrophobic_moment": 0.676,
+    "instability_index": -26.64,
+    "evidence_readiness_index": 25.0,
+    "readiness_tier": "Tier 3",
+    "readiness_tier_name_en": "Preliminary Discovery",
+    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
+    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
+    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_badge_class": "tier-3",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 0.0,
+        "max_score": 30.0,
+        "coverage_pct": 0.0,
+        "status_en": "Unassayed / Missing Safety",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "badge": "unassayed",
+        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 0.0,
+        "max_score": 15.0,
+        "coverage_pct": 0.0,
+        "blm_channel_recording": false,
+        "target_explored_mod05": false
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 7,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0047",
+      "top_priority_gap_score": 87.5,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Tareau et al., Front Microbiol 2026; 15:1827386",
+      "pmid": "30709056",
+      "doi": "10.3389/fmicb.2026.1827386",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-004",
+    "master_atlas_id": "SCA-0004",
+    "peptide_name": "StigA6",
+    "species": "Tityus stigmurus",
+    "family": "Buthidae",
+    "origin": "engineered",
+    "mature_sequence": "FFSLIPKLVKGLISAFK",
+    "sequence_length": 17,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1907.42,
+    "baseline_rank": 19,
+    "baseline_composite_score": 0.408,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 190.74,
+    "lowest_mic_um": 100.0,
+    "net_charge_ph74": 3.99,
+    "hydrophobic_moment": 0.599,
+    "instability_index": -12.81,
+    "evidence_readiness_index": 25.0,
+    "readiness_tier": "Tier 3",
+    "readiness_tier_name_en": "Preliminary Discovery",
+    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
+    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
+    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_badge_class": "tier-3",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 0.0,
+        "max_score": 30.0,
+        "coverage_pct": 0.0,
+        "status_en": "Unassayed / Missing Safety",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "badge": "unassayed",
+        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 0.0,
+        "max_score": 15.0,
+        "coverage_pct": 0.0,
+        "blm_channel_recording": false,
+        "target_explored_mod05": false
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 7,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0046",
+      "top_priority_gap_score": 87.5,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Tareau et al., Front Microbiol 2026; 15:1827386",
+      "pmid": "30709056",
+      "doi": "10.3389/fmicb.2026.1827386",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  },
+  {
+    "candidate_id": "SCA-PEP-014",
+    "master_atlas_id": "SCA-0014",
+    "peptide_name": "ToAP1",
+    "species": "Tityus obscurus",
+    "family": "Scorpiones_incertae",
+    "origin": "natural",
+    "mature_sequence": "FIGMIPGLIGGLISAFK",
+    "sequence_length": 17,
+    "is_c_terminally_amidated": true,
+    "molecular_weight_da": 1733.19,
+    "baseline_rank": 20,
+    "baseline_composite_score": 0.3793,
+    "baseline_weights": {
+      "mic": 0.5,
+      "stability": 0.25,
+      "hydrophobic_moment": 0.125,
+      "charge": 0.125,
+      "hemolysis": 0.0
+    },
+    "lowest_mic_ug_ml": 86.66,
+    "lowest_mic_um": 50.0,
+    "net_charge_ph74": 1.99,
+    "hydrophobic_moment": 0.374,
+    "instability_index": 6.14,
+    "evidence_readiness_index": 25.0,
+    "readiness_tier": "Tier 3",
+    "readiness_tier_name_en": "Preliminary Discovery",
+    "readiness_tier_name_ar": "جاهزية أولية (أمان غير مفحوص إطلاقاً)",
+    "readiness_classification_en": "Exploratory Lead (High Uncertainty)",
+    "readiness_classification_ar": "مرشح استكشافي مبكر (عدم يقين سمّي مرتفع)",
+    "readiness_badge_class": "tier-3",
+    "domain_subscores": {
+      "antimicrobial_characterization": {
+        "score": 15.0,
+        "max_score": 25.0,
+        "coverage_pct": 60.0,
+        "standard_mic_tested": true,
+        "who_priority_pathogens_tested": false,
+        "mbc_time_kill_tested": false
+      },
+      "safety_and_cytotoxicity": {
+        "score": 0.0,
+        "max_score": 30.0,
+        "coverage_pct": 0.0,
+        "status_en": "Unassayed / Missing Safety",
+        "status_ar": "غير مفحوص إطلاقاً (غياب تام لبيانات الأمان)",
+        "badge": "unassayed",
+        "warning_en": "CRITICAL WARNING: Absence of toxicity data must NEVER be interpreted as safety! Potential acute hemolytic risk.",
+        "warning_ar": "تحذير حرج: غياب بيانات السمية لا يجوز أبداً اعتباره دليلاً على الأمان! خطر انحلال دم حاد محتمل.",
+        "hc50_calibrated": false,
+        "nucleated_cytotoxicity_tested": false
+      },
+      "biophysical_mechanism": {
+        "score": 0.0,
+        "max_score": 15.0,
+        "coverage_pct": 0.0,
+        "blm_channel_recording": false,
+        "target_explored_mod05": false
+      },
+      "structural_evidence": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "experimental_nmr_xray": false,
+        "alphafold_model_available": true
+      },
+      "in_vitro_stability": {
+        "score": 5.0,
+        "max_score": 15.0,
+        "coverage_pct": 33.3,
+        "serum_half_life_tested": false,
+        "computational_index_available": true
+      }
+    },
+    "research_gaps_summary": {
+      "total_actionable_gaps": 7,
+      "total_non_gap_records": 0,
+      "top_priority_gap_id": "GAP-0053",
+      "top_priority_gap_score": 87.5,
+      "top_priority_gap_category": "hemolysis_and_safety",
+      "top_priority_gap_category_ar": "فجوات انحلال الدم والأمان الخلوي",
+      "top_priority_missing_evidence_ar": "غياب منحنى الجرعة والاستجابة السيني المعياري لحساب HC50 (اقتصار الفحص على جرعة وحيدة)",
+      "top_priority_proposed_experiment_ar": "مقترح تجريبي: فحص انحلال الدم بالتخفيف التسلسلي متعدد النقاط (0.1 إلى 500 ميكرومولار عبر 8 تراكيز مكررة ثلاثياً) تجاه كريات الدم الحمراء البشرية (hRBC) مع معايرة المنحنى السيني."
+    },
+    "provenance_and_warnings": {
+      "primary_citation": "Guilhelmelli et al., Front Microbiol 2016; 7:1844 (Table 3)",
+      "pmid": "27917162",
+      "doi": "10.3389/fmicb.2016.01844",
+      "epistemic_disclaimer_ar": "الرتبة المرجعية تعكس الفعالية والواسمات المحسوبة؛ الجاهزية البحثية تعكس درجة اكتمال الفحص المعملي وموثوقية الأمان. لا يجوز تفسير أي منهما كبرهان على النجاح السريري."
+    }
+  }
+];
+
+  function initLeadEvidenceReadiness() {
+    const btnBaseline = $('lead-view-baseline-btn');
+    const btnReadiness = $('lead-view-readiness-btn');
+    const baselineView = $('lead-baseline-view');
+    const readinessView = $('lead-readiness-view');
+    const readinessTableBody = $('lead-readiness-table-body');
+    const sortSelect = $('readiness-sort-select');
+    const detailDialog = $('lead-detail-dialog');
+    const closeDialogBtn = $('lead-modal-close');
+
+    if (!btnBaseline || !btnReadiness || !readinessView || !readinessTableBody) return;
+
+    let candidatesList = [...CANDIDATE_EVIDENCE_READINESS_DATA];
+    let activeTier = 'all';
+    let activeSort = 'baseline_rank';
+
+    // Live sync with server json if available
+    (async () => {
+      try {
+        const res = await fetch('data/candidate_evidence_readiness.json');
+        if (res.ok) {
+          const liveData = await res.json();
+          if (Array.isArray(liveData) && liveData.length > 0) {
+            candidatesList = liveData;
+            renderLeadReadinessTable();
+          }
+        }
+      } catch (e) {
+        // Fallback to embedded data
+      }
+    })();
+
+    // View Switching
+    btnBaseline.addEventListener('click', () => {
+      btnBaseline.classList.add('active');
+      btnBaseline.setAttribute('aria-selected', 'true');
+      btnReadiness.classList.remove('active');
+      btnReadiness.setAttribute('aria-selected', 'false');
+      if (baselineView) baselineView.style.display = 'block';
+      readinessView.style.display = 'none';
+    });
+
+    btnReadiness.addEventListener('click', () => {
+      btnReadiness.classList.add('active');
+      btnReadiness.setAttribute('aria-selected', 'true');
+      btnBaseline.classList.remove('active');
+      btnBaseline.setAttribute('aria-selected', 'false');
+      if (baselineView) baselineView.style.display = 'none';
+      readinessView.style.display = 'flex';
+      renderLeadReadinessTable();
+    });
+
+    // Tier Filter Buttons
+    document.querySelectorAll('.readiness-filter-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.readiness-filter-btn').forEach(b => b.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+        activeTier = e.currentTarget.dataset.tier || 'all';
+        renderLeadReadinessTable();
+      });
+    });
+
+    // Sort Dropdown
+    if (sortSelect) {
+      sortSelect.addEventListener('change', (e) => {
+        activeSort = e.target.value;
+        renderLeadReadinessTable();
+      });
+    }
+
+    // Render Table
+    function renderLeadReadinessTable() {
+      let filtered = candidatesList.filter(c => {
+        if (activeTier === 'all') return true;
+        return c.readiness_tier === activeTier || c.readiness_tier === `Tier ${activeTier}` || String(c.readiness_tier).includes(String(activeTier));
+      });
+
+      filtered.sort((a, b) => {
+        if (activeSort === 'eri_desc') {
+          return (b.evidence_readiness_index - a.evidence_readiness_index) || (a.baseline_rank - b.baseline_rank);
+        } else if (activeSort === 'gaps_asc') {
+          return (a.research_gaps_summary.total_actionable_gaps - b.research_gaps_summary.total_actionable_gaps) || (a.baseline_rank - b.baseline_rank);
+        } else if (activeSort === 'mic_asc') {
+          return (a.lowest_mic_ug_ml - b.lowest_mic_ug_ml) || (a.baseline_rank - b.baseline_rank);
+        }
+        return a.baseline_rank - b.baseline_rank;
+      });
+
+      readinessTableBody.innerHTML = filtered.map(c => {
+        const sub = c.domain_subscores;
+        const gaps = c.research_gaps_summary;
+        const prov = c.provenance_and_warnings;
+        const tierNum = String(c.readiness_tier).includes('1') ? 1 : (String(c.readiness_tier).includes('2') ? 2 : 3);
+        const tierIcon = tierNum === 1 ? '🟢' : (tierNum === 2 ? '🟡' : '🔴');
+
+        return `
+          <tr>
+            <td class="mono font-bold" dir="ltr">#${c.baseline_rank}</td>
+            <td>
+              <strong>${esc(c.peptide_name)}</strong>
+              <span class="origin-tag ${c.origin}">${c.origin === 'engineered' ? 'نظير مصمم' : 'سم طبيعي'}</span>
+              <small class="block text-muted mono text-2xs" dir="ltr">${esc(c.candidate_id)} | ${esc(c.species)}</small>
+            </td>
+            <td>
+              <span class="tier-badge ${c.readiness_badge_class}">
+                ${tierIcon} ${esc(c.readiness_tier_name_ar)}
+              </span>
+            </td>
+            <td class="eri-score-cell">
+              <div class="eri-score-value">
+                <span>${c.evidence_readiness_index.toFixed(1)}</span>
+                <small class="text-muted">/ 100</small>
+              </div>
+              <div class="eri-progress-bar">
+                <div class="eri-progress-fill ${c.readiness_badge_class}-fill" style="width: ${c.evidence_readiness_index}%;"></div>
+              </div>
+            </td>
+            <td>
+              <span class="badge measured">قياسي (${sub.antimicrobial_characterization.score}/25)</span>
+              <small class="block text-muted text-2xs" dir="ltr">${c.lowest_mic_ug_ml.toFixed(2)} µg/mL (${c.lowest_mic_um.toFixed(2)} µM)</small>
+            </td>
+            <td>
+              <span class="safety-pill ${sub.safety_and_cytotoxicity.badge}">
+                ${esc(sub.safety_and_cytotoxicity.status_ar)}
+              </span>
+              <small class="block text-muted text-2xs">${sub.safety_and_cytotoxicity.score}/30 نقطة</small>
+            </td>
+            <td>
+              <span class="badge ${sub.biophysical_mechanism.target_explored_mod05 ? 'measured' : 'conditional'}">
+                ${sub.biophysical_mechanism.target_explored_mod05 ? 'أهداف موثقة (+5)' : 'غير مفحوص (0)'}
+              </span>
+            </td>
+            <td>
+              <span class="badge conditional">AlphaFold + مؤشر (${sub.structural_evidence.score + sub.in_vitro_stability.score}/30)</span>
+            </td>
+            <td>
+              <span class="gap-count-tag">${gaps.total_actionable_gaps} فجوة</span>
+              ${gaps.top_priority_gap_id ? `<span class="top-gap-link mono" title="${esc(gaps.top_priority_missing_evidence_ar || '')}">${esc(gaps.top_priority_gap_id)}: ${esc(gaps.top_priority_gap_category_ar || '')}</span>` : ''}
+            </td>
+            <td>
+              <span class="text-xs block text-muted mono">${esc(prov.pmid ? 'PMID: ' + prov.pmid : 'DOI: ' + prov.doi)}</span>
+            </td>
+            <td>
+              <button class="button secondary small lead-detail-open-btn" data-candidate="${esc(c.candidate_id)}" style="font-size:11px; padding:5px 9px;">
+                🔍 تفاصيل
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Modal Interaction
+    readinessTableBody.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-candidate]');
+      if (btn && btn.dataset.candidate) {
+        openLeadDetailDialog(btn.dataset.candidate);
+      }
+    });
+
+    function openLeadDetailDialog(candidateId) {
+      const c = candidatesList.find(x => x.candidate_id === candidateId);
+      if (!c || !detailDialog) return;
+
+      $('lead-modal-title').textContent = `${c.peptide_name} (${c.candidate_id})`;
+      $('lead-modal-subtitle').textContent = `${c.species} | ${c.origin === 'engineered' ? 'نظير مصمم' : 'سم طبيعي'} | ${c.family} | التسلسل: ${c.mature_sequence}`;
+
+      const badgesContainer = $('lead-modal-badges');
+      if (badgesContainer) {
+        badgesContainer.innerHTML = `
+          <span class="tier-badge ${c.readiness_badge_class}">${c.readiness_tier_name_ar}</span>
+          <span class="badge measured">مؤشر الجاهزية ERI: ${c.evidence_readiness_index.toFixed(1)} / 100</span>
+          <span class="badge conditional">رتبة الأساس: #${c.baseline_rank}</span>
+        `;
+      }
+
+      // Baseline Metrics Panel
+      $('modal-baseline-rank').textContent = `#${c.baseline_rank} (الدرجة المركبة: ${c.baseline_composite_score.toFixed(4)})`;
+      $('modal-composite-score').textContent = `${c.baseline_composite_score.toFixed(4)} (MIC 50% | الاستقرار 25% | العزم 12.5% | الشحنة 12.5%)`;
+      $('modal-mic-val').textContent = `${c.lowest_mic_ug_ml.toFixed(2)} µg/mL (${c.lowest_mic_um.toFixed(2)} µM)`;
+      $('modal-charge-val').textContent = `${c.net_charge_ph74 >= 0 ? '+' : ''}${c.net_charge_ph74.toFixed(1)} (عند pH 7.4)`;
+      $('modal-moment-val').textContent = `${c.hydrophobic_moment.toFixed(2)} (Eisenberg scale)`;
+      $('modal-instability-val').textContent = `${c.instability_index.toFixed(1)} (${c.instability_index < 40 ? 'مستقر حسابياً' : 'غير مستقر حسابياً'})`;
+      $('modal-sequence-val').textContent = `${c.sequence_length} حمض أميني (${c.molecular_weight_da.toFixed(2)} Da) — ${c.is_c_terminally_amidated ? 'معدل بالنهاية الكربوكسيلية (C-amidated)' : 'طرف حر'}`;
+
+      // 5-Domain Evidence Breakdown
+      const sub = c.domain_subscores;
+      const tierNum = String(c.readiness_tier).includes('1') ? 1 : (String(c.readiness_tier).includes('2') ? 2 : 3);
+      const domainsContainer = $('modal-domains-breakdown');
+      if (domainsContainer) {
+        domainsContainer.innerHTML = `
+          <div class="domain-breakdown-item">
+            <div class="domain-breakdown-header">
+              <strong>1. فحص مضادات الميكروبات (Antimicrobial)</strong>
+              <span class="mono">${sub.antimicrobial_characterization.score} / ${sub.antimicrobial_characterization.max_score} (${sub.antimicrobial_characterization.coverage_pct}%)</span>
+            </div>
+            <div class="domain-breakdown-bar">
+              <div class="domain-breakdown-fill" style="width: ${sub.antimicrobial_characterization.coverage_pct}%;"></div>
+            </div>
+            <small class="text-muted text-xs block" style="margin-top:2px;">تم فحص MIC القياسي؛ غياب اختبارات عزلات WHO الحرجة وسرعة القتل الزمني (MBC).</small>
+          </div>
+
+          <div class="domain-breakdown-item">
+            <div class="domain-breakdown-header">
+              <strong>2. الأمان وتحلل الخلايا (Safety & Cytotoxicity)</strong>
+              <span class="mono">${sub.safety_and_cytotoxicity.score} / ${sub.safety_and_cytotoxicity.max_score} (${sub.safety_and_cytotoxicity.coverage_pct}%)</span>
+            </div>
+            <div class="domain-breakdown-bar">
+              <div class="domain-breakdown-fill" style="width: ${sub.safety_and_cytotoxicity.coverage_pct}%; background: ${tierNum === 1 ? '#10b981' : (tierNum === 2 ? '#f59e0b' : '#ef4444')};"></div>
+            </div>
+            <small class="text-muted text-xs block" style="margin-top:2px; color: ${tierNum === 3 ? '#fca5a5' : '#cbd5e1'};">
+              ${esc(sub.safety_and_cytotoxicity.warning_ar)}
+            </small>
+          </div>
+
+          <div class="domain-breakdown-item">
+            <div class="domain-breakdown-header">
+              <strong>3. الآلية الجزيئية (Biophysical Mechanism)</strong>
+              <span class="mono">${sub.biophysical_mechanism.score} / ${sub.biophysical_mechanism.max_score} (${sub.biophysical_mechanism.coverage_pct}%)</span>
+            </div>
+            <div class="domain-breakdown-bar">
+              <div class="domain-breakdown-fill" style="width: ${sub.biophysical_mechanism.coverage_pct}%;"></div>
+            </div>
+            <small class="text-muted text-xs block" style="margin-top:2px;">${sub.biophysical_mechanism.target_explored_mod05 ? 'ارتباطات الأهداف الجزيئية موثقة في MOD-05 (+5)' : 'لم يتم توثيق مستهدفات نوعية معملياً (0)'}.</small>
+          </div>
+
+          <div class="domain-breakdown-item">
+            <div class="domain-breakdown-header">
+              <strong>4. البنية ثلاثية الأبعاد (Structural Evidence)</strong>
+              <span class="mono">${sub.structural_evidence.score} / ${sub.structural_evidence.max_score} (${sub.structural_evidence.coverage_pct}%)</span>
+            </div>
+            <div class="domain-breakdown-bar">
+              <div class="domain-breakdown-fill" style="width: ${sub.structural_evidence.coverage_pct}%;"></div>
+            </div>
+            <small class="text-muted text-xs block" style="margin-top:2px;">نموذج AlphaFold تنبؤي معتمد؛ غياب بنية رنين مغناطيسي نووي (NMR) تجريبية في محلول مائي.</small>
+          </div>
+
+          <div class="domain-breakdown-item">
+            <div class="domain-breakdown-header">
+              <strong>5. الاستقرار المعملي والتطوير (In Vitro Stability)</strong>
+              <span class="mono">${sub.in_vitro_stability.score} / ${sub.in_vitro_stability.max_score} (${sub.in_vitro_stability.coverage_pct}%)</span>
+            </div>
+            <div class="domain-breakdown-bar">
+              <div class="domain-breakdown-fill" style="width: ${sub.in_vitro_stability.coverage_pct}%;"></div>
+            </div>
+            <small class="text-muted text-xs block" style="margin-top:2px;">مؤشر Guruprasad المحسوب متاح؛ قياسات نصف العمر في مصل الدم (Serum t1/2) وتحلل الإنزيمات غير مفحوصة.</small>
+          </div>
+        `;
+      }
+
+      // Actionable Research Gaps
+      const gapsContainer = $('modal-gaps-list');
+      if (gapsContainer) {
+        let peptideGaps = [];
+        if (typeof RESEARCH_GAPS_DATA !== 'undefined' && Array.isArray(RESEARCH_GAPS_DATA)) {
+          peptideGaps = RESEARCH_GAPS_DATA.filter(g => g.peptide_canonical_id === c.master_atlas_id && g.is_actionable_gap);
+        }
+
+        if (peptideGaps.length === 0) {
+          gapsContainer.innerHTML = `<p class="text-muted text-sm">إجمالي الفجوات القابلة للتنفيذ المنسوبة: ${c.research_gaps_summary.total_actionable_gaps} فجوات مسجلة في أطلس الفجوات البحثية (MOD-06).</p>`;
+        } else {
+          gapsContainer.innerHTML = `
+            <p class="text-muted text-xs" style="margin-bottom:10px;">تم حصر ${peptideGaps.length} فجوات بحثية قابلة للتنفيذ لهذا المرشح مرتبة حسب نقاط الأولوية:</p>
+            <div style="max-height: 240px; overflow-y: auto; padding-left: 4px;">
+              ${peptideGaps.map(g => `
+                <div class="lead-modal-gap-card">
+                  <div class="lead-modal-gap-header">
+                    <div>
+                      <span class="badge measured mono" style="font-size:11px;">${esc(g.gap_id)}</span>
+                      <strong style="margin-right:6px; color:#f8fafc;">${esc(g.gap_category_name_ar)}</strong>
+                    </div>
+                    <span class="mono text-xs text-warning">أولوية: ${g.priority_score.toFixed(1)} / 10</span>
+                  </div>
+                  <p style="margin:4px 0 6px 0; color:#cbd5e1; font-size:12px; line-height:1.5;">${esc(g.specific_missing_evidence_ar)}</p>
+                  <small style="color:#94a3b8; display:block;"><strong>البروتوكول المقترح:</strong> ${esc(g.proposed_experiment_ar)}</small>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        }
+      }
+
+      // Provenance Box
+      const provBox = $('modal-provenance-box');
+      if (provBox) {
+        const prov = c.provenance_and_warnings;
+        provBox.innerHTML = `
+          <strong>📚 التوثيق الأكاديمي والتحذيرات المعرفية (Academic Provenance & Epistemic Disclaimer):</strong>
+          <p style="margin:4px 0 6px 0;"><strong>المرجع الأولي المعتمد:</strong> ${esc(prov.primary_citation)}</p>
+          <div style="display:flex; gap:16px; margin-bottom:8px; font-family:monospace; font-size:12px;">
+            ${prov.pmid ? `<span>PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/${esc(prov.pmid)}/" target="_blank" rel="noopener" style="color:#38bdf8; text-decoration:underline;">${esc(prov.pmid)} ↗</a></span>` : ''}
+            ${prov.doi ? `<span>DOI: <a href="https://doi.org/${esc(prov.doi)}" target="_blank" rel="noopener" style="color:#38bdf8; text-decoration:underline;">${esc(prov.doi)} ↗</a></span>` : ''}
+          </div>
+          <small style="color:#94a3b8; display:block; line-height:1.5; border-top:1px solid rgba(255,255,255,0.06); padding-top:6px;">
+            ⚠️ ${esc(prov.epistemic_disclaimer_ar)}
+          </small>
+        `;
+      }
+
+      detailDialog.showModal();
+    }
+
+    if (closeDialogBtn) {
+      closeDialogBtn.addEventListener('click', () => detailDialog.close());
+    }
+
+    detailDialog.addEventListener('click', (e) => {
+      if (e.target === detailDialog) detailDialog.close();
+    });
+  }
+
   // Preset switching click listeners
   $('preset-btn-balanced')?.addEventListener('click', () => setRankingPreset('balanced_default'));
   $('preset-btn-potency')?.addEventListener('click', () => setRankingPreset('potency_focused'));
@@ -9577,6 +11735,7 @@
       // Initialize Sprint 02 & Sprint 03 modules
       initResearchGapAnalyzer();
       renderLeadPrioritization();
+      initLeadEvidenceReadiness();
       renderXAIExplorer();
       initKnowledgeGraph();
       initTargetExplorer();

@@ -1,0 +1,21 @@
+candidate_id,master_atlas_id,peptide_name,species,origin,baseline_rank,baseline_composite_score,lowest_mic_ug_ml,lowest_mic_um,evidence_readiness_index,readiness_tier,readiness_classification_en,safety_status_en,total_actionable_gaps,top_priority_gap_id,top_priority_gap_score
+SCA-PEP-003,SCA-0003,StigA31,Tityus stigmurus,engineered,1,0.962,2.47,1.2,35.0,Tier 2,Promising Lead (Safety Curve Needed),Single-Dose Screen Only,8,GAP-0045,93.75
+SCA-PEP-007,SCA-0007,AaeAP1_K_analogue,Androctonus aeneas,engineered,2,0.9466,4.0,1.81,25.0,Tier 3,Exploratory Lead (High Uncertainty),Unassayed / Missing Safety,7,GAP-0049,93.75
+SCA-PEP-009,SCA-0009,AaeAP2_K_analogue,Androctonus aeneas,engineered,3,0.9445,4.0,1.83,25.0,Tier 3,Exploratory Lead (High Uncertainty),Unassayed / Missing Safety,7,GAP-0051,93.75
+SCA-PEP-002,SCA-0002,StigA25,Tityus stigmurus,engineered,4,0.9232,2.37,1.2,35.0,Tier 2,Promising Lead (Safety Curve Needed),Single-Dose Screen Only,8,GAP-0044,93.75
+SCA-PEP-017,SCA-0017,AcrAP1_K_analogue,Androctonus crassicauda,engineered,5,0.9154,8.3,4.0,25.0,Tier 3,Exploratory Lead (High Uncertainty),Unassayed / Missing Safety,7,GAP-0056,93.75
+SCA-PEP-011,SCA-0011,Kn2-7,Mesobuthus martensii,engineered,6,0.8339,3.13,1.87,50.0,Tier 1,Well-Characterized Candidate,Quantified Sigmoidal HC50,7,GAP-0070,86.25
+SCA-PEP-012,SCA-0012,IsCT1,Opisthacanthus madagascariensis,natural,7,0.8191,9.39,6.25,25.0,Tier 3,Exploratory Lead (High Uncertainty),Unassayed / Missing Safety,7,GAP-0052,91.25
+SCA-PEP-010,SCA-0010,BmKn2,Mesobuthus martensii,natural,8,0.7987,20.0,13.81,50.0,Tier 1,Well-Characterized Candidate,Quantified Sigmoidal HC50,7,GAP-0069,86.25
+SCA-PEP-016,SCA-0016,AcrAP1,Androctonus crassicauda,natural,9,0.7635,15.68,8.0,25.0,Tier 3,Exploratory Lead (High Uncertainty),Unassayed / Missing Safety,7,GAP-0055,91.25
+SCA-PEP-013,SCA-0013,Hp1404,Heterometrus petersii,natural,10,0.7402,6.25,4.04,50.0,Tier 1,Well-Characterized Candidate,Quantified Sigmoidal HC50,6,GAP-0072,86.25
+SCA-PEP-020,SCA-0020,Parabutoporin,Parabuthus schlechteri,natural,11,0.7178,17.48,3.5,25.0,Tier 3,Exploratory Lead (High Uncertainty),Unassayed / Missing Safety,6,GAP-0059,87.5
+SCA-PEP-001,SCA-0001,Stigmurin,Tityus stigmurus,natural,12,0.7089,16.87,9.4,35.0,Tier 2,Promising Lead (Safety Curve Needed),Single-Dose Screen Only,8,GAP-0043,87.5
+SCA-PEP-006,SCA-0006,AaeAP1,Androctonus aeneas,natural,13,0.6613,16.0,7.93,30.0,Tier 2,Promising Lead (Safety Curve Needed),Single-Dose Screen Only,7,GAP-0048,87.5
+SCA-PEP-019,SCA-0019,Scorpine,Pandinus imperator,natural,14,0.6611,10.03,1.2,30.0,Tier 2,Promising Lead (Safety Curve Needed),Unassayed / Missing Safety,8,GAP-0058,87.5
+SCA-PEP-008,SCA-0008,AaeAP2,Androctonus aeneas,natural,15,0.659,16.0,8.05,25.0,Tier 3,Exploratory Lead (High Uncertainty),Unassayed / Missing Safety,7,GAP-0050,87.5
+SCA-PEP-018,SCA-0018,Hadrurin,Hadrurus aztecus,natural,16,0.6558,19.8,4.46,25.0,Tier 3,Exploratory Lead (High Uncertainty),Unassayed / Missing Safety,7,GAP-0057,87.5
+SCA-PEP-015,SCA-0015,ToAP3,Tityus obscurus,natural,17,0.5855,42.48,25.0,25.0,Tier 3,Exploratory Lead (High Uncertainty),Unassayed / Missing Safety,7,GAP-0054,87.5
+SCA-PEP-005,SCA-0005,StigA16,Tityus stigmurus,engineered,18,0.4385,194.85,100.0,25.0,Tier 3,Exploratory Lead (High Uncertainty),Unassayed / Missing Safety,7,GAP-0047,87.5
+SCA-PEP-004,SCA-0004,StigA6,Tityus stigmurus,engineered,19,0.408,190.74,100.0,25.0,Tier 3,Exploratory Lead (High Uncertainty),Unassayed / Missing Safety,7,GAP-0046,87.5
+SCA-PEP-014,SCA-0014,ToAP1,Tityus obscurus,natural,20,0.3793,86.66,50.0,25.0,Tier 3,Exploratory Lead (High Uncertainty),Unassayed / Missing Safety,7,GAP-0053,87.5

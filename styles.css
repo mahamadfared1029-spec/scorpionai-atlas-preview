@@ -3251,6 +3251,12 @@
   color: #94a3b8;
   border: 1px solid rgba(148, 163, 184, 0.4);
 }
+.ev-badge.ev-pending {
+  background: rgba(236, 72, 153, 0.18);
+  color: #f472b6;
+  border: 1px solid rgba(236, 72, 153, 0.4);
+}
+
 
 .target-table-wrapper {
   overflow-x: auto;

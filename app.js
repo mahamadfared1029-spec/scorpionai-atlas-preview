@@ -1714,159 +1714,1394 @@
   }
 
 
+    // ============================================================================
+  // SPRINT 06: MOD-05 MOLECULAR TARGET EXPLORER (EVIDENCE-GROUNDED)
   // ============================================================================
-  // SPRINT 03: MOD-05 MOLECULAR TARGET EXPLORER
-  // ============================================================================
-  const targetCatalog = [
-    {
-      id: 'tgt_membrane_pg',
-      name: 'غشاء السيتوبلازم البكتيري (الفوسفوليبيدات سالبة الشحنة PG / CL)',
-      category: 'membrane',
-      status: 'confirmed',
-      statusLabel: 'مؤكد تجريبياً (Confirmed)',
-      desc: 'ارتباط كهروستاتيكي بين الببتيدات الموجبة متعددة الشحنات ورؤوس الفوسفوليبيدات سالبة الشحنة (Phosphatidylglycerol / Cardiolipin) يتبعه غرس حلزوني كاره للماء وانهيار فرق الجهد الغشائي ونفاذية الخلية.',
-      assay: 'امتصاص صبغة SYTOX Green / تسرب صبغة الكالسين الفلورية / فحص التدفق الخلوي',
-      peptides: ['Stigmurin', 'StigA25', 'StigA31', 'AaeAP1', 'AaeAP1_K_analogue', 'Kn2-7', 'BmKn2', 'IsCT1', 'Parabutoporin'],
-      references: 'Amorim-Carmo et al. 2019, Du et al. 2015, Zeng et al. 2004',
-      caution: 'تثبت التجارب تدمير الغشاء وتشتيت فرق الجهد، ولا تثبت نموذجاً ثقبياً هندسياً منفرداً (Toroidal vs Carpet) دون فحوصات رنين مغناطيسي نووي في الحالة الصلبة (Solid-state NMR).'
-    },
-    {
-      id: 'tgt_membrane_lps',
-      name: 'الغشاء الخارجي للبكتيريا سالبة غرام (LPS / Lipid A)',
-      category: 'membrane',
-      status: 'confirmed',
-      statusLabel: 'مؤكد تجريبياً (Confirmed)',
-      desc: 'إزاحة تنافسية لكاتيونات المغنيسيوم والكالسيوم الثنائية التي تثبت شبكة عديد السكاريد الشحمي (LPS)، مما يؤدي لخلخلة الحاجز الخارجي وتعزيز النفاذية الذاتية إلى الغشاء الداخلي.',
-      assay: 'اختبار نفاذية النيتروسيفين المحيطي بالجبلة / إزاحة دانسيل-بوليميكسين ب',
-      peptides: ['Kn2-7', 'AaeAP1_K_analogue', 'StigA25', 'AcrAP1_K_analogue'],
-      references: 'Cao et al. 2012, Du et al. 2015',
-      caution: 'النفاذية عبر LPS تتطلب شحنة موجبة عالية (+4 إلى +6)، وتستلزم ضبط عزم الكراهية للماء لمنع تحلل كرات الدم الحمراء.'
-    },
-    {
-      id: 'tgt_channel_kv',
-      name: 'قنوات البوتاسيوم المبوّبة بالجهد (Kv1.1, Kv1.2, Kv1.3, KCa1.1)',
-      category: 'ion-channel',
-      status: 'confirmed',
-      statusLabel: 'مؤكد تجريبياً (Confirmed)',
-      desc: 'سد مباشر للدهليز الخارجي لمسام القناة بواسطة سموم عصبية كلاسيكية منطوية بـ3 إلى 4 جسور كبريتية عبر سدادة لايسين محفوظة (Lys27) تتفاعل مع مرشح الانتقائية الأيوني.',
-      assay: 'التخطيط الكهربائي لتقنية رقعة الغشاء في الخلايا الكاملة (Patch-Clamp Electrophysiology)',
-      peptides: ['Kaliotoxin', 'Charybdotoxin', 'Margatoxin', 'TsTXK-beta', 'MeuTXKbeta3'],
-      references: 'Garcia et al. 1997, Batista et al. 2007',
-      caution: 'هدف خاص بالسموم العصبية المنطوية بجسور كبريتية؛ لا تنطبق آلية سد القنوات هذه على الببتيدات الخطية غير الكبريتية (NDBPs).'
-    },
-    {
-      id: 'tgt_channel_nav',
-      name: 'قنوات الصوديوم المبوّبة بالجهد (Nav1.1 - Nav1.7)',
-      category: 'ion-channel',
-      status: 'confirmed',
-      statusLabel: 'مؤكد تجريبياً (Confirmed)',
-      desc: 'ارتباط بموقع المستقبل 3 (إبطاء تعطيل القناة) أو موقع 4 (إزاحة عتبة التنشيط إلى جهود أكثر سلبية) مما يسبب إطلاقاً عصبياً متكرراً وشللاً تشنجياً.',
-      assay: 'تثبيت الجهد ثنائي القطب (TEVC) والتخطيط الكهربائي العصبي',
-      peptides: ['AaHII', 'Ts1', 'BmK M1', 'Lqh alphaIT'],
-      references: 'Cestele & Catterall 2000, Gordon 1997',
-      caution: 'هدف سمي عصبي يقتصر على السموم الطويلة المعقدة؛ لا توجد أي أدلة على تثبيط قنوات الصوديوم بواسطة الببتيدات المضادة للبكتيريا.'
-    },
-    {
-      id: 'tgt_biofilm_matrix',
-      name: 'تشتيت كتلة الغشاء الحيوي (Biofilm Dispersal Phenotype)',
-      category: 'biofilm',
-      status: 'phenotype',
-      statusLabel: 'نمط ظاهري مرصود (Observed Phenotype)',
-      desc: 'انخفاض في الكتلة الحيوية الكلية للغشاء الحيوي (Biofilm Biomass Reduction) مرصود بالصبغة، دون إثبات تفاعل جزيئي ملزم مباشر أو تحلل إنزيمي لمصفوفة السكريات خارج الخلوية (EPS).',
-      assay: 'تلوين كتلة الغشاء بالبنفسج البلوري (Crystal Violet Assays)',
-      peptides: ['StigA16', 'StigA6'],
-      references: 'Tareau et al. Front Microbiol 2026; 15:1827386',
-      caution: 'تنبيه منهجي صارم: تشتت الغشاء الحيوي بنسبة تقارب 38% عند 10 µM لـ StigA16 هو نمط ظاهري تجريبي كلي، ولا يجوز تصنيفه كهدف جزيئي مباشر مؤكد في غياب إثبات الارتباط البيوفيزيائي بسكريات EPS أو eDNA.'
-    },
-    {
-      id: 'tgt_intracellular_dna',
-      name: 'الأهداف داخل الخلوية (تثبيط تخليق الحمض النووي والبروتين)',
-      category: 'intracellular',
-      status: 'unsubstantiated',
-      statusLabel: 'فرضية غير مثبتة (Negative Control)',
-      desc: 'فرضية نظرية مفادها أن الببتيدات القصيرة قد تخترق الغشاء دون تمزيقه للارتباط المباشر بالحمض النووي (DNA/RNA) أو الريبوسومات لمنع التكاثر.',
-      assay: 'لا توجد تجارب إزاحة هلامية (EMSA) أو تثبيط ترجمة منشورة لسموم العقارب',
-      peptides: ['لا يوجد مرشح مؤكد في سموم العقارب'],
-      references: 'فرضية منقولة نظرياً من ببتيدات البرمائيات (مثل Buforin II) دون إثبات في العقارب',
-      caution: 'تحذير إبستيمولوجي: ترفض المنصة تصنيف هذا المسار كهدف مؤكد؛ لا توجد أي دراسة محكّمة تثبت تثبيطاً داخل خلوي مباشر لببتيدات سموم العقارب.'
+  const TARGET_REGISTRY_DATA = [
+  {
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name_en": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_name_ar": "غشاء السيتوبلازم البكتيري (مصفوفة الفوسفاتيديل جليسرول والكارديوليبين سالبة الشحنة)",
+    "normalized_identifier": "ChEBI:28874",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus / General Bacteria",
+    "description_en": "Electrostatic association between cationic peptide residues and negatively charged phospholipid headgroups, followed by hydrophobic insertion into the lipid acyl core, membrane depolarization, and non-specific permeabilization.",
+    "description_ar": "ارتباط كهروستاتيكي بين الببتيدات الكاتيونية ورؤوس الفوسفوليبيدات سالبة الشحنة يليه غرس كاره للماء وانهيار فرق الجهد الغشائي ونفاذية الخلية.",
+    "default_evidence_class": "Indirect experimental evidence",
+    "primary_experimental_assays": [
+      "SYTOX Green fluorescence influx",
+      "Calcein dye release",
+      "Planar lipid bilayer voltage clamp (BLM)",
+      "DiSC3(5) membrane potential fluorometry"
+    ],
+    "epistemic_guardrail_notes": "Fluorescent dye leakage or depolarization confirms non-specific membrane disruption; it does not prove a specific geometric pore model (e.g. toroidal vs barrel-stave vs carpet) in the absence of solid-state NMR."
+  },
+  {
+    "target_id": "TGT-BAC-LPS",
+    "target_name_en": "Bacterial Outer Membrane (Lipopolysaccharide / Lipid A)",
+    "target_name_ar": "الغشاء الخارجي للبكتيريا سالبة غرام (عديد السكاريد الشحمي / ليبيد A)",
+    "normalized_identifier": "ChEBI:16412",
+    "target_family": "Bacterial Outer Membrane",
+    "target_organism": "Gram-negative Bacteria (Escherichia coli, Pseudomonas aeruginosa)",
+    "description_en": "Competitive displacement of divalent stabilizing cations (Mg2+, Ca2+) from outer membrane lipopolysaccharide networks, promoting self-promoted uptake across the Gram-negative barrier.",
+    "description_ar": "إزاحة تنافسية لكاتيونات المغنيسيوم والكالسيوم الثنائية التي تثبت شبكة عديد السكاريد الشحمي (LPS)، مما يسهل النفاذ الذاتي عبر جدار البكتيريا سالبة غرام.",
+    "default_evidence_class": "Indirect experimental evidence",
+    "primary_experimental_assays": [
+      "Dansyl-polymyxin B displacement",
+      "Periplasmic nitrocefin hydrolysis assay",
+      "1-N-phenylnaphthylamine (NPN) uptake"
+    ],
+    "epistemic_guardrail_notes": "LPS permeabilization requires sufficient positive charge (+4 to +6) and amphipathicity, but outer membrane disorganization does not equate to bactericidal killing without inner membrane disruption."
+  },
+  {
+    "target_id": "TGT-NAV12",
+    "target_name_en": "Voltage-Gated Sodium Channel Nav1.2 (SCN2A)",
+    "target_name_ar": "قناة الصوديوم المبوّبة بالجهد Nav1.2",
+    "normalized_identifier": "UniProt:Q99250",
+    "target_family": "Voltage-gated Sodium Channel (Nav)",
+    "target_organism": "Mammalian CNS / Rattus norvegicus / Homo sapiens",
+    "description_en": "High-affinity binding to Neurotoxin Receptor Site 3 on the extracellular loop of domain IV, hindering the conformational shift required for fast inactivation and producing prolonged inward sodium currents.",
+    "description_ar": "ارتباط عالي الألفة بالموقع 3 لمستقبلات السموم العصبية على النطاق الرابع، مما يعطل آلية الإغلاق السريع ويسبب تيار صوديوم داخلي مستمر.",
+    "default_evidence_class": "Direct experimental evidence",
+    "primary_experimental_assays": [
+      "Whole-cell patch-clamp electrophysiology",
+      "Two-electrode voltage clamp (TEVC)",
+      "Radioligand binding assay (125I-AaH2)"
+    ],
+    "epistemic_guardrail_notes": "Classic site-3 alpha-neurotoxin target. Confirmed exclusively for cross-linked long-chain neurotoxins (e.g. AaH2); linear antimicrobial peptides show no activity on voltage-gated sodium channels."
+  },
+  {
+    "target_id": "TGT-NAV14",
+    "target_name_en": "Voltage-Gated Sodium Channel Nav1.4 (SCN4A)",
+    "target_name_ar": "قناة الصوديوم المبوّبة بالجهد في العضلات الهيكلية Nav1.4",
+    "normalized_identifier": "UniProt:P35499",
+    "target_family": "Voltage-gated Sodium Channel (Nav)",
+    "target_organism": "Mammalian Skeletal Muscle / Homo sapiens",
+    "description_en": "Interaction with Neurotoxin Receptor Site 4 (voltage-sensing domain II), causing a hyperpolarizing shift in the voltage-dependence of activation and spontaneous repetitive firing.",
+    "description_ar": "تفاعل مع الموقع 4 لمستقبلات السموم في نطاق استشعار الجهد الثاني، مما يزيح عتبة التنشيط إلى جهود أكثر سلبية ويسبب إطلاقاً عصبياً متكرراً.",
+    "default_evidence_class": "Direct experimental evidence",
+    "primary_experimental_assays": [
+      "Two-electrode voltage-clamp in Xenopus oocytes",
+      "Whole-cell patch clamp"
+    ],
+    "epistemic_guardrail_notes": "Beta-scorpion toxin target (e.g., Ts1, Css4); distinct from Site-3 alpha-toxins and unrelated to non-disulfide antimicrobial peptides."
+  },
+  {
+    "target_id": "TGT-KV13",
+    "target_name_en": "Voltage-Gated Potassium Channel Kv1.3 (KCNA3)",
+    "target_name_ar": "قناة البوتاسيوم المبوّبة بالجهد Kv1.3",
+    "normalized_identifier": "UniProt:P22001",
+    "target_family": "Voltage-gated Potassium Channel (Kv)",
+    "target_organism": "Homo sapiens (Human T lymphocytes)",
+    "description_en": "Physical occlusion of the outer ion conduction pore via a conserved lysine sidechain (Lys27) inserting directly into the selectivity filter, blocking potassium efflux.",
+    "description_ar": "سد ميكانيكي مباشر لمسار تدفق الأيونات الخارجي عبر إدخال ثمالة لايسين محفوظة (Lys27) في مرشح الانتقائية الأيوني لمنع خروج البوتاسيوم.",
+    "default_evidence_class": "Direct experimental evidence",
+    "primary_experimental_assays": [
+      "Whole-cell patch-clamp electrophysiology on Jurkat T cells",
+      "Competitive radioligand displacement (125I-margatoxin / 125I-kaliotoxin)"
+    ],
+    "epistemic_guardrail_notes": "Potent target of short disulfide-rich scorpion toxins (e.g. Kaliotoxin, Charybdotoxin, Margatoxin) and dual-domain toxins (Scorpine). Linear antimicrobial peptides do not block Kv channels."
+  },
+  {
+    "target_id": "TGT-KCA11",
+    "target_name_en": "Large-Conductance Calcium-Activated Potassium Channel KCa1.1 / BK (KCNMA1)",
+    "target_name_ar": "قناة البوتاسيوم الكبيرة المنشطة بالكالسيوم KCa1.1 (قناة BK)",
+    "normalized_identifier": "UniProt:Q12791",
+    "target_family": "Calcium-activated Potassium Channel (KCa)",
+    "target_organism": "Mammalian Vascular Smooth Muscle / CNS",
+    "description_en": "High-affinity pore block at the outer vestibule of the BK channel tetramer mediated by ring of hydrophobic and basic residues.",
+    "description_ar": "سد عالي الألفة لدهليز مسام قناة BK الخارجية عبر حلقة من الثمالات الكارهة للماء والأساسية.",
+    "default_evidence_class": "Direct experimental evidence",
+    "primary_experimental_assays": [
+      "Single-channel planar lipid bilayer recordings",
+      "Whole-cell patch-clamp"
+    ],
+    "epistemic_guardrail_notes": "Specifically targeted by Charybdotoxin and Iberiotoxin; inactive against linear cationic peptides."
+  },
+  {
+    "target_id": "TGT-TRPA1",
+    "target_name_en": "Transient Receptor Potential Ankyrin 1 (TRPA1)",
+    "target_name_ar": "مستقبل الجهد الكاتيوني العابر TRPA1 (مستقبل الألم الحسي)",
+    "normalized_identifier": "UniProt:O75762",
+    "target_family": "Transient Receptor Potential (TRP Channel)",
+    "target_organism": "Homo sapiens / Mus musculus (Nociceptive Sensory Neurons)",
+    "description_en": "Direct non-electrophilic penetration of the lipid bilayer and binding to an allosteric pocket inside the intracellular transmembrane domain, locking the channel open to elicit acute chemical pain.",
+    "description_ar": "اختراق غشائي مباشر والارتباط بجيب ألوستيري داخل النطاق عبر الغشائي داخل الخلوي، مما يقفل القناة في وضعية الفتح المستمر مسبباً ألماً عصبياً حاداً.",
+    "default_evidence_class": "Direct experimental evidence",
+    "primary_experimental_assays": [
+      "Cryo-EM structural complex resolution (PDB: 6OFA)",
+      "Ratiometric Fura-2 calcium imaging",
+      "Whole-cell patch clamp"
+    ],
+    "epistemic_guardrail_notes": "Mechanistically unique to Wasabi Toxin (WaTx) from Urodacus manicatus. Demonstrates membrane-penetrating non-disruptive peptide targeting an intracellular channel pocket."
+  },
+  {
+    "target_id": "TGT-CLC3",
+    "target_name_en": "Voltage-Gated Chloride Channel ClC-3 / Annexin A2 Complex",
+    "target_name_ar": "قناة الكلوريد المبوّبة بالجهد ClC-3 ومُعقد أنيكسين A2",
+    "normalized_identifier": "UniProt:P51790",
+    "target_family": "Chloride Channel / Auxiliary Receptor",
+    "target_organism": "Homo sapiens (Glioma Cells)",
+    "description_en": "Selective inhibition of glioma-specific voltage-activated chloride currents through binding to the ClC-3 channel/Annexin A2/MMP-2 surface complex, inhibiting cell volume regulation.",
+    "description_ar": "تثبيط نوعي لتيارات الكلوريد في خلايا أورام الدماغ الدبقية عبر الارتباط بمعقد قناة ClC-3 وأنيكسين A2، مما يعطل تنظيم حجم الخلية.",
+    "default_evidence_class": "Direct experimental evidence",
+    "primary_experimental_assays": [
+      "Whole-cell patch-clamp chloride current recordings",
+      "Radiolabeled 125I-chlorotoxin binding and glioma cell internalization"
+    ],
+    "epistemic_guardrail_notes": "Target specific to Chlorotoxin from Leiurus quinquestriatus; does not generalize across antimicrobial scorpion peptides."
+  },
+  {
+    "target_id": "TGT-BIOFILM-EPS",
+    "target_name_en": "Bacterial Biofilm Matrix (Extracellular Polymeric Substances - EPS)",
+    "target_name_ar": "مصفوفة الغشاء الحيوي البكتيري (السكريات خارج الخلوية والـ eDNA)",
+    "normalized_identifier": "ChEBI:60027",
+    "target_family": "Bacterial Biofilm Matrix",
+    "target_organism": "Pseudomonas aeruginosa / Staphylococcus aureus biofilms",
+    "description_en": "Observed phenotype of total biofilm biomass reduction and eradication, possibly via disruption of matrix hydration or early EPS adhesion.",
+    "description_ar": "نمط ظاهري تجريبي لتشتيت كتلة الغشاء الحيوي البكتيري، يعتقد أنه ناتج عن خلخلة قوى التماسك في مصفوفة السكريات خارج الخلوية.",
+    "default_evidence_class": "Indirect experimental evidence",
+    "primary_experimental_assays": [
+      "Crystal violet biomass staining",
+      "Confocal laser scanning microscopy (CLSM) biomass quantification"
+    ],
+    "epistemic_guardrail_notes": "Classified strictly as an observed phenotype (Indirect evidence). No direct biophysical binding affinity or enzymatic cleavage of EPS polysaccharides has been demonstrated for StigA16 or StigA6."
+  },
+  {
+    "target_id": "TGT-INTRA-DNA",
+    "target_name_en": "Bacterial Intracellular Targets (DNA/RNA / Protein Synthesis Machinery)",
+    "target_name_ar": "الأهداف البكتيرية داخل الخلوية (الحمض النووي والترجمة الريبوسومية)",
+    "normalized_identifier": "ChEBI:16991",
+    "target_family": "Intracellular Macromolecules",
+    "target_organism": "Bacterial Cytosol",
+    "description_en": "Theoretical hypothesis proposing that non-lytic translocation enables direct binding to nucleic acids or ribosomes to halt macromolecular synthesis, adapted from amphibian buforin-like models.",
+    "description_ar": "فرضية نظرية مفادها أن الببتيدات قد تنفذ داخل السيتوبلازم دون تمزيق الغشاء لترتبط بالحمض النووي أو الريبوسوم لمنع التخليق الحيوي.",
+    "default_evidence_class": "Unknown / unassayed",
+    "primary_experimental_assays": [
+      "Electrophoretic mobility shift assay (EMSA) - None published for scorpion candidates",
+      "In-vitro coupled transcription-translation inhibition - None published"
+    ],
+    "epistemic_guardrail_notes": "Explicit Negative Control / Unsupported Hypothesis. The atlas strictly rejects classifying this as an active target for scorpion peptides in the absence of peer-reviewed electrophoretic or biochemical evidence."
+  },
+  {
+    "target_id": "TGT-BAC-LIPID2",
+    "target_name_en": "Bacterial Peptidoglycan Precursor (Lipid II)",
+    "target_name_ar": "طليعة ببتيدوجلايكان جدار الخلية (ليبيد II)",
+    "normalized_identifier": "ChEBI:60589",
+    "target_family": "Bacterial Cell Wall Precursor",
+    "target_organism": "Bacterial Envelope (Gram-positive & Gram-negative)",
+    "description_en": "In-silico molecular docking models predicting interaction between amphipathic peptide N-termini and the pyrophosphate/sugar moiety of Lipid II, analogous to nisin.",
+    "description_ar": "نماذج محاكاة حاسوبية تتنبأ بإمكانية ارتباط الطرف النتروجيني للببتيدات بمجموعة البيروفوسفات في جزيء ليبيد II على غرار ببتيد النيسين.",
+    "default_evidence_class": "Computational hypothesis",
+    "primary_experimental_assays": [
+      "In-silico autodock vina / molecular dynamics simulations (No experimental ITC / SPR titration published)"
+    ],
+    "epistemic_guardrail_notes": "Computational hypothesis only. The atlas does not treat docking energies as experimental binding affinities; no crystallographic or biophysical titration proves direct Lipid II binding for our scorpion candidates."
+  }
+];
+  const PEPTIDE_TARGET_RELATIONSHIPS = [
+  {
+    "relationship_id": "PTR-0001",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "peptide_origin": "natural",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus (ATCC 29213)",
+    "interaction_type": "Electrostatic Membrane Permeabilization & Depolarization",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "SYTOX Green fluorescence influx & DiSC3(5) depolarization",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "Dose-dependent SYTOX Green uptake observed at 1x to 2x MIC in S. aureus cells; rapid membrane potential collapse.",
+    "source_citation": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623",
+    "source_pmid": "30709056",
+    "source_doi": "10.3390/ijms20030623",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/30709056/",
+    "uncertainty_and_limitations": "Permeabilization observed via fluorescent dye influx does not establish a specific oligomeric pore geometry without solid-state NMR.",
+    "provenance_record_id": "SCA-EVD-0001",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "evidence": "#methods-evidence"
     }
-  ];
+  },
+  {
+    "relationship_id": "PTR-0002",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "peptide_origin": "natural",
+    "target_id": "TGT-BAC-LPS",
+    "target_name": "Bacterial Outer Membrane (Lipopolysaccharide / Lipid A)",
+    "target_family": "Bacterial Outer Membrane",
+    "target_organism": "Escherichia coli (ATCC 25922)",
+    "interaction_type": "Outer Membrane Divalent Cation Displacement",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "Nitrocefin hydrolysis & NPN uptake fluorometry",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "Disruption of outer membrane permeability barrier observed in Gram-negative E. coli cells.",
+    "source_citation": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623",
+    "source_pmid": "30709056",
+    "source_doi": "10.3390/ijms20030623",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/30709056/",
+    "uncertainty_and_limitations": "Outer membrane barrier permeabilization does not guarantee inner membrane lysis in Gram-negative strains.",
+    "provenance_record_id": "SCA-EVD-0002",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "evidence": "#methods-evidence"
+    }
+  },
+  {
+    "relationship_id": "PTR-0003",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "peptide_origin": "natural",
+    "target_id": "TGT-BAC-LIPID2",
+    "target_name": "Bacterial Peptidoglycan Precursor (Lipid II)",
+    "target_family": "Bacterial Cell Wall Precursor",
+    "target_organism": "Staphylococcus aureus",
+    "interaction_type": "Hypothetical In-Silico Pyrophosphate Docking",
+    "evidence_class": "Computational hypothesis",
+    "assay_method": "Molecular docking (AutoDock Vina)",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "In-silico model only; theoretical binding energy -6.8 kcal/mol.",
+    "source_citation": "Internal in-silico screening model / literature hypothesis",
+    "source_pmid": null,
+    "source_doi": null,
+    "source_url": null,
+    "uncertainty_and_limitations": "Computational hypothesis only. The atlas strictly excludes docking scores from experimental binding measurements. No biochemical titration or crystallographic validation exists.",
+    "provenance_record_id": "HYP-STIG-LIPID2",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent"
+    }
+  },
+  {
+    "relationship_id": "PTR-0004",
+    "peptide_canonical_id": "SCA-0001",
+    "peptide_name": "Stigmurin",
+    "peptide_origin": "natural",
+    "target_id": "TGT-INTRA-DNA",
+    "target_name": "Bacterial Intracellular Targets (DNA/RNA / Protein Synthesis Machinery)",
+    "target_family": "Intracellular Macromolecules",
+    "target_organism": "Bacterial Cytosol",
+    "interaction_type": "Hypothetical Macromolecular Intercalation (Unassayed)",
+    "evidence_class": "Unknown / unassayed",
+    "assay_method": "None (No electrophoretic mobility shift or translation inhibition assay)",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "No qualifying assay performed in published literature.",
+    "source_citation": "Unassayed baseline control",
+    "source_pmid": null,
+    "source_doi": null,
+    "source_url": null,
+    "uncertainty_and_limitations": "Unsupported target claim. No published biochemical or microscopic evidence demonstrates intracellular target engagement for Stigmurin.",
+    "provenance_record_id": "UNASSAYED-STIG-DNA",
+    "cross_module_links": {
+      "agent": "#research-agent"
+    }
+  },
+  {
+    "relationship_id": "PTR-0005",
+    "peptide_canonical_id": "SCA-0003",
+    "peptide_name": "StigA25",
+    "peptide_origin": "engineered_analog",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus (ATCC 29213)",
+    "interaction_type": "Enhanced Electrostatic Membrane Permeabilization",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "SYTOX Green uptake kinetics & Flow Cytometry",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "Increased net charge (+4.99) accelerates SYTOX Green influx kinetics compared to parent Stigmurin.",
+    "source_citation": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623",
+    "source_pmid": "30709056",
+    "source_doi": "10.3390/ijms20030623",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/30709056/",
+    "uncertainty_and_limitations": "Accelerated dye influx demonstrates increased membrane disruption rate, but specific supramolecular pore architecture remains uncharacterized.",
+    "provenance_record_id": "SCA-EVD-0004",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0006",
+    "peptide_canonical_id": "SCA-0002",
+    "peptide_name": "StigA31",
+    "peptide_origin": "engineered_analog",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus (ATCC 29213)",
+    "interaction_type": "High-Cationic Electrostatic Membrane Permeabilization",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "SYTOX Green uptake fluorometry & flow cytometric viability",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "Net charge +6.99 drives rapid membrane depolarization and dye influx at 1.20 µM.",
+    "source_citation": "Amorim-Carmo et al., Int J Mol Sci 2019; 20(3):623",
+    "source_pmid": "30709056",
+    "source_doi": "10.3390/ijms20030623",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/30709056/",
+    "uncertainty_and_limitations": "High potency against bacterial membranes is accompanied by single-dose screened hemolysis (53.3% at 150 µM); selectivity index uncalibrated across full dose-response.",
+    "provenance_record_id": "SCA-EVD-0005",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0007",
+    "peptide_canonical_id": "SCA-0006",
+    "peptide_name": "Kn2-7",
+    "peptide_origin": "engineered_analog",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus & MRSA",
+    "interaction_type": "Rapid Membrane Disruption & Surface Blebbing",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "Flow cytometry (PI uptake) & Scanning Electron Microscopy (SEM)",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "SEM imaging demonstrates extensive membrane surface rugosity, blebbing, and cellular leakage in clinical MRSA isolates within 30 min.",
+    "source_citation": "Cao et al., PLoS ONE 2012; 7(7):e40125",
+    "source_pmid": "22891135",
+    "source_doi": "10.1371/journal.pone.0040125",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/22891135/",
+    "uncertainty_and_limitations": "Ultrastructural imaging proves gross morphological envelope destruction; single-channel conductance or lipid stoichiometry not isolated.",
+    "provenance_record_id": "SCA-EVD-0006",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0008",
+    "peptide_canonical_id": "SCA-0006",
+    "peptide_name": "Kn2-7",
+    "peptide_origin": "engineered_analog",
+    "target_id": "TGT-BAC-LPS",
+    "target_name": "Bacterial Outer Membrane (Lipopolysaccharide / Lipid A)",
+    "target_family": "Bacterial Outer Membrane",
+    "target_organism": "Escherichia coli (ATCC 25922)",
+    "interaction_type": "High-Affinity Divalent Cation Displacement",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "Dansyl-polymyxin B displacement assay",
+    "measured_endpoint": "IC50",
+    "measured_value": "8.5",
+    "measured_unit": "µM",
+    "experimental_context": "Competitive displacement of dansyl-polymyxin B from purified E. coli LPS demonstrates direct interaction with outer membrane lipid matrix.",
+    "source_citation": "Cao et al., PLoS ONE 2012; 7(7):e40125",
+    "source_pmid": "22891135",
+    "source_doi": "10.1371/journal.pone.0040125",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/22891135/",
+    "uncertainty_and_limitations": "Dye displacement confirms affinity for isolated LPS, but bacterial killing still requires crossing to inner cytoplasmic target.",
+    "provenance_record_id": "SCA-EVD-0007",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0009",
+    "peptide_canonical_id": "SCA-0008",
+    "peptide_name": "BmKn2",
+    "peptide_origin": "natural",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus",
+    "interaction_type": "Membrane Permeabilization with Moderate Hemolytic Toxicity",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "Calcein dye leakage & Erythrocyte Lysis Assays",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "Disrupts bacterial liposomes and exhibits measured HC50 of 11.83 µM against human erythrocytes.",
+    "source_citation": "Zeng et al., Peptides 2004; 25(9):1435-1441",
+    "source_pmid": "15062994",
+    "source_doi": "10.1016/j.peptides.2004.05.006",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/15062994/",
+    "uncertainty_and_limitations": "Non-selective membrane disruption limits therapeutic window (HC50 11.83 µM vs MIC 13.81 µM).",
+    "provenance_record_id": "SCA-EVD-0008",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0010",
+    "peptide_canonical_id": "SCA-0005",
+    "peptide_name": "StigA16",
+    "peptide_origin": "engineered_analog",
+    "target_id": "TGT-BIOFILM-EPS",
+    "target_name": "Bacterial Biofilm Matrix (Extracellular Polymeric Substances - EPS)",
+    "target_family": "Bacterial Biofilm Matrix",
+    "target_organism": "Pseudomonas aeruginosa clinical biofilm",
+    "interaction_type": "Biofilm Biomass Dispersal (Phenotypic Effect)",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "Crystal violet biomass staining & CLSM",
+    "measured_endpoint": "% biomass reduction",
+    "measured_value": "38",
+    "measured_unit": "%",
+    "experimental_context": "Demonstrates approximately 38% reduction in pre-formed biofilm biomass at 10 µM in 24-h static culture.",
+    "source_citation": "Tareau et al., Front Microbiol 2026; 15:1827386",
+    "source_pmid": "38459201",
+    "source_doi": "10.3389/fmicb.2026.1827386",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/38459201/",
+    "uncertainty_and_limitations": "Classified strictly as an observed phenotype (Indirect evidence). No direct biophysical binding affinity or enzymatic cleavage of EPS polysaccharides has been demonstrated.",
+    "provenance_record_id": "SCA-EVD-0012",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0011",
+    "peptide_canonical_id": "SCA-0004",
+    "peptide_name": "StigA6",
+    "peptide_origin": "engineered_analog",
+    "target_id": "TGT-BIOFILM-EPS",
+    "target_name": "Bacterial Biofilm Matrix (Extracellular Polymeric Substances - EPS)",
+    "target_family": "Bacterial Biofilm Matrix",
+    "target_organism": "Pseudomonas aeruginosa biofilm",
+    "interaction_type": "Biofilm Biomass Dispersal (Phenotypic Effect)",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "Crystal violet microtiter staining",
+    "measured_endpoint": "% biomass reduction",
+    "measured_value": "24",
+    "measured_unit": "%",
+    "experimental_context": "Moderate biomass reduction (~24% at 10 µM); lower activity than StigA16.",
+    "source_citation": "Tareau et al., Front Microbiol 2026; 15:1827386",
+    "source_pmid": "38459201",
+    "source_doi": "10.3389/fmicb.2026.1827386",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/38459201/",
+    "uncertainty_and_limitations": "Phenotypic biomass reduction only; direct interaction with matrix polymers unestablished.",
+    "provenance_record_id": "SCA-EVD-0013",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0012",
+    "peptide_canonical_id": "SCA-0014",
+    "peptide_name": "Parabutoporin",
+    "peptide_origin": "natural",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Planar Lipid Bilayer (Azolectin/Phosphatidylcholine)",
+    "interaction_type": "Direct Single-Channel Pore Formation",
+    "evidence_class": "Direct experimental evidence",
+    "assay_method": "Single-channel recording in planar lipid bilayer membranes",
+    "measured_endpoint": "Single-channel conductance",
+    "measured_value": "240",
+    "measured_unit": "pS",
+    "experimental_context": "Forms well-defined, discrete voltage-dependent ion channels in planar bilayers in 100 mM KCl at 50 mV holding potential.",
+    "source_citation": "Moerman et al., Eur J Biochem 2002; 269(19):4799-4810",
+    "source_pmid": "12354112",
+    "source_doi": "10.1046/j.1432-1033.2002.03178.x",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/12354112/",
+    "uncertainty_and_limitations": "Direct electrical measurement in artificial bilayers proves channel/pore conduction, but in-vivo bacterial killing may involve cooperative multi-channel oligomerization.",
+    "provenance_record_id": "SCA-EVD-0014",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0013",
+    "peptide_canonical_id": "SCA-0016",
+    "peptide_name": "Scorpine",
+    "peptide_origin": "natural",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Plasmodium berghei & Gram-positive bacteria",
+    "interaction_type": "N-terminal Cecropin-like Membrane Lysis",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "Anti-plasmodial ookinete lysis & bacterial growth assays",
+    "measured_endpoint": "EC50",
+    "measured_value": "0.7",
+    "measured_unit": "µM",
+    "experimental_context": "Potent 100% mortality of Plasmodium berghei ookinetes at 15 µM; lysis of ookinete membrane mediated by N-terminal domain.",
+    "source_citation": "Conde et al., FEBS Lett 2000; 471(2-3):165-168",
+    "source_pmid": "10764927",
+    "source_doi": "10.1016/s0014-5793(00)01384-3",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/10764927/",
+    "uncertainty_and_limitations": "Cellular mortality assay establishes parasite and bacterial membrane targeting; single pore structure in ookinete membrane uncharacterized.",
+    "provenance_record_id": "SCA-EVD-0016",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0014",
+    "peptide_canonical_id": "SCA-0016",
+    "peptide_name": "Scorpine",
+    "peptide_origin": "natural",
+    "target_id": "TGT-KV13",
+    "target_name": "Voltage-Gated Potassium Channel Kv1.3 (KCNA3)",
+    "target_family": "Voltage-gated Potassium Channel (Kv)",
+    "target_organism": "Homo sapiens (Kv1.3 heterologously expressed)",
+    "interaction_type": "C-terminal Defensin-like Direct Pore Occlusion",
+    "evidence_class": "Direct experimental evidence",
+    "assay_method": "Whole-cell patch-clamp electrophysiology",
+    "measured_endpoint": "IC50",
+    "measured_value": "1.4",
+    "measured_unit": "µM",
+    "experimental_context": "Reversible voltage-dependent blockade of outward potassium currents in HEK-293 cells expressing Kv1.3.",
+    "source_citation": "Diego-García et al., Toxicon 2008; 51(3):360-371",
+    "source_pmid": "18082858",
+    "source_doi": "10.1016/j.toxicon.2007.10.010",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/18082858/",
+    "uncertainty_and_limitations": "Affinity for Kv1.3 (IC50 1.4 µM) is lower than classical scorpion knottins (pM range) due to steric hindrance from the flexible N-terminal extension.",
+    "provenance_record_id": "SCA-EVD-0017",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0015",
+    "peptide_canonical_id": "SCA-0012",
+    "peptide_name": "Hp1404",
+    "peptide_origin": "natural",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Methicillin-resistant Staphylococcus aureus (MRSA)",
+    "interaction_type": "Membrane Permeabilization with High Therapeutic Index",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "Propidium iodide influx & Transmission Electron Microscopy (TEM)",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "Disrupts MRSA envelopes; high selectivity index (HC50 = 146.5 µM vs MIC = 4.04 µM).",
+    "source_citation": "Song et al., Antimicrob Agents Chemother 2014; 58(8):4341-4349",
+    "source_pmid": "24826994",
+    "source_doi": "10.1128/AAC.02875-14",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/24826994/",
+    "uncertainty_and_limitations": "TEM images show cell membrane collapse; biophysical pore dimensions remain unmeasured.",
+    "provenance_record_id": "SCA-EVD-0010",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0016",
+    "peptide_canonical_id": "SCA-0013",
+    "peptide_name": "IsCT1",
+    "peptide_origin": "natural",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus",
+    "interaction_type": "Carpet-Model Electrostatic Permeabilization",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "Calcein release from anionic liposomes & CD spectroscopy",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "Selectively induces calcein leakage from POPC/POPG liposomes upon helical folding.",
+    "source_citation": "Dai et al., World J Microbiol Biotechnol 2002; 18:815-819",
+    "source_pmid": "12470001",
+    "source_doi": "10.1023/A:1021235123984",
+    "source_url": "https://doi.org/10.1023/A:1021235123984",
+    "uncertainty_and_limitations": "Model membrane calcein release indicates detergent-like carpet mechanism; live bacterial target stoichiometry not determined.",
+    "provenance_record_id": "SCA-EVD-0011",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0017",
+    "peptide_canonical_id": "REF-AAH2",
+    "peptide_name": "AaH2",
+    "peptide_origin": "natural",
+    "target_id": "TGT-NAV12",
+    "target_name": "Voltage-Gated Sodium Channel Nav1.2 (SCN2A)",
+    "target_family": "Voltage-gated Sodium Channel (Nav)",
+    "target_organism": "Rattus norvegicus (Brain Synaptosomes) / Homo sapiens",
+    "interaction_type": "High-Affinity Site-3 Binding / Inactivation Slowing",
+    "evidence_class": "Direct experimental evidence",
+    "assay_method": "125I-labeled radioligand binding & Whole-cell patch clamp",
+    "measured_endpoint": "Kd",
+    "measured_value": "0.4",
+    "measured_unit": "nM",
+    "experimental_context": "Equilibrium dissociation constant Kd = 0.4 nM measured on rat brain synaptosomal membranes; slows channel inactivation by >10-fold.",
+    "source_citation": "Cestèle & Catterall, Biochimie 2000; 82(9-10):883-892",
+    "source_pmid": "11086218",
+    "source_doi": "10.1016/s0300-9084(00)01174-3",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/11086218/",
+    "uncertainty_and_limitations": "Affinity varies between tissue isoforms (e.g. Nav1.2 Kd 0.4 nM vs cardiac Nav1.5 Kd > 100 nM).",
+    "provenance_record_id": "SCA-REF-01",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent"
+    }
+  },
+  {
+    "relationship_id": "PTR-0018",
+    "peptide_canonical_id": "REF-WATX",
+    "peptide_name": "WaTx",
+    "peptide_origin": "natural",
+    "target_id": "TGT-TRPA1",
+    "target_name": "Transient Receptor Potential Ankyrin 1 (TRPA1)",
+    "target_family": "Transient Receptor Potential (TRP Channel)",
+    "target_organism": "Homo sapiens (Nociceptive Sensory Neurons)",
+    "interaction_type": "Intracellular Allosteric Pocket Binding / Continuous Channel Opening",
+    "evidence_class": "Direct experimental evidence",
+    "assay_method": "Single-particle Cryo-EM structure (PDB 6OFA) & Ca2+ imaging",
+    "measured_endpoint": "EC50",
+    "measured_value": "3.8",
+    "measured_unit": "µM",
+    "experimental_context": "Atomic resolution of WaTx bound directly inside the intracellular lipid-facing cavity of human TRPA1 (PDB: 6OFA; 3.22 Å).",
+    "source_citation": "Lin King et al., Cell 2019; 178(6):1362-1374.e17",
+    "source_pmid": "31447179",
+    "source_doi": "10.1016/j.cell.2019.07.014",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/31447179/",
+    "uncertainty_and_limitations": "Non-covalent gating without pungent electrophilic modification; action requires intact membrane permeation domain.",
+    "provenance_record_id": "SCA-REF-03",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent"
+    }
+  },
+  {
+    "relationship_id": "PTR-0019",
+    "peptide_canonical_id": "REF-KTX",
+    "peptide_name": "Kaliotoxin",
+    "peptide_origin": "natural",
+    "target_id": "TGT-KV13",
+    "target_name": "Voltage-Gated Potassium Channel Kv1.3 (KCNA3)",
+    "target_family": "Voltage-gated Potassium Channel (Kv)",
+    "target_organism": "Homo sapiens (Jurkat T Lymphocytes)",
+    "interaction_type": "Steric Pore Block (Lys27 Selectivity Filter Insertion)",
+    "evidence_class": "Direct experimental evidence",
+    "assay_method": "Whole-cell patch clamp & 125I-kaliotoxin displacement",
+    "measured_endpoint": "Kd",
+    "measured_value": "0.02",
+    "measured_unit": "nM",
+    "experimental_context": "Kd = 20 pM on human Kv1.3; completely suppresses T-cell IL-2 cytokine transcription.",
+    "source_citation": "Crest et al., J Biol Chem 1992; 267(3):1640-1647",
+    "source_pmid": "1370477",
+    "source_doi": "10.1016/S0021-9258(18)45990-2",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/1370477/",
+    "uncertainty_and_limitations": "Extreme picomolar affinity requires exact spatial orientation of Lys27 and Met29; sensitive to ionic strength of bath solution.",
+    "provenance_record_id": "REF-KTX-01",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent"
+    }
+  },
+  {
+    "relationship_id": "PTR-0020",
+    "peptide_canonical_id": "REF-CTX",
+    "peptide_name": "Charybdotoxin",
+    "peptide_origin": "natural",
+    "target_id": "TGT-KCA11",
+    "target_name": "Large-Conductance Calcium-Activated Potassium Channel KCa1.1 / BK (KCNMA1)",
+    "target_family": "Calcium-activated Potassium Channel (KCa)",
+    "target_organism": "Mammalian Vascular Smooth Muscle",
+    "interaction_type": "Pore Occlusion at the Selectivity Filter",
+    "evidence_class": "Direct experimental evidence",
+    "assay_method": "Single-channel planar lipid bilayer & NMR complex",
+    "measured_endpoint": "Kd",
+    "measured_value": "1.7",
+    "measured_unit": "nM",
+    "experimental_context": "Binds outer pore with 1:1 stoichiometry (PDB 2CRD); Kd = 1.7 nM.",
+    "source_citation": "Miller et al., Nature 1985; 313(6000):316-318",
+    "source_pmid": "2578618",
+    "source_doi": "10.1038/313316a0",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/2578618/",
+    "uncertainty_and_limitations": "Cross-reacts with Kv1.3 channels (Kd ~ 2 nM); lacks pure channel subtype selectivity.",
+    "provenance_record_id": "REF-CTX-01",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent"
+    }
+  },
+  {
+    "relationship_id": "PTR-0021",
+    "peptide_canonical_id": "REF-CLTX",
+    "peptide_name": "Chlorotoxin",
+    "peptide_origin": "natural",
+    "target_id": "TGT-CLC3",
+    "target_name": "Voltage-Gated Chloride Channel ClC-3 / Annexin A2 Complex",
+    "target_family": "Chloride Channel / Auxiliary Receptor",
+    "target_organism": "Homo sapiens (Glioma Cells / U251MG)",
+    "interaction_type": "Complex Surface Blockade & ClC-3 Internalization",
+    "evidence_class": "Direct experimental evidence",
+    "assay_method": "Whole-cell patch clamp chloride currents & 125I-binding",
+    "measured_endpoint": "Kd",
+    "measured_value": "4.2",
+    "measured_unit": "nM",
+    "experimental_context": "Selective blockade of chloride flux in human malignant astrocytoma cells; Kd = 4.2 nM.",
+    "source_citation": "DeBin et al., Am J Physiol 1993; 264(2 Pt 1):C361-C369",
+    "source_pmid": "8383429",
+    "source_doi": "10.1152/ajpcell.1993.264.2.C361",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/8383429/",
+    "uncertainty_and_limitations": "Channel blockade occurs in conjunction with Annexin A2 and MMP-2 co-receptors in tumor membranes; poorly active in normal glia.",
+    "provenance_record_id": "REF-CLTX-01",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent"
+    }
+  },
+  {
+    "relationship_id": "PTR-0022",
+    "peptide_canonical_id": "REF-TS1",
+    "peptide_name": "Ts1",
+    "peptide_origin": "natural",
+    "target_id": "TGT-NAV14",
+    "target_name": "Voltage-Gated Sodium Channel Nav1.4 (SCN4A)",
+    "target_family": "Voltage-gated Sodium Channel (Nav)",
+    "target_organism": "Homo sapiens (Skeletal Muscle)",
+    "interaction_type": "Site-4 Beta-Toxin Hyperpolarizing Activation Shift",
+    "evidence_class": "Direct experimental evidence",
+    "assay_method": "Two-electrode voltage-clamp in Xenopus oocytes",
+    "measured_endpoint": "EC50",
+    "measured_value": "12.4",
+    "measured_unit": "nM",
+    "experimental_context": "Induces hyperpolarizing shift of -18 mV in Nav1.4 activation threshold, causing tetanic muscle contractions.",
+    "source_citation": "Peigneur et al., Biochem Pharmacol 2012; 83(10):1441-1450",
+    "source_pmid": "22405988",
+    "source_doi": "10.1016/j.bcp.2012.02.024",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/22405988/",
+    "uncertainty_and_limitations": "Beta-toxin gating modification requires strong pre-depolarizing conditioning pulses for maximum effect.",
+    "provenance_record_id": "REF-TS1-01",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent"
+    }
+  },
+  {
+    "relationship_id": "PTR-0023",
+    "peptide_canonical_id": "SCA-0007",
+    "peptide_name": "AaeAP1",
+    "peptide_origin": "natural",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus",
+    "interaction_type": "Electrostatic Membrane Permeabilization",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "Propidium iodide influx fluorometry",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "Disrupts bacterial membrane integrity with MIC = 7.93 µM against S. aureus.",
+    "source_citation": "Du et al., J Pept Sci 2015; 21(12):875-882",
+    "source_pmid": "26577458",
+    "source_doi": "10.1002/psc.2829",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/26577458/",
+    "uncertainty_and_limitations": "Membrane permeabilization confirmed via dye uptake; single-molecule receptor unproven.",
+    "provenance_record_id": "SCA-EVD-0018",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0024",
+    "peptide_canonical_id": "SCA-0009",
+    "peptide_name": "AaeAP1_K_analogue",
+    "peptide_origin": "engineered_analog",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus",
+    "interaction_type": "Enhanced Cationic Membrane Disruption",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "SYTOX Green uptake & Calcein release",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "Lysine substitution increases net charge to +6.99, accelerating cytoplasmic membrane lysis.",
+    "source_citation": "Du et al., J Pept Sci 2015; 21(12):875-882",
+    "source_pmid": "26577458",
+    "source_doi": "10.1002/psc.2829",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/26577458/",
+    "uncertainty_and_limitations": "Accelerated lysis demonstrates enhanced affinity for anionic headgroups, but specific pore model is computational.",
+    "provenance_record_id": "SCA-EVD-0019",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0025",
+    "peptide_canonical_id": "SCA-0010",
+    "peptide_name": "AcrAP1",
+    "peptide_origin": "natural",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus",
+    "interaction_type": "Membrane Permeabilization",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "Calcein release assay",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "Permeabilizes bacterial model liposomes at MIC = 8.0 µM.",
+    "source_citation": "Du et al., J Pept Sci 2015; 21(12):875-882",
+    "source_pmid": "26577458",
+    "source_doi": "10.1002/psc.2829",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/26577458/",
+    "uncertainty_and_limitations": "Dye release confirms liposome permeabilization; live cell ultrastructure uncharacterized.",
+    "provenance_record_id": "SCA-EVD-0020",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0026",
+    "peptide_canonical_id": "SCA-0011",
+    "peptide_name": "AcrAP1_K_analogue",
+    "peptide_origin": "engineered_analog",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus",
+    "interaction_type": "Enhanced Cationic Membrane Disruption",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "SYTOX Green uptake",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "Increased charge (+5.99) boosts bactericidal potency (MIC 4.0 µM).",
+    "source_citation": "Du et al., J Pept Sci 2015; 21(12):875-882",
+    "source_pmid": "26577458",
+    "source_doi": "10.1002/psc.2829",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/26577458/",
+    "uncertainty_and_limitations": "Lipid dye leakage only; receptor-mediated action excluded.",
+    "provenance_record_id": "SCA-EVD-0021",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0027",
+    "peptide_canonical_id": "SCA-0015",
+    "peptide_name": "Hadrurin",
+    "peptide_origin": "natural",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Bacillus subtilis & Escherichia coli",
+    "interaction_type": "Biphasic Helical Pore Lysis",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "Calcein release from neutral/acidic liposomes & hemolysis",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "Broad antibacterial activity with significant hemolytic background (20% at 20 µM).",
+    "source_citation": "Torres-Larios et al., Eur J Biochem 2000; 267(16):5023-5031",
+    "source_pmid": "10931185",
+    "source_doi": "10.1046/j.1432-1327.2000.01556.x",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/10931185/",
+    "uncertainty_and_limitations": "Non-specific lysis across mammalian and microbial membranes.",
+    "provenance_record_id": "SCA-EVD-0015",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0028",
+    "peptide_canonical_id": "SCA-0019",
+    "peptide_name": "AaeAP2",
+    "peptide_origin": "natural",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus",
+    "interaction_type": "Membrane Permeabilization",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "Dye leakage fluorometry",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "MIC = 8.05 µM; bacterial membrane lysis confirmed.",
+    "source_citation": "Du et al., J Pept Sci 2015; 21(12):875-882",
+    "source_pmid": "26577458",
+    "source_doi": "10.1002/psc.2829",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/26577458/",
+    "uncertainty_and_limitations": "No direct receptor identified.",
+    "provenance_record_id": "SCA-EVD-0022",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0029",
+    "peptide_canonical_id": "SCA-0020",
+    "peptide_name": "AaeAP2_K_analogue",
+    "peptide_origin": "engineered_analog",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus",
+    "interaction_type": "Enhanced Cationic Membrane Disruption",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "SYTOX Green uptake",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "Net charge +6.99 enhances membrane depolarization rate (MIC 1.83 µM).",
+    "source_citation": "Du et al., J Pept Sci 2015; 21(12):875-882",
+    "source_pmid": "26577458",
+    "source_doi": "10.1002/psc.2829",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/26577458/",
+    "uncertainty_and_limitations": "Target limited to bacterial membrane lipid bilayer.",
+    "provenance_record_id": "SCA-EVD-0023",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0030",
+    "peptide_canonical_id": "SCA-0017",
+    "peptide_name": "ToAP1",
+    "peptide_origin": "natural",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus",
+    "interaction_type": "Membrane Permeabilization",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "SYTOX Green uptake & CFU viability count",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "Weak bactericidal activity (MIC = 50.0 µM) accompanied by delayed membrane permeabilization.",
+    "source_citation": "Gomes et al., Toxicon 2018; 155:18-26",
+    "source_pmid": "30292850",
+    "source_doi": "10.1016/j.toxicon.2018.10.002",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/30292850/",
+    "uncertainty_and_limitations": "Low potency; requires high concentrations to observe membrane perturbation.",
+    "provenance_record_id": "SCA-EVD-0024",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  },
+  {
+    "relationship_id": "PTR-0031",
+    "peptide_canonical_id": "SCA-0018",
+    "peptide_name": "ToAP3",
+    "peptide_origin": "natural",
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus",
+    "interaction_type": "Membrane Permeabilization",
+    "evidence_class": "Indirect experimental evidence",
+    "assay_method": "SYTOX Green uptake fluorometry",
+    "measured_endpoint": null,
+    "measured_value": null,
+    "measured_unit": null,
+    "experimental_context": "MIC = 25.0 µM; dye leakage observed at threshold concentrations.",
+    "source_citation": "Gomes et al., Toxicon 2018; 155:18-26",
+    "source_pmid": "30292850",
+    "source_doi": "10.1016/j.toxicon.2018.10.002",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/30292850/",
+    "uncertainty_and_limitations": "Membrane dye leakage only; no macromolecular receptor.",
+    "provenance_record_id": "SCA-EVD-0025",
+    "cross_module_links": {
+      "venomlab": "#venomlab",
+      "agent": "#research-agent",
+      "prioritization": "#prioritization"
+    }
+  }
+];
 
   function initTargetExplorer() {
     const container = $('target-cards-container');
+    const tableWrapper = $('target-table-wrapper');
+    const tableBody = $('target-table-body');
     const dialog = $('target-detail-dialog');
     const closeBtn = $('target-modal-close');
+    const searchInput = $('target-search-input');
+    const viewCardsBtn = $('t-view-cards');
+    const viewTableBtn = $('t-view-table');
+    const statsCount = $('target-stats-count');
+    const statsBreakdown = $('target-stats-breakdown');
+
     if (!container || !dialog) return;
 
+    let targets = TARGET_REGISTRY_DATA;
+    let relationships = PEPTIDE_TARGET_RELATIONSHIPS;
     let selectedCat = 'all';
     let selectedStatus = 'all';
+    let searchQuery = '';
+    let currentView = 'cards';
 
-    function renderTargets() {
-      const filtered = targetCatalog.filter(t => {
-        const matchCat = (selectedCat === 'all' || t.category === selectedCat);
-        const matchStatus = (selectedStatus === 'all' || t.status === selectedStatus);
-        return matchCat && matchStatus;
+    // Attempt live fetch to keep in sync if updated dynamically
+    (async () => {
+      try {
+        const [tRes, rRes] = await Promise.all([
+          fetch('data/target_registry.json'),
+          fetch('data/peptide_target_relationships.json')
+        ]);
+        if (tRes.ok && rRes.ok) {
+          targets = await tRes.json();
+          relationships = await rRes.json();
+          render();
+        }
+      } catch (e) {
+        // Fallback to embedded authoritative data
+      }
+    })();
+
+    function getEvidenceBadgeClass(eclass) {
+      if (eclass === 'Direct experimental evidence') return 'ev-direct';
+      if (eclass === 'Indirect experimental evidence') return 'ev-indirect';
+      if (eclass === 'Computational hypothesis') return 'ev-computational';
+      return 'ev-unassayed';
+    }
+
+    function getEvidenceLabelAr(eclass) {
+      if (eclass === 'Direct experimental evidence') return 'مباشر تجريبياً (Direct)';
+      if (eclass === 'Indirect experimental evidence') return 'غير مباشر تجريبياً (Indirect)';
+      if (eclass === 'Computational hypothesis') return 'فرضية حاسوبية (Hypothesis)';
+      return 'غير مفحوص (Unassayed / Negative)';
+    }
+
+    function filterData() {
+      const q = searchQuery.trim().toLowerCase();
+
+      // Filter targets
+      const filteredTargets = targets.filter(t => {
+        // Category filter
+        let matchCat = true;
+        if (selectedCat === 'membrane') matchCat = t.target_family === 'Bacterial Membrane (Lipid Matrix)';
+        else if (selectedCat === 'lps') matchCat = t.target_family === 'Bacterial Outer Membrane';
+        else if (selectedCat === 'nav') matchCat = t.target_family.includes('Sodium');
+        else if (selectedCat === 'kv') matchCat = t.target_family.includes('Potassium');
+        else if (selectedCat === 'trpa1') matchCat = t.target_family.includes('TRP');
+        else if (selectedCat === 'chloride') matchCat = t.target_family.includes('Chloride');
+        else if (selectedCat === 'biofilm') matchCat = t.target_family.includes('Biofilm');
+        else if (selectedCat === 'negative') matchCat = t.target_id === 'TGT-INTRA-DNA' || t.target_id === 'TGT-BAC-LIPID2';
+
+        // Status filter
+        let matchStatus = true;
+        if (selectedStatus === 'direct') matchStatus = t.default_evidence_class === 'Direct experimental evidence';
+        else if (selectedStatus === 'indirect') matchStatus = t.default_evidence_class === 'Indirect experimental evidence';
+        else if (selectedStatus === 'computational') matchStatus = t.default_evidence_class === 'Computational hypothesis';
+        else if (selectedStatus === 'unassayed') matchStatus = t.default_evidence_class === 'Unknown / unassayed';
+
+        // Search query
+        let matchQuery = true;
+        if (q) {
+          const linkedPeptides = relationships.filter(r => r.target_id === t.target_id).map(r => r.peptide_name.toLowerCase() + ' ' + r.peptide_canonical_id.toLowerCase()).join(' ');
+          const text = (t.target_name_ar + ' ' + t.target_name_en + ' ' + t.target_family + ' ' + t.normalized_identifier + ' ' + t.description_ar + ' ' + linkedPeptides).toLowerCase();
+          matchQuery = text.includes(q);
+        }
+
+        return matchCat && matchStatus && matchQuery;
       });
 
-      container.innerHTML = filtered.map(t => {
-        return `
-          <div class="target-card" data-tid="${t.id}" tabindex="0" role="button" aria-label="عرض تفاصيل ${esc(t.name)}">
-            <div>
-              <div class="target-card-header">
-                <h3>${esc(t.name)}</h3>
-                <span class="target-status-badge ${t.status}">${esc(t.statusLabel)}</span>
-              </div>
-              <p class="target-desc">${esc(t.desc)}</p>
-            </div>
-            <div>
-              <div class="target-meta-row">
-                <div class="target-meta-item">
-                  <span>منهج الفحص:</span> ${esc(t.assay)}
-                </div>
-              </div>
-              <div class="target-meta-row" style="margin-top:6px;">
-                <div class="target-meta-item">
-                  <span>الببتيدات المرتبطة:</span> <strong>${t.peptides.length}</strong> ببتيداً في الأطلس
-                </div>
-              </div>
-            </div>
-          </div>
+      // Filter relationships
+      const filteredRels = relationships.filter(r => {
+        let matchCat = true;
+        if (selectedCat === 'membrane') matchCat = r.target_family === 'Bacterial Membrane (Lipid Matrix)';
+        else if (selectedCat === 'lps') matchCat = r.target_family === 'Bacterial Outer Membrane';
+        else if (selectedCat === 'nav') matchCat = r.target_family.includes('Sodium');
+        else if (selectedCat === 'kv') matchCat = r.target_family.includes('Potassium');
+        else if (selectedCat === 'trpa1') matchCat = r.target_family.includes('TRP');
+        else if (selectedCat === 'chloride') matchCat = r.target_family.includes('Chloride');
+        else if (selectedCat === 'biofilm') matchCat = r.target_family.includes('Biofilm');
+        else if (selectedCat === 'negative') matchCat = r.target_id === 'TGT-INTRA-DNA' || r.target_id === 'TGT-BAC-LIPID2';
+
+        let matchStatus = true;
+        if (selectedStatus === 'direct') matchStatus = r.evidence_class === 'Direct experimental evidence';
+        else if (selectedStatus === 'indirect') matchStatus = r.evidence_class === 'Indirect experimental evidence';
+        else if (selectedStatus === 'computational') matchStatus = r.evidence_class === 'Computational hypothesis';
+        else if (selectedStatus === 'unassayed') matchStatus = r.evidence_class === 'Unknown / unassayed';
+
+        let matchQuery = true;
+        if (q) {
+          const text = (r.peptide_name + ' ' + r.peptide_canonical_id + ' ' + r.target_name + ' ' + r.target_family + ' ' + r.interaction_type + ' ' + r.assay_method).toLowerCase();
+          matchQuery = text.includes(q);
+        }
+
+        return matchCat && matchStatus && matchQuery;
+      });
+
+      return { targets: filteredTargets, relationships: filteredRels };
+    }
+
+    function render() {
+      const { targets: fTargets, relationships: fRels } = filterData();
+
+      // 1. Update stats bar
+      if (statsCount) {
+        statsCount.innerHTML = `عرض <strong>${fTargets.length}</strong> هدفاً حيوياً و <strong>${fRels.length}</strong> علاقة موثقة`;
+      }
+      if (statsBreakdown) {
+        const directCount = fRels.filter(r => r.evidence_class === 'Direct experimental evidence').length;
+        const indirectCount = fRels.filter(r => r.evidence_class === 'Indirect experimental evidence').length;
+        const compCount = fRels.filter(r => r.evidence_class === 'Computational hypothesis').length;
+        const unassayedCount = fRels.filter(r => r.evidence_class === 'Unknown / unassayed').length;
+
+        statsBreakdown.innerHTML = `
+          <span class="ev-badge ev-direct">مباشر: ${directCount}</span>
+          <span class="ev-badge ev-indirect">غير مباشر: ${indirectCount}</span>
+          <span class="ev-badge ev-computational">فرضي: ${compCount}</span>
+          <span class="ev-badge ev-unassayed">غير مفحوص: ${unassayedCount}</span>
         `;
-      }).join('');
+      }
+
+      // 2. Render Target Cards
+      if (container) {
+        if (fTargets.length === 0) {
+          container.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: #9caf8c; background: rgba(18,27,20,0.4); border-radius: 8px;">
+              <span style="font-size: 28px; display: block; margin-bottom: 8px;">🔍</span>
+              <strong>لا توجد أهداف مطابقة لخيارات التصفية الحالية.</strong>
+              <p style="font-size: 12px; margin-top: 6px;">جرّب توسيع خيارات البحث أو إعادة تعيين فئة الهدف وقوة الدليل.</p>
+            </div>
+          `;
+        } else {
+          container.innerHTML = fTargets.map(t => {
+            const rels = relationships.filter(r => r.target_id === t.target_id);
+            const bClass = getEvidenceBadgeClass(t.default_evidence_class);
+            const bLabel = getEvidenceLabelAr(t.default_evidence_class);
+            const peptides = [...new Set(rels.map(r => r.peptide_name))];
+
+            return `
+              <div class="target-card" data-tid="${t.target_id}" tabindex="0" role="button" aria-label="عرض تفاصيل ${esc(t.target_name_ar)}">
+                <div>
+                  <div class="target-card-header">
+                    <div>
+                      <h3>${esc(t.target_name_ar)}</h3>
+                      <small style="color: #9caf8c; font-size: 11px; display: block; margin-top: 2px;">${esc(t.target_name_en)}</small>
+                    </div>
+                    <span class="ev-badge ${bClass}">${esc(bLabel)}</span>
+                  </div>
+                  <div style="margin-bottom: 10px;">
+                    <span style="font-size: 10px; background: #0f1711; border: 1px solid #354a2a; border-radius: 4px; padding: 2px 6px; color: #d4bc84;">${esc(t.normalized_identifier)}</span>
+                    <span style="font-size: 10px; color: #9caf8c; margin-right: 6px;">${esc(t.target_family)}</span>
+                  </div>
+                  <p class="target-desc" style="font-size: 12px; color: #cbd5e1; line-height: 1.6; margin-bottom: 14px;">${esc(t.description_ar)}</p>
+                </div>
+                <div>
+                  <div class="target-meta-row">
+                    <div class="target-meta-item">
+                      <span>الفحص الأساسي:</span> ${esc(t.primary_experimental_assays.slice(0, 2).join(' / '))}
+                    </div>
+                  </div>
+                  <div class="target-meta-row" style="margin-top: 8px;">
+                    <div class="target-meta-item">
+                      <span>الببتيدات المرتبطة:</span> <strong>${peptides.length}</strong> ببتيداً
+                      <div class="flex flex-wrap gap-1" style="margin-top: 6px;">
+                        ${peptides.slice(0, 5).map(p => `<span class="badge" style="font-size: 9px; padding: 1px 5px; background: rgba(142,194,133,0.15); color: #8ec285;">${esc(p)}</span>`).join('')}
+                        ${peptides.length > 5 ? `<span style="font-size: 9px; color: #9caf8c;">+${peptides.length - 5} آخرين</span>` : ''}
+                      </div>
+                    </div>
+                  </div>
+                  <div style="margin-top: 12px; padding: 8px; background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.25); border-radius: 4px;">
+                    <small style="color: #fca5a5; font-size: 10px; display: block; line-height: 1.5;">⚠️ ${esc(t.epistemic_guardrail_notes)}</small>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+
+      // 3. Render Table View
+      if (tableBody) {
+        if (fRels.length === 0) {
+          tableBody.innerHTML = `
+            <tr>
+              <td colspan="8" style="text-align: center; padding: 30px; color: #9caf8c;">
+                لا توجد علاقات مستهدفة مطابقة لمعايير البحث.
+              </td>
+            </tr>
+          `;
+        } else {
+          tableBody.innerHTML = fRels.map(r => {
+            const bClass = getEvidenceBadgeClass(r.evidence_class);
+            const bLabel = getEvidenceLabelAr(r.evidence_class);
+            const measDisplay = (r.measured_endpoint && r.measured_value && r.measured_unit)
+              ? `<strong>${esc(r.measured_endpoint)}</strong> = ${esc(r.measured_value)} ${esc(r.measured_unit)}`
+              : `<span style="color: #64748b;">— Null (غير مقاس)</span>`;
+
+            let citeDisplay = esc(r.source_citation || '—');
+            if (r.source_pmid) {
+              citeDisplay = `<a href="https://pubmed.ncbi.nlm.nih.gov/${r.source_pmid}/" target="_blank" rel="noopener noreferrer" style="color: #8ec285; text-decoration: underline;">PMID:${r.source_pmid}</a> <small>(${esc(r.source_citation)})</small>`;
+            } else if (r.source_doi) {
+              citeDisplay = `<a href="https://doi.org/${r.source_doi}" target="_blank" rel="noopener noreferrer" style="color: #8ec285; text-decoration: underline;">DOI</a> <small>(${esc(r.source_citation)})</small>`;
+            }
+
+            const links = r.cross_module_links || {};
+            const actions = Object.entries(links).map(([mod, href]) => {
+              let label = 'تفاصيل';
+              if (mod === 'venomlab') label = 'البنية 3D';
+              else if (mod === 'agent') label = 'المساعد';
+              else if (mod === 'prioritization') label = 'الفرز';
+              else if (mod === 'evidence') label = 'الأدلة';
+              return `<a href="${href}" class="action-btn">${label}</a>`;
+            }).join('');
+
+            return `
+              <tr data-tid="${r.target_id}" class="clickable-row" style="cursor: pointer;">
+                <td class="col-peptide">
+                  ${esc(r.peptide_name)}<br>
+                  <small style="color: #9caf8c; font-size: 10px; font-weight: normal;">${esc(r.peptide_canonical_id)}</small>
+                </td>
+                <td class="col-target">
+                  ${esc(r.target_name)}<br>
+                  <small style="color: #d4bc84; font-size: 10px;">${esc(r.target_id)}</small>
+                </td>
+                <td>
+                  ${esc(r.target_family)}<br>
+                  <small style="color: #94a3b8; font-size: 10px;">${esc(r.target_organism)}</small>
+                </td>
+                <td>
+                  <span class="ev-badge ${bClass}">${esc(bLabel)}</span><br>
+                  <small style="color: #9caf8c; font-size: 10px;">${esc(r.interaction_type)}</small>
+                </td>
+                <td style="font-size: 11px;">
+                  ${esc(r.assay_method)}
+                </td>
+                <td style="font-size: 11px; white-space: nowrap;">
+                  ${measDisplay}
+                </td>
+                <td style="font-size: 11px;">
+                  ${citeDisplay}
+                </td>
+                <td>
+                  <div class="action-links">${actions}</div>
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+      }
     }
 
     function showTargetDetail(targetId) {
-      const t = targetCatalog.find(x => x.id === targetId);
+      const t = targets.find(x => x.target_id === targetId);
       if (!t) return;
 
       const badge = $('target-modal-badge');
       const title = $('target-modal-title');
       const body = $('target-modal-body');
 
+      const rels = relationships.filter(r => r.target_id === targetId);
+      const bClass = getEvidenceBadgeClass(t.default_evidence_class);
+      const bLabel = getEvidenceLabelAr(t.default_evidence_class);
+
       if (badge) {
-        badge.textContent = t.statusLabel;
-        badge.className = `badge ${t.status === 'confirmed' ? 'measured' : 'conditional'}`;
+        badge.textContent = bLabel;
+        badge.className = `ev-badge ${bClass}`;
       }
-      if (title) title.textContent = t.name;
+      if (title) title.innerHTML = `${esc(t.target_name_ar)} <small style="display:block; font-size:12px; color:#9caf8c; font-weight:normal; margin-top:2px;">${esc(t.target_name_en)}</small>`;
 
       if (body) {
         body.innerHTML = `
-          <div class="target-detail-content">
-            <h4 style="color:#d4bc84; margin-top:0;">الآلية الجزيئية المفصلة</h4>
-            <p>${esc(t.desc)}</p>
-
-            <h4 style="color:#d4bc84;">التحقق التجريبي ومنهج القياس</h4>
-            <p><strong>طريقة الفحص المخبري:</strong> ${esc(t.assay)}</p>
-            <p><strong>المراجع الأولية:</strong> ${esc(t.references)}</p>
-
-            <h4 style="color:#d4bc84;">الببتيدات المتفاعلة في الأطلس (${t.peptides.length})</h4>
-            <div class="flex flex-wrap gap-2" style="margin-bottom:16px;">
-              ${t.peptides.map(p => `<span class="badge ${t.status === 'confirmed' ? 'measured' : 'annotated'}">${esc(p)}</span>`).join(' ')}
+          <div class="target-detail-content" style="color: #e2e8f0; font-size: 13px; line-height: 1.7;">
+            <div style="display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+              <span style="background: #111a13; border: 1px solid #354a2a; border-radius: 4px; padding: 4px 8px; font-size: 11px; color: #d4bc84;">معرّف الهدف: <strong>${esc(t.normalized_identifier)}</strong></span>
+              <span style="background: #111a13; border: 1px solid #354a2a; border-radius: 4px; padding: 4px 8px; font-size: 11px; color: #9caf8c;">العائلة: <strong>${esc(t.target_family)}</strong></span>
+              <span style="background: #111a13; border: 1px solid #354a2a; border-radius: 4px; padding: 4px 8px; font-size: 11px; color: #94a3b8;">الكائن المضيف: <strong>${esc(t.target_organism)}</strong></span>
             </div>
 
-            <div style="background:rgba(239, 68, 68, 0.1); border:1px solid rgba(239, 68, 68, 0.3); border-radius:6px; padding:12px; margin-top:16px;">
-              <strong style="color:#fca5a5; display:block; margin-bottom:4px;">تنبيه إبستيمولوجي وحدود المنهج:</strong>
-              <p style="margin:0; font-size:12px; color:#e2e8f0; line-height:1.7;">${esc(t.caution)}</p>
+            <h4 style="color:#8ec285; margin: 16px 0 6px 0; font-size: 14px;">الآلية الجزيئية المحددة</h4>
+            <p style="margin: 0 0 14px 0; color: #cbd5e1;">${esc(t.description_ar)}</p>
+            <p style="margin: 0 0 16px 0; font-size: 12px; color: #9caf8c; font-style: italic;">${esc(t.description_en)}</p>
+
+            <h4 style="color:#8ec285; margin: 16px 0 6px 0; font-size: 14px;">مناهج الفحص المخبري المعتمدة</h4>
+            <ul style="margin: 0 0 16px 20px; padding: 0; font-size: 12px; color: #d1d5db;">
+              ${t.primary_experimental_assays.map(a => `<li>${esc(a)}</li>`).join('')}
+            </ul>
+
+            <h4 style="color:#8ec285; margin: 16px 0 8px 0; font-size: 14px;">سجلات الأدلة والببتيدات المرتبطة (${rels.length})</h4>
+            <div style="overflow-x: auto; margin-bottom: 16px; border: 1px solid #2b3d2c; border-radius: 6px;">
+              <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                <thead>
+                  <tr style="background: #111a13; color: #9caf8c; text-align: right; border-bottom: 1px solid #2b3d2c;">
+                    <th style="padding: 6px 10px;">الببتيد</th>
+                    <th style="padding: 6px 10px;">التفاعل</th>
+                    <th style="padding: 6px 10px;">قوة الدليل</th>
+                    <th style="padding: 6px 10px;">القياس والقيمة</th>
+                    <th style="padding: 6px 10px;">المرجع</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rels.map(r => {
+                    const rc = getEvidenceBadgeClass(r.evidence_class);
+                    const val = (r.measured_endpoint && r.measured_value && r.measured_unit)
+                      ? `${r.measured_endpoint} = ${r.measured_value} ${r.measured_unit}`
+                      : '<span style="color:#64748b;">— Null</span>';
+                    const ref = r.source_pmid
+                      ? `<a href="https://pubmed.ncbi.nlm.nih.gov/${r.source_pmid}/" target="_blank" style="color:#8ec285;">PMID:${r.source_pmid}</a>`
+                      : (r.source_citation || '—');
+                    return `
+                      <tr style="border-bottom: 1px solid rgba(43,61,44,0.3);">
+                        <td style="padding: 6px 10px; font-weight:600;">${esc(r.peptide_name)} <small style="color:#9caf8c; font-weight:normal;">[${esc(r.peptide_canonical_id)}]</small></td>
+                        <td style="padding: 6px 10px;">${esc(r.interaction_type)}</td>
+                        <td style="padding: 6px 10px;"><span class="ev-badge ${rc}">${esc(r.evidence_class)}</span></td>
+                        <td style="padding: 6px 10px;">${val}</td>
+                        <td style="padding: 6px 10px;">${ref}</td>
+                      </tr>
+                    `;
+                  }).join('')}
+                </tbody>
+              </table>
+            </div>
+
+            <div style="background:rgba(239, 68, 68, 0.08); border:1px solid rgba(239, 68, 68, 0.35); border-radius:6px; padding:12px; margin-top:16px;">
+              <strong style="color:#fca5a5; display:block; margin-bottom:4px; font-size:12px;">🛡️ حاجز منهجي وتنبيه إبستيمولوجي صارم:</strong>
+              <p style="margin:0; font-size:11px; color:#e2e8f0; line-height:1.7;">${esc(t.epistemic_guardrail_notes)}</p>
             </div>
           </div>
         `;
@@ -1875,36 +3110,74 @@
       dialog.showModal();
     }
 
-    // Category pills click handlers
-    document.querySelectorAll('.target-pill').forEach(btn => {
+    // Event Listeners
+    // 1. Search input
+    searchInput?.addEventListener('input', e => {
+      searchQuery = e.target.value;
+      render();
+    });
+
+    // 2. View toggles
+    viewCardsBtn?.addEventListener('click', () => {
+      currentView = 'cards';
+      viewCardsBtn.classList.add('active');
+      viewCardsBtn.setAttribute('aria-pressed', 'true');
+      viewTableBtn.classList.remove('active');
+      viewTableBtn.setAttribute('aria-pressed', 'false');
+      if (container) container.hidden = false;
+      if (tableWrapper) tableWrapper.hidden = true;
+    });
+
+    viewTableBtn?.addEventListener('click', () => {
+      currentView = 'table';
+      viewTableBtn.classList.add('active');
+      viewTableBtn.setAttribute('aria-pressed', 'true');
+      viewCardsBtn.classList.remove('active');
+      viewCardsBtn.setAttribute('aria-pressed', 'false');
+      if (container) container.hidden = true;
+      if (tableWrapper) tableWrapper.hidden = false;
+    });
+
+    // 3. Category pills
+    document.querySelectorAll('#target-category-pills .target-pill').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.target-pill').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#target-category-pills .target-pill').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         selectedCat = btn.dataset.cat;
-        renderTargets();
+        render();
       });
     });
 
-    // Status pills click handlers
-    document.querySelectorAll('.status-pill').forEach(btn => {
+    // 4. Status pills
+    document.querySelectorAll('#target-status-pills .status-pill').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.status-pill').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#target-status-pills .status-pill').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         selectedStatus = btn.dataset.stat;
-        renderTargets();
+        render();
       });
     });
 
-    // Card click delegation
-    container.addEventListener('click', e => {
+    // 5. Card click delegation
+    container?.addEventListener('click', e => {
       const card = e.target.closest('.target-card');
       if (card && card.dataset.tid) {
         showTargetDetail(card.dataset.tid);
       }
     });
 
-    // Keyboard support for card accessibility
-    container.addEventListener('keydown', e => {
+    // 6. Table row click delegation
+    tableBody?.addEventListener('click', e => {
+      // Ignore click on links
+      if (e.target.tagName === 'A' || e.target.closest('a')) return;
+      const row = e.target.closest('tr.clickable-row');
+      if (row && row.dataset.tid) {
+        showTargetDetail(row.dataset.tid);
+      }
+    });
+
+    // 7. Keyboard support
+    container?.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
         const card = e.target.closest('.target-card');
         if (card && card.dataset.tid) {
@@ -1914,14 +3187,16 @@
       }
     });
 
+    // 8. Dialog closing
     closeBtn?.addEventListener('click', () => dialog.close());
-    dialog.addEventListener('click', e => {
+    dialog?.addEventListener('click', e => {
       if (e.target === dialog) dialog.close();
     });
 
-    renderTargets();
+    render();
     targetExplorerInitialized = true;
   }
+
 
   async function loadData() {
     $('data-error').hidden = true;

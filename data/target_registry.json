@@ -1,0 +1,182 @@
+[
+  {
+    "target_id": "TGT-BAC-PG-MEM",
+    "target_name_en": "Bacterial Cytoplasmic Membrane (Phosphatidylglycerol / Cardiolipin Matrix)",
+    "target_name_ar": "غشاء السيتوبلازم البكتيري (مصفوفة الفوسفاتيديل جليسرول والكارديوليبين سالبة الشحنة)",
+    "normalized_identifier": "ChEBI:28874",
+    "target_family": "Bacterial Membrane (Lipid Matrix)",
+    "target_organism": "Staphylococcus aureus / General Bacteria",
+    "description_en": "Electrostatic association between cationic peptide residues and negatively charged phospholipid headgroups, followed by hydrophobic insertion into the lipid acyl core, membrane depolarization, and non-specific permeabilization.",
+    "description_ar": "ارتباط كهروستاتيكي بين الببتيدات الكاتيونية ورؤوس الفوسفوليبيدات سالبة الشحنة يليه غرس كاره للماء وانهيار فرق الجهد الغشائي ونفاذية الخلية.",
+    "default_evidence_class": "Indirect experimental evidence",
+    "primary_experimental_assays": [
+      "SYTOX Green fluorescence influx",
+      "Calcein dye release",
+      "Planar lipid bilayer voltage clamp (BLM)",
+      "DiSC3(5) membrane potential fluorometry"
+    ],
+    "epistemic_guardrail_notes": "Fluorescent dye leakage or depolarization confirms non-specific membrane disruption; it does not prove a specific geometric pore model (e.g. toroidal vs barrel-stave vs carpet) in the absence of solid-state NMR."
+  },
+  {
+    "target_id": "TGT-BAC-LPS",
+    "target_name_en": "Bacterial Outer Membrane (Lipopolysaccharide / Lipid A)",
+    "target_name_ar": "الغشاء الخارجي للبكتيريا سالبة غرام (عديد السكاريد الشحمي / ليبيد A)",
+    "normalized_identifier": "ChEBI:16412",
+    "target_family": "Bacterial Outer Membrane",
+    "target_organism": "Gram-negative Bacteria (Escherichia coli, Pseudomonas aeruginosa)",
+    "description_en": "Competitive displacement of divalent stabilizing cations (Mg2+, Ca2+) from outer membrane lipopolysaccharide networks, promoting self-promoted uptake across the Gram-negative barrier.",
+    "description_ar": "إزاحة تنافسية لكاتيونات المغنيسيوم والكالسيوم الثنائية التي تثبت شبكة عديد السكاريد الشحمي (LPS)، مما يسهل النفاذ الذاتي عبر جدار البكتيريا سالبة غرام.",
+    "default_evidence_class": "Indirect experimental evidence",
+    "primary_experimental_assays": [
+      "Dansyl-polymyxin B displacement",
+      "Periplasmic nitrocefin hydrolysis assay",
+      "1-N-phenylnaphthylamine (NPN) uptake"
+    ],
+    "epistemic_guardrail_notes": "LPS permeabilization requires sufficient positive charge (+4 to +6) and amphipathicity, but outer membrane disorganization does not equate to bactericidal killing without inner membrane disruption."
+  },
+  {
+    "target_id": "TGT-NAV12",
+    "target_name_en": "Voltage-Gated Sodium Channel Nav1.2 (SCN2A)",
+    "target_name_ar": "قناة الصوديوم المبوّبة بالجهد Nav1.2",
+    "normalized_identifier": "UniProt:Q99250",
+    "target_family": "Voltage-gated Sodium Channel (Nav)",
+    "target_organism": "Mammalian CNS / Rattus norvegicus / Homo sapiens",
+    "description_en": "High-affinity binding to Neurotoxin Receptor Site 3 on the extracellular loop of domain IV, hindering the conformational shift required for fast inactivation and producing prolonged inward sodium currents.",
+    "description_ar": "ارتباط عالي الألفة بالموقع 3 لمستقبلات السموم العصبية على النطاق الرابع، مما يعطل آلية الإغلاق السريع ويسبب تيار صوديوم داخلي مستمر.",
+    "default_evidence_class": "Direct experimental evidence",
+    "primary_experimental_assays": [
+      "Whole-cell patch-clamp electrophysiology",
+      "Two-electrode voltage clamp (TEVC)",
+      "Radioligand binding assay (125I-AaH2)"
+    ],
+    "epistemic_guardrail_notes": "Classic site-3 alpha-neurotoxin target. Confirmed exclusively for cross-linked long-chain neurotoxins (e.g. AaH2); linear antimicrobial peptides show no activity on voltage-gated sodium channels."
+  },
+  {
+    "target_id": "TGT-NAV14",
+    "target_name_en": "Voltage-Gated Sodium Channel Nav1.4 (SCN4A)",
+    "target_name_ar": "قناة الصوديوم المبوّبة بالجهد في العضلات الهيكلية Nav1.4",
+    "normalized_identifier": "UniProt:P35499",
+    "target_family": "Voltage-gated Sodium Channel (Nav)",
+    "target_organism": "Mammalian Skeletal Muscle / Homo sapiens",
+    "description_en": "Interaction with Neurotoxin Receptor Site 4 (voltage-sensing domain II), causing a hyperpolarizing shift in the voltage-dependence of activation and spontaneous repetitive firing.",
+    "description_ar": "تفاعل مع الموقع 4 لمستقبلات السموم في نطاق استشعار الجهد الثاني، مما يزيح عتبة التنشيط إلى جهود أكثر سلبية ويسبب إطلاقاً عصبياً متكرراً.",
+    "default_evidence_class": "Direct experimental evidence",
+    "primary_experimental_assays": [
+      "Two-electrode voltage-clamp in Xenopus oocytes",
+      "Whole-cell patch clamp"
+    ],
+    "epistemic_guardrail_notes": "Beta-scorpion toxin target (e.g., Ts1, Css4); distinct from Site-3 alpha-toxins and unrelated to non-disulfide antimicrobial peptides."
+  },
+  {
+    "target_id": "TGT-KV13",
+    "target_name_en": "Voltage-Gated Potassium Channel Kv1.3 (KCNA3)",
+    "target_name_ar": "قناة البوتاسيوم المبوّبة بالجهد Kv1.3",
+    "normalized_identifier": "UniProt:P22001",
+    "target_family": "Voltage-gated Potassium Channel (Kv)",
+    "target_organism": "Homo sapiens (Human T lymphocytes)",
+    "description_en": "Physical occlusion of the outer ion conduction pore via a conserved lysine sidechain (Lys27) inserting directly into the selectivity filter, blocking potassium efflux.",
+    "description_ar": "سد ميكانيكي مباشر لمسار تدفق الأيونات الخارجي عبر إدخال ثمالة لايسين محفوظة (Lys27) في مرشح الانتقائية الأيوني لمنع خروج البوتاسيوم.",
+    "default_evidence_class": "Direct experimental evidence",
+    "primary_experimental_assays": [
+      "Whole-cell patch-clamp electrophysiology on Jurkat T cells",
+      "Competitive radioligand displacement (125I-margatoxin / 125I-kaliotoxin)"
+    ],
+    "epistemic_guardrail_notes": "Potent target of short disulfide-rich scorpion toxins (e.g. Kaliotoxin, Charybdotoxin, Margatoxin) and dual-domain toxins (Scorpine). Linear antimicrobial peptides do not block Kv channels."
+  },
+  {
+    "target_id": "TGT-KCA11",
+    "target_name_en": "Large-Conductance Calcium-Activated Potassium Channel KCa1.1 / BK (KCNMA1)",
+    "target_name_ar": "قناة البوتاسيوم الكبيرة المنشطة بالكالسيوم KCa1.1 (قناة BK)",
+    "normalized_identifier": "UniProt:Q12791",
+    "target_family": "Calcium-activated Potassium Channel (KCa)",
+    "target_organism": "Mammalian Vascular Smooth Muscle / CNS",
+    "description_en": "High-affinity pore block at the outer vestibule of the BK channel tetramer mediated by ring of hydrophobic and basic residues.",
+    "description_ar": "سد عالي الألفة لدهليز مسام قناة BK الخارجية عبر حلقة من الثمالات الكارهة للماء والأساسية.",
+    "default_evidence_class": "Direct experimental evidence",
+    "primary_experimental_assays": [
+      "Single-channel planar lipid bilayer recordings",
+      "Whole-cell patch-clamp"
+    ],
+    "epistemic_guardrail_notes": "Specifically targeted by Charybdotoxin and Iberiotoxin; inactive against linear cationic peptides."
+  },
+  {
+    "target_id": "TGT-TRPA1",
+    "target_name_en": "Transient Receptor Potential Ankyrin 1 (TRPA1)",
+    "target_name_ar": "مستقبل الجهد الكاتيوني العابر TRPA1 (مستقبل الألم الحسي)",
+    "normalized_identifier": "UniProt:O75762",
+    "target_family": "Transient Receptor Potential (TRP Channel)",
+    "target_organism": "Homo sapiens / Mus musculus (Nociceptive Sensory Neurons)",
+    "description_en": "Direct non-electrophilic penetration of the lipid bilayer and binding to an allosteric pocket inside the intracellular transmembrane domain, locking the channel open to elicit acute chemical pain.",
+    "description_ar": "اختراق غشائي مباشر والارتباط بجيب ألوستيري داخل النطاق عبر الغشائي داخل الخلوي، مما يقفل القناة في وضعية الفتح المستمر مسبباً ألماً عصبياً حاداً.",
+    "default_evidence_class": "Direct experimental evidence",
+    "primary_experimental_assays": [
+      "Cryo-EM structural complex resolution (PDB: 6OFA)",
+      "Ratiometric Fura-2 calcium imaging",
+      "Whole-cell patch clamp"
+    ],
+    "epistemic_guardrail_notes": "Mechanistically unique to Wasabi Toxin (WaTx) from Urodacus manicatus. Demonstrates membrane-penetrating non-disruptive peptide targeting an intracellular channel pocket."
+  },
+  {
+    "target_id": "TGT-CLC3",
+    "target_name_en": "Voltage-Gated Chloride Channel ClC-3 / Annexin A2 Complex",
+    "target_name_ar": "قناة الكلوريد المبوّبة بالجهد ClC-3 ومُعقد أنيكسين A2",
+    "normalized_identifier": "UniProt:P51790",
+    "target_family": "Chloride Channel / Auxiliary Receptor",
+    "target_organism": "Homo sapiens (Glioma Cells)",
+    "description_en": "Selective inhibition of glioma-specific voltage-activated chloride currents through binding to the ClC-3 channel/Annexin A2/MMP-2 surface complex, inhibiting cell volume regulation.",
+    "description_ar": "تثبيط نوعي لتيارات الكلوريد في خلايا أورام الدماغ الدبقية عبر الارتباط بمعقد قناة ClC-3 وأنيكسين A2، مما يعطل تنظيم حجم الخلية.",
+    "default_evidence_class": "Direct experimental evidence",
+    "primary_experimental_assays": [
+      "Whole-cell patch-clamp chloride current recordings",
+      "Radiolabeled 125I-chlorotoxin binding and glioma cell internalization"
+    ],
+    "epistemic_guardrail_notes": "Target specific to Chlorotoxin from Leiurus quinquestriatus; does not generalize across antimicrobial scorpion peptides."
+  },
+  {
+    "target_id": "TGT-BIOFILM-EPS",
+    "target_name_en": "Bacterial Biofilm Matrix (Extracellular Polymeric Substances - EPS)",
+    "target_name_ar": "مصفوفة الغشاء الحيوي البكتيري (السكريات خارج الخلوية والـ eDNA)",
+    "normalized_identifier": "ChEBI:60027",
+    "target_family": "Bacterial Biofilm Matrix",
+    "target_organism": "Pseudomonas aeruginosa / Staphylococcus aureus biofilms",
+    "description_en": "Observed phenotype of total biofilm biomass reduction and eradication, possibly via disruption of matrix hydration or early EPS adhesion.",
+    "description_ar": "نمط ظاهري تجريبي لتشتيت كتلة الغشاء الحيوي البكتيري، يعتقد أنه ناتج عن خلخلة قوى التماسك في مصفوفة السكريات خارج الخلوية.",
+    "default_evidence_class": "Indirect experimental evidence",
+    "primary_experimental_assays": [
+      "Crystal violet biomass staining",
+      "Confocal laser scanning microscopy (CLSM) biomass quantification"
+    ],
+    "epistemic_guardrail_notes": "Classified strictly as an observed phenotype (Indirect evidence). No direct biophysical binding affinity or enzymatic cleavage of EPS polysaccharides has been demonstrated for StigA16 or StigA6."
+  },
+  {
+    "target_id": "TGT-INTRA-DNA",
+    "target_name_en": "Bacterial Intracellular Targets (DNA/RNA / Protein Synthesis Machinery)",
+    "target_name_ar": "الأهداف البكتيرية داخل الخلوية (الحمض النووي والترجمة الريبوسومية)",
+    "normalized_identifier": "ChEBI:16991",
+    "target_family": "Intracellular Macromolecules",
+    "target_organism": "Bacterial Cytosol",
+    "description_en": "Theoretical hypothesis proposing that non-lytic translocation enables direct binding to nucleic acids or ribosomes to halt macromolecular synthesis, adapted from amphibian buforin-like models.",
+    "description_ar": "فرضية نظرية مفادها أن الببتيدات قد تنفذ داخل السيتوبلازم دون تمزيق الغشاء لترتبط بالحمض النووي أو الريبوسوم لمنع التخليق الحيوي.",
+    "default_evidence_class": "Unknown / unassayed",
+    "primary_experimental_assays": [
+      "Electrophoretic mobility shift assay (EMSA) - None published for scorpion candidates",
+      "In-vitro coupled transcription-translation inhibition - None published"
+    ],
+    "epistemic_guardrail_notes": "Explicit Negative Control / Unsupported Hypothesis. The atlas strictly rejects classifying this as an active target for scorpion peptides in the absence of peer-reviewed electrophoretic or biochemical evidence."
+  },
+  {
+    "target_id": "TGT-BAC-LIPID2",
+    "target_name_en": "Bacterial Peptidoglycan Precursor (Lipid II)",
+    "target_name_ar": "طليعة ببتيدوجلايكان جدار الخلية (ليبيد II)",
+    "normalized_identifier": "ChEBI:60589",
+    "target_family": "Bacterial Cell Wall Precursor",
+    "target_organism": "Bacterial Envelope (Gram-positive & Gram-negative)",
+    "description_en": "In-silico molecular docking models predicting interaction between amphipathic peptide N-termini and the pyrophosphate/sugar moiety of Lipid II, analogous to nisin.",
+    "description_ar": "نماذج محاكاة حاسوبية تتنبأ بإمكانية ارتباط الطرف النتروجيني للببتيدات بمجموعة البيروفوسفات في جزيء ليبيد II على غرار ببتيد النيسين.",
+    "default_evidence_class": "Computational hypothesis",
+    "primary_experimental_assays": [
+      "In-silico autodock vina / molecular dynamics simulations (No experimental ITC / SPR titration published)"
+    ],
+    "epistemic_guardrail_notes": "Computational hypothesis only. The atlas does not treat docking energies as experimental binding affinities; no crystallographic or biophysical titration proves direct Lipid II binding for our scorpion candidates."
+  }
+]

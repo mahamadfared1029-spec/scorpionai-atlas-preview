@@ -791,32 +791,76 @@
       </div>
     </div>
 
-    <!-- Target Filter Bar -->
+    <!-- Target Controls & Filters -->
     <div class="target-filter-bar reveal">
+      <div class="target-search-row">
+        <div class="target-search-box">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#9caf8c" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input id="target-search-input" type="search" placeholder="ابحث باسم الببتيد (Stigmurin, Kn2-7, WaTx) أو الهدف (Nav, Kv, Membrane)..." aria-label="البحث في الأهداف والببتيدات">
+        </div>
+        <div class="target-view-toggle" role="group" aria-label="طريقة العرض">
+          <button id="t-view-cards" class="target-view-btn active" aria-pressed="true">بطاقات الأهداف 🗂️</button>
+          <button id="t-view-table" class="target-view-btn" aria-pressed="false">جدول الأدلة والقياسات 📊</button>
+        </div>
+      </div>
+
       <div class="target-filter-group">
         <span class="filter-label">فئة الهدف:</span>
         <div class="pill-group" id="target-category-pills">
           <button class="target-pill active" data-cat="all" id="t-cat-all">جميع الفئات</button>
-          <button class="target-pill" data-cat="membrane" id="t-cat-membrane">أغشية البكتيريا الدهنية</button>
-          <button class="target-pill" data-cat="ion-channel" id="t-cat-ion">قنوات الأيونات المبوّبة</button>
+          <button class="target-pill" data-cat="membrane" id="t-cat-membrane">غشاء السيتوبلازم (PG/CL)</button>
+          <button class="target-pill" data-cat="lps" id="t-cat-lps">الغشاء الخارجي (LPS)</button>
+          <button class="target-pill" data-cat="nav" id="t-cat-nav">قنوات الصوديوم (Nav)</button>
+          <button class="target-pill" data-cat="kv" id="t-cat-kv">قنوات البوتاسيوم (Kv/KCa)</button>
+          <button class="target-pill" data-cat="trpa1" id="t-cat-trpa1">مستقبلات الألم (TRPA1)</button>
+          <button class="target-pill" data-cat="chloride" id="t-cat-clc">قنوات الكلوريد (ClC-3)</button>
           <button class="target-pill" data-cat="biofilm" id="t-cat-biofilm">المصفوفة الحيوية (Biofilm)</button>
-          <button class="target-pill" data-cat="intracellular" id="t-cat-intra">الأهداف داخل الخلوية</button>
+          <button class="target-pill" data-cat="negative" id="t-cat-neg">ضوابط سلبية وفرضيات</button>
         </div>
       </div>
+
       <div class="target-filter-group">
-        <span class="filter-label">حالة التحقق:</span>
+        <span class="filter-label">قوة الدليل:</span>
         <div class="pill-group" id="target-status-pills">
-          <button class="status-pill active" data-stat="all" id="t-stat-all">الكل</button>
-          <button class="status-pill" data-stat="confirmed" id="t-stat-confirmed">مؤكد تجريبياً (Confirmed)</button>
-          <button class="status-pill" data-stat="proposed" id="t-stat-proposed">نموذج مقترح (Proposed)</button>
-          <button class="status-pill" data-stat="unsubstantiated" id="t-stat-unsub">فرضية غير مثبتة (Negative Control)</button>
+          <button class="status-pill active" data-stat="all" id="t-stat-all">كل الأدلة</button>
+          <button class="status-pill" data-stat="direct" id="t-stat-direct">مباشر تجريبياً (Direct)</button>
+          <button class="status-pill" data-stat="indirect" id="t-stat-indirect">غير مباشر تجريبياً (Indirect)</button>
+          <button class="status-pill" data-stat="computational" id="t-stat-comp">فرضية حاسوبية (Hypothesis)</button>
+          <button class="status-pill" data-stat="unassayed" id="t-stat-unassayed">غير مفحوص (Unassayed)</button>
         </div>
       </div>
     </div>
 
-    <!-- Targets Cards Grid -->
+    <!-- Live Stats Summary Bar -->
+    <div class="target-stats-bar reveal" id="target-stats-bar">
+      <span id="target-stats-count">جارٍ تحميل بيانات الأهداف الجزيئية...</span>
+      <div class="target-stats-breakdown" id="target-stats-breakdown"></div>
+    </div>
+
+    <!-- View 1: Targets Cards Grid -->
     <div class="target-cards-grid reveal" id="target-cards-container">
       <!-- Populated dynamically via app.js -->
+    </div>
+
+    <!-- View 2: Peptide-Target Evidence Relationships Table -->
+    <div class="target-table-wrapper reveal" id="target-table-wrapper" hidden>
+      <table class="target-table" id="target-evidence-table">
+        <thead>
+          <tr>
+            <th>الببتيد والمعرف القانوني</th>
+            <th>الهدف البيولوجي (المعرف)</th>
+            <th>فئة الهدف والكائن</th>
+            <th>فئة الدليل العلمي</th>
+            <th>طريقة الفحص المخبري</th>
+            <th>القياس التجريبي والقيمة</th>
+            <th>المرجع العلمي والتوثيق</th>
+            <th>روابط الأطلس</th>
+          </tr>
+        </thead>
+        <tbody id="target-table-body">
+          <!-- Populated dynamically via app.js -->
+        </tbody>
+      </table>
     </div>
 
     <!-- Target Detail Dialog Modal -->

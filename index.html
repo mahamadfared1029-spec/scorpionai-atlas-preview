@@ -90,15 +90,15 @@
  <section class="hero" id="home" aria-labelledby="hero-title">
   <div class="hero-orbit" aria-hidden="true"></div>
   <div class="hero-copy">
-   <p class="eyebrow"><span class="live-dot"></span> حيث يلتقي التنوع الحيوي بالذكاء الحسابي</p>
-   <h1 id="hero-title">من عالَمٍ صغير،<br>إلى <em>احتمالاتٍ كبيرة.</em></h1>
-   <p class="hero-description">اكتشف الجزيئات الكامنة في سموم العقارب.<br>أطلس يجمع التسلسلات والخصائص والأدلة العلمية،<br class="desktop-break"> ليمنح البحث نقطة انطلاق أوضح وأدق.</p>
+   <p class="eyebrow" data-i18n="hero.badge"><span class="live-dot"></span> حيث يلتقي التنوع الحيوي بالذكاء الحسابي</p>
+   <h1 id="hero-title"><span data-i18n="hero.title_prefix">من عالَمٍ صغير،</span><br><em data-i18n="hero.title_highlight">إلى احتمالاتٍ كبيرة.</em></h1>
+   <p class="hero-description" data-i18n="hero.subtitle">اكتشف الجزيئات الكامنة في سموم العقارب.<br>أطلس يجمع التسلسلات والخصائص والأدلة العلمية،<br class="desktop-break"> ليمنح البحث نقطة انطلاق أوضح وأدق.</p>
    <div class="hero-actions">
      <button class="button secondary" type="button" id="intro-replay">مشاهدة الدخولية <span aria-hidden="true">▶</span></button>
      
-     <a class="button primary" href="#atlas">استكشف الأطلس <span aria-hidden="true">↙</span></a>
-     <a class="button secondary" href="#methods-evidence">مستكشف الأدلة الـ32 <span aria-hidden="true">🔬</span></a>
-     <a class="text-link" href="#approach"><span class="play-icon" aria-hidden="true">▶</span> وراء البيانات</a>
+     <a class="button primary" href="#atlas" data-i18n="hero.btn_explore_atlas">استكشف الأطلس <span aria-hidden="true">↙</span></a>
+     <a class="button secondary" href="#methods-evidence" data-i18n="hero.btn_methods_center">مستكشف الأدلة الـ32 <span aria-hidden="true">🔬</span></a>
+     <a class="text-link" href="#approach" data-i18n="hero.btn_3d_viewer"><span class="play-icon" aria-hidden="true">▶</span> وراء البيانات</a>
    </div>
    <div class="hero-edition">
      <span class="edition-line"></span>
@@ -116,7 +116,7 @@
 
  <!-- عارض تشريح العقرب ثلاثي الأبعاد والعمليات الحيوية والقتال المدمج من حزمة المالك -->
  <section class="atlas-anatomy" id="scorpion-anatomy" aria-labelledby="atlas-anatomy-title">
-   <h2 id="atlas-anatomy-title">العقرب من الداخل والخارج</h2>
+   <h2 id="atlas-anatomy-title" data-i18n="anatomy.title">العقرب من الداخل والخارج</h2>
    <iframe id="atlas-anatomy-frame" src="scorpion-viewer/anatomy.html?embedded=1" title="تشريح العقرب والعمليات الحيوية والقتال" allow="fullscreen" allowfullscreen></iframe>
  </section>
 
@@ -131,8 +131,8 @@
  <section class="atlas section-space" id="atlas" aria-labelledby="atlas-title">
   <div class="section-heading reveal">
     <div>
-      <p class="eyebrow"><span class="section-index">01 /</span> مكتبة الجزيئات</p>
-      <h2 id="atlas-title">اتبع فضولك.<br><span>اعثر على ببتيدك.</span></h2>
+      <p class="eyebrow" data-i18n="atlas.badge"><span class="section-index">01 /</span> مكتبة الجزيئات</p>
+      <h2 id="atlas-title" data-i18n="atlas.title">اتبع فضولك.<br><span>اعثر على ببتيدك.</span></h2>
     </div>
     <p>ابدأ باسم ببتيد، أو نوع عقرب، أو تسلسل.<br>كل سجل يقودك إلى خصائصه، ومستوى دليله، ومصدره الأصلي.</p>
   </div>
@@ -156,16 +156,16 @@
   <div class="catalog-controls">
     <label class="search">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg>
-      <input id="search" type="search" placeholder="ابحث عن Stigmurin أو نوع العقرب أو التسلسل…" aria-label="البحث في الأطلس" autocomplete="off">
+      <input id="search" type="search" placeholder="ابحث عن Stigmurin أو نوع العقرب أو التسلسل…" aria-label="البحث في الأطلس" autocomplete="off" data-i18n-placeholder="atlas.search_placeholder">
       <span class="search-key" aria-hidden="true">/</span>
     </label>
     <label class="select-label">
       <span class="sr-only">حالة الدليل</span>
       <select id="status-filter">
-        <option value="all">كل مستويات الدليل (1,232)</option>
-        <option value="measured">المستوى 1: MIC مقاس مخبرياً (18)</option>
-        <option value="annotated">المستوى 2: تعليق UniProt موثق (165)</option>
-        <option value="conditional">المستوى 3: أدلة غشاء حيوي شرطية (2)</option>
+        <option value="all" data-i18n="atlas.filter_all">كل مستويات الدليل (1,232)</option>
+        <option value="measured" data-i18n="atlas.filter_assayed">المستوى 1: MIC مقاس مخبرياً (18)</option>
+        <option value="annotated" data-i18n="atlas.filter_natural">المستوى 2: تعليق UniProt موثق (165)</option>
+        <option value="conditional" data-i18n="atlas.filter_engineered">المستوى 3: أدلة غشاء حيوي شرطية (2)</option>
         <option value="background">المستوى 4: خلفية غير مختبرة (1,047)</option>
       </select>
     </label>
@@ -222,7 +222,7 @@
     <div class="section-heading reveal">
       <div>
         <p class="eyebrow"><span class="section-index">03 /</span> مختبر البنى الجزيئية ثلاثي الأبعاد (MOD-03)</p>
-        <h2 id="venomlab-title">VenomLab 3D: استكشاف البنى الجزيئية ثلاثية الأبعاد.<br><span>توثيق دقيق للأصل المعملي والتنبؤ الحسابي دون ادعاءات غير مدعومة.</span></h2>
+        <h2 id="venomlab-title" data-i18n="venomlab.title">VenomLab 3D: استكشاف البنى الجزيئية ثلاثية الأبعاد.<br><span>توثيق دقيق للأصل المعملي والتنبؤ الحسابي دون ادعاءات غير مدعومة.</span></h2>
       </div>
       <p>بيئة بحثية تفاعلية حقيقية لعرض البنى الفراغية للببتيدات مع تصنيف إبستيمولوجي شفاف لمصدر كل بنية: فئة (A) محددة معملياً (PDB)، فئة (B) متنبأ بها حسابياً (AlphaFold DB)، وفئة (C) تمثيلات توضيحية هندسية للمشتقات غير المحلولة دون فبركة إحداثيات ذرية.</p>
     </div>
@@ -430,7 +430,7 @@
     <div class="section-heading reveal">
       <div>
         <p class="eyebrow"><span class="section-index">04 /</span> المساعد البحثي المعتمد على الأدلة (MOD-04)</p>
-        <h2 id="agent-title">المساعد العلمي: إجابات موثقة بالأدلة والتتبع التجريبي الحصري.<br><span>نظام استرجاع دقيق يجيب بشفافية إبستيمولوجية، دون اختلاق مراجع أو قياسات، ويوثق مستويات عدم اليقين.</span></h2>
+        <h2 id="agent-title" data-i18n="agent.title">المساعد العلمي: إجابات موثقة بالأدلة والتتبع التجريبي الحصري.<br><span>نظام استرجاع دقيق يجيب بشفافية إبستيمولوجية، دون اختلاق مراجع أو قياسات، ويوثق مستويات عدم اليقين.</span></h2>
       </div>
       <p>محرك بحث واسترجاع علمي يعتمد كلياً على سجلات أطلس العقارب الـ1,232، ومصفوفة الأدلة الـ32، ومختبر البنى 3D، وشبكة المعرفة. يلتزم المساعد بمبدأ عدم التوليد العشوائي (Zero-Hallucination)، ويوثق تصنيف الأدلة (Class A تجريبي، Class B تنبؤي، Class C أدبيات)، مع الامتناع الصارم عن إعطاء نصائح علاجية أو ادعاءات غير مدعومة مخبرياً.</p>
     </div>
@@ -502,7 +502,7 @@
    <div class="section-heading reveal">
      <div>
        <p class="eyebrow"><span class="section-index">02 /</span> شبكة المعرفة البيولوجية (MOD-02)</p>
-       <h2 id="kg-title">شبكة سموم العقارب المبنية على الأدلة.<br><span>ربط تجريبي متكامل بين الأنواع، الببتيدات، الممرضات، والأدبيات.</span></h2>
+       <h2 id="kg-title" data-i18n="knowledge_graph.title">شبكة سموم العقارب المبنية على الأدلة.<br><span>ربط تجريبي متكامل بين الأنواع، الببتيدات، الممرضات، والأدبيات.</span></h2>
      </div>
      <p>شبكة تفاعلية مبنية حصرياً على سجلات الأطلس المحققة. تميّز الشبكة بصرامة إبستيمولوجية بين القياسات المخبرية المباشرة (المستوى 1: ذهبي)، والتوثيقات التصنيفية (المستوى 2: فضي)، والاستدلالات الحسابية (المستوى 3: برونزي). انقر على أي عقدة لفتح سجل الإثبات والتتبع الكامل.</p>
    </div>
@@ -605,7 +605,7 @@
    <div class="section-heading reveal">
      <div>
        <p class="eyebrow"><span class="section-index">02 /</span> الشفافية التجريبية والمناهج</p>
-       <h2 id="methods-evidence-title">مركز الأدلة والمناهج.<br><span>تتبّع كامل للقياسات الـ32 المنشورة.</span></h2>
+       <h2 id="methods-evidence-title" data-i18n="methods_evidence.title">مركز الأدلة والمناهج.<br><span>تتبّع كامل للقياسات الـ32 المنشورة.</span></h2>
      </div>
      <p>مستكشف تفاعلي لكافة القياسات الكمية (MIC) المنشورة في الأدبيات الأولية المحكّمة، مع الفصل التام بين القيمة والوحدة المنشورة في المقالة والقيمة المحوّلة، وإظهار المعادلات والقياسات غير المنشورة.</p>
    </div>
@@ -724,7 +724,7 @@
     <div class="section-heading reveal">
       <div>
         <p class="eyebrow"><span class="section-index">06 /</span> محلل فجوات البحث العلمي (MOD-06)</p>
-        <h2 id="gap-title">محلل فجوات البحث العلمي والأولويات التجريبية.<br><span>تمييز صارم بين غياب الفحص (Not Assayed)، والنتائج السلبية، والنزاعات العلمية.</span></h2>
+        <h2 id="gap-title" data-i18n="gap_analyzer.title">محلل فجوات البحث العلمي والأولويات التجريبية.<br><span>تمييز صارم بين غياب الفحص (Not Assayed)، والنتائج السلبية، والنزاعات العلمية.</span></h2>
       </div>
       <p>محرك استكشافي مبني على الأدلة لتحديد وتصنيف وترتيب الفجوات التجريبية المتبقية عبر أطلس SCORPION X. يلتزم المحرك بالتمييز المعرفي الصارم بين غياب البيانات (Not Assayed)، والنتائج السلبية المثبتة (Assayed Negative)، والنزاعات العلمية غير المحسومة (Disputed Evidence)، والقياسات غير المتطابقة مع الأنواع أو الأنماط الفرعية البشرية (Species/Subtype Mismatch).</p>
     </div>
@@ -927,7 +927,7 @@
     <div class="section-heading reveal">
       <div>
         <p class="eyebrow"><span class="section-index">05 /</span> استكشاف الأهداف الجزيئية (MOD-05)</p>
-        <h2 id="target-explorer-title">مستكشف الأهداف الجزيئية والآليات.<br><span>تمييز صارم بين التفاعل المؤكد مخبرياً والنموذج النظري المقترح.</span></h2>
+        <h2 id="target-explorer-title" data-i18n="target_explorer.title">مستكشف الأهداف الجزيئية والآليات.<br><span>تمييز صارم بين التفاعل المؤكد مخبرياً والنموذج النظري المقترح.</span></h2>
       </div>
       <p>دليل تحليلي للأهداف الحيوية المباشرة لمكونات سموم العقارب. لا يصنَّف أي هدف كـ "مؤكد" ما لم تكن هناك تجارب نفاذية غشائية مباشرة (SYTOX Green / Calcein) أو تخطيط كهربائي للقنوات (Patch-Clamp). يمنع المنهاج العلمي للمنصة استنتاج نوع الثقب أو المستقبل اعتماداً على الشحنة أو الكراهية للماء فقط.</p>
     </div>
@@ -1035,7 +1035,7 @@
     <div class="section-heading reveal">
       <div>
         <p class="eyebrow"><span class="section-index">04 /</span> الترشيح المبني على الأدلة</p>
-        <h2 id="prioritization-title">فرز وترتيب المرشحين الرائدين.<br><span>توازن الفعالية والسمية والاستقرار.</span></h2>
+        <h2 id="prioritization-title" data-i18n="prioritization.title">فرز وترتيب المرشحين الرائدين.<br><span>توازن الفعالية والسمية والاستقرار.</span></h2>
       </div>
       <p>نظام فرز متعدد المعايير لترتيب الببتيدات المفحوصة كمياً وفق الفعالية المقاسة مخبرياً والواسمات الفيزيوكيميائية المحسوبة، مع تمييز الببتيدات الطبيعية عن النظائر المصممة، وفرض درع الأمان الصارم لحظر مؤشر الانتقائية غير المسند.</p>
     </div>
@@ -1333,7 +1333,7 @@
   <div class="section-heading reveal">
     <div>
       <p class="eyebrow"><span class="section-index">04B /</span> الجغرافيا الحيوية للأدلة التجريبية</p>
-      <h2 id="biogeography-title">مستكشف الجغرافيا الحيوية والتوزيع الجغرافي المعياري.<br><span>Evidence-Grounded Biogeography & Taxonomy Explorer (MOD-08)</span></h2>
+      <h2 id="biogeography-title" data-i18n="biogeography.title">مستكشف الجغرافيا الحيوية والتوزيع الجغرافي المعياري.<br><span>Evidence-Grounded Biogeography & Taxonomy Explorer (MOD-08)</span></h2>
     </div>
     <div class="biogeography-badges">
       <span class="biogeo-badge badge-mod">MOD-08</span>
@@ -1555,7 +1555,7 @@
   <div class="section-heading reveal">
     <div>
       <p class="eyebrow"><span class="section-index">04C /</span> المسار الترجمي من السم إلى الدواء</p>
-      <h2 id="translation-title">مستكشف المسار الترجمي من السم إلى الدواء والجاهزية السريرية.<br><span>Venom-to-Medicine Translation Explorer & Pipeline Trajectory (MOD-09)</span></h2>
+      <h2 id="translation-title" data-i18n="translation.title">مستكشف المسار الترجمي من السم إلى الدواء والجاهزية السريرية.<br><span>Venom-to-Medicine Translation Explorer & Pipeline Trajectory (MOD-09)</span></h2>
     </div>
     <div class="translation-badges">
       <span class="trans-badge badge-mod">MOD-09</span>
@@ -1774,7 +1774,7 @@
     <div class="section-heading reveal">
       <div>
         <p class="eyebrow"><span class="section-index">05 /</span> تفسير الذكاء الاصطناعي والشفافية التنبؤية (MOD-10)</p>
-        <h2 id="xai-title">مستكشف تفسير درجات النموذج الحسابي وتفكيك الأوزان الفيزيوكيميائية.<br><span>PU Model Interpretability, Feature Attributions & Prediction Transparency (MOD-10)</span></h2>
+        <h2 id="xai-title" data-i18n="xai.title">مستكشف تفسير درجات النموذج الحسابي وتفكيك الأوزان الفيزيوكيميائية.<br><span>PU Model Interpretability, Feature Attributions & Prediction Transparency (MOD-10)</span></h2>
       </div>
       <div class="xai-header-badges">
         <span class="trans-badge badge-mod">MOD-10</span>
@@ -1891,7 +1891,7 @@
     <div class="section-heading reveal">
       <div>
         <p class="eyebrow"><span class="section-index">11 /</span> التوأم الرقمي وبحوث الإرساء (MOD-11)</p>
-        <h2 id="docking-twin-title">دراسة حالة الإرساء الجزيئي والتوأم الرقمي التعليمي.<br><span>تجسيد ثلاثي الأبعاد للتفاعل مع القنوات الأيونية وحدود التنبؤ الحاسوبي.</span></h2>
+        <h2 id="docking-twin-title" data-i18n="docking.title">دراسة حالة الإرساء الجزيئي والتوأم الرقمي التعليمي.<br><span>تجسيد ثلاثي الأبعاد للتفاعل مع القنوات الأيونية وحدود التنبؤ الحاسوبي.</span></h2>
       </div>
       <p>منصة تفاعلية تعليمية توضح كيف تتعرف سموم العقارب على مستقبلاتها البيولوجية (قنوات الصوديوم والبوتاسيوم)، مع الفصل الصارم بين معقدات الحقيقة التجريبية المحددة بالمجهر البرودي والأشعة السينية، وتنبؤات الإرساء الحاسوبي (Docking Scores)، وأدلة الألفة المخبرية الفعلية (Kd).</p>
     </div>
@@ -2003,7 +2003,7 @@
  <section class="approach section-space" id="approach" aria-labelledby="approach-title">
   <div class="approach-intro reveal">
     <p class="eyebrow"><span class="section-index">06 /</span> وراء الأطلس</p>
-    <h2 id="approach-title">من التسلسل،<br>إلى <em>رؤية أوضح.</em></h2>
+    <h2 id="approach-title" data-i18n="approach.title">من التسلسل،<br>إلى <em>رؤية أوضح.</em></h2>
     <p>قيمة الأطلس تبدأ من أثرٍ قابل للتتبّع: من أين جاءت المعلومة، كيف حُسبت، وما الذي يمكن أن تقوله فعلاً.</p>
     <div class="sequence-art" dir="ltr" aria-label="مثال تسلسل Stigmurin">FFSLIPSLV<span>GGLISAFK</span><small>STIGMURIN / 17 AMINO ACIDS</small></div>
   </div>
@@ -2019,7 +2019,7 @@
   <div class="section-heading reveal">
     <div>
       <p class="eyebrow"><span class="section-index">07 /</span> العلم يبدأ بالتمييز</p>
-      <h2 id="evidence-title">ليست كل الأدلة<br><span>على الدرجة نفسها.</span></h2>
+      <h2 id="evidence-title" data-i18n="evidence_tiers.title">ليست كل الأدلة<br><span>على الدرجة نفسها.</span></h2>
     </div>
     <p>نحتفظ بما نعرفه بدقة، ونوضح ما لم يُختبر.<br>لا يُقدَّم التنبؤ كإثبات تجريبي قطعي.</p>
   </div>
@@ -2067,7 +2067,7 @@
       <div class="section-heading reveal">
         <div>
           <p class="eyebrow"><span class="section-index">12 /</span> مركز المنهجية والأدلة وقابلية التكرار (MOD-12)</p>
-          <h2 id="methods-center-title">التوثيق العلمي الشامل<br><span>وقابلية التحقق المنهجي (Reproducibility Center).</span></h2>
+          <h2 id="methods-center-title" data-i18n="methods_center.title">التوثيق العلمي الشامل<br><span>وقابلية التحقق المنهجي (Reproducibility Center).</span></h2>
         </div>
         <p>بنية موحدة للشفافية العلمية تتيح تتبع الأدلة التجريبية، والمعايير الإحصائية، ونماذج التنبؤ، وتدقيق البنى الجزيئية، والحدود المعرفية للأطلس، مع إتاحة البيانات المفتوحة للمراجعة الأكاديمية الخارجية وفق مبادئ FAIR.</p>
       </div>
@@ -2184,7 +2184,7 @@
  <section class="creator section-space" id="contact" aria-labelledby="creator-title">
   <div class="creator-heading">
     <p class="eyebrow">خلف هذا الأطلس</p>
-    <h2 id="creator-title">فضولٌ يقود البحث.<br><em>وشغفٌ يصنع التفاصيل.</em></h2>
+    <h2 id="creator-title" data-i18n="contact.title">فضولٌ يقود البحث.<br><em>وشغفٌ يصنع التفاصيل.</em></h2>
   </div>
   <div class="creator-card">
     <span class="creator-monogram" aria-hidden="true">م</span>
